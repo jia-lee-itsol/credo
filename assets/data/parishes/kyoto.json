@@ -1,0 +1,17 @@
+{
+  "diocese": "京都教区",
+  "dioceseId": "kyoto",
+  "region": "京都地区",
+  "regionId": "kyoto",
+  "dioceseRegion": "京都教区/京都地区",
+  "parishes": [
+    {
+      "name": "京都カテドラル",
+      "address": "京都府京都市中京区河原町通三条上ル",
+      "prefecture": "京都府",
+      "isCathedral": true,
+      "massTime": "主日：09:00, 11:00 / 第2・第4日曜14:00(英語ミサ)"
+    }
+  ]
+}
+

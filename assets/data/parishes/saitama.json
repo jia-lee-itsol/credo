@@ -1,0 +1,201 @@
+{
+  "diocese": "saitama",
+  "parishes": [
+    {
+      "name": "カトリック浦和教会",
+      "churchName": "聖ペトロ・聖パウロ",
+      "address": "〒330-0063 埼玉県さいたま市浦和区高砂3-15-1",
+      "prefecture": "埼玉県",
+      "isCathedral": true,
+      "massTime": "主日：10:00 / 第3主日 14:00 [V] / 第4主日 14:00 [E] / 平日：9:30 火水木金",
+      "phone": "048-822-4614",
+      "fax": "048-822-4615",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック上尾教会",
+      "address": "埼玉県上尾市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 平日：10:00 金",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック朝霞教会",
+      "address": "埼玉県朝霞市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：14:00 第1・第2・第4 / 10:00 第3 / 14:00または10:00 第5 / 平日：18:30 火",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック大宮教会",
+      "address": "埼玉県さいたま市大宮区",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：11:00 / 14:00 第1 [E] / 平日：7:00 火水木金",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック春日部教会",
+      "address": "埼玉県春日部市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 15:00 第1 [V]",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック加須教会",
+      "address": "埼玉県加須市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "土曜：19:00 第3 [P] / 主日：14:00 / 平日：07:00 月・火・水・木 / 10:00 金・土",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック上福岡教会",
+      "address": "埼玉県ふじみ野市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 18:00 第3 [E] / 14:00 第4 [V] / 平日：10:00 金",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック川口教会",
+      "address": "埼玉県川口市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：10:30 / 10:30 第3 [V] / 平日：11:00 水 / 07:30 金",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック川越教会",
+      "address": "埼玉県川越市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "土曜：18:00 / 主日：08:00/10:00 / 14:00 第2 [T] / 13:30 第3 [V] / 15:00 第4 [P] / 平日：10:00 水木金",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック北浦和教会",
+      "address": "埼玉県さいたま市浦和区",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 平日：10:00 初金",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック行田教会",
+      "address": "埼玉県行田市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 09:00 第5 [S]",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック熊谷教会",
+      "address": "埼玉県熊谷市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "土曜：07:00 / 主日：11:00 / 平日：07:00 月-金",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック草加教会",
+      "address": "埼玉県草加市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "土曜：19:00 / 主日：10:30 / 平日：19:00 火 / 07:00 木",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック秩父教会",
+      "address": "埼玉県秩父市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：14:30",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック所沢教会",
+      "address": "埼玉県所沢市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "土曜：9:30 偶数月第1 / 19:00(ES) / 主日：10:00 / 平日：11:00 金 (L)",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック飯能教会",
+      "address": "埼玉県飯能市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "土曜：奇数月第1 19:00（ES）/ 主日：10:00 / 平日：14:00 金",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック東松山教会",
+      "address": "埼玉県東松山市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "土曜：7:30 / 主日：9:30 第3 / 15:00 [6月 8月 10月 12月] [S] / 平日：7:30 月 / 7:30 金",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック深谷教会",
+      "address": "埼玉県深谷市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：9:00",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック本庄教会",
+      "address": "埼玉県本庄市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "土曜：19:00 第1 [P] / 08:00 第2,3,4,5 / 主日：09:00 第1,3,5 / 11:00 第2,4 / 平日：10:00 月水金 / 20:00 木",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "カトリック入間宮寺教会（巡回）",
+      "address": "埼玉県入間市",
+      "prefecture": "埼玉県",
+      "isCathedral": false,
+      "massTime": "主日：第1 14:00 / 第2〜5 10:00 / 平日：7:00 水",
+      "note": "巡回教会",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    },
+    {
+      "name": "さいたまカテドラル",
+      "churchName": "聖ペトロ・聖パウロ",
+      "address": "〒330-0063 埼玉県さいたま市浦和区高砂3-15-1",
+      "prefecture": "埼玉県",
+      "isCathedral": true,
+      "massTime": "主日：09:00, 11:00 / 第2・第4日曜14:00(英語ミサ)",
+      "phone": "048-822-4614",
+      "fax": "048-822-4615",
+      "diocese": "saitama",
+      "deanery": "saitama"
+    }
+  ]
+}

@@ -1,0 +1,674 @@
+{
+  "diocese": "tokyo",
+  "parishes": [
+    {
+      "name": "カトリック関口教会",
+      "churchName": "東京カテドラル聖マリア大聖堂",
+      "address": "東京都文京区関口3-16-15",
+      "prefecture": "東京都",
+      "isCathedral": true,
+      "massTime": "平日：07:00 / 土曜日：18:00 / 主日：07:00, 10:00, 18:00 / 第2・第4日曜14:00(英語ミサ)",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック麹町教会",
+      "churchName": "聖イグナチオ教会",
+      "address": "東京都千代田区麹町6-5-1",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "平日：07:00 / 土曜日：18:00 / 主日：09:00, 11:00 / 第1・第3日曜14:00(英語ミサ) / 第2・第4日曜14:00(スペイン語ミサ)",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック築地教会",
+      "address": "東京都中央区明石町5-26",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：10:30 / 第2日曜14:00(英語ミサ)",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック麻布教会",
+      "address": "東京都港区西麻布3-21-6",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第1・第3日曜14:00(英語ミサ)",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック目黒教会",
+      "address": "東京都品川区上大崎4-6-22",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 第4日曜14:00(英語ミサ)",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック赤羽教会",
+      "address": "東京都北区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック赤堤教会",
+      "address": "東京都世田谷区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック秋津教会",
+      "address": "東京都東村山市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリックあきる野教会",
+      "address": "東京都あきる野市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック浅草教会",
+      "address": "東京都台東区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック足立教会",
+      "address": "東京都足立区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック板橋教会",
+      "address": "東京都板橋区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック上野教会",
+      "address": "東京都台東区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック梅田教会",
+      "address": "東京都青梅市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック青梅教会",
+      "address": "東京都青梅市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック大島教会",
+      "address": "東京都大島町",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック大森教会",
+      "address": "東京都大田区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック荻窪教会",
+      "address": "東京都杉並区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック葛西教会",
+      "address": "東京都江戸川区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック蒲田教会",
+      "address": "東京都大田区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック上野毛教会",
+      "address": "東京都世田谷区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック亀有教会",
+      "address": "東京都葛飾区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック東京韓人教会",
+      "churchName": "東京韓人天主教会",
+      "address": "東京都",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック神田教会",
+      "address": "東京都千代田区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック北町教会",
+      "address": "東京都練馬区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック吉祥寺教会",
+      "address": "東京都武蔵野市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック清瀬教会",
+      "address": "東京都清瀬市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック小岩教会",
+      "address": "東京都江戸川区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック高円寺教会",
+      "address": "東京都杉並区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック小金井教会",
+      "address": "東京都小金井市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック小平教会",
+      "address": "東京都小平市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック三軒茶屋教会",
+      "address": "東京都世田谷区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック潮見教会",
+      "address": "東京都江東区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック渋谷教会",
+      "address": "東京都渋谷区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック志村教会",
+      "address": "東京都板橋区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック下井草教会",
+      "address": "東京都杉並区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック成城教会",
+      "address": "東京都世田谷区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック関町教会",
+      "address": "東京都練馬区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック瀬田教会",
+      "address": "東京都世田谷区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック世田谷教会",
+      "address": "東京都世田谷区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック洗足教会",
+      "address": "東京都目黒区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック高輪教会",
+      "address": "東京都港区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック高幡教会",
+      "address": "東京都日野市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック立川教会",
+      "address": "東京都立川市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック多摩教会",
+      "address": "東京都多摩市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック調布教会",
+      "address": "東京都調布市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック田園調布教会",
+      "address": "東京都大田区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック徳田教会",
+      "address": "東京都足立区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック豊島教会",
+      "address": "東京都豊島区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック豊田教会",
+      "address": "東京都日野市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック八王子教会",
+      "address": "東京都八王子市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック碑文谷教会",
+      "address": "東京都目黒区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック初台教会",
+      "address": "東京都渋谷区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック府中教会",
+      "address": "東京都府中市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック本郷教会",
+      "address": "東京都文京区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック本所教会",
+      "address": "東京都墨田区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック町田教会",
+      "address": "東京都町田市",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック町屋教会",
+      "address": "東京都荒川区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック松原教会",
+      "address": "東京都世田谷区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック三河島教会",
+      "address": "東京都荒川区",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "フランシスカン・チャペル・センター",
+      "address": "東京都",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "tokyo"
+    },
+    {
+      "name": "カトリック市川教会",
+      "address": "千葉県市川市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック鴨川教会",
+      "address": "千葉県鴨川市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック木更津教会",
+      "address": "千葉県木更津市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック小井教会",
+      "address": "千葉県",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック佐原教会",
+      "address": "千葉県香取市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック館山教会",
+      "address": "千葉県館山市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック銚子教会",
+      "address": "千葉県銚子市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック富津教会",
+      "address": "千葉県富津市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック習志野教会",
+      "address": "千葉県習志野市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック成田教会",
+      "address": "千葉県成田市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック西千葉教会",
+      "address": "千葉県千葉市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック松戸教会",
+      "address": "千葉県松戸市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    },
+    {
+      "name": "カトリック茂原教会",
+      "address": "千葉県茂原市",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "",
+      "diocese": "tokyo",
+      "deanery": "chiba"
+    }
+  ]
+}

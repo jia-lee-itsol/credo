@@ -1,0 +1,340 @@
+{
+  "diocese": "niigata",
+  "parishes": [
+    {
+      "name": "カトリック秋田教会",
+      "address": "秋田県秋田市",
+      "prefecture": "秋田県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "akita"
+    },
+    {
+      "name": "カトリック大館教会",
+      "address": "秋田県大館市",
+      "prefecture": "秋田県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "akita"
+    },
+    {
+      "name": "カトリック鹿角教会",
+      "address": "秋田県鹿角市",
+      "prefecture": "秋田県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "akita"
+    },
+    {
+      "name": "カトリック土崎教会",
+      "address": "秋田県秋田市土崎",
+      "prefecture": "秋田県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "akita"
+    },
+    {
+      "name": "カトリック能代教会",
+      "address": "秋田県能代市",
+      "prefecture": "秋田県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "akita"
+    },
+    {
+      "name": "カトリック本荘教会",
+      "address": "秋田県由利本荘市",
+      "prefecture": "秋田県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "akita"
+    },
+    {
+      "name": "カトリック横手教会",
+      "address": "秋田県横手市",
+      "prefecture": "秋田県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "akita"
+    },
+    {
+      "name": "カトリック上宿教会",
+      "address": "秋田県秋田市上宿",
+      "prefecture": "秋田県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "akita"
+    },
+    {
+      "name": "カトリック加茂教会",
+      "address": "新潟県加茂市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "chuuetsu"
+    },
+    {
+      "name": "カトリック三条教会",
+      "address": "新潟県三条市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "chuuetsu"
+    },
+    {
+      "name": "カトリック見附教会",
+      "address": "新潟県見附市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "chuuetsu"
+    },
+    {
+      "name": "カトリック栃尾教会",
+      "address": "新潟県長岡市栃尾",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "chuuetsu"
+    },
+    {
+      "name": "カトリック長岡教会",
+      "address": "新潟県長岡市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "chuuetsu"
+    },
+    {
+      "name": "カトリック十日町教会",
+      "address": "新潟県十日町市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "jouetsu"
+    },
+    {
+      "name": "カトリック柏崎教会",
+      "address": "新潟県柏崎市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "jouetsu"
+    },
+    {
+      "name": "カトリック直江津教会",
+      "address": "新潟県上越市直江津",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "jouetsu"
+    },
+    {
+      "name": "カトリック高田教会",
+      "address": "新潟県上越市高田",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "jouetsu"
+    },
+    {
+      "name": "カトリック妙高教会",
+      "address": "新潟県妙高市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "jouetsu"
+    },
+    {
+      "name": "カトリック糸魚川教会",
+      "address": "新潟県糸魚川市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "jouetsu"
+    },
+    {
+      "name": "カトリック新発田教会",
+      "address": "新潟県新発田市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック村上教会",
+      "address": "新潟県村上市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック新潟教会",
+      "address": "〒951-8106 新潟県新潟市中央区東大畑通一番町656",
+      "prefecture": "新潟県",
+      "isCathedral": true,
+      "massTime": "主日：10:00",
+      "phone": "025-222-5024",
+      "fax": null,
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック佐渡教会",
+      "address": "新潟県佐渡市",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック花園教会",
+      "address": "新潟県新潟市花園",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック鳥屋野教会",
+      "address": "新潟県新潟市鳥屋野",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック青山教会",
+      "address": "新潟県新潟市青山",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック寺尾教会",
+      "address": "新潟県新潟市寺尾",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック白根教会",
+      "address": "新潟県新潟市白根",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック新津教会",
+      "address": "新潟県新潟市新津",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック村松教会",
+      "address": "新潟県五泉市村松",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック亀田教会",
+      "address": "新潟県新潟市亀田",
+      "prefecture": "新潟県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "shimoetsu"
+    },
+    {
+      "name": "カトリック酒田教会",
+      "address": "山形県酒田市",
+      "prefecture": "山形県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "yamagata"
+    },
+    {
+      "name": "カトリック鶴岡教会",
+      "address": "山形県鶴岡市",
+      "prefecture": "山形県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "yamagata"
+    },
+    {
+      "name": "カトリック長井教会",
+      "address": "山形県長井市",
+      "prefecture": "山形県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "yamagata"
+    },
+    {
+      "name": "カトリック山形教会",
+      "address": "山形県山形市",
+      "prefecture": "山形県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "yamagata"
+    },
+    {
+      "name": "カトリック新庄教会",
+      "address": "山形県新庄市",
+      "prefecture": "山形県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "yamagata"
+    },
+    {
+      "name": "カトリック米沢教会",
+      "address": "山形県米沢市",
+      "prefecture": "山形県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "niigata",
+      "deanery": "yamagata"
+    }
+  ]
+}

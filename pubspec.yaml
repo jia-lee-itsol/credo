@@ -1,0 +1,86 @@
+name: credo
+description: "Catholic community app for Japan"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.3
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State Management
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # Routing
+  go_router: ^14.2.0
+
+  # Firebase
+  firebase_core: ^3.3.0
+  firebase_auth: ^5.1.4
+  cloud_firestore: ^5.2.1
+  firebase_messaging: ^15.0.4
+  firebase_storage: ^12.1.3
+
+  # Network
+  dio: ^5.5.0+1
+
+  # Local Storage
+  shared_preferences: ^2.2.3
+
+  # Location
+  geolocator: ^12.0.0
+  geocoding: ^3.0.0
+
+  # Maps
+  google_maps_flutter: ^2.7.0
+  url_launcher: ^6.3.0
+
+  # UI
+  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.3.1
+  shimmer: ^3.0.0
+
+  # Utils
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.9.0
+  intl: ^0.20.2
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+  uuid: ^4.4.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+  # Code Generation
+  build_runner: ^2.4.11
+  freezed: ^2.5.2
+  json_serializable: ^6.8.0
+  riverpod_generator: ^2.4.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/data/
+    - assets/data/parishes/tokyo.json
+    - assets/data/parishes/yokohama.json
+    - assets/data/parishes/saitama.json
+    - assets/data/parishes/sapporo.json
+    - assets/data/parishes/sendai.json
+    - assets/data/parishes/niigata.json
+    - assets/data/parishes/osaka.json
+    - assets/data/parishes/nagoya.json
+    - assets/data/parishes/kyoto.json
+    - assets/data/parishes/fukuoka.json
+    - assets/data/parishes/nagasaki.json

@@ -1,0 +1,17 @@
+{
+  "diocese": "名古屋教区",
+  "dioceseId": "nagoya",
+  "region": "名古屋地区",
+  "regionId": "nagoya",
+  "dioceseRegion": "名古屋教区/名古屋地区",
+  "parishes": [
+    {
+      "name": "名古屋カテドラル",
+      "address": "愛知県名古屋市中区錦3-15-1",
+      "prefecture": "愛知県",
+      "isCathedral": true,
+      "massTime": "主日：08:00, 10:00, 12:00 / 第1・第3日曜14:00(英語ミサ)"
+    }
+  ]
+}
+

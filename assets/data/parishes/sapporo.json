@@ -1,0 +1,356 @@
+{
+  "diocese": "sapporo",
+  "parishes": [
+    {
+      "name": "カトリック旭川五条教会",
+      "address": "〒070-0035 旭川市5条通11丁目1388",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：10:00（第1・第3金曜日）主日：9:30",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック旭川六条教会",
+      "address": "〒078-8216 旭川市6条通22丁目4",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：9:30",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック枝幸教会",
+      "address": "〒098-5821 枝幸郡枝幸町栄町903-2",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：16:30",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック大町教会",
+      "address": "北海道旭川市大町1条",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック神居教会",
+      "address": "北海道旭川市神居町",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック士別教会",
+      "address": "北海道士別市",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック砂川教会",
+      "address": "北海道砂川市",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック滝川教会",
+      "address": "北海道滝川市",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック名寄教会",
+      "address": "北海道名寄市",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック羽幌教会",
+      "address": "〒078-4120 苫前郡羽幌町港町3丁目2-2",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：14:00（第2・第4）",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック美唄教会",
+      "address": "〒072-0013 美唄市東2条南3丁目2-10",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：10:30（金曜）主日：11:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック富良野教会",
+      "address": "〒076-0038 富良野市桂木町3-73",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：11:00 主日：10:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック留萌教会",
+      "address": "〒077-0032 留萌市宮園町1丁目9-3",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：9:00 主日：9:30（第2・第4）",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック稚内教会",
+      "address": "〒097-0024 稚内市宝来2-8-11",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：（不定期）主日：9:30",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック江差教会",
+      "address": "〒043-0052 檜山郡江差町茂尻町349",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：15:00（第2・第4、その他は集会祭儀）",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック当別教会",
+      "address": "〒049-0283 北斗市三ツ石392 トラピスト地内",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：8:45",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック宮前町教会",
+      "address": "〒040-0073 函館市宮前町26-3",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：18:30（金曜）主日：9:30 土曜/18:30 第4/英語ミサ11:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック元町教会",
+      "address": "〒040-0054 函館市元町15-30",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：11:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック八雲教会",
+      "address": "〒049-3102 二海郡八雲町東町11-2",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：15:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック湯川教会",
+      "address": "〒042-0935 函館市駒場町14-11",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：18:30（火曜） 9:30（木曜・土曜）主日：9:30",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック網走教会",
+      "address": "〒093-0075 網走市北5条西4丁目",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：月1～2回 14:00（集会祭儀）",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック遠軽教会",
+      "address": "〒099-0403 紋別郡遠軽町1条通北3丁目",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：10:30",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック北見教会",
+      "address": "〒090-0033 北見市番場町1-36",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：火、木、土曜 6:30、水曜 10:00、金曜 18:30 主日：10:00（月1回程度集会祭儀）",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック美幌教会",
+      "address": "〒092-0012 網走郡美幌町栄町1-10-13",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：10:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック紋別教会",
+      "address": "〒094-0015 紋別市花園町5-9-11",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：5週に1回 14:30（集会祭儀）",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック池田教会",
+      "address": "〒083-0022 中川郡池田町西2条8丁目40",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "ミサ日時はホームページで確認してください",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック帯広教会",
+      "address": "〒080-0804 帯広市東4条南14丁目1",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：10：00（月曜除く）主日：10：00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック釧路教会",
+      "address": "〒085-0018 釧路市黒金町12-10",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：10:30 主日：10:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック厚岸教会（巡回）",
+      "address": "〒088-1128 厚岸郡厚岸町港町91",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "ミサ日時は釧路教会ホームページでご確認ください",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック中標津教会",
+      "address": "〒086-1001 標津郡中標津町東1条南3丁目1-2",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：10:00 または 14:30",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック根室教会",
+      "address": "〒087-0028 根室市大正町2-21",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "ミサ日時は釧路教会ホームページでご確認ください",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック柏林台教会",
+      "address": "〒080-0057 帯広市柏林台中町1-6",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：10:00",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック本別教会",
+      "address": "中川郡本別町北7丁目3-1",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "ミサ時間はホームページを参照ください",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック静内教会",
+      "address": "〒056-0004 日高郡新ひだか町静内緑町2-6-28",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：第1土曜10:30（12月～3月/11:00）（第3または第4は集会祭儀）",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック伊達教会",
+      "address": "〒052-0026 伊達市錦町114-5",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：9:30",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック苫小牧教会",
+      "address": "〒053-0022 苫小牧市表町1-1-18",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：18:00（金曜）主日：9:30",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック登別教会",
+      "address": "〒059-0012 登別市中央町7-15",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：なし 主日：10:00（月1回～2回）",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック東室蘭教会",
+      "address": "〒050-0073 室蘭市宮の森町4丁目9-7",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：10:00（第2・第4・第5土曜日）主日：9:30（第1・第3ミサ、第2・第4集会祭儀、第5は合同ミサ）",
+      "diocese": "sapporo",
+      "deanery": "."
+    },
+    {
+      "name": "カトリック室蘭教会",
+      "address": "〒051-0025 室蘭市常盤町15-11",
+      "prefecture": "北海道",
+      "isCathedral": false,
+      "massTime": "平日：10:00（木曜及び第1・第3土曜/集会祭儀）主日：10:00（第1・第2/集会祭儀、第3/ミサまたは集会祭儀、第4/ミサ）",
+      "diocese": "sapporo",
+      "deanery": "."
+    }
+  ]
+}

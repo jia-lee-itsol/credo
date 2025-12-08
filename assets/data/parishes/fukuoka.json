@@ -1,0 +1,17 @@
+{
+  "diocese": "福岡教区",
+  "dioceseId": "fukuoka",
+  "region": "福岡地区",
+  "regionId": "fukuoka",
+  "dioceseRegion": "福岡教区/福岡地区",
+  "parishes": [
+    {
+      "name": "福岡カテドラル",
+      "address": "福岡県福岡市中央区天神1-1-1",
+      "prefecture": "福岡県",
+      "isCathedral": true,
+      "massTime": "主日：08:00, 10:00, 12:00 / 第1・第3日曜14:00(英語ミサ)"
+    }
+  ]
+}
+

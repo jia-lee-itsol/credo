@@ -1,0 +1,17 @@
+{
+  "diocese": "長崎大司教区",
+  "dioceseId": "nagasaki",
+  "region": "長崎地区",
+  "regionId": "nagasaki",
+  "dioceseRegion": "長崎大司教区/長崎地区",
+  "parishes": [
+    {
+      "name": "長崎大聖堂",
+      "address": "長崎県長崎市本尾町1-1",
+      "prefecture": "長崎県",
+      "isCathedral": true,
+      "massTime": "主日：09:00, 11:00 / 第2・第4日曜14:00(英語ミサ)"
+    }
+  ]
+}
+

@@ -1,0 +1,14 @@
+{
+  "diocese": "osaka",
+  "parishes": [
+    {
+      "name": "神戸教会",
+      "address": "兵庫県神戸市中央区三宮町1-1",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日 9:00, 11:00",
+      "diocese": "osaka",
+      "deanery": "."
+    }
+  ]
+}
