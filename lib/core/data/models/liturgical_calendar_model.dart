@@ -93,3 +93,5 @@ class SpecialDay {
   Map<String, dynamic> toJson() => _$SpecialDayToJson(this);
 }
 
+
+

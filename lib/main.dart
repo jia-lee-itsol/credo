@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -10,6 +10,9 @@ import 'shared/providers/liturgy_theme_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // 디버그 모드: 위젯 보더 표시
+  debugPaintSizeEnabled = false;
+
   // 날짜 로케일 초기화
   await initializeDateFormatting('ja', null);
 
@@ -18,11 +21,7 @@ void main() async {
   //   options: DefaultFirebaseOptions.currentPlatform,
   // );
 
-  runApp(
-    const ProviderScope(
-      child: CredoApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: CredoApp()));
 }
 
 /// Credo 앱 루트 위젯

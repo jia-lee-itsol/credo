@@ -4,7 +4,8 @@ class AppRoutes {
 
   // Root
   static const String splash = '/';
-  static const String onboarding = '/onboarding';
+  static const String onboardingLanguage = '/onboarding/language';
+  static const String onboardingLocation = '/onboarding/location';
 
   // Auth
   static const String signIn = '/sign-in';
@@ -12,9 +13,14 @@ class AppRoutes {
 
   // Main Tabs
   static const String home = '/home';
+  static const String prayer = '/prayer';
+  static const String dailyMass = '/daily-mass';
   static const String parishList = '/parish';
   static const String community = '/community';
   static const String myPage = '/my-page';
+
+  // Settings
+  static const String settings = '/settings';
 
   // Parish
   static const String parishDetail = '/parish/:parishId';

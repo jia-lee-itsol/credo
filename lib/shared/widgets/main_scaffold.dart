@@ -29,6 +29,16 @@ class MainScaffold extends StatelessWidget {
             label: 'ホーム',
           ),
           NavigationDestination(
+            icon: Icon(Icons.menu_book_outlined),
+            selectedIcon: Icon(Icons.menu_book),
+            label: '祈り',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.auto_stories_outlined),
+            selectedIcon: Icon(Icons.auto_stories),
+            label: 'ミサ',
+          ),
+          NavigationDestination(
             icon: Icon(Icons.church_outlined),
             selectedIcon: Icon(Icons.church),
             label: '教会',
@@ -37,11 +47,6 @@ class MainScaffold extends StatelessWidget {
             icon: Icon(Icons.forum_outlined),
             selectedIcon: Icon(Icons.forum),
             label: 'コミュニティ',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'マイページ',
           ),
         ],
       ),

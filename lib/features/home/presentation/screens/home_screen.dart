@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import '../../../../core/constants/liturgy_constants.dart';
 import '../../../../core/data/services/saint_feast_day_service.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
-import '../../../../config/routes/app_routes.dart';
+import '../../../../config/routes/app_routes.dart' show AppRoutes;
 
 /// 홈 화면
 class HomeScreen extends ConsumerWidget {
@@ -24,6 +24,7 @@ class HomeScreen extends ConsumerWidget {
     final backgroundColor = ref.watch(liturgyBackgroundColorProvider);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           // 헤더
@@ -42,17 +43,17 @@ class HomeScreen extends ConsumerWidget {
           // 근처 교회 찾기 버튼
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
               child: _buildNearbyParishButton(context, theme, primaryColor),
             ),
           ),
 
-          // 섹션 타이틀: よく行く教会
-          SliverToBoxAdapter(child: _buildSectionTitle(context, 'よく行く教会')),
-
-          // よく行く教会 리스트 (임시)
+          // 오늘의 미사 버튼
           SliverToBoxAdapter(
-            child: _buildFavoriteParishesPlaceholder(context, theme),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+              child: _buildTodayMassButton(context, theme, primaryColor),
+            ),
           ),
 
           // 섹션 타이틀: 最近のお知らせ
@@ -78,7 +79,7 @@ class HomeScreen extends ConsumerWidget {
     WidgetRef ref,
   ) {
     final now = DateTime.now();
-    final dateFormat = DateFormat('yyyy年M月d日 (E)', 'ja');
+    final dateFormat = DateFormat('yyyy年M月d日（E）', 'ja');
     final todaySaintsAsync = ref.watch(todaySaintsProvider);
 
     return Container(
@@ -86,125 +87,93 @@ class HomeScreen extends ConsumerWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [backgroundColor, theme.colorScheme.surface],
+          colors: [primaryColor, primaryColor.withValues(alpha: 0.85)],
         ),
       ),
       child: SafeArea(
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 로그인 버튼 (상단 우측)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const SizedBox.shrink(),
-                  TextButton.icon(
-                    onPressed: () {
-                      context.push(AppRoutes.signIn);
-                    },
-                    icon: Icon(Icons.login, size: 18, color: primaryColor),
-                    label: Text(
-                      'ログイン',
+              // 왼쪽: 날짜, 성인, 전례시즌
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 날짜
+                    Text(
+                      dateFormat.format(now),
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: primaryColor,
-                        fontWeight: FontWeight.w500,
+                        color: Colors.white.withValues(alpha: 0.9),
                       ),
                     ),
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        side: BorderSide(
-                          color: primaryColor.withValues(alpha: 0.5),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
 
-              // 날짜
-              Text(
-                dateFormat.format(now),
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                ),
-              ),
-              const SizedBox(height: 8),
-
-              // 오늘의 성인 축일
-              todaySaintsAsync.when(
-                data: (saints) {
-                  if (saints.isEmpty) {
-                    return const SizedBox.shrink();
-                  }
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ...saints.map(
-                        (saint) => Padding(
-                          padding: const EdgeInsets.only(bottom: 4),
+                    // 오늘의 성인 축일
+                    todaySaintsAsync.when(
+                      data: (saints) {
+                        if (saints.isEmpty) {
+                          return const SizedBox(height: 4);
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 4),
                           child: Row(
                             children: [
-                              Icon(Icons.star, size: 16, color: primaryColor),
-                              const SizedBox(width: 6),
+                              const Icon(
+                                Icons.star,
+                                size: 14,
+                                color: Colors.amber,
+                              ),
+                              const SizedBox(width: 4),
                               Flexible(
                                 child: Text(
-                                  saint.name,
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: primaryColor,
-                                    fontWeight: FontWeight.w500,
+                                  saints.first.name,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: Colors.white,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ],
                           ),
-                        ),
+                        );
+                      },
+                      loading: () => const SizedBox(height: 4),
+                      error: (_, __) => const SizedBox(height: 4),
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    // 전례 시즌
+                    Text(
+                      seasonName,
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                      const SizedBox(height: 8),
-                    ],
-                  );
+                    ),
+                  ],
+                ),
+              ),
+
+              // 오른쪽: 마이페이지 아이콘
+              GestureDetector(
+                onTap: () {
+                  context.push(AppRoutes.myPage);
                 },
-                loading: () => const SizedBox.shrink(),
-                error: (_, __) => const SizedBox.shrink(),
-              ),
-
-              // 전례 시즌
-              Row(
-                children: [
-                  Container(
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      color: primaryColor,
-                      shape: BoxShape.circle,
-                    ),
+                child: Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.2),
+                    shape: BoxShape.circle,
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    seasonName,
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      color: primaryColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: const Icon(
+                    Icons.person_outline,
+                    color: Colors.white,
+                    size: 24,
                   ),
-                ],
-              ),
-              const SizedBox(height: 4),
-
-              // 앱 이름
-              Text(
-                'Credo',
-                style: theme.textTheme.displaySmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2,
                 ),
               ),
             ],
@@ -219,12 +188,18 @@ class HomeScreen extends ConsumerWidget {
     ThemeData theme,
     Color primaryColor,
   ) {
-    return Card(
-      elevation: 0,
-      color: primaryColor.withValues(alpha: 0.1),
-      shape: RoundedRectangleBorder(
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: primaryColor.withValues(alpha: 0.3)),
+        border: Border.all(color: const Color(0xFFE5E5E5), width: 0.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: InkWell(
         onTap: () {
@@ -232,18 +207,19 @@ class HomeScreen extends ConsumerWidget {
         },
         borderRadius: BorderRadius.circular(16),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(16),
           child: Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                width: 56,
+                height: 56,
                 decoration: BoxDecoration(
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(12),
+                  color: LiturgyColors.adventLight,
+                  shape: BoxShape.circle,
                 ),
-                child: const Icon(
-                  Icons.location_on,
-                  color: Colors.white,
+                child: Icon(
+                  Icons.location_on_outlined,
+                  color: primaryColor,
                   size: 28,
                 ),
               ),
@@ -256,14 +232,94 @@ class HomeScreen extends ConsumerWidget {
                       '近くの教会を探す',
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
+                        color: const Color(0xFF262626),
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text('現在地から近い教会を検索', style: theme.textTheme.bodySmall),
+                    Text(
+                      '現在地から教会を検索',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: const Color(0xFF737373),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios, color: primaryColor, size: 20),
+              Icon(
+                Icons.chevron_right,
+                color: const Color(0xFF737373),
+                size: 24,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTodayMassButton(
+    BuildContext context,
+    ThemeData theme,
+    Color primaryColor,
+  ) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFE5E5E5), width: 0.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: InkWell(
+        onTap: () {
+          context.go(AppRoutes.dailyMass);
+        },
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: LiturgyColors.adventLight,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.auto_stories, color: primaryColor, size: 28),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '今日のミサ',
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF262626),
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '今日の聖書朗読と祈り',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: const Color(0xFF737373),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right,
+                color: const Color(0xFF737373),
+                size: 24,
+              ),
             ],
           ),
         ),
@@ -279,34 +335,6 @@ class HomeScreen extends ConsumerWidget {
         style: Theme.of(
           context,
         ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-      ),
-    );
-  }
-
-  Widget _buildFavoriteParishesPlaceholder(
-    BuildContext context,
-    ThemeData theme,
-  ) {
-    return SizedBox(
-      height: 120,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.church_outlined,
-              size: 40,
-              color: theme.colorScheme.outlineVariant,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'よく行く教会を登録しましょう',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

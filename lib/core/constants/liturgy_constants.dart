@@ -22,10 +22,10 @@ class LiturgyColors {
   static const Color ordinaryBackground = Color(0xFFF1F8E9);
 
   // 대림절/사순절 - 보라색 (준비, 회개)
-  static const Color adventPrimary = Color(0xFF6A1B9A);
-  static const Color adventLight = Color(0xFF9C4DCC);
-  static const Color adventDark = Color(0xFF38006B);
-  static const Color adventBackground = Color(0xFFF3E5F5);
+  static const Color adventPrimary = Color(0xFFA78ACF);      // 상단 배너
+  static const Color adventLight = Color(0xFFE9DFF5);        // 카드 배경
+  static const Color adventDark = Color(0xFF8B6BC1);         // 아이콘/액션
+  static const Color adventBackground = Color(0xFFDAD0E8);   // 탭바 하이라이트
 
   // 성탄절/부활절 - 흰색/금색 (기쁨, 축제)
   static const Color christmasPrimary = Color(0xFFFFD700);
