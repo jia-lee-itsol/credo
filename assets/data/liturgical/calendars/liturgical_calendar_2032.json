@@ -1,0 +1,266 @@
+{
+  "year": 2032,
+  "seasons": {
+    "advent": {
+      "start": "2031-11-30",
+      "end": "2031-12-24"
+    },
+    "christmas": {
+      "start": "2031-12-25",
+      "end": "2032-01-05"
+    },
+    "lent": {
+      "start": "2032-02-11",
+      "end": "2032-03-27"
+    },
+    "easter": {
+      "start": "2032-03-28",
+      "end": "2032-05-15"
+    },
+    "pentecost": {
+      "date": "2032-05-16"
+    }
+  },
+  "specialDays": [
+    {
+      "date": "2031-12-25",
+      "name": "主の降誕",
+      "type": "solemnity"
+    },
+    {
+      "date": "2031-12-28",
+      "name": "聖家族",
+      "type": "feast"
+    },
+    {
+      "date": "2032-01-01",
+      "name": "神の母聖マリア",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-01-04",
+      "name": "主の公現",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-01-11",
+      "name": "主の洗礼",
+      "type": "feast"
+    },
+    {
+      "date": "2032-02-02",
+      "name": "主の奉献",
+      "type": "feast"
+    },
+    {
+      "date": "2032-02-06",
+      "name": "日本二十六聖人",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-02-11",
+      "name": "灰の水曜日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-03-19",
+      "name": "聖ヨセフ",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-03-21",
+      "name": "主の受難の主日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-03-25",
+      "name": "主の受胎告知",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-03-25",
+      "name": "聖木曜日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-03-26",
+      "name": "聖金曜日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-03-27",
+      "name": "聖土曜日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-03-28",
+      "name": "復活の主日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-04-25",
+      "name": "聖マルコ福音記者",
+      "type": "feast"
+    },
+    {
+      "date": "2032-05-09",
+      "name": "主の昇天",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-05-16",
+      "name": "聖霊降臨の主日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-05-23",
+      "name": "三位一体の主日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-05-30",
+      "name": "キリストの聖体と聖血",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-06-04",
+      "name": "イエスのみ心",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-06-11",
+      "name": "聖バルナバ使徒",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-06-13",
+      "name": "聖アントニオ",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-06-20",
+      "name": "聖母の汚れなきみ心",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-06-24",
+      "name": "聖ヨハネ洗礼者",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-06-29",
+      "name": "聖ペトロとパウロ",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-07-25",
+      "name": "聖ヤコブ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2032-07-31",
+      "name": "聖イグナチオ・ロヨラ",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-08-08",
+      "name": "聖ドミニコ",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-08-15",
+      "name": "聖母の被昇天",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-08-24",
+      "name": "聖バルトロマイ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2032-08-28",
+      "name": "聖アウグスティヌス",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-09-21",
+      "name": "聖マタイ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2032-09-29",
+      "name": "聖ミカエル、ガブリエル、ラファエル大天使",
+      "type": "feast"
+    },
+    {
+      "date": "2032-10-04",
+      "name": "聖フランシスコ",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-10-15",
+      "name": "聖テレジア・アビラ",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-10-18",
+      "name": "聖ルカ福音記者",
+      "type": "feast"
+    },
+    {
+      "date": "2032-10-28",
+      "name": "聖シモンとユダ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2032-11-01",
+      "name": "諸聖人の日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-11-02",
+      "name": "死者の日",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-11-03",
+      "name": "聖マルティノ・デ・ポレス",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-11-21",
+      "name": "王であるキリスト",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-11-30",
+      "name": "聖アンデレ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2032-12-03",
+      "name": "聖フランシスコ・ザビエル",
+      "type": "memorial"
+    },
+    {
+      "date": "2032-12-08",
+      "name": "無原罪の御宿り",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-12-26",
+      "name": "聖ステファノ",
+      "type": "feast"
+    },
+    {
+      "date": "2032-12-27",
+      "name": "聖ヨハネ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2032-12-28",
+      "name": "幼子殉教者",
+      "type": "feast"
+    }
+  ]
+}

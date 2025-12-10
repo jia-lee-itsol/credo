@@ -10,7 +10,7 @@ part 'post_model.g.dart';
 class PostModel with _$PostModel {
   const factory PostModel({
     @JsonKey(name: 'post_id') required String postId,
-    @JsonKey(name: 'parish_id') required String parishId,
+    @JsonKey(name: 'parish_id') String? parishId, // 본당별 공지/게시판 분리용 (옵션)
     @JsonKey(name: 'user_id') required String userId,
     required String title,
     required String content,
@@ -18,8 +18,17 @@ class PostModel with _$PostModel {
     @JsonKey(name: 'is_pinned') @Default(false) bool isPinned,
     @JsonKey(name: 'like_count') @Default(0) int likeCount,
     @JsonKey(name: 'comment_count') @Default(0) int commentCount,
-    @JsonKey(name: 'author_nickname') String? authorNickname,
+    @JsonKey(name: 'author_nickname') String? authorNickname, // 스냅샷용
     @JsonKey(name: 'author_profile_image') String? authorProfileImage,
+    @JsonKey(name: 'author_role') String? authorRole, // 스냅샷용
+    @JsonKey(name: 'author_is_verified')
+    @Default(false)
+    bool authorIsVerified, // 스냅샷용
+    @Default('community')
+    String category, // "notice" | "community" | "qa" | "testimony" ...
+    @Default('normal') String type, // "official" | "normal"
+    @Default('published')
+    String status, // "published" | "hidden" | "reported" ...
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
   }) = _PostModel;
@@ -35,9 +44,11 @@ class PostModel with _$PostModel {
     return PostModel.fromJson({
       'post_id': doc.id,
       ...data,
-      'created_at': (data['created_at'] as Timestamp?)?.toDate().toIso8601String() ??
+      'created_at':
+          (data['created_at'] as Timestamp?)?.toDate().toIso8601String() ??
           DateTime.now().toIso8601String(),
-      'updated_at': (data['updated_at'] as Timestamp?)?.toDate().toIso8601String() ??
+      'updated_at':
+          (data['updated_at'] as Timestamp?)?.toDate().toIso8601String() ??
           DateTime.now().toIso8601String(),
     });
   }
@@ -57,6 +68,11 @@ class PostModel with _$PostModel {
       isLikedByCurrentUser: isLikedByCurrentUser,
       authorNickname: authorNickname,
       authorProfileImage: authorProfileImage,
+      authorRole: authorRole,
+      authorIsVerified: authorIsVerified,
+      category: category,
+      type: type,
+      status: status,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
@@ -64,8 +80,7 @@ class PostModel with _$PostModel {
 
   /// Firestore에 저장할 Map으로 변환
   Map<String, dynamic> toFirestore() {
-    return {
-      'parish_id': parishId,
+    final map = <String, dynamic>{
       'user_id': userId,
       'title': title,
       'content': content,
@@ -75,9 +90,20 @@ class PostModel with _$PostModel {
       'comment_count': commentCount,
       'author_nickname': authorNickname,
       'author_profile_image': authorProfileImage,
+      'author_role': authorRole,
+      'author_is_verified': authorIsVerified,
+      'category': category,
+      'type': type,
+      'status': status,
       'created_at': Timestamp.fromDate(createdAt),
       'updated_at': Timestamp.fromDate(updatedAt),
     };
+
+    if (parishId != null) {
+      map['parish_id'] = parishId;
+    }
+
+    return map;
   }
 }
 
@@ -106,7 +132,8 @@ class CommentModel with _$CommentModel {
     return CommentModel.fromJson({
       'comment_id': doc.id,
       ...data,
-      'created_at': (data['created_at'] as Timestamp?)?.toDate().toIso8601String() ??
+      'created_at':
+          (data['created_at'] as Timestamp?)?.toDate().toIso8601String() ??
           DateTime.now().toIso8601String(),
     });
   }
@@ -159,7 +186,8 @@ class LikeModel with _$LikeModel {
     return LikeModel.fromJson({
       'like_id': doc.id,
       ...data,
-      'created_at': (data['created_at'] as Timestamp?)?.toDate().toIso8601String() ??
+      'created_at':
+          (data['created_at'] as Timestamp?)?.toDate().toIso8601String() ??
           DateTime.now().toIso8601String(),
     });
   }

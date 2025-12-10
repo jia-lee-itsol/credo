@@ -7,7 +7,7 @@ import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/widgets/info_row.dart';
 import '../../../../config/routes/app_routes.dart';
-import '../../../../core/data/services/parish_service.dart';
+import '../../../../core/data/services/parish_service.dart' as core;
 
 /// 교회 상세 화면
 class ParishDetailScreen extends ConsumerWidget {
@@ -22,7 +22,7 @@ class ParishDetailScreen extends ConsumerWidget {
     final currentUser = ref.watch(currentUserProvider);
 
     // 실제 데이터 조회
-    final parishAsync = ref.watch(parishByIdProvider(parishId));
+    final parishAsync = ref.watch(core.parishByIdProvider(parishId));
 
     // 즐겨찾기 여부 확인
     final isFavorite =

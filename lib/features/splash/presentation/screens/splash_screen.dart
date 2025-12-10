@@ -30,6 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
     final prefs = await SharedPreferences.getInstance();
     final onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
 
+    if (!mounted) return;
+
     // 다음 화면으로 이동
     if (onboardingCompleted) {
       context.go(AppRoutes.home);

@@ -4,22 +4,69 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../config/routes/app_routes.dart';
+import '../../../../core/data/services/liturgical_reading_service.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/widgets/expandable_content_card.dart';
 
 /// 매일미사 화면
-class DailyMassScreen extends ConsumerWidget {
+class DailyMassScreen extends ConsumerStatefulWidget {
   const DailyMassScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DailyMassScreen> createState() => _DailyMassScreenState();
+}
+
+class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
+  DateTime? _selectedDate;
+
+  Future<void> _selectDate(BuildContext context) async {
+    final theme = Theme.of(context);
+    final primaryColor = ref.read(liturgyPrimaryColorProvider);
+    final testDate = ref.read(testDateOverrideProvider);
+    final initialDate = _selectedDate ?? testDate ?? DateTime.now();
+
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: DateTime(2025, 1, 1),
+      lastDate: DateTime(2033, 12, 31),
+      locale: const Locale('ja', 'JP'),
+      builder: (context, child) {
+        return Theme(
+          data: theme.copyWith(
+            colorScheme: ColorScheme.light(
+              primary: primaryColor,
+              onPrimary: Colors.white,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final currentUser = ref.watch(currentUserProvider);
     final testDate = ref.watch(testDateOverrideProvider);
-    final now = testDate ?? DateTime.now();
+
+    // 선택한 날짜가 있으면 사용, 없으면 테스트 날짜 또는 오늘 날짜
+    final displayDate = _selectedDate ?? testDate ?? DateTime.now();
     final dateFormat = DateFormat('yyyy年M月d日 (E)', 'ja');
+
+    // 날짜를 문자열로 변환하여 Provider family 키로 사용 (무한 반복 방지)
+    final dateKey =
+        '${displayDate.year}-${displayDate.month.toString().padLeft(2, '0')}-${displayDate.day.toString().padLeft(2, '0')}';
+    final liturgicalDayAsync = ref.watch(liturgicalDayProvider(dateKey));
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -46,30 +93,61 @@ class DailyMassScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          // 오늘 날짜
-          _buildDateHeader(theme, primaryColor, dateFormat.format(now)),
+      body: liturgicalDayAsync.when(
+        data: (liturgicalDay) {
+          return ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              // 날짜 헤더 (데이트피커 포함)
+              _buildDateHeader(
+                context,
+                theme,
+                primaryColor,
+                dateFormat.format(displayDate),
+              ),
 
-          const SizedBox(height: 24),
+              const SizedBox(height: 16),
 
-          // 미사 전례 섹션들
-          ..._massSections.map(
-            (section) => ExpandableContentCard(
-              title: section['title']!,
-              subtitle: section['subtitle']!,
-              icon: _getIconData(section['icon']!),
-              primaryColor: primaryColor,
-              content: section['content']!,
+              // 전례일 정보
+              if (liturgicalDay != null) ...[
+                _buildLiturgicalDayCard(theme, primaryColor, liturgicalDay),
+                const SizedBox(height: 24),
+                _buildReadingsSection(primaryColor, liturgicalDay),
+              ] else
+                _buildNoDataCard(theme, primaryColor),
+            ],
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stackTrace) {
+          print('[DailyMassScreen] ❌ ERROR: $error');
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                const SizedBox(height: 16),
+                Text('エラーが発生しました: $error'),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () =>
+                      ref.invalidate(liturgicalDayProvider(dateKey)),
+                  child: const Text('再試行'),
+                ),
+              ],
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
 
-  Widget _buildDateHeader(ThemeData theme, Color primaryColor, String date) {
+  Widget _buildDateHeader(
+    BuildContext context,
+    ThemeData theme,
+    Color primaryColor,
+    String date,
+  ) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -81,11 +159,90 @@ class DailyMassScreen extends ConsumerWidget {
         children: [
           Icon(Icons.calendar_today, color: primaryColor),
           const SizedBox(width: 12),
-          Text(
-            date,
-            style: theme.textTheme.titleMedium?.copyWith(
-              color: primaryColor,
-              fontWeight: FontWeight.bold,
+          Expanded(
+            child: Text(
+              date,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.calendar_month, color: primaryColor),
+            onPressed: () => _selectDate(context),
+            tooltip: '날짜 선택',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLiturgicalDayCard(
+    ThemeData theme,
+    Color primaryColor,
+    LiturgicalDay day,
+  ) {
+    final liturgicalColor = _getLiturgicalColor(day.color);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: liturgicalColor.withValues(alpha: 0.5)),
+        boxShadow: [
+          BoxShadow(
+            color: liturgicalColor.withValues(alpha: 0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 8,
+            height: 60,
+            decoration: BoxDecoration(
+              color: liturgicalColor,
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  day.name.isNotEmpty ? day.name : _getDefaultDayName(day),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  _getSeasonName(day.season),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: liturgicalColor.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Text(
+              _getColorName(day.color),
+              style: TextStyle(
+                color: liturgicalColor,
+                fontSize: 12,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
         ],
@@ -93,70 +250,169 @@ class DailyMassScreen extends ConsumerWidget {
     );
   }
 
-  IconData _getIconData(String iconName) {
-    switch (iconName) {
-      case 'music_note':
-        return Icons.music_note;
-      case 'menu_book':
-        return Icons.menu_book;
-      case 'library_music':
-        return Icons.library_music;
-      case 'celebration':
-        return Icons.celebration;
-      case 'auto_stories':
-        return Icons.auto_stories;
+  Widget _buildReadingsSection(Color primaryColor, LiturgicalDay day) {
+    final readings = day.readings;
+
+    return Column(
+      children: [
+        // 제1독서
+        ExpandableContentCard(
+          title: '第一朗読',
+          subtitle: readings.first.reference,
+          icon: Icons.menu_book,
+          primaryColor: primaryColor,
+          content: readings.first.text.isNotEmpty
+              ? '${readings.first.title}\n\n${readings.first.text}'
+              : '${readings.first.title}\n\n（本文は準備中です）',
+        ),
+
+        // 화답송 (있는 경우만 표시)
+        if (readings.psalm != null && readings.psalm!.reference.isNotEmpty)
+          ExpandableContentCard(
+            title: '答唱詩編',
+            subtitle: readings.psalm!.reference,
+            icon: Icons.library_music,
+            primaryColor: primaryColor,
+            content: readings.psalm!.text.isNotEmpty
+                ? '【答唱】${readings.psalm!.response}\n\n${readings.psalm!.text}'
+                : '【答唱】${readings.psalm!.response}\n\n（本文は準備中です）',
+          ),
+
+        // 제2독서 (있는 경우)
+        if (readings.second != null)
+          ExpandableContentCard(
+            title: '第二朗読',
+            subtitle: readings.second!.reference,
+            icon: Icons.menu_book,
+            primaryColor: primaryColor,
+            content: readings.second!.text.isNotEmpty
+                ? '${readings.second!.title}\n\n${readings.second!.text}'
+                : '${readings.second!.title}\n\n（本文は準備中です）',
+          ),
+
+        // 복음
+        ExpandableContentCard(
+          title: '福音朗読',
+          subtitle: readings.gospel.reference,
+          icon: Icons.auto_stories,
+          primaryColor: primaryColor,
+          content: readings.gospel.text.isNotEmpty
+              ? '${readings.gospel.title}\n\n${readings.gospel.text}'
+              : '${readings.gospel.title}\n\n（本文は準備中です）',
+        ),
+      ],
+    );
+  }
+
+  String _getDefaultDayName(LiturgicalDay day) {
+    // 이름이 비어있을 때 기본 이름 생성 (일본어)
+    // 주일, 대축일, 축일은 시기와 관계없이 우선 표시
+    if (day.isSunday) {
+      return '主日';
+    } else if (day.isSolemnity) {
+      return '大祝日';
+    } else if (day.isFeast) {
+      return '祝日';
+    } else {
+      // 시기에 따라 기본 이름 반환
+      switch (day.season) {
+        case 'advent':
+          return '待降節';
+        case 'christmas':
+          return '降誕節';
+        case 'lent':
+          return '四旬節';
+        case 'easter':
+          return '復活節';
+        case 'ordinary':
+        default:
+          return '年間平日';
+      }
+    }
+  }
+
+  Widget _buildNoDataCard(ThemeData theme, Color primaryColor) {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Column(
+        children: [
+          Icon(Icons.event_busy, size: 48, color: Colors.grey.shade400),
+          const SizedBox(height: 16),
+          Text(
+            '本日のミサ情報がありません',
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: Colors.grey.shade600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            '平日のミサ情報は現在準備中です',
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: Colors.grey.shade500,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Color _getLiturgicalColor(String color) {
+    switch (color) {
+      case 'white':
+        return const Color(0xFFD4AF37); // 금색으로 표시 (흰색은 보이지 않으므로)
+      case 'red':
+        return Colors.red.shade700;
+      case 'green':
+        return Colors.green.shade700;
+      case 'purple':
+        return Colors.purple.shade700;
+      case 'rose':
+        return Colors.pink.shade300;
+      case 'black':
+        return Colors.black87;
       default:
-        return Icons.article;
+        return Colors.green.shade700;
+    }
+  }
+
+  String _getColorName(String color) {
+    switch (color) {
+      case 'white':
+        return '白';
+      case 'red':
+        return '赤';
+      case 'green':
+        return '緑';
+      case 'purple':
+        return '紫';
+      case 'rose':
+        return '薔薇';
+      case 'black':
+        return '黒';
+      default:
+        return '緑';
+    }
+  }
+
+  String _getSeasonName(String season) {
+    switch (season) {
+      case 'advent':
+        return '待降節';
+      case 'christmas':
+        return '降誕節';
+      case 'lent':
+        return '四旬節';
+      case 'easter':
+        return '復活節';
+      case 'ordinary':
+        return '年間';
+      default:
+        return '';
     }
   }
 }
-
-// 미사 전례 데이터
-const _massSections = [
-  {
-    'title': '入祭唱',
-    'subtitle': 'Introitus',
-    'icon': 'music_note',
-    'content':
-        '主よ、あなたの道を私に示し、\nあなたの小道を私に教えてください。\nあなたの真理によって私を導き、教えてください。\nあなたは私の救いの神。',
-  },
-  {
-    'title': '第一朗読',
-    'subtitle': 'Lectio Prima',
-    'icon': 'menu_book',
-    'content': 'イザヤの預言\n\n荒れ野で叫ぶ者の声がする。\n「主の道を整え、\n私たちの神のために、\n荒れ地に広い道を通せ。」',
-  },
-  {
-    'title': '答唱詩編',
-    'subtitle': 'Psalmus Responsorius',
-    'icon': 'library_music',
-    'content':
-        '詩編 85\n\n【答唱】主よ、あなたの慈しみを私たちに示し、\n救いを私たちに与えてください。\n\n主の語られることを私は聞こう。\n主は平和を約束される。',
-  },
-  {
-    'title': '第二朗読',
-    'subtitle': 'Lectio Secunda',
-    'icon': 'menu_book',
-    'content':
-        'ペトロの手紙\n\n愛する皆さん、主のもとでは、\n一日は千年のようで、\n千年は一日のようです。\n主は約束の実現を遅らせておられるのではありません。',
-  },
-  {
-    'title': 'アレルヤ唱',
-    'subtitle': 'Alleluia',
-    'icon': 'celebration',
-    'content': 'アレルヤ、アレルヤ。\n主の道を整え、\nその道筋をまっすぐにせよ。\nすべての人は神の救いを見る。\nアレルヤ、アレルヤ。',
-  },
-  {
-    'title': '福音朗読',
-    'subtitle': 'Evangelium',
-    'icon': 'auto_stories',
-    'content':
-        'マルコによる福音\n\n神の子イエス・キリストの福音の初め。\n預言者イザヤの書にこう書いてある。\n「見よ、私はあなたより先に使者を遣わし、\nあなたの道を整えさせよう。」',
-  },
-  {
-    'title': '拝領唱',
-    'subtitle': 'Communio',
-    'icon': 'music_note',
-    'content': 'エルサレムよ、立ち上がれ、\n高い所に立って、東を見よ。\nあなたの子らが集まって来る、\n日の出から日の入りまで。',
-  },
-];

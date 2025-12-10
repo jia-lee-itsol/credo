@@ -9,6 +9,7 @@ class UserEntity with _$UserEntity {
     required String userId,
     required String nickname,
     required String email,
+    @Default('user') String role, // "user", "priest", "staff", "admin"
     String? mainParishId,
     @Default([]) List<String> preferredLanguages,
     @Default([]) List<String> favoriteParishIds,

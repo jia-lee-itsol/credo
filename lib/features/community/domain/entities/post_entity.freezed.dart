@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PostEntity {
   String get postId => throw _privateConstructorUsedError;
-  String get parishId => throw _privateConstructorUsedError;
+  String? get parishId =>
+      throw _privateConstructorUsedError; // 본당별 공지/게시판 분리용 (옵션)
   String get userId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
@@ -29,6 +30,15 @@ mixin _$PostEntity {
   bool get isLikedByCurrentUser => throw _privateConstructorUsedError;
   String? get authorNickname => throw _privateConstructorUsedError;
   String? get authorProfileImage => throw _privateConstructorUsedError;
+  String? get authorRole =>
+      throw _privateConstructorUsedError; // "user", "priest", "staff", "admin" (스냅샷용)
+  bool get authorIsVerified => throw _privateConstructorUsedError; // 스냅샷용
+  String get category =>
+      throw _privateConstructorUsedError; // "notice" | "community" | "qa" | "testimony" ...
+  String get type =>
+      throw _privateConstructorUsedError; // "official" | "normal"
+  String get status =>
+      throw _privateConstructorUsedError; // "published" | "hidden" | "reported" ...
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
@@ -48,7 +58,7 @@ abstract class $PostEntityCopyWith<$Res> {
   @useResult
   $Res call({
     String postId,
-    String parishId,
+    String? parishId,
     String userId,
     String title,
     String content,
@@ -59,6 +69,11 @@ abstract class $PostEntityCopyWith<$Res> {
     bool isLikedByCurrentUser,
     String? authorNickname,
     String? authorProfileImage,
+    String? authorRole,
+    bool authorIsVerified,
+    String category,
+    String type,
+    String status,
     DateTime createdAt,
     DateTime updatedAt,
   });
@@ -80,7 +95,7 @@ class _$PostEntityCopyWithImpl<$Res, $Val extends PostEntity>
   @override
   $Res call({
     Object? postId = null,
-    Object? parishId = null,
+    Object? parishId = freezed,
     Object? userId = null,
     Object? title = null,
     Object? content = null,
@@ -91,6 +106,11 @@ class _$PostEntityCopyWithImpl<$Res, $Val extends PostEntity>
     Object? isLikedByCurrentUser = null,
     Object? authorNickname = freezed,
     Object? authorProfileImage = freezed,
+    Object? authorRole = freezed,
+    Object? authorIsVerified = null,
+    Object? category = null,
+    Object? type = null,
+    Object? status = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -100,10 +120,10 @@ class _$PostEntityCopyWithImpl<$Res, $Val extends PostEntity>
                 ? _value.postId
                 : postId // ignore: cast_nullable_to_non_nullable
                       as String,
-            parishId: null == parishId
+            parishId: freezed == parishId
                 ? _value.parishId
                 : parishId // ignore: cast_nullable_to_non_nullable
-                      as String,
+                      as String?,
             userId: null == userId
                 ? _value.userId
                 : userId // ignore: cast_nullable_to_non_nullable
@@ -144,6 +164,26 @@ class _$PostEntityCopyWithImpl<$Res, $Val extends PostEntity>
                 ? _value.authorProfileImage
                 : authorProfileImage // ignore: cast_nullable_to_non_nullable
                       as String?,
+            authorRole: freezed == authorRole
+                ? _value.authorRole
+                : authorRole // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            authorIsVerified: null == authorIsVerified
+                ? _value.authorIsVerified
+                : authorIsVerified // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            category: null == category
+                ? _value.category
+                : category // ignore: cast_nullable_to_non_nullable
+                      as String,
+            type: null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                      as String,
+            status: null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as String,
             createdAt: null == createdAt
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
@@ -169,7 +209,7 @@ abstract class _$$PostEntityImplCopyWith<$Res>
   @useResult
   $Res call({
     String postId,
-    String parishId,
+    String? parishId,
     String userId,
     String title,
     String content,
@@ -180,6 +220,11 @@ abstract class _$$PostEntityImplCopyWith<$Res>
     bool isLikedByCurrentUser,
     String? authorNickname,
     String? authorProfileImage,
+    String? authorRole,
+    bool authorIsVerified,
+    String category,
+    String type,
+    String status,
     DateTime createdAt,
     DateTime updatedAt,
   });
@@ -200,7 +245,7 @@ class __$$PostEntityImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? postId = null,
-    Object? parishId = null,
+    Object? parishId = freezed,
     Object? userId = null,
     Object? title = null,
     Object? content = null,
@@ -211,6 +256,11 @@ class __$$PostEntityImplCopyWithImpl<$Res>
     Object? isLikedByCurrentUser = null,
     Object? authorNickname = freezed,
     Object? authorProfileImage = freezed,
+    Object? authorRole = freezed,
+    Object? authorIsVerified = null,
+    Object? category = null,
+    Object? type = null,
+    Object? status = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -220,10 +270,10 @@ class __$$PostEntityImplCopyWithImpl<$Res>
             ? _value.postId
             : postId // ignore: cast_nullable_to_non_nullable
                   as String,
-        parishId: null == parishId
+        parishId: freezed == parishId
             ? _value.parishId
             : parishId // ignore: cast_nullable_to_non_nullable
-                  as String,
+                  as String?,
         userId: null == userId
             ? _value.userId
             : userId // ignore: cast_nullable_to_non_nullable
@@ -264,6 +314,26 @@ class __$$PostEntityImplCopyWithImpl<$Res>
             ? _value.authorProfileImage
             : authorProfileImage // ignore: cast_nullable_to_non_nullable
                   as String?,
+        authorRole: freezed == authorRole
+            ? _value.authorRole
+            : authorRole // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        authorIsVerified: null == authorIsVerified
+            ? _value.authorIsVerified
+            : authorIsVerified // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        category: null == category
+            ? _value.category
+            : category // ignore: cast_nullable_to_non_nullable
+                  as String,
+        type: null == type
+            ? _value.type
+            : type // ignore: cast_nullable_to_non_nullable
+                  as String,
+        status: null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as String,
         createdAt: null == createdAt
             ? _value.createdAt
             : createdAt // ignore: cast_nullable_to_non_nullable
@@ -282,7 +352,7 @@ class __$$PostEntityImplCopyWithImpl<$Res>
 class _$PostEntityImpl extends _PostEntity {
   const _$PostEntityImpl({
     required this.postId,
-    required this.parishId,
+    this.parishId,
     required this.userId,
     required this.title,
     required this.content,
@@ -293,6 +363,11 @@ class _$PostEntityImpl extends _PostEntity {
     this.isLikedByCurrentUser = false,
     this.authorNickname,
     this.authorProfileImage,
+    this.authorRole,
+    this.authorIsVerified = false,
+    this.category = 'community',
+    this.type = 'normal',
+    this.status = 'published',
     required this.createdAt,
     required this.updatedAt,
   }) : super._();
@@ -300,7 +375,8 @@ class _$PostEntityImpl extends _PostEntity {
   @override
   final String postId;
   @override
-  final String parishId;
+  final String? parishId;
+  // 본당별 공지/게시판 분리용 (옵션)
   @override
   final String userId;
   @override
@@ -327,13 +403,32 @@ class _$PostEntityImpl extends _PostEntity {
   @override
   final String? authorProfileImage;
   @override
+  final String? authorRole;
+  // "user", "priest", "staff", "admin" (스냅샷용)
+  @override
+  @JsonKey()
+  final bool authorIsVerified;
+  // 스냅샷용
+  @override
+  @JsonKey()
+  final String category;
+  // "notice" | "community" | "qa" | "testimony" ...
+  @override
+  @JsonKey()
+  final String type;
+  // "official" | "normal"
+  @override
+  @JsonKey()
+  final String status;
+  // "published" | "hidden" | "reported" ...
+  @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'PostEntity(postId: $postId, parishId: $parishId, userId: $userId, title: $title, content: $content, isOfficial: $isOfficial, isPinned: $isPinned, likeCount: $likeCount, commentCount: $commentCount, isLikedByCurrentUser: $isLikedByCurrentUser, authorNickname: $authorNickname, authorProfileImage: $authorProfileImage, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'PostEntity(postId: $postId, parishId: $parishId, userId: $userId, title: $title, content: $content, isOfficial: $isOfficial, isPinned: $isPinned, likeCount: $likeCount, commentCount: $commentCount, isLikedByCurrentUser: $isLikedByCurrentUser, authorNickname: $authorNickname, authorProfileImage: $authorProfileImage, authorRole: $authorRole, authorIsVerified: $authorIsVerified, category: $category, type: $type, status: $status, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -361,6 +456,14 @@ class _$PostEntityImpl extends _PostEntity {
                 other.authorNickname == authorNickname) &&
             (identical(other.authorProfileImage, authorProfileImage) ||
                 other.authorProfileImage == authorProfileImage) &&
+            (identical(other.authorRole, authorRole) ||
+                other.authorRole == authorRole) &&
+            (identical(other.authorIsVerified, authorIsVerified) ||
+                other.authorIsVerified == authorIsVerified) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -368,7 +471,7 @@ class _$PostEntityImpl extends _PostEntity {
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     postId,
     parishId,
@@ -382,9 +485,14 @@ class _$PostEntityImpl extends _PostEntity {
     isLikedByCurrentUser,
     authorNickname,
     authorProfileImage,
+    authorRole,
+    authorIsVerified,
+    category,
+    type,
+    status,
     createdAt,
     updatedAt,
-  );
+  ]);
 
   /// Create a copy of PostEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -398,7 +506,7 @@ class _$PostEntityImpl extends _PostEntity {
 abstract class _PostEntity extends PostEntity {
   const factory _PostEntity({
     required final String postId,
-    required final String parishId,
+    final String? parishId,
     required final String userId,
     required final String title,
     required final String content,
@@ -409,6 +517,11 @@ abstract class _PostEntity extends PostEntity {
     final bool isLikedByCurrentUser,
     final String? authorNickname,
     final String? authorProfileImage,
+    final String? authorRole,
+    final bool authorIsVerified,
+    final String category,
+    final String type,
+    final String status,
     required final DateTime createdAt,
     required final DateTime updatedAt,
   }) = _$PostEntityImpl;
@@ -417,7 +530,7 @@ abstract class _PostEntity extends PostEntity {
   @override
   String get postId;
   @override
-  String get parishId;
+  String? get parishId; // 본당별 공지/게시판 분리용 (옵션)
   @override
   String get userId;
   @override
@@ -438,6 +551,16 @@ abstract class _PostEntity extends PostEntity {
   String? get authorNickname;
   @override
   String? get authorProfileImage;
+  @override
+  String? get authorRole; // "user", "priest", "staff", "admin" (스냅샷용)
+  @override
+  bool get authorIsVerified; // 스냅샷용
+  @override
+  String get category; // "notice" | "community" | "qa" | "testimony" ...
+  @override
+  String get type; // "official" | "normal"
+  @override
+  String get status; // "published" | "hidden" | "reported" ...
   @override
   DateTime get createdAt;
   @override

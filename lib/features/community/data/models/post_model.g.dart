@@ -9,7 +9,7 @@ part of 'post_model.dart';
 _$PostModelImpl _$$PostModelImplFromJson(Map<String, dynamic> json) =>
     _$PostModelImpl(
       postId: json['post_id'] as String,
-      parishId: json['parish_id'] as String,
+      parishId: json['parish_id'] as String?,
       userId: json['user_id'] as String,
       title: json['title'] as String,
       content: json['content'] as String,
@@ -19,6 +19,11 @@ _$PostModelImpl _$$PostModelImplFromJson(Map<String, dynamic> json) =>
       commentCount: (json['comment_count'] as num?)?.toInt() ?? 0,
       authorNickname: json['author_nickname'] as String?,
       authorProfileImage: json['author_profile_image'] as String?,
+      authorRole: json['author_role'] as String?,
+      authorIsVerified: json['author_is_verified'] as bool? ?? false,
+      category: json['category'] as String? ?? 'community',
+      type: json['type'] as String? ?? 'normal',
+      status: json['status'] as String? ?? 'published',
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
     );
@@ -36,6 +41,11 @@ Map<String, dynamic> _$$PostModelImplToJson(_$PostModelImpl instance) =>
       'comment_count': instance.commentCount,
       'author_nickname': instance.authorNickname,
       'author_profile_image': instance.authorProfileImage,
+      'author_role': instance.authorRole,
+      'author_is_verified': instance.authorIsVerified,
+      'category': instance.category,
+      'type': instance.type,
+      'status': instance.status,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
     };

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
-import '../../../../core/data/services/parish_service.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
+import '../../../../core/data/services/parish_service.dart' as core;
 import '../../../../shared/providers/auth_provider.dart';
 import '../constants/parish_colors.dart';
 import '../widgets/parish_card.dart';
@@ -165,7 +164,7 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
   }
 
   Widget _buildParishList() {
-    final allParishesAsync = ref.watch(allParishesProvider);
+    final allParishesAsync = ref.watch(core.allParishesProvider);
 
     return allParishesAsync.when(
       data: (allParishesMap) {
@@ -453,7 +452,7 @@ class _FilterBottomSheetState extends State<_FilterBottomSheet> {
   Future<void> _loadFilterData() async {
     try {
       // 도도부현 목록 추출
-      final allParishesMap = await ParishService.loadAllParishes();
+      final allParishesMap = await core.ParishService.loadAllParishes();
       final prefectureSet = <String>{};
       for (final parishes in allParishesMap.values) {
         for (final parish in parishes) {

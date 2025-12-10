@@ -24,7 +24,7 @@ mixin _$PostModel {
   @JsonKey(name: 'post_id')
   String get postId => throw _privateConstructorUsedError;
   @JsonKey(name: 'parish_id')
-  String get parishId => throw _privateConstructorUsedError;
+  String? get parishId => throw _privateConstructorUsedError; // 본당별 공지/게시판 분리용 (옵션)
   @JsonKey(name: 'user_id')
   String get userId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -38,9 +38,19 @@ mixin _$PostModel {
   @JsonKey(name: 'comment_count')
   int get commentCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'author_nickname')
-  String? get authorNickname => throw _privateConstructorUsedError;
+  String? get authorNickname => throw _privateConstructorUsedError; // 스냅샷용
   @JsonKey(name: 'author_profile_image')
   String? get authorProfileImage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'author_role')
+  String? get authorRole => throw _privateConstructorUsedError; // 스냅샷용
+  @JsonKey(name: 'author_is_verified')
+  bool get authorIsVerified => throw _privateConstructorUsedError; // 스냅샷용
+  String get category =>
+      throw _privateConstructorUsedError; // "notice" | "community" | "qa" | "testimony" ...
+  String get type =>
+      throw _privateConstructorUsedError; // "official" | "normal"
+  String get status =>
+      throw _privateConstructorUsedError; // "published" | "hidden" | "reported" ...
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -63,7 +73,7 @@ abstract class $PostModelCopyWith<$Res> {
   @useResult
   $Res call({
     @JsonKey(name: 'post_id') String postId,
-    @JsonKey(name: 'parish_id') String parishId,
+    @JsonKey(name: 'parish_id') String? parishId,
     @JsonKey(name: 'user_id') String userId,
     String title,
     String content,
@@ -73,6 +83,11 @@ abstract class $PostModelCopyWith<$Res> {
     @JsonKey(name: 'comment_count') int commentCount,
     @JsonKey(name: 'author_nickname') String? authorNickname,
     @JsonKey(name: 'author_profile_image') String? authorProfileImage,
+    @JsonKey(name: 'author_role') String? authorRole,
+    @JsonKey(name: 'author_is_verified') bool authorIsVerified,
+    String category,
+    String type,
+    String status,
     @JsonKey(name: 'created_at') DateTime createdAt,
     @JsonKey(name: 'updated_at') DateTime updatedAt,
   });
@@ -94,7 +109,7 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
   @override
   $Res call({
     Object? postId = null,
-    Object? parishId = null,
+    Object? parishId = freezed,
     Object? userId = null,
     Object? title = null,
     Object? content = null,
@@ -104,6 +119,11 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
     Object? commentCount = null,
     Object? authorNickname = freezed,
     Object? authorProfileImage = freezed,
+    Object? authorRole = freezed,
+    Object? authorIsVerified = null,
+    Object? category = null,
+    Object? type = null,
+    Object? status = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -113,10 +133,10 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
                 ? _value.postId
                 : postId // ignore: cast_nullable_to_non_nullable
                       as String,
-            parishId: null == parishId
+            parishId: freezed == parishId
                 ? _value.parishId
                 : parishId // ignore: cast_nullable_to_non_nullable
-                      as String,
+                      as String?,
             userId: null == userId
                 ? _value.userId
                 : userId // ignore: cast_nullable_to_non_nullable
@@ -153,6 +173,26 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
                 ? _value.authorProfileImage
                 : authorProfileImage // ignore: cast_nullable_to_non_nullable
                       as String?,
+            authorRole: freezed == authorRole
+                ? _value.authorRole
+                : authorRole // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            authorIsVerified: null == authorIsVerified
+                ? _value.authorIsVerified
+                : authorIsVerified // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            category: null == category
+                ? _value.category
+                : category // ignore: cast_nullable_to_non_nullable
+                      as String,
+            type: null == type
+                ? _value.type
+                : type // ignore: cast_nullable_to_non_nullable
+                      as String,
+            status: null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as String,
             createdAt: null == createdAt
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
@@ -178,7 +218,7 @@ abstract class _$$PostModelImplCopyWith<$Res>
   @useResult
   $Res call({
     @JsonKey(name: 'post_id') String postId,
-    @JsonKey(name: 'parish_id') String parishId,
+    @JsonKey(name: 'parish_id') String? parishId,
     @JsonKey(name: 'user_id') String userId,
     String title,
     String content,
@@ -188,6 +228,11 @@ abstract class _$$PostModelImplCopyWith<$Res>
     @JsonKey(name: 'comment_count') int commentCount,
     @JsonKey(name: 'author_nickname') String? authorNickname,
     @JsonKey(name: 'author_profile_image') String? authorProfileImage,
+    @JsonKey(name: 'author_role') String? authorRole,
+    @JsonKey(name: 'author_is_verified') bool authorIsVerified,
+    String category,
+    String type,
+    String status,
     @JsonKey(name: 'created_at') DateTime createdAt,
     @JsonKey(name: 'updated_at') DateTime updatedAt,
   });
@@ -208,7 +253,7 @@ class __$$PostModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? postId = null,
-    Object? parishId = null,
+    Object? parishId = freezed,
     Object? userId = null,
     Object? title = null,
     Object? content = null,
@@ -218,6 +263,11 @@ class __$$PostModelImplCopyWithImpl<$Res>
     Object? commentCount = null,
     Object? authorNickname = freezed,
     Object? authorProfileImage = freezed,
+    Object? authorRole = freezed,
+    Object? authorIsVerified = null,
+    Object? category = null,
+    Object? type = null,
+    Object? status = null,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -227,10 +277,10 @@ class __$$PostModelImplCopyWithImpl<$Res>
             ? _value.postId
             : postId // ignore: cast_nullable_to_non_nullable
                   as String,
-        parishId: null == parishId
+        parishId: freezed == parishId
             ? _value.parishId
             : parishId // ignore: cast_nullable_to_non_nullable
-                  as String,
+                  as String?,
         userId: null == userId
             ? _value.userId
             : userId // ignore: cast_nullable_to_non_nullable
@@ -267,6 +317,26 @@ class __$$PostModelImplCopyWithImpl<$Res>
             ? _value.authorProfileImage
             : authorProfileImage // ignore: cast_nullable_to_non_nullable
                   as String?,
+        authorRole: freezed == authorRole
+            ? _value.authorRole
+            : authorRole // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        authorIsVerified: null == authorIsVerified
+            ? _value.authorIsVerified
+            : authorIsVerified // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        category: null == category
+            ? _value.category
+            : category // ignore: cast_nullable_to_non_nullable
+                  as String,
+        type: null == type
+            ? _value.type
+            : type // ignore: cast_nullable_to_non_nullable
+                  as String,
+        status: null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as String,
         createdAt: null == createdAt
             ? _value.createdAt
             : createdAt // ignore: cast_nullable_to_non_nullable
@@ -285,7 +355,7 @@ class __$$PostModelImplCopyWithImpl<$Res>
 class _$PostModelImpl extends _PostModel {
   const _$PostModelImpl({
     @JsonKey(name: 'post_id') required this.postId,
-    @JsonKey(name: 'parish_id') required this.parishId,
+    @JsonKey(name: 'parish_id') this.parishId,
     @JsonKey(name: 'user_id') required this.userId,
     required this.title,
     required this.content,
@@ -295,6 +365,11 @@ class _$PostModelImpl extends _PostModel {
     @JsonKey(name: 'comment_count') this.commentCount = 0,
     @JsonKey(name: 'author_nickname') this.authorNickname,
     @JsonKey(name: 'author_profile_image') this.authorProfileImage,
+    @JsonKey(name: 'author_role') this.authorRole,
+    @JsonKey(name: 'author_is_verified') this.authorIsVerified = false,
+    this.category = 'community',
+    this.type = 'normal',
+    this.status = 'published',
     @JsonKey(name: 'created_at') required this.createdAt,
     @JsonKey(name: 'updated_at') required this.updatedAt,
   }) : super._();
@@ -307,7 +382,8 @@ class _$PostModelImpl extends _PostModel {
   final String postId;
   @override
   @JsonKey(name: 'parish_id')
-  final String parishId;
+  final String? parishId;
+  // 본당별 공지/게시판 분리용 (옵션)
   @override
   @JsonKey(name: 'user_id')
   final String userId;
@@ -330,9 +406,30 @@ class _$PostModelImpl extends _PostModel {
   @override
   @JsonKey(name: 'author_nickname')
   final String? authorNickname;
+  // 스냅샷용
   @override
   @JsonKey(name: 'author_profile_image')
   final String? authorProfileImage;
+  @override
+  @JsonKey(name: 'author_role')
+  final String? authorRole;
+  // 스냅샷용
+  @override
+  @JsonKey(name: 'author_is_verified')
+  final bool authorIsVerified;
+  // 스냅샷용
+  @override
+  @JsonKey()
+  final String category;
+  // "notice" | "community" | "qa" | "testimony" ...
+  @override
+  @JsonKey()
+  final String type;
+  // "official" | "normal"
+  @override
+  @JsonKey()
+  final String status;
+  // "published" | "hidden" | "reported" ...
   @override
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
@@ -342,7 +439,7 @@ class _$PostModelImpl extends _PostModel {
 
   @override
   String toString() {
-    return 'PostModel(postId: $postId, parishId: $parishId, userId: $userId, title: $title, content: $content, isOfficial: $isOfficial, isPinned: $isPinned, likeCount: $likeCount, commentCount: $commentCount, authorNickname: $authorNickname, authorProfileImage: $authorProfileImage, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'PostModel(postId: $postId, parishId: $parishId, userId: $userId, title: $title, content: $content, isOfficial: $isOfficial, isPinned: $isPinned, likeCount: $likeCount, commentCount: $commentCount, authorNickname: $authorNickname, authorProfileImage: $authorProfileImage, authorRole: $authorRole, authorIsVerified: $authorIsVerified, category: $category, type: $type, status: $status, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -368,6 +465,14 @@ class _$PostModelImpl extends _PostModel {
                 other.authorNickname == authorNickname) &&
             (identical(other.authorProfileImage, authorProfileImage) ||
                 other.authorProfileImage == authorProfileImage) &&
+            (identical(other.authorRole, authorRole) ||
+                other.authorRole == authorRole) &&
+            (identical(other.authorIsVerified, authorIsVerified) ||
+                other.authorIsVerified == authorIsVerified) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -389,6 +494,11 @@ class _$PostModelImpl extends _PostModel {
     commentCount,
     authorNickname,
     authorProfileImage,
+    authorRole,
+    authorIsVerified,
+    category,
+    type,
+    status,
     createdAt,
     updatedAt,
   );
@@ -410,7 +520,7 @@ class _$PostModelImpl extends _PostModel {
 abstract class _PostModel extends PostModel {
   const factory _PostModel({
     @JsonKey(name: 'post_id') required final String postId,
-    @JsonKey(name: 'parish_id') required final String parishId,
+    @JsonKey(name: 'parish_id') final String? parishId,
     @JsonKey(name: 'user_id') required final String userId,
     required final String title,
     required final String content,
@@ -420,6 +530,11 @@ abstract class _PostModel extends PostModel {
     @JsonKey(name: 'comment_count') final int commentCount,
     @JsonKey(name: 'author_nickname') final String? authorNickname,
     @JsonKey(name: 'author_profile_image') final String? authorProfileImage,
+    @JsonKey(name: 'author_role') final String? authorRole,
+    @JsonKey(name: 'author_is_verified') final bool authorIsVerified,
+    final String category,
+    final String type,
+    final String status,
     @JsonKey(name: 'created_at') required final DateTime createdAt,
     @JsonKey(name: 'updated_at') required final DateTime updatedAt,
   }) = _$PostModelImpl;
@@ -433,7 +548,7 @@ abstract class _PostModel extends PostModel {
   String get postId;
   @override
   @JsonKey(name: 'parish_id')
-  String get parishId;
+  String? get parishId; // 본당별 공지/게시판 분리용 (옵션)
   @override
   @JsonKey(name: 'user_id')
   String get userId;
@@ -455,10 +570,22 @@ abstract class _PostModel extends PostModel {
   int get commentCount;
   @override
   @JsonKey(name: 'author_nickname')
-  String? get authorNickname;
+  String? get authorNickname; // 스냅샷용
   @override
   @JsonKey(name: 'author_profile_image')
   String? get authorProfileImage;
+  @override
+  @JsonKey(name: 'author_role')
+  String? get authorRole; // 스냅샷용
+  @override
+  @JsonKey(name: 'author_is_verified')
+  bool get authorIsVerified; // 스냅샷용
+  @override
+  String get category; // "notice" | "community" | "qa" | "testimony" ...
+  @override
+  String get type; // "official" | "normal"
+  @override
+  String get status; // "published" | "hidden" | "reported" ...
   @override
   @JsonKey(name: 'created_at')
   DateTime get createdAt;

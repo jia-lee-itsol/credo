@@ -6,12 +6,15 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/data/models/saint_feast_day_model.dart';
-import '../../../../core/data/services/parish_service.dart';
-import '../../../../core/data/services/saint_feast_day_service.dart';
+import '../../../../core/data/services/parish_service.dart' as core;
 import '../../../../core/utils/validators.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../auth/domain/entities/user_entity.dart';
+import '../../data/providers/saint_feast_day_providers.dart';
+import '../../domain/usecases/get_saint_feast_days_usecase.dart';
+import '../../../parish/data/providers/parish_providers.dart';
+import '../../../parish/domain/usecases/get_parishes_usecase.dart';
 
 /// 프로필 편집 화면
 class EditProfileScreen extends ConsumerStatefulWidget {
@@ -104,26 +107,44 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     final day = int.tryParse(parts[1]);
     if (month == null || day == null) return;
 
-    final saints = await SaintFeastDayService.getSaintsForDate(
-      DateTime(2024, month, day),
-    );
+    final repository = ref.read(saintFeastDayRepositoryProvider);
+    final useCase = GetSaintsForDateUseCase(repository);
+    final result = await useCase.call(DateTime(2024, month, day));
 
-    if (saints.isNotEmpty) {
-      setState(() {
-        _selectedFeastDay = saints.first;
-      });
-    }
+    result.fold((_) {}, (saints) {
+      if (saints.isNotEmpty && mounted) {
+        // Entity를 Model로 변환 (기존 코드 호환성)
+        final saint = saints.first;
+        setState(() {
+          _selectedFeastDay = SaintFeastDayModel(
+            month: saint.month,
+            day: saint.day,
+            name: saint.name,
+            nameEnglish: saint.nameEnglish,
+            type: saint.type,
+            isJapanese: saint.isJapanese,
+            greeting: saint.greeting,
+            description: saint.description,
+          );
+        });
+      }
+    });
   }
 
   Future<void> _loadParish() async {
     if (_selectedParishId == null) return;
 
-    final parish = await ParishService.getParishById(_selectedParishId!);
-    if (parish != null) {
-      setState(() {
-        _selectedParishName = parish['name'] as String?;
-      });
-    }
+    final repository = ref.read(parishRepositoryProvider);
+    final useCase = GetParishByIdUseCase(repository);
+    final result = await useCase.call(_selectedParishId!);
+
+    result.fold((_) {}, (parish) {
+      if (mounted) {
+        setState(() {
+          _selectedParishName = parish.name;
+        });
+      }
+    });
   }
 
   @override
@@ -992,8 +1013,25 @@ class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
 final _allSaintsProvider = FutureProvider<List<SaintFeastDayModel>>((
   ref,
 ) async {
-  final data = await SaintFeastDayService.loadSaintsFeastDays();
-  return [...data.saints, ...data.japaneseSaints];
+  final repository = ref.read(saintFeastDayRepositoryProvider);
+  final result = await repository.loadSaintsFeastDays();
+  return result.fold(
+    (_) => <SaintFeastDayModel>[],
+    (saints) => saints
+        .map(
+          (saint) => SaintFeastDayModel(
+            month: saint.month,
+            day: saint.day,
+            name: saint.name,
+            nameEnglish: saint.nameEnglish,
+            type: saint.type,
+            isJapanese: saint.isJapanese,
+            greeting: saint.greeting,
+            description: saint.description,
+          ),
+        )
+        .toList(),
+  );
 });
 
 /// 유저 검색 시트
@@ -1282,7 +1320,7 @@ class _ParishSearchSheetState extends ConsumerState<_ParishSearchSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final allParishesAsync = ref.watch(allParishesProvider);
+    final allParishesAsync = ref.watch(core.allParishesProvider);
 
     return Column(
       children: [

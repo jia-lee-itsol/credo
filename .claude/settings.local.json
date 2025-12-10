@@ -9,7 +9,14 @@
       "Bash(xargs:*)",
       "Bash(dart pub global activate:*)",
       "Bash($HOME/.pub-cache/bin/flutterfire configure --yes --project=credo-be5fc)",
-      "Bash(~/.pub-cache/bin/flutterfire configure:*)"
+      "Bash(~/.pub-cache/bin/flutterfire configure:*)",
+      "mcp__ide__getDiagnostics",
+      "WebSearch",
+      "WebFetch(domain:www.pauline.or.jp)",
+      "WebFetch(domain:www.koganei-catholic-church.com)",
+      "Bash(dart --version:*)",
+      "Bash(dart run:*)",
+      "Bash(python3:*)"
     ],
     "deny": [],
     "ask": []

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
-import '../../../../core/data/services/parish_service.dart';
+import '../../../../core/data/services/parish_service.dart' as core;
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 
@@ -253,7 +253,7 @@ class _FavoriteParishTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider);
     final isMainParish = parishId == currentUser?.mainParishId;
-    final parishAsync = ref.watch(parishByIdProvider(parishId));
+    final parishAsync = ref.watch(core.parishByIdProvider(parishId));
 
     return parishAsync.when(
       data: (parish) {

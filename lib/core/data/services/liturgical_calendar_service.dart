@@ -10,7 +10,7 @@ class LiturgicalCalendarService {
   static Future<LiturgicalCalendarModel?> loadCalendar(int year) async {
     try {
       final jsonString = await rootBundle.loadString(
-        'assets/data/liturgical_calendar_$year.json',
+        'assets/data/liturgical/calendars/liturgical_calendar_$year.json',
       );
       final json = jsonDecode(jsonString) as Map<String, dynamic>;
       return LiturgicalCalendarModel.fromJson(json);

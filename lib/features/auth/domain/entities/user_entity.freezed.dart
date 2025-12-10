@@ -20,6 +20,8 @@ mixin _$UserEntity {
   String get userId => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String get role =>
+      throw _privateConstructorUsedError; // "user", "priest", "staff", "admin"
   String? get mainParishId => throw _privateConstructorUsedError;
   List<String> get preferredLanguages => throw _privateConstructorUsedError;
   List<String> get favoriteParishIds => throw _privateConstructorUsedError;
@@ -57,6 +59,7 @@ abstract class $UserEntityCopyWith<$Res> {
     String userId,
     String nickname,
     String email,
+    String role,
     String? mainParishId,
     List<String> preferredLanguages,
     List<String> favoriteParishIds,
@@ -93,6 +96,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? userId = null,
     Object? nickname = null,
     Object? email = null,
+    Object? role = null,
     Object? mainParishId = freezed,
     Object? preferredLanguages = null,
     Object? favoriteParishIds = null,
@@ -122,6 +126,10 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
             email: null == email
                 ? _value.email
                 : email // ignore: cast_nullable_to_non_nullable
+                      as String,
+            role: null == role
+                ? _value.role
+                : role // ignore: cast_nullable_to_non_nullable
                       as String,
             mainParishId: freezed == mainParishId
                 ? _value.mainParishId
@@ -202,6 +210,7 @@ abstract class _$$UserEntityImplCopyWith<$Res>
     String userId,
     String nickname,
     String email,
+    String role,
     String? mainParishId,
     List<String> preferredLanguages,
     List<String> favoriteParishIds,
@@ -237,6 +246,7 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? nickname = null,
     Object? email = null,
+    Object? role = null,
     Object? mainParishId = freezed,
     Object? preferredLanguages = null,
     Object? favoriteParishIds = null,
@@ -266,6 +276,10 @@ class __$$UserEntityImplCopyWithImpl<$Res>
         email: null == email
             ? _value.email
             : email // ignore: cast_nullable_to_non_nullable
+                  as String,
+        role: null == role
+            ? _value.role
+            : role // ignore: cast_nullable_to_non_nullable
                   as String,
         mainParishId: freezed == mainParishId
             ? _value.mainParishId
@@ -339,6 +353,7 @@ class _$UserEntityImpl extends _UserEntity {
     required this.userId,
     required this.nickname,
     required this.email,
+    this.role = 'user',
     this.mainParishId,
     final List<String> preferredLanguages = const [],
     final List<String> favoriteParishIds = const [],
@@ -365,6 +380,10 @@ class _$UserEntityImpl extends _UserEntity {
   final String nickname;
   @override
   final String email;
+  @override
+  @JsonKey()
+  final String role;
+  // "user", "priest", "staff", "admin"
   @override
   final String? mainParishId;
   final List<String> _preferredLanguages;
@@ -428,7 +447,7 @@ class _$UserEntityImpl extends _UserEntity {
 
   @override
   String toString() {
-    return 'UserEntity(userId: $userId, nickname: $nickname, email: $email, mainParishId: $mainParishId, preferredLanguages: $preferredLanguages, favoriteParishIds: $favoriteParishIds, profileImageUrl: $profileImageUrl, isVerified: $isVerified, verifiedParishId: $verifiedParishId, verifiedRole: $verifiedRole, baptismalName: $baptismalName, feastDayId: $feastDayId, baptismDate: $baptismDate, confirmationDate: $confirmationDate, godchildren: $godchildren, godparentId: $godparentId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserEntity(userId: $userId, nickname: $nickname, email: $email, role: $role, mainParishId: $mainParishId, preferredLanguages: $preferredLanguages, favoriteParishIds: $favoriteParishIds, profileImageUrl: $profileImageUrl, isVerified: $isVerified, verifiedParishId: $verifiedParishId, verifiedRole: $verifiedRole, baptismalName: $baptismalName, feastDayId: $feastDayId, baptismDate: $baptismDate, confirmationDate: $confirmationDate, godchildren: $godchildren, godparentId: $godparentId, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -440,6 +459,7 @@ class _$UserEntityImpl extends _UserEntity {
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.role, role) || other.role == role) &&
             (identical(other.mainParishId, mainParishId) ||
                 other.mainParishId == mainParishId) &&
             const DeepCollectionEquality().equals(
@@ -479,11 +499,12 @@ class _$UserEntityImpl extends _UserEntity {
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     userId,
     nickname,
     email,
+    role,
     mainParishId,
     const DeepCollectionEquality().hash(_preferredLanguages),
     const DeepCollectionEquality().hash(_favoriteParishIds),
@@ -499,7 +520,7 @@ class _$UserEntityImpl extends _UserEntity {
     godparentId,
     createdAt,
     updatedAt,
-  );
+  ]);
 
   /// Create a copy of UserEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -515,6 +536,7 @@ abstract class _UserEntity extends UserEntity {
     required final String userId,
     required final String nickname,
     required final String email,
+    final String role,
     final String? mainParishId,
     final List<String> preferredLanguages,
     final List<String> favoriteParishIds,
@@ -539,6 +561,8 @@ abstract class _UserEntity extends UserEntity {
   String get nickname;
   @override
   String get email;
+  @override
+  String get role; // "user", "priest", "staff", "admin"
   @override
   String? get mainParishId;
   @override

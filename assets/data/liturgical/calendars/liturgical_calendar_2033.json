@@ -1,0 +1,266 @@
+{
+  "year": 2033,
+  "seasons": {
+    "advent": {
+      "start": "2032-11-28",
+      "end": "2032-12-24"
+    },
+    "christmas": {
+      "start": "2032-12-25",
+      "end": "2033-01-05"
+    },
+    "lent": {
+      "start": "2033-03-02",
+      "end": "2033-04-16"
+    },
+    "easter": {
+      "start": "2033-04-17",
+      "end": "2033-06-04"
+    },
+    "pentecost": {
+      "date": "2033-06-05"
+    }
+  },
+  "specialDays": [
+    {
+      "date": "2032-12-25",
+      "name": "主の降誕",
+      "type": "solemnity"
+    },
+    {
+      "date": "2032-12-26",
+      "name": "聖家族",
+      "type": "feast"
+    },
+    {
+      "date": "2033-01-01",
+      "name": "神の母聖マリア",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-01-02",
+      "name": "主の公現",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-01-09",
+      "name": "主の洗礼",
+      "type": "feast"
+    },
+    {
+      "date": "2033-02-02",
+      "name": "主の奉献",
+      "type": "feast"
+    },
+    {
+      "date": "2033-02-06",
+      "name": "日本二十六聖人",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-03-02",
+      "name": "灰の水曜日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-03-19",
+      "name": "聖ヨセフ",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-03-25",
+      "name": "主の受胎告知",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-04-10",
+      "name": "主の受難の主日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-04-14",
+      "name": "聖木曜日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-04-15",
+      "name": "聖金曜日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-04-16",
+      "name": "聖土曜日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-04-17",
+      "name": "復活の主日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-04-25",
+      "name": "聖マルコ福音記者",
+      "type": "feast"
+    },
+    {
+      "date": "2033-05-29",
+      "name": "主の昇天",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-06-05",
+      "name": "聖霊降臨の主日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-06-11",
+      "name": "聖バルナバ使徒",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-06-12",
+      "name": "三位一体の主日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-06-13",
+      "name": "聖アントニオ",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-06-19",
+      "name": "キリストの聖体と聖血",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-06-20",
+      "name": "聖母の汚れなきみ心",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-06-24",
+      "name": "イエスのみ心",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-06-24",
+      "name": "聖ヨハネ洗礼者",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-06-29",
+      "name": "聖ペトロとパウロ",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-07-25",
+      "name": "聖ヤコブ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2033-07-31",
+      "name": "聖イグナチオ・ロヨラ",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-08-08",
+      "name": "聖ドミニコ",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-08-15",
+      "name": "聖母の被昇天",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-08-24",
+      "name": "聖バルトロマイ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2033-08-28",
+      "name": "聖アウグスティヌス",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-09-21",
+      "name": "聖マタイ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2033-09-29",
+      "name": "聖ミカエル、ガブリエル、ラファエル大天使",
+      "type": "feast"
+    },
+    {
+      "date": "2033-10-04",
+      "name": "聖フランシスコ",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-10-15",
+      "name": "聖テレジア・アビラ",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-10-18",
+      "name": "聖ルカ福音記者",
+      "type": "feast"
+    },
+    {
+      "date": "2033-10-28",
+      "name": "聖シモンとユダ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2033-11-01",
+      "name": "諸聖人の日",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-11-02",
+      "name": "死者の日",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-11-03",
+      "name": "聖マルティノ・デ・ポレス",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-11-20",
+      "name": "王であるキリスト",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-11-30",
+      "name": "聖アンデレ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2033-12-03",
+      "name": "聖フランシスコ・ザビエル",
+      "type": "memorial"
+    },
+    {
+      "date": "2033-12-08",
+      "name": "無原罪の御宿り",
+      "type": "solemnity"
+    },
+    {
+      "date": "2033-12-26",
+      "name": "聖ステファノ",
+      "type": "feast"
+    },
+    {
+      "date": "2033-12-27",
+      "name": "聖ヨハネ使徒",
+      "type": "feast"
+    },
+    {
+      "date": "2033-12-28",
+      "name": "幼子殉教者",
+      "type": "feast"
+    }
+  ]
+}

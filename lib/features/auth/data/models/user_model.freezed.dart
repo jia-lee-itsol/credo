@@ -25,6 +25,8 @@ mixin _$UserModel {
   String get userId => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String get role =>
+      throw _privateConstructorUsedError; // "user", "priest", "staff", "admin"
   @JsonKey(name: 'main_parish_id')
   String? get mainParishId => throw _privateConstructorUsedError;
   @JsonKey(name: 'preferred_languages')
@@ -75,6 +77,7 @@ abstract class $UserModelCopyWith<$Res> {
     @JsonKey(name: 'user_id') String userId,
     String nickname,
     String email,
+    String role,
     @JsonKey(name: 'main_parish_id') String? mainParishId,
     @JsonKey(name: 'preferred_languages') List<String> preferredLanguages,
     @JsonKey(name: 'favorite_parish_ids') List<String> favoriteParishIds,
@@ -111,6 +114,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? userId = null,
     Object? nickname = null,
     Object? email = null,
+    Object? role = null,
     Object? mainParishId = freezed,
     Object? preferredLanguages = null,
     Object? favoriteParishIds = null,
@@ -140,6 +144,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
             email: null == email
                 ? _value.email
                 : email // ignore: cast_nullable_to_non_nullable
+                      as String,
+            role: null == role
+                ? _value.role
+                : role // ignore: cast_nullable_to_non_nullable
                       as String,
             mainParishId: freezed == mainParishId
                 ? _value.mainParishId
@@ -220,6 +228,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
     @JsonKey(name: 'user_id') String userId,
     String nickname,
     String email,
+    String role,
     @JsonKey(name: 'main_parish_id') String? mainParishId,
     @JsonKey(name: 'preferred_languages') List<String> preferredLanguages,
     @JsonKey(name: 'favorite_parish_ids') List<String> favoriteParishIds,
@@ -255,6 +264,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? userId = null,
     Object? nickname = null,
     Object? email = null,
+    Object? role = null,
     Object? mainParishId = freezed,
     Object? preferredLanguages = null,
     Object? favoriteParishIds = null,
@@ -284,6 +294,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
         email: null == email
             ? _value.email
             : email // ignore: cast_nullable_to_non_nullable
+                  as String,
+        role: null == role
+            ? _value.role
+            : role // ignore: cast_nullable_to_non_nullable
                   as String,
         mainParishId: freezed == mainParishId
             ? _value.mainParishId
@@ -357,6 +371,7 @@ class _$UserModelImpl extends _UserModel {
     @JsonKey(name: 'user_id') required this.userId,
     required this.nickname,
     required this.email,
+    this.role = 'user',
     @JsonKey(name: 'main_parish_id') this.mainParishId,
     @JsonKey(name: 'preferred_languages')
     final List<String> preferredLanguages = const [],
@@ -389,6 +404,10 @@ class _$UserModelImpl extends _UserModel {
   final String nickname;
   @override
   final String email;
+  @override
+  @JsonKey()
+  final String role;
+  // "user", "priest", "staff", "admin"
   @override
   @JsonKey(name: 'main_parish_id')
   final String? mainParishId;
@@ -457,7 +476,7 @@ class _$UserModelImpl extends _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(userId: $userId, nickname: $nickname, email: $email, mainParishId: $mainParishId, preferredLanguages: $preferredLanguages, favoriteParishIds: $favoriteParishIds, profileImageUrl: $profileImageUrl, isVerified: $isVerified, verifiedParishId: $verifiedParishId, verifiedRole: $verifiedRole, baptismalName: $baptismalName, feastDayId: $feastDayId, baptismDate: $baptismDate, confirmationDate: $confirmationDate, godchildren: $godchildren, godparentId: $godparentId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(userId: $userId, nickname: $nickname, email: $email, role: $role, mainParishId: $mainParishId, preferredLanguages: $preferredLanguages, favoriteParishIds: $favoriteParishIds, profileImageUrl: $profileImageUrl, isVerified: $isVerified, verifiedParishId: $verifiedParishId, verifiedRole: $verifiedRole, baptismalName: $baptismalName, feastDayId: $feastDayId, baptismDate: $baptismDate, confirmationDate: $confirmationDate, godchildren: $godchildren, godparentId: $godparentId, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -469,6 +488,7 @@ class _$UserModelImpl extends _UserModel {
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.role, role) || other.role == role) &&
             (identical(other.mainParishId, mainParishId) ||
                 other.mainParishId == mainParishId) &&
             const DeepCollectionEquality().equals(
@@ -509,11 +529,12 @@ class _$UserModelImpl extends _UserModel {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     userId,
     nickname,
     email,
+    role,
     mainParishId,
     const DeepCollectionEquality().hash(_preferredLanguages),
     const DeepCollectionEquality().hash(_favoriteParishIds),
@@ -529,7 +550,7 @@ class _$UserModelImpl extends _UserModel {
     godparentId,
     createdAt,
     updatedAt,
-  );
+  ]);
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -550,6 +571,7 @@ abstract class _UserModel extends UserModel {
     @JsonKey(name: 'user_id') required final String userId,
     required final String nickname,
     required final String email,
+    final String role,
     @JsonKey(name: 'main_parish_id') final String? mainParishId,
     @JsonKey(name: 'preferred_languages') final List<String> preferredLanguages,
     @JsonKey(name: 'favorite_parish_ids') final List<String> favoriteParishIds,
@@ -578,6 +600,8 @@ abstract class _UserModel extends UserModel {
   String get nickname;
   @override
   String get email;
+  @override
+  String get role; // "user", "priest", "staff", "admin"
   @override
   @JsonKey(name: 'main_parish_id')
   String? get mainParishId;

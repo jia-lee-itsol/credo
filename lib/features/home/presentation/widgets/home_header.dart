@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/constants/liturgy_constants.dart';
-import '../../../../core/data/services/saint_feast_day_service.dart';
+import '../../../../core/data/services/saint_feast_day_service.dart' as core;
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 
 /// 홈 화면 헤더 위젯
@@ -29,7 +29,7 @@ class HomeHeader extends ConsumerWidget {
     final testDate = ref.watch(testDateOverrideProvider);
     final now = testDate ?? DateTime.now();
     final dateFormat = DateFormat('yyyy年M月d日（E）', 'ja');
-    final todaySaintsAsync = ref.watch(todaySaintsProvider);
+    final todaySaintsAsync = ref.watch(core.todaySaintsProvider);
 
     return Container(
       decoration: BoxDecoration(

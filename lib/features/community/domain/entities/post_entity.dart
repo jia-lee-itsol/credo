@@ -7,7 +7,7 @@ part 'post_entity.freezed.dart';
 class PostEntity with _$PostEntity {
   const factory PostEntity({
     required String postId,
-    required String parishId,
+    String? parishId, // 본당별 공지/게시판 분리용 (옵션)
     required String userId,
     required String title,
     required String content,
@@ -18,6 +18,13 @@ class PostEntity with _$PostEntity {
     @Default(false) bool isLikedByCurrentUser,
     String? authorNickname,
     String? authorProfileImage,
+    String? authorRole, // "user", "priest", "staff", "admin" (스냅샷용)
+    @Default(false) bool authorIsVerified, // 스냅샷용
+    @Default('community')
+    String category, // "notice" | "community" | "qa" | "testimony" ...
+    @Default('normal') String type, // "official" | "normal"
+    @Default('published')
+    String status, // "published" | "hidden" | "reported" ...
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _PostEntity;
@@ -82,24 +89,10 @@ class ReportEntity with _$ReportEntity {
 }
 
 /// 신고 대상 유형
-enum ReportTargetType {
-  post,
-  comment,
-}
+enum ReportTargetType { post, comment }
 
 /// 신고 사유
-enum ReportReason {
-  spam,
-  harassment,
-  inappropriate,
-  misinformation,
-  other,
-}
+enum ReportReason { spam, harassment, inappropriate, misinformation, other }
 
 /// 신고 상태
-enum ReportStatus {
-  pending,
-  reviewed,
-  resolved,
-  dismissed,
-}
+enum ReportStatus { pending, reviewed, resolved, dismissed }

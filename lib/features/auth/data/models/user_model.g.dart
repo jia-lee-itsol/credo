@@ -11,6 +11,7 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       userId: json['user_id'] as String,
       nickname: json['nickname'] as String,
       email: json['email'] as String,
+      role: json['role'] as String? ?? 'user',
       mainParishId: json['main_parish_id'] as String?,
       preferredLanguages:
           (json['preferred_languages'] as List<dynamic>?)
@@ -49,6 +50,7 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'user_id': instance.userId,
       'nickname': instance.nickname,
       'email': instance.email,
+      'role': instance.role,
       'main_parish_id': instance.mainParishId,
       'preferred_languages': instance.preferredLanguages,
       'favorite_parish_ids': instance.favoriteParishIds,

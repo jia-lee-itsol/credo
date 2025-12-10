@@ -12,6 +12,7 @@ class UserModel with _$UserModel {
     @JsonKey(name: 'user_id') required String userId,
     required String nickname,
     required String email,
+    @Default('user') String role, // "user", "priest", "staff", "admin"
     @JsonKey(name: 'main_parish_id') String? mainParishId,
     @JsonKey(name: 'preferred_languages')
     @Default([])
@@ -44,11 +45,17 @@ class UserModel with _$UserModel {
     return UserModel.fromJson({
       'user_id': doc.id,
       ...data,
-      'baptism_date': (data['baptism_date'] as Timestamp?)?.toDate().toIso8601String(),
-      'confirmation_date': (data['confirmation_date'] as Timestamp?)?.toDate().toIso8601String(),
-      'created_at': (data['created_at'] as Timestamp?)?.toDate().toIso8601String() ??
+      'baptism_date': (data['baptism_date'] as Timestamp?)
+          ?.toDate()
+          .toIso8601String(),
+      'confirmation_date': (data['confirmation_date'] as Timestamp?)
+          ?.toDate()
+          .toIso8601String(),
+      'created_at':
+          (data['created_at'] as Timestamp?)?.toDate().toIso8601String() ??
           DateTime.now().toIso8601String(),
-      'updated_at': (data['updated_at'] as Timestamp?)?.toDate().toIso8601String() ??
+      'updated_at':
+          (data['updated_at'] as Timestamp?)?.toDate().toIso8601String() ??
           DateTime.now().toIso8601String(),
     });
   }
@@ -59,6 +66,7 @@ class UserModel with _$UserModel {
       userId: userId,
       nickname: nickname,
       email: email,
+      role: role,
       mainParishId: mainParishId,
       preferredLanguages: preferredLanguages,
       favoriteParishIds: favoriteParishIds,
@@ -83,6 +91,7 @@ class UserModel with _$UserModel {
       userId: entity.userId,
       nickname: entity.nickname,
       email: entity.email,
+      role: entity.role,
       mainParishId: entity.mainParishId,
       preferredLanguages: entity.preferredLanguages,
       favoriteParishIds: entity.favoriteParishIds,
@@ -106,6 +115,7 @@ class UserModel with _$UserModel {
     final map = <String, dynamic>{
       'nickname': nickname,
       'email': email,
+      'role': role,
       'main_parish_id': mainParishId,
       'preferred_languages': preferredLanguages,
       'favorite_parish_ids': favoriteParishIds,
@@ -120,14 +130,14 @@ class UserModel with _$UserModel {
       'created_at': Timestamp.fromDate(createdAt),
       'updated_at': Timestamp.fromDate(updatedAt),
     };
-    
+
     if (baptismDate != null) {
       map['baptism_date'] = Timestamp.fromDate(baptismDate!);
     }
     if (confirmationDate != null) {
       map['confirmation_date'] = Timestamp.fromDate(confirmationDate!);
     }
-    
+
     return map;
   }
 }

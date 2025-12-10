@@ -149,8 +149,9 @@ class LocationPermissionScreen extends StatelessWidget {
   }
 
   Future<void> _onAllow(BuildContext context) async {
-    // TODO: 실제 위치 권한 요청 구현
     final status = await Geolocator.requestPermission();
+    if (!context.mounted) return;
+
     if (status == LocationPermission.denied) {
       ScaffoldMessenger.of(
         context,

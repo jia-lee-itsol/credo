@@ -4,10 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
-import '../../../../core/data/services/parish_service.dart';
+import '../../../../core/data/services/parish_service.dart' as core;
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/widgets/settings_list_tile.dart';
+import '../../../../shared/widgets/badge_chip.dart';
 import '../widgets/qr_code_dialog.dart';
 
 /// 마이페이지 화면
@@ -302,13 +303,25 @@ class MyPageScreen extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        isAuthenticated
-                            ? (currentUser?.nickname ?? 'ユーザー')
-                            : 'ゲスト',
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              isAuthenticated
+                                  ? (currentUser?.nickname ?? 'ユーザー')
+                                  : 'ゲスト',
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          if (isAuthenticated &&
+                              currentUser != null &&
+                              currentUser.isVerified) ...[
+                            const SizedBox(width: 8),
+                            const BadgeChip.official(),
+                          ],
+                        ],
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -421,7 +434,7 @@ class MyPageScreen extends ConsumerWidget {
       );
     }
 
-    final parishAsync = ref.watch(parishByIdProvider(mainParishId));
+    final parishAsync = ref.watch(core.parishByIdProvider(mainParishId));
 
     return parishAsync.when(
       data: (parish) {
@@ -448,7 +461,7 @@ class MyPageScreen extends ConsumerWidget {
           const Expanded(child: Text('読み込み中...')),
         ],
       ),
-      error: (_, __) => Row(
+      error: (_, _) => Row(
         children: [
           Icon(Icons.church, size: 20, color: primaryColor),
           const SizedBox(width: 12),

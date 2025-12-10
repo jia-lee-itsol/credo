@@ -4,11 +4,13 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/date_utils.dart';
-import '../../../../core/data/services/parish_service.dart';
+import '../../../../core/data/services/parish_service.dart' as core;
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/widgets/badge_chip.dart';
 import '../../../../shared/widgets/login_required_dialog.dart';
+import '../../data/providers/community_repository_providers.dart';
+import '../../data/models/post.dart';
 
 /// 게시글 목록 화면
 class PostListScreen extends ConsumerStatefulWidget {
@@ -31,14 +33,58 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
     super.dispose();
   }
 
-  List<Map<String, String>> get _filteredPosts {
-    if (_searchQuery.isEmpty) return _samplePosts;
+  /// Mock 데이터를 Post 형태로 변환
+  List<_PostItem> _convertMockPostsToItems() {
+    return _samplePosts.map((post) {
+      return _PostItem(
+        title: post['title']!,
+        content: post['content']!,
+        author: post['author']!,
+        createdAt: DateTime.now().subtract(
+          Duration(hours: _samplePosts.indexOf(post) * 3),
+        ),
+        likeCount: int.parse(post['likes']!),
+        commentCount: int.parse(post['comments']!),
+        isOfficial: post['isOfficial'] == 'true',
+        isPinned: post['isPinned'] == 'true',
+        isMock: true,
+      );
+    }).toList();
+  }
 
-    return _samplePosts.where((post) {
-      final title = post['title']!.toLowerCase();
-      final content = post['content']!.toLowerCase();
-      final author = post['author']!.toLowerCase();
-      final query = _searchQuery.toLowerCase();
+  /// Firebase Post를 _PostItem으로 변환
+  _PostItem _convertFirebasePostToItem(Post post) {
+    return _PostItem(
+      title: post.title,
+      content: post.body,
+      author: post.authorName,
+      createdAt: post.createdAt,
+      likeCount: 0, // Firebase Post 모델에는 아직 likeCount가 없음
+      commentCount: 0, // Firebase Post 모델에는 아직 commentCount가 없음
+      isOfficial: post.isOfficial,
+      isPinned: false, // Firebase Post 모델에는 아직 isPinned가 없음
+      isMock: false,
+      postId: post.postId,
+    );
+  }
+
+  List<_PostItem> _getAllPosts(List<Post> firebasePosts) {
+    final mockItems = _convertMockPostsToItems();
+    final firebaseItems = firebasePosts
+        .map(_convertFirebasePostToItem)
+        .toList();
+    // Mock 데이터를 먼저, 그 다음 Firebase 데이터
+    return [...mockItems, ...firebaseItems];
+  }
+
+  List<_PostItem> _getFilteredPosts(List<_PostItem> allPosts) {
+    if (_searchQuery.isEmpty) return allPosts;
+
+    final query = _searchQuery.toLowerCase();
+    return allPosts.where((post) {
+      final title = post.title.toLowerCase();
+      final content = post.content.toLowerCase();
+      final author = post.author.toLowerCase();
 
       return title.contains(query) ||
           content.contains(query) ||
@@ -50,14 +96,17 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
-    final parishAsync = ref.watch(parishByIdProvider(widget.parishId));
+    final parishAsync = ref.watch(core.parishByIdProvider(widget.parishId));
+    final firebasePostsAsync = ref.watch(
+      communityPostsProvider(widget.parishId),
+    );
 
     return Scaffold(
       appBar: AppBar(
         title: parishAsync.when(
           data: (parish) => Text(parish?['name'] as String? ?? 'コミュニティ'),
           loading: () => const Text('コミュニティ'),
-          error: (_, __) => const Text('コミュニティ'),
+          error: (_, _) => const Text('コミュニティ'),
         ),
       ),
       body: Column(
@@ -119,8 +168,13 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
 
           // 게시글 목록
           Expanded(
-            child: _filteredPosts.isEmpty
-                ? Center(
+            child: firebasePostsAsync.when(
+              data: (firebasePosts) {
+                final allPosts = _getAllPosts(firebasePosts);
+                final posts = _getFilteredPosts(allPosts);
+
+                if (posts.isEmpty) {
+                  return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -138,35 +192,113 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
                         ),
                       ],
                     ),
-                  )
-                : ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: _filteredPosts.length,
-                    itemBuilder: (context, index) {
-                      final post = _filteredPosts[index];
-                      return _PostCard(
-                        title: post['title']!,
-                        content: post['content']!,
-                        author: post['author']!,
-                        createdAt: DateTime.now().subtract(
-                          Duration(hours: index * 3),
-                        ),
-                        likeCount: int.parse(post['likes']!),
-                        commentCount: int.parse(post['comments']!),
-                        isOfficial: post['isOfficial'] == 'true',
-                        isPinned: post['isPinned'] == 'true',
-                        primaryColor: primaryColor,
-                        onTap: () {
+                  );
+                }
+
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: posts.length,
+                  itemBuilder: (context, index) {
+                    final post = posts[index];
+                    return _PostCard(
+                      title: post.title,
+                      content: post.content,
+                      author: post.author,
+                      createdAt: post.createdAt,
+                      likeCount: post.likeCount,
+                      commentCount: post.commentCount,
+                      isOfficial: post.isOfficial,
+                      isPinned: post.isPinned,
+                      primaryColor: primaryColor,
+                      isMock: post.isMock,
+                      onTap: () {
+                        if (post.postId != null) {
+                          // Firebase 게시글인 경우
                           context.push(
                             AppRoutes.postDetailPath(
                               widget.parishId,
-                              'post-$index',
+                              post.postId!,
                             ),
                           );
-                        },
-                      );
-                    },
-                  ),
+                        } else {
+                          // Mock 게시글인 경우
+                          context.push(
+                            AppRoutes.postDetailPath(
+                              widget.parishId,
+                              'mock-post-$index',
+                            ),
+                          );
+                        }
+                      },
+                    );
+                  },
+                );
+              },
+              loading: () {
+                // 로딩 중일 때는 Mock 데이터만 표시
+                final mockPosts = _convertMockPostsToItems();
+                final posts = _getFilteredPosts(mockPosts);
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: posts.length,
+                  itemBuilder: (context, index) {
+                    final post = posts[index];
+                    return _PostCard(
+                      title: post.title,
+                      content: post.content,
+                      author: post.author,
+                      createdAt: post.createdAt,
+                      likeCount: post.likeCount,
+                      commentCount: post.commentCount,
+                      isOfficial: post.isOfficial,
+                      isPinned: post.isPinned,
+                      primaryColor: primaryColor,
+                      isMock: post.isMock,
+                      onTap: () {
+                        context.push(
+                          AppRoutes.postDetailPath(
+                            widget.parishId,
+                            'mock-post-$index',
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+              error: (error, stack) {
+                // 에러 발생 시 Mock 데이터만 표시
+                final mockPosts = _convertMockPostsToItems();
+                final posts = _getFilteredPosts(mockPosts);
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: posts.length,
+                  itemBuilder: (context, index) {
+                    final post = posts[index];
+                    return _PostCard(
+                      title: post.title,
+                      content: post.content,
+                      author: post.author,
+                      createdAt: post.createdAt,
+                      likeCount: post.likeCount,
+                      commentCount: post.commentCount,
+                      isOfficial: post.isOfficial,
+                      isPinned: post.isPinned,
+                      primaryColor: primaryColor,
+                      isMock: post.isMock,
+                      onTap: () {
+                        context.push(
+                          AppRoutes.postDetailPath(
+                            widget.parishId,
+                            'mock-post-$index',
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),
@@ -229,6 +361,33 @@ class _SortChip extends StatelessWidget {
   }
 }
 
+/// 게시글 아이템 (Mock + Firebase 통합)
+class _PostItem {
+  final String title;
+  final String content;
+  final String author;
+  final DateTime createdAt;
+  final int likeCount;
+  final int commentCount;
+  final bool isOfficial;
+  final bool isPinned;
+  final bool isMock;
+  final String? postId; // Firebase 게시글인 경우 postId
+
+  _PostItem({
+    required this.title,
+    required this.content,
+    required this.author,
+    required this.createdAt,
+    required this.likeCount,
+    required this.commentCount,
+    required this.isOfficial,
+    required this.isPinned,
+    required this.isMock,
+    this.postId,
+  });
+}
+
 class _PostCard extends StatelessWidget {
   final String title;
   final String content;
@@ -239,6 +398,7 @@ class _PostCard extends StatelessWidget {
   final bool isOfficial;
   final bool isPinned;
   final Color primaryColor;
+  final bool isMock;
   final VoidCallback onTap;
 
   const _PostCard({
@@ -251,6 +411,7 @@ class _PostCard extends StatelessWidget {
     required this.isOfficial,
     required this.isPinned,
     required this.primaryColor,
+    this.isMock = false,
     required this.onTap,
   });
 
@@ -269,7 +430,7 @@ class _PostCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // 배지들
-              if (isPinned || isOfficial)
+              if (isPinned || isOfficial || isMock)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Row(
@@ -279,6 +440,20 @@ class _PostCard extends StatelessWidget {
                         const SizedBox(width: 8),
                       ],
                       if (isOfficial) const BadgeChip.official(),
+                      if (isMock) ...[
+                        const SizedBox(width: 8),
+                        Chip(
+                          label: const Text(
+                            'サンプル',
+                            style: TextStyle(fontSize: 10),
+                          ),
+                          backgroundColor: Colors.grey.shade200,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 2,
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),

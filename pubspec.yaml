@@ -61,7 +61,7 @@ dependencies:
 
   # QR Code
   qr_flutter: ^4.1.0
-  mobile_scanner: ^5.2.3
+  simple_barcode_scanner: ^0.4.0
 
 dev_dependencies:
   flutter_test:
@@ -93,3 +93,5 @@ flutter:
     - assets/data/parishes/fukuoka.json
     - assets/data/parishes/nagasaki.json
     - assets/data/saints/saints_feast_days.json
+    - assets/data/prayers/prayers_ja.json
+    - assets/data/liturgical/readings/readings_year_a.json
