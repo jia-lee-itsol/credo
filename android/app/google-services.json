@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "182699877294",
+    "project_id": "credo-ceda9",
+    "storage_bucket": "credo-ceda9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182699877294:android:cc1861e78d06f6f0bfde3f",
+        "android_client_info": {
+          "package_name": "com.itz.credo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182699877294-6qcgdug0hnqdkq9j5lkkglgct39qla9f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1D463UWqfCyZvfkKTL8qc6nCFl6slZBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182699877294-6qcgdug0hnqdkq9j5lkkglgct39qla9f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "182699877294-4fpobp2ijkdjaijt6ttfjo02o7v6cvg2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.credo.credo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

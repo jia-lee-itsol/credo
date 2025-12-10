@@ -9,18 +9,23 @@ class AppTheme {
   static const String fontFamily = 'NotoSansJP';
 
   /// 전례 시즌에 따른 라이트 테마 생성
-  static ThemeData lightTheme(LiturgySeason season) {
-    final seedColor = LiturgyColors.getSeedColor(season);
-    final primaryColor = LiturgyColors.getPrimaryColor(season);
-    final backgroundColor = LiturgyColors.getBackgroundColor(season);
+  static ThemeData lightTheme(
+    LiturgySeason season, {
+    Color? primaryColorOverride,
+  }) {
+    final seedColor =
+        primaryColorOverride ?? LiturgyColors.getSeedColor(season);
+    final primaryColor =
+        primaryColorOverride ?? LiturgyColors.getPrimaryColor(season);
 
-    final colorScheme = ColorScheme.fromSeed(
-      seedColor: seedColor,
-      brightness: Brightness.light,
-    ).copyWith(
-      primary: primaryColor,
-      surfaceContainerLowest: backgroundColor,
-    );
+    final colorScheme =
+        ColorScheme.fromSeed(
+          seedColor: seedColor,
+          brightness: Brightness.light,
+        ).copyWith(
+          primary: primaryColor,
+          surfaceContainerLowest: Colors.white, // 배경은 흰색 고정
+        );
 
     return ThemeData(
       useMaterial3: true,
@@ -64,12 +69,9 @@ class AppTheme {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
-          side: BorderSide(
-            color: colorScheme.outlineVariant,
-            width: 1,
-          ),
+          side: BorderSide(color: colorScheme.outlineVariant, width: 1),
         ),
-        color: colorScheme.surface,
+        color: Colors.white, // 카드 색상은 흰색 고정
       ),
 
       // ElevatedButton Theme
@@ -77,9 +79,7 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           textStyle: const TextStyle(
             fontFamily: fontFamily,
             fontSize: 16,
@@ -104,9 +104,7 @@ class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           textStyle: const TextStyle(
             fontFamily: fontFamily,
             fontSize: 16,
@@ -131,18 +129,16 @@ class AppTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: primaryColor,
-            width: 2,
-          ),
+          borderSide: BorderSide(color: primaryColor, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(
-            color: colorScheme.error,
-          ),
+          borderSide: BorderSide(color: colorScheme.error),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
         hintStyle: TextStyle(
           fontFamily: fontFamily,
           color: colorScheme.onSurfaceVariant,
@@ -153,21 +149,14 @@ class AppTheme {
       chipTheme: ChipThemeData(
         backgroundColor: colorScheme.surfaceContainerHighest,
         selectedColor: primaryColor.withValues(alpha: 0.2),
-        labelStyle: const TextStyle(
-          fontFamily: fontFamily,
-          fontSize: 14,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        labelStyle: const TextStyle(fontFamily: fontFamily, fontSize: 14),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
 
       // ListTile Theme
       listTileTheme: ListTileThemeData(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
 
       // Divider Theme
@@ -180,16 +169,12 @@ class AppTheme {
       // Snackbar Theme
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
 
       // Dialog Theme
       dialogTheme: DialogThemeData(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
 
       // BottomSheet Theme

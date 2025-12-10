@@ -27,6 +27,15 @@ mixin _$UserEntity {
   bool get isVerified => throw _privateConstructorUsedError;
   String? get verifiedParishId => throw _privateConstructorUsedError;
   String? get verifiedRole => throw _privateConstructorUsedError;
+  String? get baptismalName => throw _privateConstructorUsedError;
+  String? get feastDayId =>
+      throw _privateConstructorUsedError; // "month-day" 형식 (예: "1-1")
+  DateTime? get baptismDate => throw _privateConstructorUsedError; // 세례 날짜
+  DateTime? get confirmationDate => throw _privateConstructorUsedError; // 견진 날짜
+  List<String> get godchildren =>
+      throw _privateConstructorUsedError; // 대자녀 목록 (userId 리스트)
+  String? get godparentId =>
+      throw _privateConstructorUsedError; // 대부모 userId (1名のみ)
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
@@ -55,6 +64,12 @@ abstract class $UserEntityCopyWith<$Res> {
     bool isVerified,
     String? verifiedParishId,
     String? verifiedRole,
+    String? baptismalName,
+    String? feastDayId,
+    DateTime? baptismDate,
+    DateTime? confirmationDate,
+    List<String> godchildren,
+    String? godparentId,
     DateTime createdAt,
     DateTime updatedAt,
   });
@@ -85,6 +100,12 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? isVerified = null,
     Object? verifiedParishId = freezed,
     Object? verifiedRole = freezed,
+    Object? baptismalName = freezed,
+    Object? feastDayId = freezed,
+    Object? baptismDate = freezed,
+    Object? confirmationDate = freezed,
+    Object? godchildren = null,
+    Object? godparentId = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -130,6 +151,30 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
                 ? _value.verifiedRole
                 : verifiedRole // ignore: cast_nullable_to_non_nullable
                       as String?,
+            baptismalName: freezed == baptismalName
+                ? _value.baptismalName
+                : baptismalName // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            feastDayId: freezed == feastDayId
+                ? _value.feastDayId
+                : feastDayId // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            baptismDate: freezed == baptismDate
+                ? _value.baptismDate
+                : baptismDate // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
+            confirmationDate: freezed == confirmationDate
+                ? _value.confirmationDate
+                : confirmationDate // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
+            godchildren: null == godchildren
+                ? _value.godchildren
+                : godchildren // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            godparentId: freezed == godparentId
+                ? _value.godparentId
+                : godparentId // ignore: cast_nullable_to_non_nullable
+                      as String?,
             createdAt: null == createdAt
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
@@ -164,6 +209,12 @@ abstract class _$$UserEntityImplCopyWith<$Res>
     bool isVerified,
     String? verifiedParishId,
     String? verifiedRole,
+    String? baptismalName,
+    String? feastDayId,
+    DateTime? baptismDate,
+    DateTime? confirmationDate,
+    List<String> godchildren,
+    String? godparentId,
     DateTime createdAt,
     DateTime updatedAt,
   });
@@ -193,6 +244,12 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? isVerified = null,
     Object? verifiedParishId = freezed,
     Object? verifiedRole = freezed,
+    Object? baptismalName = freezed,
+    Object? feastDayId = freezed,
+    Object? baptismDate = freezed,
+    Object? confirmationDate = freezed,
+    Object? godchildren = null,
+    Object? godparentId = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -238,6 +295,30 @@ class __$$UserEntityImplCopyWithImpl<$Res>
             ? _value.verifiedRole
             : verifiedRole // ignore: cast_nullable_to_non_nullable
                   as String?,
+        baptismalName: freezed == baptismalName
+            ? _value.baptismalName
+            : baptismalName // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        feastDayId: freezed == feastDayId
+            ? _value.feastDayId
+            : feastDayId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        baptismDate: freezed == baptismDate
+            ? _value.baptismDate
+            : baptismDate // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        confirmationDate: freezed == confirmationDate
+            ? _value.confirmationDate
+            : confirmationDate // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        godchildren: null == godchildren
+            ? _value._godchildren
+            : godchildren // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        godparentId: freezed == godparentId
+            ? _value.godparentId
+            : godparentId // ignore: cast_nullable_to_non_nullable
+                  as String?,
         createdAt: null == createdAt
             ? _value.createdAt
             : createdAt // ignore: cast_nullable_to_non_nullable
@@ -265,10 +346,17 @@ class _$UserEntityImpl extends _UserEntity {
     this.isVerified = false,
     this.verifiedParishId,
     this.verifiedRole,
+    this.baptismalName,
+    this.feastDayId,
+    this.baptismDate,
+    this.confirmationDate,
+    final List<String> godchildren = const [],
+    this.godparentId,
     required this.createdAt,
     required this.updatedAt,
   }) : _preferredLanguages = preferredLanguages,
        _favoriteParishIds = favoriteParishIds,
+       _godchildren = godchildren,
        super._();
 
   @override
@@ -309,13 +397,38 @@ class _$UserEntityImpl extends _UserEntity {
   @override
   final String? verifiedRole;
   @override
+  final String? baptismalName;
+  @override
+  final String? feastDayId;
+  // "month-day" 형식 (예: "1-1")
+  @override
+  final DateTime? baptismDate;
+  // 세례 날짜
+  @override
+  final DateTime? confirmationDate;
+  // 견진 날짜
+  final List<String> _godchildren;
+  // 견진 날짜
+  @override
+  @JsonKey()
+  List<String> get godchildren {
+    if (_godchildren is EqualUnmodifiableListView) return _godchildren;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_godchildren);
+  }
+
+  // 대자녀 목록 (userId 리스트)
+  @override
+  final String? godparentId;
+  // 대부모 userId (1名のみ)
+  @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'UserEntity(userId: $userId, nickname: $nickname, email: $email, mainParishId: $mainParishId, preferredLanguages: $preferredLanguages, favoriteParishIds: $favoriteParishIds, profileImageUrl: $profileImageUrl, isVerified: $isVerified, verifiedParishId: $verifiedParishId, verifiedRole: $verifiedRole, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserEntity(userId: $userId, nickname: $nickname, email: $email, mainParishId: $mainParishId, preferredLanguages: $preferredLanguages, favoriteParishIds: $favoriteParishIds, profileImageUrl: $profileImageUrl, isVerified: $isVerified, verifiedParishId: $verifiedParishId, verifiedRole: $verifiedRole, baptismalName: $baptismalName, feastDayId: $feastDayId, baptismDate: $baptismDate, confirmationDate: $confirmationDate, godchildren: $godchildren, godparentId: $godparentId, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -345,6 +458,20 @@ class _$UserEntityImpl extends _UserEntity {
                 other.verifiedParishId == verifiedParishId) &&
             (identical(other.verifiedRole, verifiedRole) ||
                 other.verifiedRole == verifiedRole) &&
+            (identical(other.baptismalName, baptismalName) ||
+                other.baptismalName == baptismalName) &&
+            (identical(other.feastDayId, feastDayId) ||
+                other.feastDayId == feastDayId) &&
+            (identical(other.baptismDate, baptismDate) ||
+                other.baptismDate == baptismDate) &&
+            (identical(other.confirmationDate, confirmationDate) ||
+                other.confirmationDate == confirmationDate) &&
+            const DeepCollectionEquality().equals(
+              other._godchildren,
+              _godchildren,
+            ) &&
+            (identical(other.godparentId, godparentId) ||
+                other.godparentId == godparentId) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -364,6 +491,12 @@ class _$UserEntityImpl extends _UserEntity {
     isVerified,
     verifiedParishId,
     verifiedRole,
+    baptismalName,
+    feastDayId,
+    baptismDate,
+    confirmationDate,
+    const DeepCollectionEquality().hash(_godchildren),
+    godparentId,
     createdAt,
     updatedAt,
   );
@@ -389,6 +522,12 @@ abstract class _UserEntity extends UserEntity {
     final bool isVerified,
     final String? verifiedParishId,
     final String? verifiedRole,
+    final String? baptismalName,
+    final String? feastDayId,
+    final DateTime? baptismDate,
+    final DateTime? confirmationDate,
+    final List<String> godchildren,
+    final String? godparentId,
     required final DateTime createdAt,
     required final DateTime updatedAt,
   }) = _$UserEntityImpl;
@@ -414,6 +553,18 @@ abstract class _UserEntity extends UserEntity {
   String? get verifiedParishId;
   @override
   String? get verifiedRole;
+  @override
+  String? get baptismalName;
+  @override
+  String? get feastDayId; // "month-day" 형식 (예: "1-1")
+  @override
+  DateTime? get baptismDate; // 세례 날짜
+  @override
+  DateTime? get confirmationDate; // 견진 날짜
+  @override
+  List<String> get godchildren; // 대자녀 목록 (userId 리스트)
+  @override
+  String? get godparentId; // 대부모 userId (1名のみ)
   @override
   DateTime get createdAt;
   @override

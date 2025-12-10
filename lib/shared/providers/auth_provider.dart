@@ -1,12 +1,23 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../features/auth/domain/entities/user_entity.dart';
+import '../../../features/auth/domain/repositories/auth_repository.dart';
+import '../../../features/auth/data/repositories/auth_repository_impl.dart';
 
-/// 인증 상태 Provider
-/// TODO: 실제 인증 구현 시 AuthRepository와 연결
+/// AuthRepository Provider
+final authRepositoryProvider = Provider<AuthRepository>((ref) {
+  return AuthRepositoryImpl();
+});
+
+/// 인증 상태 Provider (Stream)
+final authStateStreamProvider = StreamProvider<UserEntity?>((ref) {
+  final repository = ref.watch(authRepositoryProvider);
+  return repository.authStateChanges;
+});
+
+/// 인증 상태 Provider (State)
 final authStateProvider = StateProvider<UserEntity?>((ref) {
-  // 현재는 null로 설정 (로그인하지 않은 상태)
-  // 실제 구현 시 AuthRepository의 authStateChanges 스트림을 사용
-  return null;
+  final authStateAsync = ref.watch(authStateStreamProvider);
+  return authStateAsync.valueOrNull;
 });
 
 /// 로그인 여부 확인 Provider

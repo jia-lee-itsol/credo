@@ -3,41 +3,71 @@ import '../data/services/liturgical_calendar_service.dart';
 
 /// 전례 시즌 열거형
 enum LiturgySeason {
-  ordinary,      // 연중 시기 (녹색)
-  advent,        // 대림절 (보라색)
-  christmas,     // 성탄절 (흰색/금색)
-  lent,          // 사순절 (보라색)
-  easter,        // 부활절 (흰색/금색)
-  pentecost,     // 성령 강림 (빨간색)
+  ordinary, // 연중 시기 (녹색)
+  advent, // 대림절 (보라색)
+  christmas, // 성탄절 (흰색/금색)
+  lent, // 사순절 (보라색)
+  easter, // 부활절 (흰색/금색)
+  pentecost, // 성령 강림 (빨간색)
 }
 
 /// 전례색 상수
 class LiturgyColors {
   LiturgyColors._();
 
-  // 연중 시기 - 녹색 (희망, 성장)
+  // 연중 시기 - 초록색 (희망, 성장)
   static const Color ordinaryPrimary = Color(0xFF2E7D32);
   static const Color ordinaryLight = Color(0xFF60AD5E);
   static const Color ordinaryDark = Color(0xFF005005);
   static const Color ordinaryBackground = Color(0xFFF1F8E9);
 
-  // 대림절/사순절 - 보라색 (준비, 회개)
-  static const Color adventPrimary = Color(0xFFA78ACF);      // 상단 배너
-  static const Color adventLight = Color(0xFFE9DFF5);        // 카드 배경
-  static const Color adventDark = Color(0xFF8B6BC1);         // 아이콘/액션
-  static const Color adventBackground = Color(0xFFDAD0E8);   // 탭바 하이라이트
+  // 대림절 - 보라색 (기다림, 준비)
+  static const Color adventPrimary = Color(0xFF7B1FA2);
+  static const Color adventLight = Color(0xFFE1BEE7);
+  static const Color adventDark = Color(0xFF4A148C);
+  static const Color adventBackground = Color(0xFFF3E5F5);
 
-  // 성탄절/부활절 - 흰색/금색 (기쁨, 축제)
-  static const Color christmasPrimary = Color(0xFFFFD700);
-  static const Color christmasLight = Color(0xFFFFFF52);
-  static const Color christmasDark = Color(0xFFC7A600);
-  static const Color christmasBackground = Color(0xFFFFFDE7);
+  // 사순절 - 보라색 (회개, 속죄)
+  static const Color lentPrimary = Color(0xFF7B1FA2);
+  static const Color lentLight = Color(0xFFE1BEE7);
+  static const Color lentDark = Color(0xFF4A148C);
+  static const Color lentBackground = Color(0xFFF3E5F5);
 
-  // 성령 강림/순교자 - 빨간색 (성령, 희생)
+  // 골드 포인트 색상 (흰색 시기용) - 채도 낮춘 골드
+  static const Color goldPrimary = Color(0xFFD4AF37); // 클래식 골드 (채도 낮음)
+  static const Color goldLight = Color(0xFFF4E4BC); // 밝은 골드
+  static const Color goldDark = Color(0xFFB8860B); // 어두운 골드
+  static const Color goldBackground = Color(0xFFFFFDE7);
+
+  // 성탄절 - 흰색 배경 + 골드 포인트 (기쁨, 순결)
+  static const Color christmasPrimary = Color(0xFFD4AF37); // 클래식 골드 (채도 낮음)
+  static const Color christmasLight = Color(0xFFFFFFFF);
+  static const Color christmasDark = Color(0xFFB8860B);
+  static const Color christmasBackground = Color(0xFFFFFBFE);
+
+  // 부활절 - 흰색 배경 + 골드 포인트 (승리, 영광)
+  static const Color easterPrimary = Color(0xFFD4AF37); // 클래식 골드 (채도 낮음)
+  static const Color easterLight = Color(0xFFFFFFFF);
+  static const Color easterDark = Color(0xFFB8860B);
+  static const Color easterBackground = Color(0xFFFFFBFE);
+
+  // 성령 강림(오순절) - 붉은색 (성령, 순교)
   static const Color pentecostPrimary = Color(0xFFC62828);
   static const Color pentecostLight = Color(0xFFFF5F52);
   static const Color pentecostDark = Color(0xFF8E0000);
   static const Color pentecostBackground = Color(0xFFFFEBEE);
+
+  // 순교자 축일 - 붉은색 (피흘림)
+  static const Color martyrPrimary = Color(0xFFC62828);
+  static const Color martyrLight = Color(0xFFFF5F52);
+  static const Color martyrDark = Color(0xFF8E0000);
+  static const Color martyrBackground = Color(0xFFFFEBEE);
+
+  // 성모 마리아 축일/성인 축일 - 흰색 배경 + 골드 포인트 (기쁨, 성덕)
+  static const Color saintPrimary = Color(0xFFD4AF37); // 클래식 골드 (채도 낮음)
+  static const Color saintLight = Color(0xFFFFFFFF);
+  static const Color saintDark = Color(0xFFB8860B);
+  static const Color saintBackground = Color(0xFFFFFBFE);
 
   /// 전례 시즌에 따른 기본 색상 반환
   static Color getPrimaryColor(LiturgySeason season) {
@@ -45,11 +75,13 @@ class LiturgyColors {
       case LiturgySeason.ordinary:
         return ordinaryPrimary;
       case LiturgySeason.advent:
-      case LiturgySeason.lent:
         return adventPrimary;
+      case LiturgySeason.lent:
+        return lentPrimary;
       case LiturgySeason.christmas:
-      case LiturgySeason.easter:
         return christmasPrimary;
+      case LiturgySeason.easter:
+        return easterPrimary;
       case LiturgySeason.pentecost:
         return pentecostPrimary;
     }
@@ -61,11 +93,13 @@ class LiturgyColors {
       case LiturgySeason.ordinary:
         return ordinaryBackground;
       case LiturgySeason.advent:
-      case LiturgySeason.lent:
         return adventBackground;
+      case LiturgySeason.lent:
+        return lentBackground;
       case LiturgySeason.christmas:
-      case LiturgySeason.easter:
         return christmasBackground;
+      case LiturgySeason.easter:
+        return easterBackground;
       case LiturgySeason.pentecost:
         return pentecostBackground;
     }
@@ -74,6 +108,45 @@ class LiturgyColors {
   /// 전례 시즌에 따른 ColorScheme seed 반환
   static Color getSeedColor(LiturgySeason season) {
     return getPrimaryColor(season);
+  }
+
+  /// 특별한 축일 타입에 따른 색상 반환 (순교자, 성인, 성주간 등)
+  /// 전례 시기보다 우선하지 않고, 참고용으로 사용
+  static Color? getColorForSpecialDayType(String? type, String? name) {
+    if (type == null || name == null) return null;
+
+    // 성주간 특별 날짜 - 붉은색 (수난 주일, 성금요일)
+    if (name.contains('受難') ||
+        name.contains('聖金曜日') ||
+        name.contains('Passion') ||
+        name.contains('Good Friday')) {
+      return pentecostPrimary; // 붉은색
+    }
+
+    // 순교자 축일 체크
+    if (name.contains('殉教') ||
+        name.contains('殉教者') ||
+        name.contains('martyr') ||
+        name.contains('Martyr')) {
+      return martyrPrimary;
+    }
+
+    // 성인 축일 체크 (순교자가 아닌 경우)
+    if (type == 'solemnity' || type == 'feast') {
+      // 성모 마리아 축일
+      if (name.contains('マリア') ||
+          name.contains('聖母') ||
+          name.contains('Mary') ||
+          name.contains('Mother of God')) {
+        return saintPrimary;
+      }
+      // 기타 성인 축일
+      if (name.contains('聖') && !name.contains('殉教')) {
+        return saintPrimary;
+      }
+    }
+
+    return null;
   }
 }
 
@@ -85,7 +158,7 @@ class LiturgySeasonUtil {
   /// 데이터 파일이 있으면 우선 사용, 없으면 계산 로직 사용
   static Future<LiturgySeason> getCurrentSeason([DateTime? date]) async {
     final now = date ?? DateTime.now();
-    
+
     // 데이터 파일에서 시즌 가져오기 시도
     try {
       final season = await LiturgicalCalendarService.getSeasonForDate(now);
@@ -119,11 +192,7 @@ class LiturgySeasonUtil {
     final pentecost = easter.add(const Duration(days: 49));
 
     // 현재 날짜 기준 전례 시즌 판별
-    if (now.isAfter(adventStart.subtract(const Duration(days: 1))) &&
-        now.isBefore(christmas)) {
-      return LiturgySeason.advent;
-    }
-
+    // 성탄절을 먼저 체크 (12월 25일 ~ 1월 6일)
     if ((now.isAfter(christmas.subtract(const Duration(days: 1))) &&
             now.year == year) ||
         (now.isBefore(epiphany.add(const Duration(days: 1))) &&
@@ -131,20 +200,28 @@ class LiturgySeasonUtil {
       return LiturgySeason.christmas;
     }
 
+    // 대림절 체크 (성탄절이 아닌 경우)
+    if (now.isAfter(adventStart.subtract(const Duration(days: 1))) &&
+        now.isBefore(christmas)) {
+      return LiturgySeason.advent;
+    }
+
     if (now.isAfter(ashWednesday.subtract(const Duration(days: 1))) &&
         now.isBefore(easter)) {
       return LiturgySeason.lent;
     }
 
-    if (now.isAfter(easter.subtract(const Duration(days: 1))) &&
-        now.isBefore(pentecost.add(const Duration(days: 1)))) {
-      return LiturgySeason.easter;
-    }
-
+    // 성령 강림 (부활절 시즌보다 먼저 체크)
     if (now.day == pentecost.day &&
         now.month == pentecost.month &&
         now.year == pentecost.year) {
       return LiturgySeason.pentecost;
+    }
+
+    // 부활절 시즌 (부활절 ~ 성령 강림 전날)
+    if (now.isAfter(easter.subtract(const Duration(days: 1))) &&
+        now.isBefore(pentecost)) {
+      return LiturgySeason.easter;
     }
 
     return LiturgySeason.ordinary;
@@ -168,6 +245,11 @@ class LiturgySeasonUtil {
     final day = ((h + l - 7 * m + 114) % 31) + 1;
 
     return DateTime(year, month, day);
+  }
+
+  /// 부활절 날짜 반환 (public 메서드)
+  static DateTime calculateEaster(int year) {
+    return _calculateEaster(year);
   }
 
   /// 대림절 시작일 계산 (11월 30일에 가장 가까운 일요일)

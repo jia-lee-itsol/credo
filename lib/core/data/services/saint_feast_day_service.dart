@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/saint_feast_day_model.dart';
+import '../../../shared/providers/liturgy_theme_provider.dart';
 
 /// 성인 축일 데이터 서비스
 class SaintFeastDayService {
@@ -15,7 +16,7 @@ class SaintFeastDayService {
 
     try {
       final jsonString = await rootBundle.loadString(
-        'assets/data/saints_feast_days.json',
+        'assets/data/saints/saints_feast_days.json',
       );
       final json = jsonDecode(jsonString) as Map<String, dynamic>;
       _cachedData = SaintsFeastDaysModel.fromJson(json);
@@ -49,5 +50,7 @@ class SaintFeastDayService {
 
 /// 오늘의 성인 축일 Provider
 final todaySaintsProvider = FutureProvider<List<SaintFeastDayModel>>((ref) {
-  return SaintFeastDayService.getTodaySaints();
+  final testDate = ref.watch(testDateOverrideProvider);
+  final date = testDate ?? DateTime.now();
+  return SaintFeastDayService.getSaintsForDate(date);
 });

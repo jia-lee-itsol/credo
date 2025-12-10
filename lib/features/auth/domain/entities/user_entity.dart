@@ -16,6 +16,12 @@ class UserEntity with _$UserEntity {
     @Default(false) bool isVerified,
     String? verifiedParishId,
     String? verifiedRole,
+    String? baptismalName,
+    String? feastDayId, // "month-day" 형식 (예: "1-1")
+    DateTime? baptismDate, // 세례 날짜
+    DateTime? confirmationDate, // 견진 날짜
+    @Default([]) List<String> godchildren, // 대자녀 목록 (userId 리스트)
+    String? godparentId, // 대부모 userId (1名のみ)
     required DateTime createdAt,
     required DateTime updatedAt,
   }) = _UserEntity;

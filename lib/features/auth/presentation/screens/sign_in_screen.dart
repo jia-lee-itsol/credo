@@ -4,7 +4,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/validators.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
+import '../../../../shared/providers/auth_provider.dart';
 import '../../../../config/routes/app_routes.dart';
+import '../widgets/password_field.dart';
+import '../widgets/loading_button.dart';
+import '../widgets/auth_logo_header.dart';
+import '../widgets/social_login_button.dart';
+import '../widgets/divider_with_text.dart';
+import '../widgets/password_reset_dialog.dart';
 
 /// 로그인 화면
 class SignInScreen extends ConsumerStatefulWidget {
@@ -19,7 +26,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLoading = false;
-  bool _obscurePassword = true;
 
   @override
   void dispose() {
@@ -43,40 +49,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const SizedBox(height: 40),
-
-                // 로고
-                Center(
-                  child: Container(
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: backgroundColor,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Icon(Icons.church, size: 48, color: primaryColor),
-                  ),
+                // 로고 헤더
+                AuthLogoHeader(
+                  primaryColor: primaryColor,
+                  backgroundColor: backgroundColor,
+                  subtitle: '信仰でつながる',
                 ),
-                const SizedBox(height: 24),
-
-                // 타이틀
-                Text(
-                  'Credo',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  '信仰でつながる',
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-                const SizedBox(height: 48),
 
                 // 이메일 입력
                 TextFormField(
@@ -92,27 +70,9 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 const SizedBox(height: 16),
 
                 // 비밀번호 입력
-                TextFormField(
+                PasswordField(
                   controller: _passwordController,
-                  decoration: InputDecoration(
-                    labelText: 'パスワード',
-                    prefixIcon: const Icon(Icons.lock_outlined),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                    ),
-                  ),
-                  obscureText: _obscurePassword,
                   validator: Validators.validatePassword,
-                  textInputAction: TextInputAction.done,
                   onFieldSubmitted: (_) => _signIn(),
                 ),
                 const SizedBox(height: 8),
@@ -121,66 +81,36 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed: () {
-                      // TODO: 비밀번호 재설정
-                    },
+                    onPressed: _isLoading ? null : _resetPassword,
                     child: const Text('パスワードをお忘れですか？'),
                   ),
                 ),
                 const SizedBox(height: 24),
 
                 // 로그인 버튼
-                ElevatedButton(
-                  onPressed: _isLoading ? null : _signIn,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: _isLoading
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: Colors.white,
-                          ),
-                        )
-                      : const Text('ログイン'),
+                LoadingButton(
+                  onPressed: _signIn,
+                  label: 'ログイン',
+                  backgroundColor: primaryColor,
+                  isLoading: _isLoading,
                 ),
                 const SizedBox(height: 24),
 
                 // 구분선
-                Row(
-                  children: [
-                    Expanded(child: Divider(color: theme.colorScheme.outline)),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text('または', style: theme.textTheme.bodySmall),
-                    ),
-                    Expanded(child: Divider(color: theme.colorScheme.outline)),
-                  ],
-                ),
+                const DividerWithText(text: 'または'),
                 const SizedBox(height: 24),
 
                 // 소셜 로그인 버튼
-                OutlinedButton.icon(
-                  onPressed: _isLoading ? null : _signIn,
-                  icon: const Icon(Icons.g_mobiledata, size: 24),
-                  label: const Text('Googleでログイン'),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                  ),
+                SocialLoginButton(
+                  type: SocialLoginType.google,
+                  onPressed: _signInWithGoogle,
+                  isLoading: _isLoading,
                 ),
                 const SizedBox(height: 12),
-
-                OutlinedButton.icon(
-                  onPressed: _isLoading ? null : _signIn,
-                  icon: const Icon(Icons.apple, size: 24),
-                  label: const Text('Appleでログイン'),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 14),
-                  ),
+                SocialLoginButton(
+                  type: SocialLoginType.apple,
+                  onPressed: _signInWithApple,
+                  isLoading: _isLoading,
                 ),
                 const SizedBox(height: 32),
 
@@ -214,28 +144,194 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   }
 
   Future<void> _signIn() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
     setState(() {
       _isLoading = true;
     });
 
     try {
-      // TODO: 실제 로그인 처리
-      await Future.delayed(const Duration(seconds: 1));
+      final repository = ref.read(authRepositoryProvider);
+      final result = await repository.signInWithEmail(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+      );
 
-      if (mounted) {
-        context.go(AppRoutes.home);
-      }
+      result.fold(
+        (failure) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(failure.message),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        (user) {
+          if (mounted) {
+            // authStateProvider가 자동으로 업데이트됨
+            context.go(AppRoutes.home);
+          }
+        },
+      );
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('ログインに失敗しました')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('ログインに失敗しました'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     } finally {
       if (mounted) {
         setState(() {
           _isLoading = false;
         });
+      }
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final repository = ref.read(authRepositoryProvider);
+      final result = await repository.signInWithGoogle();
+
+      result.fold(
+        (failure) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(failure.message),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        (user) {
+          if (mounted) {
+            context.go(AppRoutes.home);
+          }
+        },
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Googleログインに失敗しました'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _signInWithApple() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final repository = ref.read(authRepositoryProvider);
+      final result = await repository.signInWithApple();
+
+      result.fold(
+        (failure) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(failure.message),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        (user) {
+          if (mounted) {
+            context.go(AppRoutes.home);
+          }
+        },
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Appleログインに失敗しました'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _resetPassword() async {
+    final email = _emailController.text.trim();
+    if (email.isEmpty) {
+      // 이메일 입력 다이얼로그 표시
+      final result = await PasswordResetDialog.show(context);
+      if (result == null || result.isEmpty) {
+        return;
+      }
+      _resetPasswordForEmail(result);
+    } else {
+      _resetPasswordForEmail(email);
+    }
+  }
+
+  Future<void> _resetPasswordForEmail(String email) async {
+    try {
+      final repository = ref.read(authRepositoryProvider);
+      final result = await repository.sendPasswordResetEmail(email);
+
+      result.fold(
+        (failure) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(failure.message),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        (_) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('パスワードリセットメールを送信しました'),
+                backgroundColor: Colors.green,
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('パスワードリセットメールの送信に失敗しました'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     }
   }

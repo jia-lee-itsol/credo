@@ -4,7 +4,12 @@
       "Bash(flutter create:*)",
       "Bash(flutter pub get:*)",
       "Bash(flutter analyze:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(tree:*)",
+      "Bash(xargs:*)",
+      "Bash(dart pub global activate:*)",
+      "Bash($HOME/.pub-cache/bin/flutterfire configure --yes --project=credo-be5fc)",
+      "Bash(~/.pub-cache/bin/flutterfire configure:*)"
     ],
     "deny": [],
     "ask": []

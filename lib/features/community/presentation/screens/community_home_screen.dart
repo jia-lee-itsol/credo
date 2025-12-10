@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
+import '../../../../shared/providers/auth_provider.dart';
 
 /// 커뮤니티 홈 화면 (교회 선택)
 class CommunityHomeScreen extends ConsumerWidget {
@@ -13,10 +14,32 @@ class CommunityHomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final currentUser = ref.watch(currentUserProvider);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('コミュニティ'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: GestureDetector(
+              onTap: () {
+                context.push(AppRoutes.myPage);
+              },
+              child: CircleAvatar(
+                radius: 18,
+                backgroundColor: primaryColor.withValues(alpha: 0.2),
+                backgroundImage: currentUser?.profileImageUrl != null
+                    ? NetworkImage(currentUser!.profileImageUrl!)
+                    : null,
+                child: currentUser?.profileImageUrl == null
+                    ? Icon(Icons.person, size: 20, color: primaryColor)
+                    : null,
+              ),
+            ),
+          ),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
@@ -122,10 +145,7 @@ class _CommunityParishCard extends StatelessWidget {
                       color: primaryColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
-                      Icons.forum,
-                      color: primaryColor,
-                    ),
+                    child: Icon(Icons.forum, color: primaryColor),
                   ),
                   if (hasNewPosts)
                     Positioned(
@@ -160,10 +180,7 @@ class _CommunityParishCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      '$postCount件の投稿',
-                      style: theme.textTheme.bodySmall,
-                    ),
+                    Text('$postCount件の投稿', style: theme.textTheme.bodySmall),
                   ],
                 ),
               ),

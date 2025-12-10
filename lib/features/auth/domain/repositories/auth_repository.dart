@@ -38,6 +38,17 @@ abstract class AuthRepository {
     String? mainParishId,
     List<String>? preferredLanguages,
     List<String>? favoriteParishIds,
+    String? feastDayId,
+    DateTime? baptismDate,
+    DateTime? confirmationDate,
+    List<String>? godchildren,
+    String? godparentId,
+  });
+
+  /// 이메일 또는 userId로 사용자 검색
+  Future<Either<Failure, UserEntity?>> searchUser({
+    String? email,
+    String? userId,
   });
 
   /// 인증 상태 스트림

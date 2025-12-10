@@ -19,15 +19,12 @@ import '../../features/community/presentation/screens/post_detail_screen.dart';
 import '../../features/community/presentation/screens/post_create_screen.dart';
 import '../../features/profile/presentation/screens/my_page_screen.dart';
 import '../../features/profile/presentation/screens/edit_profile_screen.dart';
+import '../../features/profile/presentation/screens/favorite_parishes_screen.dart';
+import '../../features/profile/presentation/screens/qr_scanner_screen.dart';
+import '../../features/profile/presentation/screens/language_settings_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../shared/widgets/main_scaffold.dart';
 import 'app_routes.dart';
-
-/// 온보딩 완료 여부 Provider
-final onboardingCompletedProvider = FutureProvider<bool>((ref) async {
-  final prefs = await SharedPreferences.getInstance();
-  return prefs.getBool('onboarding_completed') ?? false;
-});
 
 /// GoRouter Provider
 final appRouterProvider = Provider<GoRouter>((ref) {
@@ -41,7 +38,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       }
 
       final prefs = await SharedPreferences.getInstance();
-      final onboardingCompleted = prefs.getBool('onboarding_completed') ?? false;
+      final onboardingCompleted =
+          prefs.getBool('onboarding_completed') ?? false;
 
       final isOnboardingRoute = state.matchedLocation.startsWith('/onboarding');
 
@@ -139,7 +137,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                     name: 'parishDetail',
                     builder: (context, state) {
                       final parishId = state.pathParameters['parishId']!;
-                      return ParishDetailScreen(parishId: parishId);
+                      // 전체 경로를 포함하여 더 고유한 key 생성
+                      final uniqueKey = ValueKey('parishDetail_${state.uri}');
+                      return ParishDetailScreen(
+                        key: uniqueKey,
+                        parishId: parishId,
+                      );
                     },
                   ),
                 ],
@@ -189,11 +192,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               ),
             ],
           ),
-
         ],
       ),
 
-      // My Page Route (outside shell - accessible via AppBar)
+      // My Page Route (outside shell - with bottom navigation)
       GoRoute(
         path: AppRoutes.myPage,
         name: 'myPage',
@@ -203,6 +205,37 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: 'edit-profile',
             name: 'editProfile',
             builder: (context, state) => const EditProfileScreen(),
+          ),
+          GoRoute(
+            path: 'favorite-parishes',
+            name: 'favoriteParishes',
+            builder: (context, state) => const FavoriteParishesScreen(
+              key: ValueKey('favoriteParishesScreen'),
+            ),
+            routes: [
+              // 자주 가는 교회에서 교회 상세로 이동할 수 있도록 중첩 라우트 추가
+              GoRoute(
+                path: 'parish/:parishId',
+                name: 'favoriteParishDetail',
+                builder: (context, state) {
+                  final parishId = state.pathParameters['parishId']!;
+                  final uniqueKey = ValueKey(
+                    'favoriteParishDetail_${state.uri}',
+                  );
+                  return ParishDetailScreen(key: uniqueKey, parishId: parishId);
+                },
+              ),
+            ],
+          ),
+          GoRoute(
+            path: 'qr-scanner',
+            name: 'qrScanner',
+            builder: (context, state) => const QrScannerScreen(),
+          ),
+          GoRoute(
+            path: 'language-settings',
+            name: 'languageSettings',
+            builder: (context, state) => const LanguageSettingsScreen(),
           ),
         ],
       ),
@@ -214,22 +247,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
-              Icons.error_outline,
-              size: 64,
-              color: Colors.grey,
-            ),
+            const Icon(Icons.error_outline, size: 64, color: Colors.grey),
             const SizedBox(height: 16),
-            Text(
-              'ページが見つかりません',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            Text('ページが見つかりません', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
             Text(
               state.uri.toString(),
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: Colors.grey),
             ),
             const SizedBox(height: 24),
             ElevatedButton(

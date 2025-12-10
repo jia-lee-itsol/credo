@@ -4,7 +4,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/utils/validators.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
+import '../../../../shared/providers/auth_provider.dart';
 import '../../../../config/routes/app_routes.dart';
+import '../widgets/password_field.dart';
+import '../widgets/loading_button.dart';
+import '../widgets/terms_agreement_checkbox.dart';
 
 /// 회원가입 화면
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -21,8 +25,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   bool _isLoading = false;
-  bool _obscurePassword = true;
-  bool _obscureConfirmPassword = true;
   bool _agreeToTerms = true;
 
   @override
@@ -40,9 +42,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('新規登録'),
-      ),
+      appBar: AppBar(title: const Text('新規登録')),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -77,51 +77,18 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 const SizedBox(height: 16),
 
                 // 비밀번호 입력
-                TextFormField(
+                PasswordField(
                   controller: _passwordController,
-                  decoration: InputDecoration(
-                    labelText: 'パスワード',
-                    prefixIcon: const Icon(Icons.lock_outlined),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscurePassword = !_obscurePassword;
-                        });
-                      },
-                    ),
-                    helperText: '8文字以上で入力してください',
-                  ),
-                  obscureText: _obscurePassword,
+                  helperText: '8文字以上で入力してください',
                   validator: Validators.validatePassword,
                   textInputAction: TextInputAction.next,
                 ),
                 const SizedBox(height: 16),
 
                 // 비밀번호 확인
-                TextFormField(
+                PasswordField(
                   controller: _confirmPasswordController,
-                  decoration: InputDecoration(
-                    labelText: 'パスワード（確認）',
-                    prefixIcon: const Icon(Icons.lock_outlined),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _obscureConfirmPassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _obscureConfirmPassword = !_obscureConfirmPassword;
-                        });
-                      },
-                    ),
-                  ),
-                  obscureText: _obscureConfirmPassword,
+                  labelText: 'パスワード（確認）',
                   validator: (value) {
                     if (value != _passwordController.text) {
                       return 'パスワードが一致しません';
@@ -133,72 +100,23 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 const SizedBox(height: 24),
 
                 // 이용약관 동의
-                Row(
-                  children: [
-                    Checkbox(
-                      value: _agreeToTerms,
-                      onChanged: (value) {
-                        setState(() {
-                          _agreeToTerms = value ?? false;
-                        });
-                      },
-                      activeColor: primaryColor,
-                    ),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _agreeToTerms = !_agreeToTerms;
-                          });
-                        },
-                        child: RichText(
-                          text: TextSpan(
-                            style: theme.textTheme.bodyMedium,
-                            children: [
-                              const TextSpan(text: ''),
-                              TextSpan(
-                                text: '利用規約',
-                                style: TextStyle(
-                                  color: primaryColor,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                              const TextSpan(text: ' と '),
-                              TextSpan(
-                                text: 'プライバシーポリシー',
-                                style: TextStyle(
-                                  color: primaryColor,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                              const TextSpan(text: ' に同意します'),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                TermsAgreementCheckbox(
+                  value: _agreeToTerms,
+                  onChanged: (value) {
+                    setState(() {
+                      _agreeToTerms = value;
+                    });
+                  },
+                  primaryColor: primaryColor,
                 ),
                 const SizedBox(height: 24),
 
                 // 회원가입 버튼
-                ElevatedButton(
-                  onPressed: _isLoading ? null : _signUp,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                  ),
-                  child: _isLoading
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: Colors.white,
-                          ),
-                        )
-                      : const Text('アカウントを作成'),
+                LoadingButton(
+                  onPressed: _signUp,
+                  label: 'アカウントを作成',
+                  backgroundColor: primaryColor,
+                  isLoading: _isLoading,
                 ),
                 const SizedBox(height: 24),
 
@@ -206,10 +124,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'すでにアカウントをお持ちですか？',
-                      style: theme.textTheme.bodyMedium,
-                    ),
+                    Text('すでにアカウントをお持ちですか？', style: theme.textTheme.bodyMedium),
                     TextButton(
                       onPressed: () {
                         context.pop();
@@ -227,32 +142,124 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   }
 
   Future<void> _signUp() async {
+    debugPrint('🔵 [SignUp] 회원가입 버튼 클릭됨');
+
+    if (!_formKey.currentState!.validate()) {
+      debugPrint('🔴 [SignUp] 폼 검증 실패');
+      return;
+    }
+    debugPrint('✅ [SignUp] 폼 검증 통과');
+
+    if (!_agreeToTerms) {
+      debugPrint('🔴 [SignUp] 이용약관 미동의');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('利用規約とプライバシーポリシーに同意してください'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    debugPrint('✅ [SignUp] 이용약관 동의 확인');
+
+    debugPrint('🟡 [SignUp] 로딩 상태: true로 변경');
     setState(() {
       _isLoading = true;
     });
+    debugPrint('🟡 [SignUp] 현재 로딩 상태: $_isLoading');
 
     try {
-      // TODO: 실제 회원가입 처리
-      await Future.delayed(const Duration(seconds: 1));
+      debugPrint('🟡 [SignUp] Repository 가져오기 시작');
+      final repository = ref.read(authRepositoryProvider);
+      debugPrint('🟡 [SignUp] signUpWithEmail 호출 시작');
+      debugPrint('🟡 [SignUp] 이메일: ${_emailController.text.trim()}');
+      debugPrint('🟡 [SignUp] 닉네임: ${_nicknameController.text.trim()}');
 
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('アカウントを作成しました')),
-        );
-        context.go(AppRoutes.home);
+      final result = await repository.signUpWithEmail(
+        email: _emailController.text.trim(),
+        password: _passwordController.text,
+        nickname: _nicknameController.text.trim(),
+      );
+
+      debugPrint('🟢 [SignUp] signUpWithEmail 완료');
+      debugPrint('🟢 [SignUp] 결과 타입: ${result.runtimeType}');
+
+      if (!mounted) {
+        debugPrint('🔴 [SignUp] Widget이 unmount됨');
+        return;
       }
-    } catch (e) {
+
+      debugPrint('🟡 [SignUp] 로딩 상태: false로 변경 시작');
+      // 로딩 상태를 먼저 false로 설정
+      setState(() {
+        _isLoading = false;
+      });
+      debugPrint('🟢 [SignUp] 로딩 상태: false로 변경 완료');
+      debugPrint('🟢 [SignUp] 현재 로딩 상태: $_isLoading');
+
+      result.fold(
+        (failure) {
+          debugPrint('🔴 [SignUp] 회원가입 실패: ${failure.message}');
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(failure.message),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        (user) {
+          debugPrint('🟢 [SignUp] 회원가입 성공!');
+          debugPrint('🟢 [SignUp] 사용자 ID: ${user.userId}');
+          debugPrint('🟢 [SignUp] 사용자 이메일: ${user.email}');
+
+          if (mounted) {
+            debugPrint('🟢 [SignUp] 스낵바 표시 시작');
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('アカウントを作成しました'),
+                backgroundColor: Colors.green,
+              ),
+            );
+            debugPrint('🟢 [SignUp] 스낵바 표시 완료');
+
+            debugPrint('🟢 [SignUp] 페이지 이동 스케줄링');
+            // 다음 프레임에서 페이지 이동 (로딩 상태가 UI에 반영된 후)
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              debugPrint('🟢 [SignUp] addPostFrameCallback 실행됨');
+              if (mounted) {
+                debugPrint('🟢 [SignUp] 로그인 페이지로 이동 시작');
+                context.go(AppRoutes.signIn);
+                debugPrint('🟢 [SignUp] 로그인 페이지로 이동 완료');
+              } else {
+                debugPrint('🔴 [SignUp] 페이지 이동 시도했지만 Widget이 unmount됨');
+              }
+            });
+          } else {
+            debugPrint('🔴 [SignUp] 성공했지만 Widget이 unmount됨');
+          }
+        },
+      );
+    } catch (e, stackTrace) {
+      debugPrint('🔴 [SignUp] 예외 발생: $e');
+      debugPrint('🔴 [SignUp] 스택 트레이스: $stackTrace');
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('登録に失敗しました')),
-        );
-      }
-    } finally {
-      if (mounted) {
+        debugPrint('🟡 [SignUp] 예외 처리: 로딩 상태 false로 변경');
         setState(() {
           _isLoading = false;
         });
+        debugPrint('🟢 [SignUp] 예외 처리: 로딩 상태 변경 완료');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('登録に失敗しました'),
+            backgroundColor: Colors.red,
+          ),
+        );
       }
     }
+
+    debugPrint('🔵 [SignUp] _signUp 함수 종료');
+    debugPrint('🔵 [SignUp] 최종 로딩 상태: $_isLoading');
   }
 }

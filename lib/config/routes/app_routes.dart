@@ -19,25 +19,11 @@ class AppRoutes {
   static const String community = '/community';
   static const String myPage = '/my-page';
 
-  // Settings
-  static const String settings = '/settings';
-
-  // Parish
-  static const String parishDetail = '/parish/:parishId';
-  static const String parishMap = '/parish/:parishId/map';
-
-  // Community
-  static const String communityParish = '/community/:parishId';
-  static const String postDetail = '/community/:parishId/post/:postId';
-  static const String postCreate = '/community/:parishId/post/create';
-
   // My Page
   static const String editProfile = '/my-page/edit-profile';
-  static const String parishSettings = '/my-page/parish-settings';
-  static const String notificationSettings = '/my-page/notification-settings';
+  static const String favoriteParishes = '/my-page/favorite-parishes';
+  static const String qrScanner = '/my-page/qr-scanner';
   static const String languageSettings = '/my-page/language-settings';
-  static const String termsOfService = '/my-page/terms';
-  static const String privacyPolicy = '/my-page/privacy';
 
   /// 파라미터가 포함된 경로 생성
   static String parishDetailPath(String parishId) => '/parish/$parishId';

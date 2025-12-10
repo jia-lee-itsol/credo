@@ -23,6 +23,12 @@ class UserModel with _$UserModel {
     @JsonKey(name: 'is_verified') @Default(false) bool isVerified,
     @JsonKey(name: 'verified_parish_id') String? verifiedParishId,
     @JsonKey(name: 'verified_role') String? verifiedRole,
+    @JsonKey(name: 'baptismal_name') String? baptismalName,
+    @JsonKey(name: 'feast_day_id') String? feastDayId,
+    @JsonKey(name: 'baptism_date') DateTime? baptismDate,
+    @JsonKey(name: 'confirmation_date') DateTime? confirmationDate,
+    @JsonKey(name: 'godchildren') @Default([]) List<String> godchildren,
+    @JsonKey(name: 'godparent_id') String? godparentId,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
   }) = _UserModel;
@@ -38,6 +44,8 @@ class UserModel with _$UserModel {
     return UserModel.fromJson({
       'user_id': doc.id,
       ...data,
+      'baptism_date': (data['baptism_date'] as Timestamp?)?.toDate().toIso8601String(),
+      'confirmation_date': (data['confirmation_date'] as Timestamp?)?.toDate().toIso8601String(),
       'created_at': (data['created_at'] as Timestamp?)?.toDate().toIso8601String() ??
           DateTime.now().toIso8601String(),
       'updated_at': (data['updated_at'] as Timestamp?)?.toDate().toIso8601String() ??
@@ -58,6 +66,12 @@ class UserModel with _$UserModel {
       isVerified: isVerified,
       verifiedParishId: verifiedParishId,
       verifiedRole: verifiedRole,
+      baptismalName: baptismalName,
+      feastDayId: feastDayId,
+      baptismDate: baptismDate,
+      confirmationDate: confirmationDate,
+      godchildren: godchildren,
+      godparentId: godparentId,
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
@@ -76,6 +90,12 @@ class UserModel with _$UserModel {
       isVerified: entity.isVerified,
       verifiedParishId: entity.verifiedParishId,
       verifiedRole: entity.verifiedRole,
+      baptismalName: entity.baptismalName,
+      feastDayId: entity.feastDayId,
+      baptismDate: entity.baptismDate,
+      confirmationDate: entity.confirmationDate,
+      godchildren: entity.godchildren,
+      godparentId: entity.godparentId,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
     );
@@ -83,7 +103,7 @@ class UserModel with _$UserModel {
 
   /// Firestore에 저장할 Map으로 변환
   Map<String, dynamic> toFirestore() {
-    return {
+    final map = <String, dynamic>{
       'nickname': nickname,
       'email': email,
       'main_parish_id': mainParishId,
@@ -93,8 +113,21 @@ class UserModel with _$UserModel {
       'is_verified': isVerified,
       'verified_parish_id': verifiedParishId,
       'verified_role': verifiedRole,
+      'baptismal_name': baptismalName,
+      'feast_day_id': feastDayId,
+      'godchildren': godchildren,
+      'godparent_id': godparentId,
       'created_at': Timestamp.fromDate(createdAt),
       'updated_at': Timestamp.fromDate(updatedAt),
     };
+    
+    if (baptismDate != null) {
+      map['baptism_date'] = Timestamp.fromDate(baptismDate!);
+    }
+    if (confirmationDate != null) {
+      map['confirmation_date'] = Timestamp.fromDate(confirmationDate!);
+    }
+    
+    return map;
   }
 }

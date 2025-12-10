@@ -4,8 +4,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/date_utils.dart';
+import '../../../../core/data/services/parish_service.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
+import '../../../../shared/widgets/badge_chip.dart';
+import '../../../../shared/widgets/login_required_dialog.dart';
 
 /// 게시글 목록 화면
 class PostListScreen extends ConsumerStatefulWidget {
@@ -18,16 +21,80 @@ class PostListScreen extends ConsumerStatefulWidget {
 }
 
 class _PostListScreenState extends ConsumerState<PostListScreen> {
+  final TextEditingController _searchController = TextEditingController();
   bool _sortByLatest = true;
+  String _searchQuery = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  List<Map<String, String>> get _filteredPosts {
+    if (_searchQuery.isEmpty) return _samplePosts;
+
+    return _samplePosts.where((post) {
+      final title = post['title']!.toLowerCase();
+      final content = post['content']!.toLowerCase();
+      final author = post['author']!.toLowerCase();
+      final query = _searchQuery.toLowerCase();
+
+      return title.contains(query) ||
+          content.contains(query) ||
+          author.contains(query);
+    }).toList();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final parishAsync = ref.watch(parishByIdProvider(widget.parishId));
 
     return Scaffold(
-      appBar: AppBar(title: const Text('東京カテドラル聖マリア大聖堂')),
+      appBar: AppBar(
+        title: parishAsync.when(
+          data: (parish) => Text(parish?['name'] as String? ?? 'コミュニティ'),
+          loading: () => const Text('コミュニティ'),
+          error: (_, __) => const Text('コミュニティ'),
+        ),
+      ),
       body: Column(
         children: [
+          // 검색바
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: '投稿を検索',
+                hintStyle: TextStyle(color: Colors.grey.shade500),
+                prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
+                suffixIcon: _searchQuery.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () {
+                          _searchController.clear();
+                          setState(() => _searchQuery = '');
+                        },
+                      )
+                    : null,
+                filled: true,
+                fillColor: Colors.grey.shade100,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+              ),
+              onChanged: (value) => setState(() => _searchQuery = value),
+            ),
+          ),
+
           // 정렬 탭
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -52,31 +119,54 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
 
           // 게시글 목록
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemCount: _samplePosts.length,
-              itemBuilder: (context, index) {
-                final post = _samplePosts[index];
-                return _PostCard(
-                  title: post['title']!,
-                  content: post['content']!,
-                  author: post['author']!,
-                  createdAt: DateTime.now().subtract(
-                    Duration(hours: index * 3),
+            child: _filteredPosts.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.search_off,
+                          size: 48,
+                          color: Colors.grey.shade400,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          '検索結果がありません',
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    itemCount: _filteredPosts.length,
+                    itemBuilder: (context, index) {
+                      final post = _filteredPosts[index];
+                      return _PostCard(
+                        title: post['title']!,
+                        content: post['content']!,
+                        author: post['author']!,
+                        createdAt: DateTime.now().subtract(
+                          Duration(hours: index * 3),
+                        ),
+                        likeCount: int.parse(post['likes']!),
+                        commentCount: int.parse(post['comments']!),
+                        isOfficial: post['isOfficial'] == 'true',
+                        isPinned: post['isPinned'] == 'true',
+                        primaryColor: primaryColor,
+                        onTap: () {
+                          context.push(
+                            AppRoutes.postDetailPath(
+                              widget.parishId,
+                              'post-$index',
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
-                  likeCount: int.parse(post['likes']!),
-                  commentCount: int.parse(post['comments']!),
-                  isOfficial: post['isOfficial'] == 'true',
-                  isPinned: post['isPinned'] == 'true',
-                  primaryColor: primaryColor,
-                  onTap: () {
-                    context.push(
-                      AppRoutes.postDetailPath(widget.parishId, 'post-$index'),
-                    );
-                  },
-                );
-              },
-            ),
           ),
         ],
       ),
@@ -86,26 +176,10 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
           if (isAuthenticated) {
             context.push(AppRoutes.postCreatePath(widget.parishId));
           } else {
-            // 로그인하지 않은 경우 로그인 화면으로 이동
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('ログインが必要です'),
-                content: const Text('投稿するにはログインが必要です。ログインしますか？'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('キャンセル'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      context.push(AppRoutes.signIn);
-                    },
-                    child: Text('ログイン', style: TextStyle(color: primaryColor)),
-                  ),
-                ],
-              ),
+            LoginRequiredDialog.show(
+              context,
+              message: '投稿するにはログインが必要です。ログインしますか？',
+              primaryColor: primaryColor,
             );
           }
         },
@@ -200,67 +274,11 @@ class _PostCard extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Row(
                     children: [
-                      if (isPinned)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 2,
-                          ),
-                          margin: const EdgeInsets.only(right: 8),
-                          decoration: BoxDecoration(
-                            color: Colors.orange.shade100,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.push_pin,
-                                size: 12,
-                                color: Colors.orange.shade700,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                '固定',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: Colors.orange.shade700,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      if (isOfficial)
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.amber.shade100,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.verified,
-                                size: 12,
-                                color: Colors.amber.shade700,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                '公式',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: Colors.amber.shade700,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      if (isPinned) ...[
+                        const BadgeChip.pinned(),
+                        const SizedBox(width: 8),
+                      ],
+                      if (isOfficial) const BadgeChip.official(),
                     ],
                   ),
                 ),

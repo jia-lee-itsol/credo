@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users Collection
+    match /users/{userId} {
+      // 읽기: 로그인한 사용자는 모든 사용자 정보 읽기 가능
+      allow read: if request.auth != null;
+      
+      // 쓰기: 자신의 문서만 생성/수정 가능
+      // userId는 문서 ID와 동일하므로 데이터에 포함되지 않음
+      allow create: if request.auth != null 
+        && request.auth.uid == userId;
+      
+      allow update: if request.auth != null 
+        && request.auth.uid == userId;
+      
+      allow delete: if request.auth != null 
+        && request.auth.uid == userId;
+    }
+    
+    // Posts Collection (향후 구현)
+    match /posts/{postId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null 
+        && request.resource.data.authorId == request.auth.uid;
+      allow update, delete: if request.auth != null 
+        && (resource.data.authorId == request.auth.uid);
+    }
+    
+    // Comments Collection (향후 구현)
+    match /comments/{commentId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null 
+        && request.resource.data.authorId == request.auth.uid;
+      allow update, delete: if request.auth != null 
+        && resource.data.authorId == request.auth.uid;
+    }
+    
+    // Post Likes Collection (향후 구현)
+    match /postLikes/{likeId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null 
+        && request.resource.data.userId == request.auth.uid;
+      allow delete: if request.auth != null 
+        && resource.data.userId == request.auth.uid;
+    }
+  }
+}
+

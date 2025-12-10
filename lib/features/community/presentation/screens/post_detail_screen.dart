@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../../config/routes/app_routes.dart';
-import '../../../../core/utils/date_utils.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
+import '../../../../shared/widgets/badge_chip.dart';
+import '../../../../shared/widgets/login_required_dialog.dart';
+import '../widgets/comment_item.dart';
 
 /// 게시글 상세 화면
 class PostDetailScreen extends ConsumerStatefulWidget {
@@ -72,35 +72,9 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 공식 배지
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    margin: const EdgeInsets.only(bottom: 12),
-                    decoration: BoxDecoration(
-                      color: Colors.amber.shade100,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.verified,
-                          size: 14,
-                          color: Colors.amber.shade700,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '公式',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.amber.shade700,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 12),
+                    child: BadgeChip.official(),
                   ),
 
                   // 제목
@@ -113,42 +87,69 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                   const SizedBox(height: 12),
 
                   // 작성자 & 시간
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 16,
-                        backgroundColor: primaryColor.withValues(alpha: 0.2),
-                        child: Icon(
-                          Icons.church,
-                          size: 16,
-                          color: primaryColor,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '東京カテドラル',
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Text(
-                            AppDateUtils.formatRelativeTime(
-                              DateTime.now().subtract(const Duration(hours: 2)),
-                            ),
-                            style: theme.textTheme.bodySmall,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  _buildAuthorInfo(theme, primaryColor),
                   const SizedBox(height: 24),
 
                   // 본문
-                  Text(
-                    '''年末年始のミサ時間をお知らせいたします。
+                  _buildContent(theme),
+                  const SizedBox(height: 24),
+
+                  // 좋아요 버튼
+                  _buildLikeButton(isAuthenticated, primaryColor),
+
+                  const SizedBox(height: 24),
+                  const Divider(),
+                  const SizedBox(height: 16),
+
+                  // 댓글 섹션
+                  _buildCommentsSection(theme, primaryColor),
+                ],
+              ),
+            ),
+          ),
+
+          // 댓글 입력
+          _buildCommentInput(theme, isAuthenticated, primaryColor),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAuthorInfo(ThemeData theme, Color primaryColor) {
+    return Row(
+      children: [
+        CircleAvatar(
+          radius: 16,
+          backgroundColor: primaryColor.withValues(alpha: 0.2),
+          child: Icon(
+            Icons.church,
+            size: 16,
+            color: primaryColor,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '東京カテドラル',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            Text(
+              '2時間前',
+              style: theme.textTheme.bodySmall,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildContent(ThemeData theme) {
+    return Text(
+      '''年末年始のミサ時間をお知らせいたします。
 
 ■ 12月31日（大晦日）
 ・18:00 感謝のミサ
@@ -161,159 +162,134 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
 
 皆様のご参列をお待ちしております。
 新しい年も皆様に神様の祝福がありますように。''',
-                    style: theme.textTheme.bodyLarge?.copyWith(height: 1.8),
-                  ),
-                  const SizedBox(height: 24),
+      style: theme.textTheme.bodyLarge?.copyWith(height: 1.8),
+    );
+  }
 
-                  // 좋아요 버튼
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          if (isAuthenticated) {
-                            setState(() {
-                              _isLiked = !_isLiked;
-                            });
-                          } else {
-                            _showLoginRequiredDialog(context, primaryColor);
-                          }
-                        },
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: _isLiked
-                                ? primaryColor.withValues(alpha: 0.1)
-                                : Colors.grey.shade100,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                _isLiked
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                size: 20,
-                                color: _isLiked ? primaryColor : Colors.grey,
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                _isLiked ? '25' : '24',
-                                style: TextStyle(
-                                  color: _isLiked ? primaryColor : Colors.grey,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 24),
-                  const Divider(),
-                  const SizedBox(height: 16),
-
-                  // 댓글 섹션
-                  Text(
-                    'コメント (5)',
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // 댓글 목록
-                  ..._sampleComments.map(
-                    (comment) => _CommentItem(
-                      author: comment['author']!,
-                      content: comment['content']!,
-                      createdAt: DateTime.now().subtract(
-                        Duration(hours: int.parse(comment['hoursAgo']!)),
-                      ),
-                      primaryColor: primaryColor,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          // 댓글 입력
-          Container(
-            padding: EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 12,
-              bottom: MediaQuery.of(context).padding.bottom + 12,
+  Widget _buildLikeButton(bool isAuthenticated, Color primaryColor) {
+    return Row(
+      children: [
+        InkWell(
+          onTap: () {
+            if (isAuthenticated) {
+              setState(() {
+                _isLiked = !_isLiked;
+              });
+            } else {
+              LoginRequiredDialog.show(context, primaryColor: primaryColor);
+            }
+          },
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
             ),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surface,
-              border: Border(
-                top: BorderSide(color: theme.colorScheme.outlineVariant),
-              ),
+              color: _isLiked
+                  ? primaryColor.withValues(alpha: 0.1)
+                  : Colors.grey.shade100,
+              borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
               children: [
-                Expanded(
-                  child: TextField(
-                    controller: _commentController,
-                    decoration: const InputDecoration(
-                      hintText: 'コメントを入力...',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 12,
-                      ),
-                    ),
-                    maxLines: null,
-                  ),
+                Icon(
+                  _isLiked ? Icons.favorite : Icons.favorite_border,
+                  size: 20,
+                  color: _isLiked ? primaryColor : Colors.grey,
                 ),
-                IconButton(
-                  onPressed: () {
-                    if (!isAuthenticated) {
-                      _showLoginRequiredDialog(context, primaryColor);
-                      return;
-                    }
-                    if (_commentController.text.trim().isNotEmpty) {
-                      // TODO: 댓글 작성 처리
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('コメントを投稿しました')),
-                      );
-                      _commentController.clear();
-                    }
-                  },
-                  icon: Icon(Icons.send, color: primaryColor),
+                const SizedBox(width: 8),
+                Text(
+                  _isLiked ? '25' : '24',
+                  style: TextStyle(
+                    color: _isLiked ? primaryColor : Colors.grey,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  void _showLoginRequiredDialog(BuildContext context, Color primaryColor) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('ログインが必要です'),
-        content: const Text('この機能を使用するにはログインが必要です。ログインしますか？'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('キャンセル'),
+  Widget _buildCommentsSection(ThemeData theme, Color primaryColor) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'コメント (5)',
+          style: theme.textTheme.titleSmall?.copyWith(
+            fontWeight: FontWeight.bold,
           ),
-          TextButton(
+        ),
+        const SizedBox(height: 16),
+
+        // 댓글 목록
+        ..._sampleComments.map(
+          (comment) => CommentItem(
+            author: comment['author']!,
+            content: comment['content']!,
+            createdAt: DateTime.now().subtract(
+              Duration(hours: int.parse(comment['hoursAgo']!)),
+            ),
+            primaryColor: primaryColor,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCommentInput(
+    ThemeData theme,
+    bool isAuthenticated,
+    Color primaryColor,
+  ) {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: 12,
+        bottom: MediaQuery.of(context).padding.bottom + 12,
+      ),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surface,
+        border: Border(
+          top: BorderSide(color: theme.colorScheme.outlineVariant),
+        ),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextField(
+              controller: _commentController,
+              decoration: const InputDecoration(
+                hintText: 'コメントを入力...',
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+              ),
+              maxLines: null,
+            ),
+          ),
+          IconButton(
             onPressed: () {
-              Navigator.of(context).pop();
-              context.push(AppRoutes.signIn);
+              if (!isAuthenticated) {
+                LoginRequiredDialog.show(context, primaryColor: primaryColor);
+                return;
+              }
+              if (_commentController.text.trim().isNotEmpty) {
+                // TODO: 댓글 작성 처리
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('コメントを投稿しました')),
+                );
+                _commentController.clear();
+              }
             },
-            child: Text('ログイン', style: TextStyle(color: primaryColor)),
+            icon: Icon(Icons.send, color: primaryColor),
           ),
         ],
       ),
@@ -361,70 +337,6 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text('キャンセル'),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _CommentItem extends StatelessWidget {
-  final String author;
-  final String content;
-  final DateTime createdAt;
-  final Color primaryColor;
-
-  const _CommentItem({
-    required this.author,
-    required this.content,
-    required this.createdAt,
-    required this.primaryColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          CircleAvatar(
-            radius: 16,
-            backgroundColor: Colors.grey.shade200,
-            child: Text(
-              author[0],
-              style: TextStyle(
-                color: Colors.grey.shade600,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      author,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      AppDateUtils.formatRelativeTime(createdAt),
-                      style: theme.textTheme.bodySmall,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(content, style: theme.textTheme.bodyMedium),
-              ],
-            ),
           ),
         ],
       ),
