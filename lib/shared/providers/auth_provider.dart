@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../features/auth/domain/entities/user_entity.dart';
 import '../../../features/auth/domain/repositories/auth_repository.dart';
 import '../../../features/auth/data/repositories/auth_repository_impl.dart';
+import '../../../core/services/logger_service.dart';
 
 /// AuthRepository Provider
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
@@ -23,7 +24,16 @@ final authStateProvider = StateProvider<UserEntity?>((ref) {
 /// 로그인 여부 확인 Provider
 final isAuthenticatedProvider = Provider<bool>((ref) {
   final user = ref.watch(authStateProvider);
-  return user != null;
+  final isAuthenticated = user != null;
+  AppLogger.auth('isAuthenticatedProvider: $isAuthenticated');
+  if (user != null) {
+    AppLogger.auth(
+      '현재 사용자: userId=${user.userId}, email=${user.email}, nickname=${user.nickname}',
+    );
+  } else {
+    AppLogger.auth('사용자가 null입니다');
+  }
+  return isAuthenticated;
 });
 
 /// 현재 사용자 Provider

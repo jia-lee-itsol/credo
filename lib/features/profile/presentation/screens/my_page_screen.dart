@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/data/services/parish_service.dart' as core;
+import '../../../../core/services/logger_service.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/widgets/settings_list_tile.dart';
@@ -22,6 +23,16 @@ class MyPageScreen extends ConsumerWidget {
     final isAuthenticated = ref.watch(isAuthenticatedProvider);
     final currentUser = ref.watch(currentUserProvider);
     final mainParishId = currentUser?.mainParishId;
+
+    // 인증 상태 디버깅
+    AppLogger.profile('빌드됨');
+    AppLogger.profile('isAuthenticated: $isAuthenticated');
+    AppLogger.profile('currentUser: ${currentUser?.userId ?? 'null'}');
+    if (currentUser != null) {
+      AppLogger.profile(
+        '사용자 정보: userId=${currentUser.userId}, email=${currentUser.email}, nickname=${currentUser.nickname}',
+      );
+    }
 
     // 현재 경로를 기반으로 선택된 탭 인덱스 결정
     final currentLocation = GoRouterState.of(context).matchedLocation;
@@ -222,6 +233,17 @@ class MyPageScreen extends ConsumerWidget {
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: selectedIndex,
+        height: 72, // 네비게이션 바 높이 증가 (라벨 포함)
+        indicatorShape: const CircleBorder(), // 정원형 배경
+        indicatorColor: primaryColor.withValues(alpha: 0.2), // 배경 색상
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          // 선택된 항목의 라벨 색상
+          if (states.contains(WidgetState.selected)) {
+            return TextStyle(color: primaryColor);
+          }
+          // 선택되지 않은 항목의 라벨 색상
+          return TextStyle(color: theme.colorScheme.onSurfaceVariant);
+        }),
         onDestinationSelected: (index) {
           switch (index) {
             case 0:
@@ -250,12 +272,12 @@ class MyPageScreen extends ConsumerWidget {
           NavigationDestination(
             icon: Icon(Icons.menu_book_outlined),
             selectedIcon: Icon(Icons.menu_book),
-            label: '祈り',
+            label: '黙想',
           ),
           NavigationDestination(
-            icon: Icon(Icons.auto_stories_outlined),
-            selectedIcon: Icon(Icons.auto_stories),
-            label: 'ミサ',
+            icon: Icon(Icons.add),
+            selectedIcon: Icon(Icons.add),
+            label: '共有',
           ),
           NavigationDestination(
             icon: Icon(Icons.church_outlined),

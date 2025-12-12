@@ -1,0 +1,551 @@
+{
+  "diocese": "kagoshima",
+  "parishes": [
+    {
+      "name": "鹿児島カテドラル・ザビエル記念聖堂",
+      "address": "〒892-0841 鹿児島県鹿児島市照国町13-42",
+      "prefecture": "鹿児島県",
+      "isCathedral": true,
+      "phone": "099-222-3408",
+      "massTime": "平日：06:30（小聖堂） / 土曜日：06:30（小聖堂）、18:30（小聖堂） / 主日：07:00（小聖堂）、09:00（主聖堂）、19:00（小聖堂） / 主日：15:00(英語ミサ)",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "saturday": ["06:30", "18:30"],
+        "sunday": ["07:00", "09:00", "19:00"],
+        "monday": ["06:30"],
+        "tuesday": ["06:30"],
+        "wednesday": ["06:30"],
+        "thursday": ["06:30"],
+        "friday": ["06:30"]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック川内教会",
+      "churchName": "殉教者の聖母",
+      "address": "〒895-0054 鹿児島県薩摩川内市若松町4-7",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "0996-22-3738",
+      "massTime": "主日前晩（土）19:00 / 主日（日）9:00 / 平日 火・木＝18:10",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "saturday": ["19:00"],
+        "sunday": ["09:00"],
+        "tuesday": ["18:10"],
+        "thursday": ["18:10"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック垂水教会",
+      "churchName": "無原罪の聖母",
+      "address": "〒891-2106 鹿児島県垂水市中央町26",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "土曜日：18:30 / 主日：10:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "saturday": ["18:30"],
+        "sunday": ["10:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大笠利教会",
+      "churchName": "大天使ミカエル",
+      "address": "〒894-0622 鹿児島県奄美市笠利町大字笠利892",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "0997-63-8108",
+      "fax": "0997-63-8116",
+      "massTime": "主日：08:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["08:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック瀬留教会",
+      "churchName": "聖ヨセフ",
+      "address": "〒894-0102 鹿児島県大島郡龍郷町瀬留271-1",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日（日）9:00（第5は合同ミサ） / 平日 月・火・水・木・金＝8:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["09:00"],
+        "monday": ["08:00"],
+        "tuesday": ["08:00"],
+        "wednesday": ["08:00"],
+        "thursday": ["08:00"],
+        "friday": ["08:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大熊教会",
+      "churchName": "ファチマの聖母",
+      "address": "〒894-0001 鹿児島県奄美市名瀬大熊町21-1",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日（日）7:30（第3日曜は大熊・浦上交互に合同ミサ） / 平日 月・金＝6:30、水＝19:30",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["07:30"],
+        "monday": ["06:30"],
+        "wednesday": ["19:30"],
+        "friday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック古田町教会",
+      "churchName": "天地の元后聖マリア",
+      "address": "〒894-0016 鹿児島県奄美市名瀬古田町16-8",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日前晩（土）19:30 / 主日（日）9:00 / 平日 月・火・木・金・土＝06:30、水＝19:30",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "saturday": ["19:30", "06:30"],
+        "sunday": ["09:00"],
+        "monday": ["06:30"],
+        "tuesday": ["06:30"],
+        "wednesday": ["19:30"],
+        "thursday": ["06:30"],
+        "friday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック名瀬聖心教会",
+      "churchName": "イエスのみ心",
+      "address": "〒894-0025 鹿児島県奄美市名瀬幸町18-1",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日（日）6:30、9:00 / 平日 6:30",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["06:30", "09:00"],
+        "monday": ["06:30"],
+        "tuesday": ["06:30"],
+        "wednesday": ["06:30"],
+        "thursday": ["06:30"],
+        "friday": ["06:30"],
+        "saturday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小宿教会",
+      "churchName": "王であるキリスト",
+      "address": "〒894-0046 鹿児島県奄美市名瀬大字小宿992",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日（日）9:30 / 平日 月・木＝11:00、火・金・土＝06:30",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["09:30"],
+        "monday": ["11:00"],
+        "tuesday": ["06:30"],
+        "thursday": ["11:00"],
+        "friday": ["06:30"],
+        "saturday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック古仁屋教会",
+      "churchName": "聖ジェオルジオ",
+      "address": "〒894-1504 鹿児島県大島郡瀬戸内町古仁屋春日16",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日（日）7:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["07:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック母間教会",
+      "churchName": "絶えざる御助けの聖母",
+      "address": "〒894-7426 鹿児島県大島郡徳之島町母間9540",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日前晩（第1・第3日曜の前日）9:00ミサ / 主日（第2・第4・第5日曜）9:00ミサ",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "saturday": ["09:00"],
+        "sunday": ["09:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック和泊教会",
+      "churchName": "聖ジェラルド",
+      "address": "〒891-9112 鹿児島県大島郡和泊町和泊19-3",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日（第1・第3日曜）9:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["09:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック指宿教会",
+      "churchName": "日本26聖人殉教者",
+      "address": "〒891-0401 鹿児島県指宿市大牟礼4-15-30",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "0993-24-4567",
+      "massTime": "主日（日）9:30 / 平日 火・水・木・土 夏期＝6:30、冬期＝7:00、金＝19:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["09:30"],
+        "tuesday": ["06:30"],
+        "wednesday": ["06:30"],
+        "thursday": ["06:30"],
+        "friday": ["19:00"],
+        "saturday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック加世田教会",
+      "churchName": "救い主キリスト",
+      "address": "〒897-0006 鹿児島県南さつま市加世田本町35-3",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "0993-52-2303",
+      "massTime": "主日（日）9:30 / 平日 火・水・木＝19:00、金・土＝10:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["09:30"],
+        "tuesday": ["19:00"],
+        "wednesday": ["19:00"],
+        "thursday": ["19:00"],
+        "friday": ["10:00"],
+        "saturday": ["10:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック種子島教会",
+      "churchName": "聖霊",
+      "address": "〒891-3101 鹿児島県西之表市西之表6877",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "09972-2-0423",
+      "massTime": "主日（日）9:00 / 平日 5:45（5:30～聖務日課）",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["09:00"],
+        "monday": ["05:45"],
+        "tuesday": ["05:45"],
+        "wednesday": ["05:45"],
+        "thursday": ["05:45"],
+        "friday": ["05:45"],
+        "saturday": ["05:45"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック国分教会",
+      "churchName": "聖フランシスコ・ザビエル",
+      "address": "〒899-4332 鹿児島県霧島市国分中央3-13-18",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "0995-64-0038",
+      "massTime": "主日前晩（土）19:00 / 主日（日）9:30 / 平日 7:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "saturday": ["19:00"],
+        "sunday": ["09:30"],
+        "monday": ["07:00"],
+        "tuesday": ["07:00"],
+        "wednesday": ["07:00"],
+        "thursday": ["07:00"],
+        "friday": ["07:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック鹿屋教会",
+      "churchName": "天地の元后聖マリア",
+      "address": "〒893-0001 鹿児島県鹿屋市古前城町14-1",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日前晩（土）19:00 / 主日（日）10:00 / 平日 月・火・水・木・金＝17:30",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "saturday": ["19:00"],
+        "sunday": ["10:00"],
+        "monday": ["17:30"],
+        "tuesday": ["17:30"],
+        "wednesday": ["17:30"],
+        "thursday": ["17:30"],
+        "friday": ["17:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック志布志教会",
+      "churchName": "海の星の聖母",
+      "address": "〒899-7103 鹿児島県志布志市志布志町志布志2-17-19",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "099-472-0720",
+      "massTime": "主日（日）10:00 / 平日 火・木・土＝7:30、特別な祝祭日＝18:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["10:00"],
+        "tuesday": ["07:30"],
+        "thursday": ["07:30"],
+        "saturday": ["07:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック阿久根教会",
+      "churchName": "イエスのみ心",
+      "address": "〒899-1625 鹿児島県阿久根市波留545番地",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日（第2・第4日曜）18:00 / 平日（第2・第4木曜）19:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["18:00"],
+        "thursday": ["19:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック出水教会",
+      "churchName": "日本26聖人殉教者",
+      "address": "〒899-0204 鹿児島県出水市麓町11-27",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "0996-62-0153",
+      "massTime": "主日（日）9:00 / 平日 月・水・木・金・土＝6:30",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["09:00"],
+        "monday": ["06:30"],
+        "wednesday": ["06:30"],
+        "thursday": ["06:30"],
+        "friday": ["06:30"],
+        "saturday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック入来教会",
+      "churchName": "洗礼者聖ヨハネ",
+      "address": "〒895-1401 鹿児島県薩摩川内市入来町副田5761",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "0996-44-2657",
+      "massTime": "主日（第1・第2・第3日曜）10:30ミサ、第4日曜は集会祭儀",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["10:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大口教会",
+      "churchName": "イエスのみ心",
+      "address": "〒895-2511 鹿児島県伊佐市大口里3096-1",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日（日）9:00 / 平日 火＝14:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["09:00"],
+        "tuesday": ["14:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック溝辺教会（マリア山荘）",
+      "churchName": "祈りのマリア",
+      "address": "〒890-0081 鹿児島県霧島市溝辺町麓3616-4",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "massTime": "主日（日）7:00（修道院）9:00 / 平日 7:00（修道院）",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["07:00", "09:00"],
+        "monday": ["07:00"],
+        "tuesday": ["07:00"],
+        "wednesday": ["07:00"],
+        "thursday": ["07:00"],
+        "friday": ["07:00"],
+        "saturday": ["07:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック姶良教会",
+      "churchName": "聖マキシミリアノ・マリア・コルベ",
+      "address": "〒899-5421 鹿児島県姶良市東餅田2668",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "0995-66-3256",
+      "massTime": "主日前晩（土）19:00 / 主日（日）9:00 / 平日 月・火・水・土＝7:00、木・金＝10:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "saturday": ["19:00", "07:00"],
+        "sunday": ["09:00"],
+        "monday": ["07:00"],
+        "tuesday": ["07:00"],
+        "wednesday": ["07:00"],
+        "thursday": ["10:00"],
+        "friday": ["10:00"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック吉野教会",
+      "churchName": "聖ペトロ",
+      "address": "〒892-0871 鹿児島県鹿児島市吉野町3216-53",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "099-243-3768",
+      "fax": "099-243-3777",
+      "massTime": "主日（日）9:00 / 平日 火・水・木・金・土＝6:30、初金＝15:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["09:00"],
+        "tuesday": ["06:30"],
+        "wednesday": ["06:30"],
+        "thursday": ["06:30"],
+        "friday": ["06:30", "15:00"],
+        "saturday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック玉里教会",
+      "churchName": "聖パウロ",
+      "address": "〒890-0014 鹿児島県鹿児島市草牟田2-29-3",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "099-226-3821",
+      "massTime": "主日（日）9:00 / 平日 月・火・水・木・土＝6:30、金＝18:30",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["09:00"],
+        "monday": ["06:30"],
+        "tuesday": ["06:30"],
+        "wednesday": ["06:30"],
+        "thursday": ["06:30"],
+        "friday": ["18:30"],
+        "saturday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック鴨池教会",
+      "churchName": "被昇天の聖母",
+      "address": "〒890-0054 鹿児島県鹿児島市荒田2-53-11",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "099-257-8097",
+      "massTime": "主日（日）6:30、9:00 / 平日 月・火・水・木・土＝6:30、金＝19:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["06:30", "09:00"],
+        "monday": ["06:30"],
+        "tuesday": ["06:30"],
+        "wednesday": ["06:30"],
+        "thursday": ["06:30"],
+        "friday": ["19:00"],
+        "saturday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック紫原教会",
+      "churchName": "使徒聖ヨハネ",
+      "address": "〒890-0082 鹿児島県鹿児島市紫原3-36-20",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "099-254-7923",
+      "massTime": "主日（日）6:30、9:00 / 平日 6:30",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "sunday": ["06:30", "09:00"],
+        "monday": ["06:30"],
+        "tuesday": ["06:30"],
+        "wednesday": ["06:30"],
+        "thursday": ["06:30"],
+        "friday": ["06:30"],
+        "saturday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック谷山教会",
+      "churchName": "聖霊",
+      "address": "〒891-0113 鹿児島県鹿児島市東谷山2-33-13",
+      "prefecture": "鹿児島県",
+      "isCathedral": false,
+      "phone": "099-268-2084",
+      "massTime": "主日前晩（土）19:00 / 主日（日）6:30、9:00 / 平日 月・火・木・金＝6:30、水＝19:00",
+      "diocese": "kagoshima",
+      "deanery": "kagoshima",
+      "massTimes": {
+        "saturday": ["19:00"],
+        "sunday": ["06:30", "09:00"],
+        "monday": ["06:30"],
+        "tuesday": ["06:30"],
+        "wednesday": ["19:00"],
+        "thursday": ["06:30"],
+        "friday": ["06:30"]
+      },
+      "foreignMassTimes": {}
+    }
+  ]
+}

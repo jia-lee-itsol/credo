@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/providers/auth_provider.dart';
-import '../../../../shared/providers/liturgy_theme_provider.dart';
-import '../../../../shared/widgets/badge_chip.dart';
-import '../../../../shared/widgets/login_required_dialog.dart';
-import '../widgets/comment_item.dart';
+import '../../data/models/post.dart';
+import '../../data/providers/community_repository_providers.dart';
+import 'post_edit_screen.dart';
+import '../widgets/post_detail_comment_input.dart'
+    show PostDetailCommentInput, PostDetailCommentInputState;
+import '../widgets/post_detail_comments_section.dart';
+import '../widgets/post_detail_header.dart';
+import '../widgets/post_detail_images.dart';
+import '../widgets/post_detail_like_button.dart';
 
 /// 게시글 상세 화면
 class PostDetailScreen extends ConsumerStatefulWidget {
@@ -23,277 +28,231 @@ class PostDetailScreen extends ConsumerStatefulWidget {
 }
 
 class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
-  final TextEditingController _commentController = TextEditingController();
-  bool _isLiked = false;
-
-  @override
-  void dispose() {
-    _commentController.dispose();
-    super.dispose();
-  }
+  final GlobalKey<PostDetailCommentInputState> _commentInputKey =
+      GlobalKey<PostDetailCommentInputState>();
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final isAuthenticated = ref.watch(isAuthenticatedProvider);
+    final currentUser = ref.watch(currentUserProvider);
+    final postAsync = ref.watch(postByIdProvider(widget.postId));
 
     return Scaffold(
       appBar: AppBar(
         actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              if (value == 'report') {
-                _showReportDialog(context);
+          postAsync.when(
+            data: (post) {
+              if (post == null) {
+                return const SizedBox.shrink();
               }
+
+              // 작성자 본인인지 확인
+              final isAuthor =
+                  currentUser != null && currentUser.userId == post.authorId;
+
+              return PopupMenuButton<String>(
+                onSelected: (value) {
+                  if (value == 'edit') {
+                    _navigateToEdit(context, post);
+                  } else if (value == 'delete') {
+                    _showDeleteConfirmDialog(context, post);
+                  } else if (value == 'report') {
+                    _showReportDialog(context);
+                  }
+                },
+                itemBuilder: (context) {
+                  final items = <PopupMenuEntry<String>>[];
+
+                  // 작성자 본인인 경우 수정/삭제 옵션 추가
+                  if (isAuthor) {
+                    items.addAll([
+                      const PopupMenuItem(
+                        value: 'edit',
+                        child: Row(
+                          children: [
+                            Icon(Icons.edit_outlined, size: 20),
+                            SizedBox(width: 8),
+                            Text('編集する'),
+                          ],
+                        ),
+                      ),
+                      const PopupMenuItem(
+                        value: 'delete',
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.delete_outline,
+                              size: 20,
+                              color: Colors.red,
+                            ),
+                            SizedBox(width: 8),
+                            Text('削除する', style: TextStyle(color: Colors.red)),
+                          ],
+                        ),
+                      ),
+                      const PopupMenuDivider(),
+                    ]);
+                  }
+
+                  // 신고 옵션 (작성자가 아닌 경우에만 표시)
+                  if (!isAuthor) {
+                    items.add(
+                      const PopupMenuItem(
+                        value: 'report',
+                        child: Row(
+                          children: [
+                            Icon(Icons.flag_outlined, size: 20),
+                            SizedBox(width: 8),
+                            Text('通報する'),
+                          ],
+                        ),
+                      ),
+                    );
+                  }
+
+                  return items;
+                },
+              );
             },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'report',
-                child: Row(
-                  children: [
-                    Icon(Icons.flag_outlined, size: 20),
-                    SizedBox(width: 8),
-                    Text('通報する'),
-                  ],
+            loading: () => const SizedBox.shrink(),
+            error: (error, stackTrace) => const SizedBox.shrink(),
+          ),
+        ],
+      ),
+      body: postAsync.when(
+        data: (post) {
+          if (post == null) {
+            return const Center(child: Text('게시글을 찾을 수 없습니다.'));
+          }
+
+          return Column(
+            children: [
+              // 게시글 내용
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // 헤더 (배지, 제목, 작성자 정보)
+                      PostDetailHeader(post: post),
+                      const SizedBox(height: 24),
+
+                      // 본문
+                      Text(
+                        post.body,
+                        style: theme.textTheme.bodyLarge?.copyWith(height: 1.8),
+                      ),
+                      const SizedBox(height: 16),
+
+                      // 이미지 썸네일
+                      if (post.imageUrls.isNotEmpty)
+                        PostDetailImages(imageUrls: post.imageUrls),
+                      if (post.imageUrls.isNotEmpty) const SizedBox(height: 24),
+
+                      // 좋아요 버튼
+                      PostDetailLikeButton(
+                        post: post,
+                        isAuthenticated: isAuthenticated,
+                      ),
+
+                      const SizedBox(height: 24),
+                      const Divider(),
+                      const SizedBox(height: 16),
+
+                      // 댓글 섹션
+                      PostDetailCommentsSection(
+                        post: post,
+                        onAuthorTap: (authorName, authorId) {
+                          _commentInputKey.currentState?.addMention(
+                            authorName,
+                            authorId,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
+
+              // 댓글 입력
+              PostDetailCommentInput(key: _commentInputKey, post: post),
             ],
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          // 게시글 내용
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 공식 배지
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 12),
-                    child: BadgeChip.official(),
-                  ),
-
-                  // 제목
-                  Text(
-                    '【お知らせ】年末年始のミサ時間について',
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  // 작성자 & 시간
-                  _buildAuthorInfo(theme, primaryColor),
-                  const SizedBox(height: 24),
-
-                  // 본문
-                  _buildContent(theme),
-                  const SizedBox(height: 24),
-
-                  // 좋아요 버튼
-                  _buildLikeButton(isAuthenticated, primaryColor),
-
-                  const SizedBox(height: 24),
-                  const Divider(),
-                  const SizedBox(height: 16),
-
-                  // 댓글 섹션
-                  _buildCommentsSection(theme, primaryColor),
-                ],
-              ),
-            ),
-          ),
-
-          // 댓글 입력
-          _buildCommentInput(theme, isAuthenticated, primaryColor),
-        ],
+          );
+        },
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => Center(child: Text('에러가 발생했습니다: $error')),
       ),
     );
   }
 
-  Widget _buildAuthorInfo(ThemeData theme, Color primaryColor) {
-    return Row(
-      children: [
-        CircleAvatar(
-          radius: 16,
-          backgroundColor: primaryColor.withValues(alpha: 0.2),
-          child: Icon(
-            Icons.church,
-            size: 16,
-            color: primaryColor,
+  void _navigateToEdit(BuildContext context, Post post) {
+    Navigator.of(context)
+        .push(
+          MaterialPageRoute(
+            builder: (_) =>
+                PostEditScreen(initialPost: post, parishId: post.parishId),
           ),
-        ),
-        const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '東京カテドラル',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Text(
-              '2時間前',
-              style: theme.textTheme.bodySmall,
-            ),
-          ],
-        ),
-      ],
-    );
+        )
+        .then((_) {
+          // 수정 후 돌아왔을 때 게시글 새로고침
+          ref.invalidate(postByIdProvider(widget.postId));
+        });
   }
 
-  Widget _buildContent(ThemeData theme) {
-    return Text(
-      '''年末年始のミサ時間をお知らせいたします。
-
-■ 12月31日（大晦日）
-・18:00 感謝のミサ
-
-■ 1月1日（神の母聖マリア）
-・10:00 新年ミサ
-
-■ 1月2日以降
-・通常通りのスケジュールとなります
-
-皆様のご参列をお待ちしております。
-新しい年も皆様に神様の祝福がありますように。''',
-      style: theme.textTheme.bodyLarge?.copyWith(height: 1.8),
-    );
-  }
-
-  Widget _buildLikeButton(bool isAuthenticated, Color primaryColor) {
-    return Row(
-      children: [
-        InkWell(
-          onTap: () {
-            if (isAuthenticated) {
-              setState(() {
-                _isLiked = !_isLiked;
-              });
-            } else {
-              LoginRequiredDialog.show(context, primaryColor: primaryColor);
-            }
-          },
-          borderRadius: BorderRadius.circular(20),
-          child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 8,
-            ),
-            decoration: BoxDecoration(
-              color: _isLiked
-                  ? primaryColor.withValues(alpha: 0.1)
-                  : Colors.grey.shade100,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  _isLiked ? Icons.favorite : Icons.favorite_border,
-                  size: 20,
-                  color: _isLiked ? primaryColor : Colors.grey,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  _isLiked ? '25' : '24',
-                  style: TextStyle(
-                    color: _isLiked ? primaryColor : Colors.grey,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
+  void _showDeleteConfirmDialog(BuildContext context, Post post) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('削除確認'),
+        content: const Text('この投稿を削除してもよろしいですか？\nこの操作は取り消せません。'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('キャンセル'),
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCommentsSection(ThemeData theme, Color primaryColor) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'コメント (5)',
-          style: theme.textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 16),
-
-        // 댓글 목록
-        ..._sampleComments.map(
-          (comment) => CommentItem(
-            author: comment['author']!,
-            content: comment['content']!,
-            createdAt: DateTime.now().subtract(
-              Duration(hours: int.parse(comment['hoursAgo']!)),
-            ),
-            primaryColor: primaryColor,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCommentInput(
-    ThemeData theme,
-    bool isAuthenticated,
-    Color primaryColor,
-  ) {
-    return Container(
-      padding: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        top: 12,
-        bottom: MediaQuery.of(context).padding.bottom + 12,
-      ),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        border: Border(
-          top: BorderSide(color: theme.colorScheme.outlineVariant),
-        ),
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              controller: _commentController,
-              decoration: const InputDecoration(
-                hintText: 'コメントを入力...',
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-              ),
-              maxLines: null,
-            ),
-          ),
-          IconButton(
+          TextButton(
             onPressed: () {
-              if (!isAuthenticated) {
-                LoginRequiredDialog.show(context, primaryColor: primaryColor);
-                return;
-              }
-              if (_commentController.text.trim().isNotEmpty) {
-                // TODO: 댓글 작성 처리
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('コメントを投稿しました')),
-                );
-                _commentController.clear();
-              }
+              Navigator.pop(context);
+              _deletePost(post);
             },
-            icon: Icon(Icons.send, color: primaryColor),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('削除する'),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> _deletePost(Post post) async {
+    try {
+      final repository = ref.read(postRepositoryProvider);
+      final result = await repository.deletePost(post.postId);
+      result.fold(
+        (failure) {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('投稿の削除に失敗しました: ${failure.message}')),
+            );
+          }
+        },
+        (_) {
+          if (mounted) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('投稿を削除しました')));
+            Navigator.of(context).pop(); // 상세 화면 닫기
+          }
+        },
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('削除に失敗しました: $e')));
+      }
+    }
   }
 
   void _showReportDialog(BuildContext context) {
@@ -343,16 +302,3 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
     );
   }
 }
-
-// 샘플 댓글 데이터
-final _sampleComments = [
-  {'author': 'パウロ', 'content': 'ありがとうございます！年末のミサに参加します。', 'hoursAgo': '1'},
-  {'author': 'マリア', 'content': '新年のミサも楽しみにしています。', 'hoursAgo': '2'},
-  {'author': 'ヨハネ', 'content': '駐車場は使えますか？', 'hoursAgo': '3'},
-  {'author': '東京カテドラル', 'content': '@ヨハネ はい、駐車場はご利用いただけます。', 'hoursAgo': '3'},
-  {
-    'author': 'ペトロ',
-    'content': '今年もありがとうございました。来年もよろしくお願いします。',
-    'hoursAgo': '5',
-  },
-];

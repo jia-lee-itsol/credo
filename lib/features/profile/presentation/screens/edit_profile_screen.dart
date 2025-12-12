@@ -3,11 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:intl/intl.dart';
-
 import '../../../../core/data/models/saint_feast_day_model.dart';
 import '../../../../core/data/services/parish_service.dart' as core;
-import '../../../../core/utils/validators.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../auth/domain/entities/user_entity.dart';
@@ -15,6 +12,11 @@ import '../../data/providers/saint_feast_day_providers.dart';
 import '../../domain/usecases/get_saint_feast_days_usecase.dart';
 import '../../../parish/data/providers/parish_providers.dart';
 import '../../../parish/domain/usecases/get_parishes_usecase.dart';
+import '../widgets/profile_image_picker.dart';
+import '../widgets/profile_basic_info_section.dart';
+import '../widgets/profile_parish_info_section.dart';
+import '../widgets/profile_sacrament_dates_section.dart';
+import '../widgets/profile_godparent_section.dart';
 
 /// 프로필 편집 화면
 class EditProfileScreen extends ConsumerStatefulWidget {
@@ -155,7 +157,6 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final currentUser = ref.watch(currentUserProvider);
 
@@ -186,454 +187,74 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            // 프로필 이미지
-            Center(
-              child: Stack(
-                children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundColor: primaryColor.withValues(alpha: 0.2),
-                    child: Icon(Icons.person, size: 50, color: primaryColor),
-                  ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.camera_alt,
-                        size: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            ProfileImagePicker(primaryColor: primaryColor),
             const SizedBox(height: 32),
-
-            // 기본 정보 카드
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '基本情報',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // 닉네임 입력
-                    TextFormField(
-                      controller: _nicknameController,
-                      decoration: const InputDecoration(
-                        labelText: 'ニックネーム',
-                        hintText: 'ニックネームを入力してください',
-                      ),
-                      validator: Validators.validateNickname,
-                      maxLength: 20,
-                    ),
-                    const SizedBox(height: 16),
-                    // 이메일 (읽기 전용)
-                    TextFormField(
-                      initialValue: currentUser?.email ?? '',
-                      decoration: const InputDecoration(labelText: 'メールアドレス'),
-                      enabled: false,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'メールアドレスは変更できません',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // 유저 ID (읽기 전용)
-                    GestureDetector(
-                      onLongPress: currentUser?.userId != null
-                          ? () {
-                              Clipboard.setData(
-                                ClipboardData(text: currentUser!.userId),
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('ユーザーIDをコピーしました'),
-                                  duration: Duration(seconds: 2),
-                                ),
-                              );
-                            }
-                          : null,
-                      child: TextFormField(
-                        initialValue: currentUser?.userId ?? '',
-                        decoration: const InputDecoration(labelText: 'ユーザーID'),
-                        enabled: false,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'ユーザーIDは変更できません（長押しでコピー）',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // 세례명 (읽기 전용)
-                    TextFormField(
-                      initialValue: currentUser?.baptismalName ?? '未設定',
-                      decoration: const InputDecoration(labelText: '洗礼名'),
-                      enabled: false,
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      '洗礼名は変更できません',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            ProfileBasicInfoSection(
+              nicknameController: _nicknameController,
+              email: currentUser?.email,
+              userId: currentUser?.userId,
+              baptismalName: currentUser?.baptismalName,
             ),
             const SizedBox(height: 16),
-
-            // 교회 정보 카드
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '教会情報',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // 소속 본당 선택
-                    InkWell(
-                      onTap: () => _showParishSearchBottomSheet(
-                        context,
-                        ref,
-                        primaryColor,
-                      ),
-                      child: InputDecorator(
-                        decoration: InputDecoration(
-                          labelText: '所属教会',
-                          suffixIcon: const Icon(Icons.chevron_right),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        child: Text(
-                          _selectedParishName ?? '選択してください',
-                          style: TextStyle(
-                            color: _selectedParishName != null
-                                ? theme.colorScheme.onSurface
-                                : theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // 축일 선택
-                    InkWell(
-                      onTap: () =>
-                          _showFeastDayBottomSheet(context, ref, primaryColor),
-                      child: InputDecorator(
-                        decoration: InputDecoration(
-                          labelText: '守護聖人の祝日',
-                          suffixIcon: const Icon(Icons.chevron_right),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        child: Text(
-                          _selectedFeastDay != null
-                              ? _selectedFeastDay!.name
-                              : '選択してください',
-                          style: TextStyle(
-                            color: _selectedFeastDay != null
-                                ? theme.colorScheme.onSurface
-                                : theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            ProfileParishInfoSection(
+              selectedParishName: _selectedParishName,
+              selectedFeastDay: _selectedFeastDay,
+              onParishTap: () =>
+                  _showParishSearchBottomSheet(context, ref, primaryColor),
+              onFeastDayTap: () =>
+                  _showFeastDayBottomSheet(context, ref, primaryColor),
             ),
             const SizedBox(height: 16),
-
-            // 성사 날짜 카드
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '聖事の日付',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // 세례 날짜
-                    InkWell(
-                      onTap: () => _selectDate(context, true),
-                      child: InputDecorator(
-                        decoration: InputDecoration(
-                          labelText: '洗礼日',
-                          suffixIcon: const Icon(Icons.calendar_today),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        child: Text(
-                          _baptismDate != null
-                              ? DateFormat(
-                                  'yyyy年MM月dd日',
-                                  'ja',
-                                ).format(_baptismDate!)
-                              : '選択してください',
-                          style: TextStyle(
-                            color: _baptismDate != null
-                                ? theme.colorScheme.onSurface
-                                : theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // 견진 날짜
-                    InkWell(
-                      onTap: () => _selectDate(context, false),
-                      child: InputDecorator(
-                        decoration: InputDecoration(
-                          labelText: '堅信日',
-                          suffixIcon: const Icon(Icons.calendar_today),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        child: Text(
-                          _confirmationDate != null
-                              ? DateFormat(
-                                  'yyyy年MM月dd日',
-                                  'ja',
-                                ).format(_confirmationDate!)
-                              : '選択してください',
-                          style: TextStyle(
-                            color: _confirmationDate != null
-                                ? theme.colorScheme.onSurface
-                                : theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+            ProfileSacramentDatesSection(
+              baptismDate: _baptismDate,
+              confirmationDate: _confirmationDate,
+              onBaptismDateTap: () => _selectDate(context, true),
+              onConfirmationDateTap: () => _selectDate(context, false),
             ),
             const SizedBox(height: 16),
-
-            // 대부모・대자녀 카드
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '代父母・代子・代女',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    // 대부모 선택
-                    InkWell(
-                      onTap: () => _showUserSearchBottomSheet(
-                        context,
-                        ref,
-                        primaryColor,
-                        '代父母を選択',
-                        (user) {
-                          setState(() {
-                            _godparentId = user.userId;
-                            _godparent = user;
-                          });
-                        },
-                      ),
-                      child: InputDecorator(
-                        decoration: InputDecoration(
-                          labelText: '代父母 (1名のみ)',
-                          suffixIcon: const Icon(Icons.chevron_right),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        child: Text(
-                          _godparent != null
-                              ? '${_godparent!.nickname} (${_godparent!.email})'
-                              : '選択してください',
-                          style: TextStyle(
-                            color: _godparent != null
-                                ? theme.colorScheme.onSurface
-                                : theme.colorScheme.onSurfaceVariant,
-                          ),
-                        ),
-                      ),
-                    ),
-                    if (_godparent != null)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8, left: 16),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: GestureDetector(
-                                onLongPress: () {
-                                  Clipboard.setData(
-                                    ClipboardData(text: _godparent!.userId),
-                                  );
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('ユーザーIDをコピーしました'),
-                                      duration: Duration(seconds: 2),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  'ユーザーID: ${_godparent!.userId}',
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: theme.colorScheme.onSurfaceVariant,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                setState(() {
-                                  _godparentId = null;
-                                  _godparent = null;
-                                });
-                              },
-                              child: const Text('削除'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    const SizedBox(height: 24),
-                    // 대자녀 목록
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            '代子・代女 (${_godchildren.length}人)',
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        TextButton.icon(
-                          onPressed: () => _showUserSearchBottomSheet(
-                            context,
-                            ref,
-                            primaryColor,
-                            '代子・代女を追加',
-                            (user) {
-                              if (!_godchildren.contains(user.userId)) {
-                                setState(() {
-                                  _godchildren.add(user.userId);
-                                  _godchildrenMap[user.userId] = user;
-                                });
-                              }
-                            },
-                          ),
-                          icon: const Icon(Icons.add),
-                          label: const Text('追加'),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    if (_godchildren.isEmpty)
-                      Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(
-                          '登録された代子・代女がありません',
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            color: theme.colorScheme.onSurfaceVariant,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      )
-                    else
-                      ..._godchildren.map((userId) {
-                        final user = _godchildrenMap[userId];
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 8),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: primaryColor.withValues(
-                                alpha: 0.1,
-                              ),
-                              child: Icon(
-                                Icons.person,
-                                color: primaryColor,
-                                size: 20,
-                              ),
-                            ),
-                            title: Text(user?.nickname ?? '不明'),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (user != null) Text(user.email),
-                                GestureDetector(
-                                  onLongPress: () {
-                                    Clipboard.setData(
-                                      ClipboardData(text: userId),
-                                    );
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text('ユーザーIDをコピーしました'),
-                                        duration: Duration(seconds: 2),
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    'ユーザーID: $userId',
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: theme.colorScheme.onSurfaceVariant,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.delete_outline),
-                              color: Colors.red.shade300,
-                              onPressed: () {
-                                setState(() {
-                                  _godchildren.remove(userId);
-                                  _godchildrenMap.remove(userId);
-                                });
-                              },
-                            ),
-                          ),
-                        );
-                      }),
-                  ],
-                ),
+            ProfileGodparentSection(
+              primaryColor: primaryColor,
+              godparent: _godparent,
+              godchildren: _godchildren,
+              godchildrenMap: _godchildrenMap,
+              onGodparentTap: () => _showUserSearchBottomSheet(
+                context,
+                ref,
+                primaryColor,
+                '代父母を選択',
+                (user) {
+                  setState(() {
+                    _godparentId = user.userId;
+                    _godparent = user;
+                  });
+                },
               ),
+              onAddGodchildTap: () => _showUserSearchBottomSheet(
+                context,
+                ref,
+                primaryColor,
+                '代子・代女を追加',
+                (user) {
+                  if (!_godchildren.contains(user.userId)) {
+                    setState(() {
+                      _godchildren.add(user.userId);
+                      _godchildrenMap[user.userId] = user;
+                    });
+                  }
+                },
+              ),
+              onRemoveGodparent: () {
+                setState(() {
+                  _godparentId = null;
+                  _godparent = null;
+                });
+              },
+              onRemoveGodchild: (userId) {
+                setState(() {
+                  _godchildren.remove(userId);
+                  _godchildrenMap.remove(userId);
+                });
+              },
             ),
           ],
         ),

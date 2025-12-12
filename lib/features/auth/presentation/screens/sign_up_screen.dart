@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/services/logger_service.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
@@ -9,6 +11,9 @@ import '../../../../config/routes/app_routes.dart';
 import '../widgets/password_field.dart';
 import '../widgets/loading_button.dart';
 import '../widgets/terms_agreement_checkbox.dart';
+import '../../../../core/data/services/parish_service.dart' as core;
+import '../../../../core/data/models/saint_feast_day_model.dart';
+import '../../../profile/data/providers/saint_feast_day_providers.dart';
 
 /// 회원가입 화면
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -24,8 +29,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _baptismalNameController = TextEditingController();
   bool _isLoading = false;
   bool _agreeToTerms = true;
+  String? _selectedParishId;
+  String? _selectedParishName;
+  String? _selectedFeastDayId;
+  SaintFeastDayModel? _selectedFeastDay;
+  String? _customBaptismalName;
+  int? _customFeastMonth;
+  int? _customFeastDay;
 
   @override
   void dispose() {
@@ -33,6 +46,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _baptismalNameController.dispose();
     super.dispose();
   }
 
@@ -44,96 +58,175 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('新規登録')),
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // 닉네임 입력
-                TextFormField(
-                  controller: _nicknameController,
-                  decoration: const InputDecoration(
-                    labelText: 'ニックネーム',
-                    prefixIcon: Icon(Icons.person_outlined),
-                  ),
-                  validator: Validators.validateNickname,
-                  textInputAction: TextInputAction.next,
-                ),
-                const SizedBox(height: 16),
-
-                // 이메일 입력
-                TextFormField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(
-                    labelText: 'メールアドレス',
-                    prefixIcon: Icon(Icons.email_outlined),
-                  ),
-                  keyboardType: TextInputType.emailAddress,
-                  validator: Validators.validateEmail,
-                  textInputAction: TextInputAction.next,
-                ),
-                const SizedBox(height: 16),
-
-                // 비밀번호 입력
-                PasswordField(
-                  controller: _passwordController,
-                  helperText: '8文字以上で入力してください',
-                  validator: Validators.validatePassword,
-                  textInputAction: TextInputAction.next,
-                ),
-                const SizedBox(height: 16),
-
-                // 비밀번호 확인
-                PasswordField(
-                  controller: _confirmPasswordController,
-                  labelText: 'パスワード（確認）',
-                  validator: (value) {
-                    if (value != _passwordController.text) {
-                      return 'パスワードが一致しません';
-                    }
-                    return null;
-                  },
-                  textInputAction: TextInputAction.done,
-                ),
-                const SizedBox(height: 24),
-
-                // 이용약관 동의
-                TermsAgreementCheckbox(
-                  value: _agreeToTerms,
-                  onChanged: (value) {
-                    setState(() {
-                      _agreeToTerms = value;
-                    });
-                  },
-                  primaryColor: primaryColor,
-                ),
-                const SizedBox(height: 24),
-
-                // 회원가입 버튼
-                LoadingButton(
-                  onPressed: _signUp,
-                  label: 'アカウントを作成',
-                  backgroundColor: primaryColor,
-                  isLoading: _isLoading,
-                ),
-                const SizedBox(height: 24),
-
-                // 로그인 링크
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('すでにアカウントをお持ちですか？', style: theme.textTheme.bodyMedium),
-                    TextButton(
-                      onPressed: () {
-                        context.pop();
-                      },
-                      child: const Text('ログイン'),
+        child: GestureDetector(
+          onTap: () {
+            // 키보드 이외의 영역을 탭하면 키보드 숨김
+            FocusScope.of(context).unfocus();
+          },
+          behavior: HitTestBehavior.opaque,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // 닉네임 입력
+                  TextFormField(
+                    controller: _nicknameController,
+                    decoration: const InputDecoration(
+                      labelText: 'ニックネーム',
+                      prefixIcon: Icon(Icons.person_outlined),
                     ),
-                  ],
-                ),
-              ],
+                    validator: Validators.validateNickname,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(height: 16),
+
+                  // 이메일 입력
+                  TextFormField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(
+                      labelText: 'メールアドレス',
+                      prefixIcon: Icon(Icons.email_outlined),
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                    validator: Validators.validateEmail,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(height: 16),
+
+                  // 비밀번호 입력
+                  PasswordField(
+                    controller: _passwordController,
+                    helperText: '8文字以上で入力してください',
+                    validator: Validators.validatePassword,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(height: 16),
+
+                  // 비밀번호 확인
+                  PasswordField(
+                    controller: _confirmPasswordController,
+                    labelText: 'パスワード（確認）',
+                    validator: (value) {
+                      if (value != _passwordController.text) {
+                        return 'パスワードが一致しません';
+                      }
+                      return null;
+                    },
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(height: 16),
+
+                  // 소속 성당 선택
+                  InkWell(
+                    onTap: () => _showParishSearchBottomSheet(
+                      context,
+                      ref,
+                      primaryColor,
+                    ),
+                    child: InputDecorator(
+                      decoration: InputDecoration(
+                        labelText: '所属教会',
+                        suffixIcon: const Icon(Icons.chevron_right),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                      child: Text(
+                        _selectedParishName ?? '選択してください（任意）',
+                        style: TextStyle(
+                          color: _selectedParishName != null
+                              ? theme.colorScheme.onSurface
+                              : theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // 세례명 입력
+                  TextFormField(
+                    controller: _baptismalNameController,
+                    decoration: const InputDecoration(
+                      labelText: '洗礼名（任意）',
+                      prefixIcon: Icon(Icons.badge_outlined),
+                      hintText: '洗礼名を入力してください',
+                    ),
+                    textInputAction: TextInputAction.next,
+                  ),
+                  const SizedBox(height: 16),
+
+                  // 축일 선택
+                  InkWell(
+                    onTap: () =>
+                        _showFeastDayBottomSheet(context, ref, primaryColor),
+                    child: InputDecorator(
+                      decoration: InputDecoration(
+                        labelText: '守護聖人の祝日（任意）',
+                        suffixIcon: const Icon(Icons.chevron_right),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                      child: Text(
+                        _selectedFeastDay != null
+                            ? '${_selectedFeastDay?.name ?? ''} (${_selectedFeastDay?.month ?? 0}月${_selectedFeastDay?.day ?? 0}日)'
+                            : _customBaptismalName != null &&
+                                  _customFeastMonth != null &&
+                                  _customFeastDay != null
+                            ? '$_customBaptismalName ($_customFeastMonth月$_customFeastDay日)'
+                            : '選択してください（任意）',
+                        style: TextStyle(
+                          color: _selectedFeastDay != null
+                              ? theme.colorScheme.onSurface
+                              : theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // 이용약관 동의
+                  TermsAgreementCheckbox(
+                    value: _agreeToTerms,
+                    onChanged: (value) {
+                      setState(() {
+                        _agreeToTerms = value;
+                      });
+                    },
+                    primaryColor: primaryColor,
+                  ),
+                  const SizedBox(height: 24),
+
+                  // 회원가입 버튼
+                  LoadingButton(
+                    onPressed: _signUp,
+                    label: 'アカウントを作成',
+                    backgroundColor: primaryColor,
+                    isLoading: _isLoading,
+                  ),
+                  const SizedBox(height: 24),
+
+                  // 로그인 링크
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'すでにアカウントをお持ちですか？',
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context.pop();
+                        },
+                        child: const Text('ログイン'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -142,16 +235,16 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   }
 
   Future<void> _signUp() async {
-    debugPrint('🔵 [SignUp] 회원가입 버튼 클릭됨');
+    AppLogger.auth('회원가입 버튼 클릭됨');
 
     if (!_formKey.currentState!.validate()) {
-      debugPrint('🔴 [SignUp] 폼 검증 실패');
+      AppLogger.warning('폼 검증 실패');
       return;
     }
-    debugPrint('✅ [SignUp] 폼 검증 통과');
+    AppLogger.auth('폼 검증 통과');
 
     if (!_agreeToTerms) {
-      debugPrint('🔴 [SignUp] 이용약관 미동의');
+      AppLogger.warning('이용약관 미동의');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('利用規約とプライバシーポリシーに同意してください'),
@@ -160,46 +253,67 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       );
       return;
     }
-    debugPrint('✅ [SignUp] 이용약관 동의 확인');
+    AppLogger.auth('이용약관 동의 확인');
 
-    debugPrint('🟡 [SignUp] 로딩 상태: true로 변경');
+    AppLogger.debug('로딩 상태: true로 변경');
     setState(() {
       _isLoading = true;
     });
-    debugPrint('🟡 [SignUp] 현재 로딩 상태: $_isLoading');
+    AppLogger.debug('현재 로딩 상태: $_isLoading');
 
     try {
-      debugPrint('🟡 [SignUp] Repository 가져오기 시작');
+      AppLogger.debug('Repository 가져오기 시작');
       final repository = ref.read(authRepositoryProvider);
-      debugPrint('🟡 [SignUp] signUpWithEmail 호출 시작');
-      debugPrint('🟡 [SignUp] 이메일: ${_emailController.text.trim()}');
-      debugPrint('🟡 [SignUp] 닉네임: ${_nicknameController.text.trim()}');
+      AppLogger.auth('signUpWithEmail 호출 시작');
+      AppLogger.auth('이메일: ${_emailController.text.trim()}');
+      AppLogger.auth('닉네임: ${_nicknameController.text.trim()}');
+
+      // 세례명 결정: 직접 입력한 세례명이 있으면 우선 사용, 없으면 목록에서 선택한 성인 이름 사용
+      String? finalBaptismalName;
+      if (_customBaptismalName != null && _customBaptismalName!.isNotEmpty) {
+        finalBaptismalName = _customBaptismalName;
+      } else if (_baptismalNameController.text.trim().isNotEmpty) {
+        finalBaptismalName = _baptismalNameController.text.trim();
+      } else if (_selectedFeastDay != null) {
+        finalBaptismalName = _selectedFeastDay!.name;
+      }
+
+      // 축일 ID 결정: 커스텀 입력이 있으면 사용, 없으면 선택한 축일 ID 사용
+      String? finalFeastDayId;
+      if (_customFeastMonth != null && _customFeastDay != null) {
+        finalFeastDayId = '$_customFeastMonth-$_customFeastDay';
+      } else {
+        finalFeastDayId = _selectedFeastDayId;
+      }
 
       final result = await repository.signUpWithEmail(
         email: _emailController.text.trim(),
         password: _passwordController.text,
         nickname: _nicknameController.text.trim(),
+        mainParishId: _selectedParishId,
+        baptismalName: finalBaptismalName,
+        feastDayId: finalFeastDayId,
       );
 
-      debugPrint('🟢 [SignUp] signUpWithEmail 완료');
-      debugPrint('🟢 [SignUp] 결과 타입: ${result.runtimeType}');
+      AppLogger.auth('signUpWithEmail 완료');
+      AppLogger.debug('결과 타입: ${result.runtimeType}');
 
       if (!mounted) {
-        debugPrint('🔴 [SignUp] Widget이 unmount됨');
+        AppLogger.warning('Widget이 unmount됨');
         return;
       }
 
-      debugPrint('🟡 [SignUp] 로딩 상태: false로 변경 시작');
+      AppLogger.debug('로딩 상태: false로 변경 시작');
       // 로딩 상태를 먼저 false로 설정
       setState(() {
         _isLoading = false;
       });
-      debugPrint('🟢 [SignUp] 로딩 상태: false로 변경 완료');
-      debugPrint('🟢 [SignUp] 현재 로딩 상태: $_isLoading');
+      AppLogger.debug('로딩 상태: false로 변경 완료');
+      AppLogger.debug('현재 로딩 상태: $_isLoading');
 
       result.fold(
         (failure) {
-          debugPrint('🔴 [SignUp] 회원가입 실패: ${failure.message}');
+          AppLogger.error('회원가입 실패: ${failure.message}', failure);
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -210,46 +324,51 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           }
         },
         (user) {
-          debugPrint('🟢 [SignUp] 회원가입 성공!');
-          debugPrint('🟢 [SignUp] 사용자 ID: ${user.userId}');
-          debugPrint('🟢 [SignUp] 사용자 이메일: ${user.email}');
+          AppLogger.auth('회원가입 성공!');
+          AppLogger.auth('사용자 ID: ${user.userId}');
+          AppLogger.auth('사용자 이메일: ${user.email}');
 
           if (mounted) {
-            debugPrint('🟢 [SignUp] 스낵바 표시 시작');
+            AppLogger.debug('스낵바 표시 시작');
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('アカウントを作成しました'),
                 backgroundColor: Colors.green,
               ),
             );
-            debugPrint('🟢 [SignUp] 스낵바 표시 완료');
+            AppLogger.debug('스낵바 표시 완료');
 
-            debugPrint('🟢 [SignUp] 페이지 이동 스케줄링');
+            AppLogger.debug('페이지 이동 스케줄링');
             // 다음 프레임에서 페이지 이동 (로딩 상태가 UI에 반영된 후)
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              debugPrint('🟢 [SignUp] addPostFrameCallback 실행됨');
+            // 회원가입 성공 시 로그인 페이지로 이동 (자동 로그인하지 않음)
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              AppLogger.debug('addPostFrameCallback 실행됨');
               if (mounted) {
-                debugPrint('🟢 [SignUp] 로그인 페이지로 이동 시작');
-                context.go(AppRoutes.signIn);
-                debugPrint('🟢 [SignUp] 로그인 페이지로 이동 완료');
+                AppLogger.auth('로그인 페이지로 이동 시작');
+                // 회원가입 후 로그아웃하여 자동 로그인 방지
+                final repository = ref.read(authRepositoryProvider);
+                await repository.signOut();
+                if (mounted) {
+                  context.go(AppRoutes.signIn);
+                  AppLogger.auth('로그인 페이지로 이동 완료');
+                }
               } else {
-                debugPrint('🔴 [SignUp] 페이지 이동 시도했지만 Widget이 unmount됨');
+                AppLogger.warning('페이지 이동 시도했지만 Widget이 unmount됨');
               }
             });
           } else {
-            debugPrint('🔴 [SignUp] 성공했지만 Widget이 unmount됨');
+            AppLogger.warning('성공했지만 Widget이 unmount됨');
           }
         },
       );
     } catch (e, stackTrace) {
-      debugPrint('🔴 [SignUp] 예외 발생: $e');
-      debugPrint('🔴 [SignUp] 스택 트레이스: $stackTrace');
+      AppLogger.error('예외 발생: $e', e, stackTrace);
       if (mounted) {
-        debugPrint('🟡 [SignUp] 예외 처리: 로딩 상태 false로 변경');
+        AppLogger.debug('예외 처리: 로딩 상태 false로 변경');
         setState(() {
           _isLoading = false;
         });
-        debugPrint('🟢 [SignUp] 예외 처리: 로딩 상태 변경 완료');
+        AppLogger.debug('예외 처리: 로딩 상태 변경 완료');
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('登録に失敗しました'),
@@ -259,7 +378,644 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       }
     }
 
-    debugPrint('🔵 [SignUp] _signUp 함수 종료');
-    debugPrint('🔵 [SignUp] 최종 로딩 상태: $_isLoading');
+    AppLogger.auth('_signUp 함수 종료');
+    AppLogger.debug('최종 로딩 상태: $_isLoading');
+  }
+
+  void _showParishSearchBottomSheet(
+    BuildContext context,
+    WidgetRef ref,
+    Color primaryColor,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.9,
+          maxChildSize: 0.9,
+          minChildSize: 0.5,
+          expand: false,
+          builder: (context, scrollController) {
+            return _ParishSearchSheet(
+              scrollController: scrollController,
+              primaryColor: primaryColor,
+              selectedParishId: _selectedParishId,
+              onParishSelected: (parishId, parishName) {
+                setState(() {
+                  _selectedParishId = parishId;
+                  _selectedParishName = parishName;
+                });
+                Navigator.pop(context);
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void _showFeastDayBottomSheet(
+    BuildContext context,
+    WidgetRef ref,
+    Color primaryColor,
+  ) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return _FeastDaySearchSheet(
+          primaryColor: primaryColor,
+          selectedFeastDayId: _selectedFeastDayId,
+          customBaptismalName: _customBaptismalName,
+          customFeastMonth: _customFeastMonth,
+          customFeastDay: _customFeastDay,
+          onFeastDaySelected: (saint) {
+            setState(() {
+              _selectedFeastDay = saint;
+              _selectedFeastDayId = '${saint.month}-${saint.day}';
+              _customBaptismalName = null;
+              _customFeastMonth = null;
+              _customFeastDay = null;
+            });
+            Navigator.pop(context);
+          },
+          onCustomInput: (baptismalName, month, day) {
+            setState(() {
+              _customBaptismalName = baptismalName;
+              _customFeastMonth = month;
+              _customFeastDay = day;
+              _selectedFeastDay = null;
+              _selectedFeastDayId = 'custom-$month-$day';
+            });
+            Navigator.pop(context);
+          },
+        );
+      },
+    );
   }
 }
+
+/// 교회 검색 시트
+class _ParishSearchSheet extends ConsumerStatefulWidget {
+  final ScrollController scrollController;
+  final Color primaryColor;
+  final String? selectedParishId;
+  final void Function(String parishId, String parishName) onParishSelected;
+
+  const _ParishSearchSheet({
+    required this.scrollController,
+    required this.primaryColor,
+    this.selectedParishId,
+    required this.onParishSelected,
+  });
+
+  @override
+  ConsumerState<_ParishSearchSheet> createState() => _ParishSearchSheetState();
+}
+
+class _ParishSearchSheetState extends ConsumerState<_ParishSearchSheet> {
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final allParishesAsync = ref.watch(core.allParishesProvider);
+
+    return Column(
+      children: [
+        // 핸들
+        Container(
+          margin: const EdgeInsets.only(top: 12),
+          width: 40,
+          height: 4,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.outlineVariant,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        const SizedBox(height: 8),
+
+        // 타이틀
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            '所属教会を選択',
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+
+        // 검색바
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              hintText: '教会名で検索',
+              hintStyle: TextStyle(color: Colors.grey.shade500),
+              prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
+              suffixIcon: _searchQuery.isNotEmpty
+                  ? IconButton(
+                      icon: const Icon(Icons.clear),
+                      onPressed: () {
+                        _searchController.clear();
+                        setState(() => _searchQuery = '');
+                      },
+                    )
+                  : null,
+              filled: true,
+              fillColor: Colors.grey.shade100,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
+            ),
+            onChanged: (value) => setState(() => _searchQuery = value),
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
+        // 교회 목록
+        Expanded(
+          child: allParishesAsync.when(
+            data: (allParishesMap) {
+              final allParishes = <Map<String, dynamic>>[];
+              allParishesMap.forEach((dioceseId, parishes) {
+                for (final parish in parishes) {
+                  final parishId = '$dioceseId-${parish['name']}';
+                  allParishes.add({...parish, 'parishId': parishId});
+                }
+              });
+
+              // 검색 필터링
+              final filteredParishes = _searchQuery.isEmpty
+                  ? allParishes
+                  : allParishes.where((parish) {
+                      final name = (parish['name'] as String? ?? '')
+                          .toLowerCase();
+                      final address = (parish['address'] as String? ?? '')
+                          .toLowerCase();
+                      final query = _searchQuery.toLowerCase();
+                      return name.contains(query) || address.contains(query);
+                    }).toList();
+
+              if (filteredParishes.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.search_off,
+                        size: 48,
+                        color: Colors.grey.shade400,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        '検索結果がありません',
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              return ListView.builder(
+                controller: widget.scrollController,
+                itemCount: filteredParishes.length,
+                itemBuilder: (context, index) {
+                  final parish = filteredParishes[index];
+                  final name = parish['name'] as String? ?? '';
+                  final address = parish['address'] as String? ?? '';
+                  final parishId = parish['parishId'] as String? ?? '';
+                  final isSelected = widget.selectedParishId == parishId;
+
+                  return ListTile(
+                    key: ValueKey(parishId),
+                    leading: CircleAvatar(
+                      backgroundColor: widget.primaryColor.withValues(
+                        alpha: 0.1,
+                      ),
+                      child: Icon(
+                        Icons.church,
+                        color: widget.primaryColor,
+                        size: 20,
+                      ),
+                    ),
+                    title: Text(
+                      name,
+                      style: TextStyle(
+                        fontWeight: isSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
+                    ),
+                    subtitle: Text(
+                      address,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    trailing: isSelected
+                        ? Icon(Icons.check, color: widget.primaryColor)
+                        : Icon(
+                            Icons.chevron_right,
+                            color: Colors.grey.shade400,
+                          ),
+                    onTap: () => widget.onParishSelected(parishId, name),
+                  );
+                },
+              );
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, _) => Center(child: Text('エラー: $error')),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// 축일 검색 시트
+class _FeastDaySearchSheet extends ConsumerStatefulWidget {
+  final Color primaryColor;
+  final String? selectedFeastDayId;
+  final String? customBaptismalName;
+  final int? customFeastMonth;
+  final int? customFeastDay;
+  final void Function(SaintFeastDayModel saint) onFeastDaySelected;
+  final void Function(String baptismalName, int month, int day) onCustomInput;
+
+  const _FeastDaySearchSheet({
+    required this.primaryColor,
+    this.selectedFeastDayId,
+    this.customBaptismalName,
+    this.customFeastMonth,
+    this.customFeastDay,
+    required this.onFeastDaySelected,
+    required this.onCustomInput,
+  });
+
+  @override
+  ConsumerState<_FeastDaySearchSheet> createState() =>
+      _FeastDaySearchSheetState();
+}
+
+class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final allSaintsAsync = ref.watch(_allSaintsProvider);
+
+    return Column(
+      children: [
+        // 핸들
+        Container(
+          margin: const EdgeInsets.only(top: 12),
+          width: 40,
+          height: 4,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.outlineVariant,
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        const SizedBox(height: 8),
+
+        // 타이틀
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            '守護聖人の祝日を選択',
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+
+        // 검색바
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              hintText: '聖人名で検索',
+              hintStyle: TextStyle(color: Colors.grey.shade500),
+              prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
+              suffixIcon: _searchQuery.isNotEmpty
+                  ? IconButton(
+                      icon: const Icon(Icons.clear),
+                      onPressed: () {
+                        _searchController.clear();
+                        setState(() => _searchQuery = '');
+                      },
+                    )
+                  : null,
+              filled: true,
+              fillColor: Colors.grey.shade100,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 12,
+              ),
+            ),
+            onChanged: (value) => setState(() => _searchQuery = value),
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
+        // 성인 목록
+        Expanded(
+          child: allSaintsAsync.when(
+            data: (allSaints) {
+              // 검색 필터링
+              final filteredSaints = _searchQuery.isEmpty
+                  ? allSaints
+                  : allSaints.where((saint) {
+                      final name = saint.name.toLowerCase();
+                      final nameEn = saint.nameEnglish.toLowerCase();
+                      final query = _searchQuery.toLowerCase();
+                      return name.contains(query) || nameEn.contains(query);
+                    }).toList();
+
+              if (filteredSaints.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.search_off,
+                        size: 48,
+                        color: Colors.grey.shade400,
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        '検索結果がありません',
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              final isCustomSelected =
+                  widget.customBaptismalName != null &&
+                  widget.customFeastMonth != null &&
+                  widget.customFeastDay != null;
+
+              return ListView(
+                children: [
+                  // 기타 옵션
+                  ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: widget.primaryColor.withValues(
+                        alpha: 0.1,
+                      ),
+                      child: Icon(
+                        Icons.edit,
+                        color: widget.primaryColor,
+                        size: 20,
+                      ),
+                    ),
+                    title: Text(
+                      'その他（直接入力）',
+                      style: TextStyle(
+                        fontWeight: isCustomSelected
+                            ? FontWeight.bold
+                            : FontWeight.normal,
+                      ),
+                    ),
+                    subtitle: isCustomSelected
+                        ? Text(
+                            '${widget.customBaptismalName} (${widget.customFeastMonth}月${widget.customFeastDay}日)',
+                            style: theme.textTheme.bodySmall,
+                          )
+                        : const Text('洗礼名と祝日を直接入力'),
+                    trailing: isCustomSelected
+                        ? Icon(Icons.check, color: widget.primaryColor)
+                        : Icon(
+                            Icons.chevron_right,
+                            color: Colors.grey.shade400,
+                          ),
+                    onTap: () => _showCustomInputDialog(context, theme),
+                  ),
+                  const Divider(),
+                  // 성인 목록
+                  ...filteredSaints.map((saint) {
+                    final feastDayId = '${saint.month}-${saint.day}';
+                    final isSelected = widget.selectedFeastDayId == feastDayId;
+
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: widget.primaryColor.withValues(
+                          alpha: 0.1,
+                        ),
+                        child: Icon(
+                          Icons.celebration,
+                          color: widget.primaryColor,
+                          size: 20,
+                        ),
+                      ),
+                      title: Text(
+                        saint.name,
+                        style: TextStyle(
+                          fontWeight: isSelected
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                        ),
+                      ),
+                      subtitle: Text(
+                        '${saint.month}月${saint.day}日',
+                        style: theme.textTheme.bodySmall,
+                      ),
+                      trailing: isSelected
+                          ? Icon(Icons.check, color: widget.primaryColor)
+                          : null,
+                      onTap: () => widget.onFeastDaySelected(saint),
+                    );
+                  }),
+                ],
+              );
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, _) => Center(child: Text('エラー: $error')),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _showCustomInputDialog(BuildContext context, ThemeData theme) {
+    final baptismalNameController = TextEditingController(
+      text: widget.customBaptismalName ?? '',
+    );
+    final monthController = TextEditingController(
+      text: widget.customFeastMonth?.toString() ?? '',
+    );
+    final dayController = TextEditingController(
+      text: widget.customFeastDay?.toString() ?? '',
+    );
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('洗礼名と祝日を入力'),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: baptismalNameController,
+                decoration: const InputDecoration(
+                  labelText: '洗礼名',
+                  hintText: '洗礼名を入力してください',
+                  border: OutlineInputBorder(),
+                ),
+                textCapitalization: TextCapitalization.words,
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: monthController,
+                      decoration: const InputDecoration(
+                        labelText: '月',
+                        hintText: '1-12',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: TextField(
+                      controller: dayController,
+                      decoration: const InputDecoration(
+                        labelText: '日',
+                        hintText: '1-31',
+                        border: OutlineInputBorder(),
+                      ),
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: const Text('キャンセル'),
+          ),
+          TextButton(
+            onPressed: () {
+              final baptismalName = baptismalNameController.text.trim();
+              final monthStr = monthController.text.trim();
+              final dayStr = dayController.text.trim();
+
+              if (baptismalName.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('洗礼名を入力してください'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+                return;
+              }
+
+              final month = int.tryParse(monthStr);
+              final day = int.tryParse(dayStr);
+
+              if (month == null || month < 1 || month > 12) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('有効な月（1-12）を入力してください'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+                return;
+              }
+
+              if (day == null || day < 1 || day > 31) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('有効な日（1-31）を入力してください'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+                return;
+              }
+
+              widget.onCustomInput(baptismalName, month, day);
+              Navigator.pop(dialogContext);
+            },
+            child: const Text('保存'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// 모든 성인 목록 Provider
+final _allSaintsProvider = FutureProvider<List<SaintFeastDayModel>>((
+  ref,
+) async {
+  final repository = ref.read(saintFeastDayRepositoryProvider);
+  final result = await repository.loadSaintsFeastDays();
+  return result.fold(
+    (_) => <SaintFeastDayModel>[],
+    (saints) => saints
+        .map(
+          (saint) => SaintFeastDayModel(
+            month: saint.month,
+            day: saint.day,
+            name: saint.name,
+            nameEnglish: saint.nameEnglish,
+            type: saint.type,
+            isJapanese: saint.isJapanese,
+            greeting: saint.greeting,
+            description: saint.description,
+          ),
+        )
+        .toList(),
+  );
+});

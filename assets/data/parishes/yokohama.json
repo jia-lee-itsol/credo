@@ -8,7 +8,46 @@
       "isCathedral": true,
       "massTime": "平日：07:00 / 土曜日：18:00 / 主日：08:00, 10:00, 12:00 / 第2・第4日曜14:00(英語ミサ) / 第1・第3日曜14:00(スペイン語ミサ)",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "08:00",
+          "10:00",
+          "12:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2・第4日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "ES",
+            "note": "第1・第3日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック貝塚教会",
@@ -21,7 +60,21 @@
       "fax": "044-222-2843",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      }
     },
     {
       "name": "カトリック浅田教会",
@@ -33,7 +86,13 @@
       "phone": "045-355-1580",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック中原教会",
@@ -47,7 +106,13 @@
       "website": "https://catholic-nakahara.org/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック鹿島田教会",
@@ -60,7 +125,13 @@
       "website": "https://www.cat-kashimada.org/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック溝ノロ教会",
@@ -74,7 +145,21 @@
       "website": "http://www.mizo-ch.com/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": "第2週"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック百合ヶ丘教会",
@@ -88,7 +173,13 @@
       "website": "http://yurigaoka.info/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック都筑教会",
@@ -102,7 +193,17 @@
       "website": "https://catholic-tsuzuki.church/",
       "note": "障害者用トイレ・スロープあり（旧・鷺沼教会）",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック新子安教会",
@@ -115,7 +216,28 @@
       "fax": "045-435-1574",
       "website": "https://shinkoyasu-cch.org/",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "17:00",
+            "language": "ID",
+            "note": ""
+          }
+        ],
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "CN",
+            "note": "第3・4・5日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック菊名教会",
@@ -129,7 +251,13 @@
       "website": "http://www.kikuna.or.jp/",
       "note": "障害者用トイレあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック藤が丘教会",
@@ -143,7 +271,16 @@
       "website": "http://fujigaoka-catholic.jp/",
       "note": "障害者用トイレ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック鶴見教会",
@@ -156,7 +293,16 @@
       "website": "http://catholic-church-tsurumi.com/",
       "note": "障害者用トイレ・スロープ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック戸部教会",
@@ -170,7 +316,14 @@
       "website": "http://tobecatholic.org/",
       "note": "障害者用トイレあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック末吉町教会",
@@ -184,7 +337,21 @@
       "website": "http://sueyoshicho-catholic-church.jp/main/",
       "note": "障害者用トイレ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "11:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "08:00",
+            "language": "EN",
+            "note": "第２日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック山手教会",
@@ -198,7 +365,25 @@
       "website": "http://catholicyamate.org",
       "note": "障害者用トイレ・スロープ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "07:30",
+          "11:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "09:30",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック港南教会",
@@ -210,7 +395,13 @@
       "phone": "045-843-2624",
       "note": "障害者用スロープ・トイレあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "8:45"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック磯子教会",
@@ -224,7 +415,16 @@
       "website": "https://www.catholicisogo.org/",
       "note": "障害者用スロープ・トイレあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "16:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック二俣川教会",
@@ -238,7 +438,17 @@
       "website": "http://futamatagawa-cc.com/",
       "note": "障害者用トイレ・スロープ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "07:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック保土ヶ谷教会",
@@ -252,7 +462,16 @@
       "website": "https://hodogayacc.net/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック横須賀三笠教会",
@@ -266,7 +485,21 @@
       "website": "http://mikasa-church.com/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック横須賀大津教会",
@@ -280,7 +513,16 @@
       "website": "https://st-monica-church-ootsu.jimdofree.com/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック三浦海岸教会",
@@ -294,7 +536,13 @@
       "website": "https://miurakaigan-ch.sakura.ne.jp/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック金沢教会",
@@ -307,7 +555,24 @@
       "website": "http://www.catholickanazawa.org/",
       "note": "障害者用エレベーター・トイレあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "09:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック雪ノ下教会",
@@ -321,7 +586,17 @@
       "website": "https://catholicyukinoshita.jp/",
       "note": "障害者用トイレ・スロープ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "16:00"
+        ],
+        "sunday": [
+          "08:00",
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック由比ガ浜教会",
@@ -335,7 +610,13 @@
       "website": "https://www.catholicyuigahama.org/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック逗子教会",
@@ -349,7 +630,17 @@
       "website": "https://www.catholic-zushi.jp/",
       "note": "障害者用トイレ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "16:00"
+        ],
+        "sunday": [
+          "07:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック藤沢教会",
@@ -363,7 +654,22 @@
       "website": "https://catholicfujisawa.org/",
       "note": "障害者用トイレ・スロープ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "EN",
+            "note": "第1日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック片瀬教会",
@@ -377,7 +683,14 @@
       "website": "https://www.catholickatasechurch.com/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック戸塚教会",
@@ -391,7 +704,16 @@
       "website": "http://totsuka-church.wixsite.com/catholic",
       "note": "障害者用トイレ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "16:00"
+        ],
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック原宿教会（巡回）",
@@ -405,7 +727,13 @@
       "website": "https://totsuka-church.wixsite.com/catholic-harajuku",
       "note": "障害者用トイレ・スロープあり（巡回教会）",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "08:45"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック中和田教会",
@@ -418,7 +746,13 @@
       "website": "http://nakawada-catholic.com/",
       "note": "障害者用トイレ・スロープ(一部）あり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック鍛冶ヶ谷教会",
@@ -432,7 +766,16 @@
       "website": "http://catholic-kajigaya.com/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック大船教会",
@@ -446,7 +789,16 @@
       "website": "https://ofuna-church.jimdo.com/",
       "note": "障害者用トイレ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "16:30"
+        ],
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック小田原教会",
@@ -460,7 +812,16 @@
       "website": "http://catholicodawara.org/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック茅ヶ崎教会",
@@ -474,7 +835,22 @@
       "website": "https://catholicchigasaki.jimdofree.com/",
       "note": "障害者用トイレ・スロープ・エレベーターあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "9:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック平塚教会",
@@ -488,7 +864,21 @@
       "website": "http://hiratsuka.catholic.ne.jp/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック大磯教会",
@@ -502,7 +892,13 @@
       "website": "http://www.scn-net.ne.jp/~cathoiso/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック国府津教会",
@@ -516,7 +912,13 @@
       "website": "https://catholic-kozu.jimdofree.com/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック秦野教会",
@@ -530,7 +932,24 @@
       "website": "https://catholichadanochurch.com/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1・3日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック二宮教会",
@@ -544,7 +963,13 @@
       "website": "https://catholic-ninomiya.com/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック真鶴教会",
@@ -557,16 +982,40 @@
       "website": "http://catholicodawara.org/カトリック真鶴教会/",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "kanagawa"
+      "deanery": "kanagawa",
+      "massTimes": {},
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック静岡教会",
-      "address": "静岡県静岡市葵区追手町1-1",
+      "churchName": "聖ドミニコ",
+      "address": "〒420-0854 静岡県静岡市葵区城内町1-5",
       "prefecture": "静岡県",
       "isCathedral": false,
-      "massTime": "日 9:00, 11:00",
+      "massTime": "土曜日：18:30 / 主日：10:30 / 第４日曜14:00(英語）",
+      "phone": "054-252-4938",
+      "fax": "054-251-7672",
+      "website": "https://sites.google.com/view/shizuoka-catholic/",
+      "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "shizuoka"
+      "deanery": "shizuoka",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第４日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック沼津教会",
@@ -579,7 +1028,22 @@
       "fax": "055-934-2734",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "toubu"
+      "deanery": "toubu",
+      "massTimes": {
+        "sunday": [
+          "9:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": "第４日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック三島教会",
@@ -592,7 +1056,22 @@
       "website": "http://mishima.catholic.ne.jp/",
       "note": "障害者用トイレあり",
       "diocese": "yokohama",
-      "deanery": "toubu"
+      "deanery": "toubu",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック御殿場教会",
@@ -605,7 +1084,13 @@
       "fax": "0550-82-6005",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "toubu"
+      "deanery": "toubu",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック裾野教会（巡回）",
@@ -617,7 +1102,13 @@
       "phone": "0550-82-1406",
       "note": "障害者用トイレあり（巡回教会）",
       "diocese": "yokohama",
-      "deanery": "toubu"
+      "deanery": "toubu",
+      "massTimes": {
+        "sunday": [
+          "8:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック熱海教会",
@@ -628,7 +1119,13 @@
       "massTime": "主日：14:30",
       "phone": "0557-81-7437",
       "diocese": "yokohama",
-      "deanery": "toubu"
+      "deanery": "toubu",
+      "massTimes": {
+        "sunday": [
+          "14:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック伊東教会",
@@ -641,7 +1138,13 @@
       "fax": "0557-38-7565",
       "note": "障害者用トイレ・スロープあり",
       "diocese": "yokohama",
-      "deanery": "toubu"
+      "deanery": "toubu",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック下田教会（巡回）",
@@ -652,7 +1155,9 @@
       "phone": "0558-22-0529",
       "note": "障害者用スロープあり（巡回教会）",
       "diocese": "yokohama",
-      "deanery": "toubu"
+      "deanery": "toubu",
+      "massTimes": {},
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック富士教会",
@@ -665,7 +1170,21 @@
       "fax": "0545-52-1161",
       "note": "障害者用トイレあり",
       "diocese": "yokohama",
-      "deanery": "toubu"
+      "deanery": "toubu",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "PT",
+            "note": "第1日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック富士宮教会（巡回）",
@@ -677,7 +1196,856 @@
       "fax": "0544-26-6003",
       "note": "巡回教会",
       "diocese": "yokohama",
-      "deanery": "toubu"
+      "deanery": "toubu",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大和教会",
+      "churchName": "大天使聖ミカエル",
+      "address": "〒242-0006 神奈川県大和市南林間7-4-1",
+      "prefecture": "神奈川県",
+      "isCathedral": false,
+      "massTime": "土曜日：18:00 / 主日：07:00/09:30 / 第2日曜12:00(ベトナム語)/第3日曜12：00(ポルトガル語)・第3日曜15:00(スペイン語)/第4日曜13:30(英語)/第5日曜13:30(タガログ語)",
+      "phone": "046-274-1178",
+      "fax": "046-272-0980",
+      "website": "http://www.yamato-catholic.jp/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "kanagawa",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "07:00",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "12:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック厚木教会",
+      "churchName": "洗礼者聖ヨハネ",
+      "address": "〒243-0014 神奈川県厚木市旭町2-7-11",
+      "prefecture": "神奈川県",
+      "isCathedral": false,
+      "massTime": "主日：9:30 / 第1日曜14:00(ポルトガル語)/第3日曜14:00(英語)/第4日曜14:00(スペイン語)",
+      "phone": "046-228-4164",
+      "fax": "046-228-4150",
+      "website": "http://catholic-atsugi.sakuraweb.com/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック津久井教会",
+      "churchName": "アシジの聖フランシスコ",
+      "address": "〒252-0157 神奈川県相模原市緑区中野1366-1",
+      "prefecture": "神奈川県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "phone": "042-784-5821",
+      "fax": "042-784-5821",
+      "website": "https://tsukuichurch.wixsite.com/catholic",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック相模原教会",
+      "churchName": "聖ルドビコ茨木",
+      "address": "〒252-0232 神奈川県相模原市中央区矢部4-13-1",
+      "prefecture": "神奈川県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "042-755-9318",
+      "fax": "042-755-9318",
+      "website": "http://catholic-sagamihara.blogspot.jp",
+      "note": "障害者用トイレあり",
+      "diocese": "yokohama",
+      "deanery": "kanagawa",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック千代田教会",
+      "churchName": "洗礼者聖ヨハネ",
+      "address": "〒420-0801 静岡県静岡市葵区千代田1-18-14",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "054-261-7754",
+      "fax": "054-264-7460",
+      "website": "https://sites.google.com/view/chiyoda-catholic/",
+      "note": "障害者用トイレ・段差解消機あり",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック谷津教会（巡回）",
+      "address": "〒421-1202 静岡県静岡市葵区谷津389",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "",
+      "note": "巡回教会",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック八幡教会",
+      "churchName": "神の母聖マリア",
+      "address": "〒422-8076 静岡県静岡市駿河区八幡4-10-14",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "054-282-5629",
+      "fax": "054-287-5996",
+      "website": "https://sites.google.com/view/yahata-catholic/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック草薙教会",
+      "churchName": "聖パウロ",
+      "address": "〒424-0888 静岡県静岡市清水区中之郷2-5-12",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：8:30",
+      "phone": "054-345-4792",
+      "fax": "054-345-4792",
+      "website": "https://sites.google.com/view/kusanagi-catholic/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "8:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック清水教会",
+      "churchName": "ブローニュの聖母",
+      "address": "〒424-0931 静岡県静岡市清水区岡町1-34",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "現在、清水教会聖堂は建物の耐震問題と老朽化により使用禁止となっており、ミサは草薙教会で行われています。",
+      "phone": "054-352-7188",
+      "fax": "054-352-7189",
+      "website": "https://sites.google.com/view/shimizu-catholic/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック焼津教会",
+      "churchName": "労働者聖ヨセフ",
+      "address": "〒425-0035 静岡県焼津市東小川3-11-24",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 第4日曜17:00(スペイン語・ポルトガル語） / 第5日曜14:30(英語）",
+      "phone": "054-628-4998",
+      "fax": "054-628-2050",
+      "note": "障害者用トイレあり",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "17:00",
+            "language": "ES",
+            "note": "第4日曜"
+          },
+          {
+            "time": "14:30",
+            "language": "EN",
+            "note": "第5日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック吉田教会（巡回）",
+      "churchName": "日本26聖人殉教者",
+      "address": "〒421-0303 静岡県榛原郡吉田町片岡1996-2",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：15:00",
+      "note": "巡回教会",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "15:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック藤枝教会",
+      "churchName": "聖アンナ",
+      "address": "〒426-0023 静岡県藤枝市茶町1-2-51",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "054-641-0710",
+      "fax": "054-639-9951",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック岡部教会（巡回）",
+      "churchName": "み心",
+      "address": "〒421-1131 静岡県藤枝市岡部町内谷581-1",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日ミサ：なし",
+      "note": "巡回教会",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック島田教会",
+      "churchName": "王であるキリスト",
+      "address": "〒427-0041 静岡県島田市中河町344",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：11:00",
+      "phone": "0547-37-1906",
+      "fax": "0547-37-1906",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック徳山教会（巡回）",
+      "address": "〒428-0301 静岡県榛原郡川根本町徳山1865",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：第3日曜13:30",
+      "phone": "0547-57-2234",
+      "fax": "0547-57-2234",
+      "note": "巡回教会",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "13:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック浜松教会",
+      "churchName": "アシジの聖フランシスコ",
+      "address": "〒432-8002 静岡県浜松市中央区富塚町2662",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：07:00/09:30 / 毎週土曜19:30(ポルトガル語) /第3日曜16:00(スペイン語)/第4日曜13:00(英語)",
+      "phone": "053-474-3314",
+      "fax": "053-474-3314",
+      "website": "http://www.hamamatsukyoukai.com/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "19:30",
+            "language": "EN",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック鷺の宮教会",
+      "churchName": "ロザリオの聖母",
+      "address": "〒431-3113 静岡県浜松市中央区大瀬町27-181",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：08:30(第2週、第4週)/11:00(第1週、第3週、第5週)（第1子供ミサ、第3国際ミサ）",
+      "phone": "053-434-5087",
+      "fax": "053-434-5087",
+      "note": "障害者用スロープあり",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "08:30",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック三方原教会（巡回）",
+      "churchName": "無原罪の聖母",
+      "address": "〒433-8105 静岡県浜松市中央区三方原町2221",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：第1、第3、第5日曜08:30／第2、第4日曜11:00 / 第4日曜11:00（ベトナム語）",
+      "phone": "053-436-8450",
+      "fax": "053-436-8450",
+      "note": "障害者用スロープあり（巡回教会）",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "08:30",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "VI",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック掛川教会",
+      "churchName": "無原罪の聖マリア",
+      "address": "〒436-0056 静岡県掛川市中央1-8-8",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：第1、第3、第5日曜11:30/第2、第4日曜08:30 / 第2日曜17:00(スペイン語)/第1日曜14:00(英語)/第4日曜17:00(ポルトガル語)",
+      "phone": "0537-22-6427",
+      "fax": "0537-22-3235",
+      "note": "障害者用トイレあり",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "11:30",
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "17:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック磐田教会",
+      "churchName": "幼いイエスの聖テレジア",
+      "address": "〒438-0077 静岡県磐田市国府台54-1",
+      "prefecture": "静岡県",
+      "isCathedral": false,
+      "massTime": "主日：第1、第3、第5日曜08:30/第2、第4日曜11:30 / 第1日曜17:30(ポルトガル語)/第2日曜14:00(英語)",
+      "phone": "0538-36-1225",
+      "fax": "0583-36-5014",
+      "note": "障害者用トイレ・スロープ・エレベーターあり",
+      "diocese": "yokohama",
+      "deanery": "shizuoka",
+      "massTimes": {
+        "sunday": [
+          "08:30",
+          "11:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "17:30",
+            "language": "EN",
+            "note": "第1日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック長野教会",
+      "churchName": "聖ヨセフ",
+      "address": "〒380-0814 長野県長野市西鶴賀町1491-12",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "土曜日：18:00 / 主日：11:00 / 第3日曜14:30(タガログ語)",
+      "phone": "026-232-6949",
+      "fax": "026-237-3139",
+      "website": "http://naganocato.wixsite.com/church-arizon",
+      "note": "障害者用トイレ・スロープ・エレベーターあり",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック長野吉田教会（分教会）",
+      "churchName": "平和の聖母",
+      "address": "〒381-0043 長野県長野市吉田1-16-24",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日ミサ：なし",
+      "note": "障害者用トイレ・スロープあり（分教会）",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック篠ノ井教会",
+      "churchName": "天地の元后聖マリア",
+      "address": "〒388-8007 長野県長野市篠ノ井布施高田652-5",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "026-292-0549",
+      "fax": "026-292-0549",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック松本教会",
+      "churchName": "使徒聖ヨハネ",
+      "address": "〒390-0873 長野県松本市丸の内9-32",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "phone": "0263-32-0795",
+      "fax": "0263-34-0936",
+      "website": "http://www.catholic-matsumoto.org/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック諏訪教会",
+      "churchName": "聖霊",
+      "address": "〒392-0027 長野県諏訪市湖岸通り4-1-36",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：10:30 / 第3土曜20:00(ポルトガル語)/第1日曜14:00(英語)",
+      "phone": "0266-53-3110",
+      "fax": "0266-53-5332",
+      "website": "http://www.catholicnaganomiddle.server-shared.com/suwa%5Fmain.html",
+      "note": "障害者用トイレ・スロープ・エレベーターあり",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "20:00",
+            "language": "EN",
+            "note": "第1日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック茅野教会（巡回）",
+      "churchName": "洗礼者聖ヨハネ",
+      "address": "〒391-0005 長野県茅野市仲町14-7",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 第3日曜14:00(英語)",
+      "website": "http://www.catholicnaganomiddle.server-shared.com/chino%5Fmain.html",
+      "note": "巡回教会",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック岡谷教会",
+      "churchName": "無原罪の聖母",
+      "address": "〒394-0029 長野県岡谷市幸町4-13",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 第2日曜14:00(英語)",
+      "phone": "0266-22-2629",
+      "fax": "0266-22-2629",
+      "website": "http://www.catholicnaganomiddle.server-shared.com/okaya%5Fmain.html",
+      "note": "障害者用スロープあり",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック富士見教会",
+      "churchName": "聖ヨセフ",
+      "address": "〒399-0211 長野県諏訪郡富士見町富士見4650",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "0266-62-2405",
+      "fax": "0266-78-1130",
+      "website": "http://www.catholicnaganomiddle.server-shared.com/fujimi%5Fmain.html",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック飯田教会",
+      "churchName": "被昇天の聖母",
+      "address": "〒395-0013 長野県飯田市小伝馬町1-48",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：10:00（7～9月は9:30）",
+      "phone": "0265-22-1914",
+      "fax": "0265-22-1924",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "10:00",
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック伊那教会",
+      "churchName": "奉献の聖母",
+      "address": "〒396-0026 長野県伊那市西町4816",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：10:00（7～9月は9:30） / 第３日曜10：00(ポルトガル語、要問合せ)",
+      "phone": "0265-73-8556",
+      "fax": "0265-73-8569",
+      "website": "http://www.ina.catholic.ne.jp/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "10:00",
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "",
+            "language": "PT",
+            "note": "第３日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック駒ヶ根教会",
+      "address": "〒399-4111 長野県駒ケ根市北町9-11",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：第2・第4日曜10:00（7～9月は9:30）",
+      "phone": "0265-82-6464",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "10:00",
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小諸教会",
+      "churchName": "無原罪の聖母",
+      "address": "〒384-0028 長野県小諸市田町2-3-35",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：09:00(偶数月)/11:00(奇数月)",
+      "note": "通常連絡先は上田教会",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック佐久教会",
+      "churchName": "聖家族",
+      "address": "〒385-0043 長野県佐久市取出町185-1",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：11:00",
+      "phone": "0267-78-5456",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック上田教会",
+      "churchName": "聖ペトロ･聖パウロ",
+      "address": "〒386-0018 長野県上田市常田2-2-1",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：09:00(奇数月)/11:00(偶数月) / 第4日曜16:00(ポルトガル語)",
+      "phone": "0268-22-9106",
+      "fax": "0268-22-3842",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "16:00",
+            "language": "PT",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック軽井沢教会",
+      "churchName": "聖ペトロ･聖パウロ",
+      "address": "〒389-0102 長野県北佐久郡軽井沢町大字軽井沢179",
+      "prefecture": "長野県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "0267-42-2429",
+      "fax": "0267-42-6151",
+      "diocese": "yokohama",
+      "deanery": "nagano",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック甲府教会",
+      "churchName": "無原罪の聖母",
+      "address": "〒400-0032 山梨県甲府市中央2-7-10",
+      "prefecture": "山梨県",
+      "isCathedral": false,
+      "massTime": "主日：10:30 / 第2日曜15:00(ポルトガル語)/第3日曜12:30(韓国語)/第4日曜14:00(英語)",
+      "phone": "055-237-2531",
+      "fax": "055-237-2507",
+      "website": "http://www.catholic-kofu.com/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "yamanashi",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック塩山教会（巡回）",
+      "churchName": "イエスのみ心",
+      "address": "〒404-0042 山梨県甲州市塩山上於曽1351",
+      "prefecture": "山梨県",
+      "isCathedral": false,
+      "massTime": "主日：土曜19:00",
+      "phone": "0553-32-1175",
+      "fax": "2553-32-1175",
+      "note": "巡回教会",
+      "diocese": "yokohama",
+      "deanery": "yamanashi",
+      "massTimes": {
+        "sunday": [
+          "19:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック富士吉田教会",
+      "churchName": "幼きイエスの聖テレジア",
+      "address": "〒403-0005 山梨県富士吉田市上吉田3-5-7",
+      "prefecture": "山梨県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "0555-22-3199",
+      "fax": "0555-25-7002",
+      "website": "http://www.fgo.jp/~catholic/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "yamanashi",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック韮崎教会",
+      "churchName": "聖パウロ",
+      "address": "〒407-0015 山梨県韮崎市若宮3-10-1",
+      "prefecture": "山梨県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "0551-23-6011",
+      "website": "http://nirasaki-catholic.org/",
+      "note": "障害者用トイレ・スロープあり",
+      "diocese": "yokohama",
+      "deanery": "yamanashi",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
     }
   ]
 }

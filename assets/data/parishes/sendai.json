@@ -11,7 +11,13 @@
       "phone": "017-741-5903",
       "fax": "017-718-8215",
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック青森本町教会",
@@ -23,7 +29,13 @@
       "phone": "017-734-3937",
       "fax": "017-734-3947",
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック松ヶ丘教会（巡回）",
@@ -35,7 +47,9 @@
       "phone": null,
       "fax": null,
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {},
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック野辺地教会",
@@ -47,7 +61,13 @@
       "phone": "0175-64-3470",
       "fax": "0175-72-8090",
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック大湊教会",
@@ -60,7 +80,13 @@
       "fax": null,
       "note": "通常連絡先は浪打教会",
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック弘前教会",
@@ -72,7 +98,13 @@
       "phone": "0172-33-0175",
       "fax": "0172-33-0601",
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック黒石教会",
@@ -84,7 +116,13 @@
       "phone": "0172-53-2632",
       "fax": null,
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック五所川原教会",
@@ -96,7 +134,13 @@
       "phone": "0173-34-2222",
       "fax": "0173-34-2710",
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック三沢教会",
@@ -109,7 +153,13 @@
       "fax": null,
       "note": "通常連絡先 八戸塩町教会 0178-22-2228",
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック十和田教会",
@@ -121,7 +171,13 @@
       "phone": "0176-23-2561",
       "fax": "0176-23-2561",
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック八戸塩町教会",
@@ -133,7 +189,13 @@
       "phone": "0178-22-2228",
       "fax": "0178-22-2390",
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック鮫町教会",
@@ -145,7 +207,13 @@
       "phone": "0178-33-0800",
       "fax": null,
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック久慈教会",
@@ -157,7 +225,13 @@
       "phone": "0194-53-3016",
       "fax": "0194-53-3016",
       "diocese": "sendai",
-      "deanery": "chiku1"
+      "deanery": "chiku1",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック花巻教会",
@@ -169,7 +243,13 @@
       "phone": "0198-23-5183",
       "fax": "0198-23-5183",
       "diocese": "sendai",
-      "deanery": "chiku2"
+      "deanery": "chiku2",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック北上教会",
@@ -181,7 +261,13 @@
       "phone": "0197-63-3887",
       "fax": "0197-63-3887",
       "diocese": "sendai",
-      "deanery": "chiku2"
+      "deanery": "chiku2",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック水沢教会",
@@ -193,7 +279,13 @@
       "phone": "0197-25-7707",
       "fax": "0197-25-7707",
       "diocese": "sendai",
-      "deanery": "chiku2"
+      "deanery": "chiku2",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック遠野教会",
@@ -205,7 +297,13 @@
       "phone": "0198-62-3342",
       "fax": "0198-62-1908",
       "diocese": "sendai",
-      "deanery": "chiku2"
+      "deanery": "chiku2",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック宮古教会",
@@ -217,7 +315,13 @@
       "phone": "0193-62-3043",
       "fax": "0193-62-3043",
       "diocese": "sendai",
-      "deanery": "chiku2"
+      "deanery": "chiku2",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック釜石教会",
@@ -229,7 +333,13 @@
       "phone": "0193-22-1165",
       "fax": "0193-22-1165",
       "diocese": "sendai",
-      "deanery": "chiku2"
+      "deanery": "chiku2",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック四ツ家教会",
@@ -242,7 +352,13 @@
       "fax": "019-654-2837",
       "website": "http://www.fukura.ne.jp/yotsuya/",
       "diocese": "sendai",
-      "deanery": "chiku2"
+      "deanery": "chiku2",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック志家教会",
@@ -254,7 +370,13 @@
       "phone": "019-622-6363",
       "fax": "019-622-6363",
       "diocese": "sendai",
-      "deanery": "chiku2"
+      "deanery": "chiku2",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック盛岡上堂教会",
@@ -266,7 +388,13 @@
       "phone": "019-647-0315",
       "fax": "019-647-0315",
       "diocese": "sendai",
-      "deanery": "chiku2"
+      "deanery": "chiku2",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック一関教会",
@@ -278,7 +406,13 @@
       "phone": "0191-23-2602",
       "fax": "0191-23-9370",
       "diocese": "sendai",
-      "deanery": "chiku3"
+      "deanery": "chiku3",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック千厩教会",
@@ -290,7 +424,13 @@
       "phone": "0191-52-2485",
       "fax": "0191-52-2911",
       "diocese": "sendai",
-      "deanery": "chiku3"
+      "deanery": "chiku3",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック築館教会",
@@ -302,7 +442,13 @@
       "phone": "0228-24-9530",
       "fax": "0228-24-9530",
       "diocese": "sendai",
-      "deanery": "chiku3"
+      "deanery": "chiku3",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック新生園（巡回）",
@@ -314,7 +460,9 @@
       "phone": "0228-38-2121",
       "fax": null,
       "diocese": "sendai",
-      "deanery": "chiku3"
+      "deanery": "chiku3",
+      "massTimes": {},
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック古川教会",
@@ -327,7 +475,13 @@
       "fax": "0229-23-7300",
       "website": "https://furukawa535.web.fc2.com/",
       "diocese": "sendai",
-      "deanery": "chiku3"
+      "deanery": "chiku3",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック石巻教会",
@@ -339,7 +493,13 @@
       "phone": "0225-22-4070",
       "fax": "0225-22-4070",
       "diocese": "sendai",
-      "deanery": "chiku3"
+      "deanery": "chiku3",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック気仙沼教会",
@@ -351,7 +511,13 @@
       "phone": "0226-22-7183",
       "fax": null,
       "diocese": "sendai",
-      "deanery": "chiku3"
+      "deanery": "chiku3",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック大船渡教会",
@@ -363,7 +529,13 @@
       "phone": "0192-26-3291",
       "fax": "0192-26-3291",
       "diocese": "sendai",
-      "deanery": "chiku3"
+      "deanery": "chiku3",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック米川教会",
@@ -376,19 +548,46 @@
       "fax": "0220-45-2052",
       "note": "鈴木",
       "diocese": "sendai",
-      "deanery": "chiku3"
+      "deanery": "chiku3",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック元寺小路教会",
-      "churchName": "聖ペトロ・聖パウロ",
+      "churchName": "聖ペトロ・聖パウロ大聖堂",
       "address": "〒980-0014 仙台市青葉区本町1-2-12",
       "prefecture": "宮城県",
       "isCathedral": true,
-      "massTime": "主日：10:00",
+      "massTime": "主日：07:00, 09:30, 18:00 / 第2日曜14:00(スペイン語ミサ) / 第3日曜14:00(英語ミサ)",
       "phone": "022-222-5507",
       "fax": "022-222-5535",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:30",
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "ES",
+            "note": "第2日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第3日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック八木山教会",
@@ -400,7 +599,13 @@
       "phone": "022-229-0120",
       "fax": "022-229-0120",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック亘理教会",
@@ -412,7 +617,13 @@
       "phone": "0223-34-1613",
       "fax": "0223-34-1613",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック角田教会",
@@ -424,7 +635,13 @@
       "phone": "0224-63-1431",
       "fax": "0224-63-1960",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック大河原教会",
@@ -436,7 +653,13 @@
       "phone": "0224-53-1271",
       "fax": "0224-53-1430",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック白石教会",
@@ -448,7 +671,13 @@
       "phone": "0224-26-3466",
       "fax": null,
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック一本杉教会",
@@ -460,7 +689,13 @@
       "phone": "022-286-3025",
       "fax": "022-286-3025",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック畳屋丁教会",
@@ -472,7 +707,13 @@
       "phone": "022-222-7860",
       "fax": "022-222-7860",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック北仙台教会",
@@ -485,7 +726,13 @@
       "fax": "022-234-0203",
       "website": "http://www.catholic-kitasendai-church.com/",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック西仙台教会",
@@ -497,7 +744,13 @@
       "phone": "022-233-4945",
       "fax": "022-765-9340",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック塩釜教会",
@@ -509,7 +762,13 @@
       "phone": "022-362-3975",
       "fax": "022-362-3975",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック東仙台教会",
@@ -521,7 +780,13 @@
       "phone": "022-257-4348",
       "fax": "022-257-4348",
       "diocese": "sendai",
-      "deanery": "chiku4"
+      "deanery": "chiku4",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック会津若松教会",
@@ -533,7 +798,13 @@
       "phone": "0242-27-1447",
       "fax": "0242-23-8723",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック喜多方教会",
@@ -545,7 +816,13 @@
       "phone": "0241-22-1765",
       "fax": "0241-22-1765",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック南会津教会",
@@ -558,7 +835,13 @@
       "fax": "0241-62-0595",
       "note": "連絡先: 田島カトリック暁の星幼稚園 〒967-0004 南会津郡南会津町田島字根小屋甲4242",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック原町教会",
@@ -570,7 +853,13 @@
       "phone": "0244-23-3713",
       "fax": null,
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリックいわき教会",
@@ -582,7 +871,13 @@
       "phone": "0246-25-3290",
       "fax": "0246-25-3290",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック湯本教会（巡回）",
@@ -595,7 +890,9 @@
       "fax": "0246-42-2517",
       "note": "桑折",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {},
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック松木町教会",
@@ -607,7 +904,13 @@
       "phone": "024-534-5947",
       "fax": "024-573-2047",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック桑折教会（巡回）",
@@ -620,7 +923,9 @@
       "fax": null,
       "note": "湯澤",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {},
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック野田町教会",
@@ -632,7 +937,13 @@
       "phone": "024-534-4686",
       "fax": "024-534-4697",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック二本松教会",
@@ -644,7 +955,13 @@
       "phone": "0243-23-3037",
       "fax": "0243-23-3037",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック郡山教会",
@@ -657,7 +974,13 @@
       "fax": "024-922-1699",
       "website": "https://catholic-koriyama.jp/",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック須賀川教会",
@@ -670,7 +993,13 @@
       "fax": null,
       "note": "通常連絡先は白河教会",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック白河教会",
@@ -682,7 +1011,13 @@
       "phone": "0248-22-0731",
       "fax": "0248-22-0731",
       "diocese": "sendai",
-      "deanery": "chiku5"
+      "deanery": "chiku5",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     }
   ]
 }

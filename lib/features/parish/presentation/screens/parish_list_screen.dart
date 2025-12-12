@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../core/data/services/parish_service.dart' as core;
 import '../../../../shared/providers/auth_provider.dart';
+import '../../../../shared/providers/location_provider.dart';
+import '../../../../core/utils/location_utils.dart';
 import '../constants/parish_colors.dart';
 import '../widgets/parish_card.dart';
 import '../widgets/parish_filter_chip.dart';
+import '../widgets/parish_search_bar.dart';
+import '../widgets/parish_empty_state.dart';
+import '../widgets/parish_no_result_state.dart';
+import '../widgets/parish_filter_bottom_sheet.dart';
 
 /// 교회 목록 화면
 class ParishListScreen extends ConsumerStatefulWidget {
@@ -30,9 +37,147 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
   bool _onlyForeignLanguageMass = false;
 
   @override
+  void initState() {
+    super.initState();
+    // 화면이 로드될 때 위치 권한 확인
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkLocationPermission();
+    });
+  }
+
+  @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  /// 위치 권한 확인 및 요청
+  Future<void> _checkLocationPermission() async {
+    final permission = await Geolocator.checkPermission();
+
+    // 권한이 이미 허용된 경우
+    if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      return;
+    }
+
+    // 권한이 거부된 경우 다이얼로그 표시
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      if (!mounted) return;
+      await _showLocationPermissionDialog();
+    }
+  }
+
+  /// 위치 권한 요청 다이얼로그 표시
+  Future<void> _showLocationPermissionDialog() async {
+    final permission = await Geolocator.checkPermission();
+
+    if (permission == LocationPermission.deniedForever) {
+      // 영구적으로 거부된 경우 설정으로 이동 안내
+      if (!mounted) return;
+      final shouldOpen = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('位置情報の許可が必要です'),
+          content: const Text(
+            '近くの教会を探すために位置情報の許可が必要です。\n設定から位置情報の許可を有効にしてください。',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('キャンセル'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('設定を開く'),
+            ),
+          ],
+        ),
+      );
+
+      if (shouldOpen == true && mounted) {
+        await Geolocator.openAppSettings();
+      }
+      return;
+    }
+
+    // 권한 요청 다이얼로그
+    if (!mounted) return;
+    final shouldRequest = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('位置情報の利用'),
+        content: const Text('近くの教会を探すために位置情報の利用を許可してください。\n教会までの距離表示にも使用されます。'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('今はしない'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('許可する'),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldRequest == true && mounted) {
+      await _requestLocationPermission();
+    }
+  }
+
+  /// 위치 권한 요청
+  Future<void> _requestLocationPermission() async {
+    LocationPermission permission = await Geolocator.requestPermission();
+
+    if (!mounted) return;
+
+    if (permission == LocationPermission.denied) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('位置情報の許可が必要です。')));
+      return;
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      final shouldOpen = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('位置情報の許可が必要です'),
+          content: const Text('設定から位置情報の許可を有効にしてください。'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('キャンセル'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('設定を開く'),
+            ),
+          ],
+        ),
+      );
+
+      if (shouldOpen == true && mounted) {
+        await Geolocator.openAppSettings();
+      }
+      return;
+    }
+
+    // 권한이 허용된 경우 위치 정보 새로고침
+    if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      // Provider 새로고침
+      ref.invalidate(currentLocationProvider);
+      // 위치를 가져오면 캐시에 저장
+      final locationAsync = ref.read(currentLocationProvider);
+      locationAsync.whenData((position) {
+        if (position != null) {
+          ref.read(cachedLocationProvider.notifier).state = position;
+        }
+      });
+    }
   }
 
   @override
@@ -93,7 +238,10 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 검색 바
-          _buildSearchBar(),
+          ParishSearchBar(
+            controller: _searchController,
+            onChanged: (value) => setState(() {}),
+          ),
 
           const SizedBox(height: 16),
 
@@ -113,7 +261,17 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
                 icon: Icons.swap_vert,
                 label: '距離順',
                 isSelected: _sortByDistance,
-                onTap: () {
+                onTap: () async {
+                  if (!_sortByDistance) {
+                    // 거리순 정렬을 활성화하려면 위치 권한 확인
+                    final permission = await Geolocator.checkPermission();
+                    if (permission != LocationPermission.whileInUse &&
+                        permission != LocationPermission.always) {
+                      // 권한이 없으면 권한 요청 다이얼로그 표시
+                      await _showLocationPermissionDialog();
+                      return;
+                    }
+                  }
                   setState(() {
                     _sortByDistance = !_sortByDistance;
                   });
@@ -122,43 +280,6 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildSearchBar() {
-    return Container(
-      height: 49.361,
-      decoration: BoxDecoration(
-        color: ParishColors.neutral50,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: ParishColors.neutral200, width: 0.69),
-      ),
-      child: TextField(
-        controller: _searchController,
-        style: const TextStyle(
-          fontSize: 16,
-          color: Colors.black,
-          letterSpacing: -0.31,
-        ),
-        decoration: InputDecoration(
-          hintText: '教会名、地域で検索',
-          hintStyle: const TextStyle(
-            color: Color(0x800A0A0A),
-            fontSize: 16,
-            letterSpacing: -0.31,
-          ),
-          prefixIcon: const Padding(
-            padding: EdgeInsets.only(left: 12, right: 8),
-            child: Icon(Icons.search, size: 20, color: Color(0x800A0A0A)),
-          ),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 12,
-          ),
-        ),
-        onChanged: (value) => setState(() {}),
       ),
     );
   }
@@ -176,14 +297,19 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
         });
 
         if (allParishes.isEmpty) {
-          return _buildEmptyState();
+          return const ParishEmptyState();
         }
 
-        final filteredParishes = _getFilteredParishes(allParishes);
+        var filteredParishes = _getFilteredParishes(allParishes);
+
+        // 거리순 정렬
+        if (_sortByDistance) {
+          filteredParishes = _sortParishesByDistance(filteredParishes);
+        }
 
         if (filteredParishes.isEmpty &&
             (_searchController.text.isNotEmpty || _hasActiveFilters)) {
-          return _buildNoResultState();
+          return const ParishNoResultState();
         }
 
         return ListView.separated(
@@ -208,38 +334,6 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, _) => Center(child: Text('エラーが発生しました: $error')),
-    );
-  }
-
-  Widget _buildEmptyState() {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.church_outlined, size: 64, color: ParishColors.neutral600),
-          SizedBox(height: 16),
-          Text(
-            '教会データが見つかりませんでした',
-            style: TextStyle(fontSize: 16, color: ParishColors.neutral600),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNoResultState() {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.search_off, size: 64, color: ParishColors.neutral600),
-          SizedBox(height: 16),
-          Text(
-            '検索結果が見つかりませんでした',
-            style: TextStyle(fontSize: 16, color: ParishColors.neutral600),
-          ),
-        ],
-      ),
     );
   }
 
@@ -320,7 +414,7 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
-        return _FilterBottomSheet(
+        return ParishFilterBottomSheet(
           selectedPrefectures: _selectedPrefectures,
           onlyCathedrals: _onlyCathedrals,
           onlyWithMassTime: _onlyWithMassTime,
@@ -395,345 +489,52 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
         massTime.contains('Portuguese') ||
         massTime.contains('ポルトガル語');
   }
-}
 
-/// 필터 바텀시트 위젯
-class _FilterBottomSheet extends StatefulWidget {
-  final Set<String> selectedPrefectures;
-  final bool onlyCathedrals;
-  final bool onlyWithMassTime;
-  final bool onlyTodayMass;
-  final bool onlyForeignLanguageMass;
-  final void Function(
-    Set<String> prefectures,
-    bool cathedrals,
-    bool massTime,
-    bool todayMass,
-    bool foreignMass,
-  )
-  onApply;
-  final VoidCallback onReset;
+  /// 거리순으로 교회 정렬
+  List<Map<String, dynamic>> _sortParishesByDistance(
+    List<Map<String, dynamic>> parishes,
+  ) {
+    // 거리 정보가 있는 교회와 없는 교회를 분리
+    final parishesWithDistance =
+        <({Map<String, dynamic> parish, double distance})>[];
+    final parishesWithoutDistance = <Map<String, dynamic>>[];
 
-  const _FilterBottomSheet({
-    required this.selectedPrefectures,
-    required this.onlyCathedrals,
-    required this.onlyWithMassTime,
-    required this.onlyTodayMass,
-    required this.onlyForeignLanguageMass,
-    required this.onApply,
-    required this.onReset,
-  });
+    final locationAsync = ref.read(currentLocationProvider);
+    final cachedLocation = ref.read(cachedLocationProvider);
+    final userPosition = cachedLocation ?? locationAsync.valueOrNull;
 
-  @override
-  State<_FilterBottomSheet> createState() => _FilterBottomSheetState();
-}
-
-class _FilterBottomSheetState extends State<_FilterBottomSheet> {
-  late Set<String> _tempSelectedPrefectures;
-  late bool _tempOnlyCathedrals;
-  late bool _tempOnlyWithMassTime;
-  late bool _tempOnlyTodayMass;
-  late bool _tempOnlyForeignLanguageMass;
-
-  List<String> _prefectures = [];
-  bool _isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _tempSelectedPrefectures = Set.from(widget.selectedPrefectures);
-    _tempOnlyCathedrals = widget.onlyCathedrals;
-    _tempOnlyWithMassTime = widget.onlyWithMassTime;
-    _tempOnlyTodayMass = widget.onlyTodayMass;
-    _tempOnlyForeignLanguageMass = widget.onlyForeignLanguageMass;
-    _loadFilterData();
-  }
-
-  Future<void> _loadFilterData() async {
-    try {
-      // 도도부현 목록 추출
-      final allParishesMap = await core.ParishService.loadAllParishes();
-      final prefectureSet = <String>{};
-      for (final parishes in allParishesMap.values) {
-        for (final parish in parishes) {
-          final prefecture = parish['prefecture'] as String?;
-          if (prefecture != null && prefecture.isNotEmpty) {
-            prefectureSet.add(prefecture);
-          }
-        }
-      }
-      _prefectures = prefectureSet.toList()..sort();
-
-      setState(() {
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _isLoading = false;
-      });
+    if (userPosition == null) {
+      // 사용자 위치가 없으면 정렬하지 않음
+      return parishes;
     }
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    for (final parish in parishes) {
+      // 좌표가 있으면 직접 계산
+      final lat = parish['latitude'] as double?;
+      final lon = parish['longitude'] as double?;
 
-    return DraggableScrollableSheet(
-      initialChildSize: 0.7,
-      maxChildSize: 0.95,
-      minChildSize: 0.5,
-      expand: false,
-      builder: (context, scrollController) {
-        return Column(
-          children: [
-            // 핸들 바
-            Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: theme.colorScheme.outlineVariant,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-              ),
-            ),
-
-            // 헤더
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'フィルター',
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  if (_hasChanges)
-                    TextButton(
-                      onPressed: widget.onReset,
-                      child: const Text('リセット'),
-                    ),
-                ],
-              ),
-            ),
-
-            // 필터 내용
-            Expanded(
-              child: _isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : ListView(
-                      controller: scrollController,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      children: [
-                        // 도도부현 필터
-                        _buildSectionTitle('都道府県'),
-                        const SizedBox(height: 12),
-                        _buildPrefectureFilter(),
-                        const SizedBox(height: 24),
-
-                        // 미사 필터 칩
-                        _buildSectionTitle('ミサ'),
-                        const SizedBox(height: 12),
-                        _buildMassFilterChips(),
-                        const SizedBox(height: 24),
-
-                        // 옵션 필터
-                        _buildSectionTitle('オプション'),
-                        const SizedBox(height: 12),
-                        _buildOptionFilter(),
-                        const SizedBox(height: 24),
-                      ],
-                    ),
-            ),
-
-            // 하단 버튼
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border(
-                  top: BorderSide(
-                    color: theme.colorScheme.outlineVariant,
-                    width: 0.5,
-                  ),
-                ),
-              ),
-              child: SafeArea(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: widget.onReset,
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                        ),
-                        child: const Text('リセット'),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      flex: 2,
-                      child: ElevatedButton(
-                        onPressed: _applyFilters,
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: ParishColors.purple600,
-                          foregroundColor: Colors.white,
-                        ),
-                        child: const Text('適用'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+      if (lat != null && lon != null) {
+        // 좌표가 있으면 직접 계산
+        final distance = LocationUtils.calculateDistance(
+          userPosition.latitude,
+          userPosition.longitude,
+          lat,
+          lon,
         );
-      },
-    );
-  }
+        parishesWithDistance.add((parish: parish, distance: distance));
+      } else {
+        // 좌표가 없으면 거리 계산 불가 (나중에 Provider를 통해 계산되지만 정렬에는 사용하지 않음)
+        parishesWithoutDistance.add(parish);
+      }
+    }
 
-  Widget _buildSectionTitle(String title) {
-    return Text(
-      title,
-      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-        fontWeight: FontWeight.bold,
-        color: ParishColors.neutral800,
-      ),
-    );
-  }
+    // 거리순 정렬
+    parishesWithDistance.sort((a, b) => a.distance.compareTo(b.distance));
 
-  Widget _buildPrefectureFilter() {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: _prefectures.map((prefecture) {
-        final isSelected = _tempSelectedPrefectures.contains(prefecture);
-
-        return FilterChip(
-          label: Text(prefecture),
-          selected: isSelected,
-          onSelected: (selected) {
-            setState(() {
-              if (selected) {
-                _tempSelectedPrefectures.add(prefecture);
-              } else {
-                _tempSelectedPrefectures.remove(prefecture);
-              }
-            });
-          },
-          selectedColor: ParishColors.purple100,
-          checkmarkColor: ParishColors.purple600,
-          labelStyle: TextStyle(
-            color: isSelected
-                ? ParishColors.purple600
-                : ParishColors.neutral700,
-            fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-          ),
-        );
-      }).toList(),
-    );
-  }
-
-  Widget _buildMassFilterChips() {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: [
-        FilterChip(
-          label: const Text('今日のミサあり'),
-          selected: _tempOnlyTodayMass,
-          onSelected: (selected) {
-            setState(() {
-              _tempOnlyTodayMass = selected;
-            });
-          },
-          selectedColor: ParishColors.purple100,
-          checkmarkColor: ParishColors.purple600,
-          labelStyle: TextStyle(
-            color: _tempOnlyTodayMass
-                ? ParishColors.purple600
-                : ParishColors.neutral700,
-            fontWeight: _tempOnlyTodayMass
-                ? FontWeight.w600
-                : FontWeight.normal,
-          ),
-        ),
-        FilterChip(
-          label: const Text('外国語ミサあり'),
-          selected: _tempOnlyForeignLanguageMass,
-          onSelected: (selected) {
-            setState(() {
-              _tempOnlyForeignLanguageMass = selected;
-            });
-          },
-          selectedColor: ParishColors.purple100,
-          checkmarkColor: ParishColors.purple600,
-          labelStyle: TextStyle(
-            color: _tempOnlyForeignLanguageMass
-                ? ParishColors.purple600
-                : ParishColors.neutral700,
-            fontWeight: _tempOnlyForeignLanguageMass
-                ? FontWeight.w600
-                : FontWeight.normal,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildOptionFilter() {
-    return Column(
-      children: [
-        CheckboxListTile(
-          title: const Text('大聖堂のみ'),
-          subtitle: const Text('大聖堂のみを表示'),
-          value: _tempOnlyCathedrals,
-          onChanged: (value) {
-            setState(() {
-              _tempOnlyCathedrals = value ?? false;
-            });
-          },
-          contentPadding: EdgeInsets.zero,
-        ),
-        CheckboxListTile(
-          title: const Text('ミサ時間あり'),
-          subtitle: const Text('ミサ時間情報がある教会のみを表示'),
-          value: _tempOnlyWithMassTime,
-          onChanged: (value) {
-            setState(() {
-              _tempOnlyWithMassTime = value ?? false;
-            });
-          },
-          contentPadding: EdgeInsets.zero,
-        ),
-      ],
-    );
-  }
-
-  bool get _hasChanges {
-    return _tempSelectedPrefectures.length !=
-            widget.selectedPrefectures.length ||
-        !_tempSelectedPrefectures.containsAll(widget.selectedPrefectures) ||
-        !widget.selectedPrefectures.containsAll(_tempSelectedPrefectures) ||
-        _tempOnlyCathedrals != widget.onlyCathedrals ||
-        _tempOnlyWithMassTime != widget.onlyWithMassTime ||
-        _tempOnlyTodayMass != widget.onlyTodayMass ||
-        _tempOnlyForeignLanguageMass != widget.onlyForeignLanguageMass;
-  }
-
-  void _applyFilters() {
-    widget.onApply(
-      _tempSelectedPrefectures,
-      _tempOnlyCathedrals,
-      _tempOnlyWithMassTime,
-      _tempOnlyTodayMass,
-      _tempOnlyForeignLanguageMass,
-    );
+    // 거리가 있는 교회를 먼저, 거리가 없는 교회를 나중에 배치
+    return [
+      ...parishesWithDistance.map((p) => p.parish),
+      ...parishesWithoutDistance,
+    ];
   }
 }

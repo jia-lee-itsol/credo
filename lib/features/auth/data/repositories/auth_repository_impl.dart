@@ -3,10 +3,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import '../../../../core/data/services/push_notification_service.dart';
 import '../../../../core/error/failures.dart';
+import '../../../../core/services/logger_service.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../models/user_model.dart';
@@ -28,17 +29,33 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, UserEntity?>> getCurrentUser() async {
     try {
+      AppLogger.auth('getCurrentUser() 호출됨');
       final firebaseUser = _auth.currentUser;
+      AppLogger.auth(
+        'Firebase Auth currentUser: ${firebaseUser?.uid ?? 'null'}',
+      );
+      AppLogger.auth(
+        'Firebase Auth currentUser email: ${firebaseUser?.email ?? 'null'}',
+      );
+      AppLogger.auth(
+        'Firebase Auth currentUser displayName: ${firebaseUser?.displayName ?? 'null'}',
+      );
+
       if (firebaseUser == null) {
+        AppLogger.auth('firebaseUser가 null이므로 null 반환');
         return const Right(null);
       }
 
+      AppLogger.auth('Firestore에서 사용자 데이터 조회: ${firebaseUser.uid}');
       final userDoc = await _firestore
           .collection('users')
           .doc(firebaseUser.uid)
           .get();
 
+      AppLogger.auth('Firestore 문서 존재 여부: ${userDoc.exists}');
+
       if (!userDoc.exists) {
+        AppLogger.auth('Firestore에 사용자 데이터가 없어서 기본 데이터 생성');
         // Firestore에 사용자 데이터가 없으면 기본 데이터 생성
         final newUser = UserEntity(
           userId: firebaseUser.uid,
@@ -51,16 +68,23 @@ class AuthRepositoryImpl implements AuthRepository {
             .collection('users')
             .doc(firebaseUser.uid)
             .set(UserModel.fromEntity(newUser).toFirestore());
+        AppLogger.auth('기본 사용자 데이터 생성 완료: ${newUser.userId}');
         return Right(newUser);
       }
 
       final userModel = UserModel.fromFirestore(userDoc);
-      return Right(userModel.toEntity());
+      final userEntity = userModel.toEntity();
+      AppLogger.auth(
+        '사용자 데이터 로드 완료: userId=${userEntity.userId}, email=${userEntity.email}',
+      );
+      return Right(userEntity);
     } on FirebaseException catch (e) {
+      AppLogger.error('FirebaseException: ${e.code} - ${e.message}', e);
       return Left(
         FirebaseFailure(message: e.message ?? 'Firebaseエラー', code: e.code),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
+      AppLogger.error('Exception: $e', e, stackTrace);
       return Left(UnknownFailure(message: e.toString()));
     }
   }
@@ -70,44 +94,50 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
     required String nickname,
+    String? mainParishId,
+    String? baptismalName,
+    String? feastDayId,
   }) async {
     try {
-      debugPrint('🟡 [AuthRepo] createUserWithEmailAndPassword 시작');
+      AppLogger.auth('createUserWithEmailAndPassword 시작');
       final userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      debugPrint('🟢 [AuthRepo] createUserWithEmailAndPassword 완료');
+      AppLogger.auth('createUserWithEmailAndPassword 완료');
 
       final firebaseUser = userCredential.user;
       if (firebaseUser == null) {
-        debugPrint('🔴 [AuthRepo] firebaseUser가 null');
+        AppLogger.error('firebaseUser가 null');
         return const Left(AuthFailure(message: 'アカウント作成に失敗しました。'));
       }
-      debugPrint('🟢 [AuthRepo] firebaseUser 생성됨: ${firebaseUser.uid}');
+      AppLogger.auth('firebaseUser 생성됨: ${firebaseUser.uid}');
 
       // 사용자 프로필 업데이트
-      debugPrint('🟡 [AuthRepo] updateDisplayName 시작: $nickname');
+      AppLogger.auth('updateDisplayName 시작: $nickname');
       await firebaseUser.updateDisplayName(nickname);
-      debugPrint('🟢 [AuthRepo] updateDisplayName 완료');
+      AppLogger.auth('updateDisplayName 완료');
 
       // Firestore에 사용자 데이터 저장
-      debugPrint('🟡 [AuthRepo] UserEntity 생성 시작');
+      AppLogger.auth('UserEntity 생성 시작');
       final newUser = UserEntity(
         userId: firebaseUser.uid,
         nickname: nickname,
         email: email,
+        mainParishId: mainParishId,
+        baptismalName: baptismalName,
+        feastDayId: feastDayId,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       );
-      debugPrint('🟢 [AuthRepo] UserEntity 생성 완료');
+      AppLogger.auth('UserEntity 생성 완료');
 
-      debugPrint('🟡 [AuthRepo] UserModel 변환 시작');
+      AppLogger.auth('UserModel 변환 시작');
       final userModel = UserModel.fromEntity(newUser);
-      debugPrint('🟢 [AuthRepo] UserModel 변환 완료');
+      AppLogger.auth('UserModel 변환 완료');
 
-      debugPrint('🟡 [AuthRepo] Firestore 저장 시작: users/${firebaseUser.uid}');
-      debugPrint('🟡 [AuthRepo] 저장할 데이터: ${userModel.toFirestore()}');
+      AppLogger.auth('Firestore 저장 시작: users/${firebaseUser.uid}');
+      AppLogger.debug('저장할 데이터: ${userModel.toFirestore()}');
 
       try {
         await _firestore
@@ -117,32 +147,29 @@ class AuthRepositoryImpl implements AuthRepository {
             .timeout(
               const Duration(seconds: 10),
               onTimeout: () {
-                debugPrint('🔴 [AuthRepo] Firestore 저장 타임아웃 (10초)');
+                AppLogger.error('Firestore 저장 타임아웃 (10초)');
                 throw TimeoutException('Firestore 저장 타임아웃');
               },
             );
-        debugPrint('🟢 [AuthRepo] Firestore 저장 완료');
+        AppLogger.auth('Firestore 저장 완료');
       } catch (e) {
-        debugPrint('🔴 [AuthRepo] Firestore 저장 중 에러: $e');
-        debugPrint('🔴 [AuthRepo] 에러 타입: ${e.runtimeType}');
+        AppLogger.error('Firestore 저장 중 에러: $e', e);
+        AppLogger.debug('에러 타입: ${e.runtimeType}');
         rethrow;
       }
 
-      debugPrint('🟢 [AuthRepo] signUpWithEmail 성공, Right 반환');
+      AppLogger.auth('signUpWithEmail 성공, Right 반환');
       return Right(newUser);
     } on FirebaseAuthException catch (e) {
-      debugPrint(
-        '🔴 [AuthRepo] FirebaseAuthException: ${e.code} - ${e.message}',
-      );
+      AppLogger.error('FirebaseAuthException: ${e.code} - ${e.message}', e);
       return Left(_handleAuthException(e));
     } on FirebaseException catch (e) {
-      debugPrint('🔴 [AuthRepo] FirebaseException: ${e.code} - ${e.message}');
+      AppLogger.error('FirebaseException: ${e.code} - ${e.message}', e);
       return Left(
         FirebaseFailure(message: e.message ?? 'Firebaseエラー', code: e.code),
       );
     } catch (e, stackTrace) {
-      debugPrint('🔴 [AuthRepo] Unknown Exception: $e');
-      debugPrint('🔴 [AuthRepo] StackTrace: $stackTrace');
+      AppLogger.error('Unknown Exception: $e', e, stackTrace);
       return Left(UnknownFailure(message: e.toString()));
     }
   }
@@ -343,6 +370,12 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, void>> signOut() async {
     try {
+      // FCM 토큰 삭제
+      final currentUser = _auth.currentUser;
+      if (currentUser != null) {
+        await PushNotificationService().removeTokenForUser(currentUser.uid);
+      }
+
       await _auth.signOut();
       return const Right(null);
     } on FirebaseException catch (e) {
@@ -438,17 +471,34 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Stream<UserEntity?> get authStateChanges {
     return _auth.authStateChanges().asyncMap((firebaseUser) async {
+      AppLogger.auth('authStateChanges 이벤트 발생');
+      AppLogger.auth(
+        'Firebase Auth currentUser: ${_auth.currentUser?.uid ?? 'null'}',
+      );
+      AppLogger.auth(
+        'firebaseUser from stream: ${firebaseUser?.uid ?? 'null'}',
+      );
+      AppLogger.auth('firebaseUser email: ${firebaseUser?.email ?? 'null'}');
+      AppLogger.auth(
+        'firebaseUser displayName: ${firebaseUser?.displayName ?? 'null'}',
+      );
+
       if (firebaseUser == null) {
+        AppLogger.auth('firebaseUser가 null이므로 null 반환');
         return null;
       }
 
       try {
+        AppLogger.auth('Firestore에서 사용자 데이터 조회 시작: ${firebaseUser.uid}');
         final userDoc = await _firestore
             .collection('users')
             .doc(firebaseUser.uid)
             .get();
 
+        AppLogger.auth('Firestore 문서 존재 여부: ${userDoc.exists}');
+
         if (!userDoc.exists) {
+          AppLogger.auth('Firestore에 사용자 데이터가 없어서 기본 데이터 생성');
           // Firestore에 사용자 데이터가 없으면 기본 데이터 생성
           final newUser = UserEntity(
             userId: firebaseUser.uid,
@@ -461,13 +511,23 @@ class AuthRepositoryImpl implements AuthRepository {
               .collection('users')
               .doc(firebaseUser.uid)
               .set(UserModel.fromEntity(newUser).toFirestore());
+          AppLogger.auth('기본 사용자 데이터 생성 완료: ${newUser.userId}');
           return newUser;
         }
 
         final userModel = UserModel.fromFirestore(userDoc);
-        return userModel.toEntity();
-      } catch (e) {
+        final userEntity = userModel.toEntity();
+        AppLogger.auth(
+          '사용자 데이터 로드 완료: userId=${userEntity.userId}, email=${userEntity.email}, nickname=${userEntity.nickname}',
+        );
+
+        // FCM 토큰 저장
+        await PushNotificationService().saveTokenForUser(userEntity.userId);
+
+        return userEntity;
+      } catch (e, stackTrace) {
         // 에러 발생 시 null 반환
+        AppLogger.error('에러 발생: $e', e, stackTrace);
         return null;
       }
     });

@@ -10,8 +10,1341 @@
       "address": "福岡県福岡市中央区天神1-1-1",
       "prefecture": "福岡県",
       "isCathedral": true,
-      "massTime": "主日：08:00, 10:00, 12:00 / 第1・第3日曜14:00(英語ミサ)"
+      "massTime": "主日：08:00, 10:00, 12:00 / 第1・第3日曜14:00(英語ミサ)",
+      "massTimes": {
+        "sunday": [
+          "08:00",
+          "10:00",
+          "12:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1・第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック老司教会",
+      "address": "〒811-1346 福岡県福岡市南区老司5-28-1",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:30",
+      "phone": "092-566-2323",
+      "fax": "092-566-2323",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック南粕屋教会（巡回）",
+      "address": "〒811-2204 福岡県糟屋郡志免町田富139-1",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜・日曜09:00",
+      "phone": "092-937-0874",
+      "fax": "092-515-6816",
+      "note": "巡回教会",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "09:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック吉塚教会",
+      "address": "〒812-0041 福岡県福岡市博多区吉塚5-17-40",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜・日曜11:00",
+      "phone": "092-621-2959",
+      "fax": "092-621-2960",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "11:00"
+        ],
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック光丘教会",
+      "address": "〒812-0874 福岡県福岡市博多区光丘町1-1-15",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：07:30, 09:30",
+      "phone": "092-581-0570",
+      "fax": "092-581-0616",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:30",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック箱崎教会",
+      "address": "〒812-0054 福岡県福岡市東区馬出4-8-21",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜・日曜09:30",
+      "phone": "080-4032-9479",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "09:30"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック西新教会",
+      "address": "〒814-0003 福岡県福岡市早良区城西3-14-1",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：07:00, 10:00",
+      "phone": "092-851-8032",
+      "fax": "092-851-8055",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック茶山教会",
+      "address": "〒814-0111 福岡県福岡市城南区茶山2-12-11",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜18:00 / 主日：09:00",
+      "phone": "092-821-7024",
+      "fax": "092-400-8580",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック笹丘教会",
+      "address": "〒810-0034 福岡県福岡市中央区笹丘1-16-1",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：07:30, 10:00 / 第1土16:00(英語)",
+      "phone": "092-761-4504",
+      "fax": "092-761-4524",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:30",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "16:00",
+            "language": "EN",
+            "note": "第1土"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック高宮教会",
+      "address": "〒815-0083 福岡県福岡市南区高宮4-10-34",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:30",
+      "phone": "092-531-6494",
+      "fax": "092-526-0632",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック能古島教会（巡回）",
+      "address": "〒819-0012 福岡県福岡市西区能古1621-12",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜18:00 / 主日なし",
+      "note": "巡回教会",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大名町教会",
+      "address": "〒810-0041 福岡県福岡市中央区大名2-7-7",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：07:00, 09:30 / 英語16:00 / ベトナム語第2・4日13:30",
+      "phone": "092-741-3687",
+      "fax": "092-741-5107",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:00",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "16:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "13:30",
+            "language": "VI",
+            "note": "第2・4日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック浄水通教会",
+      "address": "〒810-0028 福岡県福岡市中央区浄水通6-22",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:00 / ベトナム語第1日16:30",
+      "phone": "092-531-3689",
+      "fax": "092-791-8499",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "16:30",
+            "language": "VI",
+            "note": "第1日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック古賀教会",
+      "address": "〒811-3112 福岡県古賀市花見東2-23-1",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜18:00 / 主日：09:30 / 英語第4日15:00",
+      "phone": "092-942-2171",
+      "fax": "092-944-6928",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第4日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック糸島教会",
+      "address": "〒819-1306 福岡県糸島市志摩松隈770",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:00",
+      "phone": "092-327-3210",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大楠教会",
+      "address": "〒815-0082 福岡県福岡市南区大楠2-7-10",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜・日曜09:00",
+      "phone": "092-521-6946",
+      "fax": "092-791-9600",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "09:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック本郷教会",
+      "address": "〒830-1211 福岡県三井郡大刀洗町本郷2275",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "0942-77-0011",
+      "fax": "0942-77-0011",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック二日市教会",
+      "address": "〒818-0103 福岡県太宰府市朱雀4-14-1",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "主日：07:00, 09:30",
+      "phone": "092-922-2319",
+      "fax": "092-924-5129",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック久留米教会",
+      "address": "〒830-0031 福岡県久留米市六ツ門町22-43",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：06:30, 09:00 / 手話通訳第2日 / 英語第3日15:30 / ベトナム語第1日15:00",
+      "phone": "0942-32-8011",
+      "fax": "0942-32-7884",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "06:30",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "09:00",
+            "language": "SIGN",
+            "note": "第2日"
+          },
+          {
+            "time": "15:30",
+            "language": "EN",
+            "note": "第3日"
+          },
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": "第1日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック小郡教会",
+      "address": "〒838-0141 福岡県小郡市小郡636-1",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:30 / 主日：09:00, 11:00",
+      "phone": "0942-72-3256",
+      "fax": "0942-72-3395",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大牟田教会",
+      "address": "〒836-0842 福岡県大牟田市有明町2-2-12",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:00",
+      "phone": "0944-52-4871",
+      "fax": "0944-52-4886",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック今村教会",
+      "address": "〒830-1223 福岡県三井郡大刀洗町大字今707",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：08:00, 10:00",
+      "phone": "0942-77-2301",
+      "fax": "0942-77-3998",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "08:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック若松教会",
+      "address": "〒808-0035 福岡県北九州市若松区白山1-9-50",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：10:30（第2）09:00",
+      "phone": "093-761-4571",
+      "fax": "093-761-2371",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "10:30",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック豊津教会（巡回）",
+      "address": "〒824-0121 福岡県京都郡みやこ町豊津1104-1",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:30 / 主日：08:00（第2日曜のみ）",
+      "phone": "0930-33-4767",
+      "fax": "0930-22-0816",
+      "note": "巡回教会",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
+        "sunday": [
+          "08:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック行橋教会",
+      "address": "〒824-0006 福岡県行橋市門樋町8-5",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜・日曜 / 日・英・べ（第1日）10:30 / 日（第2～5日）10:30 / ベトナム語（第3日）15:00",
+      "phone": "0930-22-0805",
+      "fax": "0930-22-0816",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "10:30"
+        ],
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": "第3日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック湯川教会",
+      "address": "〒800-0257 福岡県北九州市小倉南区湯川5-10-33",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:00",
+      "phone": "093-922-7997",
+      "fax": "093-931-3011",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック門司教会",
+      "address": "〒800-0035 福岡県北九州市門司区別院1-21",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:30",
+      "phone": "093-371-2944",
+      "fax": "093-371-2988",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック水巻教会",
+      "address": "〒807-0025 福岡県遠賀郡水巻町頃末南1-35-3",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：09:30 / ベトナム語（第4日）16:00",
+      "phone": "093-201-0680",
+      "fax": "093-201-7354",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "16:00",
+            "language": "VI",
+            "note": "第4日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック直方教会",
+      "address": "〒822-0002 福岡県直方市頓野3891-2",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：09:30",
+      "phone": "0949-28-8908",
+      "fax": "0949-28-8650",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック戸畑教会",
+      "address": "〒804-0081 福岡県北九州市戸畑区千防1-8-15",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:00（第2）10:30",
+      "phone": "093-871-3019",
+      "fax": "093-871-3199",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00",
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック天神町教会",
+      "address": "〒805-0054 福岡県北九州市八幡東区天神町3-3",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜20:00 / 主日：08:00 / （第3日）09:30",
+      "phone": "093-671-3252",
+      "fax": "093-671-3258",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "20:00"
+        ],
+        "sunday": [
+          "08:00",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック田川教会",
+      "address": "〒826-0023 福岡県田川市上本町9-6",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：11:30",
+      "phone": "0947-44-2250",
+      "fax": "0947-44-2250",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "11:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック新田原教会",
+      "address": "〒824-0025 福岡県行橋市東徳永384",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:00",
+      "phone": "0930-23-1594",
+      "fax": "0930-23-6050",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小倉教会",
+      "address": "〒802-0084 福岡県北九州市小倉北区香春口1-3-1",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：07:30, 10:00 / 英語（第2日）15:00 / ベトナム語（第1日）14:00",
+      "phone": "093-921-0093",
+      "fax": "093-921-0139",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:30",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第2日"
+          },
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "第1日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック黒崎教会",
+      "address": "〒806-0032 福岡県北九州市八幡西区筒井町4-7",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜18:30 / 主日：09:30（第3日）08:00",
+      "phone": "093-621-3672",
+      "fax": "093-622-6180",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "09:30",
+          "08:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック飯塚教会",
+      "address": "〒820-0004 福岡県飯塚市新立岩1-11",
+      "prefecture": "福岡県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:00",
+      "phone": "0948-25-3489",
+      "fax": "0948-25-3558",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック松島教会（巡回）",
+      "address": "〒847-0406 佐賀県唐津市鎮西町松島3506",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：15:00",
+      "note": "巡回教会",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "15:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック呼子教会",
+      "address": "〒847-0304 佐賀県唐津市呼子町殿ノ浦1868-1",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜19:30 / 主日：10:30",
+      "phone": "0955-82-3126",
+      "fax": "0955-82-3126",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック馬渡島教会",
+      "address": "〒847-0405 佐賀県唐津市鎮西町馬渡島1767-2",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：07:30",
+      "phone": "0955-82-9044",
+      "fax": "0955-82-3126",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック基山教会（巡回）",
+      "address": "〒841-0203 佐賀県三養基郡基山町園部2264",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜第2 07:00 / 主日なし",
+      "phone": "0942-92-2278",
+      "fax": "0942-82-2374",
+      "note": "巡回教会",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック鳥栖教会",
+      "address": "〒841-0033 佐賀県鳥栖市本通町1-806",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：09:00",
+      "phone": "0942-82-2282",
+      "fax": "0942-82-2374",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック武雄教会",
+      "address": "〒843-0024 佐賀県武雄市武雄町富岡8281",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：09:00（4・5・6月）11:00（7・8・9月）09:00（10・11・12月）11:00（1・2・3月）",
+      "phone": "0954-22-2459",
+      "fax": "0954-28-9553",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "11:00",
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック多久教会",
+      "address": "〒846-0002 佐賀県多久市北多久町小侍40",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：11:00",
+      "phone": "0952-75-2605",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック佐賀教会",
+      "address": "〒840-0825 佐賀県佐賀市中央本町1-17",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：10:00 / ベトナム語第3日14:00",
+      "phone": "0952-23-4754",
+      "fax": "0952-23-4929",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "第3日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック唐津教会",
+      "address": "〒847-0842 佐賀県唐津市山下町1201-1",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：09:00",
+      "phone": "0955-72-2758",
+      "fax": "0955-72-2758",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック鹿島教会",
+      "address": "〒849-1312 佐賀県鹿島市大字納富分3151",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：11:00（4・5・6月）09:00（7・8・9月）11:00（10・11・12月）09:00（1・2・3月）",
+      "phone": "0954-62-2966",
+      "fax": "0954-62-2966",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "11:00",
+          "09:00",
+          "11:00",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック伊万里教会",
+      "address": "〒848-0031 佐賀県伊万里市二里町八谷搦一本松117-2",
+      "prefecture": "佐賀県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：09:00",
+      "phone": "0955-23-5521",
+      "fax": "0955-25-8197",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック荒尾教会",
+      "address": "〒864-0054 熊本県荒尾市大正町2-1-10",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜10:00 / 主日：09:00",
+      "phone": "0968-62-0432",
+      "fax": "0968-62-0432",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "10:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック八代教会",
+      "address": "〒866-0861 熊本県八代市本町1-8-2",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：11:00 / 英語（第4日）13:00",
+      "phone": "0965-32-4065",
+      "fax": "0965-32-4070",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "EN",
+            "note": "第4日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック恵楓園教会（巡回）",
+      "address": "〒861-1113 熊本県合志市栄3796",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：08:30",
+      "note": "巡回教会",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック武蔵ヶ丘教会",
+      "address": "〒862-8001 熊本県熊本市北区武蔵ヶ丘7-1-103",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜19:30 / 主日：10:00 / 英語第3日14:00",
+      "phone": "096-339-1910",
+      "fax": "096-339-8979",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第3日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック水俣教会",
+      "address": "〒867-0045 熊本県水俣市桜井町3-1-10",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜・日曜08:00",
+      "phone": "0966-62-4286",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "08:00"
+        ],
+        "sunday": [
+          "08:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック本渡教会",
+      "address": "〒863-0015 熊本県天草市大浜町3-28",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：10:00",
+      "phone": "0969-22-2758",
+      "fax": "0969-22-2758",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック人吉教会",
+      "address": "〒868-0056 熊本県人吉市寺町5-1",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：09:00",
+      "phone": "0966-22-3892",
+      "fax": "0966-24-6880",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック手取教会",
+      "address": "〒860-0845 熊本県熊本市中央区上通町3-34",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜18:00 / 主日：09:00, 11:00 / ベトナム語第2日14:00",
+      "phone": "096-352-3030",
+      "fax": "096-352-1515",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "第2日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック玉名教会",
+      "address": "〒865-0064 熊本県玉名市中1925-2",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：11:00",
+      "phone": "0968-72-3269",
+      "fax": "096-57-9955",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック島崎教会",
+      "address": "〒860-0073 熊本県熊本市西区島崎2-10-11",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：07:00（修道院）09:00",
+      "phone": "096-352-5610",
+      "fax": "096-322-2112",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック崎津教会",
+      "address": "〒863-1204 熊本県天草市河浦町崎津539",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：07:30",
+      "phone": "0969-79-0015",
+      "fax": "0969-79-0015",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "07:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック高遊原教会（巡回）",
+      "address": "〒861-2403 熊本県阿蘇郡西原村布田",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜第2・4 19:00 / 主日",
+      "note": "巡回教会",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック健軍教会",
+      "address": "〒862-0911 熊本県熊本市東区健軍3-8-37",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：09:30",
+      "phone": "096-368-2825",
+      "fax": "096-368-2825",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック山鹿教会（巡回）",
+      "address": "〒861-0501 熊本県山鹿市山鹿563-5",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：11:00",
+      "phone": "0968-44-7436",
+      "fax": "0968-44-7436",
+      "note": "巡回教会",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック菊池教会",
+      "address": "〒861-1331 熊本県菊池市隈府278-2",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜・日曜09:00",
+      "phone": "0968-25-2381",
+      "fax": "0968-25-5201",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "09:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック帯山教会",
+      "address": "〒862-0972 熊本県熊本市中央区新大江3-19-10",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜なし / 主日：09:00",
+      "phone": "096-382-9413",
+      "fax": "096-382-9413",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大江教会",
+      "address": "〒863-2801 熊本県天草市天草町大江1782",
+      "prefecture": "熊本県",
+      "isCathedral": false,
+      "massTime": "土曜18:30 / 主日",
+      "phone": "0969-42-5176",
+      "fax": "0969-42-5176",
+      "diocese": "fukuoka",
+      "deanery": "fukuoka",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ]
+      },
+      "foreignMassTimes": {}
     }
   ]
 }
-

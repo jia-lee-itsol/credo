@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../shared/providers/location_provider.dart';
+import '../../../../core/utils/location_utils.dart';
 import '../constants/parish_colors.dart';
 import 'parish_tag.dart';
 
 /// 교회 카드 위젯
-class ParishCard extends StatelessWidget {
+class ParishCard extends ConsumerWidget {
   final Map<String, dynamic> parish;
   final VoidCallback onTap;
 
   const ParishCard({super.key, required this.parish, required this.onTap});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final name = parish['name'] as String? ?? '';
     final address = parish['address'] as String? ?? '';
     final massTime = parish['massTime'] as String? ?? '';
 
-    // 거리 (임시)
-    final distance = '1.2km';
+    // 실제 거리 계산
+    final distanceKm = ref.watch(parishDistanceProvider(parish));
+    final distance = distanceKm != null
+        ? LocationUtils.formatDistance(distanceKm)
+        : null;
 
     // 오늘/내일 미사 시간 추출
     final nextMass = _getNextMassTime(massTime);
@@ -90,36 +96,41 @@ class ParishCard extends StatelessWidget {
 
                     const SizedBox(height: 12),
 
-                    // 거리, 미사 시간, 언어 태그 - 한 줄 가로 배치
-                    Row(
-                      children: [
-                        // 거리 태그
-                        ParishTag(
-                          text: distance,
-                          backgroundColor: ParishColors.purple100,
-                          textColor: ParishColors.purple600,
-                        ),
-                        const SizedBox(width: 8),
-                        // 미사 시간 태그
-                        if (nextMass.isNotEmpty) ...[
-                          ParishTag(
-                            text: nextMass,
-                            backgroundColor: ParishColors.neutral100,
-                            textColor: ParishColors.neutral600,
-                          ),
-                          const SizedBox(width: 8),
-                        ],
-                        // 언어 태그들
-                        ...languages.map(
-                          (lang) => Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: ParishOutlinedTag(
-                              text: lang,
-                              textColor: ParishColors.blue600,
+                    // 거리, 미사 시간, 언어 태그 - 한 줄 가로 배치 (가로 스크롤 가능)
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          // 거리 태그 (거리가 있을 때만 표시)
+                          if (distance != null) ...[
+                            ParishTag(
+                              text: distance,
+                              backgroundColor: ParishColors.purple100,
+                              textColor: ParishColors.purple600,
+                            ),
+                            const SizedBox(width: 8),
+                          ],
+                          // 미사 시간 태그
+                          if (nextMass.isNotEmpty) ...[
+                            ParishTag(
+                              text: nextMass,
+                              backgroundColor: ParishColors.neutral100,
+                              textColor: ParishColors.neutral600,
+                            ),
+                            const SizedBox(width: 8),
+                          ],
+                          // 언어 태그들
+                          ...languages.map(
+                            (lang) => Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: ParishOutlinedTag(
+                                text: lang,
+                                textColor: ParishColors.blue600,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -166,14 +177,25 @@ class ParishCard extends StatelessWidget {
   List<String> _getSupportedLanguages(String massTime) {
     final languages = <String>[];
 
-    // 일본어는 기본
-    if (massTime.isNotEmpty) {
-      languages.add('JP');
-    }
+    // 일본어는 기본 언어이므로 뱃지 표시하지 않음
 
     // 영어
     if (massTime.contains('英語') || massTime.contains('English')) {
       languages.add('EN');
+    }
+
+    // 스페인어
+    if (massTime.contains('スペイン語') ||
+        massTime.contains('Spanish') ||
+        massTime.contains('Español')) {
+      languages.add('ES');
+    }
+
+    // 중국어
+    if (massTime.contains('中国語') ||
+        massTime.contains('Chinese') ||
+        massTime.contains('中文')) {
+      languages.add('CN');
     }
 
     // 필리핀어

@@ -4,12 +4,53 @@
     {
       "name": "カトリック関口教会",
       "churchName": "東京カテドラル聖マリア大聖堂",
-      "address": "東京都文京区関口3-16-15",
+      "address": "〒112-0014 東京都文京区関口3-16-15",
       "prefecture": "東京都",
       "isCathedral": true,
-      "massTime": "平日：07:00 / 土曜日：18:00 / 主日：07:00, 10:00, 18:00 / 第2・第4日曜14:00(英語ミサ)",
+      "massTime": "平日：07:00 / 土曜日：18:00 / 主日：08:00, 10:00, 12:00(韓国語ミサ), 18:00 / 第2・第4日曜14:00(英語ミサ)",
+      "phone": "03-3945-0126",
+      "fax": null,
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "08:00",
+          "10:00",
+          "18:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "12:00",
+            "language": "KR",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2・第4日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック麹町教会",
@@ -19,7 +60,45 @@
       "isCathedral": false,
       "massTime": "平日：07:00 / 土曜日：18:00 / 主日：09:00, 11:00 / 第1・第3日曜14:00(英語ミサ) / 第2・第4日曜14:00(スペイン語ミサ)",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:00",
+          "11:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1・第3日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "ES",
+            "note": "第2・第4日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック築地教会",
@@ -28,7 +107,21 @@
       "isCathedral": false,
       "massTime": "主日：10:30 / 第2日曜14:00(英語ミサ)",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック麻布教会",
@@ -37,7 +130,21 @@
       "isCathedral": false,
       "massTime": "主日：09:30 / 第1・第3日曜14:00(英語ミサ)",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1・第3日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック目黒教会",
@@ -46,7 +153,21 @@
       "isCathedral": false,
       "massTime": "主日：10:00 / 第4日曜14:00(英語ミサ)",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック赤羽教会",
@@ -555,12 +676,20 @@
     },
     {
       "name": "カトリック市川教会",
-      "address": "千葉県市川市",
+      "address": "〒272-0021 千葉県市川市八幡3-13-15",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00",
+      "phone": "047-322-5488",
+      "fax": null,
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック鴨川教会",
@@ -581,13 +710,21 @@
       "deanery": "chiba"
     },
     {
-      "name": "カトリック小井教会",
-      "address": "千葉県",
+      "name": "カトリック五井教会",
+      "address": "〒290-0081 千葉県市原市五井中央西1-33-10",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00",
+      "phone": "0436-21-3830",
+      "fax": null,
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック佐原教会",
@@ -654,12 +791,20 @@
     },
     {
       "name": "カトリック松戸教会",
-      "address": "千葉県松戸市",
+      "address": "〒271-0092 千葉県松戸市松戸1126",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00",
+      "phone": "047-362-3516",
+      "fax": null,
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック茂原教会",
@@ -668,7 +813,43 @@
       "isCathedral": false,
       "massTime": "",
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック豊四季教会",
+      "address": "〒270-0134 千葉県流山市長崎2-444-1",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "phone": "04-7145-9933",
+      "fax": null,
+      "diocese": "tokyo",
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック東金教会",
+      "address": "〒283-0802 千葉県東金市東金1416-2",
+      "prefecture": "千葉県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "phone": "0475-52-3291",
+      "fax": null,
+      "diocese": "tokyo",
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     }
   ]
 }

@@ -1,14 +1,16 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../error/failures.dart';
+import '../../services/logger_service.dart';
 
 /// 교회 데이터 서비스
 class ParishService {
   static Map<String, dynamic>? _cachedData;
 
   /// 모든 교구 데이터 로드
-  static Future<Map<String, List<Map<String, dynamic>>>> loadAllParishes() async {
+  static Future<Map<String, List<Map<String, dynamic>>>>
+  loadAllParishes() async {
     if (_cachedData != null) {
       return _cachedData! as Map<String, List<Map<String, dynamic>>>;
     }
@@ -43,15 +45,16 @@ class ParishService {
         } catch (e) {
           // 파일이 없거나 에러가 발생하면 빈 리스트
           // 디버깅을 위해 에러 로그 출력 (개발 중에만)
-          debugPrint('Failed to load $diocese.json: $e');
+          AppLogger.parish('Failed to load $diocese.json: $e');
           allParishes[diocese] = [];
         }
       }
 
       _cachedData = allParishes;
       return allParishes;
-    } catch (e) {
-      throw Exception('Failed to load parishes data: $e');
+    } catch (e, stackTrace) {
+      AppLogger.error('Failed to load parishes data', e, stackTrace);
+      throw CacheFailure(message: '교회 데이터를 불러오는데 실패했습니다: $e');
     }
   }
 
@@ -77,12 +80,10 @@ class ParishService {
       final name = parishId.substring(firstDashIndex + 1);
 
       final parishes = await getParishesByDiocese(dioceseId);
-      
+
       // 이름으로 교회 찾기
       try {
-        return parishes.firstWhere(
-          (parish) => parish['name'] == name,
-        );
+        return parishes.firstWhere((parish) => parish['name'] == name);
       } catch (e) {
         return null;
       }
@@ -102,7 +103,8 @@ class ParishService {
       for (final parish in dioceseParishes) {
         final name = (parish['name'] as String? ?? '').toLowerCase();
         final address = (parish['address'] as String? ?? '').toLowerCase();
-        final prefecture = (parish['prefecture'] as String? ?? '').toLowerCase();
+        final prefecture = (parish['prefecture'] as String? ?? '')
+            .toLowerCase();
 
         if (name.contains(queryLower) ||
             address.contains(queryLower) ||
@@ -119,18 +121,18 @@ class ParishService {
 /// 모든 교회 데이터 Provider
 final allParishesProvider =
     FutureProvider<Map<String, List<Map<String, dynamic>>>>((ref) {
-  return ParishService.loadAllParishes();
-});
+      return ParishService.loadAllParishes();
+    });
 
 /// 특정 교구의 교회 목록 Provider
 final parishesByDioceseProvider =
     FutureProvider.family<List<Map<String, dynamic>>, String>((ref, dioceseId) {
-  return ParishService.getParishesByDiocese(dioceseId);
-});
+      return ParishService.getParishesByDiocese(dioceseId);
+    });
 
 /// 특정 교회 데이터 Provider
-final parishByIdProvider =
-    FutureProvider.family<Map<String, dynamic>?, String>((ref, parishId) {
-  return ParishService.getParishById(parishId);
-});
-
+final parishByIdProvider = FutureProvider.family<Map<String, dynamic>?, String>(
+  (ref, parishId) {
+    return ParishService.getParishById(parishId);
+  },
+);

@@ -1,36 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'post.freezed.dart';
+part 'post.g.dart';
 
 /// 게시글 모델 (Firestore /posts/{postId} 컬렉션)
-class Post {
-  final String postId;
-  final String authorId; // user uid
-  final String authorName; // snapshot of user.displayName at posting time
-  final String authorRole; // copy of user.role for snapshot
-  final bool authorIsVerified; // copy of user.isVerified for snapshot
-  final String category; // e.g. "notice", "community", "qa", "testimony"
-  final String type; // "official" | "normal"
-  final String? parishId; // if the post is specific to a parish
-  final String title;
-  final String body;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final String status; // "published" | "hidden" | "reported"
+@freezed
+class Post with _$Post {
+  const factory Post({
+    required String postId,
+    required String authorId, // user uid
+    required String authorName, // snapshot of user.displayName at posting time
+    @Default('user') String authorRole, // copy of user.role for snapshot
+    @Default(false)
+    bool authorIsVerified, // copy of user.isVerified for snapshot
+    @Default('community')
+    String category, // e.g. "notice", "community", "qa", "testimony"
+    @Default('normal') String type, // "official" | "normal"
+    String? parishId, // if the post is specific to a parish
+    required String title,
+    required String body,
+    @Default([]) List<String> imageUrls, // 게시글에 첨부된 이미지 URL 리스트
+    @Default(0) int likeCount, // 좋아요 수
+    @Default(0) int commentCount, // 댓글 수
+    @Default(false) bool isPinned, // 상단 고정 여부
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    @Default('published') String status, // "published" | "hidden" | "reported"
+  }) = _Post;
 
-  const Post({
-    required this.postId,
-    required this.authorId,
-    required this.authorName,
-    required this.authorRole,
-    required this.authorIsVerified,
-    required this.category,
-    required this.type,
-    this.parishId,
-    required this.title,
-    required this.body,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.status,
-  });
+  const Post._();
 
   /// 공식 게시글인지 확인
   bool get isOfficial => type == 'official';
@@ -47,113 +46,44 @@ class Post {
   /// 게시된 상태인지 확인
   bool get isPublished => status == 'published';
 
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
+
   /// Firestore Document에서 생성
   factory Post.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    return Post.fromJson({'postId': doc.id, ...data});
-  }
-
-  /// JSON에서 생성
-  factory Post.fromJson(Map<String, dynamic> json) {
-    return Post(
-      postId: json['postId'] as String,
-      authorId: json['authorId'] as String,
-      authorName: json['authorName'] as String,
-      authorRole: json['authorRole'] as String? ?? 'user',
-      authorIsVerified: json['authorIsVerified'] as bool? ?? false,
-      category: json['category'] as String? ?? 'community',
-      type: json['type'] as String? ?? 'normal',
-      parishId: json['parishId'] as String?,
-      title: json['title'] as String,
-      body: json['body'] as String,
-      createdAt: _parseTimestamp(json['createdAt']),
-      updatedAt: _parseTimestamp(json['updatedAt']),
-      status: json['status'] as String? ?? 'published',
-    );
-  }
-
-  /// Firestore Timestamp를 DateTime으로 변환
-  static DateTime _parseTimestamp(dynamic timestamp) {
-    if (timestamp == null) {
-      return DateTime.now();
-    }
-    if (timestamp is Timestamp) {
-      return timestamp.toDate();
-    }
-    if (timestamp is String) {
-      return DateTime.parse(timestamp);
-    }
-    return DateTime.now();
+    // Timestamp를 ISO8601 문자열로 변환 (json_serializable이 파싱할 수 있도록)
+    final json = <String, dynamic>{
+      'postId': doc.id,
+      ...data,
+      'createdAt':
+          (data['createdAt'] as Timestamp?)?.toDate().toIso8601String() ??
+          DateTime.now().toIso8601String(),
+      'updatedAt':
+          (data['updatedAt'] as Timestamp?)?.toDate().toIso8601String() ??
+          DateTime.now().toIso8601String(),
+    };
+    return Post.fromJson(json);
   }
 
   /// Firestore에 저장할 Map으로 변환
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{
-      'postId': postId,
-      'authorId': authorId,
-      'authorName': authorName,
-      'authorRole': authorRole,
-      'authorIsVerified': authorIsVerified,
-      'category': category,
-      'type': type,
-      'title': title,
-      'body': body,
-      'createdAt': Timestamp.fromDate(createdAt),
-      'updatedAt': Timestamp.fromDate(updatedAt),
-      'status': status,
-    };
-
-    if (parishId != null) {
-      map['parishId'] = parishId;
-    }
-
-    return map;
+  Map<String, dynamic> toFirestore() {
+    final json = toJson();
+    // DateTime을 Timestamp로 변환 (toJson은 ISO8601 문자열로 변환됨)
+    json['createdAt'] = Timestamp.fromDate(createdAt);
+    json['updatedAt'] = Timestamp.fromDate(updatedAt);
+    return json;
   }
 
-  /// 복사본 생성 (일부 필드만 업데이트)
-  Post copyWith({
-    String? postId,
-    String? authorId,
-    String? authorName,
-    String? authorRole,
-    bool? authorIsVerified,
-    String? category,
-    String? type,
-    String? parishId,
-    String? title,
-    String? body,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-    String? status,
-  }) {
-    return Post(
-      postId: postId ?? this.postId,
-      authorId: authorId ?? this.authorId,
-      authorName: authorName ?? this.authorName,
-      authorRole: authorRole ?? this.authorRole,
-      authorIsVerified: authorIsVerified ?? this.authorIsVerified,
-      category: category ?? this.category,
-      type: type ?? this.type,
-      parishId: parishId ?? this.parishId,
-      title: title ?? this.title,
-      body: body ?? this.body,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-      status: status ?? this.status,
-    );
+  /// JSON 직렬화를 위한 DateTime 변환기
+  static DateTime _dateTimeFromJson(dynamic value) {
+    if (value == null) return DateTime.now();
+    if (value is Timestamp) return value.toDate();
+    if (value is String) return DateTime.parse(value);
+    if (value is DateTime) return value;
+    return DateTime.now();
   }
 
-  @override
-  String toString() {
-    return 'Post(postId: $postId, title: $title, type: $type, category: $category, status: $status)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is Post && other.postId == postId;
-  }
-
-  @override
-  int get hashCode => postId.hashCode;
+  /// JSON 직렬화를 위한 DateTime 변환기
+  static String _dateTimeToJson(DateTime dateTime) =>
+      dateTime.toIso8601String();
 }

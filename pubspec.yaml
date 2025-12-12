@@ -50,6 +50,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   cached_network_image: ^3.3.1
   shimmer: ^3.0.0
+  image_picker: ^1.1.2
 
   # Utils
   freezed_annotation: ^2.4.1
@@ -58,6 +59,7 @@ dependencies:
   equatable: ^2.0.5
   dartz: ^0.10.1
   uuid: ^4.4.2
+  flutter_dotenv: ^5.1.0
 
   # QR Code
   qr_flutter: ^4.1.0
@@ -78,6 +80,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - .env
     - assets/images/
     - assets/icons/
     - assets/data/

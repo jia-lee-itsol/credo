@@ -10,8 +10,3339 @@
       "address": "長崎県長崎市本尾町1-1",
       "prefecture": "長崎県",
       "isCathedral": true,
-      "massTime": "主日：09:00, 11:00 / 第2・第4日曜14:00(英語ミサ)"
+      "massTime": "主日：09:00, 11:00 / 第2・第4日曜14:00(英語ミサ)",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2・第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック飽の浦教会",
+      "address": "〒850-0063 長崎県長崎市飽の浦町8-50",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・水・金・土06:00 / 木17:30 / 土曜19:00 / 主日：07:00, 09:00",
+      "phone": "095-861-2589",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック愛宕教会",
+      "address": "〒850-0822 長崎県長崎市愛宕4-3-3",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "初金曜日・祭日10:00 / 土曜19:00 / 主日：09:00",
+      "phone": "095-822-8802",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック諫早教会",
+      "address": "〒854-0006 長崎県諫早市天満町32-17",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・金・土06:00 / 木19:00 / 初金曜日10:00 / 土曜19:00 / 主日：09:00（第1日曜・手話通訳付きミサ）",
+      "phone": "0957-23-2066",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "09:00",
+            "language": "SIGN",
+            "note": "第1日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック稲佐教会",
+      "address": "〒852-8011 長崎県長崎市稲佐町18-17",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:30（木のみ17:15） / 土曜19:00 / 主日：09:00",
+      "phone": "095-861-0747",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:30",
+          "17:15"
+        ],
+        "tuesday": [
+          "06:30",
+          "17:15"
+        ],
+        "wednesday": [
+          "06:30",
+          "17:15"
+        ],
+        "thursday": [
+          "06:30",
+          "17:15"
+        ],
+        "friday": [
+          "06:30",
+          "17:15"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック植松教会",
+      "address": "〒856-0027 長崎県大村市植松2-722-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・金06:00 / 火19:00 / 土曜19:00 / 主日：06:00, 09:00",
+      "phone": "0957-52-2256",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "06:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック浦上教会",
+      "address": "〒852-8112 長崎県長崎市本尾町1-79",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:00 / 初金曜日10:00 / 土曜19:00 / 主日：07:00, 09:00, 18:30（第1日曜日18:30のミサなし）",
+      "phone": "095-844-1777",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:00",
+          "09:00",
+          "18:30",
+          "18:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大浦教会",
+      "address": "〒850-0931 長崎県長崎市南山手町2-18",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・水・木・土06:00 / 金19:00 / 土曜19:00 / 主日：09:30",
+      "phone": "095-827-0623",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大山教会",
+      "address": "〒850-0964 長崎県長崎市大山町566-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日火19:30 / 土曜19:30",
+      "phone": "095-878-4093",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
+        "monday": [
+          "19:30"
+        ],
+        "tuesday": [
+          "19:30"
+        ],
+        "wednesday": [
+          "19:30"
+        ],
+        "thursday": [
+          "19:30"
+        ],
+        "friday": [
+          "19:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック水主町教会",
+      "address": "〒856-0827 長崎県大村市水主町2-606",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・水・金・土06:00（第1水曜は修道院でミサ） / 木19:00 / 土曜19:00 / 主日：09:00",
+      "phone": "0957-52-2830",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック神ノ島教会",
+      "address": "〒850-0078 長崎県長崎市神ノ島町2-148",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・金・土06:00 / 水18:00 / 土曜19:30 / 主日：08:00",
+      "phone": "095-865-1028",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック木鉢教会",
+      "address": "〒850-0077 長崎県長崎市小瀬戸町86",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・金06:00 / 火19:00 / 土（祭日･祝日のみ）06:00 / 土曜19:00 / 主日：06:00, 09:00",
+      "phone": "095-865-1039",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "06:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック黒崎教会",
+      "address": "〒851-2324 長崎県長崎市上黒崎町26",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月18:30（教会学校休校時は06:00） / 火～土06:00（第1水曜のミサは修道院で05:50） / 第1・3日曜前晩19:00 / 主日09:00 / 第2・4・5日曜前晩ミサなし / 主日06:00, 09:00",
+      "phone": "0959-25-0007",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "06:00",
+          "09:00"
+        ],
+        "monday": [
+          "18:30",
+          "06:00"
+        ],
+        "tuesday": [
+          "18:30",
+          "06:00"
+        ],
+        "wednesday": [
+          "18:30",
+          "06:00"
+        ],
+        "thursday": [
+          "18:30",
+          "06:00"
+        ],
+        "friday": [
+          "18:30",
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック香焼教会",
+      "address": "〒851-0310 長崎県長崎市香焼町409-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・金・土06:00 / 火19:00 / 主日：06:00, 09:00",
+      "phone": "095-871-4349",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "06:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小ヶ倉教会",
+      "address": "〒850-0963 長崎県長崎市ダイヤランド4-2-3",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・金05:50 / 主日：09:00",
+      "phone": "095-878-0964",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "05:50"
+        ],
+        "tuesday": [
+          "05:50"
+        ],
+        "wednesday": [
+          "05:50"
+        ],
+        "thursday": [
+          "05:50"
+        ],
+        "friday": [
+          "05:50"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック出津教会",
+      "address": "〒851-2322 長崎県長崎市西出津町2633",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：06:00（第1・3日曜は09:00）",
+      "phone": "0959-25-0012",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "06:00",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック島原教会",
+      "address": "〒855-0807 長崎県島原市白土町1066-3",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・水・金06:00 / 木18:00 / 土曜18:00 / 主日：09:00",
+      "phone": "0957-62-2952",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック城山教会",
+      "address": "〒852-8023 長崎県長崎市若草町6-5",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:30 / 土曜18:30 / 主日：08:00, 10:00, 18:00",
+      "phone": "095-844-9208",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "08:00",
+          "10:00",
+          "18:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック時津教会",
+      "address": "〒851-2102 長崎県西彼杵郡時津町浜田郷606-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・金・土06:30 / 火17:30 / 土曜19:00 / 主日：07:00, 09:30",
+      "phone": "095-882-7140",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:00",
+          "09:30"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック中町教会",
+      "address": "〒850-0055 長崎県長崎市中町1-13",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・水・金・土06:30 / 木19:00 / 初金曜日09:00 / 土曜19:00 / 主日：06:30, 09:00",
+      "phone": "095-823-2484",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "06:30",
+          "09:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック長与教会",
+      "address": "〒851-2126 長崎県西彼杵郡長与町吉無田郷2035-4",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・木06:30 / 火19:00 / 土曜19:00 / 主日：10:00",
+      "phone": "095-887-3839",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック滑石教会",
+      "address": "〒852-8061 長崎県長崎市滑石5-2-6",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・水・金06:00（初金曜日は19:00） / 木19:00 / 土曜19:00 / 主日：06:30, 09:30",
+      "phone": "095-856-8623",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "06:30",
+          "09:30"
+        ],
+        "monday": [
+          "06:00",
+          "19:00"
+        ],
+        "tuesday": [
+          "06:00",
+          "19:00"
+        ],
+        "wednesday": [
+          "06:00",
+          "19:00"
+        ],
+        "thursday": [
+          "06:00",
+          "19:00"
+        ],
+        "friday": [
+          "06:00",
+          "19:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック西町教会",
+      "address": "〒852-8044 長崎県長崎市音無町9-34",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:30 / 土曜17:00 / 主日：07:00, 09:00",
+      "phone": "095-844-5755",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "07:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック東長崎教会",
+      "address": "〒851-0134 長崎県長崎市田中町366",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月～金06:30（初金曜日は09:00） / 土09:00 / 土曜19:00 / 主日：07:00, 09:00",
+      "phone": "095-839-1246",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:30",
+          "09:00"
+        ],
+        "tuesday": [
+          "06:30",
+          "09:00"
+        ],
+        "wednesday": [
+          "06:30",
+          "09:00"
+        ],
+        "thursday": [
+          "06:30",
+          "09:00"
+        ],
+        "friday": [
+          "06:30",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック深堀教会",
+      "address": "〒851-0301 長崎県長崎市深堀町5-292",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・金・土06:00 / 火18:30 / 土曜19:00 / 主日：09:00",
+      "phone": "095-871-3459",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック本河内教会",
+      "address": "〒850-0012 長崎県長崎市本河内2-2-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:30 / 初金曜日のみ10:00もあり / 主日：06:30, 09:00",
+      "phone": "095-824-2079",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "06:30",
+          "09:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック馬込教会",
+      "address": "〒851-1201 長崎県長崎市伊王島町2-617",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・金・土06:30 / 主日：08:00",
+      "phone": "095-898-2054",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック三ツ山教会",
+      "address": "〒852-8142 長崎県長崎市三ツ山町775",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日水・金06:00 / 木17:00 / 主日：08:30",
+      "phone": "095-847-7411",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック本原教会",
+      "address": "〒852-8123 長崎県長崎市三原2丁目23-12",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:00 / 土曜19:00 / 主日：07:00, 09:00",
+      "phone": "095-844-0566",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "07:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック八幡町教会",
+      "address": "〒850-0801 長崎県長崎市八幡町8-8",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:30 / 土曜19:00（手話通訳付きミサ） / 主日：09:00",
+      "phone": "095-824-3423",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "SIGN",
+            "note": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック湯江教会",
+      "address": "〒859-0131 長崎県諫早市高来町神津倉41-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月～土06:00 / 主日：06:00, 09:00",
+      "phone": "0957-32-3105",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "06:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック相浦教会",
+      "address": "〒858-0926 長崎県佐世保市大潟町1022",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木06:30 / 火・金18:30 / 土曜18:30 / 主日：06:30, 09:00",
+      "phone": "0956-47-2442",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "06:30",
+          "09:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック浅子教会",
+      "address": "〒857-0431 長崎県佐世保市浅子町232-4",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・木・金・土06:00 / 火18:00 / 水通常は17:30（祝祭日などは06:00） / 主日：06:00, 09:00",
+      "phone": "0956-68-2583",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "06:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大崎教会",
+      "address": "〒858-0926 長崎県佐世保市大潟町483",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・土06:30 / 火・金18:00 / 土曜19:00 / 主日：08:00",
+      "phone": "0956-47-6188",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック太田尾教会",
+      "address": "〒857-2427 長崎県西海市大島町4617",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・土06:00 / 火17:30 / 土曜18:30（奇数週） / 主日：08:00（偶数週）",
+      "phone": "0959-34-2341",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大野教会",
+      "address": "〒857-0131 長崎県佐世保市大野町10-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・木06:00 / 水・金17:30（初金曜日はなし） / 土曜18:30 / 主日：09:00（第1のみ07:00）（10月～3月は09:30、第1のみ07:30）",
+      "phone": "0956-49-3608",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "09:00",
+          "07:00",
+          "09:30",
+          "07:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック鹿子前教会",
+      "address": "〒858-0922 長崎県佐世保市鹿子前町853",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月～土06:00 / 木18:00 / 土曜18:30 / 主日：09:00",
+      "phone": "0956-28-2339",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック黒島教会",
+      "address": "〒857-3271 長崎県佐世保市黒島町3333",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:00（諸事情により無しになる日があります） / 土曜18:00 / 主日：08:00",
+      "phone": "0956-56-2017",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック神崎教会",
+      "address": "〒857-0414 長崎県佐世保市小佐々町矢岳免87-4",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:00 / 土曜17:30（夏季は18:00） / 主日：06:00, 09:00",
+      "phone": "0956-69-2603",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "17:30",
+          "18:00"
+        ],
+        "sunday": [
+          "06:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック佐々教会",
+      "address": "〒857-0353 長崎県北松浦郡佐々町沖田免1-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・木・土06:00 / 土曜18:30 / 主日：10:30",
+      "phone": "0956-59-5559",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "10:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック褥崎教会",
+      "address": "〒859-6206 長崎県佐世保市鹿町町長串1089",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・金06:00 / 火18:00 / 主日：08:00",
+      "phone": "0956-77-4443",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック俵町教会",
+      "address": "〒857-0016 長崎県佐世保市俵町22-12",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・金・土06:30 / 火19:30 / 土曜19:30 / 主日：09:00",
+      "phone": "0956-22-4285",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック天神教会",
+      "address": "〒857-1175 長崎県佐世保市天神町1303",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日木18:00 / 主日：08:00",
+      "phone": "0956-31-4705",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "18:00"
+        ],
+        "tuesday": [
+          "18:00"
+        ],
+        "wednesday": [
+          "18:00"
+        ],
+        "thursday": [
+          "18:00"
+        ],
+        "friday": [
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック早岐教会",
+      "address": "〒859-3215 長崎県佐世保市早岐2丁目23-6",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・金06:00 / 火19:00 / 土曜19:00 / 主日：09:30",
+      "phone": "0956-38-2293",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック三浦町教会",
+      "address": "〒857-0863 長崎県佐世保市三浦町4-25",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・水・金・土06:00 / 主日：10:30, 17:30",
+      "phone": "0956-22-5701",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "10:30",
+          "17:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック上神崎教会",
+      "address": "〒859-5102 長崎県平戸市大久保町220",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月～土06:00 / 主日：06:00, 08:30",
+      "phone": "0950-22-3340",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "06:00",
+          "08:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック田平教会",
+      "address": "〒859-4824 長崎県平戸市田平町小手田免19",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月～土06:00 / 土曜19:00 / 主日：09:00",
+      "phone": "0950-57-0254",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック西木場教会",
+      "address": "〒859-4765 長崎県松浦市御厨町米の山免206",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月～水・土06:00 / 主日：08:30",
+      "phone": "0956-75-0688",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック紐差教会",
+      "address": "〒859-5361 長崎県平戸市紐差町1039",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:00（水を除く） / 主日：09:00",
+      "phone": "0950-28-0168",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック平戸ザビエル記念教会",
+      "address": "〒859-5152 長崎県平戸市鏡川町268-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜18:30（奇数週） / 主日：06:00, 08:30",
+      "phone": "0950-22-2442",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "06:00",
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック平戸口教会",
+      "address": "〒859-4825 長崎県平戸市田平町山内免471-3",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:00 / 主日：07:00（第1日曜は09:00）",
+      "phone": "0950-57-1922",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック宝亀教会",
+      "address": "〒859-5366 長崎県平戸市宝亀町1170",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・土06:00 / 主日：08:30",
+      "phone": "0950-28-0324",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック山田教会",
+      "address": "〒859-5704 長崎県平戸市生月町山田免440-2",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水～土06:00 / 火17:30 / 第2・4土曜19:00 / 第1・3・5日曜07:00",
+      "phone": "0950-53-0832",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック青方教会",
+      "address": "〒857-4404 長崎県南松浦郡新上五島町青方郷511-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月06:00 / 火17:30 / 主日：08:30",
+      "phone": "0959-52-8490",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック青砂ヶ浦教会",
+      "address": "〒857-4402 長崎県南松浦郡新上五島町奈摩郷1241",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日06:00 / 水17:30 / 土曜18:00 / 主日：09:00（第2日曜は07:00）",
+      "phone": "0959-52-8011",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:00",
+          "07:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大曽教会",
+      "address": "〒857-4404 長崎県南松浦郡新上五島町青方郷2151-2",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・金・土06:00 / 水17:30 / 主日：08:30",
+      "phone": "0959-53-1920",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック桐教会",
+      "address": "〒853-2302 長崎県南松浦郡新上五島町桐古里郷357-4",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：09:00（最終日曜は07:00）",
+      "phone": "0959-44-0006",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック曽根教会",
+      "address": "〒857-4601 長崎県南松浦郡新上五島町小串郷1028",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・火・水・木・土06:00 / 金17:30 / 土曜18:30 / 主日：07:00",
+      "phone": "0959-55-2128",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "07:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック鯛之浦教会",
+      "address": "〒853-3321 長崎県南松浦郡新上五島町鯛ノ浦郷326",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日05:45 / 土曜19:30 / 主日：08:00",
+      "phone": "0959-42-0221",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "05:45"
+        ],
+        "tuesday": [
+          "05:45"
+        ],
+        "wednesday": [
+          "05:45"
+        ],
+        "thursday": [
+          "05:45"
+        ],
+        "friday": [
+          "05:45"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック仲知教会",
+      "address": "〒857-4604 長崎県南松浦郡新上五島町津和崎郷991",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・金・土06:00 / 主日：08:00",
+      "phone": "0959-55-8037",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック土井ノ浦教会",
+      "address": "〒853-2301 長崎県南松浦郡新上五島町若松郷853",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・金・土06:00 / 火・木18:00 / 主日：09:00",
+      "phone": "0959-46-2126",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック浜串教会",
+      "address": "〒853-3102 長崎県南松浦郡新上五島町岩瀬浦郷724",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・金06:00 / 火17:00 / 主日：07:00",
+      "phone": "0959-45-3032",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック真手ノ浦教会",
+      "address": "〒857-4413 長崎県南松浦郡新上五島町今里郷495-2",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・木・金・土06:00 / 火・水18:30 / 主日：09:30",
+      "phone": "0959-52-3721",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック丸尾教会",
+      "address": "〒857-4513 長崎県南松浦郡新上五島町丸尾940",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日水17:30 / 木・金06:00 / 主日：07:00",
+      "phone": "0959-54-1700",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00"
+        ],
+        "monday": [
+          "17:30"
+        ],
+        "tuesday": [
+          "17:30"
+        ],
+        "wednesday": [
+          "17:30"
+        ],
+        "thursday": [
+          "17:30"
+        ],
+        "friday": [
+          "17:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック井持浦教会",
+      "address": "〒853-0411 長崎県五島市玉之浦町玉之浦1243",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：08:30",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック浦頭教会",
+      "address": "〒853-0051 長崎県五島市平蔵町2716",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・木・金06:00 / 火17:00（夏季06:00） / 主日：05:30, 08:00",
+      "phone": "0959-73-0072",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "05:30",
+          "08:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック貝津教会",
+      "address": "〒853-0604 長崎県五島市三井楽町貝津郷458",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "水06:00 / 主日：06:00",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック奈留教会",
+      "address": "〒853-2201 長崎県五島市奈留町浦395",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜19:00（第2土曜は18:00） / 主日：08:30",
+      "phone": "0959-64-3285",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00",
+          "18:00"
+        ],
+        "sunday": [
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック浜脇教会",
+      "address": "〒853-2173 長崎県五島市田ノ浦町263",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：08:00（6月～9月は07:00）",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:00",
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック福江教会",
+      "address": "〒853-0005 長崎県五島市末広町3-6",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：06:00, 09:00",
+      "phone": "0959-72-3957",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "06:00",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック三井楽教会",
+      "address": "〒853-0607 長崎県五島市三井楽町嶽1420",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・木・金・土06:00 / 土曜18:30 / 主日：07:30",
+      "phone": "0959-84-2099",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "07:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック水ノ浦教会",
+      "address": "〒853-0701 長崎県五島市岐宿町岐宿1643-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜18:00 / 主日：06:30（偶数週）/08:30（奇数週）",
+      "phone": "0959-82-0103",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "06:30",
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック岳教会（巡回）",
+      "address": "〒850-0068 長崎県長崎市福田本町477",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第1・3土曜17:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック福田集会所",
+      "address": "〒850-0067 長崎県長崎市小浦町59-2",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第4日曜07:00",
+      "note": "集会所",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック愛野集会所",
+      "address": "〒854-0301 長崎県雲仙市愛野町甲3932-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日火06:15 / 第3日曜11:00",
+      "phone": "0957-36-0063",
+      "note": "集会所",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "monday": [
+          "06:15"
+        ],
+        "tuesday": [
+          "06:15"
+        ],
+        "wednesday": [
+          "06:15"
+        ],
+        "thursday": [
+          "06:15"
+        ],
+        "friday": [
+          "06:15"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック壱岐教会（巡回）",
+      "address": "〒811-5136 長崎県壱岐市郷ノ浦町片原触字三本松42-2",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "原則第3日曜17:00（行けない場合あり）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小瀬戸集会所",
+      "address": "〒850-0077 長崎県長崎市小瀬戸町806-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：11:00",
+      "phone": "095-865-0037",
+      "note": "集会所",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック樫山教会（巡回）",
+      "address": "〒851-2202 長崎県長崎市樫山町3059",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第1日曜11:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大野教会（巡回）",
+      "address": "〒851-2427 長崎県長崎市下大野町2619",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "年1回（10月第1日曜09:00）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック牧野教会（巡回）",
+      "address": "〒851-2323 長崎県長崎市新牧野町591-93",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "3ヶ月に1回（3・6・9・12月）第1水曜19:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック雲仙教会（巡回）",
+      "address": "〒854-0621 長崎県雲仙市小浜町雲仙札の原422-2",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：11:00（第3日曜は無し）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリックさくらの里聖家族教会（巡回）",
+      "address": "〒851-2207 長崎県長崎市さくらの里3-1700",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月・水・金06:20（ケアハウスかおり） / 火18:40 / 木19:00 / 初金曜日19:00（いずれも教会） / 土曜19:00 / 主日：08:00（いずれも教会）",
+      "phone": "095-850-6260",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "06:20"
+        ],
+        "tuesday": [
+          "06:20"
+        ],
+        "wednesday": [
+          "06:20"
+        ],
+        "thursday": [
+          "06:20"
+        ],
+        "friday": [
+          "06:20"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック善長谷教会（巡回）",
+      "address": "〒851-0302 長崎県長崎市大籠町519",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：07:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大明寺教会（巡回）",
+      "address": "〒851-1201 長崎県長崎市伊王島町1-1060",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "水06:30 / 木17:30 / 主日：06:30",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小長井教会（準小教区）",
+      "address": "〒859-0167 長崎県諫早市小長井町遠竹2747",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日月～土06:00 / 主日：07:00, 08:00",
+      "phone": "0957-34-3296",
+      "note": "準小教区",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "08:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック横浦教会（巡回）",
+      "address": "〒857-0403 長崎県佐世保市小佐々町臼の浦149-7",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜18:30",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック間瀬教会（巡回）",
+      "address": "〒857-2401 長崎県西海市大島町1420-3",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日木17:30 / 金06:00 / 土曜18:30（偶数週） / 主日：08:00（奇数週）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "17:30"
+        ],
+        "tuesday": [
+          "17:30"
+        ],
+        "wednesday": [
+          "17:30"
+        ],
+        "thursday": [
+          "17:30"
+        ],
+        "friday": [
+          "17:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック皆瀬教会（巡回）",
+      "address": "〒857-0144 長崎県佐世保市皆瀬町363",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日初金曜日のみ17:30 / 主日：07:00（第1のみ09:00）（10月～3月は07:30、第1のみ09:30）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00",
+          "07:30",
+          "09:30"
+        ],
+        "monday": [
+          "17:30"
+        ],
+        "tuesday": [
+          "17:30"
+        ],
+        "wednesday": [
+          "17:30"
+        ],
+        "thursday": [
+          "17:30"
+        ],
+        "friday": [
+          "17:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック船越教会（巡回）",
+      "address": "〒857-1231 長崎県佐世保市船越町131-3",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：07:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック潜竜教会（巡回）",
+      "address": "〒859-6134 長崎県佐世保市江迎町田ノ元503-4",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日金18:30 / 主日：08:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "18:30"
+        ],
+        "tuesday": [
+          "18:30"
+        ],
+        "wednesday": [
+          "18:30"
+        ],
+        "thursday": [
+          "18:30"
+        ],
+        "friday": [
+          "18:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大加勢教会（巡回）",
+      "address": "〒859-6206 長崎県佐世保市鹿町町長串4-5",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜19:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック烏帽子教会（巡回）",
+      "address": "〒857-0001 長崎県佐世保市烏帽子町138",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第1・3土曜18:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック川棚教会（巡回）",
+      "address": "〒859-3607 長崎県東彼杵郡川棚町城山町38",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日水・金19:00 / 木・土06:00 / 主日：07:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00"
+        ],
+        "monday": [
+          "19:00"
+        ],
+        "tuesday": [
+          "19:00"
+        ],
+        "wednesday": [
+          "19:00"
+        ],
+        "thursday": [
+          "19:00"
+        ],
+        "friday": [
+          "19:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック御厨教会（巡回）",
+      "address": "〒859-4752 長崎県松浦市御厨町里免長峰126",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日木17:30 / 土曜18:30",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "monday": [
+          "17:30"
+        ],
+        "tuesday": [
+          "17:30"
+        ],
+        "wednesday": [
+          "17:30"
+        ],
+        "thursday": [
+          "17:30"
+        ],
+        "friday": [
+          "17:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック福崎教会（巡回）",
+      "address": "〒859-4802 長崎県平戸市田平町福崎免990",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日金17:30 / 主日：07:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00"
+        ],
+        "monday": [
+          "17:30"
+        ],
+        "tuesday": [
+          "17:30"
+        ],
+        "wednesday": [
+          "17:30"
+        ],
+        "thursday": [
+          "17:30"
+        ],
+        "friday": [
+          "17:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大佐志教会（巡回）",
+      "address": "〒859-5516 長崎県平戸市鮎川町字四釜3-40",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：06:30",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック木ヶ津教会（巡回）",
+      "address": "〒859-5362 長崎県平戸市木ヶ津町577",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜17:30",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "17:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック古江教会（巡回）",
+      "address": "〒859-5145 長崎県平戸市古江町大瀬",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜18:30（偶数週）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック山野教会（巡回）",
+      "address": "〒859-5142 長崎県平戸市主師町山野",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日火18:30 / 土曜18:30（偶数週） / 主日：06:00（奇数週）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "06:00"
+        ],
+        "monday": [
+          "18:30"
+        ],
+        "tuesday": [
+          "18:30"
+        ],
+        "wednesday": [
+          "18:30"
+        ],
+        "thursday": [
+          "18:30"
+        ],
+        "friday": [
+          "18:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック中野教会（巡回）",
+      "address": "〒859-5141 長崎県平戸市山中町390",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日金18:30 / 土曜18:30（奇数週） / 主日：06:00（偶数週）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "06:00"
+        ],
+        "monday": [
+          "18:30"
+        ],
+        "tuesday": [
+          "18:30"
+        ],
+        "wednesday": [
+          "18:30"
+        ],
+        "thursday": [
+          "18:30"
+        ],
+        "friday": [
+          "18:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック壱部教会（巡回）",
+      "address": "〒859-5701 長崎県平戸市生月町壱部4808-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第1・3・5土曜19:00 / 第2・4日曜07:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック冷水教会（巡回）",
+      "address": "〒857-4401 長崎県南松浦郡新上五島町網上郷623-2",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：07:00（第2日曜は09:00）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック跡次教会（巡回）",
+      "address": "〒857-4413 長崎県南松浦郡新上五島町跡次",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日木18:00 / 土曜18:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "monday": [
+          "18:00"
+        ],
+        "tuesday": [
+          "18:00"
+        ],
+        "wednesday": [
+          "18:00"
+        ],
+        "thursday": [
+          "18:00"
+        ],
+        "friday": [
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック中ノ浦教会（巡回）",
+      "address": "〒853-2303 長崎県南松浦郡新上五島町宿ノ浦郷中ノ浦",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：07:00（最終日曜は09:00）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大浦教会（巡回）",
+      "address": "〒853-2303 長崎県南松浦郡新上五島町宿ノ浦郷大浦",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜18:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大水教会（巡回）",
+      "address": "〒857-4602 長崎県南松浦郡新上五島町曽根郷大水",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第2・4日曜09:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小瀬良教会（巡回）",
+      "address": "〒857-4603 長崎県南松浦郡新上五島町立串郷小瀬良",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第3・5日曜09:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック船隠教会（巡回）",
+      "address": "〒853-3323 長崎県南松浦郡新上五島町東神ノ浦郷船隠48-11",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜16:30（第2・4土曜のみ）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "16:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック頭ヶ島教会（巡回）",
+      "address": "〒857-4102 長崎県南松浦郡新上五島町友住郷頭ヶ島638",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第2・4日曜15:00（夏時間6～9月は16:00）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック佐野原教会（巡回）",
+      "address": "〒853-3323 長崎県南松浦郡新上五島町東神ノ浦郷佐ノ原",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第1・3土曜16:30",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小値賀教会（巡回）",
+      "address": "〒857-4701 長崎県北松浦郡小値賀町笛吹郷字段地2679-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第4日曜09:30",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック米山教会（巡回）",
+      "address": "〒857-4604 長崎県南松浦郡新上五島町津和崎郷589-14",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日火17:00（江袋教会と週ごとに交互） / 土曜17:30（第2・4土曜は18:40）",
+      "note": "巡回教会（要問い合わせ）",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "17:30",
+          "18:40"
+        ],
+        "monday": [
+          "17:00"
+        ],
+        "tuesday": [
+          "17:00"
+        ],
+        "wednesday": [
+          "17:00"
+        ],
+        "thursday": [
+          "17:00"
+        ],
+        "friday": [
+          "17:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック江袋教会（巡回）",
+      "address": "〒857-4602 長崎県南松浦郡新上五島町曽根郷字浜口195-2",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "平日水17:00（米山教会と週ごとに交互） / 土曜18:40（第2・4土曜は17:30）",
+      "note": "巡回教会（要問い合わせ）",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:40",
+          "17:30"
+        ],
+        "monday": [
+          "17:00"
+        ],
+        "tuesday": [
+          "17:00"
+        ],
+        "wednesday": [
+          "17:00"
+        ],
+        "thursday": [
+          "17:00"
+        ],
+        "friday": [
+          "17:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック赤波江教会（巡回）",
+      "address": "〒857-4603 長崎県南松浦郡新上五島町立串郷字谷ノ坂子1899",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第3日曜09:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック有福教会（巡回）",
+      "address": "〒853-2313 長崎県南松浦郡新上五島町有福郷",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜16:00または日曜07:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "16:00",
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大平教会（巡回）",
+      "address": "〒853-2311 長崎県南松浦郡新上五島町大平",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜16:00または日曜07:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "16:00",
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック福見教会（巡回）",
+      "address": "〒853-3102 長崎県南松浦郡新上五島町岩瀬浦郷福見",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック高井旅教会（巡回）",
+      "address": "〒853-3101 長崎県南松浦郡新上五島町奈良尾郷高井旅",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜17:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック焼崎教会（巡回）",
+      "address": "〒857-4414 長崎県南松浦郡新上五島町飯ノ瀬戸郷焼崎",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：07:30",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "07:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック猪ノ浦教会（巡回）",
+      "address": "〒857-4415 長崎県南松浦郡新上五島町続浜ノ浦郷猪ノ浦",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜18:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック玉之浦教会（巡回）",
+      "address": "〒853-0411 長崎県五島市玉之浦町玉之浦622-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "土曜17:30（隔週）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "saturday": [
+          "17:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック堂崎天主堂（巡回）",
+      "address": "〒853-0053 長崎県五島市奥浦町堂崎2019",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第1日曜05:30",
+      "phone": "0959-73-0705",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック宮原教会（巡回）",
+      "address": "〒853-0054 長崎県五島市戸岐町773-2",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第2・4日曜13:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック半泊教会（巡回）",
+      "address": "〒853-0054 長崎県五島市戸岐町半泊1223",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第4日曜13:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック嵯峨島教会（巡回）",
+      "address": "〒853-0611 長崎県五島市三井楽町嵯峨島",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第1・3日曜10:00",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック江上教会（巡回）",
+      "address": "〒853-2202 長崎県五島市奈留町大串1131",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "不定期要問合せ（通常は第3日曜15:00）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック五輪教会（巡回）",
+      "address": "〒853-2172 長崎県五島市蕨町五輪",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第4日曜10:00（6月～9月は09:00）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック牢屋の窄殉教記念聖堂（巡回）",
+      "address": "〒853-2171 長崎県五島市久賀町大開",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第3日曜09:30（6月～9月は08:30）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック楠原教会（巡回）",
+      "address": "〒853-0703 長崎県五島市岐宿町楠原737",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "主日：06:30（奇数週）/08:30（偶数週）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {
+        "sunday": [
+          "06:30",
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック打折教会（巡回）",
+      "address": "〒853-0702 長崎県五島市岐宿町川原1052-1",
+      "prefecture": "長崎県",
+      "isCathedral": false,
+      "massTime": "第1・3日曜10:30（休みの場合あり）",
+      "note": "巡回教会",
+      "diocese": "nagasaki",
+      "deanery": "nagasaki",
+      "massTimes": {},
+      "foreignMassTimes": {}
     }
   ]
 }
-

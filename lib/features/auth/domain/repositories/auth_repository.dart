@@ -12,6 +12,9 @@ abstract class AuthRepository {
     required String email,
     required String password,
     required String nickname,
+    String? mainParishId,
+    String? baptismalName,
+    String? feastDayId,
   });
 
   /// 이메일/비밀번호로 로그인

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'liturgical_calendar_service.dart';
+import '../../../core/services/logger_service.dart';
 
 /// 독서 모델
 class Reading {
@@ -164,8 +166,8 @@ class LiturgicalReadingService {
           await rootBundle.loadString(filePath);
         } catch (e) {
           // B, C년도 파일이 없으면 A년도 사용
-          print(
-            'Warning: readings_year_${cycle.toLowerCase()}.json not found, using A: $e',
+          AppLogger.warning(
+            'readings_year_${cycle.toLowerCase()}.json not found, using A: $e',
           );
           fileCycle = 'A';
         }
@@ -173,61 +175,43 @@ class LiturgicalReadingService {
 
       final finalPath =
           'assets/data/liturgical/readings/readings_year_${fileCycle.toLowerCase()}.json';
-      print('[LiturgicalReadingService] Loading readings from: $finalPath');
+      AppLogger.debug('Loading readings from: $finalPath');
 
       final jsonString = await rootBundle.loadString(finalPath);
-      print(
-        '[LiturgicalReadingService] File loaded, string length: ${jsonString.length}',
-      );
+      AppLogger.debug('File loaded, string length: ${jsonString.length}');
 
       final json = jsonDecode(jsonString) as Map<String, dynamic>;
-      print('[LiturgicalReadingService] JSON decoded successfully');
-      print(
-        '[LiturgicalReadingService] JSON top-level keys: ${json.keys.toList()}',
-      );
+      AppLogger.debug('JSON decoded successfully');
+      AppLogger.debug('JSON top-level keys: ${json.keys.toList()}');
 
       // dailyReadings 확인
       if (json.containsKey('dailyReadings')) {
         final dailyReadings = json['dailyReadings'] as Map<String, dynamic>?;
-        print(
-          '[LiturgicalReadingService] dailyReadings exists: ${dailyReadings != null}',
-        );
+        AppLogger.debug('dailyReadings exists: ${dailyReadings != null}');
         if (dailyReadings != null) {
-          print(
-            '[LiturgicalReadingService] dailyReadings count: ${dailyReadings.length}',
-          );
+          AppLogger.debug('dailyReadings count: ${dailyReadings.length}');
           if (dailyReadings.isNotEmpty) {
             final firstKey = dailyReadings.keys.first;
             final lastKey = dailyReadings.keys.last;
-            print(
-              '[LiturgicalReadingService] dailyReadings date range: $firstKey ~ $lastKey',
-            );
+            AppLogger.debug('dailyReadings date range: $firstKey ~ $lastKey');
 
             // 첫 번째 항목 샘플 출력
             final firstEntry = dailyReadings[firstKey] as Map<String, dynamic>?;
             if (firstEntry != null) {
-              print('[LiturgicalReadingService] Sample entry ($firstKey):');
-              print(
-                '[LiturgicalReadingService]   - keys: ${firstEntry.keys.toList()}',
-              );
-              print(
-                '[LiturgicalReadingService]   - name: "${firstEntry['name']}"',
-              );
-              print(
-                '[LiturgicalReadingService]   - season: "${firstEntry['season']}"',
-              );
-              print(
-                '[LiturgicalReadingService]   - color: "${firstEntry['color']}"',
-              );
-              print(
-                '[LiturgicalReadingService]   - has readings: ${firstEntry.containsKey('readings')}',
+              AppLogger.debug('Sample entry ($firstKey):');
+              AppLogger.debug('   - keys: ${firstEntry.keys.toList()}');
+              AppLogger.debug('   - name: "${firstEntry['name']}"');
+              AppLogger.debug('   - season: "${firstEntry['season']}"');
+              AppLogger.debug('   - color: "${firstEntry['color']}"');
+              AppLogger.debug(
+                '   - has readings: ${firstEntry.containsKey('readings')}',
               );
               if (firstEntry.containsKey('readings')) {
                 final readings =
                     firstEntry['readings'] as Map<String, dynamic>?;
                 if (readings != null) {
-                  print(
-                    '[LiturgicalReadingService]   - readings keys: ${readings.keys.toList()}',
+                  AppLogger.debug(
+                    '   - readings keys: ${readings.keys.toList()}',
                   );
                 }
               }
@@ -235,30 +219,22 @@ class LiturgicalReadingService {
           }
         }
       } else {
-        print(
-          '[LiturgicalReadingService] ⚠️ WARNING: dailyReadings key not found in JSON!',
-        );
+        AppLogger.warning('dailyReadings key not found in JSON!');
       }
 
       // sundays 확인
       if (json.containsKey('sundays')) {
         final sundays = json['sundays'] as Map<String, dynamic>?;
-        print(
-          '[LiturgicalReadingService] sundays count: ${sundays?.length ?? 0}',
-        );
+        AppLogger.debug('sundays count: ${sundays?.length ?? 0}');
       }
 
       // solemnities 확인
       if (json.containsKey('solemnities')) {
         final solemnities = json['solemnities'] as Map<String, dynamic>?;
-        print(
-          '[LiturgicalReadingService] solemnities count: ${solemnities?.length ?? 0}',
-        );
+        AppLogger.debug('solemnities count: ${solemnities?.length ?? 0}');
       }
 
-      print(
-        '[LiturgicalReadingService] ✅ Successfully loaded readings for cycle $cycle',
-      );
+      AppLogger.debug('Successfully loaded readings for cycle $cycle');
 
       switch (cycle) {
         case 'A':
@@ -274,8 +250,11 @@ class LiturgicalReadingService {
 
       return json;
     } catch (e, stackTrace) {
-      print('Error loading readings for cycle $cycle: $e');
-      print('Stack trace: $stackTrace');
+      AppLogger.error(
+        'Error loading readings for cycle $cycle: $e',
+        e,
+        stackTrace,
+      );
       throw Exception('Failed to load readings for cycle $cycle: $e');
     }
   }
@@ -293,10 +272,10 @@ class LiturgicalReadingService {
         return _cachedDays[dateString];
       }
 
-      print('[LiturgicalReadingService] Loading data for $dateString...');
+      AppLogger.debug('Loading data for $dateString...');
 
       final cycle = getLiturgicalCycle(date);
-      print('[LiturgicalReadingService] Cycle: $cycle for $dateString');
+      AppLogger.debug('Cycle: $cycle for $dateString');
 
       // 1. dailyReadings에서 날짜로 직접 조회 (가장 빠름)
       final readings = await loadReadings(cycle);
@@ -304,16 +283,14 @@ class LiturgicalReadingService {
 
       if (dailyReadings != null && dailyReadings.containsKey(dateString)) {
         final dayData = dailyReadings[dateString] as Map<String, dynamic>;
-        print(
-          '[LiturgicalReadingService] ✅ Found $dateString in dailyReadings',
-        );
+        AppLogger.debug('Found $dateString in dailyReadings');
         // JSON 데이터 구조 확인 로그
-        print('[LiturgicalReadingService] JSON data for $dateString:');
-        print(
+        AppLogger.debug('JSON data for $dateString:');
+        AppLogger.debug(
           '  - name: "${dayData['name']}" (empty: ${(dayData['name'] as String? ?? '').isEmpty})',
         );
-        print('  - season: "${dayData['season']}"');
-        print('  - color: "${dayData['color']}"');
+        AppLogger.debug('  - season: "${dayData['season']}"');
+        AppLogger.debug('  - color: "${dayData['color']}"');
 
         // readings 구조 확인
         if (dayData.containsKey('readings')) {
@@ -321,11 +298,11 @@ class LiturgicalReadingService {
           if (readings != null) {
             if (readings.containsKey('first')) {
               final first = readings['first'] as Map<String, dynamic>?;
-              print('  - first reading: "${first?['reference']}"');
+              AppLogger.debug('  - first reading: "${first?['reference']}"');
             }
             if (readings.containsKey('gospel')) {
               final gospel = readings['gospel'] as Map<String, dynamic>?;
-              print('  - gospel: "${gospel?['reference']}"');
+              AppLogger.debug('  - gospel: "${gospel?['reference']}"');
             }
           }
         }
@@ -334,35 +311,32 @@ class LiturgicalReadingService {
           final liturgicalDay = LiturgicalDay.fromJson(dateString, dayData);
 
           _cachedDays[dateString] = liturgicalDay; // 캐싱
-          print('[LiturgicalReadingService] ✅ Parsed successfully');
-          print(
+          AppLogger.debug('Parsed successfully');
+          AppLogger.debug(
             '  - name: "${liturgicalDay.name}" (empty: ${liturgicalDay.name.isEmpty})',
           );
-          print('  - season: "${liturgicalDay.season}"');
-          print('  - color: "${liturgicalDay.color}"');
+          AppLogger.debug('  - season: "${liturgicalDay.season}"');
+          AppLogger.debug('  - color: "${liturgicalDay.color}"');
           return liturgicalDay;
         } catch (e, stackTrace) {
           // 파싱 에러 로깅
-          print(
-            '[LiturgicalReadingService] ❌ ERROR parsing for $dateString: $e',
-          );
-          print('[LiturgicalReadingService] Stack trace: $stackTrace');
-          print('[LiturgicalReadingService] Day data: $dayData');
+          AppLogger.error('ERROR parsing for $dateString: $e', e, stackTrace);
+          AppLogger.debug('Day data: $dayData');
           return null;
         }
       } else {
         if (dailyReadings == null) {
-          print('[LiturgicalReadingService] ⚠️ ERROR: dailyReadings is null!');
+          AppLogger.error('ERROR: dailyReadings is null!');
         } else {
-          print(
-            '[LiturgicalReadingService] ⚠️ WARNING: $dateString not found (${dailyReadings.length} entries)',
+          AppLogger.warning(
+            '$dateString not found (${dailyReadings.length} entries)',
           );
         }
       }
 
       // 2. 주일인 경우 주일 데이터만 확인
       if (date.weekday == DateTime.sunday) {
-        final dayId = _getSundayId(date);
+        final dayId = await _getSundayId(date);
         if (dayId != null) {
           final sundays = readings['sundays'] as Map<String, dynamic>?;
           if (sundays != null && sundays.containsKey(dayId)) {
@@ -371,9 +345,7 @@ class LiturgicalReadingService {
               sundays[dayId] as Map<String, dynamic>,
             );
             _cachedDays[dateString] = liturgicalDay; // 캐싱
-            print(
-              '[LiturgicalReadingService] ✅ Loaded Sunday: $dayId ($dateString)',
-            );
+            AppLogger.debug('Loaded Sunday: $dayId ($dateString)');
             return liturgicalDay;
           }
         }
@@ -389,35 +361,56 @@ class LiturgicalReadingService {
           if (data['date'] == monthDay) {
             final liturgicalDay = LiturgicalDay.fromJson(entry.key, data);
             _cachedDays[dateString] = liturgicalDay; // 캐싱
-            print(
-              '[LiturgicalReadingService] ✅ Loaded solemnity: ${entry.key} ($dateString)',
-            );
+            AppLogger.debug('Loaded solemnity: ${entry.key} ($dateString)');
             return liturgicalDay;
           }
         }
       }
 
-      print('[LiturgicalReadingService] ⚠️ No data found for $dateString');
+      AppLogger.warning('No data found for $dateString');
       return null;
-    } catch (e) {
+    } catch (e, stackTrace) {
       // 에러 발생 시 로깅 및 null 반환
       final errorDateString =
           '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-      print('[LiturgicalReadingService] ❌ ERROR for $errorDateString: $e');
+      AppLogger.error('ERROR for $errorDateString: $e', e, stackTrace);
       return null;
     }
   }
 
-  /// 주일 ID 계산
-  static String? _getSundayId(DateTime date) {
-    final year = date.year;
+  /// 주일 ID 계산 (캘린더 파일 우선 사용, 없으면 계산 로직 사용)
+  static Future<String?> _getSundayId(DateTime date) async {
+    // 캘린더 파일에서 날짜 정보 가져오기 시도
+    final calendar = await LiturgicalCalendarService.loadCurrentCalendar(date);
 
-    // 주요 날짜 계산
+    final year = date.year;
+    DateTime advent1;
+    DateTime easter;
+    DateTime pentecost;
+    DateTime ashWednesday;
     final christmas = DateTime(year, 12, 25);
-    final advent1 = _getAdventFirstSunday(year);
-    final easter = _getEasterDate(year);
-    final ashWednesday = easter.subtract(const Duration(days: 46));
-    final pentecost = easter.add(const Duration(days: 49));
+
+    if (calendar != null) {
+      // 캘린더 파일에서 날짜 가져오기
+      final seasons = calendar.seasons;
+      final adventStart = _parseDateString(seasons.advent.start);
+      advent1 = adventStart;
+
+      final easterStart = _parseDateString(seasons.easter.start);
+      easter = easterStart;
+
+      final pentecostDate = _parseDateString(seasons.pentecost.date);
+      pentecost = pentecostDate;
+
+      // 사순 수요일 = 부활절 - 46일
+      ashWednesday = easter.subtract(const Duration(days: 46));
+    } else {
+      // 캘린더 파일이 없으면 기존 계산 로직 사용
+      advent1 = _getAdventFirstSunday(year);
+      easter = _getEasterDate(year);
+      ashWednesday = easter.subtract(const Duration(days: 46));
+      pentecost = easter.add(const Duration(days: 49));
+    }
 
     // 대림시기
     if (date.isAfter(advent1.subtract(const Duration(days: 1))) &&
@@ -625,7 +618,7 @@ final liturgicalDayProvider = FutureProvider.family<LiturgicalDay?, String>((
     final result = await LiturgicalReadingService.getLiturgicalDayForDate(date);
     return result;
   } catch (e) {
-    print('[liturgicalDayProvider] ❌ ERROR for $dateString: $e');
+    AppLogger.error('ERROR for $dateString: $e', e);
     rethrow;
   }
 });

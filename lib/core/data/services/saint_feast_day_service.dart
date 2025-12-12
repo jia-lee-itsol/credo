@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/saint_feast_day_model.dart';
 import '../../../shared/providers/liturgy_theme_provider.dart';
+import '../../error/failures.dart';
+import '../../services/logger_service.dart';
 
 /// 성인 축일 데이터 서비스
 class SaintFeastDayService {
@@ -21,8 +23,9 @@ class SaintFeastDayService {
       final json = jsonDecode(jsonString) as Map<String, dynamic>;
       _cachedData = SaintsFeastDaysModel.fromJson(json);
       return _cachedData!;
-    } catch (e) {
-      throw Exception('Failed to load saints feast days data: $e');
+    } catch (e, stackTrace) {
+      AppLogger.error('Failed to load saints feast days data', e, stackTrace);
+      throw CacheFailure(message: '성인 축일 데이터를 불러오는데 실패했습니다: $e');
     }
   }
 

@@ -7,11 +7,1046 @@
   "parishes": [
     {
       "name": "京都カテドラル",
-      "address": "京都府京都市中京区河原町通三条上ル",
+      "address": "〒604-8006 京都府京都市中京区河原町通三条上ル",
       "prefecture": "京都府",
       "isCathedral": true,
-      "massTime": "主日：09:00, 11:00 / 第2・第4日曜14:00(英語ミサ)"
+      "massTime": "前土曜：18:30 / 主日：07:00, 10:30 / 第2日曜12:00(英語) / 第4日曜12:00(英語)",
+      "phone": "075-231-4785",
+      "fax": "075-211-8021",
+      "massTimes": {
+        "saturday": ["18:30"],
+        "sunday": ["07:00", "10:30"]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "12:00",
+            "language": "EN",
+            "note": "第2日曜"
+          },
+          {
+            "time": "12:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック河原町教会",
+      "address": "〒604-8006 京都府京都市中京区河原町通三条上ル",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "前土曜：18:30 / 主日：07:00, 10:30 / 第2日曜12:00(英語) / 第4日曜12:00(英語)",
+      "phone": "075-231-4785",
+      "fax": "075-211-8021",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "saturday": ["18:30"],
+        "sunday": ["07:00", "10:30"]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "12:00",
+            "language": "EN",
+            "note": "第2日曜"
+          },
+          {
+            "time": "12:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック伏見教会",
+      "address": "〒612-0889 京都府京都市伏見区深草直違橋5-312",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 12月21日14:00(ベトナム語) / 12月27日19:30(ベトナム語)",
+      "phone": "075-641-0610",
+      "fax": "075-642-9061",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "12月21日"
+          },
+          {
+            "time": "19:30",
+            "language": "VI",
+            "note": "12月27日"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック桃山教会",
+      "address": "〒612-8034 京都府京都市伏見区桃山町泰長老82-2",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：10:30",
+      "phone": "075-611-5695",
+      "fax": "075-611-5750",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック山科教会",
+      "address": "〒607-8415 京都府京都市山科区御陵中筋町3",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "075-581-0719",
+      "fax": "075-581-0760",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック北白川教会",
+      "address": "〒606-8261 京都府京都市左京区北白川西蔦町22-3",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "075-724-6623",
+      "fax": "075-724-6603",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック衣笠教会",
+      "address": "〒603-8378 京都府京都市北区衣笠御所ノ内町4",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：10:30 / 第1日曜日なし",
+      "phone": "075-461-6802",
+      "fax": "075-461-6805",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック宇津教会（巡回）",
+      "address": "〒601-0265 京都府京都市右京区京北中地町横谷口15-1",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "第2前土曜15:00",
+      "note": "巡回教会",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック山国教会（巡回）",
+      "address": "〒601-0321 京都府京都市右京区京北塔町宮ノ上13-2",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "第4前土曜15:00",
+      "note": "巡回教会",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小山教会",
+      "address": "〒603-8171 京都府京都市北区小山上初音町12-1",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 第4日曜日なし",
+      "phone": "075-491-1877",
+      "fax": "075-491-1877",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック高野教会",
+      "address": "〒606-0866 京都府京都市左京区下鴨東森ケ前町7",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：10:30 / 第2日曜日なし",
+      "phone": "075-781-1252",
+      "fax": "075-781-1253",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック西陣教会",
+      "address": "〒602-0934 京都府京都市上京区新町通一条上ル",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 第3日曜日なし",
+      "phone": "075-441-2525",
+      "fax": "075-441-3086",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック桂教会",
+      "address": "〒615-8196 京都府京都市西京区川島尻堀町30",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "第1,3,4日曜09:00 / 第2前土曜19:00",
+      "phone": "075-381-3268",
+      "fax": "075-381-3269",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック西院教会",
+      "address": "〒604-8854 京都府京都市中京区壬生仙念町23",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "12月14日09:00 / 12月21日11:30 / 12月27日19:00 / 1月4日11:30 / 1月11日09:00 / 1月18日11:30 / 1月24日19:00",
+      "phone": "075-841-1023",
+      "fax": "075-841-1040",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック九条教会",
+      "address": "〒601-8451 京都府京都市南区唐橋川久保町10",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "第1,2,4日曜09:00 / 第3前土曜18:00",
+      "phone": "075-691-3290",
+      "fax": "075-691-3482",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック長岡教会",
+      "address": "〒617-0824 京都府長岡京市天神２丁目3-26",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "第1前土曜19:00 / 第2,4日曜11:30 / 第3日曜09:00",
+      "phone": "075-955-8345",
+      "fax": "075-955-8355",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック丹波教会",
+      "address": "〒621-0805 京都府亀岡市安町小屋場53",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "亀岡聖堂：第1日曜11:30 / 第2前土曜19:00 / 園部聖堂：第3,4日曜11:30",
+      "phone": "0771-22-0768",
+      "fax": "0771-22-3473",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック田辺教会",
+      "address": "〒610-0334 京都府京田辺市田辺中央二丁目1-20",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "第1日曜11:00 / 第3日曜11:00 / 第4日曜14:00",
+      "phone": "0774-62-0300",
+      "fax": "0774-62-0456",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック青谷教会",
+      "address": "〒610-0113 京都府城陽市中向河原11",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "第2日曜09:00 / 第4日曜11:00",
+      "phone": "0774-52-0116",
+      "fax": "0774-52-0116",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック宇治教会",
+      "address": "〒611-0021 京都府宇治市宇治又振3",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "第1日曜11:00 / 第1日曜14:00(英語) / 第2日曜14:00 / 第3日曜09:00 / 第4前土曜15:00",
+      "phone": "0774-21-2891",
+      "fax": "0774-21-2891",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック精華教会",
+      "address": "〒619-0243 京都府相楽郡精華町南稲八妻丸山2",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "第1日曜09:00 / 第2日曜10:30 / 第4日曜10:30",
+      "phone": "0774-95-3124",
+      "fax": "0774-95-3124",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック八幡教会",
+      "address": "〒614-8002 京都府八幡市八幡土井54-8",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "第1前土曜10:30 / 第2日曜11:00 / 第3前土曜10:30 / 第4日曜09:00",
+      "phone": "075-981-0208",
+      "fax": "075-981-0208",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック丹後教会",
+      "address": "〒626-0023 京都府宮津市宮本500",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "網野教会堂・加悦教会堂：12月21日10:00 / 宮津教会堂：12月14日10:00, 12月28日10:00",
+      "phone": "0772-22-3127",
+      "fax": "0772-22-3684",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック福知山教会",
+      "address": "〒620-0940 京都府福知山市駅南町1-247-1",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 第1日曜国際ミサ / 第3日曜14:00(英語) / 第4日曜14:00(ベトナム語)",
+      "phone": "0773-22-2347",
+      "fax": "0773-21-5113",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第3日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック西舞鶴教会",
+      "address": "〒624-0855 京都府舞鶴市北田辺66",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 第2日曜14:00(英語)",
+      "phone": "0773-75-2295",
+      "fax": "0773-75-6615",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック東舞鶴教会",
+      "address": "〒625-0036 京都府舞鶴市浜1593",
+      "prefecture": "京都府",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "phone": "0773-62-1133",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック安曇川教会",
+      "address": "〒520-1212 滋賀県高島市安曇川町西万木813-2",
+      "prefecture": "滋賀県",
+      "isCathedral": false,
+      "massTime": "主日：14:00 / 第3日曜日なし",
+      "phone": "0740-32-2764",
+      "fax": "0740-32-2764",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大津教会",
+      "address": "〒520-0802 滋賀県大津市馬場2-4-6",
+      "prefecture": "滋賀県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 第3日曜国際ミサ",
+      "phone": "077-522-3987",
+      "fax": "077-522-3987",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック唐崎教会",
+      "address": "〒520-0004 滋賀県大津市見世1-1-35",
+      "prefecture": "滋賀県",
+      "isCathedral": false,
+      "massTime": "主日：10:30",
+      "phone": "077-526-0461",
+      "fax": "077-526-0461",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック草津教会",
+      "address": "〒525-0034 滋賀県草津市草津1-9-21",
+      "prefecture": "滋賀県",
+      "isCathedral": false,
+      "massTime": "前土曜：19:00 / 主日：08:00, 10:00 / 第1日曜14:00(ベトナム語) / 第2日曜14:00(スペイン語) / 第3日曜14:00(ポルトガル語) / 第4日曜14:00(英語)",
+      "phone": "077-562-3510",
+      "fax": "077-566-0431",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "saturday": ["19:00"],
+        "sunday": ["08:00", "10:00"]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "第1日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "ES",
+            "note": "第2日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "PT",
+            "note": "第3日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック甲賀教会（巡回）",
+      "address": "〒520-3326 滋賀県甲賀市甲南町耕心1-764-30",
+      "prefecture": "滋賀県",
+      "isCathedral": false,
+      "massTime": "第2・4土曜16:00",
+      "note": "巡回教会",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック長浜教会",
+      "address": "〒526-0032 滋賀県長浜市南高田町47",
+      "prefecture": "滋賀県",
+      "isCathedral": false,
+      "massTime": "第1日曜09:00(ポルトガル語) / 第1日曜14:00(英語) / 第2,4,5日曜14:00(国際ミサ) / 第3日曜14:00(スペイン語)",
+      "phone": "0749-62-1838",
+      "fax": "0749-63-7775",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "09:00",
+            "language": "PT",
+            "note": "第1日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "ES",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック彦根教会",
+      "address": "〒522-0062 滋賀県彦根市立花町2-24",
+      "prefecture": "滋賀県",
+      "isCathedral": false,
+      "massTime": "第1日曜11:00(英語) / 第2日曜11:00(国際ミサ) / 第3日曜11:00(スペイン語) / 第4日曜11:00(ポルトガル語) / 第5日曜11:00(国際ミサ)",
+      "phone": "0749-23-4611",
+      "fax": "0749-23-4611",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "EN",
+            "note": "第1日曜"
+          },
+          {
+            "time": "11:00",
+            "language": "ES",
+            "note": "第3日曜"
+          },
+          {
+            "time": "11:00",
+            "language": "PT",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック奈良教会",
+      "address": "〒630-8213 奈良県奈良市登大路町36",
+      "prefecture": "奈良県",
+      "isCathedral": false,
+      "massTime": "主日：11:00 / 最終日曜15:00(英語)",
+      "phone": "0742-26-2094",
+      "fax": "0742-27-3027",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "最終日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック登美が丘教会",
+      "address": "〒631-0003 奈良県奈良市中登美ヶ丘2-1984-72",
+      "prefecture": "奈良県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "0742-44-8841",
+      "fax": "0742-44-8836",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック富雄教会",
+      "address": "〒631-0076 奈良県奈良市富雄北1-10-3",
+      "prefecture": "奈良県",
+      "isCathedral": false,
+      "massTime": "主日：11:00",
+      "phone": "0742-45-0034",
+      "fax": "0742-45-1999",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大和郡山教会",
+      "address": "〒639-1016 奈良県大和郡山市城南町1-33",
+      "prefecture": "奈良県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "0743-52-3268",
+      "fax": "0743-55-3036",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大和八木教会",
+      "address": "〒634-0078 奈良県橿原市八木町1-7-10",
+      "prefecture": "奈良県",
+      "isCathedral": false,
+      "massTime": "主日：11:00 / 第3日曜14:00(英語)",
+      "phone": "0744-22-3855",
+      "fax": "0744-22-3855",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック西大和カトリックセンター",
+      "address": "〒636-0072 奈良県北葛城郡河合町中山台1-19-3",
+      "prefecture": "奈良県",
+      "isCathedral": false,
+      "massTime": "主日：10:30",
+      "phone": "0745-73-5141",
+      "fax": "0745-73-5141",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック御所教会",
+      "address": "〒639-2251 奈良県御所市戸毛60",
+      "prefecture": "奈良県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 第3日曜なし",
+      "phone": "0745-67-0136",
+      "fax": "0745-67-0136",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大和高田教会",
+      "address": "〒635-0092 奈良県大和高田市大中南町6-11",
+      "prefecture": "奈良県",
+      "isCathedral": false,
+      "massTime": "主日：08:30 / 第2日曜なし / 第2日曜15:00(ベトナム語)",
+      "phone": "0745-52-2415",
+      "fax": "0745-23-5904",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック桑名教会",
+      "address": "〒511-0058 三重県桑名市千代田町7",
+      "prefecture": "三重県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第4日曜13:00(ベトナム語)",
+      "phone": "0594-22-2431",
+      "fax": "0594-24-4145",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "VI",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック鈴鹿教会",
+      "address": "〒513-0801 三重県鈴鹿市神戸3-17-5",
+      "prefecture": "三重県",
+      "isCathedral": false,
+      "massTime": "土曜：10:00 / 主日：09:00 / 第1・2日曜18:00(スペイン語) / 第3・4日曜18:00(ポルトガル語) / 第3日曜11:00(ベトナム語) / 第3日曜15:00(タガログ語)",
+      "phone": "059-373-4180",
+      "fax": "059-373-4181",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "saturday": [
+          "10:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "18:00",
+            "language": "ES",
+            "note": "第1・2日曜"
+          },
+          {
+            "time": "18:00",
+            "language": "PT",
+            "note": "第3・4日曜"
+          },
+          {
+            "time": "11:00",
+            "language": "VI",
+            "note": "第3日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "PH",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック四日市教会",
+      "address": "〒510-0063 三重県四日市市十七軒町2-4",
+      "prefecture": "三重県",
+      "isCathedral": false,
+      "massTime": "前土曜：18:00 / 主日：07:00, 10:00 / 第2日曜10:00(国際ミサ) / 第1日曜13:00(タガログ語) / 第1日曜16:00(ポルトガル語) / 第3日曜13:00(英語) / 第4日曜17:00(スペイン語)",
+      "phone": "059-352-2012",
+      "fax": "0593-55-4143",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "saturday": ["18:00"],
+        "sunday": ["07:00", "10:00"]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "PH",
+            "note": "第1日曜"
+          },
+          {
+            "time": "16:00",
+            "language": "PT",
+            "note": "第1日曜"
+          },
+          {
+            "time": "13:00",
+            "language": "EN",
+            "note": "第3日曜"
+          },
+          {
+            "time": "17:00",
+            "language": "ES",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック上野教会",
+      "address": "〒518-0873 三重県伊賀市上野丸の内133",
+      "prefecture": "三重県",
+      "isCathedral": false,
+      "massTime": "前土曜：19:30 / 第1日曜09:00(英語) / 第2日曜09:00(ポルトガル語) / 第3日曜09:00(子どもとともにミサ) / 第4日曜09:00(スペイン語) / 第4日曜10:30(タガログ語) / 第4日曜17:00(ポルトガル語)",
+      "phone": "0595-21-1420",
+      "fax": "0595-21-8099",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "saturday": ["19:30"]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "09:00",
+            "language": "EN",
+            "note": "第1日曜"
+          },
+          {
+            "time": "09:00",
+            "language": "PT",
+            "note": "第2日曜"
+          },
+          {
+            "time": "09:00",
+            "language": "ES",
+            "note": "第4日曜"
+          },
+          {
+            "time": "17:00",
+            "language": "PT",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック名張教会",
+      "address": "〒518-0719 三重県名張市栄町2898",
+      "prefecture": "三重県",
+      "isCathedral": false,
+      "massTime": "主日：11:00 / 第1国際ミサ / 第3日曜15:00(英語)",
+      "phone": "0595-63-1332",
+      "fax": "0595-63-1332",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック津教会",
+      "address": "〒514-0035 三重県津市西丸之内18-21",
+      "prefecture": "三重県",
+      "isCathedral": false,
+      "massTime": "前土曜：18:30 / 主日：09:00 / 第1日曜10:45(ベトナム語) / 第2日曜14:00(英語) / 第3日曜10:45(スペイン語) / 第4日曜14:00(ビサヤ語またはタガログ語)",
+      "phone": "059-228-2580",
+      "fax": "059-229-2305",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "saturday": ["18:30"],
+        "sunday": ["09:00"]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "10:45",
+            "language": "VI",
+            "note": "第1日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          },
+          {
+            "time": "10:45",
+            "language": "ES",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック久居教会",
+      "address": "〒514-1106 三重県津市久居寺町1205",
+      "prefecture": "三重県",
+      "isCathedral": false,
+      "massTime": "主日：11:00 / 第2日曜14:30(ポルトガル語)",
+      "phone": "059-255-2338",
+      "fax": "059-255-2338",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:30",
+            "language": "PT",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック松阪教会",
+      "address": "〒515-0073 三重県松阪市殿町1278-1",
+      "prefecture": "三重県",
+      "isCathedral": false,
+      "massTime": "第1日曜11:00(英語) / 第2日曜11:00 / 第2日曜14:00(タガログ語) / 第3日曜09:00 / 第4日曜11:00(英語) / 第5日曜11:00 / 第5日曜14:00(子どもミサ)",
+      "phone": "0598-21-0538",
+      "fax": "0598-21-0538",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "EN",
+            "note": "第1日曜"
+          },
+          {
+            "time": "11:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック伊勢教会",
+      "address": "〒516-0036 三重県伊勢市岡本1-2-1",
+      "prefecture": "三重県",
+      "isCathedral": false,
+      "massTime": "第1,2,5日曜09:00 / 第3日曜11:00",
+      "phone": "0596-28-3885",
+      "fax": "0596-27-0525",
+      "diocese": "kyoto",
+      "deanery": "kyoto",
+      "massTimes": {},
+      "foreignMassTimes": {}
     }
   ]
 }
-

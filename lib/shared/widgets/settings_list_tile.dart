@@ -24,8 +24,10 @@ class SettingsListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon, color: primaryColor),
-      title: Text(title),
-      subtitle: subtitle != null ? Text(subtitle!) : null,
+      title: Text(title, overflow: TextOverflow.ellipsis, maxLines: 1),
+      subtitle: subtitle != null
+          ? Text(subtitle!, overflow: TextOverflow.ellipsis, maxLines: 1)
+          : null,
       trailing: trailing ?? const Icon(Icons.chevron_right),
       onTap: onTap,
     );

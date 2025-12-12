@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
+import '../../../parish/presentation/providers/parish_presentation_providers.dart';
+import '../../data/providers/community_repository_providers.dart';
 
 /// 커뮤니티 홈 화면 (교회 선택)
 class CommunityHomeScreen extends ConsumerWidget {
@@ -15,6 +17,12 @@ class CommunityHomeScreen extends ConsumerWidget {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final currentUser = ref.watch(currentUserProvider);
+    final mainParishId = currentUser?.mainParishId;
+
+    // 소속 교회 정보 가져오기
+    final mainParishAsync = mainParishId != null
+        ? ref.watch(parishByIdEntityProvider(mainParishId))
+        : null;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -52,45 +60,95 @@ class CommunityHomeScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 12),
-          _CommunityParishCard(
-            name: '東京カテドラル聖マリア大聖堂',
-            postCount: 15,
-            hasNewPosts: true,
-            primaryColor: primaryColor,
-            onTap: () {
-              context.push(AppRoutes.communityParishPath('main-parish'));
-            },
-          ),
+          if (mainParishId != null && mainParishAsync != null)
+            mainParishAsync.when(
+              data: (parish) {
+                if (parish == null) {
+                  return _buildEmptyParishCard('所属教会が設定されていません', primaryColor);
+                }
+                // 게시글 수와 새 게시글 여부 가져오기
+                final postCountAsync = ref.watch(
+                  postCountProvider(mainParishId),
+                );
+                final hasNewPostsAsync = ref.watch(
+                  hasNewPostsProvider(mainParishId),
+                );
 
-          const SizedBox(height: 24),
-
-          // よく行く教会 섹션
-          Text(
-            'よく行く教会',
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 12),
-          _CommunityParishCard(
-            name: '聖イグナチオ教会',
-            postCount: 8,
-            hasNewPosts: false,
-            primaryColor: primaryColor,
-            onTap: () {
-              context.push(AppRoutes.communityParishPath('favorite-1'));
-            },
-          ),
-          const SizedBox(height: 8),
-          _CommunityParishCard(
-            name: '築地教会',
-            postCount: 3,
-            hasNewPosts: true,
-            primaryColor: primaryColor,
-            onTap: () {
-              context.push(AppRoutes.communityParishPath('favorite-2'));
-            },
-          ),
+                return postCountAsync.when(
+                  data: (postCount) {
+                    return hasNewPostsAsync.when(
+                      data: (hasNewPosts) => _CommunityParishCard(
+                        name: parish.name,
+                        postCount: postCount,
+                        hasNewPosts: hasNewPosts,
+                        primaryColor: primaryColor,
+                        parishId: mainParishId,
+                        onTap: () {
+                          // 마지막 읽은 타임스탬프 업데이트
+                          updateLastReadTimestamp(mainParishId);
+                          context.push(
+                            AppRoutes.communityParishPath(mainParishId),
+                          );
+                        },
+                      ),
+                      loading: () => _CommunityParishCard(
+                        name: parish.name,
+                        postCount: postCount,
+                        hasNewPosts: false,
+                        primaryColor: primaryColor,
+                        parishId: mainParishId,
+                        onTap: () {
+                          updateLastReadTimestamp(mainParishId);
+                          context.push(
+                            AppRoutes.communityParishPath(mainParishId),
+                          );
+                        },
+                      ),
+                      error: (error, stackTrace) => _CommunityParishCard(
+                        name: parish.name,
+                        postCount: postCount,
+                        hasNewPosts: false,
+                        primaryColor: primaryColor,
+                        parishId: mainParishId,
+                        onTap: () {
+                          updateLastReadTimestamp(mainParishId);
+                          context.push(
+                            AppRoutes.communityParishPath(mainParishId),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  loading: () => const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                  error: (error, stackTrace) => _CommunityParishCard(
+                    name: parish.name,
+                    postCount: 0,
+                    hasNewPosts: false,
+                    primaryColor: primaryColor,
+                    parishId: mainParishId,
+                    onTap: () {
+                      updateLastReadTimestamp(mainParishId);
+                      context.push(AppRoutes.communityParishPath(mainParishId));
+                    },
+                  ),
+                );
+              },
+              loading: () => const Center(
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+              error: (error, stackTrace) =>
+                  _buildEmptyParishCard('所属教会の情報を読み込めませんでした', primaryColor),
+            )
+          else
+            _buildEmptyParishCard('所属教会が設定されていません', primaryColor),
 
           const SizedBox(height: 24),
 
@@ -108,11 +166,30 @@ class CommunityHomeScreen extends ConsumerWidget {
   }
 }
 
+/// 소속 교회가 없을 때 표시할 카드
+Widget _buildEmptyParishCard(String message, Color primaryColor) {
+  return Card(
+    child: Padding(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Icon(Icons.info_outline, color: primaryColor),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(message, style: TextStyle(color: Colors.grey[600])),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 class _CommunityParishCard extends StatelessWidget {
   final String name;
   final int postCount;
   final bool hasNewPosts;
   final Color primaryColor;
+  final String parishId;
   final VoidCallback onTap;
 
   const _CommunityParishCard({
@@ -120,6 +197,7 @@ class _CommunityParishCard extends StatelessWidget {
     required this.postCount,
     required this.hasNewPosts,
     required this.primaryColor,
+    required this.parishId,
     required this.onTap,
   });
 

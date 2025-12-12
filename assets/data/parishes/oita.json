@@ -1,0 +1,496 @@
+{
+  "diocese": "oita",
+  "parishes": [
+    {
+      "name": "カトリック大分教会",
+      "churchName": "聖フランシスコ・ザビエル聖堂",
+      "address": "〒870-0035 大分県大分市中央町3-7-30",
+      "prefecture": "大分県",
+      "isCathedral": true,
+      "phone": "097-532-2452",
+      "fax": "097-532-2405",
+      "massTime": "土曜日：18:30 / 主日：09:30 / 主日：15:00(英語ミサ)",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック中津教会",
+      "churchName": "聖ヨハネ・ボスコ聖堂",
+      "address": "〒871-0057 大分県中津市三ノ丁1283-1",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "phone": "0979-22-2259",
+      "fax": "0979-22-2259",
+      "massTime": "主日：06:30, 09:00",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "06:30",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック日向教会",
+      "churchName": "日本26聖人殉教者聖堂",
+      "address": "〒883-0052 宮崎県日向市鶴町2-4-16",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "主日：11:00",
+      "phone": "0982-53-3685",
+      "fax": "0982-53-3685",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック日田教会",
+      "address": "〒877-0071 大分県日田市玉川町265-2",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "主日：08:30（第2、第4は11:00）",
+      "phone": "0973-22-3350",
+      "fax": "0973-24-5356",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "08:30",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック玖珠教会",
+      "address": "〒879-4413 大分県玖珠郡玖珠町塚脇425",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "主日：09:00（偶数週）、11:00（奇数週）",
+      "phone": "0973-72-9011",
+      "fax": "0973-72-9011",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック由布教会（集会所）",
+      "address": "〒879-5102 大分県由布市湯布院町川上451-12",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "主日：11:00",
+      "note": "集会所（連絡先：大分教会）",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック古城教会",
+      "address": "〒871-0154 大分県中津市古城町6班",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "0979-22-2259",
+      "note": "中津教会に連絡",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック宇佐教会",
+      "address": "〒879-0471 大分県宇佐市四日市196-3",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "要問い合わせ",
+      "phone": "0978-32-3636",
+      "fax": "0978-32-3636",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック豊後高田教会",
+      "address": "〒879-0617 大分県豊後高田市高田2731",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "要問い合わせ",
+      "phone": "0978-22-3480",
+      "fax": "0978-22-3480",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック杵築教会",
+      "address": "〒873-0002 大分県杵築市南杵築257-1",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "0978-62-5647",
+      "fax": "0978-62-5647",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック別府教会",
+      "address": "〒874-5102 大分県別府市末広町1-14",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:00, 13:30（英語）",
+      "phone": "0977-22-1772",
+      "fax": "0977-25-8442",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:30",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック明野教会",
+      "address": "〒870-0165 大分県大分市明野北2-8-15",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "097-558-5670",
+      "fax": "097-558-8851",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック鶴崎教会",
+      "address": "〒870-0131 大分県大分市皆春213",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "主日：08:30",
+      "phone": "097-521-0020",
+      "fax": "097-521-0024",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック坂ノ市教会",
+      "address": "〒870-0308 大分県大分市坂ノ市南3-3-30",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:30",
+      "phone": "097-592-1410",
+      "fax": "097-592-1410",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック臼杵教会",
+      "address": "〒875-0041 大分県臼杵市臼杵75-11",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "0972-63-4199",
+      "fax": "0972-62-3079",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック津久見教会",
+      "address": "〒879-2433 大分県津久見市中田町2-68",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "主日：11:00",
+      "phone": "0972-82-6827",
+      "fax": "0972-82-3426",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック佐伯教会",
+      "address": "〒876-0853 大分県佐伯市中村東町7-3",
+      "prefecture": "大分県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "0972-23-4414",
+      "fax": "0972-23-4424",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック延岡教会",
+      "address": "〒882-0825 宮崎県延岡市須崎町4-3",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "土曜18:30（ウルスラ修道院） / 主日：09:00",
+      "phone": "0982-32-6501",
+      "fax": "0982-20-4640",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック高鍋教会",
+      "address": "〒884-0002 宮崎県児湯郡高鍋町北高鍋755-1",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "0983-23-0367",
+      "fax": "0983-23-0385",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック西都教会",
+      "address": "〒881-0012 宮崎県西都市小野崎2-21",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "0983-43-0436",
+      "fax": "0983-43-0436",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック宮崎教会",
+      "address": "〒880-0841 宮崎県宮崎市吉村町北中甲1238-1",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "土曜18:30 / 主日：07:00, 09:30",
+      "phone": "0985-27-6662",
+      "fax": "0985-32-5691",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "07:00",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小林教会",
+      "address": "〒886-0004 宮崎県小林市細野278-1",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "0984-23-0820",
+      "fax": "0984-27-3539",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック南宮崎教会",
+      "address": "〒880-0915 宮崎県宮崎市恒久南1-11-1",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "土曜19:00 / 主日：09:00",
+      "phone": "0985-52-0214",
+      "fax": "0985-52-0214",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック田野教会",
+      "address": "〒889-1702 宮崎県宮崎市田野町乙9306-8",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "主日：08:00",
+      "phone": "0985-86-0470",
+      "fax": "0985-86-0251",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "08:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック都城教会",
+      "address": "〒885-0077 宮崎県都城市松元町5街区1号",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "0986-22-2161",
+      "fax": "0986-22-2161",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック日南教会",
+      "address": "〒887-0013 宮崎県日南市木山2-4-1",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "0987-22-3006",
+      "fax": "0987-55-0202",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック串間教会（巡回）",
+      "address": "〒888-0013 宮崎県串間市東町29-15",
+      "prefecture": "宮崎県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "0987-27-3288",
+      "note": "巡回教会",
+      "diocese": "oita",
+      "deanery": "oita",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    }
+  ]
+}

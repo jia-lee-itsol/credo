@@ -8,6 +8,8 @@ class ExpandableContentCard extends StatefulWidget {
   final IconData icon;
   final Color primaryColor;
   final String content;
+  final String? referenceLabel; // 성경 구절 참조 라벨 (예: "参考箇所：イザヤ書 48:17–19")
+  final bool isBibleTextLicensed; // 성경 텍스트 라이선스 여부
 
   const ExpandableContentCard({
     super.key,
@@ -16,6 +18,8 @@ class ExpandableContentCard extends StatefulWidget {
     required this.icon,
     required this.primaryColor,
     required this.content,
+    this.referenceLabel,
+    this.isBibleTextLicensed = false,
   });
 
   @override
@@ -61,13 +65,15 @@ class _ExpandableContentCardState extends State<ExpandableContentCard> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            subtitle: Text(
-              widget.subtitle,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
+            subtitle: widget.subtitle.isNotEmpty
+                ? Text(
+                    widget.subtitle,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  )
+                : null,
             trailing: AnimatedRotation(
               turns: _isExpanded ? 0.5 : 0,
               duration: const Duration(milliseconds: 200),
@@ -84,6 +90,49 @@ class _ExpandableContentCardState extends State<ExpandableContentCard> {
               });
             },
           ),
+          // referenceLabel 표시 (isBibleTextLicensed가 true일 때만)
+          if (widget.referenceLabel != null && widget.isBibleTextLicensed)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: GestureDetector(
+                onTap: () {
+                  // TODO: 추후 성경 읽기 화면으로 연결
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) => BibleReadingScreen(reference: widget.referenceLabel)));
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: widget.primaryColor.withValues(alpha: 0.05),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: widget.primaryColor.withValues(alpha: 0.2),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.menu_book,
+                        size: 16,
+                        color: widget.primaryColor,
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          widget.referenceLabel!,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: widget.primaryColor,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           AnimatedCrossFade(
             firstChild: const SizedBox.shrink(),
             secondChild: Container(
@@ -97,9 +146,7 @@ class _ExpandableContentCardState extends State<ExpandableContentCard> {
                 ),
                 child: Text(
                   widget.content,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    height: 1.6,
-                  ),
+                  style: theme.textTheme.bodyMedium?.copyWith(height: 1.6),
                 ),
               ),
             ),

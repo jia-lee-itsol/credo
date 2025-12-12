@@ -4,8 +4,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'config/routes/app_router.dart';
+import 'core/data/services/push_notification_service.dart';
 import 'shared/providers/liturgy_theme_provider.dart';
 import 'firebase_options.dart';
 
@@ -15,11 +17,17 @@ void main() async {
   // 디버그 모드: 위젯 보더 표시
   debugPaintSizeEnabled = false;
 
+  // 환경 변수 로드
+  await dotenv.load(fileName: '.env');
+
   // 날짜 로케일 초기화
   await initializeDateFormatting('ja', null);
 
   // Firebase 초기화
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // FCM 푸시 알림 초기화
+  await PushNotificationService().initialize();
 
   runApp(const ProviderScope(child: CredoApp()));
 }
@@ -32,6 +40,9 @@ class CredoApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(appRouterProvider);
     final theme = ref.watch(appThemeProvider);
+
+    // 푸시 알림 서비스에 router 설정
+    PushNotificationService().setRouter(router);
 
     return MaterialApp.router(
       title: 'Credo',

@@ -3,12 +3,22 @@
   "parishes": [
     {
       "name": "カトリック秋田教会",
-      "address": "秋田県秋田市",
+      "address": "〒010-0875 秋田県秋田市千秋明徳町1-48",
       "prefecture": "秋田県",
       "isCathedral": false,
-      "massTime": "主日：10:00",
+      "massTime": "主日：06:30, 09:30, 17:30 / 水：10:00 / 第1金：10:00",
+      "phone": "018-832-3254",
+      "fax": null,
       "diocese": "niigata",
-      "deanery": "akita"
+      "deanery": "akita",
+      "massTimes": {
+        "sunday": [
+          "06:30",
+          "09:30",
+          "17:30"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック大館教会",
@@ -17,7 +27,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "akita"
+      "deanery": "akita",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック鹿角教会",
@@ -26,7 +42,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "akita"
+      "deanery": "akita",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック土崎教会",
@@ -35,7 +57,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "akita"
+      "deanery": "akita",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック能代教会",
@@ -44,7 +72,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "akita"
+      "deanery": "akita",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック本荘教会",
@@ -53,7 +87,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "akita"
+      "deanery": "akita",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック横手教会",
@@ -62,7 +102,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "akita"
+      "deanery": "akita",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック上宿教会",
@@ -71,7 +117,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "akita"
+      "deanery": "akita",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック加茂教会",
@@ -80,7 +132,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "chuuetsu"
+      "deanery": "chuuetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック三条教会",
@@ -89,7 +147,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "chuuetsu"
+      "deanery": "chuuetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック見附教会",
@@ -98,7 +162,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "chuuetsu"
+      "deanery": "chuuetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック栃尾教会",
@@ -107,16 +177,39 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "chuuetsu"
+      "deanery": "chuuetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック長岡教会",
-      "address": "新潟県長岡市",
+      "address": "〒940-0071 新潟県長岡市表町4-1-5",
       "prefecture": "新潟県",
       "isCathedral": false,
-      "massTime": "主日：10:00",
+      "massTime": "主日：09:30, 18:00 / 第4日曜14:00(英語ミサ) / 火-土：07:00 / 第1金：10:00",
+      "phone": "0258-32-0932",
+      "fax": null,
       "diocese": "niigata",
-      "deanery": "chuuetsu"
+      "deanery": "chuuetsu",
+      "massTimes": {
+        "sunday": [
+          "09:30",
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック十日町教会",
@@ -125,7 +218,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "jouetsu"
+      "deanery": "jouetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック柏崎教会",
@@ -134,7 +233,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "jouetsu"
+      "deanery": "jouetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック直江津教会",
@@ -143,7 +248,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "jouetsu"
+      "deanery": "jouetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック高田教会",
@@ -152,7 +263,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "jouetsu"
+      "deanery": "jouetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック妙高教会",
@@ -161,7 +278,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "jouetsu"
+      "deanery": "jouetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック糸魚川教会",
@@ -170,7 +293,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "jouetsu"
+      "deanery": "jouetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック新発田教会",
@@ -179,7 +308,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック村上教会",
@@ -188,18 +323,39 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック新潟教会",
       "address": "〒951-8106 新潟県新潟市中央区東大畑通一番町656",
       "prefecture": "新潟県",
       "isCathedral": true,
-      "massTime": "主日：10:00",
+      "massTime": "主日：07:00, 09:30 / 第1日曜12:00(英語ミサ) / 火-木・土：07:00 / 金：10:00",
       "phone": "025-222-5024",
       "fax": null,
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "12:00",
+            "language": "EN",
+            "note": "第1日曜"
+          }
+        ]
+      }
     },
     {
       "name": "カトリック佐渡教会",
@@ -208,7 +364,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック花園教会",
@@ -217,7 +379,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック鳥屋野教会",
@@ -226,7 +394,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック青山教会",
@@ -235,7 +409,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック寺尾教会",
@@ -244,7 +424,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック白根教会",
@@ -253,7 +439,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック新津教会",
@@ -262,7 +454,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック村松教会",
@@ -271,7 +469,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック亀田教会",
@@ -280,25 +484,47 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "shimoetsu"
+      "deanery": "shimoetsu",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック酒田教会",
-      "address": "山形県酒田市",
+      "address": "〒998-0029 山形県酒田市住吉町16-26",
       "prefecture": "山形県",
       "isCathedral": false,
       "massTime": "主日：10:00",
+      "phone": "0234-34-8026",
+      "fax": "0234-34-8026",
       "diocese": "niigata",
-      "deanery": "yamagata"
+      "deanery": "yamagata",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック鶴岡教会",
-      "address": "山形県鶴岡市",
+      "address": "〒997-0035 山形県鶴岡市馬場町7-19",
       "prefecture": "山形県",
       "isCathedral": false,
       "massTime": "主日：10:00",
+      "phone": "0235-22-0292",
+      "fax": "0235-22-0148",
       "diocese": "niigata",
-      "deanery": "yamagata"
+      "deanery": "yamagata",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック長井教会",
@@ -307,16 +533,30 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "yamagata"
+      "deanery": "yamagata",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック山形教会",
-      "address": "山形県山形市",
+      "address": "〒990-0042 山形県山形市七日町4丁目1-32",
       "prefecture": "山形県",
       "isCathedral": false,
       "massTime": "主日：10:00",
+      "phone": "023-622-4668",
+      "fax": null,
       "diocese": "niigata",
-      "deanery": "yamagata"
+      "deanery": "yamagata",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック新庄教会",
@@ -325,7 +565,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "yamagata"
+      "deanery": "yamagata",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック米沢教会",
@@ -334,7 +580,13 @@
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "niigata",
-      "deanery": "yamagata"
+      "deanery": "yamagata",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     }
   ]
 }

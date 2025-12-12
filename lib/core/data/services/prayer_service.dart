@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../error/failures.dart';
+import '../../services/logger_service.dart';
 
 /// 기도문 모델
 class Prayer {
@@ -51,8 +53,9 @@ class PrayerService {
           .toList();
 
       return _cachedPrayers!;
-    } catch (e) {
-      throw Exception('Failed to load prayers data: $e');
+    } catch (e, stackTrace) {
+      AppLogger.error('Failed to load prayers data', e, stackTrace);
+      throw CacheFailure(message: '기도문 데이터를 불러오는데 실패했습니다: $e');
     }
   }
 

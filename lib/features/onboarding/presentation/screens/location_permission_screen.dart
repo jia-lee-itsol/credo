@@ -15,6 +15,7 @@ class LocationPermissionScreen extends StatelessWidget {
     const primaryColor = Color(0xFF722F37);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -149,17 +150,89 @@ class LocationPermissionScreen extends StatelessWidget {
   }
 
   Future<void> _onAllow(BuildContext context) async {
-    final status = await Geolocator.requestPermission();
-    if (!context.mounted) return;
+    // 현재 권한 상태 확인
+    LocationPermission permission = await Geolocator.checkPermission();
 
-    if (status == LocationPermission.denied) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('位置情報を許可してください.')));
+    // 이미 권한이 허용된 경우 바로 다음 화면으로
+    if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      if (!context.mounted) return;
+      await _completeOnboarding(context);
       return;
     }
 
-    await _completeOnboarding(context);
+    if (permission == LocationPermission.deniedForever) {
+      // 영구적으로 거부된 경우 설정으로 이동
+      if (!context.mounted) return;
+      final shouldOpen = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('位置情報の許可が必要です'),
+          content: const Text('設定から位置情報の許可を有効にしてください。'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('キャンセル'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('設定を開く'),
+            ),
+          ],
+        ),
+      );
+
+      if (shouldOpen == true && context.mounted) {
+        await Geolocator.openAppSettings();
+      }
+      return;
+    }
+
+    if (permission == LocationPermission.denied) {
+      // 시스템 위치 권한 다이얼로그 표시
+      permission = await Geolocator.requestPermission();
+      if (!context.mounted) return;
+
+      if (permission == LocationPermission.denied) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('位置情報の許可が必要です。')));
+        return;
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        if (!context.mounted) return;
+        final shouldOpen = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('位置情報の許可が必要です'),
+            content: const Text('設定から位置情報の許可を有効にしてください。'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('キャンセル'),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('設定を開く'),
+              ),
+            ],
+          ),
+        );
+
+        if (shouldOpen == true && context.mounted) {
+          await Geolocator.openAppSettings();
+        }
+        return;
+      }
+    }
+
+    // 권한이 허용된 경우 온보딩 완료
+    if (permission == LocationPermission.whileInUse ||
+        permission == LocationPermission.always) {
+      if (!context.mounted) return;
+      await _completeOnboarding(context);
+    }
   }
 
   Future<void> _onSkip(BuildContext context) async {

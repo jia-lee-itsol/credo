@@ -1,28 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'app_user.freezed.dart';
+part 'app_user.g.dart';
 
 /// 사용자 모델 (Firestore /users/{uid} 컬렉션)
-class AppUser {
-  final String uid;
-  final String displayName;
-  final String email;
-  final String role; // "user" | "priest" | "staff" | "admin"
-  final bool isVerified;
-  final String? verifiedRole; // e.g. "priest", "parish_staff", "diocese_office"
-  final String? parishId; // parish or community this user belongs to
-  final DateTime createdAt;
-  final DateTime updatedAt;
+@freezed
+class AppUser with _$AppUser {
+  const factory AppUser({
+    required String uid,
+    required String displayName,
+    @Default('') String email,
+    @Default('user') String role, // "user" | "priest" | "staff" | "admin"
+    @Default(false) bool isVerified,
+    String? verifiedRole, // e.g. "priest", "parish_staff", "diocese_office"
+    String? parishId, // parish or community this user belongs to
+    required DateTime createdAt,
+    required DateTime updatedAt,
+  }) = _AppUser;
 
-  const AppUser({
-    required this.uid,
-    required this.displayName,
-    required this.email,
-    required this.role,
-    required this.isVerified,
-    this.verifiedRole,
-    this.parishId,
-    required this.createdAt,
-    required this.updatedAt,
-  });
+  const AppUser._();
 
   /// 공식 게시글 작성 권한이 있는지 확인
   /// priest, staff, admin 역할이고 verified된 경우에만 true
@@ -31,127 +28,59 @@ class AppUser {
         (role == 'priest' || role == 'staff' || role == 'admin');
   }
 
+  factory AppUser.fromJson(Map<String, dynamic> json) =>
+      _$AppUserFromJson(json);
+
   /// Firestore Document에서 생성
+  /// Firestore 필드명(snake_case)과 camelCase 모두 지원
   factory AppUser.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
-    return AppUser.fromJson({'uid': doc.id, ...data});
-  }
 
-  /// JSON에서 생성
-  /// Firestore 필드명(snake_case)과 camelCase 모두 지원
-  factory AppUser.fromJson(Map<String, dynamic> json) {
-    // uid 또는 user_id 지원
-    final uid = json['uid'] as String? ?? json['user_id'] as String?;
-    if (uid == null) {
-      throw Exception('uid 또는 user_id 필드가 필요합니다');
-    }
+    // JSON을 정규화 (snake_case를 camelCase로 변환)
+    final normalizedJson = <String, dynamic>{
+      'uid': doc.id, // doc.id를 우선 사용
+      'displayName':
+          data['displayName'] as String? ??
+          data['nickname'] as String? ??
+          'ユーザー',
+      'email': data['email'] as String? ?? '',
+      'role': data['role'] as String? ?? 'user',
+      'isVerified':
+          data['isVerified'] as bool? ?? data['is_verified'] as bool? ?? false,
+      'verifiedRole':
+          data['verifiedRole'] as String? ?? data['verified_role'] as String?,
+      'parishId':
+          data['parishId'] as String? ?? data['main_parish_id'] as String?,
+      // DateTime을 ISO8601 문자열로 변환
+      'createdAt': _dateTimeFromJson(
+        data['createdAt'] ?? data['created_at'],
+      ).toIso8601String(),
+      'updatedAt': _dateTimeFromJson(
+        data['updatedAt'] ?? data['updated_at'],
+      ).toIso8601String(),
+    };
 
-    // displayName 또는 nickname 지원
-    final displayName =
-        json['displayName'] as String? ?? json['nickname'] as String? ?? 'ユーザー';
-
-    // isVerified 또는 is_verified 지원
-    final isVerified =
-        json['isVerified'] as bool? ?? json['is_verified'] as bool? ?? false;
-
-    // verifiedRole 또는 verified_role 지원
-    final verifiedRole =
-        json['verifiedRole'] as String? ?? json['verified_role'] as String?;
-
-    // parishId 또는 main_parish_id 지원
-    final parishId =
-        json['parishId'] as String? ?? json['main_parish_id'] as String?;
-
-    // createdAt 또는 created_at 지원
-    final createdAt = _parseTimestamp(json['createdAt'] ?? json['created_at']);
-
-    // updatedAt 또는 updated_at 지원
-    final updatedAt = _parseTimestamp(json['updatedAt'] ?? json['updated_at']);
-
-    return AppUser(
-      uid: uid,
-      displayName: displayName,
-      email: json['email'] as String? ?? '',
-      role: json['role'] as String? ?? 'user',
-      isVerified: isVerified,
-      verifiedRole: verifiedRole,
-      parishId: parishId,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-    );
-  }
-
-  /// Firestore Timestamp를 DateTime으로 변환
-  static DateTime _parseTimestamp(dynamic timestamp) {
-    if (timestamp == null) {
-      return DateTime.now();
-    }
-    if (timestamp is Timestamp) {
-      return timestamp.toDate();
-    }
-    if (timestamp is String) {
-      return DateTime.parse(timestamp);
-    }
-    return DateTime.now();
+    return AppUser.fromJson(normalizedJson);
   }
 
   /// Firestore에 저장할 Map으로 변환
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{
-      'uid': uid,
-      'displayName': displayName,
-      'email': email,
-      'role': role,
-      'isVerified': isVerified,
-      'createdAt': Timestamp.fromDate(createdAt),
-      'updatedAt': Timestamp.fromDate(updatedAt),
-    };
-
-    if (verifiedRole != null) {
-      map['verifiedRole'] = verifiedRole;
-    }
-    if (parishId != null) {
-      map['parishId'] = parishId;
-    }
-
-    return map;
+  Map<String, dynamic> toFirestore() {
+    final json = toJson();
+    json['createdAt'] = Timestamp.fromDate(createdAt);
+    json['updatedAt'] = Timestamp.fromDate(updatedAt);
+    return json;
   }
 
-  /// 복사본 생성 (일부 필드만 업데이트)
-  AppUser copyWith({
-    String? displayName,
-    String? email,
-    String? role,
-    bool? isVerified,
-    String? verifiedRole,
-    String? parishId,
-    DateTime? createdAt,
-    DateTime? updatedAt,
-  }) {
-    return AppUser(
-      uid: uid,
-      displayName: displayName ?? this.displayName,
-      email: email ?? this.email,
-      role: role ?? this.role,
-      isVerified: isVerified ?? this.isVerified,
-      verifiedRole: verifiedRole ?? this.verifiedRole,
-      parishId: parishId ?? this.parishId,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-    );
+  /// JSON 직렬화를 위한 DateTime 변환기
+  static DateTime _dateTimeFromJson(dynamic value) {
+    if (value == null) return DateTime.now();
+    if (value is Timestamp) return value.toDate();
+    if (value is String) return DateTime.parse(value);
+    if (value is DateTime) return value;
+    return DateTime.now();
   }
 
-  @override
-  String toString() {
-    return 'AppUser(uid: $uid, displayName: $displayName, role: $role, isVerified: $isVerified)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is AppUser && other.uid == uid;
-  }
-
-  @override
-  int get hashCode => uid.hashCode;
+  /// JSON 직렬화를 위한 DateTime 변환기
+  static String _dateTimeToJson(DateTime dateTime) =>
+      dateTime.toIso8601String();
 }

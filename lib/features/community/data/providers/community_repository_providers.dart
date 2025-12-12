@@ -1,10 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../shared/providers/auth_provider.dart';
+import '../../domain/repositories/notification_repository.dart';
 import '../../domain/repositories/post_repository.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../../presentation/notifiers/post_form_notifier.dart';
 import '../models/app_user.dart';
+import '../models/comment.dart';
+import '../models/notification.dart' as models;
 import '../models/post.dart';
+import '../repositories/firestore_notification_repository.dart';
 import '../repositories/firestore_post_repository.dart';
 import '../repositories/firestore_user_repository.dart';
 
@@ -32,6 +37,14 @@ final communityPostsProvider = StreamProvider.autoDispose
       return repo.watchCommunityPosts(parishId: parishId);
     });
 
+/// 모든 게시글 스트림 Provider (공지 + 커뮤니티, parishId 파라미터 지원)
+final allPostsProvider = StreamProvider.autoDispose.family<List<Post>, String?>(
+  (ref, String? parishId) {
+    final repo = ref.watch(postRepositoryProvider);
+    return repo.watchAllPosts(parishId: parishId);
+  },
+);
+
 /// 사용자 스트림 Provider (uid 파라미터)
 final userStreamProvider = StreamProvider.autoDispose.family<AppUser?, String>((
   ref,
@@ -45,30 +58,147 @@ final userStreamProvider = StreamProvider.autoDispose.family<AppUser?, String>((
 final userProvider = FutureProvider.autoDispose.family<AppUser?, String>((
   ref,
   String uid,
-) {
+) async {
   final repo = ref.watch(userRepositoryProvider);
-  return repo.getUserById(uid);
+  final result = await repo.getUserById(uid);
+  return result.fold((failure) => null, (user) => user);
 });
 
+/// displayName으로 사용자 검색 Provider (displayName 파라미터, Future)
+final userByDisplayNameProvider = FutureProvider.autoDispose
+    .family<AppUser?, String>((ref, String displayName) async {
+      final repo = ref.watch(userRepositoryProvider);
+      final result = await repo.searchUsersByDisplayName(displayName);
+      return result.fold((failure) => null, (users) {
+        if (users.isEmpty) {
+          return null;
+        }
+        // 정확히 일치하는 사용자 찾기 (대소문자 구분 없음)
+        try {
+          return users.firstWhere(
+            (user) =>
+                user.displayName.toLowerCase() == displayName.toLowerCase(),
+          );
+        } catch (e) {
+          // 정확히 일치하는 사용자가 없으면 첫 번째 사용자 반환
+          return users.first;
+        }
+      });
+    });
+
 /// 현재 로그인한 사용자의 AppUser Provider
-final currentAppUserProvider = FutureProvider.autoDispose<AppUser?>((ref) {
+final currentAppUserProvider = FutureProvider.autoDispose<AppUser?>((
+  ref,
+) async {
   final currentUser = ref.watch(currentUserProvider);
   if (currentUser == null) {
-    return Future.value(null);
+    return null;
   }
   final repo = ref.watch(userRepositoryProvider);
-  return repo.getUserById(currentUser.userId);
+  final result = await repo.getUserById(currentUser.userId);
+  return result.fold((failure) => null, (user) => user);
 });
 
 /// PostFormNotifier Provider
 final postFormNotifierProvider = StateNotifierProvider.autoDispose
     .family<PostFormNotifier, PostFormState, PostFormParams>((ref, params) {
-      final repo = ref.watch(postRepositoryProvider);
+      final postRepo = ref.watch(postRepositoryProvider);
+      final userRepo = ref.watch(userRepositoryProvider);
+      final notificationRepo = ref.watch(notificationRepositoryProvider);
       return PostFormNotifier(
-        postRepository: repo,
+        postRepository: postRepo,
+        userRepository: userRepo,
+        notificationRepository: notificationRepo,
         currentUser: params.currentUser,
         initialPost: params.initialPost,
-        isOfficial: params.isOfficial,
         parishId: params.parishId,
       );
     });
+
+/// 게시글 상세 조회 Provider (postId 파라미터)
+final postByIdProvider = FutureProvider.autoDispose.family<Post?, String>((
+  ref,
+  String postId,
+) async {
+  final repo = ref.watch(postRepositoryProvider);
+  final result = await repo.getPostById(postId);
+  return result.fold((failure) {
+    // 에러 발생 시 null 반환 (UI에서 처리)
+    return null;
+  }, (post) => post);
+});
+
+/// NotificationRepository Provider
+final notificationRepositoryProvider = Provider<NotificationRepository>((ref) {
+  return FirestoreNotificationRepository();
+});
+
+/// 사용자 알림 스트림 Provider (userId 파라미터)
+final notificationsProvider = StreamProvider.autoDispose
+    .family<List<models.AppNotification>, String>((ref, String userId) {
+      final repo = ref.watch(notificationRepositoryProvider);
+      return repo.watchNotifications(userId);
+    });
+
+/// 게시글 댓글 스트림 Provider (postId 파라미터)
+final commentsProvider = StreamProvider.autoDispose
+    .family<List<Comment>, String>((ref, String postId) {
+      final repo = ref.watch(postRepositoryProvider);
+      return repo.watchComments(postId);
+    });
+
+/// 성당별 게시글 수 Provider (parishId 파라미터)
+final postCountProvider = StreamProvider.autoDispose.family<int, String>((
+  ref,
+  String parishId,
+) {
+  final postsAsync = ref.watch(allPostsProvider(parishId));
+  return postsAsync.when(
+    data: (posts) => Stream.value(posts.length),
+    loading: () => Stream.value(0),
+    error: (error, stackTrace) => Stream.value(0),
+  );
+});
+
+/// 성당별 새 게시글 여부 Provider (parishId 파라미터)
+final hasNewPostsProvider = FutureProvider.autoDispose.family<bool, String>((
+  ref,
+  String parishId,
+) async {
+  final postsAsync = ref.watch(allPostsProvider(parishId));
+
+  return postsAsync.when(
+    data: (posts) async {
+      if (posts.isEmpty) {
+        return false;
+      }
+
+      // 최신 게시글의 createdAt 가져오기
+      final latestPost = posts.reduce(
+        (a, b) => a.createdAt.isAfter(b.createdAt) ? a : b,
+      );
+
+      // SharedPreferences에서 마지막 읽은 타임스탬프 가져오기
+      final prefs = await SharedPreferences.getInstance();
+      final lastReadKey = 'last_read_parish_$parishId';
+      final lastReadTimestamp = prefs.getInt(lastReadKey);
+
+      if (lastReadTimestamp == null) {
+        // 처음 읽는 경우 새 게시글이 있다고 간주하지 않음
+        return false;
+      }
+
+      final lastRead = DateTime.fromMillisecondsSinceEpoch(lastReadTimestamp);
+      return latestPost.createdAt.isAfter(lastRead);
+    },
+    loading: () async => false,
+    error: (error, stackTrace) async => false,
+  );
+});
+
+/// 마지막 읽은 타임스탬프 업데이트 함수
+Future<void> updateLastReadTimestamp(String parishId) async {
+  final prefs = await SharedPreferences.getInstance();
+  final lastReadKey = 'last_read_parish_$parishId';
+  await prefs.setInt(lastReadKey, DateTime.now().millisecondsSinceEpoch);
+}

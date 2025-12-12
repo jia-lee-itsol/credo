@@ -3,18 +3,28 @@
 ## 현재 상태 분석
 
 ### 사용 중인 서비스
-- ✅ Firebase Authentication (이메일, Google, Apple)
-- ✅ Cloud Firestore (사용자 데이터)
-- ✅ Firebase Storage (이미지 저장)
-- ✅ Firebase Cloud Messaging (푸시 알림)
-- 📦 로컬 JSON 파일 (교회 데이터)
+- ✅ Firebase Authentication (이메일, Google, Apple) - **구현 완료**
+- ✅ Cloud Firestore (사용자 데이터, 게시글, 댓글, 알림) - **구현 완료**
+- ✅ Firebase Storage (이미지 저장) - **구현 완료**
+- ✅ Firebase Cloud Messaging (푸시 알림) - **구현 완료**
+  - `PushNotificationService` 구현 완료
+  - 알림 탭 시 게시글 상세 화면 네비게이션 구현
+  - 사용자 FCM 토큰 관리 구현
+- 📦 로컬 JSON 파일 (교회 데이터) - 현재 사용 중
 
 ### 주요 기능
-1. **인증**: 사용자 로그인/회원가입
-2. **교회 정보**: 교회 검색, 상세 정보, 미사 시간
-3. **커뮤니티**: 게시글, 댓글, 좋아요, 신고
-4. **프로필**: 사용자 정보 관리
-5. **알림**: 푸시 알림
+1. **인증**: 사용자 로그인/회원가입 - **구현 완료**
+2. **교회 정보**: 교회 검색, 상세 정보, 미사 시간 - **구현 완료** (로컬 JSON 사용)
+3. **커뮤니티**: 게시글, 댓글, 좋아요 - **구현 완료**
+   - 게시글 CRUD 구현 완료
+   - 댓글 시스템 구현 완료 (`commentCount` 자동 업데이트)
+   - 좋아요 기능 구현 완료
+   - 이미지 업로드 및 갤러리 뷰어 구현 완료
+   - 공식 공지 vs 커뮤니티 게시글 구분 구현 완료
+4. **프로필**: 사용자 정보 관리 - **구현 완료**
+5. **알림**: 푸시 알림 - **구현 완료**
+   - FCM 토큰 관리 구현 완료
+   - 알림 네비게이션 구현 완료
 
 ---
 
@@ -101,25 +111,34 @@
 }
 ```
 
-#### 3. `posts` (게시글)
+#### 3. `posts` (게시글) ✅ 구현 완료
 ```typescript
 {
   postId: string,
   parishId: string,
   authorId: string,
+  authorName: string,
   title: string,
   content: string,
-  images?: string[], // Storage URLs
+  imageUrls?: string[], // Storage URLs
   likeCount: number,
-  commentCount: number,
+  commentCount: number, // 댓글 생성 시 자동 업데이트
   isPinned: boolean,
   isOfficial: boolean, // 공식 게시글
+  category: string,
   createdAt: Timestamp,
   updatedAt: Timestamp
 }
 ```
+**구현 현황**:
+- 게시글 CRUD 구현 완료
+- 이미지 업로드 및 다중 이미지 지원
+- 공식 공지/커뮤니티 게시글 구분
+- 핀 고정 기능
+- 댓글 수 자동 업데이트 (댓글 생성 시 Firestore transaction 사용)
+- 좋아요 기능
 
-#### 4. `comments` (댓글)
+#### 4. `comments` (댓글) ✅ 구현 완료
 ```typescript
 {
   commentId: string,
@@ -131,8 +150,11 @@
   updatedAt: Timestamp
 }
 ```
+**구현 현황**:
+- 댓글 생성/조회 구현 완료
+- 게시글의 `commentCount` 필드에 댓글 생성 시 자동 증가 (Firestore transaction 사용)
 
-#### 5. `postLikes` (게시글 좋아요)
+#### 5. `postLikes` (게시글 좋아요) ✅ 구현 완료
 ```typescript
 {
   postId: string,
@@ -141,6 +163,9 @@
 }
 // Composite index: (postId, userId)
 ```
+**구현 현황**:
+- 좋아요 토글 기능 구현 완료
+- 게시글의 `likeCount` 필드와 동기화
 
 #### 6. `reports` (신고)
 ```typescript
@@ -240,7 +265,7 @@ exports.togglePostLike = functions.https.onCall(async (data, context) => {
 });
 ```
 
-#### 5. **푸시 알림 전송**
+#### 5. **푸시 알림 전송** ⚠️ 클라이언트 측 구현 완료, 서버 측 미구현
 ```typescript
 exports.sendNotification = functions.firestore
   .document('posts/{postId}')
@@ -258,12 +283,21 @@ exports.sendNotification = functions.firestore
       notification: {
         title: post.title,
         body: post.content.substring(0, 100)
+      },
+      data: {
+        postId: post.postId,
+        parishId: post.parishId
       }
     }));
     
     await admin.messaging().sendAll(messages);
   });
 ```
+**현재 구현 상태**:
+- ✅ 클라이언트 측 `PushNotificationService` 구현 완료 (`lib/core/data/services/push_notification_service.dart`)
+- ✅ FCM 토큰 관리 구현 완료
+- ✅ 알림 수신 및 네비게이션 구현 완료 (알림 탭 시 게시글 상세 화면으로 이동)
+- ❌ Firebase Cloud Functions를 통한 자동 알림 전송 미구현 (향후 구현 필요)
 
 #### 6. **교회 데이터 동기화 (선택사항)**
 ```typescript
@@ -381,26 +415,28 @@ service cloud.firestore {
 
 ## 구현 단계별 로드맵
 
-### Phase 1: 기본 인프라 (1-2주)
-- [ ] Firestore Collections 생성
-- [ ] Security Rules 설정
-- [ ] 기본 Cloud Functions 구현
-- [ ] 교회 데이터 Firestore 마이그레이션
+### Phase 1: 기본 인프라 ✅ 완료
+- [x] Firestore Collections 생성
+- [x] Security Rules 설정
+- [x] 기본 Cloud Functions 구현 (클라이언트 측 로직으로 대체)
+- [ ] 교회 데이터 Firestore 마이그레이션 (현재 로컬 JSON 사용 중)
 
-### Phase 2: 커뮤니티 기능 (2-3주)
-- [ ] 게시글 CRUD 구현
-- [ ] 댓글 시스템 구현
-- [ ] 좋아요 기능 구현
-- [ ] 실시간 업데이트 적용
+### Phase 2: 커뮤니티 기능 ✅ 완료
+- [x] 게시글 CRUD 구현
+- [x] 댓글 시스템 구현 (commentCount 자동 업데이트 포함)
+- [x] 좋아요 기능 구현
+- [x] 실시간 업데이트 적용 (StreamProvider 사용)
+- [x] 이미지 업로드 및 갤러리 뷰어 구현
 
-### Phase 3: 고급 기능 (2-3주)
-- [ ] 푸시 알림 설정
+### Phase 3: 고급 기능 🔄 진행 중
+- [x] 푸시 알림 클라이언트 구현 (FCM 토큰 관리, 알림 수신, 네비게이션)
+- [ ] 푸시 알림 서버 구현 (Firebase Cloud Functions를 통한 자동 알림 전송)
 - [ ] 검색 기능 (Algolia 또는 Firestore 검색)
 - [ ] 신고 시스템
 - [ ] 관리자 기능
 
-### Phase 4: 최적화 (1-2주)
-- [ ] 인덱스 최적화
+### Phase 4: 최적화 🔄 진행 중
+- [x] 인덱스 최적화 (복합 인덱스 설정 완료)
 - [ ] 캐싱 전략
 - [ ] 성능 모니터링
 - [ ] 비용 최적화

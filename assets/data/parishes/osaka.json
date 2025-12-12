@@ -8,7 +8,11 @@
       "isCathedral": false,
       "massTime": "日 9:00, 11:00",
       "diocese": "osaka",
-      "deanery": "."
+      "deanery": "kobe",
+      "massTimes": {
+        "sunday": ["09:00", "11:00"]
+      },
+      "foreignMassTimes": {}
     }
   ]
 }

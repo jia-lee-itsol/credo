@@ -1,0 +1,1385 @@
+{
+  "diocese": "hiroshima",
+  "parishes": [
+    {
+      "name": "カトリック幟町教会",
+      "churchName": "世界平和記念聖堂",
+      "address": "〒730-0016 広島県広島市中区幟町4-42",
+      "prefecture": "広島県",
+      "isCathedral": true,
+      "phone": "082-221-0621",
+      "fax": "082-221-8486",
+      "massTime": "月～木曜日：07:00（小聖堂） / 金曜日：07:00（小聖堂）、10:00（地下聖堂） / 土曜日：07:00（小聖堂）、18:00（地下聖堂） / 主日：07:30（地下聖堂）、09:30（大聖堂） / 第1日曜15:00(ポルトガル語ミサ) / 第4日曜11:30(ベトナム語ミサ) / 最終日曜17:00(スペイン語ミサ) / 日曜14:30(英語ミサ)",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00",
+          "10:00"
+        ],
+        "saturday": [
+          "07:00",
+          "18:00"
+        ],
+        "sunday": [
+          "07:30",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "PT",
+            "note": "第1日曜"
+          },
+          {
+            "time": "11:30",
+            "language": "VI",
+            "note": "第4日曜"
+          },
+          {
+            "time": "17:00",
+            "language": "ES",
+            "note": "最終日曜"
+          },
+          {
+            "time": "14:30",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック岩国教会",
+      "address": "〒740-0019 山口県岩国市砂山町2-9-19",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "0827-21-0779",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック宇部教会",
+      "address": "〒755-0033 山口県宇部市琴芝町1丁目1-59",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 平日月～土曜07:00 / 第3日曜14:00(ベトナム語)",
+      "phone": "0836-32-7575",
+      "fax": "0836-32-7580",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック下松教会",
+      "address": "〒744-0022 山口県下松市楠木町1-8-23",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 第4日曜14:30(英語)",
+      "phone": "0833-41-4042",
+      "fax": "0833-41-4042",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:30",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック徳山教会",
+      "address": "〒745-0004 山口県周南市毛利町1丁目6番地",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第1・3日曜14:00(英語) / 平日18:00 / 金曜10:00 / 土曜19:00",
+      "phone": "0834-21-1604",
+      "fax": "0834-21-1604",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "friday": [
+          "10:00",
+          "18:00"
+        ],
+        "saturday": [
+          "19:00"
+        ],
+        "monday": [
+          "18:00"
+        ],
+        "tuesday": [
+          "18:00"
+        ],
+        "wednesday": [
+          "18:00"
+        ],
+        "thursday": [
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1・3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック山口教会",
+      "address": "〒753-0089 山口県山口市亀山町4-3",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：09:30（手話通訳付き） / 土曜18:00 / 平日月～木09:00 / 金曜09:30",
+      "phone": "083-920-1549",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "saturday": [
+          "18:00"
+        ],
+        "friday": [
+          "09:30",
+          "09:00"
+        ],
+        "monday": [
+          "09:00"
+        ],
+        "tuesday": [
+          "09:00"
+        ],
+        "wednesday": [
+          "09:00"
+        ],
+        "thursday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "09:30",
+            "language": "SIGN",
+            "note": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック防府教会",
+      "address": "〒747-0037 山口県防府市八王子1-26-27",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 平日07:00 / 土曜18:00",
+      "phone": "0835-22-1825",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "saturday": [
+          "18:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック長府教会",
+      "address": "〒752-0958 山口県下関市長府金屋浜8-9",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日07:00 / 金曜10:00 / 土曜07:00",
+      "phone": "083-245-0747",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "friday": [
+          "10:00",
+          "07:00"
+        ],
+        "saturday": [
+          "07:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック萩教会",
+      "address": "〒758-0025 山口県萩市土原3区564",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 平日07:00 / 土曜18:00",
+      "phone": "0838-22-0732",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "saturday": [
+          "18:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック北若山教会（巡回）",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "第1日曜11:00 / 第1金曜09:00",
+      "note": "巡回教会",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック高千帆教会（巡回）",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "第3日曜11:00",
+      "note": "巡回教会",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック光教会",
+      "address": "〒743-0011 山口県光市光井2丁目5-1",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日07:00 / 土曜18:00",
+      "phone": "0833-71-0640",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "saturday": [
+          "18:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック柳井教会（巡回）",
+      "address": "〒742-0032 山口県柳井市古開作瀬戸側275-4",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：11:00 / 第3日曜14:00 / 木曜14:00",
+      "phone": "0820-23-3734",
+      "note": "巡回教会",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ],
+        "thursday": [
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック彦島教会",
+      "address": "〒750-0074 山口県下関市彦島本村町6-10-17",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：10:30 / 平日07:00 / 土曜18:00",
+      "phone": "083-266-2043",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ],
+        "saturday": [
+          "18:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック細江教会",
+      "address": "〒750-0016 山口県下関市細江町3-2-8",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日：11:00 / 第2日曜14:00(ベトナム語) / 月～木07:00 / 金曜11:00 / 土曜07:00",
+      "phone": "083-222-4640",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ],
+        "friday": [
+          "11:00"
+        ],
+        "saturday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック地福教会（巡回）",
+      "address": "〒759-1421 山口県阿武郡阿東町大字地福",
+      "prefecture": "山口県",
+      "isCathedral": false,
+      "massTime": "主日（不定期）",
+      "phone": "08395-2-0308",
+      "note": "巡回教会（原医院に問い合わせ）",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック出雲教会",
+      "address": "〒693-0001 島根県出雲市今市町284-2",
+      "prefecture": "島根県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日水曜07:30",
+      "phone": "0853-21-2343",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:30"
+        ],
+        "tuesday": [
+          "07:30"
+        ],
+        "wednesday": [
+          "07:30"
+        ],
+        "thursday": [
+          "07:30"
+        ],
+        "friday": [
+          "07:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック松江教会",
+      "address": "〒690-0886 島根県松江市母衣町47",
+      "prefecture": "島根県",
+      "isCathedral": false,
+      "massTime": "土曜18:00 / 主日：09:30 / 平日火～金07:00",
+      "phone": "0852-21-4694",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック浜田教会",
+      "address": "〒697-0027 島根県浜田市殿町133",
+      "prefecture": "島根県",
+      "isCathedral": false,
+      "massTime": "土曜18:00 / 主日：09:00 / 平日水曜07:00",
+      "phone": "0855-22-1014",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック益田教会",
+      "address": "〒698-0042 島根県益田市中吉田町261-1",
+      "prefecture": "島根県",
+      "isCathedral": false,
+      "massTime": "土曜18:00 / 主日：09:00 / 平日火～金07:00",
+      "phone": "0856-22-6590",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック津和野教会",
+      "address": "〒699-5605 島根県鹿足郡津和野町大字後田ロ66-7",
+      "prefecture": "島根県",
+      "isCathedral": false,
+      "massTime": "土曜18:00 / 主日：09:00 / 平日水曜07:00",
+      "phone": "0856-72-0251",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック尾道教会",
+      "address": "〒722-0025 広島県尾道市栗原東1-12-1",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 土曜17:00(ポルトガル語) / 第4日曜14:00(英語) / 平日火・木曜06:30 / 金曜10:30 / 第2・第4月曜06:20",
+      "phone": "0848-22-3096",
+      "fax": "0848-22-3124",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "friday": [
+          "10:30",
+          "06:30"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "17:00",
+            "language": "PT",
+            "note": ""
+          }
+        ],
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック観音町教会",
+      "address": "〒733-0031 広島県広島市西区観音町15-31",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：07:00, 09:00 / 平日月～土07:00",
+      "phone": "082-231-5547",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック祇園教会",
+      "address": "〒731-0138 広島県広島市安佐南区祇園3-6-1",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：07:00, 09:30 / 火・水・木・土06:45 / 金曜10:00",
+      "phone": "082-874-5198",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:30"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック呉教会",
+      "address": "〒737-0045 広島県呉市本通4-2-14",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 土曜18:00 / 平日水曜10:00",
+      "phone": "0823-21-2535",
+      "fax": "0823-21-2536",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "saturday": [
+          "18:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック廿日市教会",
+      "address": "〒738-0016 広島県廿日市市可愛11-8",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 火曜07:30 / 金曜10:00 / 土曜08:30",
+      "phone": "0829-31-0429",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "tuesday": [
+          "07:30"
+        ],
+        "friday": [
+          "10:00"
+        ],
+        "saturday": [
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック福山教会",
+      "address": "〒720-0808 広島県福山市昭和町7-26",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：09:00, 18:00 / 第1・3日曜15:00(ベトナム語) / 第2・4日曜15:00(英語) / 第5日曜15:00(ベトナム語または英語) / 水曜09:30 / 金曜10:00 / 土曜10:00, 18:00",
+      "phone": "084-923-0614",
+      "fax": "084-923-0615",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "18:00"
+        ],
+        "wednesday": [
+          "09:30"
+        ],
+        "friday": [
+          "10:00"
+        ],
+        "saturday": [
+          "10:00",
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": "第1・3日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第2・4日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第5日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック三篠教会",
+      "address": "〒733-0002 広島県広島市西区楠木町4-16-30",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 平日火・木07:00",
+      "phone": "082-237-0822",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック翠町教会",
+      "address": "〒734-0005 広島県広島市南区翠5-9-29",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：偶数月09:00、奇数月10:30 / 第2週金曜10:00",
+      "phone": "082-251-1948",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック三原教会",
+      "address": "〒723-0011 広島県三原市東町4830-1",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：11:00 / 第1・3日曜14:00(英語) / 第2・4日曜18:30(スペイン語・ポルトガル語) / 第4日曜09:00(ベトナム語) / 平日月・水・金・土06:20 / 金曜09:00",
+      "phone": "0848-62-4514",
+      "fax": "0848-62-6824",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ],
+        "friday": [
+          "09:00",
+          "06:20"
+        ],
+        "monday": [
+          "06:20"
+        ],
+        "tuesday": [
+          "06:20"
+        ],
+        "wednesday": [
+          "06:20"
+        ],
+        "thursday": [
+          "06:20"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1・3日曜"
+          },
+          {
+            "time": "18:30",
+            "language": "ES",
+            "note": "第2・4日曜"
+          },
+          {
+            "time": "09:00",
+            "language": "VI",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック三次教会",
+      "address": "〒728-0012 広島県三次市十日市中2-1-43",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：14:30 / 金曜14:30 / 火曜10:00（例外あり）",
+      "phone": "0824-62-5611",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "14:30"
+        ],
+        "friday": [
+          "14:30"
+        ],
+        "tuesday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック向原教会",
+      "address": "〒739-1201 広島県安芸高田市向原町坂158-2",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "第1・3・5日曜14:00 / 第2日曜14:00 / 第4日曜15:00",
+      "phone": "0826-46-2203",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック東広島教会",
+      "address": "〒739-2111 広島県東広島市高屋高美が丘5丁目5-1",
+      "prefecture": "広島県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 金曜10:00 / 第2日曜14:30(英語) / 第3日曜12:00(ベトナム語) / 平日月～金06:15",
+      "phone": "082-430-7960",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "friday": [
+          "10:00",
+          "06:15"
+        ],
+        "monday": [
+          "06:15"
+        ],
+        "tuesday": [
+          "06:15"
+        ],
+        "wednesday": [
+          "06:15"
+        ],
+        "thursday": [
+          "06:15"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:30",
+            "language": "EN",
+            "note": "第2日曜"
+          },
+          {
+            "time": "12:00",
+            "language": "VI",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック倉吉教会",
+      "address": "〒682-0022 鳥取県倉吉市上井町2丁目1-1",
+      "prefecture": "鳥取県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第4日曜12:30(英語) / 第5日曜13:30(英語) / 平日月～土06:30",
+      "phone": "0858-26-3655",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "12:30",
+            "language": "EN",
+            "note": "第4日曜"
+          },
+          {
+            "time": "13:30",
+            "language": "EN",
+            "note": "第5日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック鳥取教会",
+      "address": "〒680-0841 鳥取県鳥取市吉方温泉3丁目701",
+      "prefecture": "鳥取県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第2日曜14:00(英語) / 水曜10:00 / 金曜10:00",
+      "phone": "0857-22-3146",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック米子教会",
+      "address": "〒683-0812 鳥取県米子市角盤町1丁目58",
+      "prefecture": "鳥取県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第2日曜14:00(英語) / 水・木・金・土10:00",
+      "phone": "0859-22-3090",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック岡山教会",
+      "address": "〒700-0821 岡山県岡山市北区中山下1丁目9-30",
+      "prefecture": "岡山県",
+      "isCathedral": false,
+      "massTime": "主日：08:30, 10:30 / 第1・3日曜15:00(英語) / 第2日曜15:00(ベトナム語) / 平日・土曜06:30 / 金曜10:00 / 土曜18:30",
+      "phone": "086-222-0990",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "08:30",
+          "10:30"
+        ],
+        "friday": [
+          "10:00",
+          "06:30"
+        ],
+        "saturday": [
+          "18:30"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第1・3日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック岡山南教会",
+      "address": "〒702-8035 岡山県岡山市南区福浜町14-28",
+      "prefecture": "岡山県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 火・木19:00 / 水・金10:30",
+      "phone": "086-262-2404",
+      "fax": "086-262-2404",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック笠岡教会",
+      "address": "〒714-0081 岡山県笠岡市笠岡2407",
+      "prefecture": "岡山県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日07:00 / 金曜10:00",
+      "phone": "0865-62-2232",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "friday": [
+          "10:00",
+          "07:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック倉敷教会",
+      "address": "〒710-0051 岡山県倉敷市幸町4-27",
+      "prefecture": "岡山県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第2日曜15:00(ポルトガル語) / 第4日曜15:00(英語) / 第1水曜10:00 / 金曜09:30 / 第2・4土曜18:00",
+      "phone": "086-422-0290",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "friday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "PT",
+            "note": "第2日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック玉島教会",
+      "address": "〒713-8122 岡山県倉敷市玉島中央町1-4-20",
+      "prefecture": "岡山県",
+      "isCathedral": false,
+      "massTime": "主日：09:30（2024年8月・10月は11:00） / 金曜09:30（2024年8月のみ11:00） / 朝ミサ08:00～（司祭の都合による、8月～10月は司祭休暇のためなし）",
+      "phone": "086-522-2814",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30",
+          "11:00"
+        ],
+        "friday": [
+          "09:30",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック玉野教会",
+      "address": "〒706-0002 岡山県玉野市築港1-10-1",
+      "prefecture": "岡山県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 水曜10:00",
+      "phone": "0863-31-3344",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "wednesday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック津山教会",
+      "address": "〒708-0004 岡山県津山市山北550-1",
+      "prefecture": "岡山県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 第4日曜15:30(タガログ語) / 金曜10:00",
+      "phone": "0868-22-3189",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:30",
+            "language": "PH",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック水島教会",
+      "prefecture": "岡山県",
+      "isCathedral": false,
+      "massTime": "主日：偶数月09:30、奇数月11:00 / 木曜09:30 / 土曜18:30（第1・3のみ）",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {
+        "sunday": [
+          "09:30",
+          "11:00"
+        ],
+        "thursday": [
+          "09:30"
+        ],
+        "saturday": [
+          "18:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリックロザリオ教会（巡回）",
+      "address": "〒701-4501 岡山県瀬戸内市邑久町虫明6539番地",
+      "prefecture": "岡山県",
+      "isCathedral": false,
+      "phone": "086-222-4093",
+      "fax": "086-222-4017",
+      "note": "巡回教会",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック境港教会（巡回）",
+      "address": "〒684-0031 鳥取県境港市湊町66",
+      "prefecture": "鳥取県",
+      "isCathedral": false,
+      "massTime": "第1・3日曜14:00",
+      "phone": "0859-22-6340",
+      "fax": "0859-22-6340",
+      "note": "巡回教会",
+      "diocese": "hiroshima",
+      "deanery": "hiroshima",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    }
+  ]
+}

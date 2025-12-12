@@ -46,54 +46,56 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           child: Column(
             children: [
               // 헤더 영역
-              SizedBox(
-                height: 136,
-                child: Column(
-                  children: [
-                    // 아이콘
-                    Container(
-                      width: 48,
-                      height: 48,
-                      decoration: const BoxDecoration(
-                        color: _selectedCardBackground,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.language,
-                        size: 24,
-                        color: _primaryColor,
-                      ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // 아이콘
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: const BoxDecoration(
+                      color: _selectedCardBackground,
+                      shape: BoxShape.circle,
                     ),
-
-                    const SizedBox(height: 24),
-
-                    // 타이틀
-                    const Text(
-                      '言語を選択',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.normal,
-                        color: _neutral800,
-                        letterSpacing: 0.07,
-                        height: 32 / 24,
-                      ),
+                    child: const Icon(
+                      Icons.language,
+                      size: 24,
+                      color: _primaryColor,
                     ),
+                  ),
 
-                    const SizedBox(height: 8),
+                  const SizedBox(height: 24),
 
-                    // 부제목
-                    const Text(
-                      'Select Language',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.normal,
-                        color: _neutral600,
-                        letterSpacing: -0.31,
-                        height: 24 / 16,
-                      ),
+                  // 타이틀
+                  Text(
+                    '言語を選択',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.normal,
+                      color: _neutral800,
+                      letterSpacing: 0.07,
+                      height: 32 / 24,
                     ),
-                  ],
-                ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  // 부제목
+                  Text(
+                    'Select Language',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      color: _neutral600,
+                      letterSpacing: -0.31,
+                      height: 24 / 16,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                ],
               ),
 
               const SizedBox(height: 38),
@@ -199,7 +201,7 @@ class _LanguageCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(14),
         child: Container(
-          height: 78.74,
+          constraints: const BoxConstraints(minHeight: 78.74),
           padding: const EdgeInsets.symmetric(
             horizontal: 16.17,
             vertical: 16.17,
@@ -218,6 +220,7 @@ class _LanguageCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       language.name,
@@ -228,6 +231,8 @@ class _LanguageCard extends StatelessWidget {
                         letterSpacing: -0.31,
                         height: 24 / 16,
                       ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -239,6 +244,8 @@ class _LanguageCard extends StatelessWidget {
                         letterSpacing: -0.15,
                         height: 20 / 14,
                       ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ],
                 ),

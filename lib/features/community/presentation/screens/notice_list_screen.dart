@@ -1,32 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../config/routes/app_routes.dart';
 import '../../data/providers/community_repository_providers.dart';
-import '../../data/models/post.dart';
-import 'post_edit_page.dart';
+import 'post_edit_screen.dart';
 
-/// 커뮤니티 게시판 리스트 페이지
-class CommunityListPage extends ConsumerWidget {
+/// 공지사항 리스트 화면
+class NoticeListScreen extends ConsumerWidget {
   final String? parishId;
 
-  const CommunityListPage({super.key, this.parishId});
+  const NoticeListScreen({super.key, this.parishId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final postsAsync = ref.watch(communityPostsProvider(parishId));
+    final noticesAsync = ref.watch(officialNoticesProvider(parishId));
     final currentAppUserAsync = ref.watch(currentAppUserProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('커뮤니티')),
-      body: postsAsync.when(
-        data: (posts) {
-          if (posts.isEmpty) {
-            return const Center(child: Text('게시글이 없습니다.'));
+      appBar: AppBar(title: const Text('공지사항')),
+      body: noticesAsync.when(
+        data: (notices) {
+          if (notices.isEmpty) {
+            return const Center(child: Text('공식 공지사항이 없습니다.'));
           }
 
           return ListView.builder(
-            itemCount: posts.length,
+            itemCount: notices.length,
             itemBuilder: (context, index) {
-              final post = posts[index];
+              final post = notices[index];
               return Card(
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: ListTile(
@@ -36,18 +37,17 @@ class CommunityListPage extends ConsumerWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  trailing: post.authorIsVerified
-                      ? const Chip(
-                          label: Text('公認'),
-                          labelStyle: TextStyle(fontSize: 12),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                        )
-                      : null,
+                  trailing: const Chip(
+                    label: Text('公式'),
+                    labelStyle: TextStyle(fontSize: 12),
+                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  ),
                   onTap: () {
-                    // TODO: navigate to detail
+                    if (post.parishId != null) {
+                      context.push(
+                        AppRoutes.postDetailPath(post.parishId!, post.postId),
+                      );
+                    }
                   },
                 ),
               );
@@ -59,27 +59,24 @@ class CommunityListPage extends ConsumerWidget {
       ),
       floatingActionButton: currentAppUserAsync.when(
         data: (currentUser) {
-          if (currentUser != null) {
+          if (currentUser != null && currentUser.canPostOfficial) {
             return FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => PostEditPage(
-                      initialPost: null,
-                      isOfficial: false,
-                      parishId: parishId,
-                    ),
+                    builder: (_) =>
+                        PostEditScreen(initialPost: null, parishId: parishId),
                   ),
                 );
               },
+              tooltip: '공지 작성',
               child: const Icon(Icons.edit),
-              tooltip: '글쓰기',
             );
           }
           return const SizedBox.shrink();
         },
         loading: () => const SizedBox.shrink(),
-        error: (_, __) => const SizedBox.shrink(),
+        error: (error, stackTrace) => const SizedBox.shrink(),
       ),
     );
   }

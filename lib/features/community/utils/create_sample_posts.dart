@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../../core/services/logger_service.dart';
 import '../data/models/post.dart';
 import '../data/repositories/firestore_post_repository.dart';
 
@@ -95,13 +95,19 @@ class CreateSamplePosts {
 
     // 각 게시글 생성
     for (final post in samplePosts) {
-      try {
-        final postId = await _repository.createPost(post);
-        createdPostIds.add(postId);
-      } catch (e) {
-        // 에러 발생 시 계속 진행
-        print('게시글 생성 실패: ${post.title} - $e');
-      }
+      final result = await _repository.createPost(post);
+      result.fold(
+        (failure) {
+          // 에러 발생 시 계속 진행
+          AppLogger.error(
+            '게시글 생성 실패: ${post.title} - ${failure.message}',
+            failure,
+          );
+        },
+        (postId) {
+          createdPostIds.add(postId);
+        },
+      );
     }
 
     return createdPostIds;

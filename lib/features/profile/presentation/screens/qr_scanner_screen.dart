@@ -25,16 +25,16 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
     });
 
     try {
-      final result = await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SimpleBarcodeScannerPage(),
-        ),
-      );
+      final result = await SimpleBarcodeScanner.scanBarcode(context);
 
-      if (!mounted) return;
+      if (!mounted) {
+        setState(() {
+          _isProcessing = false;
+        });
+        return;
+      }
 
-      if (result == null || result is! String) {
+      if (result == null || result.isEmpty) {
         setState(() {
           _isProcessing = false;
         });

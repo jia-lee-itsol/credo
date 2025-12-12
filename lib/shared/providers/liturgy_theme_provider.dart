@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/constants/liturgy_constants.dart';
 import '../../core/data/models/liturgical_calendar_model.dart';
 import '../../core/data/services/liturgical_calendar_service.dart';
+import '../../core/data/services/liturgical_reading_service.dart';
 import '../../core/theme/app_theme.dart';
 
 /// 테스트용 날짜 오버라이드 (디버그 모드에서만 사용)
@@ -102,6 +103,9 @@ final specialDayProvider = FutureProvider.family<SpecialDay?, DateTime>((
 
 /// 전례 기본 색상 Provider (특별한 축일 고려)
 final liturgyPrimaryColorProvider = Provider<Color>((ref) {
+  // 날짜 변경 감지를 위해 currentDateStringProvider를 watch
+  ref.watch(currentDateStringProvider);
+
   final seasonAsync = ref.watch(currentLiturgySeasonProvider);
   final testDate = ref.watch(testDateOverrideProvider);
   final date = testDate ?? DateTime.now();

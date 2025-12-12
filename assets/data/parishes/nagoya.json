@@ -10,8 +10,1688 @@
       "address": "愛知県名古屋市中区錦3-15-1",
       "prefecture": "愛知県",
       "isCathedral": true,
-      "massTime": "主日：08:00, 10:00, 12:00 / 第1・第3日曜14:00(英語ミサ)"
+      "massTime": "主日：08:00, 10:00, 12:00 / 第1・第3日曜14:00(英語ミサ)",
+      "phone": "052-935-2432",
+      "massTimes": {
+        "sunday": [
+          "08:00",
+          "10:00",
+          "12:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1・第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック布池教会",
+      "address": "〒461-0004 愛知県名古屋市東区葵1-12-23",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "土曜日：07:00, 18:30 / 主日：07:00, 09:30, 18:00 / 第2・第4日曜18:00(英語) / 第3日曜18:00(日本語) / 第1・第5日曜18:00(タガログ語)",
+      "phone": "052-935-6305",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "07:00",
+          "18:30"
+        ],
+        "sunday": [
+          "07:00",
+          "09:30",
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "18:00",
+            "language": "EN",
+            "note": "第2・第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック岐阜教会",
+      "address": "〒500-8881 岐阜県岐阜市青柳町3-23",
+      "prefecture": "岐阜県",
+      "isCathedral": false,
+      "massTime": "土曜日：19:00 / 主日：10:00 / 第1日曜13:00(タガログ語)",
+      "phone": "058-251-1018",
+      "fax": "058-255-1206",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック豊橋教会",
+      "address": "〒440-0806 愛知県豊橋市八町通2-7",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "土曜日：19:00 / 主日：09:30 / 第1・第3日曜17:00(ポルトガル語) / 第4日曜17:00(スペイン語) / 第2日曜15:00(タガログ語) / 第4日曜15:00(英語) / 第1日曜14:30(ベトナム語)",
+      "phone": "0532-52-3897",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "17:00",
+            "language": "PT",
+            "note": "第1・第3日曜"
+          },
+          {
+            "time": "17:00",
+            "language": "ES",
+            "note": "第4日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第4日曜"
+          },
+          {
+            "time": "14:30",
+            "language": "VI",
+            "note": "第1日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック一宮教会",
+      "address": "〒491-0044 愛知県一宮市大宮1丁目7-1",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "土曜日：18:30 / 主日：08:00, 10:00 / 第1日曜13:00(ベトナム語) / 第4日曜17:00(タガログ語)",
+      "phone": "0586-73-4884",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "08:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "VI",
+            "note": "第1日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック岡崎教会",
+      "address": "〒444-0864 愛知県岡崎市明大寺町向山2-3",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 第2日曜13:15(タガログ語) / 第4日曜13:15(英語)",
+      "phone": "0564-51-1848",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:15",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック多治見教会",
+      "address": "〒507-0021 岐阜県多治見市緑ケ丘38",
+      "prefecture": "岐阜県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第1日曜14:00(ポルトガル語) / 第2日曜14:00(英語) / 第3日曜12:00(ベトナム語)",
+      "phone": "0572-22-1583",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "PT",
+            "note": "第1日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          },
+          {
+            "time": "12:00",
+            "language": "VI",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック春日井教会",
+      "address": "〒486-0839 愛知県春日井市六軒屋町西3-9-2",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：07:00, 09:00 / 第2・第4日曜16:00(ポルトガル語)",
+      "phone": "0568-81-8198",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "16:00",
+            "language": "PT",
+            "note": "第2・第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック金沢教会",
+      "address": "〒920-0962 石川県金沢市広坂1丁目1-54",
+      "prefecture": "石川県",
+      "isCathedral": false,
+      "massTime": "土曜日：18:00 / 主日：08:30, 10:00, 18:00 / 平日：07:00 / 第4日曜15:00(英語)",
+      "phone": "076-264-2536",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "08:30",
+          "10:00",
+          "18:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック福井教会",
+      "address": "〒910-0004 福井県福井市宝永3丁目2-3",
+      "prefecture": "福井県",
+      "isCathedral": false,
+      "massTime": "主日：09:00(第1～4日曜), 12:00(英語・第1～4日曜), 10:00(第5日曜・国際交流ミサ) / 平日：07:30(火～木), 09:00(金・土) / 第4土曜19:30(ポルトガル語) / 第4日曜14:30(ベトナム語)",
+      "phone": "0776-25-4106",
+      "fax": "0776-22-0888",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "monday": [
+          "07:30",
+          "09:00"
+        ],
+        "tuesday": [
+          "07:30",
+          "09:00"
+        ],
+        "wednesday": [
+          "07:30",
+          "09:00"
+        ],
+        "thursday": [
+          "07:30",
+          "09:00"
+        ],
+        "friday": [
+          "07:30",
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "09:00",
+            "language": "EN",
+            "note": "第5日曜"
+          },
+          {
+            "time": "14:30",
+            "language": "VI",
+            "note": "第4日曜"
+          }
+        ],
+        "saturday": [
+          {
+            "time": "19:30",
+            "language": "PT",
+            "note": "第2土曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック富山教会",
+      "address": "〒930-0053 富山県富山市辰巳町1丁目5-8",
+      "prefecture": "富山県",
+      "isCathedral": false,
+      "massTime": "土曜日：18:00 / 主日：10:00, 12:00 / 平日：06:30(月～木), 10:00(金) / 第2日曜14:00(英語) / 第2日曜12:00(ベトナム語) / 第5日曜14:00(タガログ語)",
+      "phone": "076-421-7331",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "10:00",
+          "12:00"
+        ],
+        "monday": [
+          "06:30",
+          "10:00"
+        ],
+        "tuesday": [
+          "06:30",
+          "10:00"
+        ],
+        "wednesday": [
+          "06:30",
+          "10:00"
+        ],
+        "thursday": [
+          "06:30",
+          "10:00"
+        ],
+        "friday": [
+          "06:30",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          },
+          {
+            "time": "12:00",
+            "language": "VI",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック五反城教会",
+      "address": "〒453-0837 愛知県名古屋市中村区二瀬町27",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 平日：07:00 / 第2日曜14:00(ベトナム語) / 第3日曜12:00(タガログ語)",
+      "phone": "052-412-3456",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "第2日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック城北橋教会",
+      "address": "〒462-0061 愛知県名古屋市北区金城1-1-57",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "土曜日：19:00 / 主日：09:30 / 平日：07:00(火～金) / 第4日曜12:30(インドネシア語)",
+      "phone": "052-912-7123",
+      "fax": "052-917-0018",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "12:30",
+            "language": "ID",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック守山教会",
+      "address": "〒463-0010 愛知県名古屋市守山区翠松園3-919",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 第1・第3日曜は集会祭儀",
+      "phone": "052-792-4429",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小牧教会",
+      "address": "〒485-0044 愛知県小牧市常普請3-116",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第1日曜14:30(スペイン語) / 第4日曜12:00(ベトナム語)",
+      "phone": "0568-73-7675",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:30",
+            "language": "ES",
+            "note": "第1日曜"
+          },
+          {
+            "time": "12:00",
+            "language": "VI",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック押切教会",
+      "address": "〒451-0063 愛知県名古屋市西区押切2丁目3-1",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日：07:00",
+      "phone": "052-531-2931",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック南山教会",
+      "address": "〒466-0835 愛知県名古屋市昭和区南山町1",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "土曜日：17:00 / 主日：08:00, 09:30(手話通訳あり), 11:00, 18:00 / 平日：07:00(月・水・木), 19:00(火) / 毎週日曜09:30(英語) / 第4日曜15:30(ベトナム語)",
+      "phone": "052-831-9131",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "08:00",
+          "09:30",
+          "11:00",
+          "18:00"
+        ],
+        "monday": [
+          "07:00",
+          "19:00"
+        ],
+        "tuesday": [
+          "07:00",
+          "19:00"
+        ],
+        "wednesday": [
+          "07:00",
+          "19:00"
+        ],
+        "thursday": [
+          "07:00",
+          "19:00"
+        ],
+        "friday": [
+          "07:00",
+          "19:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "09:30",
+            "language": "SIGN",
+            "note": ""
+          },
+          {
+            "time": "09:30",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "15:30",
+            "language": "VI",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック名東教会",
+      "address": "〒465-0053 愛知県名古屋市名東区極楽3-245",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日：07:00",
+      "phone": "052-704-4621",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック平針教会",
+      "address": "〒470-0126 愛知県日進市赤池町西組116",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "土曜日：17:00 / 主日：09:30 / 平日：07:00 / 金曜日：10:00",
+      "phone": "052-803-4110",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "friday": [
+          "10:00",
+          "07:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック恵方町教会",
+      "address": "〒466-0037 愛知県名古屋市昭和区恵方町2-15",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日：06:30(月～木・土) / 金曜日：10:00",
+      "phone": "052-841-4537",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "friday": [
+          "10:00",
+          "06:30"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック東山教会",
+      "address": "〒464-0806 愛知県名古屋市千種区唐山1-52",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：07:30, 09:30",
+      "phone": "052-781-6514",
+      "fax": "052-781-9397",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "07:30",
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック膳棚教会",
+      "address": "〒500-8227 岐阜県岐阜市北一色3丁目13-1",
+      "prefecture": "岐阜県",
+      "isCathedral": false,
+      "massTime": "土曜日：18:30 / 主日：09:30 / 平日：07:00(火～金)",
+      "phone": "058-245-1360",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック八熊教会",
+      "address": "〒454-0033 愛知県名古屋市中川区五女子1-5-5",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:00",
+      "phone": "052-361-0011",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック半田教会",
+      "address": "〒475-0922 愛知県半田市昭和町2丁目40",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "土曜日：18:30 / 主日：09:30 / 平日：07:00(火～金)",
+      "phone": "0569-21-0046",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック日比野教会",
+      "address": "〒456-0062 愛知県名古屋市熱田区大宝4-5-17",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 平日：06:30 / 第1日曜13:30(英語)",
+      "phone": "052-671-1825",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:30",
+            "language": "EN",
+            "note": "第1日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック東海教会",
+      "address": "〒476-0011 愛知県東海市富木島町伏見2丁目24-1",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "土曜日：18:00 / 主日：09:30 / 平日：07:00",
+      "phone": "052-601-4455",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック港教会",
+      "address": "〒455-0843 愛知県名古屋市港区錦町25-17",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日：08:30 / 第4日曜13:30(タガログ語)",
+      "phone": "052-389-1841",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "08:30"
+        ],
+        "tuesday": [
+          "08:30"
+        ],
+        "wednesday": [
+          "08:30"
+        ],
+        "thursday": [
+          "08:30"
+        ],
+        "friday": [
+          "08:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック熱田教会",
+      "address": "〒456-0034 愛知県名古屋市熱田区伝馬2-28-14",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 平日：06:00",
+      "phone": "052-671-4549",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック緑ケ丘教会",
+      "address": "〒464-0003 愛知県名古屋市千種区新西1丁目1-1",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:00, 11:00 / 平日：07:00(火～金)",
+      "phone": "052-711-1234",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "11:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック長浦教会",
+      "address": "〒478-0042 愛知県知多市長浦3-29",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日：09:15(火～金)",
+      "phone": "0562-55-3130",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "09:15"
+        ],
+        "tuesday": [
+          "09:15"
+        ],
+        "wednesday": [
+          "09:15"
+        ],
+        "thursday": [
+          "09:15"
+        ],
+        "friday": [
+          "09:15"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック鳴海教会",
+      "address": "〒458-0801 愛知県名古屋市緑区鳴海町矢切50",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第1土曜19:00 / 平日：10:00(火・木・土) / 第1日曜15:00(タガログ語) / 第4日曜11:00(ベトナム語)",
+      "phone": "052-891-0669",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "VI",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック瀬戸教会",
+      "address": "〒489-0809 愛知県瀬戸市共栄通5丁目12番地",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：10:30 / 平日：07:00",
+      "phone": "0561-82-3343",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック瑞浪教会",
+      "address": "〒509-6124 岐阜県瑞浪市一色町4-27",
+      "prefecture": "岐阜県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 第3日曜11:00(スペイン語)",
+      "phone": "0572-68-3938",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "ES",
+            "note": "第3日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック高蔵寺教会",
+      "address": "〒487-0025 愛知県春日井市出川町2丁目1-1",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日：07:00",
+      "phone": "0568-51-1234",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック各務原教会",
+      "address": "〒504-0956 岐阜県各務原市三井北町1-261",
+      "prefecture": "岐阜県",
+      "isCathedral": false,
+      "massTime": "土曜日：19:00 / 主日：10:00 / 第3日曜12:00(スペイン語) / 第2日曜11:30(ポルトガル語) / 第4日曜13:30(英語)",
+      "phone": "058-371-5499",
+      "fax": "058-389-1148",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "12:00",
+            "language": "ES",
+            "note": "第3日曜"
+          },
+          {
+            "time": "11:30",
+            "language": "PT",
+            "note": "第2日曜"
+          },
+          {
+            "time": "13:30",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック大垣教会",
+      "address": "〒503-0018 岐阜県大垣市西之川町1-313-1",
+      "prefecture": "岐阜県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第3日曜14:00(英語) / 第1日曜16:00(スペイン語) / 第2・第4日曜18:00(ポルトガル語)",
+      "phone": "0584-78-5329",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第3日曜"
+          },
+          {
+            "time": "16:00",
+            "language": "ES",
+            "note": "第1日曜"
+          },
+          {
+            "time": "18:00",
+            "language": "PT",
+            "note": "第2・第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック江南教会",
+      "address": "〒483-8323 愛知県江南市村久野町門弟山190",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日：11:00(水・金) / 第1・第3日曜14:30(タガログ語)",
+      "phone": "0587-54-5015",
+      "fax": "0587-54-5488",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "11:00"
+        ],
+        "tuesday": [
+          "11:00"
+        ],
+        "wednesday": [
+          "11:00"
+        ],
+        "thursday": [
+          "11:00"
+        ],
+        "friday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック津島愛西教会",
+      "address": "〒496-0042 愛知県津島市寺前町三丁目65-1",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 平日：10:00(不定期)",
+      "phone": "0567-74-3102",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック美濃加茂教会",
+      "address": "〒505-0004 岐阜県美濃加茂市蜂屋町上蜂屋3511-14",
+      "prefecture": "岐阜県",
+      "isCathedral": false,
+      "massTime": "土曜日：07:00 / 主日：09:30 / 第1・第3日曜14:00(タガログ語) / 平日：07:00",
+      "phone": "0574-26-9649",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "07:00"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック刈谷教会",
+      "address": "〒448-0842 愛知県刈谷市東陽町4-37",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "土曜日：17:15 / 主日：09:30 / 第1・3日曜16:00(英語) / 第2・4日曜11:00(ポルトガル語) / 第2日曜16:00(スペイン語) / 第1日曜12:00(ベトナム語)",
+      "phone": "0566-21-6529",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "17:15"
+        ],
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "16:00",
+            "language": "EN",
+            "note": "第1・3日曜"
+          },
+          {
+            "time": "11:00",
+            "language": "PT",
+            "note": "第2・4日曜"
+          },
+          {
+            "time": "16:00",
+            "language": "ES",
+            "note": "第2日曜"
+          },
+          {
+            "time": "12:00",
+            "language": "VI",
+            "note": "第1日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック安城教会",
+      "address": "〒446-0072 愛知県安城市住吉町7-26-3",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第2土曜19:00(ポルトガル語) / 毎日曜19:00(ポルトガル語) / 第2・第4日曜16:00(英語) / 第4日曜14:00(スペイン語)",
+      "phone": "0566-98-7766",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "PT",
+            "note": ""
+          }
+        ],
+        "sunday": [
+          {
+            "time": "19:00",
+            "language": "PT",
+            "note": ""
+          },
+          {
+            "time": "16:00",
+            "language": "EN",
+            "note": "第2・第4日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "ES",
+            "note": "第4日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック聖心教会",
+      "address": "〒471-0844 愛知県豊田市聖心町4-44-13",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "主日：09:00, 18:00 / 平日：06:30 / 第2・第4日曜11:00(ポルトガル語) / 第2土曜19:30(スペイン語) / 第3・第5日曜11:00(タガログ語) / 第2日曜14:00(ベトナム語)",
+      "phone": "0565-28-0970",
+      "fax": "0565-24-7511",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "18:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "PT",
+            "note": "第2・第4日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "第2日曜"
+          }
+        ],
+        "saturday": [
+          {
+            "time": "19:30",
+            "language": "ES",
+            "note": "第2土曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック小矢部教会",
+      "address": "〒932-0836 富山県小矢部市埴生1581",
+      "prefecture": "富山県",
+      "isCathedral": false,
+      "massTime": "第2～第5日曜16:30 / 第1日曜10:00(集会祭儀)",
+      "phone": "076-421-7331",
+      "note": "富山教会へお問い合わせください",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック高岡教会",
+      "address": "〒933-0038 富山県高岡市坂下町1200",
+      "prefecture": "富山県",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 平日：07:00",
+      "phone": "0766-22-2550",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック魚津教会",
+      "address": "〒937-0067 富山県魚津市本江新町2-12",
+      "prefecture": "富山県",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 金曜日：10:00(第1・第3・第5)",
+      "phone": "076-421-3508",
+      "note": "富山教会へお問い合わせください",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック七尾教会",
+      "address": "〒926-0813 石川県七尾市南藤橋町子部59",
+      "prefecture": "石川県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "phone": "0767-52-0710",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック三馬教会",
+      "address": "〒921-8162 石川県金沢市三馬3-324",
+      "prefecture": "石川県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "090-6640-1558",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック内灘教会",
+      "address": "〒920-0271 石川県河北郡内灘町鶴ヶ丘4-1-127",
+      "prefecture": "石川県",
+      "isCathedral": false,
+      "massTime": "第1・第3日曜15:00",
+      "phone": "076-286-3256",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {},
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小松教会",
+      "address": "〒923-0907 石川県小松市浜田町ロ42-1",
+      "prefecture": "石川県",
+      "isCathedral": false,
+      "massTime": "主日：10:30 / 平日：06:00",
+      "phone": "0761-21-6687",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ],
+        "monday": [
+          "06:00"
+        ],
+        "tuesday": [
+          "06:00"
+        ],
+        "wednesday": [
+          "06:00"
+        ],
+        "thursday": [
+          "06:00"
+        ],
+        "friday": [
+          "06:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック羽咋教会",
+      "address": "〒925-0054 石川県羽咋市千里浜町イ30-4",
+      "prefecture": "石川県",
+      "isCathedral": false,
+      "massTime": "主日：14:00(奇数月第4日曜・偶数月第2日曜) / 第5日曜14:00(英語)",
+      "phone": "0767-52-0710",
+      "note": "七尾教会へお問い合わせください",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第5日曜"
+          }
+        ]
+      }
+    },
+    {
+      "name": "カトリック輪島教会",
+      "address": "〒928-0001 石川県輪島市河井町4-70",
+      "prefecture": "石川県",
+      "isCathedral": false,
+      "massTime": "主日：10:00",
+      "phone": "0768-22-0545",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大野教会",
+      "address": "〒498-0021 愛知県弥富市鯏浦町南前新田123",
+      "prefecture": "愛知県",
+      "isCathedral": false,
+      "massTime": "土曜日：18:00 / 主日：09:30 / 平日：07:00",
+      "phone": "0567-65-1234",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック小浜教会",
+      "address": "〒917-0241 福井県小浜市遠敷2-206-1",
+      "prefecture": "福井県",
+      "isCathedral": false,
+      "massTime": "主日：14:30(第4土曜14:30、第5週はなし)",
+      "phone": "0770-52-1234",
+      "note": "電話番号は要確認",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "14:30",
+          "14:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック敦賀教会",
+      "address": "〒914-0051 福井県敦賀市本町1丁目7-10",
+      "prefecture": "福井県",
+      "isCathedral": false,
+      "massTime": "主日：09:30",
+      "phone": "0770-22-0570",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック鯖江教会",
+      "address": "〒916-0022 福井県鯖江市水落町2丁目28-1",
+      "prefecture": "福井県",
+      "isCathedral": false,
+      "massTime": "主日：10:30",
+      "phone": "0778-51-1555",
+      "diocese": "nagoya",
+      "deanery": "nagoya",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {}
     }
   ]
 }
-
