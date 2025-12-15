@@ -4,12 +4,12 @@ import '../../../../core/services/logger_service.dart';
 import '../../data/models/app_user.dart';
 import '../../data/models/notification.dart' as models;
 import '../../data/models/post.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
 import '../../core/utils/mention_parser.dart';
 
 /// 댓글 제출 로직을 처리하는 헬퍼 클래스
 class PostCommentSubmitter {
-  final Ref ref;
+  final WidgetRef ref;
 
   PostCommentSubmitter({required this.ref});
 
@@ -153,6 +153,12 @@ class PostCommentSubmitter {
       } else {
         AppLogger.community('멘션이 없음');
       }
+
+      // 댓글 목록 provider를 invalidate하여 새로고침
+      ref.invalidate(commentsProvider(post.postId));
+      AppLogger.community(
+        'commentsProvider invalidate 완료: postId=${post.postId}',
+      );
 
       return true;
     } catch (e) {

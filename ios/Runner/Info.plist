@@ -49,5 +49,11 @@
 	<string>近くの教会を検索するために位置情報を使用します。</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>近くの教会を検索するために位置情報を使用します。</string>
+	<key>NSCameraUsageDescription</key>
+	<string>投稿に写真を添付するためにカメラへのアクセスが必要です。</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>投稿に写真を添付するためにフォトライブラリへのアクセスが必要です。</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>投稿に写真を添付するためにフォトライブラリへのアクセスが必要です。</string>
 </dict>
 </plist>

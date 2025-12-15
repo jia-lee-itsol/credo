@@ -28,7 +28,9 @@
             "note": ""
           }
         ]
-      }
+      },
+      "latitude": 33.2386594,
+      "longitude": 131.6043252
     },
     {
       "name": "カトリック中津教会",
@@ -47,7 +49,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.6025833,
+      "longitude": 131.1938899
     },
     {
       "name": "カトリック日向教会",
@@ -65,7 +69,9 @@
           "11:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.4261155,
+      "longitude": 131.6317805
     },
     {
       "name": "カトリック日田教会",
@@ -83,7 +89,9 @@
           "11:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3219019,
+      "longitude": 130.9271657
     },
     {
       "name": "カトリック玖珠教会",
@@ -101,7 +109,9 @@
           "11:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2763685,
+      "longitude": 131.1565968
     },
     {
       "name": "カトリック由布教会（集会所）",
@@ -117,7 +127,9 @@
           "11:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2757748,
+      "longitude": 131.3663396
     },
     {
       "name": "カトリック古城教会",
@@ -134,33 +146,39 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.6001119,
+      "longitude": 131.1884549
     },
     {
       "name": "カトリック宇佐教会",
       "address": "〒879-0471 大分県宇佐市四日市196-3",
       "prefecture": "大分県",
       "isCathedral": false,
-      "massTime": "要問い合わせ",
+      "massTime": "ミサ時間はホームページまたは教会にご確認ください",
       "phone": "0978-32-3636",
       "fax": "0978-32-3636",
       "diocese": "oita",
       "deanery": "oita",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.5371043,
+      "longitude": 131.3281075
     },
     {
       "name": "カトリック豊後高田教会",
       "address": "〒879-0617 大分県豊後高田市高田2731",
       "prefecture": "大分県",
       "isCathedral": false,
-      "massTime": "要問い合わせ",
+      "massTime": "ミサ時間はホームページまたは教会にご確認ください",
       "phone": "0978-22-3480",
       "fax": "0978-22-3480",
       "diocese": "oita",
       "deanery": "oita",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.5604406,
+      "longitude": 131.4350877
     },
     {
       "name": "カトリック杵築教会",
@@ -177,7 +195,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.4162341,
+      "longitude": 131.615235
     },
     {
       "name": "カトリック別府教会",
@@ -192,20 +212,19 @@
       "massTimes": {
         "saturday": [
           "19:00"
-        ],
-        "sunday": [
-          "09:00"
         ]
       },
       "foreignMassTimes": {
         "sunday": [
           {
-            "time": "13:30",
+            "time": "09:00",
             "language": "EN",
             "note": ""
           }
         ]
-      }
+      },
+      "latitude": 33.2744633,
+      "longitude": 131.5024069
     },
     {
       "name": "カトリック明野教会",
@@ -222,7 +241,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2326126,
+      "longitude": 131.6552509
     },
     {
       "name": "カトリック鶴崎教会",
@@ -239,7 +260,9 @@
           "08:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2382807,
+      "longitude": 131.6805934
     },
     {
       "name": "カトリック坂ノ市教会",
@@ -259,7 +282,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.23079810000001,
+      "longitude": 131.7530568
     },
     {
       "name": "カトリック臼杵教会",
@@ -276,7 +301,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.123093,
+      "longitude": 131.8024289
     },
     {
       "name": "カトリック津久見教会",
@@ -293,7 +320,9 @@
           "11:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.0683419,
+      "longitude": 131.8618381
     },
     {
       "name": "カトリック佐伯教会",
@@ -310,7 +339,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.961216,
+      "longitude": 131.9006189
     },
     {
       "name": "カトリック延岡教会",
@@ -330,7 +361,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.5823712,
+      "longitude": 131.6722859
     },
     {
       "name": "カトリック高鍋教会",
@@ -347,7 +380,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.1295171,
+      "longitude": 131.5078017
     },
     {
       "name": "カトリック西都教会",
@@ -364,7 +399,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.104358,
+      "longitude": 131.4043068
     },
     {
       "name": "カトリック宮崎教会",
@@ -385,7 +422,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.9197283,
+      "longitude": 131.4437535
     },
     {
       "name": "カトリック小林教会",
@@ -402,7 +441,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.9961299,
+      "longitude": 130.9740772
     },
     {
       "name": "カトリック南宮崎教会",
@@ -422,7 +463,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.8918457,
+      "longitude": 131.4233337
     },
     {
       "name": "カトリック田野教会",
@@ -439,7 +482,9 @@
           "08:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.8408281,
+      "longitude": 131.2993577
     },
     {
       "name": "カトリック都城教会",
@@ -456,7 +501,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.7228223,
+      "longitude": 131.0576738
     },
     {
       "name": "カトリック日南教会",
@@ -473,14 +520,16 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.591396,
+      "longitude": 131.3974981
     },
     {
       "name": "カトリック串間教会（巡回）",
       "address": "〒888-0013 宮崎県串間市東町29-15",
       "prefecture": "宮崎県",
       "isCathedral": false,
-      "massTime": "主日：09:30",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "phone": "0987-27-3288",
       "note": "巡回教会",
       "diocese": "oita",
@@ -490,7 +539,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.4609354,
+      "longitude": 131.2325042
     }
   ]
 }

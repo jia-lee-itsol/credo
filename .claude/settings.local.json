@@ -17,7 +17,9 @@
       "Bash(dart --version:*)",
       "Bash(dart run:*)",
       "Bash(python3:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

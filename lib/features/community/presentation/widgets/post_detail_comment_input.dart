@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/services/logger_service.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/widgets/login_required_dialog.dart';
 import '../../data/models/post.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
 import 'post_comment_submitter.dart';
 
 /// 게시글 댓글 입력 위젯
@@ -63,48 +65,78 @@ class PostDetailCommentInputState
   }
 
   Future<void> _handleSubmit() async {
+    AppLogger.community('===== _handleSubmit() 시작 =====');
+
     final isAuthenticated = ref.read(isAuthenticatedProvider);
     final primaryColor = ref.read(liturgyPrimaryColorProvider);
 
+    AppLogger.community('isAuthenticated: $isAuthenticated');
+
     if (!isAuthenticated) {
+      AppLogger.community('로그인 필요 다이얼로그 표시');
       LoginRequiredDialog.show(context, primaryColor: primaryColor);
       return;
     }
 
-    final currentAppUserAsync = ref.read(currentAppUserProvider);
-    final currentUser = currentAppUserAsync.valueOrNull;
+    // FutureProvider이므로 await로 값을 기다림
+    final currentUser = await ref.read(currentAppUserProvider.future);
+    AppLogger.community('currentUser: ${currentUser?.uid}');
+
     if (currentUser == null) {
+      AppLogger.community('currentUser가 null이므로 종료');
       return;
     }
 
     final content = _commentController.text.trim();
+    AppLogger.community('content: "$content"');
+
     if (content.isEmpty) {
+      AppLogger.community('content가 비어있으므로 종료');
       return;
     }
 
-    final submitter = PostCommentSubmitter(ref: ref as Ref);
-    final success = await submitter.submitComment(
-      post: widget.post,
-      currentUser: currentUser,
-      content: content,
-    );
+    try {
+      AppLogger.community('PostCommentSubmitter 생성 및 submitComment 호출');
+      final submitter = PostCommentSubmitter(ref: ref);
+      final success = await submitter.submitComment(
+        post: widget.post,
+        currentUser: currentUser,
+        content: content,
+      );
+      AppLogger.community('submitComment 결과: $success');
 
-    if (mounted) {
-      if (success) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('コメントを投稿しました')));
-        _commentController.clear();
-      } else {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('コメント投稿に失敗しました')));
+      if (mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
+        if (success) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(l10n.community.commentPosted)));
+          _commentController.clear();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(l10n.community.commentPostFailed)),
+          );
+        }
+      }
+    } catch (e) {
+      AppLogger.error('댓글 작성 중 에러 발생: $e', e);
+      if (mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '${l10n.community.commentPostFailed}: ${e.toString()}',
+            ),
+            duration: const Duration(seconds: 3),
+          ),
+        );
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
 
@@ -126,8 +158,8 @@ class PostDetailCommentInputState
           Expanded(
             child: TextField(
               controller: _commentController,
-              decoration: const InputDecoration(
-                hintText: 'コメントを入力...',
+              decoration: InputDecoration(
+                hintText: l10n.common.commentHint,
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(
                   horizontal: 16,

@@ -28,20 +28,25 @@ class ParishFilterChip extends StatelessWidget {
           height: 35.986,
           padding: const EdgeInsets.only(left: 16, right: 16),
           decoration: BoxDecoration(
-            color: ParishColors.neutral100,
+            color: isSelected
+                ? ParishColors.neutral700
+                : ParishColors.neutral100,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(icon, size: 16, color: ParishColors.neutral700),
+              if (isSelected)
+                Icon(Icons.check, size: 16, color: Colors.white)
+              else
+                Icon(icon, size: 16, color: ParishColors.neutral700),
               const SizedBox(width: 8),
               Text(
                 label,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.normal,
-                  color: ParishColors.neutral700,
+                  color: isSelected ? Colors.white : ParishColors.neutral700,
                   letterSpacing: -0.15,
                   height: 20 / 14,
                 ),

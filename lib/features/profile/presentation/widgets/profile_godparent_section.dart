@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../auth/domain/entities/user_entity.dart';
 
 /// 프로필 대부모·대자녀 섹션
-class ProfileGodparentSection extends StatelessWidget {
+class ProfileGodparentSection extends ConsumerWidget {
   final Color primaryColor;
   final UserEntity? godparent;
   final List<String> godchildren;
@@ -26,8 +28,9 @@ class ProfileGodparentSection extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
 
     return Card(
       child: Padding(
@@ -56,7 +59,7 @@ class ProfileGodparentSection extends StatelessWidget {
                 child: Text(
                   godparent != null
                       ? '${godparent!.nickname} (${godparent!.email})'
-                      : '選択してください',
+                      : l10n.common.select,
                   style: TextStyle(
                     color: godparent != null
                         ? theme.colorScheme.onSurface
@@ -84,7 +87,7 @@ class ProfileGodparentSection extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          'ユーザーID: ${godparent!.userId}',
+                          '${l10n.profile.userId}: ${godparent!.userId}',
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: theme.colorScheme.onSurfaceVariant,
                           ),
@@ -93,7 +96,7 @@ class ProfileGodparentSection extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: onRemoveGodparent,
-                      child: const Text('削除'),
+                      child: Text(l10n.profile.godparent.remove),
                     ),
                   ],
                 ),
@@ -113,7 +116,7 @@ class ProfileGodparentSection extends StatelessWidget {
                 TextButton.icon(
                   onPressed: onAddGodchildTap,
                   icon: const Icon(Icons.add),
-                  label: const Text('追加'),
+                  label: Text(l10n.profile.godparent.add),
                 ),
               ],
             ),
@@ -155,7 +158,7 @@ class ProfileGodparentSection extends StatelessWidget {
                             );
                           },
                           child: Text(
-                            'ユーザーID: $userId',
+                            '${l10n.profile.userId}: $userId',
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: theme.colorScheme.onSurfaceVariant,
                             ),

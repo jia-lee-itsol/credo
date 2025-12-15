@@ -25,7 +25,9 @@
             "note": "第2・第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 32.7758413,
+      "longitude": 129.868088
     },
     {
       "name": "カトリック飽の浦教会",
@@ -60,7 +62,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7447039,
+      "longitude": 129.8572739
     },
     {
       "name": "カトリック愛宕教会",
@@ -79,7 +83,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7366851,
+      "longitude": 129.8927999
     },
     {
       "name": "カトリック諫早教会",
@@ -113,15 +119,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {
-        "sunday": [
-          {
-            "time": "09:00",
-            "language": "SIGN",
-            "note": "第1日曜"
-          }
-        ]
-      }
+      "foreignMassTimes": {},
+      "latitude": 32.8524159,
+      "longitude": 130.0462712
     },
     {
       "name": "カトリック稲佐教会",
@@ -160,7 +160,9 @@
           "17:15"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7556472,
+      "longitude": 129.8590772
     },
     {
       "name": "カトリック植松教会",
@@ -195,7 +197,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9307286,
+      "longitude": 129.9559557
     },
     {
       "name": "カトリック浦上教会",
@@ -213,7 +217,6 @@
         "sunday": [
           "07:00",
           "09:00",
-          "18:30",
           "18:30"
         ],
         "monday": [
@@ -232,7 +235,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7758626,
+      "longitude": 129.8684727
     },
     {
       "name": "カトリック大浦教会",
@@ -266,7 +271,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7348748,
+      "longitude": 129.8700453
     },
     {
       "name": "カトリック大山教会",
@@ -297,7 +304,9 @@
           "19:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.6982618,
+      "longitude": 129.8727032
     },
     {
       "name": "カトリック水主町教会",
@@ -331,7 +340,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.90892100000001,
+      "longitude": 129.9572924
     },
     {
       "name": "カトリック神ノ島教会",
@@ -365,7 +376,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7185127,
+      "longitude": 129.8264241
     },
     {
       "name": "カトリック木鉢教会",
@@ -400,7 +413,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7265478,
+      "longitude": 129.8379084
     },
     {
       "name": "カトリック黒崎教会",
@@ -438,7 +453,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.839382,
+      "longitude": 129.715669
     },
     {
       "name": "カトリック香焼教会",
@@ -470,7 +487,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.6929595,
+      "longitude": 129.8140723
     },
     {
       "name": "カトリック小ヶ倉教会",
@@ -501,7 +520,9 @@
           "05:50"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7012053,
+      "longitude": 129.8586133
     },
     {
       "name": "カトリック出津教会",
@@ -517,11 +538,12 @@
           "19:00"
         ],
         "sunday": [
-          "06:00",
-          "09:00"
+          "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8439066,
+      "longitude": 129.7009051
     },
     {
       "name": "カトリック島原教会",
@@ -555,7 +577,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7806543,
+      "longitude": 130.3677415
     },
     {
       "name": "カトリック城山教会",
@@ -591,7 +615,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7757046,
+      "longitude": 129.8516692
     },
     {
       "name": "カトリック時津教会",
@@ -626,7 +652,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8334141,
+      "longitude": 129.858682
     },
     {
       "name": "カトリック中町教会",
@@ -661,7 +689,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7516357,
+      "longitude": 129.874104
     },
     {
       "name": "カトリック長与教会",
@@ -695,7 +725,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8173655,
+      "longitude": 129.8806128
     },
     {
       "name": "カトリック滑石教会",
@@ -735,7 +767,9 @@
           "19:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8059174,
+      "longitude": 129.8374139
     },
     {
       "name": "カトリック西町教会",
@@ -770,7 +804,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7882414,
+      "longitude": 129.8576601
     },
     {
       "name": "カトリック東長崎教会",
@@ -810,7 +846,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7675686,
+      "longitude": 129.9496596
     },
     {
       "name": "カトリック深堀教会",
@@ -844,7 +882,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.6843375,
+      "longitude": 129.8209876
     },
     {
       "name": "カトリック本河内教会",
@@ -876,7 +916,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7512012,
+      "longitude": 129.8990735
     },
     {
       "name": "カトリック馬込教会",
@@ -907,7 +949,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.6974912,
+      "longitude": 129.7811623
     },
     {
       "name": "カトリック三ツ山教会",
@@ -938,7 +982,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8076048,
+      "longitude": 129.9015649
     },
     {
       "name": "カトリック本原教会",
@@ -973,7 +1019,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.783141,
+      "longitude": 129.8828605
     },
     {
       "name": "カトリック八幡町教会",
@@ -1007,15 +1055,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {
-        "saturday": [
-          {
-            "time": "19:00",
-            "language": "SIGN",
-            "note": ""
-          }
-        ]
-      }
+      "foreignMassTimes": {},
+      "latitude": 32.7509687,
+      "longitude": 129.8854323
     },
     {
       "name": "カトリック湯江教会",
@@ -1047,7 +1089,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9104405,
+      "longitude": 130.1398292
     },
     {
       "name": "カトリック相浦教会",
@@ -1082,7 +1126,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1877345,
+      "longitude": 129.6590315
     },
     {
       "name": "カトリック浅子教会",
@@ -1114,7 +1160,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1935968,
+      "longitude": 129.6232445
     },
     {
       "name": "カトリック大崎教会",
@@ -1148,7 +1196,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1723227,
+      "longitude": 129.643879
     },
     {
       "name": "カトリック太田尾教会",
@@ -1182,7 +1232,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.0379729,
+      "longitude": 129.5937309
     },
     {
       "name": "カトリック大野教会",
@@ -1199,8 +1251,6 @@
         ],
         "sunday": [
           "09:00",
-          "07:00",
-          "09:30",
           "07:30"
         ],
         "monday": [
@@ -1219,7 +1269,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2099857,
+      "longitude": 129.7272724
     },
     {
       "name": "カトリック鹿子前教会",
@@ -1253,7 +1305,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1606084,
+      "longitude": 129.6858182
     },
     {
       "name": "カトリック黒島教会",
@@ -1287,7 +1341,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.139269,
+      "longitude": 129.5372494
     },
     {
       "name": "カトリック神崎教会",
@@ -1323,7 +1379,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2309974,
+      "longitude": 129.571768
     },
     {
       "name": "カトリック佐々教会",
@@ -1357,7 +1415,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2253287,
+      "longitude": 129.6390943
     },
     {
       "name": "カトリック褥崎教会",
@@ -1388,7 +1448,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2461396,
+      "longitude": 129.5641557
     },
     {
       "name": "カトリック俵町教会",
@@ -1422,7 +1484,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1883444,
+      "longitude": 129.7186697
     },
     {
       "name": "カトリック天神教会",
@@ -1453,7 +1517,9 @@
           "18:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1442649,
+      "longitude": 129.7338559
     },
     {
       "name": "カトリック早岐教会",
@@ -1487,7 +1553,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1385335,
+      "longitude": 129.7951412
     },
     {
       "name": "カトリック三浦町教会",
@@ -1519,7 +1587,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1662377,
+      "longitude": 129.7259564
     },
     {
       "name": "カトリック上神崎教会",
@@ -1551,7 +1621,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3946695,
+      "longitude": 129.5443549
     },
     {
       "name": "カトリック田平教会",
@@ -1585,7 +1657,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.341024,
+      "longitude": 129.5767943
     },
     {
       "name": "カトリック西木場教会",
@@ -1616,7 +1690,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3644069,
+      "longitude": 129.6660078
     },
     {
       "name": "カトリック紐差教会",
@@ -1647,7 +1723,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2888766,
+      "longitude": 129.475486
     },
     {
       "name": "カトリック平戸ザビエル記念教会",
@@ -1667,7 +1745,9 @@
           "08:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3695249,
+      "longitude": 129.5498213
     },
     {
       "name": "カトリック平戸口教会",
@@ -1680,8 +1760,7 @@
       "deanery": "nagasaki",
       "massTimes": {
         "sunday": [
-          "07:00",
-          "09:00"
+          "07:00"
         ],
         "monday": [
           "06:00"
@@ -1699,7 +1778,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3657158,
+      "longitude": 129.5823089
     },
     {
       "name": "カトリック宝亀教会",
@@ -1730,7 +1811,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3065354,
+      "longitude": 129.5110413
     },
     {
       "name": "カトリック山田教会",
@@ -1758,7 +1841,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3669899,
+      "longitude": 129.4267389
     },
     {
       "name": "カトリック青方教会",
@@ -1789,7 +1874,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9875602,
+      "longitude": 129.067499
     },
     {
       "name": "カトリック青砂ヶ浦教会",
@@ -1805,8 +1892,7 @@
           "18:00"
         ],
         "sunday": [
-          "09:00",
-          "07:00"
+          "09:00"
         ],
         "monday": [
           "06:00"
@@ -1824,7 +1910,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.0276405,
+      "longitude": 129.0874055
     },
     {
       "name": "カトリック大曽教会",
@@ -1855,7 +1943,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9851125,
+      "longitude": 129.0487608
     },
     {
       "name": "カトリック桐教会",
@@ -1868,11 +1958,12 @@
       "deanery": "nagasaki",
       "massTimes": {
         "sunday": [
-          "09:00",
-          "07:00"
+          "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8635535,
+      "longitude": 129.0476113
     },
     {
       "name": "カトリック曽根教会",
@@ -1906,7 +1997,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.0549849,
+      "longitude": 129.0895083
     },
     {
       "name": "カトリック鯛之浦教会",
@@ -1940,7 +2033,9 @@
           "05:45"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9648244,
+      "longitude": 129.0990238
     },
     {
       "name": "カトリック仲知教会",
@@ -1971,7 +2066,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1179733,
+      "longitude": 129.1027651
     },
     {
       "name": "カトリック土井ノ浦教会",
@@ -2002,7 +2099,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8706605,
+      "longitude": 129.021569
     },
     {
       "name": "カトリック浜串教会",
@@ -2033,7 +2132,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8728392,
+      "longitude": 129.086701
     },
     {
       "name": "カトリック真手ノ浦教会",
@@ -2064,7 +2165,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9397408,
+      "longitude": 129.0404564
     },
     {
       "name": "カトリック丸尾教会",
@@ -2095,7 +2198,9 @@
           "17:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.006225,
+      "longitude": 129.091165
     },
     {
       "name": "カトリック井持浦教会",
@@ -2110,7 +2215,9 @@
           "08:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.6191546,
+      "longitude": 128.6117654
     },
     {
       "name": "カトリック浦頭教会",
@@ -2142,7 +2249,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7346999,
+      "longitude": 128.831162
     },
     {
       "name": "カトリック貝津教会",
@@ -2157,7 +2266,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.72373779999999,
+      "longitude": 128.6582269
     },
     {
       "name": "カトリック奈留教会",
@@ -2177,7 +2288,9 @@
           "08:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8351018,
+      "longitude": 128.9344127
     },
     {
       "name": "カトリック浜脇教会",
@@ -2189,11 +2302,12 @@
       "deanery": "nagasaki",
       "massTimes": {
         "sunday": [
-          "08:00",
-          "07:00"
+          "08:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7791137,
+      "longitude": 128.85116
     },
     {
       "name": "カトリック福江教会",
@@ -2213,7 +2327,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.6945039,
+      "longitude": 128.8416585
     },
     {
       "name": "カトリック三井楽教会",
@@ -2247,7 +2363,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7742783,
+      "longitude": 128.6709925
     },
     {
       "name": "カトリック水ノ浦教会",
@@ -2263,23 +2381,26 @@
           "18:00"
         ],
         "sunday": [
-          "06:30",
-          "08:30"
+          "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7486135,
+      "longitude": 128.7470912
     },
     {
       "name": "カトリック岳教会（巡回）",
       "address": "〒850-0068 長崎県長崎市福田本町477",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第1・3土曜17:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.755696,
+      "longitude": 129.8247383
     },
     {
       "name": "カトリック福田集会所",
@@ -2290,8 +2411,14 @@
       "note": "集会所",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 32.7517231,
+      "longitude": 129.8257553
     },
     {
       "name": "カトリック愛野集会所",
@@ -2320,19 +2447,23 @@
           "06:15"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8163959,
+      "longitude": 130.155583
     },
     {
       "name": "カトリック壱岐教会（巡回）",
       "address": "〒811-5136 長崎県壱岐市郷ノ浦町片原触字三本松42-2",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "原則第3日曜17:00（行けない場合あり）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.7384794,
+      "longitude": 129.6905123
     },
     {
       "name": "カトリック小瀬戸集会所",
@@ -2349,50 +2480,58 @@
           "11:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7271391,
+      "longitude": 129.8313314
     },
     {
       "name": "カトリック樫山教会（巡回）",
       "address": "〒851-2202 長崎県長崎市樫山町3059",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第1日曜11:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8126958,
+      "longitude": 129.736915
     },
     {
       "name": "カトリック大野教会（巡回）",
       "address": "〒851-2427 長崎県長崎市下大野町2619",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "年1回（10月第1日曜09:00）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8604231,
+      "longitude": 129.6892228
     },
     {
       "name": "カトリック牧野教会（巡回）",
       "address": "〒851-2323 長崎県長崎市新牧野町591-93",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "3ヶ月に1回（3・6・9・12月）第1水曜19:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8572017,
+      "longitude": 129.7106582
     },
     {
       "name": "カトリック雲仙教会（巡回）",
       "address": "〒854-0621 長崎県雲仙市小浜町雲仙札の原422-2",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "主日：11:00（第3日曜は無し）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2401,14 +2540,16 @@
           "11:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.727045,
+      "longitude": 130.25378
     },
     {
       "name": "カトリックさくらの里聖家族教会（巡回）",
       "address": "〒851-2207 長崎県長崎市さくらの里3-1700",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日月・水・金06:20（ケアハウスかおり） / 火18:40 / 木19:00 / 初金曜日19:00（いずれも教会） / 土曜19:00 / 主日：08:00（いずれも教会）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "phone": "095-850-6260",
       "note": "巡回教会",
       "diocese": "nagasaki",
@@ -2436,14 +2577,16 @@
           "06:20"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8246272,
+      "longitude": 129.7572087
     },
     {
       "name": "カトリック善長谷教会（巡回）",
       "address": "〒851-0302 長崎県長崎市大籠町519",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "主日：07:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2452,14 +2595,16 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.67187090000001,
+      "longitude": 129.8248398
     },
     {
       "name": "カトリック大明寺教会（巡回）",
       "address": "〒851-1201 長崎県長崎市伊王島町1-1060",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "水06:30 / 木17:30 / 主日：06:30",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2468,7 +2613,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7069725,
+      "longitude": 129.7716963
     },
     {
       "name": "カトリック小長井教会（準小教区）",
@@ -2501,14 +2648,16 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9588554,
+      "longitude": 130.16695
     },
     {
       "name": "カトリック横浦教会（巡回）",
       "address": "〒857-0403 長崎県佐世保市小佐々町臼の浦149-7",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜18:30",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2517,14 +2666,16 @@
           "18:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2094538,
+      "longitude": 129.6285874
     },
     {
       "name": "カトリック間瀬教会（巡回）",
       "address": "〒857-2401 長崎県西海市大島町1420-3",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日木17:30 / 金06:00 / 土曜18:30（偶数週） / 主日：08:00（奇数週）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2551,22 +2702,22 @@
           "17:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.0460642,
+      "longitude": 129.6156785
     },
     {
       "name": "カトリック皆瀬教会（巡回）",
       "address": "〒857-0144 長崎県佐世保市皆瀬町363",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日初金曜日のみ17:30 / 主日：07:00（第1のみ09:00）（10月～3月は07:30、第1のみ09:30）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {
         "sunday": [
           "07:00",
-          "09:00",
-          "07:30",
           "09:30"
         ],
         "monday": [
@@ -2585,14 +2736,16 @@
           "17:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2151134,
+      "longitude": 129.7025176
     },
     {
       "name": "カトリック船越教会（巡回）",
       "address": "〒857-1231 長崎県佐世保市船越町131-3",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "主日：07:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2601,14 +2754,16 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1528658,
+      "longitude": 129.6858398
     },
     {
       "name": "カトリック潜竜教会（巡回）",
       "address": "〒859-6134 長崎県佐世保市江迎町田ノ元503-4",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日金18:30 / 主日：08:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2632,14 +2787,16 @@
           "18:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2829123,
+      "longitude": 129.681348
     },
     {
       "name": "カトリック大加勢教会（巡回）",
       "address": "〒859-6206 長崎県佐世保市鹿町町長串4-5",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜19:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2648,26 +2805,30 @@
           "19:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2647172,
+      "longitude": 129.5780884
     },
     {
       "name": "カトリック烏帽子教会（巡回）",
       "address": "〒857-0001 長崎県佐世保市烏帽子町138",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第1・3土曜18:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1826197,
+      "longitude": 129.7636904
     },
     {
       "name": "カトリック川棚教会（巡回）",
       "address": "〒859-3607 長崎県東彼杵郡川棚町城山町38",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日水・金19:00 / 木・土06:00 / 主日：07:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2691,14 +2852,16 @@
           "19:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.0699131,
+      "longitude": 129.8671336
     },
     {
       "name": "カトリック御厨教会（巡回）",
       "address": "〒859-4752 長崎県松浦市御厨町里免長峰126",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日木17:30 / 土曜18:30",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2722,14 +2885,16 @@
           "17:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3644069,
+      "longitude": 129.6660078
     },
     {
       "name": "カトリック福崎教会（巡回）",
       "address": "〒859-4802 長崎県平戸市田平町福崎免990",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日金17:30 / 主日：07:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2753,14 +2918,16 @@
           "17:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3607485,
+      "longitude": 129.612564
     },
     {
       "name": "カトリック大佐志教会（巡回）",
       "address": "〒859-5516 長崎県平戸市鮎川町字四釜3-40",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "主日：06:30",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2769,14 +2936,16 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2225572,
+      "longitude": 129.4152456
     },
     {
       "name": "カトリック木ヶ津教会（巡回）",
       "address": "〒859-5362 長崎県平戸市木ヶ津町577",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜17:30",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2785,14 +2954,16 @@
           "17:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.2676366,
+      "longitude": 129.4934005
     },
     {
       "name": "カトリック古江教会（巡回）",
       "address": "〒859-5145 長崎県平戸市古江町大瀬",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜18:30（偶数週）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2801,14 +2972,16 @@
           "18:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.36817449999999,
+      "longitude": 129.5097237
     },
     {
       "name": "カトリック山野教会（巡回）",
       "address": "〒859-5142 長崎県平戸市主師町山野",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日火18:30 / 土曜18:30（偶数週） / 主日：06:00（奇数週）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2835,14 +3008,16 @@
           "18:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3459521,
+      "longitude": 129.4683263
     },
     {
       "name": "カトリック中野教会（巡回）",
       "address": "〒859-5141 長崎県平戸市山中町390",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日金18:30 / 土曜18:30（奇数週） / 主日：06:00（偶数週）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2869,43 +3044,48 @@
           "18:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3276616,
+      "longitude": 129.4946623
     },
     {
       "name": "カトリック壱部教会（巡回）",
       "address": "〒859-5701 長崎県平戸市生月町壱部4808-1",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第1・3・5土曜19:00 / 第2・4日曜07:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.3981964,
+      "longitude": 129.4323403
     },
     {
       "name": "カトリック冷水教会（巡回）",
       "address": "〒857-4401 長崎県南松浦郡新上五島町網上郷623-2",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "主日：07:00（第2日曜は09:00）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {
         "sunday": [
-          "07:00",
-          "09:00"
+          "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.0330664,
+      "longitude": 129.0656186
     },
     {
       "name": "カトリック跡次教会（巡回）",
       "address": "〒857-4413 長崎県南松浦郡新上五島町跡次",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日木18:00 / 土曜18:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2929,31 +3109,34 @@
           "18:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.973332,
+      "longitude": 129.053774
     },
     {
       "name": "カトリック中ノ浦教会（巡回）",
       "address": "〒853-2303 長崎県南松浦郡新上五島町宿ノ浦郷中ノ浦",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "主日：07:00（最終日曜は09:00）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {
         "sunday": [
-          "07:00",
-          "09:00"
+          "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9031393,
+      "longitude": 129.0667304
     },
     {
       "name": "カトリック大浦教会（巡回）",
       "address": "〒853-2303 長崎県南松浦郡新上五島町宿ノ浦郷大浦",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜18:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -2962,38 +3145,44 @@
           "18:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8953816,
+      "longitude": 129.0580511
     },
     {
       "name": "カトリック大水教会（巡回）",
       "address": "〒857-4602 長崎県南松浦郡新上五島町曽根郷大水",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第2・4日曜09:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.072675,
+      "longitude": 129.0945124
     },
     {
       "name": "カトリック小瀬良教会（巡回）",
       "address": "〒857-4603 長崎県南松浦郡新上五島町立串郷小瀬良",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第3・5日曜09:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.075652,
+      "longitude": 129.107276
     },
     {
       "name": "カトリック船隠教会（巡回）",
       "address": "〒853-3323 長崎県南松浦郡新上五島町東神ノ浦郷船隠48-11",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜16:30（第2・4土曜のみ）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -3002,50 +3191,58 @@
           "16:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.911908,
+      "longitude": 129.09142
     },
     {
       "name": "カトリック頭ヶ島教会（巡回）",
       "address": "〒857-4102 長崎県南松浦郡新上五島町友住郷頭ヶ島638",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第2・4日曜15:00（夏時間6～9月は16:00）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.0109184,
+      "longitude": 129.1868741
     },
     {
       "name": "カトリック佐野原教会（巡回）",
       "address": "〒853-3323 長崎県南松浦郡新上五島町東神ノ浦郷佐ノ原",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第1・3土曜16:30",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9127282,
+      "longitude": 129.0111417
     },
     {
       "name": "カトリック小値賀教会（巡回）",
       "address": "〒857-4701 長崎県北松浦郡小値賀町笛吹郷字段地2679-1",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第4日曜09:30",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.1929696,
+      "longitude": 129.0528407
     },
     {
       "name": "カトリック米山教会（巡回）",
       "address": "〒857-4604 長崎県南松浦郡新上五島町津和崎郷589-14",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日火17:00（江袋教会と週ごとに交互） / 土曜17:30（第2・4土曜は18:40）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会（要問い合わせ）",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -3070,14 +3267,16 @@
           "17:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.139715,
+      "longitude": 129.1108069
     },
     {
       "name": "カトリック江袋教会（巡回）",
       "address": "〒857-4602 長崎県南松浦郡新上五島町曽根郷字浜口195-2",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "平日水17:00（米山教会と週ごとに交互） / 土曜18:40（第2・4土曜は17:30）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会（要問い合わせ）",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -3102,26 +3301,30 @@
           "17:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.072675,
+      "longitude": 129.0945124
     },
     {
       "name": "カトリック赤波江教会（巡回）",
       "address": "〒857-4603 長崎県南松浦郡新上五島町立串郷字谷ノ坂子1899",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第3日曜09:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.984529,
+      "longitude": 129.0733574
     },
     {
       "name": "カトリック有福教会（巡回）",
       "address": "〒853-2313 長崎県南松浦郡新上五島町有福郷",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜16:00または日曜07:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -3131,14 +3334,16 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9172226,
+      "longitude": 128.940713
     },
     {
       "name": "カトリック大平教会（巡回）",
       "address": "〒853-2311 長崎県南松浦郡新上五島町大平",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜16:00または日曜07:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -3148,14 +3353,16 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9204656,
+      "longitude": 129.0060668
     },
     {
       "name": "カトリック福見教会（巡回）",
       "address": "〒853-3102 長崎県南松浦郡新上五島町岩瀬浦郷福見",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "主日：09:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -3164,14 +3371,16 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.861377,
+      "longitude": 129.074894
     },
     {
       "name": "カトリック高井旅教会（巡回）",
       "address": "〒853-3101 長崎県南松浦郡新上五島町奈良尾郷高井旅",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜17:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -3180,14 +3389,16 @@
           "17:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8635543,
+      "longitude": 129.0681178
     },
     {
       "name": "カトリック焼崎教会（巡回）",
       "address": "〒857-4414 長崎県南松浦郡新上五島町飯ノ瀬戸郷焼崎",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "主日：07:30",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -3196,14 +3407,16 @@
           "07:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.94435,
+      "longitude": 128.999717
     },
     {
       "name": "カトリック猪ノ浦教会（巡回）",
       "address": "〒857-4415 長崎県南松浦郡新上五島町続浜ノ浦郷猪ノ浦",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜18:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -3212,14 +3425,16 @@
           "18:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.9642137,
+      "longitude": 129.0181286
     },
     {
       "name": "カトリック玉之浦教会（巡回）",
       "address": "〒853-0411 長崎県五島市玉之浦町玉之浦622-1",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "土曜17:30（隔週）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
@@ -3228,121 +3443,140 @@
           "17:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.6354761,
+      "longitude": 128.6158132
     },
     {
       "name": "カトリック堂崎天主堂（巡回）",
       "address": "〒853-0053 長崎県五島市奥浦町堂崎2019",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第1日曜05:30",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "phone": "0959-73-0705",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7558809,
+      "longitude": 128.8372585
     },
     {
       "name": "カトリック宮原教会（巡回）",
       "address": "〒853-0054 長崎県五島市戸岐町773-2",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第2・4日曜13:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7619976,
+      "longitude": 128.8136507
     },
     {
       "name": "カトリック半泊教会（巡回）",
       "address": "〒853-0054 長崎県五島市戸岐町半泊1223",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第4日曜13:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7760754,
+      "longitude": 128.8037575
     },
     {
       "name": "カトリック嵯峨島教会（巡回）",
       "address": "〒853-0611 長崎県五島市三井楽町嵯峨島",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第1・3日曜10:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7240549,
+      "longitude": 128.5979091
     },
     {
       "name": "カトリック江上教会（巡回）",
       "address": "〒853-2202 長崎県五島市奈留町大串1131",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "不定期要問合せ（通常は第3日曜15:00）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8551988,
+      "longitude": 128.9041436
     },
     {
       "name": "カトリック五輪教会（巡回）",
       "address": "〒853-2172 長崎県五島市蕨町五輪",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第4日曜10:00（6月～9月は09:00）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.8034158,
+      "longitude": 128.9023432
     },
     {
       "name": "カトリック牢屋の窄殉教記念聖堂（巡回）",
       "address": "〒853-2171 長崎県五島市久賀町大開",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第3日曜09:30（6月～9月は08:30）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7944803,
+      "longitude": 128.8798413
     },
     {
       "name": "カトリック楠原教会（巡回）",
       "address": "〒853-0703 長崎県五島市岐宿町楠原737",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "主日：06:30（奇数週）/08:30（偶数週）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {
         "sunday": [
-          "06:30",
-          "08:30"
+          "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7335064,
+      "longitude": 128.7463788
     },
     {
       "name": "カトリック打折教会（巡回）",
       "address": "〒853-0702 長崎県五島市岐宿町川原1052-1",
       "prefecture": "長崎県",
       "isCathedral": false,
-      "massTime": "第1・3日曜10:30（休みの場合あり）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "nagasaki",
       "deanery": "nagasaki",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.7398724,
+      "longitude": 128.7083606
     }
   ]
 }

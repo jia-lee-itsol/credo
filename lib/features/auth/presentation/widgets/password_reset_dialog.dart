@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 /// 비밀번호 재설정 다이얼로그
-class PasswordResetDialog extends StatefulWidget {
+class PasswordResetDialog extends ConsumerStatefulWidget {
   const PasswordResetDialog({super.key});
 
   @override
-  State<PasswordResetDialog> createState() => _PasswordResetDialogState();
+  _PasswordResetDialogState createState() => _PasswordResetDialogState();
 
   /// 다이얼로그를 표시하고 이메일을 반환
   static Future<String?> show(BuildContext context) async {
@@ -16,7 +18,7 @@ class PasswordResetDialog extends StatefulWidget {
   }
 }
 
-class _PasswordResetDialogState extends State<PasswordResetDialog> {
+class _PasswordResetDialogState extends ConsumerState<PasswordResetDialog> {
   final _emailController = TextEditingController();
 
   @override
@@ -27,13 +29,14 @@ class _PasswordResetDialogState extends State<PasswordResetDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     return AlertDialog(
-      title: const Text('パスワードリセット'),
+      title: Text(l10n.auth.passwordReset),
       content: TextField(
         controller: _emailController,
-        decoration: const InputDecoration(
-          labelText: 'メールアドレス',
-          hintText: 'メールアドレスを入力してください',
+        decoration: InputDecoration(
+          labelText: l10n.auth.email,
+          hintText: l10n.auth.emailHint,
         ),
         keyboardType: TextInputType.emailAddress,
         autofocus: true,
@@ -42,15 +45,14 @@ class _PasswordResetDialogState extends State<PasswordResetDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('キャンセル'),
+          child: Text(l10n.common.cancel),
         ),
         TextButton(
           onPressed: () =>
               Navigator.of(context).pop(_emailController.text.trim()),
-          child: const Text('送信'),
+          child: Text(l10n.common.send),
         ),
       ],
     );
   }
 }
-

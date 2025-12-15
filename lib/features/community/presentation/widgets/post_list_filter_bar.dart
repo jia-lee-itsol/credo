@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 게시글 목록 필터 타입
 enum PostListFilterType { latest, popular, myPosts }
 
 /// 게시글 목록 필터 바 위젯
-class PostListFilterBar extends StatelessWidget {
+class PostListFilterBar extends ConsumerWidget {
   final PostListFilterType filterType;
   final ValueChanged<PostListFilterType> onFilterChanged;
   final Color primaryColor;
@@ -17,7 +18,7 @@ class PostListFilterBar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(

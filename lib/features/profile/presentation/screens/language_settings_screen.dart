@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
+import '../../../../shared/providers/locale_provider.dart';
 import '../../../../shared/widgets/settings_list_tile.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 /// 언어 설정 화면
 class LanguageSettingsScreen extends ConsumerWidget {
@@ -21,46 +23,24 @@ class LanguageSettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
-    final currentUser = ref.watch(currentUserProvider);
+    final currentLocale = ref.watch(localeProvider);
+    final l10nAsync = ref.watch(appLocalizationsProvider);
 
-    // 유저의 preferredLanguages 첫 번째 항목을 사용, 없으면 기본값 'ja'
-    final currentLanguageCode =
-        currentUser?.preferredLanguages.isNotEmpty == true
-        ? currentUser!.preferredLanguages.first
-        : 'ja';
+    // 현재 선택된 언어 코드
+    final currentLanguageCode = currentLocale.languageCode;
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('言語設定')),
+      appBar: AppBar(
+        title: l10nAsync.when(
+          data: (l10n) => Text(l10n.language.settings),
+          loading: () => const Text('言語設定'),
+          error: (_, _) => const Text('言語設定'),
+        ),
+      ),
       body: ListView(
         children: [
-          // 안내 메시지
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Card(
-              color: Colors.orange.withValues(alpha: 0.1),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Icon(Icons.info_outline, color: Colors.orange, size: 24),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        '言語設定機能は開発中です。',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: Colors.orange.shade900,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-
           // 언어 목록
           ...supportedLanguages.map((language) {
             final isSelected = language.code == currentLanguageCode;
@@ -80,41 +60,81 @@ class LanguageSettingsScreen extends ConsumerWidget {
                   // 이미 선택된 언어면 무시
                   if (isSelected) return;
 
-                  // TODO: 언어 변경 로직 구현 (아직 개발 중)
-                  // final repository = ref.read(authRepositoryProvider);
-                  // final result = await repository.updateProfile(
-                  //   preferredLanguages: [language.code],
-                  // );
-                  //
-                  // if (!context.mounted) return;
-                  //
-                  // result.fold(
-                  //   (failure) {
-                  //     ScaffoldMessenger.of(context).showSnackBar(
-                  //       SnackBar(
-                  //         content: Text(failure.message),
-                  //         backgroundColor: Colors.red,
-                  //       ),
-                  //     );
-                  //   },
-                  //   (updatedUser) {
-                  //     ref.read(authStateProvider.notifier).state = updatedUser;
-                  //     ref.invalidate(authStateStreamProvider);
-                  //     ScaffoldMessenger.of(context).showSnackBar(
-                  //       SnackBar(
-                  //         content: Text('${language.name}に切り替えました'),
-                  //         backgroundColor: Colors.green,
-                  //       ),
-                  //     );
-                  //   },
-                  // );
+                  // 로케일 업데이트 (즉시 UI 반영)
+                  await ref
+                      .read(localeProvider.notifier)
+                      .setLocaleByLanguageCode(language.code);
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('${language.name}への切り替えは準備中です'),
-                      backgroundColor: Colors.orange,
-                    ),
+                  // 번역 데이터 Provider 무효화하여 새 로케일로 다시 로드
+                  ref.invalidate(appLocalizationsProvider);
+
+                  // 로그인된 사용자가 있으면 프로필도 업데이트
+                  final currentUser = ref.read(currentUserProvider);
+
+                  // 번역 데이터 로드 (로케일 변경 후)
+                  final updatedL10n = await ref.read(
+                    appLocalizationsProvider.future,
                   );
+
+                  if (currentUser != null) {
+                    final repository = ref.read(authRepositoryProvider);
+                    final result = await repository.updateProfile(
+                      preferredLanguages: [language.code],
+                    );
+
+                    if (!context.mounted) return;
+
+                    result.fold(
+                      (failure) {
+                        // 로케일은 이미 변경되었으므로 에러만 표시
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              updatedL10n.language
+                                  .switchedButProfileUpdateFailed(
+                                    language: language.name,
+                                    error: failure.message,
+                                  ),
+                            ),
+                            backgroundColor: Colors.orange,
+                            duration: const Duration(seconds: 4),
+                          ),
+                        );
+                      },
+                      (updatedUser) {
+                        // 프로필 업데이트 성공
+                        ref.read(authStateProvider.notifier).state =
+                            updatedUser;
+                        ref.invalidate(authStateStreamProvider);
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                updatedL10n.language.switched(
+                                  language: language.name,
+                                ),
+                              ),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                        }
+                      },
+                    );
+                  } else {
+                    // 로그인하지 않은 경우 로케일만 변경
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            updatedL10n.language.switched(
+                              language: language.name,
+                            ),
+                          ),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    }
+                  }
                 },
               ),
             );
@@ -139,9 +159,3 @@ class LanguageOption {
     required this.nativeName,
   });
 }
-
-
-
-
-
-

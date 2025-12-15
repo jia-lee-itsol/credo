@@ -98,3 +98,4 @@ flutter:
     - assets/data/saints/saints_feast_days.json
     - assets/data/prayers/prayers_ja.json
     - assets/data/liturgical/readings/readings_year_a.json
+    - assets/l10n/

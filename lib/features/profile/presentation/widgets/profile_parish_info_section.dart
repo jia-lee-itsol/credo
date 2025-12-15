@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/data/models/saint_feast_day_model.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 /// 프로필 교회 정보 섹션
-class ProfileParishInfoSection extends StatelessWidget {
+class ProfileParishInfoSection extends ConsumerWidget {
   final String? selectedParishName;
   final SaintFeastDayModel? selectedFeastDay;
   final VoidCallback onParishTap;
@@ -17,8 +19,9 @@ class ProfileParishInfoSection extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
 
     return Card(
       child: Padding(
@@ -38,14 +41,14 @@ class ProfileParishInfoSection extends StatelessWidget {
               onTap: onParishTap,
               child: InputDecorator(
                 decoration: InputDecoration(
-                  labelText: '所属教会',
+                  labelText: l10n.auth.parish,
                   suffixIcon: const Icon(Icons.chevron_right),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
                 child: Text(
-                  selectedParishName ?? '選択してください',
+                  selectedParishName ?? l10n.common.select,
                   style: TextStyle(
                     color: selectedParishName != null
                         ? theme.colorScheme.onSurface
@@ -60,7 +63,7 @@ class ProfileParishInfoSection extends StatelessWidget {
               onTap: onFeastDayTap,
               child: InputDecorator(
                 decoration: InputDecoration(
-                  labelText: '守護聖人の祝日',
+                  labelText: l10n.auth.feastDay,
                   suffixIcon: const Icon(Icons.chevron_right),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
@@ -69,7 +72,7 @@ class ProfileParishInfoSection extends StatelessWidget {
                 child: Text(
                   selectedFeastDay != null
                       ? selectedFeastDay!.name
-                      : '選択してください',
+                      : l10n.common.select,
                   style: TextStyle(
                     color: selectedFeastDay != null
                         ? theme.colorScheme.onSurface

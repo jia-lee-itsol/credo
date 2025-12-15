@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../data/models/post.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
 import 'comment_item.dart';
 
 /// 게시글 댓글 섹션
@@ -52,6 +52,7 @@ class PostDetailCommentsSection extends ConsumerWidget {
             else
               ...comments.map(
                 (comment) => CommentItem(
+                  commentId: comment.commentId,
                   author: comment.authorName,
                   authorId: comment.authorId,
                   content: comment.content,

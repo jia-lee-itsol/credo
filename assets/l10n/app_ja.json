@@ -1,0 +1,382 @@
+{
+  "app": {
+    "name": "Credo",
+    "description": "日本全国のカトリック教会と信者をつなぐコミュニティアプリです。"
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "delete": "削除",
+    "edit": "編集",
+    "close": "閉じる",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功",
+    "retry": "再試行",
+    "search": "検索",
+    "select": "選択",
+    "add": "追加",
+    "remove": "削除",
+    "send": "送信",
+    "reset": "リセット",
+    "apply": "適用",
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "guest": "ゲスト",
+    "user": "ユーザー",
+    "required": "必須",
+    "optional": "任意",
+    "notSet": "未設定",
+    "small": "小",
+    "medium": "中",
+    "large": "大",
+    "extraLarge": "特大",
+    "sampleText": "サンプルテキスト",
+    "or": "または",
+    "pageNotFound": "ページが見つかりません",
+    "backToHome": "ホームへ戻る",
+    "noMassTimeInfo": "ミサ時間情報がありません",
+    "favoriteAdded": "お気に入りに追加しました",
+    "favoriteRemoved": "お気に入りから削除しました",
+    "commentHint": "コメントを入力..."
+  },
+  "navigation": {
+    "home": "ホーム",
+    "meditation": "黙想",
+    "share": "共有",
+    "church": "教会",
+    "community": "コミュニティ"
+  },
+  "language": {
+    "settings": "言語設定",
+    "switched": "{language}に切り替えました",
+    "switchedButProfileUpdateFailed": "{language}に切り替えましたが、プロフィールの更新に失敗しました: {error}",
+    "switchedButProfileUpdateFailed@language": "言語名",
+    "switchedButProfileUpdateFailed@error": "エラーメッセージ"
+  },
+  "auth": {
+    "signIn": "ログイン",
+    "signUp": "新規登録",
+    "signOut": "ログアウト",
+    "signOutSuccess": "ログアウトしました",
+    "signInFailed": "ログインに失敗しました",
+    "signUpFailed": "登録に失敗しました",
+    "accountCreated": "アカウントを作成しました",
+    "loginRequired": "ログインが必要です",
+    "loginRequiredMessage": "投稿するにはログインが必要です。",
+    "loginRequiredQuestion": "投稿するにはログインが必要です。ログインしますか？",
+    "continueAsGuest": "ゲストとして続ける",
+    "alreadyHaveAccount": "すでにアカウントをお持ちですか？",
+    "noAccount": "アカウントをお持ちでないですか？",
+    "forgotPassword": "パスワードをお忘れですか？",
+    "passwordReset": "パスワードリセット",
+    "passwordResetEmailSent": "パスワードリセットメールを送信しました",
+    "passwordResetEmailFailed": "パスワードリセットメールの送信に失敗しました",
+    "email": "メールアドレス",
+    "emailHint": "メールアドレスを入力してください",
+    "password": "パスワード",
+    "passwordConfirm": "パスワード（確認）",
+    "passwordMismatch": "パスワードが一致しません",
+    "saveEmail": "メールアドレスを保存",
+    "nickname": "ニックネーム",
+    "parish": "所属教会",
+    "selectParish": "選択してください（任意）",
+    "selectParishTitle": "所属教会を選択",
+    "baptismName": "洗礼名（任意）",
+    "baptismNameHint": "洗礼名を入力してください",
+    "feastDay": "守護聖人の祝日（任意）",
+    "selectFeastDay": "選択してください（任意）",
+    "selectFeastDayTitle": "守護聖人の祝日を選択",
+    "createAccount": "アカウントを作成",
+    "termsRequired": "利用規約とプライバシーポリシーに同意してください",
+    "subtitle": "信仰でつながる"
+  },
+  "validation": {
+    "emailRequired": "メールアドレスを入力してください",
+    "emailInvalid": "有効なメールアドレスを入力してください",
+    "passwordRequired": "パスワードを入力してください",
+    "passwordMinLength": "パスワードは8文字以上で入力してください",
+    "nicknameRequired": "ニックネームを入力してください",
+    "nicknameMaxLength": "ニックネームは{max}文字以内で入力してください",
+    "nicknameMaxLength@max": "最大文字数",
+    "invalidCharacters": "使用できない文字が含まれています",
+    "titleRequired": "タイトルを入力してください",
+    "titleMaxLength": "タイトルは{max}文字以内で入力してください",
+    "titleMaxLength@max": "最大文字数",
+    "contentRequired": "本文を入力してください",
+    "contentMaxLength": "本文は{max}文字以内で入力してください",
+    "contentMaxLength@max": "最大文字数",
+    "commentRequired": "コメントを入力してください",
+    "commentMaxLength": "コメントは{max}文字以内で入力してください",
+    "commentMaxLength@max": "最大文字数",
+    "baptismNameRequired": "洗礼名を入力してください",
+    "monthInvalid": "有効な月（1-12）を入力してください",
+    "dayInvalid": "有効な日（1-31）を入力してください"
+  },
+  "community": {
+    "title": "コミュニティ",
+    "newPost": "新規投稿",
+    "postCreated": "投稿しました",
+    "postCreateFailed": "投稿に失敗しました。ネットワーク接続を確認してください。",
+    "postDeleted": "投稿を削除しました",
+    "postDeleteFailed": "投稿の削除に失敗しました",
+    "postDeleteConfirmTitle": "削除確認",
+    "postDeleteConfirmMessage": "この投稿を削除してもよろしいですか？\nこの操作は取り消せません。",
+    "postHidden": "投稿を非表示にしました",
+    "postShow": "投稿を表示しました",
+    "postHideFailed": "非表示処理に失敗しました",
+    "postShowFailed": "表示処理に失敗しました",
+    "postHideConfirmTitle": "非表示確認",
+    "postHideConfirmMessage": "この投稿を非表示にしてもよろしいですか？\n非表示にした投稿は一覧に表示されなくなります。",
+    "postShowConfirmTitle": "表示確認",
+    "postShowConfirmMessage": "この投稿を表示してもよろしいですか？\n表示すると一覧に再度表示されます。",
+    "postHideNoPermission": "この投稿を非表示にする権限がありません。自分の所属教会の投稿のみ非表示にできます。",
+    "postShowNoPermission": "この投稿を表示する権限がありません。自分の所属教会の投稿のみ表示できます。",
+    "editPost": "編集する",
+    "deletePost": "削除する",
+    "hidePost": "非表示にする",
+    "showPost": "表示する",
+    "reportPost": "通報する",
+    "commentPosted": "コメントを投稿しました",
+    "commentPostFailed": "コメント投稿に失敗しました",
+    "likeFailed": "いいね処理に失敗しました",
+    "shareMeditation": "黙想を共有しました",
+    "noSearchResults": "検索結果がありません",
+    "errorOccurred": "エラーが発生しました",
+    "swipeToRefresh": "下にスワイプして再読み込み",
+    "official": "公式",
+    "officialAccountSettings": "公式アカウント設定",
+    "registerAsNotice": "お知らせとして登録",
+    "registerAsNoticeSubtitle": "教会メンバー全員に通知されます",
+    "pinToTop": "上部に固定",
+    "pinToTopSubtitle": "投稿リストの最上部に表示されます",
+    "guidelines": "投稿することで、コミュニティガイドラインに同意したものとみなされます。他のユーザーを尊重し、適切な内容を投稿してください。",
+    "home": {
+      "title": "コミュニティ",
+      "parish": "所属教会",
+      "parishNotSet": "所属教会が設定されていません",
+      "parishLoadFailed": "所属教会の情報を読み込めませんでした",
+      "searchOtherParishes": "他の教会のコミュニティを探す",
+      "todayMass": "今日のミサ",
+      "todayBibleReadingAndPrayer": "今日の聖書朗読と祈り",
+      "recentNotices": "最近のお知らせ",
+      "noNotices": "お知らせはありません"
+    },
+    "notificationLabels": {
+      "mention": "メンション",
+      "notice": "お知らせ",
+      "comment": "コメント"
+    }
+  },
+  "report": {
+    "title": "通報する",
+    "reasonRequired": "通報理由を選択してください",
+    "reasonInputRequired": "通報理由を入力してください",
+    "reportFailed": "通報に失敗しました",
+    "reportSuccess": "通報しました。ご報告ありがとうございます。",
+    "reasons": {
+      "spam": "スパム",
+      "inappropriate": "不適切なコンテンツ",
+      "harassment": "誹謗中傷",
+      "other": "その他"
+    },
+    "reasonHint": "通報理由を入力してください"
+  },
+  "image": {
+    "title": "画像",
+    "add": "画像を追加",
+    "addButton": "追加",
+    "max3Images": "最大3枚まで添付できます",
+    "camera": "カメラ",
+    "gallery": "ギャラリー",
+    "selectFailed": "画像の選択に失敗しました",
+    "permissionRequired": "アクセス許可が必要です",
+    "cameraPermissionMessage": "カメラを使用するために、設定からカメラへのアクセスを許可してください。",
+    "galleryPermissionMessage": "フォトライブラリを使用するために、設定からフォトライブラリへのアクセスを許可してください。",
+    "openSettings": "設定を開く",
+    "permissionDeniedMessage": "設定アプリからカメラ/フォトライブラリへのアクセスを許可してください",
+    "permissionDeniedMessageAlt": "設定からカメラ/ストレージへのアクセスを許可してください"
+  },
+  "profile": {
+    "myPage": "マイページ",
+    "editProfile": "プロフィール編集",
+    "profileUpdated": "プロフィールを更新しました",
+    "updateFailed": "更新に失敗しました",
+    "favoriteParishes": "よく行く教会",
+    "notificationSettings": "通知設定",
+    "notificationSettingsComingSoon": "通知設定は準備中です",
+    "languageSettings": "言語設定",
+    "termsOfService": "利用規約",
+    "termsOfServiceComingSoon": "利用規約は準備中です",
+    "privacyPolicy": "プライバシーポリシー",
+    "privacyPolicyComingSoon": "プライバシーポリシーは準備中です",
+    "aboutApp": "アプリについて",
+    "shareProfileQR": "プロフィールをQRコードで共有",
+    "userId": "ユーザーID",
+    "userIdCopied": "ユーザーIDをコピーしました",
+    "loginRequired": "ログインが必要です",
+    "pleaseLogin": "ログインしてください",
+    "fontSize": "文字サイズ",
+    "directInput": "その他（直接入力）",
+    "directInputTitle": "洗礼名と祝日を直接入力",
+    "directInputDialogTitle": "洗礼名と祝日を入力",
+    "month": "月",
+    "day": "日",
+    "godparent": {
+      "add": "追加",
+      "remove": "削除",
+      "searchUser": "メールアドレスまたはユーザーIDで検索してください",
+      "userNotFound": "ユーザーが見つかりませんでした",
+      "userFound": "ユーザーが見つかりました",
+      "nickname": "ニックネーム",
+      "email": "メール",
+      "userId": "ユーザーID"
+    },
+    "favoriteParishes": {
+      "title": "よく行く教会",
+      "searchParish": "教会を検索",
+      "noParishes": "登録された教会がありません",
+      "addParishMessage": "教会を検索して追加してください",
+      "cannotDeleteParish": "所属教会は削除できません",
+      "deleted": "削除しました",
+      "deleteTitle": "削除"
+    }
+  },
+  "parish": {
+    "detail": "教会詳細",
+    "notFound": "教会情報が見つかりませんでした",
+    "favoriteAdded": "お気に入りに追加しました",
+    "favoriteRemoved": "お気に入りから削除しました",
+    "cannotRemoveParish": "所属教会はお気に入りから削除できません",
+    "openInMap": "地図アプリで開く",
+    "community": "コミュニティ",
+    "search": "教会を探す",
+    "searchFromCurrentLocation": "現在地から教会を検索",
+    "locationPermissionRequired": "位置情報の許可が必要です",
+    "locationPermissionMessage": "設定から位置情報の許可を有効にしてください。",
+    "locationUsage": "位置情報の利用",
+    "locationUsageMessage": "近くの教会を探すために位置情報の利用を許可してください。\n教会までの距離表示にも使用されます。",
+    "notNow": "今はしない",
+    "allow": "許可する",
+    "locationFailed": "位置情報を取得できませんでした",
+    "filter": {
+      "title": "フィルター",
+      "reset": "リセット",
+      "prefecture": "都道府県",
+      "mass": "ミサ",
+      "options": "オプション",
+      "apply": "適用",
+      "todayMass": "今日のミサあり",
+      "foreignMass": "外国語ミサあり",
+      "cathedralOnly": "大聖堂のみ",
+      "cathedralOnlySubtitle": "大聖堂のみを表示",
+      "massTimeAvailable": "ミサ時間あり",
+      "massTimeAvailableSubtitle": "ミサ時間情報がある教会のみを表示"
+    },
+    "empty": {
+      "notFound": "教会データが見つかりませんでした"
+    },
+    "detail": {
+      "noMassTimeInfo": "ミサ時間情報がありません"
+    }
+  },
+  "mass": {
+    "title": "日々の黙想",
+    "noDataToday": "本日の黙想情報がありません",
+    "noDataWeekday": "平日の黙想情報は現在準備中です",
+    "bibleNotice": "※聖書の本文は、教会でお聞きになるか、公式の聖書をお読みください。",
+    "liturgicalDays": {
+      "sunday": "主日",
+      "solemnity": "大祝日",
+      "feast": "祝日",
+      "advent": "待降節",
+      "christmas": "降誕節",
+      "lent": "四旬節",
+      "easter": "復活節",
+      "ordinary": "年間平日"
+    },
+    "prayer": {
+      "title": "黙想のガイド",
+      "morningMeditation": "朝の黙想",
+      "guides": {
+        "morning": {
+          "title": "朝の黙想",
+          "subtitle": "Morning",
+          "content": "一日の始まりに、神様に感謝しながら新しい一日を神様の保護の下に委ねる時間です。朝起きて一日を始めるとき、一日中のお恵みと保護を願う時です。"
+        },
+        "meal": {
+          "title": "食事の黙想",
+          "subtitle": "Meal",
+          "content": "食事の前後に、食べ物を与えてくださった神様に感謝する時間です。食事の前には食べ物を与えてくださったことに感謝し、食事の後には満腹になったことに感謝する時です。"
+        },
+        "evening": {
+          "title": "夜の黙想",
+          "subtitle": "Evening",
+          "content": "一日を終えるにあたり、神様に感謝し、一日の罪を悔い改めて赦しを願う時間です。就寝前に一日を振り返り、明日のために祈る時です。"
+        },
+        "difficult": {
+          "title": "困難な時の黙想",
+          "subtitle": "In Difficult Times",
+          "content": "困難な状況や苦しい時に、神様の助けと慰めを願う時間です。試練や苦難の中でも、神様の愛と保護を信じる時です。"
+        },
+        "thanksgiving": {
+          "title": "感謝の黙想",
+          "subtitle": "Thanksgiving",
+          "content": "神様が与えてくださった恵みと祝福に感謝する時間です。日常の小さな喜びから大きな祝福まで、すべてのことに感謝の心を持つ時です。"
+        },
+        "meditation": {
+          "title": "黙想の時間",
+          "subtitle": "Meditation Time",
+          "content": "静かな時間を持ち、神様と対話しながら自分の心を見つめ直す時間です。み言葉を黙想し、神様の御心を求めながら平和な時間を過ごします。"
+        }
+      },
+      "meditationGuides": {
+        "firstReading": "聖書に基づく黙想I",
+        "psalm": "詩編に基づく黙想",
+        "secondReading": "第二朗読の黙想II",
+        "gospel": "聖書のことばをめぐる黙想（福音）"
+      },
+      "shareHint": "今日の黙想を共有しましょう...",
+      "readings": {
+        "firstReading": "第一朗読",
+        "psalm": "答唱詩編",
+        "secondReading": "第二朗読",
+        "gospel": "福音"
+      }
+    }
+  },
+  "qr": {
+    "invalid": "無効なQRコードです",
+    "ownProfile": "自分のプロフィールです",
+    "userNotFound": "ユーザーが見つかりませんでした",
+    "scanError": "スキャンエラー",
+    "userFound": "ユーザーが見つかりました",
+    "startScan": "スキャン開始"
+  },
+  "location": {
+    "permissionRequired": "位置情報の許可が必要です",
+    "permissionMessage": "設定から位置情報の許可を有効にしてください。",
+    "openSettings": "設定を開く",
+    "usagePurpose": "位置情報の使用目的",
+    "purposeNearbySearch": "現在地から近い教会の検索",
+    "purposeDistanceDisplay": "教会までの距離表示"
+  },
+  "search": {
+    "userNotFound": "ユーザーが見つかりませんでした",
+    "userSearchHint": "メールアドレスまたはユーザーID",
+    "userSearchRequired": "メールアドレスまたはユーザーIDを入力してください",
+    "parishSearchHint": "教会名で検索",
+    "saintSearchHint": "聖人名で検索",
+    "noResults": "検索結果がありません"
+  },
+  "comingSoon": {
+    "notificationSettings": "通知設定は準備中です",
+    "termsOfService": "利用規約は準備中です",
+    "privacyPolicy": "プライバシーポリシーは準備中です"
+  },
+  "community": {
+    "postsCount": "{count}件の投稿",
+    "postsCount@count": "投稿数"
+  }
+}

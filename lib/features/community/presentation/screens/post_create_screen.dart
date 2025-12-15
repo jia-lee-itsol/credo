@@ -3,10 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/services/logger_service.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../config/routes/app_routes.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
 import '../notifiers/post_form_notifier.dart';
 import '../widgets/post_form_fields.dart';
 import '../widgets/post_image_picker.dart';
@@ -46,6 +47,7 @@ class _PostCreateScreenState extends ConsumerState<PostCreateScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final isAuthenticated = ref.watch(isAuthenticatedProvider);
 
     // 로그인하지 않은 경우 로그인 화면으로 리다이렉트
@@ -54,26 +56,32 @@ class _PostCreateScreenState extends ConsumerState<PostCreateScreen> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) => AlertDialog(
-            title: const Text('ログインが必要です'),
-            content: const Text('投稿するにはログインが必要です。'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  context.go(AppRoutes.home);
-                },
-                child: const Text('キャンセル'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  context.push(AppRoutes.signIn);
-                },
-                child: Text('ログイン', style: TextStyle(color: primaryColor)),
-              ),
-            ],
-          ),
+          builder: (context) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            return AlertDialog(
+              title: Text(l10n.auth.loginRequired),
+              content: Text(l10n.auth.loginRequiredMessage),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    context.go(AppRoutes.home);
+                  },
+                  child: Text(l10n.common.cancel),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    context.push(AppRoutes.signIn);
+                  },
+                  child: Text(
+                    l10n.auth.signIn,
+                    style: TextStyle(color: primaryColor),
+                  ),
+                ),
+              ],
+            );
+          },
         );
       });
     }
@@ -81,11 +89,11 @@ class _PostCreateScreenState extends ConsumerState<PostCreateScreen> {
     final currentAppUserAsync = ref.watch(currentAppUserProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('新規投稿')),
+      appBar: AppBar(title: Text(l10n.community.newPost)),
       body: currentAppUserAsync.when(
         data: (currentUser) {
           if (currentUser == null) {
-            return const Center(child: Text('ログインが必要です'));
+            return Center(child: Text(l10n.auth.loginRequired));
           }
 
           final params = PostFormParams(
@@ -159,7 +167,7 @@ class _PostCreateScreenState extends ConsumerState<PostCreateScreen> {
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
-                                '投稿することで、コミュニティガイドラインに同意したものとみなされます。他のユーザーを尊重し、適切な内容を投稿してください。',
+                                l10n.community.guidelines,
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   color: theme.colorScheme.onSurfaceVariant,
                                 ),
@@ -223,17 +231,23 @@ class _PostCreateScreenState extends ConsumerState<PostCreateScreen> {
 
     if (success) {
       AppLogger.community('게시글 저장 성공');
+      // 게시물 목록 provider를 invalidate하여 새로고침
+      ref.invalidate(allPostsProvider(widget.parishId));
+      AppLogger.community('allPostsProvider invalidate 완료');
+
+      final l10n = ref.read(appLocalizationsSyncProvider);
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('投稿しました')));
+      ).showSnackBar(SnackBar(content: Text(l10n.community.postCreated)));
       AppLogger.community('context.pop() 호출');
       context.pop();
     } else {
       AppLogger.error('게시글 저장 실패');
+      final l10n = ref.read(appLocalizationsSyncProvider);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('投稿に失敗しました。ネットワーク接続を確認してください。'),
-          duration: Duration(seconds: 3),
+        SnackBar(
+          content: Text(l10n.community.postCreateFailed),
+          duration: const Duration(seconds: 3),
         ),
       );
     }

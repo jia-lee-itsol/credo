@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/services/logger_service.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../data/models/post.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
 import '../notifiers/post_form_notifier.dart';
 import '../widgets/post_form_fields.dart';
 import '../widgets/post_image_picker.dart';
@@ -48,6 +49,7 @@ class _PostEditScreenState extends ConsumerState<PostEditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final currentAppUserAsync = ref.watch(currentAppUserProvider);
 
     return Scaffold(
@@ -91,7 +93,7 @@ class _PostEditScreenState extends ConsumerState<PostEditScreen> {
                         height: 16,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : const Text('저장'),
+                    : Text(l10n.common.save),
               );
             },
             loading: () => const SizedBox.shrink(),
@@ -154,7 +156,8 @@ class _PostEditScreenState extends ConsumerState<PostEditScreen> {
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => Center(child: Text('에러: $error')),
+        error: (error, stack) =>
+            Center(child: Text('${l10n.common.error}: $error')),
       ),
     );
   }
@@ -198,8 +201,13 @@ class _PostEditScreenState extends ConsumerState<PostEditScreen> {
     AppLogger.debug('===== notifier.submit() 호출 시작 =====');
     AppLogger.debug('notifier 상태 확인:');
     AppLogger.debug('   - title: "${currentState.title}"');
+    final bodyPreview = currentState.body.isEmpty
+        ? '(empty)'
+        : currentState.body.length > 100
+        ? '${currentState.body.substring(0, 100)}...'
+        : currentState.body;
     AppLogger.debug(
-      '   - body: "${currentState.body.substring(0, currentState.body.length > 100 ? 100 : currentState.body.length)}..."',
+      '   - body: "$bodyPreview" (length: ${currentState.body.length})',
     );
     AppLogger.debug('   - category: "${currentState.category}"');
     AppLogger.debug('   - isOfficial: ${currentState.isOfficial}');
@@ -213,10 +221,28 @@ class _PostEditScreenState extends ConsumerState<PostEditScreen> {
 
     if (success) {
       AppLogger.community('게시글 저장 성공');
+      // 게시물 목록 provider를 invalidate하여 새로고침
+      if (widget.parishId != null) {
+        ref.invalidate(allPostsProvider(widget.parishId));
+        AppLogger.community(
+          'allPostsProvider invalidate 완료: parishId=${widget.parishId}',
+        );
+      }
+      // 게시물 상세 provider도 invalidate (수정된 경우)
+      if (widget.initialPost != null) {
+        ref.invalidate(postByIdProvider(widget.initialPost!.postId));
+        AppLogger.community(
+          'postByIdProvider invalidate 완료: postId=${widget.initialPost!.postId}',
+        );
+      }
+
+      final l10n = ref.read(appLocalizationsSyncProvider);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            widget.initialPost == null ? '게시글이 작성되었습니다.' : '게시글이 수정되었습니다.',
+            widget.initialPost == null
+                ? l10n.community.postCreated
+                : '게시글이 수정되었습니다.',
           ),
         ),
       );

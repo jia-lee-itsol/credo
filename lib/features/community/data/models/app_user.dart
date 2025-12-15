@@ -79,8 +79,4 @@ class AppUser with _$AppUser {
     if (value is DateTime) return value;
     return DateTime.now();
   }
-
-  /// JSON 직렬화를 위한 DateTime 변환기
-  static String _dateTimeToJson(DateTime dateTime) =>
-      dateTime.toIso8601String();
 }

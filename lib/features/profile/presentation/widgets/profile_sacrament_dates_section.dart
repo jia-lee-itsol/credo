@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 /// 프로필 성사 날짜 섹션
-class ProfileSacramentDatesSection extends StatelessWidget {
+class ProfileSacramentDatesSection extends ConsumerWidget {
   final DateTime? baptismDate;
   final DateTime? confirmationDate;
   final VoidCallback onBaptismDateTap;
@@ -17,8 +19,9 @@ class ProfileSacramentDatesSection extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
 
     return Card(
       child: Padding(
@@ -47,7 +50,7 @@ class ProfileSacramentDatesSection extends StatelessWidget {
                 child: Text(
                   baptismDate != null
                       ? DateFormat('yyyy年MM月dd日', 'ja').format(baptismDate!)
-                      : '選択してください',
+                      : l10n.common.select,
                   style: TextStyle(
                     color: baptismDate != null
                         ? theme.colorScheme.onSurface
@@ -74,7 +77,7 @@ class ProfileSacramentDatesSection extends StatelessWidget {
                           'yyyy年MM月dd日',
                           'ja',
                         ).format(confirmationDate!)
-                      : '選択してください',
+                      : l10n.common.select,
                   style: TextStyle(
                     color: confirmationDate != null
                         ? theme.colorScheme.onSurface

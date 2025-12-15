@@ -1,0 +1,30 @@
+{
+  "app": {
+    "name": "Credo"
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "Hủy",
+    "save": "Lưu",
+    "delete": "Xóa",
+    "edit": "Chỉnh sửa",
+    "close": "Đóng",
+    "loading": "Đang tải...",
+    "error": "Lỗi",
+    "success": "Thành công",
+    "retry": "Thử lại"
+  },
+  "language": {
+    "settings": "Cài đặt ngôn ngữ",
+    "switched": "Đã chuyển sang {language}",
+    "switched@language": "Tên ngôn ngữ",
+    "switchedButProfileUpdateFailed": "Đã chuyển sang {language}, nhưng cập nhật hồ sơ thất bại: {error}",
+    "switchedButProfileUpdateFailed@language": "Tên ngôn ngữ",
+    "switchedButProfileUpdateFailed@error": "Thông báo lỗi"
+  },
+  "mass": {
+    "noDataToday": "Không có thông tin suy niệm cho hôm nay",
+    "noDataWeekday": "Thông tin suy niệm ngày thường đang được chuẩn bị",
+    "bibleNotice": "※Vui lòng nghe văn bản Kinh Thánh tại nhà thờ hoặc đọc Kinh Thánh chính thức."
+  }
+}

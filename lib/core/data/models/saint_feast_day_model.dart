@@ -7,9 +7,20 @@ part 'saint_feast_day_model.g.dart';
 class SaintFeastDayModel {
   final int month;
   final int day;
-  final String name;
+  @JsonKey(name: 'name')
+  final String name; // 일본어 이름 (기본값, 하위 호환성)
   @JsonKey(name: 'nameEn')
-  final String nameEnglish;
+  final String? nameEn; // 영어 이름
+  @JsonKey(name: 'nameKo')
+  final String? nameKo; // 한국어 이름
+  @JsonKey(name: 'nameZh')
+  final String? nameZh; // 중국어 이름
+  @JsonKey(name: 'nameVi')
+  final String? nameVi; // 베트남어 이름
+  @JsonKey(name: 'nameEs')
+  final String? nameEs; // 스페인어 이름
+  @JsonKey(name: 'namePt')
+  final String? namePt; // 포르투갈어 이름
   final String type; // solemnity, feast, memorial
   @JsonKey(name: 'isJapanese')
   final bool isJapanese;
@@ -20,12 +31,39 @@ class SaintFeastDayModel {
     required this.month,
     required this.day,
     required this.name,
-    required this.nameEnglish,
+    this.nameEn,
+    this.nameKo,
+    this.nameZh,
+    this.nameVi,
+    this.nameEs,
+    this.namePt,
     required this.type,
     required this.isJapanese,
     required this.greeting,
     this.description,
   });
+
+  /// 현재 로케일에 맞는 이름 반환
+  String getName(String languageCode) {
+    switch (languageCode) {
+      case 'ja':
+        return name;
+      case 'en':
+        return nameEn ?? name;
+      case 'ko':
+        return nameKo ?? name;
+      case 'zh':
+        return nameZh ?? name;
+      case 'vi':
+        return nameVi ?? nameEn ?? name;
+      case 'es':
+        return nameEs ?? nameEn ?? name;
+      case 'pt':
+        return namePt ?? nameEn ?? name;
+      default:
+        return name;
+    }
+  }
 
   factory SaintFeastDayModel.fromJson(Map<String, dynamic> json) =>
       _$SaintFeastDayModelFromJson(json);

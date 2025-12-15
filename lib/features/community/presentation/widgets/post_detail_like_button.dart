@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/widgets/login_required_dialog.dart';
 import '../../data/models/post.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
 
 /// 게시글 좋아요 버튼
 class PostDetailLikeButton extends ConsumerWidget {
@@ -50,9 +51,12 @@ class PostDetailLikeButton extends ConsumerWidget {
               result.fold(
                 (failure) {
                   if (context.mounted) {
+                    final l10n = ref.read(appLocalizationsSyncProvider);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('いいね処理に失敗しました: ${failure.message}'),
+                        content: Text(
+                          '${l10n.community.likeFailed}: ${failure.message}',
+                        ),
                       ),
                     );
                   }

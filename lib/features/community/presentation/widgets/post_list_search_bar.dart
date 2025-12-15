@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// 게시글 목록 검색 바 위젯
-class PostListSearchBar extends StatelessWidget {
+class PostListSearchBar extends ConsumerWidget {
   final TextEditingController controller;
   final String searchQuery;
   final ValueChanged<String> onChanged;
@@ -16,7 +17,7 @@ class PostListSearchBar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
       child: TextField(

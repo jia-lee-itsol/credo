@@ -1,0 +1,382 @@
+{
+  "app": {
+    "name": "Credo",
+    "description": "A community app connecting Catholic churches and believers throughout Japan."
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "retry": "Retry",
+    "search": "Search",
+    "select": "Select",
+    "add": "Add",
+    "remove": "Remove",
+    "send": "Send",
+    "reset": "Reset",
+    "apply": "Apply",
+    "login": "Login",
+    "logout": "Logout",
+    "guest": "Guest",
+    "user": "User",
+    "required": "Required",
+    "optional": "Optional",
+    "notSet": "Not Set",
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large",
+    "extraLarge": "Extra Large",
+    "sampleText": "Sample Text",
+    "or": "or",
+    "pageNotFound": "Page Not Found",
+    "backToHome": "Back to Home",
+    "noMassTimeInfo": "No mass time information",
+    "favoriteAdded": "Added to favorites",
+    "favoriteRemoved": "Removed from favorites",
+    "commentHint": "Enter a comment..."
+  },
+  "navigation": {
+    "home": "Home",
+    "meditation": "Meditation",
+    "share": "Share",
+    "church": "Church",
+    "community": "Community"
+  },
+  "language": {
+    "settings": "Language Settings",
+    "switched": "Switched to {language}",
+    "switchedButProfileUpdateFailed": "Switched to {language}, but profile update failed: {error}",
+    "switchedButProfileUpdateFailed@language": "Language name",
+    "switchedButProfileUpdateFailed@error": "Error message"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "signOutSuccess": "Signed out",
+    "signInFailed": "Sign in failed",
+    "signUpFailed": "Registration failed",
+    "accountCreated": "Account created",
+    "loginRequired": "Login required",
+    "loginRequiredMessage": "You need to login to post.",
+    "loginRequiredQuestion": "You need to login to post. Would you like to login?",
+    "continueAsGuest": "Continue as Guest",
+    "alreadyHaveAccount": "Already have an account?",
+    "noAccount": "Don't have an account?",
+    "forgotPassword": "Forgot password?",
+    "passwordReset": "Password Reset",
+    "passwordResetEmailSent": "Password reset email sent",
+    "passwordResetEmailFailed": "Failed to send password reset email",
+    "email": "Email",
+    "emailHint": "Enter your email address",
+    "password": "Password",
+    "passwordConfirm": "Password (Confirm)",
+    "passwordMismatch": "Passwords do not match",
+    "saveEmail": "Save email address",
+    "nickname": "Nickname",
+    "parish": "Parish",
+    "selectParish": "Select (Optional)",
+    "selectParishTitle": "Select Parish",
+    "baptismName": "Baptismal Name (Optional)",
+    "baptismNameHint": "Enter your baptismal name",
+    "feastDay": "Patron Saint's Feast Day (Optional)",
+    "selectFeastDay": "Select (Optional)",
+    "selectFeastDayTitle": "Select Patron Saint's Feast Day",
+    "createAccount": "Create Account",
+    "termsRequired": "Please agree to the Terms of Service and Privacy Policy",
+    "subtitle": "Connected by Faith"
+  },
+  "validation": {
+    "emailRequired": "Please enter your email address",
+    "emailInvalid": "Please enter a valid email address",
+    "passwordRequired": "Please enter your password",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "nicknameRequired": "Please enter your nickname",
+    "nicknameMaxLength": "Nickname must be {max} characters or less",
+    "nicknameMaxLength@max": "Maximum characters",
+    "invalidCharacters": "Contains invalid characters",
+    "titleRequired": "Please enter a title",
+    "titleMaxLength": "Title must be {max} characters or less",
+    "titleMaxLength@max": "Maximum characters",
+    "contentRequired": "Please enter content",
+    "contentMaxLength": "Content must be {max} characters or less",
+    "contentMaxLength@max": "Maximum characters",
+    "commentRequired": "Please enter a comment",
+    "commentMaxLength": "Comment must be {max} characters or less",
+    "commentMaxLength@max": "Maximum characters",
+    "baptismNameRequired": "Please enter your baptismal name",
+    "monthInvalid": "Please enter a valid month (1-12)",
+    "dayInvalid": "Please enter a valid day (1-31)"
+  },
+  "community": {
+    "title": "Community",
+    "newPost": "New Post",
+    "postCreated": "Post created",
+    "postCreateFailed": "Failed to create post. Please check your network connection.",
+    "postDeleted": "Post deleted",
+    "postDeleteFailed": "Failed to delete post",
+    "postDeleteConfirmTitle": "Confirm Deletion",
+    "postDeleteConfirmMessage": "Are you sure you want to delete this post?\nThis action cannot be undone.",
+    "postHidden": "Post hidden",
+    "postShow": "Post shown",
+    "postHideFailed": "Failed to hide post",
+    "postShowFailed": "Failed to show post",
+    "postHideConfirmTitle": "Confirm Hide",
+    "postHideConfirmMessage": "Are you sure you want to hide this post?\nHidden posts will not appear in the list.",
+    "postShowConfirmTitle": "Confirm Show",
+    "postShowConfirmMessage": "Are you sure you want to show this post?\nIt will appear in the list again.",
+    "postHideNoPermission": "You do not have permission to hide this post. You can only hide posts from your parish.",
+    "postShowNoPermission": "You do not have permission to show this post. You can only show posts from your parish.",
+    "editPost": "Edit",
+    "deletePost": "Delete",
+    "hidePost": "Hide",
+    "showPost": "Show",
+    "reportPost": "Report",
+    "commentPosted": "Comment posted",
+    "commentPostFailed": "Failed to post comment",
+    "likeFailed": "Failed to like",
+    "shareMeditation": "Shared meditation",
+    "noSearchResults": "No search results",
+    "errorOccurred": "An error occurred",
+    "swipeToRefresh": "Swipe down to refresh",
+    "official": "Official",
+    "officialAccountSettings": "Official Account Settings",
+    "registerAsNotice": "Register as Notice",
+    "registerAsNoticeSubtitle": "All church members will be notified",
+    "pinToTop": "Pin to Top",
+    "pinToTopSubtitle": "Will be displayed at the top of the post list",
+    "guidelines": "By posting, you agree to the Community Guidelines. Please respect other users and post appropriate content.",
+    "home": {
+      "title": "Community",
+      "parish": "Parish",
+      "parishNotSet": "Parish not set",
+      "parishLoadFailed": "Failed to load parish information",
+      "searchOtherParishes": "Search other parishes' communities",
+      "todayMass": "Today's Mass",
+      "todayBibleReadingAndPrayer": "Today's Bible Reading and Prayer",
+      "recentNotices": "Recent Notices",
+      "noNotices": "No notices"
+    },
+    "notificationLabels": {
+      "mention": "Mention",
+      "notice": "Notice",
+      "comment": "Comment"
+    }
+  },
+  "report": {
+    "title": "Report",
+    "reasonRequired": "Please select a reason",
+    "reasonInputRequired": "Please enter a reason",
+    "reportFailed": "Failed to report",
+    "reportSuccess": "Reported. Thank you for your report.",
+    "reasons": {
+      "spam": "Spam",
+      "inappropriate": "Inappropriate Content",
+      "harassment": "Harassment",
+      "other": "Other"
+    },
+    "reasonHint": "Enter reason for reporting"
+  },
+  "image": {
+    "title": "Image",
+    "add": "Add Image",
+    "addButton": "Add",
+    "max3Images": "You can attach up to 3 images",
+    "camera": "Camera",
+    "gallery": "Gallery",
+    "selectFailed": "Failed to select image",
+    "permissionRequired": "Permission Required",
+    "cameraPermissionMessage": "Please allow camera access in settings to use the camera.",
+    "galleryPermissionMessage": "Please allow photo library access in settings to use the photo library.",
+    "openSettings": "Open Settings",
+    "permissionDeniedMessage": "Please allow camera/photo library access from the Settings app",
+    "permissionDeniedMessageAlt": "Please allow camera/storage access from settings"
+  },
+  "profile": {
+    "myPage": "My Page",
+    "editProfile": "Edit Profile",
+    "profileUpdated": "Profile updated",
+    "updateFailed": "Update failed",
+    "favoriteParishes": "Favorite Parishes",
+    "notificationSettings": "Notification Settings",
+    "notificationSettingsComingSoon": "Notification settings coming soon",
+    "languageSettings": "Language Settings",
+    "termsOfService": "Terms of Service",
+    "termsOfServiceComingSoon": "Terms of Service coming soon",
+    "privacyPolicy": "Privacy Policy",
+    "privacyPolicyComingSoon": "Privacy Policy coming soon",
+    "aboutApp": "About App",
+    "shareProfileQR": "Share Profile via QR Code",
+    "userId": "User ID",
+    "userIdCopied": "User ID copied",
+    "loginRequired": "Login required",
+    "pleaseLogin": "Please login",
+    "fontSize": "Font Size",
+    "directInput": "Other (Direct Input)",
+    "directInputTitle": "Enter Baptismal Name and Feast Day",
+    "directInputDialogTitle": "Enter Baptismal Name and Feast Day",
+    "month": "Month",
+    "day": "Day",
+    "godparent": {
+      "add": "Add",
+      "remove": "Remove",
+      "searchUser": "Search by email address or user ID",
+      "userNotFound": "User not found",
+      "userFound": "User found",
+      "nickname": "Nickname",
+      "email": "Email",
+      "userId": "User ID"
+    },
+    "favoriteParishes": {
+      "title": "Favorite Parishes",
+      "searchParish": "Search Church",
+      "noParishes": "No registered churches",
+      "addParishMessage": "Please search and add a church",
+      "cannotDeleteParish": "Cannot delete your parish",
+      "deleted": "Deleted",
+      "deleteTitle": "Delete"
+    }
+  },
+  "parish": {
+    "detail": "Church Details",
+    "notFound": "Church information not found",
+    "favoriteAdded": "Added to favorites",
+    "favoriteRemoved": "Removed from favorites",
+    "cannotRemoveParish": "Cannot remove your parish from favorites",
+    "openInMap": "Open in Map App",
+    "community": "Community",
+    "search": "Find Church",
+    "searchFromCurrentLocation": "Search churches from current location",
+    "locationPermissionRequired": "Location permission required",
+    "locationPermissionMessage": "Please enable location permission in settings.",
+    "locationUsage": "Location Usage",
+    "locationUsageMessage": "Please allow location usage to find nearby churches.\nAlso used to display distance to churches.",
+    "notNow": "Not Now",
+    "allow": "Allow",
+    "locationFailed": "Failed to get location",
+    "filter": {
+      "title": "Filter",
+      "reset": "Reset",
+      "prefecture": "Prefecture",
+      "mass": "Mass",
+      "options": "Options",
+      "apply": "Apply",
+      "todayMass": "Mass Today",
+      "foreignMass": "Foreign Language Mass",
+      "cathedralOnly": "Cathedrals Only",
+      "cathedralOnlySubtitle": "Show only cathedrals",
+      "massTimeAvailable": "Mass Times Available",
+      "massTimeAvailableSubtitle": "Show only churches with mass time information"
+    },
+    "empty": {
+      "notFound": "Church data not found"
+    },
+    "detail": {
+      "noMassTimeInfo": "No mass time information"
+    }
+  },
+  "mass": {
+    "title": "Daily Meditation",
+    "noDataToday": "No meditation information for today",
+    "noDataWeekday": "Weekday meditation information is currently being prepared",
+    "bibleNotice": "※Please listen to the Bible text at church or read an official Bible.",
+    "liturgicalDays": {
+      "sunday": "Sunday",
+      "solemnity": "Solemnity",
+      "feast": "Feast",
+      "advent": "Advent",
+      "christmas": "Christmas",
+      "lent": "Lent",
+      "easter": "Easter",
+      "ordinary": "Ordinary Time"
+    },
+    "prayer": {
+      "title": "Meditation Guide",
+      "morningMeditation": "Morning Meditation",
+      "guides": {
+        "morning": {
+          "title": "Morning Meditation",
+          "subtitle": "Morning",
+          "content": "A time to thank God at the beginning of the day and entrust the new day under God's protection. When you wake up and start your day, this is a time to ask for God's grace and protection throughout the day."
+        },
+        "meal": {
+          "title": "Meal Meditation",
+          "subtitle": "Meal",
+          "content": "A time to thank God for the food before and after meals. Before the meal, thank God for providing food, and after the meal, thank God for being full."
+        },
+        "evening": {
+          "title": "Evening Meditation",
+          "subtitle": "Evening",
+          "content": "A time to thank God at the end of the day, repent of the day's sins, and ask for forgiveness. Before going to bed, reflect on the day and pray for tomorrow."
+        },
+        "difficult": {
+          "title": "Meditation in Difficult Times",
+          "subtitle": "In Difficult Times",
+          "content": "A time to ask for God's help and comfort in difficult situations or times of suffering. Even in trials and hardships, this is a time to believe in God's love and protection."
+        },
+        "thanksgiving": {
+          "title": "Thanksgiving Meditation",
+          "subtitle": "Thanksgiving",
+          "content": "A time to thank God for the grace and blessings He has given. This is a time to have a heart of gratitude for everything, from small daily joys to great blessings."
+        },
+        "meditation": {
+          "title": "Meditation Time",
+          "subtitle": "Meditation Time",
+          "content": "A time to have quiet time, dialogue with God, and reflect on your heart. Meditate on the Word and spend peaceful time seeking God's will."
+        }
+      },
+      "meditationGuides": {
+        "firstReading": "Meditation Based on Scripture I",
+        "psalm": "Meditation Based on Psalms",
+        "secondReading": "Second Reading Meditation II",
+        "gospel": "Meditation on the Word of Scripture (Gospel)"
+      },
+      "shareHint": "Share today's meditation...",
+      "readings": {
+        "firstReading": "First Reading",
+        "psalm": "Responsorial Psalm",
+        "secondReading": "Second Reading",
+        "gospel": "Gospel"
+      }
+    }
+  },
+  "qr": {
+    "invalid": "Invalid QR code",
+    "ownProfile": "This is your own profile",
+    "userNotFound": "User not found",
+    "scanError": "Scan Error",
+    "userFound": "User found",
+    "startScan": "Start Scan"
+  },
+  "location": {
+    "permissionRequired": "Location permission required",
+    "permissionMessage": "Please enable location permission in settings.",
+    "openSettings": "Open Settings",
+    "usagePurpose": "Purpose of Location Usage",
+    "purposeNearbySearch": "Search for nearby churches from current location",
+    "purposeDistanceDisplay": "Display distance to churches"
+  },
+  "search": {
+    "userNotFound": "User not found",
+    "userSearchHint": "Email address or User ID",
+    "userSearchRequired": "Please enter email address or user ID",
+    "parishSearchHint": "Search by church name",
+    "saintSearchHint": "Search by saint name",
+    "noResults": "No search results"
+  },
+  "comingSoon": {
+    "notificationSettings": "Notification settings coming soon",
+    "termsOfService": "Terms of Service coming soon",
+    "privacyPolicy": "Privacy Policy coming soon"
+  },
+  "community": {
+    "postsCount": "{count} posts",
+    "postsCount@count": "Number of posts"
+  }
+}

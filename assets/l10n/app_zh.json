@@ -1,0 +1,30 @@
+{
+  "app": {
+    "name": "Credo"
+  },
+  "common": {
+    "ok": "确定",
+    "cancel": "取消",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "close": "关闭",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "retry": "重试"
+  },
+  "language": {
+    "settings": "语言设置",
+    "switched": "已切换到{language}",
+    "switched@language": "语言名称",
+    "switchedButProfileUpdateFailed": "已切换到{language}，但个人资料更新失败：{error}",
+    "switchedButProfileUpdateFailed@language": "语言名称",
+    "switchedButProfileUpdateFailed@error": "错误消息"
+  },
+  "mass": {
+    "noDataToday": "今天没有默想信息",
+    "noDataWeekday": "平日默想信息正在准备中",
+    "bibleNotice": "※请在教堂聆听圣经文本或阅读官方圣经。"
+  }
+}

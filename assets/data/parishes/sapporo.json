@@ -10,10 +10,30 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["09:30"],
-        "friday": ["10:00"]
+        "monday": [
+          "10:00",
+          "9:30"
+        ],
+        "tuesday": [
+          "10:00",
+          "9:30"
+        ],
+        "wednesday": [
+          "10:00",
+          "9:30"
+        ],
+        "thursday": [
+          "10:00",
+          "9:30"
+        ],
+        "friday": [
+          "10:00",
+          "9:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.7689219,
+      "longitude": 142.3667663
     },
     {
       "name": "カトリック旭川六条教会",
@@ -24,9 +44,25 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["09:30"]
+        "monday": [
+          "9:30"
+        ],
+        "tuesday": [
+          "9:30"
+        ],
+        "wednesday": [
+          "9:30"
+        ],
+        "thursday": [
+          "9:30"
+        ],
+        "friday": [
+          "9:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.7650893,
+      "longitude": 142.3847126
     },
     {
       "name": "カトリック枝幸教会",
@@ -37,9 +73,25 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["16:30"]
+        "monday": [
+          "16:30"
+        ],
+        "tuesday": [
+          "16:30"
+        ],
+        "wednesday": [
+          "16:30"
+        ],
+        "thursday": [
+          "16:30"
+        ],
+        "friday": [
+          "16:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 44.9388053,
+      "longitude": 142.5803707
     },
     {
       "name": "カトリック大町教会",
@@ -50,74 +102,98 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.7934059,
+      "longitude": 142.3490609
     },
     {
       "name": "カトリック神居教会",
-      "address": "北海道旭川市神居町",
+      "address": "北海道旭川市神居4条9丁目1-25",
       "prefecture": "北海道",
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.7395594,
+      "longitude": 142.3470918
     },
     {
       "name": "カトリック士別教会",
-      "address": "北海道士別市",
+      "address": "北海道士別市東3条1丁目",
       "prefecture": "北海道",
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 44.1763178,
+      "longitude": 142.3953023
     },
     {
       "name": "カトリック砂川教会",
-      "address": "北海道砂川市",
+      "address": "北海道砂川市東5条南3丁目3-1",
       "prefecture": "北海道",
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.49497969999999,
+      "longitude": 141.9034416
     },
     {
       "name": "カトリック滝川教会",
-      "address": "北海道滝川市",
+      "address": "北海道滝川市大町1丁目2-1",
       "prefecture": "北海道",
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.5578133,
+      "longitude": 141.9103331
     },
     {
       "name": "カトリック名寄教会",
-      "address": "北海道名寄市",
+      "address": "北海道名寄市西三条南4丁目",
       "prefecture": "北海道",
       "isCathedral": false,
       "massTime": "主日：10:00",
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 44.3560311,
+      "longitude": 142.4631977
     },
     {
       "name": "カトリック羽幌教会",
@@ -128,9 +204,25 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["14:00"]
+        "monday": [
+          "14:00"
+        ],
+        "tuesday": [
+          "14:00"
+        ],
+        "wednesday": [
+          "14:00"
+        ],
+        "thursday": [
+          "14:00"
+        ],
+        "friday": [
+          "14:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 44.3665262,
+      "longitude": 141.6988901
     },
     {
       "name": "カトリック美唄教会",
@@ -141,10 +233,30 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["11:00"],
-        "friday": ["10:30"]
+        "monday": [
+          "10:30",
+          "11:00"
+        ],
+        "tuesday": [
+          "10:30",
+          "11:00"
+        ],
+        "wednesday": [
+          "10:30",
+          "11:00"
+        ],
+        "thursday": [
+          "10:30",
+          "11:00"
+        ],
+        "friday": [
+          "10:30",
+          "11:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.3292206,
+      "longitude": 141.8635586
     },
     {
       "name": "カトリック富良野教会",
@@ -155,14 +267,30 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["10:00"],
-        "monday": ["11:00"],
-        "tuesday": ["11:00"],
-        "wednesday": ["11:00"],
-        "thursday": ["11:00"],
-        "friday": ["11:00"]
+        "monday": [
+          "11:00",
+          "10:00"
+        ],
+        "tuesday": [
+          "11:00",
+          "10:00"
+        ],
+        "wednesday": [
+          "11:00",
+          "10:00"
+        ],
+        "thursday": [
+          "11:00",
+          "10:00"
+        ],
+        "friday": [
+          "11:00",
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.3496154,
+      "longitude": 142.3851649
     },
     {
       "name": "カトリック留萌教会",
@@ -173,14 +301,30 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["09:30"],
-        "monday": ["09:00"],
-        "tuesday": ["09:00"],
-        "wednesday": ["09:00"],
-        "thursday": ["09:00"],
-        "friday": ["09:00"]
+        "monday": [
+          "9:00",
+          "9:30"
+        ],
+        "tuesday": [
+          "9:00",
+          "9:30"
+        ],
+        "wednesday": [
+          "9:00",
+          "9:30"
+        ],
+        "thursday": [
+          "9:00",
+          "9:30"
+        ],
+        "friday": [
+          "9:00",
+          "9:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.9377301,
+      "longitude": 141.6405257
     },
     {
       "name": "カトリック稚内教会",
@@ -191,9 +335,25 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "sunday": ["09:30"]
+        "monday": [
+          "9:30"
+        ],
+        "tuesday": [
+          "9:30"
+        ],
+        "wednesday": [
+          "9:30"
+        ],
+        "thursday": [
+          "9:30"
+        ],
+        "friday": [
+          "9:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 45.4226815,
+      "longitude": 141.6710982
     },
     {
       "name": "カトリック江差教会",
@@ -204,9 +364,25 @@
       "diocese": "sapporo",
       "deanery": "hakodate",
       "massTimes": {
-        "sunday": ["15:00"]
+        "monday": [
+          "15:00"
+        ],
+        "tuesday": [
+          "15:00"
+        ],
+        "wednesday": [
+          "15:00"
+        ],
+        "thursday": [
+          "15:00"
+        ],
+        "friday": [
+          "15:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 41.8626806,
+      "longitude": 140.1267528
     },
     {
       "name": "カトリック当別教会",
@@ -217,9 +393,25 @@
       "diocese": "sapporo",
       "deanery": "hakodate",
       "massTimes": {
-        "sunday": ["08:45"]
+        "monday": [
+          "8:45"
+        ],
+        "tuesday": [
+          "8:45"
+        ],
+        "wednesday": [
+          "8:45"
+        ],
+        "thursday": [
+          "8:45"
+        ],
+        "friday": [
+          "8:45"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 41.7402679,
+      "longitude": 140.5692137
     },
     {
       "name": "カトリック宮前町教会",
@@ -229,20 +421,46 @@
       "massTime": "平日：18:30（金曜）主日：9:30 土曜/18:30 第4/英語ミサ11:00",
       "diocese": "sapporo",
       "deanery": "hakodate",
-      "massTimes": {
-        "saturday": ["18:30"],
-        "sunday": ["09:30"],
-        "friday": ["18:30"]
-      },
+      "massTimes": {},
       "foreignMassTimes": {
-        "sunday": [
+        "monday": [
           {
-            "time": "11:00",
+            "time": "18:30",
             "language": "EN",
-            "note": "第4"
+            "note": ""
+          }
+        ],
+        "tuesday": [
+          {
+            "time": "18:30",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "wednesday": [
+          {
+            "time": "18:30",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "thursday": [
+          {
+            "time": "18:30",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "friday": [
+          {
+            "time": "18:30",
+            "language": "EN",
+            "note": ""
           }
         ]
-      }
+      },
+      "latitude": 41.7894426,
+      "longitude": 140.7392618
     },
     {
       "name": "カトリック元町教会",
@@ -253,9 +471,25 @@
       "diocese": "sapporo",
       "deanery": "hakodate",
       "massTimes": {
-        "sunday": ["11:00"]
+        "monday": [
+          "11:00"
+        ],
+        "tuesday": [
+          "11:00"
+        ],
+        "wednesday": [
+          "11:00"
+        ],
+        "thursday": [
+          "11:00"
+        ],
+        "friday": [
+          "11:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 41.7632999,
+      "longitude": 140.7128309
     },
     {
       "name": "カトリック八雲教会",
@@ -266,9 +500,25 @@
       "diocese": "sapporo",
       "deanery": "hakodate",
       "massTimes": {
-        "sunday": ["15:00"]
+        "monday": [
+          "15:00"
+        ],
+        "tuesday": [
+          "15:00"
+        ],
+        "wednesday": [
+          "15:00"
+        ],
+        "thursday": [
+          "15:00"
+        ],
+        "friday": [
+          "15:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.2568053,
+      "longitude": 140.2709604
     },
     {
       "name": "カトリック湯川教会",
@@ -279,12 +529,35 @@
       "diocese": "sapporo",
       "deanery": "hakodate",
       "massTimes": {
-        "saturday": ["09:30"],
-        "sunday": ["09:30"],
-        "tuesday": ["18:30"],
-        "thursday": ["09:30"]
+        "monday": [
+          "18:30",
+          "9:30",
+          "9:30"
+        ],
+        "tuesday": [
+          "18:30",
+          "9:30",
+          "9:30"
+        ],
+        "wednesday": [
+          "18:30",
+          "9:30",
+          "9:30"
+        ],
+        "thursday": [
+          "18:30",
+          "9:30",
+          "9:30"
+        ],
+        "friday": [
+          "18:30",
+          "9:30",
+          "9:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 41.7833897,
+      "longitude": 140.7780315
     },
     {
       "name": "カトリック網走教会",
@@ -295,9 +568,25 @@
       "diocese": "sapporo",
       "deanery": "kitami",
       "massTimes": {
-        "sunday": ["14:00"]
+        "monday": [
+          "14:00"
+        ],
+        "tuesday": [
+          "14:00"
+        ],
+        "wednesday": [
+          "14:00"
+        ],
+        "thursday": [
+          "14:00"
+        ],
+        "friday": [
+          "14:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 44.02460199999999,
+      "longitude": 144.2602817
     },
     {
       "name": "カトリック遠軽教会",
@@ -308,9 +597,25 @@
       "diocese": "sapporo",
       "deanery": "kitami",
       "massTimes": {
-        "sunday": ["10:30"]
+        "monday": [
+          "10:30"
+        ],
+        "tuesday": [
+          "10:30"
+        ],
+        "wednesday": [
+          "10:30"
+        ],
+        "thursday": [
+          "10:30"
+        ],
+        "friday": [
+          "10:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 44.0613838,
+      "longitude": 143.5287478
     },
     {
       "name": "カトリック北見教会",
@@ -321,14 +626,40 @@
       "diocese": "sapporo",
       "deanery": "kitami",
       "massTimes": {
-        "saturday": ["06:30"],
-        "sunday": ["10:00"],
-        "tuesday": ["06:30"],
-        "wednesday": ["10:00"],
-        "thursday": ["06:30"],
-        "friday": ["18:30"]
+        "monday": [
+          "6:30",
+          "10:00",
+          "18:30",
+          "10:00"
+        ],
+        "tuesday": [
+          "6:30",
+          "10:00",
+          "18:30",
+          "10:00"
+        ],
+        "wednesday": [
+          "6:30",
+          "10:00",
+          "18:30",
+          "10:00"
+        ],
+        "thursday": [
+          "6:30",
+          "10:00",
+          "18:30",
+          "10:00"
+        ],
+        "friday": [
+          "6:30",
+          "10:00",
+          "18:30",
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.8120774,
+      "longitude": 143.8898208
     },
     {
       "name": "カトリック美幌教会",
@@ -339,9 +670,25 @@
       "diocese": "sapporo",
       "deanery": "kitami",
       "massTimes": {
-        "sunday": ["10:00"]
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.8281795,
+      "longitude": 144.108698
     },
     {
       "name": "カトリック紋別教会",
@@ -352,20 +699,38 @@
       "diocese": "sapporo",
       "deanery": "kitami",
       "massTimes": {
-        "sunday": ["14:30"]
+        "monday": [
+          "14:30"
+        ],
+        "tuesday": [
+          "14:30"
+        ],
+        "wednesday": [
+          "14:30"
+        ],
+        "thursday": [
+          "14:30"
+        ],
+        "friday": [
+          "14:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 44.3536237,
+      "longitude": 143.348233
     },
     {
       "name": "カトリック池田教会",
       "address": "〒083-0022 中川郡池田町西2条8丁目40",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "ミサ日時はホームページで確認してください",
+      "massTime": "ミサ時間はホームページまたは教会にご確認ください",
       "diocese": "sapporo",
       "deanery": "obihiro",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.930642,
+      "longitude": 143.4468029
     },
     {
       "name": "カトリック帯広教会",
@@ -376,14 +741,25 @@
       "diocese": "sapporo",
       "deanery": "obihiro",
       "massTimes": {
-        "sunday": ["10:00"],
-        "tuesday": ["10:00"],
-        "wednesday": ["10:00"],
-        "thursday": ["10:00"],
-        "friday": ["10:00"],
-        "saturday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.9167709,
+      "longitude": 143.2125425
     },
     {
       "name": "カトリック釧路教会",
@@ -394,25 +770,43 @@
       "diocese": "sapporo",
       "deanery": "kushiro",
       "massTimes": {
-        "sunday": ["10:00"],
-        "monday": ["10:30"],
-        "tuesday": ["10:30"],
-        "wednesday": ["10:30"],
-        "thursday": ["10:30"],
-        "friday": ["10:30"]
+        "monday": [
+          "10:30",
+          "10:00"
+        ],
+        "tuesday": [
+          "10:30",
+          "10:00"
+        ],
+        "wednesday": [
+          "10:30",
+          "10:00"
+        ],
+        "thursday": [
+          "10:30",
+          "10:00"
+        ],
+        "friday": [
+          "10:30",
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.988198,
+      "longitude": 144.3805611
     },
     {
       "name": "カトリック厚岸教会（巡回）",
       "address": "〒088-1128 厚岸郡厚岸町港町91",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "ミサ日時は釧路教会ホームページでご確認ください",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "diocese": "sapporo",
       "deanery": "kushiro",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.0528434,
+      "longitude": 144.8514308
     },
     {
       "name": "カトリック中標津教会",
@@ -423,20 +817,43 @@
       "diocese": "sapporo",
       "deanery": "kushiro",
       "massTimes": {
-        "sunday": ["10:00", "14:30"]
+        "monday": [
+          "10:00",
+          "14:30"
+        ],
+        "tuesday": [
+          "10:00",
+          "14:30"
+        ],
+        "wednesday": [
+          "10:00",
+          "14:30"
+        ],
+        "thursday": [
+          "10:00",
+          "14:30"
+        ],
+        "friday": [
+          "10:00",
+          "14:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.5476256,
+      "longitude": 144.9765079
     },
     {
       "name": "カトリック根室教会",
       "address": "〒087-0028 根室市大正町2-21",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "ミサ日時は釧路教会ホームページでご確認ください",
+      "massTime": "ミサ時間はホームページまたは教会にご確認ください",
       "diocese": "sapporo",
       "deanery": "kushiro",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.3281475,
+      "longitude": 145.5839449
     },
     {
       "name": "カトリック柏林台教会",
@@ -447,20 +864,38 @@
       "diocese": "sapporo",
       "deanery": "obihiro",
       "massTimes": {
-        "sunday": ["10:00"]
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.9234181,
+      "longitude": 143.1672567
     },
     {
       "name": "カトリック本別教会",
       "address": "中川郡本別町北7丁目3-1",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "ミサ時間はホームページを参照ください",
+      "massTime": "ミサ時間はホームページまたは教会にご確認ください",
       "diocese": "sapporo",
       "deanery": "obihiro",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.1309709,
+      "longitude": 143.612819
     },
     {
       "name": "カトリック静内教会",
@@ -471,9 +906,30 @@
       "diocese": "sapporo",
       "deanery": "muroran",
       "massTimes": {
-        "saturday": ["10:30"]
+        "monday": [
+          "10:30",
+          "11:00"
+        ],
+        "tuesday": [
+          "10:30",
+          "11:00"
+        ],
+        "wednesday": [
+          "10:30",
+          "11:00"
+        ],
+        "thursday": [
+          "10:30",
+          "11:00"
+        ],
+        "friday": [
+          "10:30",
+          "11:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.3402209,
+      "longitude": 142.3719021
     },
     {
       "name": "カトリック伊達教会",
@@ -484,9 +940,25 @@
       "diocese": "sapporo",
       "deanery": "muroran",
       "massTimes": {
-        "sunday": ["09:30"]
+        "monday": [
+          "9:30"
+        ],
+        "tuesday": [
+          "9:30"
+        ],
+        "wednesday": [
+          "9:30"
+        ],
+        "thursday": [
+          "9:30"
+        ],
+        "friday": [
+          "9:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.4701938,
+      "longitude": 140.8600326
     },
     {
       "name": "カトリック苫小牧教会",
@@ -497,10 +969,30 @@
       "diocese": "sapporo",
       "deanery": "muroran",
       "massTimes": {
-        "sunday": ["09:30"],
-        "friday": ["18:00"]
+        "monday": [
+          "18:00",
+          "9:30"
+        ],
+        "tuesday": [
+          "18:00",
+          "9:30"
+        ],
+        "wednesday": [
+          "18:00",
+          "9:30"
+        ],
+        "thursday": [
+          "18:00",
+          "9:30"
+        ],
+        "friday": [
+          "18:00",
+          "9:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.6350674,
+      "longitude": 141.6031214
     },
     {
       "name": "カトリック登別教会",
@@ -511,9 +1003,25 @@
       "diocese": "sapporo",
       "deanery": "muroran",
       "massTimes": {
-        "sunday": ["10:00"]
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.4152558,
+      "longitude": 141.1072882
     },
     {
       "name": "カトリック東室蘭教会",
@@ -524,10 +1032,30 @@
       "diocese": "sapporo",
       "deanery": "muroran",
       "massTimes": {
-        "saturday": ["10:00"],
-        "sunday": ["09:30"]
+        "monday": [
+          "10:00",
+          "9:30"
+        ],
+        "tuesday": [
+          "10:00",
+          "9:30"
+        ],
+        "wednesday": [
+          "10:00",
+          "9:30"
+        ],
+        "thursday": [
+          "10:00",
+          "9:30"
+        ],
+        "friday": [
+          "10:00",
+          "9:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.3541617,
+      "longitude": 141.0268107
     },
     {
       "name": "カトリック室蘭教会",
@@ -538,11 +1066,30 @@
       "diocese": "sapporo",
       "deanery": "muroran",
       "massTimes": {
-        "saturday": ["10:00"],
-        "sunday": ["10:00"],
-        "thursday": ["10:00"]
+        "monday": [
+          "10:00",
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00",
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00",
+          "10:00"
+        ],
+        "thursday": [
+          "10:00",
+          "10:00"
+        ],
+        "friday": [
+          "10:00",
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 42.3161482,
+      "longitude": 140.967148
     },
     {
       "name": "カトリック北一条教会",
@@ -554,13 +1101,28 @@
       "diocese": "sapporo",
       "deanery": "sapporo",
       "massTimes": {
-        "saturday": ["07:00", "18:30"],
-        "sunday": ["09:00"],
-        "monday": ["07:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["07:00", "18:30"]
+        "saturday": [
+          "07:00",
+          "18:30"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
@@ -570,7 +1132,9 @@
             "note": ""
           }
         ]
-      }
+      },
+      "latitude": 43.0648081,
+      "longitude": 141.3655966
     },
     {
       "name": "カトリック北十一条教会",
@@ -582,14 +1146,29 @@
       "diocese": "sapporo",
       "deanery": "sapporo",
       "massTimes": {
-        "sunday": ["08:00", "10:00"],
-        "monday": ["07:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["07:00"]
+        "sunday": [
+          "08:00",
+          "10:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.0752396,
+      "longitude": 141.3565698
     },
     {
       "name": "カトリック北二十六条教会",
@@ -601,10 +1180,28 @@
       "diocese": "sapporo",
       "deanery": "sapporo",
       "massTimes": {
-        "sunday": ["10:00"],
-        "friday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.0937582,
+      "longitude": 141.3484016
     },
     {
       "name": "カトリック円山教会",
@@ -616,13 +1213,13 @@
       "diocese": "sapporo",
       "deanery": "sapporo",
       "massTimes": {
-        "sunday": ["10:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["07:00"]
+        "sunday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.0621053,
+      "longitude": 141.3206603
     },
     {
       "name": "カトリック琴似教会",
@@ -634,145 +1231,262 @@
       "diocese": "sapporo",
       "deanery": "sapporo",
       "massTimes": {
-        "sunday": ["10:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["07:00"]
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 43.07304999999999,
+      "longitude": 141.301728
     },
     {
       "name": "カトリック白石教会",
       "address": "北海道札幌市白石区本郷通8丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.0412982,
+      "longitude": 141.4143604
     },
     {
       "name": "カトリック新札幌教会",
       "address": "北海道札幌市厚別区厚別中央2条5丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.0382842,
+      "longitude": 141.4722398
     },
     {
       "name": "カトリック手稲教会",
       "address": "北海道札幌市手稲区手稲本町2条3丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00 / 平日：第1金曜日と土曜日10:00",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.1185903,
+      "longitude": 141.241352
     },
     {
       "name": "カトリック平岸教会",
       "address": "北海道札幌市豊平区平岸3条7丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.0350837,
+      "longitude": 141.3717935
     },
     {
       "name": "カトリック福住教会",
       "address": "北海道札幌市豊平区福住2条1丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.0197594,
+      "longitude": 141.4035713
     },
     {
       "name": "カトリック山鼻教会",
       "address": "北海道札幌市中央区南22条西9丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00 / 平日：水曜日、木曜日、金曜日10:00",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.0301021,
+      "longitude": 141.3474652
     },
     {
       "name": "カトリック澄川教会",
       "address": "北海道札幌市南区澄川4条3丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.0140626,
+      "longitude": 141.3680409
     },
     {
       "name": "カトリック真駒内教会",
       "address": "北海道札幌市南区真駒内本町6丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.0041634,
+      "longitude": 141.346481
     },
     {
       "name": "カトリック南の沢教会",
       "address": "北海道札幌市南区南の沢4丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 42.9877144,
+      "longitude": 141.3167967
     },
     {
       "name": "カトリック藻岩教会",
       "address": "北海道札幌市南区藻岩下2丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.0088221,
+      "longitude": 141.3402175
     },
     {
       "name": "カトリック厚別教会",
       "address": "北海道札幌市厚別区厚別中央3条4丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.0400867,
+      "longitude": 141.4669518
     },
     {
       "name": "カトリック清田教会",
       "address": "北海道札幌市清田区清田2条1丁目",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "sapporo",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 43.0052963,
+      "longitude": 141.428514
     },
     {
       "name": "カトリック五稜郭教会",
@@ -780,11 +1494,17 @@
       "prefecture": "北海道",
       "isCathedral": false,
       "phone": "0138-51-2467",
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "hakodate",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 41.7886251,
+      "longitude": 140.7531825
     },
     {
       "name": "カトリック大沼教会",
@@ -792,11 +1512,17 @@
       "prefecture": "北海道",
       "isCathedral": false,
       "phone": "0138-67-2005",
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "hakodate",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 41.9801708,
+      "longitude": 140.6692546
     },
     {
       "name": "カトリック森教会",
@@ -804,44 +1530,68 @@
       "prefecture": "北海道",
       "isCathedral": false,
       "phone": "01374-2-2055",
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "hakodate",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 42.1064264,
+      "longitude": 140.5760038
     },
     {
       "name": "カトリック松前教会",
-      "address": "北海道松前郡松前町字福山",
+      "address": "北海道松前郡松前町字松城303",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "hakodate",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 41.4332179,
+      "longitude": 140.1113954
     },
     {
       "name": "カトリック瀬棚教会",
-      "address": "北海道久遠郡せたな町瀬棚区本町",
+      "address": "〒049-4821 北海道久遠郡せたな町瀬棚区本町",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "hakodate",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 42.4513091,
+      "longitude": 139.8493596
     },
     {
       "name": "カトリック奥尻教会",
       "address": "北海道奥尻郡奥尻町",
       "prefecture": "北海道",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "sapporo",
       "deanery": "hakodate",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 42.1722438,
+      "longitude": 139.5141276
     }
   ]
 }

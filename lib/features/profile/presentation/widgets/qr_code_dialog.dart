@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../auth/domain/entities/user_entity.dart';
 
@@ -60,6 +61,7 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
 
   Future<void> _scanBarcode() async {
     if (_isProcessing) return;
+    final l10n = ref.read(appLocalizationsSyncProvider);
 
     setState(() {
       _isProcessing = true;
@@ -87,8 +89,8 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
       // "credo:userId" 형식인지 확인
       if (!rawValue.startsWith('credo:')) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('無効なQRコードです'),
+          SnackBar(
+            content: Text(l10n.qr.invalid),
             backgroundColor: Colors.orange,
           ),
         );
@@ -139,8 +141,8 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
           });
           if (user == null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('ユーザーが見つかりませんでした'),
+              SnackBar(
+                content: Text(l10n.qr.userNotFound),
                 backgroundColor: Colors.orange,
               ),
             );
@@ -155,32 +157,36 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
           _isProcessing = false;
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('スキャンエラー: $e'), backgroundColor: Colors.red),
+          SnackBar(
+            content: Text('${l10n.qr.scanError}: $e'),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     }
   }
 
   void _showUserFoundDialog(UserEntity user) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('ユーザーが見つかりました'),
+        title: Text(l10n.qr.userFound),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('ニックネーム: ${user.nickname}'),
+            Text('${l10n.profile.godparent.nickname}: ${user.nickname}'),
             const SizedBox(height: 8),
-            Text('メール: ${user.email}'),
+            Text('${l10n.profile.godparent.email}: ${user.email}'),
             const SizedBox(height: 8),
-            Text('ユーザーID: ${user.userId}'),
+            Text('${l10n.profile.userId}: ${user.userId}'),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('閉じる'),
+            child: Text(l10n.common.close),
           ),
         ],
       ),
@@ -190,6 +196,7 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
@@ -217,9 +224,12 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
             labelColor: widget.primaryColor,
             unselectedLabelColor: theme.colorScheme.onSurfaceVariant,
             indicatorColor: widget.primaryColor,
-            tabs: const [
-              Tab(icon: Icon(Icons.qr_code), text: 'QR表示'),
-              Tab(icon: Icon(Icons.qr_code_scanner), text: 'QRスキャン'),
+            tabs: [
+              Tab(icon: const Icon(Icons.qr_code), text: 'QR表示'),
+              Tab(
+                icon: const Icon(Icons.qr_code_scanner),
+                text: l10n.qr.startScan,
+              ),
             ],
           ),
 
@@ -241,6 +251,7 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
   }
 
   Widget _buildQrDisplayTab(ThemeData theme) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     // QR 코드에 인코딩할 데이터: "credo:userId" 형식
     final qrData = 'credo:${widget.userId}';
 
@@ -249,7 +260,7 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
       child: Column(
         children: [
           Text(
-            'プロフィールを共有',
+            l10n.profile.shareProfileQR,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -293,6 +304,7 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
   }
 
   Widget _buildQrScanTab(ThemeData theme) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -317,7 +329,7 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
           ElevatedButton.icon(
             onPressed: _isProcessing ? null : _scanBarcode,
             icon: const Icon(Icons.qr_code_scanner),
-            label: const Text('スキャン開始'),
+            label: Text(l10n.qr.startScan),
             style: ElevatedButton.styleFrom(
               backgroundColor: widget.primaryColor,
               foregroundColor: Colors.white,

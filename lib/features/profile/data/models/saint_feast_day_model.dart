@@ -9,7 +9,7 @@ extension SaintFeastDayModelExtension on core.SaintFeastDayModel {
       month: month,
       day: day,
       name: name,
-      nameEnglish: nameEnglish,
+      nameEnglish: nameEn ?? name,
       type: type,
       isJapanese: isJapanese,
       greeting: greeting,

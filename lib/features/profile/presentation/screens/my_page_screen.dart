@@ -6,8 +6,10 @@ import 'package:go_router/go_router.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/data/services/parish_service.dart' as core;
 import '../../../../core/services/logger_service.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
+import '../../../../shared/providers/font_scale_provider.dart';
 import '../../../../shared/widgets/settings_list_tile.dart';
 import '../../../../shared/widgets/badge_chip.dart';
 import '../widgets/qr_code_dialog.dart';
@@ -20,6 +22,7 @@ class MyPageScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final isAuthenticated = ref.watch(isAuthenticatedProvider);
     final currentUser = ref.watch(currentUserProvider);
     final mainParishId = currentUser?.mainParishId;
@@ -51,7 +54,7 @@ class MyPageScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('マイページ')),
+      appBar: AppBar(title: Text(l10n.profile.myPage)),
       body: ListView(
         children: [
           // 프로필 섹션
@@ -73,8 +76,8 @@ class MyPageScreen extends ConsumerWidget {
                 children: [
                   SettingsListTile(
                     icon: Icons.qr_code,
-                    title: 'QRコードで共有',
-                    subtitle: 'プロフィールをQRコードで共有',
+                    title: l10n.profile.shareProfileQR,
+                    subtitle: l10n.profile.shareProfileQR,
                     primaryColor: primaryColor,
                     onTap: () {
                       if (currentUser != null) {
@@ -100,7 +103,7 @@ class MyPageScreen extends ConsumerWidget {
               title: 'よく行く教会',
               subtitle: isAuthenticated
                   ? '${currentUser?.favoriteParishIds.length ?? 0}件登録済み'
-                  : 'ログインが必要です',
+                  : l10n.profile.loginRequired,
               primaryColor: primaryColor,
               onTap: () {
                 if (isAuthenticated) {
@@ -122,12 +125,14 @@ class MyPageScreen extends ConsumerWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: SettingsListTile(
               icon: Icons.notifications,
-              title: '通知設定',
+              title: l10n.profile.notificationSettings,
               primaryColor: primaryColor,
               onTap: () {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('通知設定は準備中です')));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(l10n.profile.notificationSettingsComingSoon),
+                  ),
+                );
               },
             ),
           ),
@@ -137,7 +142,7 @@ class MyPageScreen extends ConsumerWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: SettingsListTile(
               icon: Icons.language,
-              title: '言語設定',
+              title: l10n.profile.languageSettings,
               subtitle: _getLanguageDisplayName(
                 currentUser?.preferredLanguages.isNotEmpty == true
                     ? currentUser!.preferredLanguages.first
@@ -150,6 +155,12 @@ class MyPageScreen extends ConsumerWidget {
             ),
           ),
 
+          // 글씨 크기 설정
+          Card(
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: _FontScaleSettingsTile(primaryColor: primaryColor),
+          ),
+
           // 이용 규약
           Card(
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -158,9 +169,11 @@ class MyPageScreen extends ConsumerWidget {
               title: '利用規約',
               primaryColor: primaryColor,
               onTap: () {
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('利用規約は準備中です')));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(l10n.profile.termsOfServiceComingSoon),
+                  ),
+                );
               },
             ),
           ),
@@ -174,7 +187,7 @@ class MyPageScreen extends ConsumerWidget {
               primaryColor: primaryColor,
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('プライバシーポリシーは準備中です')),
+                  SnackBar(content: Text(l10n.profile.privacyPolicyComingSoon)),
                 );
               },
             ),
@@ -185,7 +198,7 @@ class MyPageScreen extends ConsumerWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: SettingsListTile(
               icon: Icons.info,
-              title: 'アプリについて',
+              title: l10n.profile.aboutApp,
               subtitle: 'Credo v1.0.0',
               primaryColor: primaryColor,
               onTap: () {
@@ -196,7 +209,7 @@ class MyPageScreen extends ConsumerWidget {
                   applicationLegalese: '© 2024 Credo',
                   children: [
                     const SizedBox(height: 16),
-                    const Text('日本全国のカトリック教会と信者をつなぐコミュニティアプリです。'),
+                    Text(l10n.app.description),
                   ],
                 );
               },
@@ -222,7 +235,7 @@ class MyPageScreen extends ConsumerWidget {
                 side: BorderSide(color: primaryColor),
               ),
               child: Text(
-                isAuthenticated ? 'ログアウト' : 'ログイン',
+                isAuthenticated ? l10n.auth.signOut : l10n.auth.signIn,
                 style: TextStyle(color: primaryColor),
               ),
             ),
@@ -303,6 +316,7 @@ class MyPageScreen extends ConsumerWidget {
     WidgetRef ref,
     String? mainParishId,
   ) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       color: Colors.white,
@@ -349,7 +363,7 @@ class MyPageScreen extends ConsumerWidget {
                       Text(
                         isAuthenticated
                             ? (currentUser?.email ?? '')
-                            : 'ログインしてください',
+                            : l10n.profile.pleaseLogin,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: theme.colorScheme.onSurfaceVariant,
                         ),
@@ -362,9 +376,9 @@ class MyPageScreen extends ConsumerWidget {
                               ClipboardData(text: currentUser.userId),
                             );
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('ユーザーIDをコピーしました'),
-                                duration: Duration(seconds: 2),
+                              SnackBar(
+                                content: Text(l10n.profile.userIdCopied),
+                                duration: const Duration(seconds: 2),
                               ),
                             );
                           },
@@ -415,6 +429,7 @@ class MyPageScreen extends ConsumerWidget {
 
     if (!context.mounted) return;
 
+    final l10n = ref.read(appLocalizationsSyncProvider);
     result.fold(
       (failure) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -423,8 +438,8 @@ class MyPageScreen extends ConsumerWidget {
       },
       (_) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('ログアウトしました'),
+          SnackBar(
+            content: Text(l10n.auth.signOutSuccess),
             backgroundColor: Colors.green,
           ),
         );
@@ -439,6 +454,7 @@ class MyPageScreen extends ConsumerWidget {
     Color primaryColor,
     String? mainParishId,
   ) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     if (mainParishId == null) {
       return Row(
         children: [
@@ -446,7 +462,7 @@ class MyPageScreen extends ConsumerWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              '未設定',
+              l10n.common.notSet,
               style: theme.textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w500,
               ),
@@ -521,5 +537,75 @@ class MyPageScreen extends ConsumerWidget {
       default:
         return '日本語';
     }
+  }
+}
+
+/// 글씨 크기 설정 타일
+class _FontScaleSettingsTile extends ConsumerWidget {
+  final Color primaryColor;
+
+  const _FontScaleSettingsTile({required this.primaryColor});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final fontScale = ref.watch(fontScaleProvider);
+    final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
+
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.text_fields, color: primaryColor),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  l10n.profile.fontSize,
+                  style: theme.textTheme.bodyLarge,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Text(l10n.common.small),
+              Expanded(
+                child: Slider(
+                  value: fontScale,
+                  min: 0.85,
+                  max: 1.4,
+                  divisions: 11,
+                  activeColor: primaryColor,
+                  label: _getFontScaleLabel(fontScale, l10n),
+                  onChanged: (value) {
+                    ref.read(fontScaleProvider.notifier).setFontScale(value);
+                  },
+                ),
+              ),
+              Text(l10n.common.large),
+            ],
+          ),
+          Center(
+            child: Text(
+              l10n.common.sampleText,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontSize: 16 * fontScale,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _getFontScaleLabel(double scale, AppLocalizations l10n) {
+    if (scale <= 0.9) return l10n.common.small;
+    if (scale <= 1.05) return l10n.common.medium;
+    if (scale <= 1.2) return l10n.common.large;
+    return l10n.common.extraLarge;
   }
 }

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/routes/app_routes.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../../../../core/utils/app_localizations.dart';
+import '../providers/community_presentation_providers.dart';
 import 'post_edit_screen.dart';
 
 /// 공지사항 리스트 화면
@@ -13,15 +14,16 @@ class NoticeListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final noticesAsync = ref.watch(officialNoticesProvider(parishId));
     final currentAppUserAsync = ref.watch(currentAppUserProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('공지사항')),
+      appBar: AppBar(title: Text('공지사항')),
       body: noticesAsync.when(
         data: (notices) {
           if (notices.isEmpty) {
-            return const Center(child: Text('공식 공지사항이 없습니다.'));
+            return Center(child: Text('공식 공지사항이 없습니다.'));
           }
 
           return ListView.builder(
@@ -55,7 +57,8 @@ class NoticeListScreen extends ConsumerWidget {
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => Center(child: Text('에러: $error')),
+        error: (error, stack) =>
+            Center(child: Text('${l10n.common.error}: $error')),
       ),
       floatingActionButton: currentAppUserAsync.when(
         data: (currentUser) {

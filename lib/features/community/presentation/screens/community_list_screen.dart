@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/routes/app_routes.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
 import 'post_edit_screen.dart';
 
 /// 커뮤니티 게시판 리스트 화면
@@ -32,11 +32,6 @@ class CommunityListScreen extends ConsumerWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: ListTile(
                   title: Text(post.title),
-                  subtitle: Text(
-                    post.body.split('\n').first,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
                   trailing: post.authorIsVerified
                       ? const Chip(
                           label: Text('公認'),

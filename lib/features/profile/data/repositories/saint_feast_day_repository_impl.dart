@@ -25,7 +25,7 @@ class SaintFeastDayRepositoryImpl implements SaintFeastDayRepository {
     DateTime date,
   ) async {
     try {
-      final saints = await SaintFeastDayService.getSaintsForDate(date);
+      final saints = await SaintFeastDayService.getSaintsForDateFromJson(date);
       final entities = saints.map((saint) => saint.toEntity()).toList();
       return Right(entities);
     } catch (e) {

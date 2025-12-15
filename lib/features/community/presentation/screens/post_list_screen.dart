@@ -4,10 +4,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/data/services/parish_service.dart' as core;
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/widgets/login_required_dialog.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
 import '../../data/models/post.dart';
 import '../widgets/post_card.dart';
 import '../widgets/post_list_filter_bar.dart';
@@ -128,15 +129,25 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final parishAsync = ref.watch(core.parishByIdProvider(widget.parishId));
     final firebasePostsAsync = ref.watch(allPostsProvider(widget.parishId));
 
     return Scaffold(
       appBar: AppBar(
         title: parishAsync.when(
-          data: (parish) => Text(parish?['name'] as String? ?? 'コミュニティ'),
-          loading: () => const Text('コミュニティ'),
-          error: (_, _) => const Text('コミュニティ'),
+          data: (parish) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            return Text(parish?['name'] as String? ?? l10n.community.title);
+          },
+          loading: () {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            return Text(l10n.community.title);
+          },
+          error: (_, _) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            return Text(l10n.community.title);
+          },
         ),
       ),
       body: Column(
@@ -187,7 +198,7 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
                                 ),
                                 const SizedBox(height: 16),
                                 Text(
-                                  '検索結果がありません',
+                                  l10n.community.noSearchResults,
                                   style: theme.textTheme.bodyLarge?.copyWith(
                                     color: Colors.grey.shade600,
                                   ),
@@ -260,14 +271,14 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
                               ),
                               const SizedBox(height: 16),
                               Text(
-                                'エラーが発生しました',
+                                l10n.community.errorOccurred,
                                 style: theme.textTheme.bodyLarge?.copyWith(
                                   color: Colors.grey.shade600,
                                 ),
                               ),
                               const SizedBox(height: 8),
                               Text(
-                                '下にスワイプして再読み込み',
+                                l10n.community.swipeToRefresh,
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   color: Colors.grey.shade500,
                                 ),
@@ -292,7 +303,7 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
           } else {
             LoginRequiredDialog.show(
               context,
-              message: '投稿するにはログインが必要です。ログインしますか？',
+              message: l10n.auth.loginRequiredQuestion,
               primaryColor: primaryColor,
             );
           }

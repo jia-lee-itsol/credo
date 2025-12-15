@@ -27,7 +27,9 @@
             "note": "第1・第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.1715832,
+      "longitude": 136.9069874
     },
     {
       "name": "カトリック布池教会",
@@ -57,14 +59,16 @@
             "note": "第2・第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.1728285,
+      "longitude": 136.9239068
     },
     {
       "name": "カトリック岐阜教会",
       "address": "〒500-8881 岐阜県岐阜市青柳町3-23",
       "prefecture": "岐阜県",
       "isCathedral": false,
-      "massTime": "土曜日：19:00 / 主日：10:00 / 第1日曜13:00(タガログ語)",
+      "massTime": "土曜日：19:00（ないときもあり） / 主日：10:00 / 初金曜日：10:00 / 平日：07:00(土曜日を除く) / 第1日曜13:00(タガログ語)",
       "phone": "058-251-1018",
       "fax": "058-255-1206",
       "diocese": "nagoya",
@@ -75,9 +79,34 @@
         ],
         "sunday": [
           "10:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "PH",
+            "note": "第1日曜"
+          }
+        ]
+      },
+      "latitude": 35.4251228,
+      "longitude": 136.7507118
     },
     {
       "name": "カトリック豊橋教会",
@@ -119,7 +148,9 @@
             "note": "第1日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.7682465,
+      "longitude": 137.3917631
     },
     {
       "name": "カトリック一宮教会",
@@ -147,7 +178,9 @@
             "note": "第1日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.307933,
+      "longitude": 136.7984645
     },
     {
       "name": "カトリック岡崎教会",
@@ -171,7 +204,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.9442323,
+      "longitude": 137.1646451
     },
     {
       "name": "カトリック多治見教会",
@@ -205,7 +240,9 @@
             "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.3426474,
+      "longitude": 137.1351634
     },
     {
       "name": "カトリック春日井教会",
@@ -230,7 +267,9 @@
             "note": "第2・第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.2616925,
+      "longitude": 136.9687542
     },
     {
       "name": "カトリック金沢教会",
@@ -274,7 +313,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 36.5615677,
+      "longitude": 136.6553187
     },
     {
       "name": "カトリック福井教会",
@@ -325,10 +366,12 @@
           {
             "time": "19:30",
             "language": "PT",
-            "note": "第2土曜"
+            "note": ""
           }
         ]
-      }
+      },
+      "latitude": 36.0671955,
+      "longitude": 136.2246884
     },
     {
       "name": "カトリック富山教会",
@@ -381,7 +424,9 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 36.6871997,
+      "longitude": 137.2220683
     },
     {
       "name": "カトリック五反城教会",
@@ -420,7 +465,9 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.1602241,
+      "longitude": 136.8515642
     },
     {
       "name": "カトリック城北橋教会",
@@ -463,7 +510,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.1933705,
+      "longitude": 136.9013166
     },
     {
       "name": "カトリック守山教会",
@@ -479,7 +528,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.2152016,
+      "longitude": 136.9951204
     },
     {
       "name": "カトリック小牧教会",
@@ -508,7 +559,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.2797578,
+      "longitude": 136.9154873
     },
     {
       "name": "カトリック押切教会",
@@ -539,14 +592,16 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1873391,
+      "longitude": 136.8855814
     },
     {
       "name": "カトリック南山教会",
       "address": "〒466-0835 愛知県名古屋市昭和区南山町1",
       "prefecture": "愛知県",
       "isCathedral": false,
-      "massTime": "土曜日：17:00 / 主日：08:00, 09:30(手話通訳あり), 11:00, 18:00 / 平日：07:00(月・水・木), 19:00(火) / 毎週日曜09:30(英語) / 第4日曜15:30(ベトナム語)",
+      "massTime": "土曜日：17:00 / 主日：08:00, 10:00 / 毎週日曜09:30(英語) / 第4日曜14:00(ベトナム語) / 平日：07:00(月・水・木), 19:00(火), 10:00(金)",
       "phone": "052-831-9131",
       "diocese": "nagoya",
       "deanery": "nagoya",
@@ -556,50 +611,40 @@
         ],
         "sunday": [
           "08:00",
-          "09:30",
-          "11:00",
-          "18:00"
+          "10:00"
         ],
         "monday": [
-          "07:00",
-          "19:00"
+          "07:00"
         ],
         "tuesday": [
-          "07:00",
           "19:00"
         ],
         "wednesday": [
-          "07:00",
-          "19:00"
+          "07:00"
         ],
         "thursday": [
-          "07:00",
-          "19:00"
+          "07:00"
         ],
         "friday": [
-          "07:00",
-          "19:00"
+          "10:00"
         ]
       },
       "foreignMassTimes": {
         "sunday": [
           {
             "time": "09:30",
-            "language": "SIGN",
-            "note": ""
-          },
-          {
-            "time": "09:30",
             "language": "EN",
             "note": ""
           },
           {
-            "time": "15:30",
+            "time": "14:00",
             "language": "VI",
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.1423548,
+      "longitude": 136.9524746
     },
     {
       "name": "カトリック名東教会",
@@ -630,7 +675,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1556821,
+      "longitude": 137.0232642
     },
     {
       "name": "カトリック平針教会",
@@ -665,7 +712,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1228599,
+      "longitude": 137.0092471
     },
     {
       "name": "カトリック恵方町教会",
@@ -697,7 +746,9 @@
           "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1453726,
+      "longitude": 136.9312356
     },
     {
       "name": "カトリック東山教会",
@@ -715,7 +766,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1603622,
+      "longitude": 136.968385
     },
     {
       "name": "カトリック膳棚教会",
@@ -749,7 +802,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.4117252,
+      "longitude": 136.7871566
     },
     {
       "name": "カトリック八熊教会",
@@ -765,7 +820,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1436855,
+      "longitude": 136.884643
     },
     {
       "name": "カトリック半田教会",
@@ -799,7 +856,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.8904212,
+      "longitude": 136.923761
     },
     {
       "name": "カトリック日比野教会",
@@ -838,7 +897,9 @@
             "note": "第1日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.1290757,
+      "longitude": 136.8924589
     },
     {
       "name": "カトリック東海教会",
@@ -872,14 +933,16 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.0174995,
+      "longitude": 136.911096
     },
     {
       "name": "カトリック港教会",
       "address": "〒455-0843 愛知県名古屋市港区錦町25-17",
       "prefecture": "愛知県",
       "isCathedral": false,
-      "massTime": "主日：09:30 / 平日：08:30 / 第4日曜13:30(タガログ語)",
+      "massTime": "主日：09:30 / 平日：08:30 / 第4日曜13:00(タガログ語)",
       "phone": "052-389-1841",
       "diocese": "nagoya",
       "deanery": "nagoya",
@@ -903,7 +966,17 @@
           "08:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "PH",
+            "note": "第4日曜"
+          }
+        ]
+      },
+      "latitude": 35.0853011,
+      "longitude": 136.8619763
     },
     {
       "name": "カトリック熱田教会",
@@ -934,7 +1007,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1178792,
+      "longitude": 136.9094697
     },
     {
       "name": "カトリック緑ケ丘教会",
@@ -966,7 +1041,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1884906,
+      "longitude": 136.9801497
     },
     {
       "name": "カトリック長浦教会",
@@ -997,7 +1074,9 @@
           "09:15"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.9590833,
+      "longitude": 136.9079349
     },
     {
       "name": "カトリック鳴海教会",
@@ -1036,7 +1115,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.0826088,
+      "longitude": 136.9538418
     },
     {
       "name": "カトリック瀬戸教会",
@@ -1067,7 +1148,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.21919889999999,
+      "longitude": 137.0732054
     },
     {
       "name": "カトリック瑞浪教会",
@@ -1091,7 +1174,9 @@
             "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.3584408,
+      "longitude": 137.251679
     },
     {
       "name": "カトリック高蔵寺教会",
@@ -1122,7 +1207,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.2696809,
+      "longitude": 137.0212146
     },
     {
       "name": "カトリック各務原教会",
@@ -1160,7 +1247,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.3960641,
+      "longitude": 136.8375355
     },
     {
       "name": "カトリック大垣教会",
@@ -1194,7 +1283,9 @@
             "note": "第2・第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.385503,
+      "longitude": 136.613233
     },
     {
       "name": "カトリック江南教会",
@@ -1210,23 +1301,24 @@
         "sunday": [
           "09:30"
         ],
-        "monday": [
-          "11:00"
-        ],
-        "tuesday": [
-          "11:00"
-        ],
         "wednesday": [
-          "11:00"
-        ],
-        "thursday": [
           "11:00"
         ],
         "friday": [
           "11:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:30",
+            "language": "PH",
+            "note": "第1・第3日曜"
+          }
+        ]
+      },
+      "latitude": 35.3507941,
+      "longitude": 136.863118
     },
     {
       "name": "カトリック津島愛西教会",
@@ -1257,14 +1349,16 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.18650969999999,
+      "longitude": 136.7389998
     },
     {
       "name": "カトリック美濃加茂教会",
       "address": "〒505-0004 岐阜県美濃加茂市蜂屋町上蜂屋3511-14",
       "prefecture": "岐阜県",
       "isCathedral": false,
-      "massTime": "土曜日：07:00 / 主日：09:30 / 第1・第3日曜14:00(タガログ語) / 平日：07:00",
+      "massTime": "土曜日：07:00 / 主日：09:30 / 第1・第3日曜14:00(タガログ語) / 平日：07:00 / 初金：09:30",
       "phone": "0574-26-9649",
       "diocese": "nagoya",
       "deanery": "nagoya",
@@ -1291,7 +1385,17 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "PH",
+            "note": "第1・第3日曜"
+          }
+        ]
+      },
+      "latitude": 35.4536784,
+      "longitude": 137.0134477
     },
     {
       "name": "カトリック刈谷教会",
@@ -1315,12 +1419,12 @@
           {
             "time": "16:00",
             "language": "EN",
-            "note": "第1・3日曜"
+            "note": ""
           },
           {
             "time": "11:00",
             "language": "PT",
-            "note": "第2・4日曜"
+            "note": ""
           },
           {
             "time": "16:00",
@@ -1333,7 +1437,9 @@
             "note": "第1日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.9878557,
+      "longitude": 137.0011317
     },
     {
       "name": "カトリック安城教会",
@@ -1374,7 +1480,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.9877987,
+      "longitude": 137.0761143
     },
     {
       "name": "カトリック聖心教会",
@@ -1424,10 +1532,12 @@
           {
             "time": "19:30",
             "language": "ES",
-            "note": "第2土曜"
+            "note": ""
           }
         ]
-      }
+      },
+      "latitude": 35.059352,
+      "longitude": 137.1198825
     },
     {
       "name": "カトリック小矢部教会",
@@ -1439,8 +1549,15 @@
       "note": "富山教会へお問い合わせください",
       "diocese": "nagoya",
       "deanery": "nagoya",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00",
+          "16:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 36.6688465,
+      "longitude": 136.8575252
     },
     {
       "name": "カトリック高岡教会",
@@ -1471,7 +1588,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.7464947,
+      "longitude": 137.0160374
     },
     {
       "name": "カトリック魚津教会",
@@ -1491,7 +1610,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.8186809,
+      "longitude": 137.4056793
     },
     {
       "name": "カトリック七尾教会",
@@ -1507,7 +1628,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.0429969,
+      "longitude": 136.9616623
     },
     {
       "name": "カトリック三馬教会",
@@ -1523,7 +1646,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.5281694,
+      "longitude": 136.6306947
     },
     {
       "name": "カトリック内灘教会",
@@ -1534,8 +1659,14 @@
       "phone": "076-286-3256",
       "diocese": "nagoya",
       "deanery": "nagoya",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "15:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 36.6428585,
+      "longitude": 136.6370232
     },
     {
       "name": "カトリック小松教会",
@@ -1566,7 +1697,9 @@
           "06:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.4067212,
+      "longitude": 136.4435183
     },
     {
       "name": "カトリック羽咋教会",
@@ -1591,7 +1724,9 @@
             "note": "第5日曜"
           }
         ]
-      }
+      },
+      "latitude": 36.8929352,
+      "longitude": 136.7755891
     },
     {
       "name": "カトリック輪島教会",
@@ -1607,7 +1742,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.3943736,
+      "longitude": 136.9054124
     },
     {
       "name": "カトリック大野教会",
@@ -1641,7 +1778,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1106146,
+      "longitude": 136.7268016
     },
     {
       "name": "カトリック小浜教会",
@@ -1655,11 +1794,12 @@
       "deanery": "nagoya",
       "massTimes": {
         "sunday": [
-          "14:30",
           "14:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.4828502,
+      "longitude": 135.7858518
     },
     {
       "name": "カトリック敦賀教会",
@@ -1675,7 +1815,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.6525512,
+      "longitude": 136.0736102
     },
     {
       "name": "カトリック鯖江教会",
@@ -1691,7 +1833,9 @@
           "10:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.9635754,
+      "longitude": 136.1874607
     }
   ]
 }

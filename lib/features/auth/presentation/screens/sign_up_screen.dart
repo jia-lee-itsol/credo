@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/services/logger_service.dart';
 import '../../../../core/utils/validators.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../config/routes/app_routes.dart';
@@ -54,9 +55,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('新規登録')),
+      appBar: AppBar(title: Text(l10n.auth.signUp)),
       body: SafeArea(
         child: GestureDetector(
           onTap: () {
@@ -74,11 +76,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   // 닉네임 입력
                   TextFormField(
                     controller: _nicknameController,
-                    decoration: const InputDecoration(
-                      labelText: 'ニックネーム',
-                      prefixIcon: Icon(Icons.person_outlined),
+                    decoration: InputDecoration(
+                      labelText: l10n.auth.nickname,
+                      prefixIcon: const Icon(Icons.person_outlined),
                     ),
-                    validator: Validators.validateNickname,
+                    validator: (value) =>
+                        Validators.validateNickname(value, l10n),
                     textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(height: 16),
@@ -86,12 +89,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   // 이메일 입력
                   TextFormField(
                     controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'メールアドレス',
-                      prefixIcon: Icon(Icons.email_outlined),
+                    decoration: InputDecoration(
+                      labelText: l10n.auth.email,
+                      prefixIcon: const Icon(Icons.email_outlined),
                     ),
                     keyboardType: TextInputType.emailAddress,
-                    validator: Validators.validateEmail,
+                    validator: (value) => Validators.validateEmail(value, l10n),
                     textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(height: 16),
@@ -99,8 +102,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   // 비밀번호 입력
                   PasswordField(
                     controller: _passwordController,
-                    helperText: '8文字以上で入力してください',
-                    validator: Validators.validatePassword,
+                    helperText: l10n.validation.passwordMinLength,
+                    validator: (value) =>
+                        Validators.validatePassword(value, l10n),
                     textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(height: 16),
@@ -108,10 +112,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   // 비밀번호 확인
                   PasswordField(
                     controller: _confirmPasswordController,
-                    labelText: 'パスワード（確認）',
+                    labelText: l10n.auth.passwordConfirm,
                     validator: (value) {
                       if (value != _passwordController.text) {
-                        return 'パスワードが一致しません';
+                        return l10n.auth.passwordMismatch;
                       }
                       return null;
                     },
@@ -128,14 +132,14 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     ),
                     child: InputDecorator(
                       decoration: InputDecoration(
-                        labelText: '所属教会',
+                        labelText: l10n.auth.parish,
                         suffixIcon: const Icon(Icons.chevron_right),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
                       child: Text(
-                        _selectedParishName ?? '選択してください（任意）',
+                        _selectedParishName ?? l10n.auth.selectParish,
                         style: TextStyle(
                           color: _selectedParishName != null
                               ? theme.colorScheme.onSurface
@@ -149,10 +153,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   // 세례명 입력
                   TextFormField(
                     controller: _baptismalNameController,
-                    decoration: const InputDecoration(
-                      labelText: '洗礼名（任意）',
-                      prefixIcon: Icon(Icons.badge_outlined),
-                      hintText: '洗礼名を入力してください',
+                    decoration: InputDecoration(
+                      labelText: l10n.auth.baptismName,
+                      prefixIcon: const Icon(Icons.badge_outlined),
+                      hintText: l10n.auth.baptismNameHint,
                     ),
                     textInputAction: TextInputAction.next,
                   ),
@@ -172,12 +176,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       ),
                       child: Text(
                         _selectedFeastDay != null
-                            ? '${_selectedFeastDay?.name ?? ''} (${_selectedFeastDay?.month ?? 0}月${_selectedFeastDay?.day ?? 0}日)'
+                            ? '${_selectedFeastDay?.name ?? ''} (${_selectedFeastDay?.month ?? 0}${l10n.profile.month}${_selectedFeastDay?.day ?? 0}${l10n.profile.day})'
                             : _customBaptismalName != null &&
                                   _customFeastMonth != null &&
                                   _customFeastDay != null
-                            ? '$_customBaptismalName ($_customFeastMonth月$_customFeastDay日)'
-                            : '選択してください（任意）',
+                            ? '$_customBaptismalName ($_customFeastMonth${l10n.profile.month}$_customFeastDay${l10n.profile.day})'
+                            : l10n.auth.selectFeastDay,
                         style: TextStyle(
                           color: _selectedFeastDay != null
                               ? theme.colorScheme.onSurface
@@ -203,7 +207,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   // 회원가입 버튼
                   LoadingButton(
                     onPressed: _signUp,
-                    label: 'アカウントを作成',
+                    label: l10n.auth.createAccount,
                     backgroundColor: primaryColor,
                     isLoading: _isLoading,
                   ),
@@ -245,9 +249,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
     if (!_agreeToTerms) {
       AppLogger.warning('이용약관 미동의');
+      final l10n = ref.read(appLocalizationsSyncProvider);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('利用規約とプライバシーポリシーに同意してください'),
+        SnackBar(
+          content: Text(l10n.auth.termsRequired),
           backgroundColor: Colors.red,
         ),
       );
@@ -330,9 +335,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
           if (mounted) {
             AppLogger.debug('스낵바 표시 시작');
+            final l10n = ref.read(appLocalizationsSyncProvider);
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('アカウントを作成しました'),
+              SnackBar(
+                content: Text(l10n.auth.accountCreated),
                 backgroundColor: Colors.green,
               ),
             );
@@ -369,9 +375,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           _isLoading = false;
         });
         AppLogger.debug('예외 처리: 로딩 상태 변경 완료');
+        final l10n = ref.read(appLocalizationsSyncProvider);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('登録に失敗しました'),
+          SnackBar(
+            content: Text(l10n.auth.signUpFailed),
             backgroundColor: Colors.red,
           ),
         );
@@ -493,6 +500,7 @@ class _ParishSearchSheetState extends ConsumerState<_ParishSearchSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final allParishesAsync = ref.watch(core.allParishesProvider);
 
     return Column(
@@ -513,7 +521,7 @@ class _ParishSearchSheetState extends ConsumerState<_ParishSearchSheet> {
         Padding(
           padding: const EdgeInsets.all(16),
           child: Text(
-            '所属教会を選択',
+            l10n.auth.selectParishTitle,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -526,7 +534,7 @@ class _ParishSearchSheetState extends ConsumerState<_ParishSearchSheet> {
           child: TextField(
             controller: _searchController,
             decoration: InputDecoration(
-              hintText: '教会名で検索',
+              hintText: l10n.search.parishSearchHint,
               hintStyle: TextStyle(color: Colors.grey.shade500),
               prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
               suffixIcon: _searchQuery.isNotEmpty
@@ -591,7 +599,7 @@ class _ParishSearchSheetState extends ConsumerState<_ParishSearchSheet> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        '検索結果がありません',
+                        l10n.search.noResults,
                         style: theme.textTheme.bodyLarge?.copyWith(
                           color: Colors.grey.shade600,
                         ),
@@ -648,7 +656,10 @@ class _ParishSearchSheetState extends ConsumerState<_ParishSearchSheet> {
               );
             },
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) => Center(child: Text('エラー: $error')),
+            error: (error, _) {
+              final l10n = ref.read(appLocalizationsSyncProvider);
+              return Center(child: Text('${l10n.common.error}: $error'));
+            },
           ),
         ),
       ],
@@ -694,6 +705,7 @@ class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final allSaintsAsync = ref.watch(_allSaintsProvider);
 
     return Column(
@@ -714,7 +726,7 @@ class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
         Padding(
           padding: const EdgeInsets.all(16),
           child: Text(
-            '守護聖人の祝日を選択',
+            l10n.auth.selectFeastDayTitle,
             style: theme.textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -727,7 +739,7 @@ class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
           child: TextField(
             controller: _searchController,
             decoration: InputDecoration(
-              hintText: '聖人名で検索',
+              hintText: l10n.search.saintSearchHint,
               hintStyle: TextStyle(color: Colors.grey.shade500),
               prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
               suffixIcon: _searchQuery.isNotEmpty
@@ -765,7 +777,7 @@ class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
                   ? allSaints
                   : allSaints.where((saint) {
                       final name = saint.name.toLowerCase();
-                      final nameEn = saint.nameEnglish.toLowerCase();
+                      final nameEn = saint.nameEn?.toLowerCase() ?? '';
                       final query = _searchQuery.toLowerCase();
                       return name.contains(query) || nameEn.contains(query);
                     }).toList();
@@ -782,7 +794,7 @@ class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        '検索結果がありません',
+                        l10n.search.noResults,
                         style: theme.textTheme.bodyLarge?.copyWith(
                           color: Colors.grey.shade600,
                         ),
@@ -821,10 +833,10 @@ class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
                     ),
                     subtitle: isCustomSelected
                         ? Text(
-                            '${widget.customBaptismalName} (${widget.customFeastMonth}月${widget.customFeastDay}日)',
+                            '${widget.customBaptismalName} (${widget.customFeastMonth}${l10n.profile.month}${widget.customFeastDay}${l10n.profile.day})',
                             style: theme.textTheme.bodySmall,
                           )
-                        : const Text('洗礼名と祝日を直接入力'),
+                        : Text(l10n.profile.directInputTitle),
                     trailing: isCustomSelected
                         ? Icon(Icons.check, color: widget.primaryColor)
                         : Icon(
@@ -859,7 +871,7 @@ class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
                         ),
                       ),
                       subtitle: Text(
-                        '${saint.month}月${saint.day}日',
+                        '${saint.month}${l10n.profile.month}${saint.day}${l10n.profile.day}',
                         style: theme.textTheme.bodySmall,
                       ),
                       trailing: isSelected
@@ -872,7 +884,10 @@ class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
               );
             },
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) => Center(child: Text('エラー: $error')),
+            error: (error, _) {
+              final l10n = ref.read(appLocalizationsSyncProvider);
+              return Center(child: Text('${l10n.common.error}: $error'));
+            },
           ),
         ),
       ],
@@ -892,105 +907,112 @@ class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
 
     showDialog(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: const Text('洗礼名と祝日を入力'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: baptismalNameController,
-                decoration: const InputDecoration(
-                  labelText: '洗礼名',
-                  hintText: '洗礼名を入力してください',
-                  border: OutlineInputBorder(),
+      builder: (dialogContext) {
+        final dialogL10n = AppLocalizations.of(dialogContext);
+        return AlertDialog(
+          title: Text(dialogL10n.profile.directInputDialogTitle),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: baptismalNameController,
+                  decoration: InputDecoration(
+                    labelText: dialogL10n.auth.baptismName,
+                    hintText: dialogL10n.auth.baptismNameHint,
+                    border: const OutlineInputBorder(),
+                  ),
+                  textCapitalization: TextCapitalization.words,
                 ),
-                textCapitalization: TextCapitalization.words,
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: monthController,
-                      decoration: const InputDecoration(
-                        labelText: '月',
-                        hintText: '1-12',
-                        border: OutlineInputBorder(),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: monthController,
+                        decoration: InputDecoration(
+                          labelText: dialogL10n.profile.month,
+                          hintText: '1-12',
+                          border: const OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                       ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: TextField(
-                      controller: dayController,
-                      decoration: const InputDecoration(
-                        labelText: '日',
-                        hintText: '1-31',
-                        border: OutlineInputBorder(),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: TextField(
+                        controller: dayController,
+                        decoration: InputDecoration(
+                          labelText: dialogL10n.profile.day,
+                          hintText: '1-31',
+                          border: const OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
                       ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('キャンセル'),
-          ),
-          TextButton(
-            onPressed: () {
-              final baptismalName = baptismalNameController.text.trim();
-              final monthStr = monthController.text.trim();
-              final dayStr = dayController.text.trim();
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext),
+              child: Text(dialogL10n.common.cancel),
+            ),
+            TextButton(
+              onPressed: () {
+                final baptismalName = baptismalNameController.text.trim();
+                final monthStr = monthController.text.trim();
+                final dayStr = dayController.text.trim();
 
-              if (baptismalName.isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('洗礼名を入力してください'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-                return;
-              }
+                if (baptismalName.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(dialogL10n.validation.baptismNameRequired),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
 
-              final month = int.tryParse(monthStr);
-              final day = int.tryParse(dayStr);
+                final month = int.tryParse(monthStr);
+                final day = int.tryParse(dayStr);
 
-              if (month == null || month < 1 || month > 12) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('有効な月（1-12）を入力してください'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-                return;
-              }
+                if (month == null || month < 1 || month > 12) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(dialogL10n.validation.monthInvalid),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
 
-              if (day == null || day < 1 || day > 31) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('有効な日（1-31）を入力してください'),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-                return;
-              }
+                if (day == null || day < 1 || day > 31) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(dialogL10n.validation.dayInvalid),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                  return;
+                }
 
-              widget.onCustomInput(baptismalName, month, day);
-              Navigator.pop(dialogContext);
-            },
-            child: const Text('保存'),
-          ),
-        ],
-      ),
+                widget.onCustomInput(baptismalName, month, day);
+                Navigator.pop(dialogContext);
+              },
+              child: Text(dialogL10n.common.save),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -1009,7 +1031,7 @@ final _allSaintsProvider = FutureProvider<List<SaintFeastDayModel>>((
             month: saint.month,
             day: saint.day,
             name: saint.name,
-            nameEnglish: saint.nameEnglish,
+            nameEn: saint.nameEnglish,
             type: saint.type,
             isJapanese: saint.isJapanese,
             greeting: saint.greeting,

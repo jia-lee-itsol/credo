@@ -1,11 +1,16 @@
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/constants/liturgy_constants.dart';
 import '../../core/data/models/liturgical_calendar_model.dart';
 import '../../core/data/services/liturgical_calendar_service.dart';
 import '../../core/data/services/liturgical_reading_service.dart';
+import '../../core/data/services/openai_service.dart';
+import '../../core/services/logger_service.dart';
 import '../../core/theme/app_theme.dart';
+import '../providers/locale_provider.dart';
 
 /// 테스트용 날짜 오버라이드 (디버그 모드에서만 사용)
 /// null이면 실제 날짜 사용, 설정하면 해당 날짜 사용
@@ -26,9 +31,105 @@ final testDateOverrideProvider = StateProvider<DateTime?>((ref) {
   return null;
 });
 
-/// 현재 전례 시즌 Provider (비동기)
+/// ChatGPT로 전례력 정보 가져오기 (캐싱 포함)
+final liturgyInfoFromChatGPTProvider =
+    FutureProvider.family<Map<String, dynamic>?, DateTime>((ref, date) async {
+      final locale = ref.watch(localeProvider);
+      final languageCode = locale.languageCode;
+      final month = date.month;
+      final day = date.day;
+      final year = date.year;
+
+      // 캐시 키 생성 (날짜별로 캐싱)
+      final cacheKey = 'liturgy_info_chatgpt_$year-$month-$day';
+
+      try {
+        // SharedPreferences에서 캐시 확인
+        final prefs = await SharedPreferences.getInstance();
+        final cachedJson = prefs.getString(cacheKey);
+
+        String liturgyJson;
+        if (cachedJson != null && cachedJson.isNotEmpty) {
+          AppLogger.debug(
+            '[LiturgyThemeProvider] 캐시에서 전례력 정보 로드: $year-$month-$day',
+          );
+          liturgyJson = cachedJson;
+        } else {
+          // 캐시가 없으면 ChatGPT로 검색
+          AppLogger.debug(
+            '[LiturgyThemeProvider] ChatGPT로 전례력 확인 시작: $year-$month-$day',
+          );
+
+          final openAIService = OpenAIService();
+          liturgyJson = await openAIService.getLiturgyInfoForDate(
+            date: date,
+            languageCode: languageCode,
+          );
+
+          // 캐시에 저장 (하루에 한 번만 검색)
+          await prefs.setString(cacheKey, liturgyJson);
+          AppLogger.debug(
+            '[LiturgyThemeProvider] 전례력 확인 및 캐싱 완료: $year-$month-$day',
+          );
+        }
+
+        // JSON 파싱 (코드 블록이나 마크다운 제거)
+        String cleanJson = liturgyJson.trim();
+        if (cleanJson.startsWith('```')) {
+          final lines = cleanJson.split('\n');
+          cleanJson = lines
+              .where((line) => !line.trim().startsWith('```'))
+              .join('\n')
+              .trim();
+        }
+        final jsonStart = cleanJson.indexOf('{');
+        final jsonEnd = cleanJson.lastIndexOf('}');
+        if (jsonStart != -1 && jsonEnd != -1 && jsonEnd > jsonStart) {
+          cleanJson = cleanJson.substring(jsonStart, jsonEnd + 1);
+        }
+
+        final jsonData = jsonDecode(cleanJson) as Map<String, dynamic>;
+        return jsonData;
+      } catch (e, stackTrace) {
+        AppLogger.error(
+          '[LiturgyThemeProvider] ChatGPT 전례력 확인 실패: $year-$month-$day',
+          e,
+          stackTrace,
+        );
+        return null;
+      }
+    });
+
+/// 현재 전례 시즌 Provider (ChatGPT 우선, 실패 시 기존 로직)
 final currentLiturgySeasonProvider = FutureProvider<LiturgySeason>((ref) async {
   final testDate = ref.watch(testDateOverrideProvider);
+  final date = testDate ?? DateTime.now();
+
+  // ChatGPT로 전례력 정보 가져오기 시도
+  final liturgyInfoAsync = ref.watch(liturgyInfoFromChatGPTProvider(date));
+  if (liturgyInfoAsync.hasValue && liturgyInfoAsync.value != null) {
+    final liturgyInfo = liturgyInfoAsync.value!;
+    final seasonStr = liturgyInfo['season'] as String?;
+    if (seasonStr != null) {
+      // 문자열을 LiturgySeason enum으로 변환
+      switch (seasonStr.toLowerCase()) {
+        case 'ordinary':
+          return LiturgySeason.ordinary;
+        case 'advent':
+          return LiturgySeason.advent;
+        case 'christmas':
+          return LiturgySeason.christmas;
+        case 'lent':
+          return LiturgySeason.lent;
+        case 'easter':
+          return LiturgySeason.easter;
+        case 'pentecost':
+          return LiturgySeason.pentecost;
+      }
+    }
+  }
+
+  // ChatGPT 실패 시 기존 로직 사용
   return await LiturgySeasonUtil.getCurrentSeason(testDate);
 });
 
@@ -38,14 +139,26 @@ final currentLiturgySeasonSyncProvider = Provider<LiturgySeason>((ref) {
   return LiturgySeasonUtil.getCurrentSeasonSync(testDate);
 });
 
-/// 전례 시즌 이름 Provider
+/// 전례 시즌 이름 Provider (ChatGPT 우선)
 final liturgySeasonNameProvider = Provider.family<String, String>((
   ref,
   locale,
 ) {
-  final seasonAsync = ref.watch(currentLiturgySeasonProvider);
   final testDate = ref.watch(testDateOverrideProvider);
   final date = testDate ?? DateTime.now();
+
+  // ChatGPT로 전례력 정보 가져오기 시도
+  final liturgyInfoAsync = ref.watch(liturgyInfoFromChatGPTProvider(date));
+  if (liturgyInfoAsync.hasValue && liturgyInfoAsync.value != null) {
+    final liturgyInfo = liturgyInfoAsync.value!;
+    final seasonName = liturgyInfo['seasonName'] as String?;
+    if (seasonName != null && seasonName.isNotEmpty) {
+      return seasonName;
+    }
+  }
+
+  // ChatGPT 실패 시 기존 로직 사용
+  final seasonAsync = ref.watch(currentLiturgySeasonProvider);
   final season =
       seasonAsync.value ?? LiturgySeasonUtil.getCurrentSeasonSync(testDate);
 
@@ -101,14 +214,51 @@ final specialDayProvider = FutureProvider.family<SpecialDay?, DateTime>((
   return await LiturgicalCalendarService.getSpecialDayForDate(date);
 });
 
-/// 전례 기본 색상 Provider (특별한 축일 고려)
+/// 전례 기본 색상 Provider (ChatGPT 우선, 특별한 축일 고려)
 final liturgyPrimaryColorProvider = Provider<Color>((ref) {
   // 날짜 변경 감지를 위해 currentDateStringProvider를 watch
   ref.watch(currentDateStringProvider);
 
-  final seasonAsync = ref.watch(currentLiturgySeasonProvider);
   final testDate = ref.watch(testDateOverrideProvider);
   final date = testDate ?? DateTime.now();
+
+  // ChatGPT로 전례력 정보 가져오기 시도
+  final liturgyInfoAsync = ref.watch(liturgyInfoFromChatGPTProvider(date));
+  if (liturgyInfoAsync.hasValue && liturgyInfoAsync.value != null) {
+    final liturgyInfo = liturgyInfoAsync.value!;
+    final colorType = liturgyInfo['colorType'] as String?;
+    final specialDay = liturgyInfo['specialDay'] as bool? ?? false;
+    final specialDayType = liturgyInfo['specialDayType'] as String?;
+
+    // 특별한 축일 색상 우선
+    if (specialDay) {
+      if (specialDayType == 'martyr' || specialDayType == 'passion') {
+        return LiturgyColors.pentecostPrimary; // 붉은색
+      }
+      if (specialDayType == 'saint') {
+        return LiturgyColors.saintPrimary; // 골드
+      }
+    }
+
+    // 색상 타입에 따라 색상 반환
+    if (colorType != null) {
+      switch (colorType.toLowerCase()) {
+        case 'green':
+          return LiturgyColors.ordinaryPrimary;
+        case 'purple':
+          return LiturgyColors.adventPrimary;
+        case 'gold':
+          return LiturgyColors.goldPrimary;
+        case 'red':
+          return LiturgyColors.pentecostPrimary;
+        case 'white':
+          return LiturgyColors.goldPrimary; // 흰색 시기에는 골드 포인트
+      }
+    }
+  }
+
+  // ChatGPT 실패 시 기존 로직 사용
+  final seasonAsync = ref.watch(currentLiturgySeasonProvider);
   final season =
       seasonAsync.value ?? LiturgySeasonUtil.getCurrentSeasonSync(testDate);
 
@@ -162,8 +312,34 @@ final liturgyPrimaryColorProvider = Provider<Color>((ref) {
   return LiturgyColors.getPrimaryColor(season);
 });
 
-/// 전례 배경 색상 Provider
+/// 전례 배경 색상 Provider (ChatGPT 우선)
 final liturgyBackgroundColorProvider = Provider<Color>((ref) {
+  final testDate = ref.watch(testDateOverrideProvider);
+  final date = testDate ?? DateTime.now();
+
+  // ChatGPT로 전례력 정보 가져오기 시도
+  final liturgyInfoAsync = ref.watch(liturgyInfoFromChatGPTProvider(date));
+  if (liturgyInfoAsync.hasValue && liturgyInfoAsync.value != null) {
+    final liturgyInfo = liturgyInfoAsync.value!;
+    final colorType = liturgyInfo['colorType'] as String?;
+
+    // 색상 타입에 따라 배경 색상 반환
+    if (colorType != null) {
+      switch (colorType.toLowerCase()) {
+        case 'green':
+          return LiturgyColors.ordinaryBackground;
+        case 'purple':
+          return LiturgyColors.adventBackground;
+        case 'gold':
+        case 'white':
+          return LiturgyColors.goldBackground;
+        case 'red':
+          return LiturgyColors.pentecostBackground;
+      }
+    }
+  }
+
+  // ChatGPT 실패 시 기존 로직 사용
   final season = ref.watch(currentLiturgySeasonSyncProvider);
   return LiturgyColors.getBackgroundColor(season);
 });

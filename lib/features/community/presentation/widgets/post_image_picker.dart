@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../notifiers/post_form_notifier.dart';
 
 /// 게시글 이미지 선택 위젯
-class PostImagePicker extends StatelessWidget {
+class PostImagePicker extends ConsumerWidget {
   final PostFormState formState;
   final PostFormNotifier notifier;
   final VoidCallback onImagePickerTap;
@@ -18,7 +21,8 @@ class PostImagePicker extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final totalImageCount =
         formState.selectedImages.length + formState.imageUrls.length;
     final canAddMore = totalImageCount < 3;
@@ -26,9 +30,9 @@ class PostImagePicker extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '画像',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        Text(
+          l10n.image.title,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 8),
         if (totalImageCount > 0 || canAddMore)
@@ -64,7 +68,7 @@ class PostImagePicker extends StatelessWidget {
           _AddImageButton(onTap: onImagePickerTap, isLarge: true),
         const SizedBox(height: 4),
         Text(
-          '最大3枚まで添付できます',
+          l10n.image.max3Images,
           style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
         ),
       ],
@@ -132,14 +136,15 @@ class _ImageItem extends StatelessWidget {
   }
 }
 
-class _AddImageButton extends StatelessWidget {
+class _AddImageButton extends ConsumerWidget {
   final VoidCallback onTap;
   final bool isLarge;
 
   const _AddImageButton({required this.onTap, this.isLarge = false});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     if (isLarge) {
       return GestureDetector(
         onTap: onTap,
@@ -150,12 +155,12 @@ class _AddImageButton extends StatelessWidget {
             border: Border.all(color: Colors.grey.shade300),
             color: Colors.grey.shade100,
           ),
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.add_photo_alternate, size: 32),
-              SizedBox(height: 4),
-              Text('画像を追加'),
+              const Icon(Icons.add_photo_alternate, size: 32),
+              const SizedBox(height: 4),
+              Text(l10n.image.add),
             ],
           ),
         ),
@@ -170,12 +175,12 @@ class _AddImageButton extends StatelessWidget {
           border: Border.all(color: Colors.grey.shade300),
           color: Colors.grey.shade100,
         ),
-        child: const Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.add_photo_alternate, size: 32),
-            SizedBox(height: 4),
-            Text('追加', style: TextStyle(fontSize: 12)),
+            const Icon(Icons.add_photo_alternate, size: 32),
+            const SizedBox(height: 4),
+            Text(l10n.image.addButton, style: const TextStyle(fontSize: 12)),
           ],
         ),
       ),
@@ -191,6 +196,7 @@ class PostImagePickerHelper {
     int currentImageCount,
     int maxImages,
   ) async {
+    final l10n = AppLocalizations.of(context);
     // 최대 개수 확인
     if (currentImageCount >= maxImages) {
       if (context.mounted) {
@@ -205,28 +211,31 @@ class PostImagePickerHelper {
 
     final source = await showModalBottomSheet<ImageSource>(
       context: context,
-      builder: (context) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.camera_alt),
-              title: const Text('カメラ'),
-              onTap: () => Navigator.pop(context, ImageSource.camera),
-            ),
-            ListTile(
-              leading: const Icon(Icons.photo_library),
-              title: const Text('ギャラリー'),
-              onTap: () => Navigator.pop(context, ImageSource.gallery),
-            ),
-            ListTile(
-              leading: const Icon(Icons.cancel),
-              title: const Text('キャンセル'),
-              onTap: () => Navigator.pop(context),
-            ),
-          ],
-        ),
-      ),
+      builder: (dialogContext) {
+        final dialogL10n = AppLocalizations.of(dialogContext);
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: Text(dialogL10n.image.camera),
+                onTap: () => Navigator.pop(dialogContext, ImageSource.camera),
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: Text(dialogL10n.image.gallery),
+                onTap: () => Navigator.pop(dialogContext, ImageSource.gallery),
+              ),
+              ListTile(
+                leading: const Icon(Icons.cancel),
+                title: Text(dialogL10n.common.cancel),
+                onTap: () => Navigator.pop(dialogContext),
+              ),
+            ],
+          ),
+        );
+      },
     );
 
     if (source == null || !context.mounted) return;
@@ -243,11 +252,75 @@ class PostImagePickerHelper {
         final imageFile = File(pickedFile.path);
         notifier.addImage(imageFile);
       }
+    } on PlatformException catch (e) {
+      // 권한 관련 에러 처리
+      if (context.mounted) {
+        String errorMessage = l10n.image.selectFailed;
+
+        if (e.code == 'photo_access_denied' ||
+            e.code == 'camera_access_denied' ||
+            e.message?.contains('permission') == true ||
+            e.message?.contains('権限') == true) {
+          errorMessage = l10n.image.permissionRequired;
+
+          // 설정으로 이동 안내 다이얼로그
+          final shouldOpen = await showDialog<bool>(
+            context: context,
+            builder: (dialogContext) {
+              final dialogL10n = AppLocalizations.of(dialogContext);
+              return AlertDialog(
+                title: Text(dialogL10n.image.permissionRequired),
+                content: Text(
+                  source == ImageSource.camera
+                      ? dialogL10n.image.cameraPermissionMessage
+                      : dialogL10n.image.galleryPermissionMessage,
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(dialogContext).pop(false),
+                    child: Text(dialogL10n.common.cancel),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(dialogContext).pop(true),
+                    child: Text(dialogL10n.image.openSettings),
+                  ),
+                ],
+              );
+            },
+          );
+
+          if (shouldOpen == true && context.mounted) {
+            // iOS/Android 설정 앱 열기
+            if (Platform.isIOS) {
+              // iOS는 직접 설정 앱을 열 수 없으므로 안내만 표시
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(l10n.image.permissionDeniedMessage),
+                  duration: const Duration(seconds: 3),
+                ),
+              );
+            } else {
+              // Android는 설정 앱 열기 가능 (permission_handler 필요)
+              // 현재는 안내만 표시
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(l10n.image.permissionDeniedMessageAlt),
+                  duration: const Duration(seconds: 3),
+                ),
+              );
+            }
+          }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('$errorMessage: ${e.message ?? e.code}')),
+          );
+        }
+      }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('画像の選択に失敗しました: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${l10n.image.selectFailed}: $e')),
+        );
       }
     }
   }

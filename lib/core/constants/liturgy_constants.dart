@@ -274,51 +274,112 @@ class LiturgySeasonUtil {
 
   /// 전례 시즌 이름 반환
   static String getSeasonName(LiturgySeason season, {String locale = 'ja'}) {
-    if (locale == 'ja') {
-      switch (season) {
-        case LiturgySeason.ordinary:
-          return '年間';
-        case LiturgySeason.advent:
-          return '待降節';
-        case LiturgySeason.christmas:
-          return '降誕節';
-        case LiturgySeason.lent:
-          return '四旬節';
-        case LiturgySeason.easter:
-          return '復活節';
-        case LiturgySeason.pentecost:
-          return '聖霊降臨';
-      }
-    } else if (locale == 'ko') {
-      switch (season) {
-        case LiturgySeason.ordinary:
-          return '연중';
-        case LiturgySeason.advent:
-          return '대림';
-        case LiturgySeason.christmas:
-          return '성탄';
-        case LiturgySeason.lent:
-          return '사순';
-        case LiturgySeason.easter:
-          return '부활';
-        case LiturgySeason.pentecost:
-          return '성령 강림';
-      }
-    } else {
-      switch (season) {
-        case LiturgySeason.ordinary:
-          return 'Ordinary Time';
-        case LiturgySeason.advent:
-          return 'Advent';
-        case LiturgySeason.christmas:
-          return 'Christmas';
-        case LiturgySeason.lent:
-          return 'Lent';
-        case LiturgySeason.easter:
-          return 'Easter';
-        case LiturgySeason.pentecost:
-          return 'Pentecost';
-      }
+    switch (locale) {
+      case 'ja':
+        switch (season) {
+          case LiturgySeason.ordinary:
+            return '年間';
+          case LiturgySeason.advent:
+            return '待降節';
+          case LiturgySeason.christmas:
+            return '降誕節';
+          case LiturgySeason.lent:
+            return '四旬節';
+          case LiturgySeason.easter:
+            return '復活節';
+          case LiturgySeason.pentecost:
+            return '聖霊降臨';
+        }
+      case 'ko':
+        switch (season) {
+          case LiturgySeason.ordinary:
+            return '연중';
+          case LiturgySeason.advent:
+            return '대림';
+          case LiturgySeason.christmas:
+            return '성탄';
+          case LiturgySeason.lent:
+            return '사순';
+          case LiturgySeason.easter:
+            return '부활';
+          case LiturgySeason.pentecost:
+            return '성령 강림';
+        }
+      case 'zh':
+        switch (season) {
+          case LiturgySeason.ordinary:
+            return '常年期';
+          case LiturgySeason.advent:
+            return '将临期';
+          case LiturgySeason.christmas:
+            return '圣诞期';
+          case LiturgySeason.lent:
+            return '四旬期';
+          case LiturgySeason.easter:
+            return '复活期';
+          case LiturgySeason.pentecost:
+            return '圣神降临';
+        }
+      case 'vi':
+        switch (season) {
+          case LiturgySeason.ordinary:
+            return 'Thường Niên';
+          case LiturgySeason.advent:
+            return 'Mùa Vọng';
+          case LiturgySeason.christmas:
+            return 'Giáng Sinh';
+          case LiturgySeason.lent:
+            return 'Mùa Chay';
+          case LiturgySeason.easter:
+            return 'Phục Sinh';
+          case LiturgySeason.pentecost:
+            return 'Hiện Xuống';
+        }
+      case 'es':
+        switch (season) {
+          case LiturgySeason.ordinary:
+            return 'Tiempo Ordinario';
+          case LiturgySeason.advent:
+            return 'Adviento';
+          case LiturgySeason.christmas:
+            return 'Navidad';
+          case LiturgySeason.lent:
+            return 'Cuaresma';
+          case LiturgySeason.easter:
+            return 'Pascua';
+          case LiturgySeason.pentecost:
+            return 'Pentecostés';
+        }
+      case 'pt':
+        switch (season) {
+          case LiturgySeason.ordinary:
+            return 'Tempo Comum';
+          case LiturgySeason.advent:
+            return 'Advento';
+          case LiturgySeason.christmas:
+            return 'Natal';
+          case LiturgySeason.lent:
+            return 'Quaresma';
+          case LiturgySeason.easter:
+            return 'Páscoa';
+          case LiturgySeason.pentecost:
+            return 'Pentecostes';
+        }
+      default: // 영어 (en 등)
+        switch (season) {
+          case LiturgySeason.ordinary:
+            return 'Ordinary Time';
+          case LiturgySeason.advent:
+            return 'Advent';
+          case LiturgySeason.christmas:
+            return 'Christmas';
+          case LiturgySeason.lent:
+            return 'Lent';
+          case LiturgySeason.easter:
+            return 'Easter';
+          case LiturgySeason.pentecost:
+            return 'Pentecost';
+        }
     }
   }
 }

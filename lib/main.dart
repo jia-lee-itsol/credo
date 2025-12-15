@@ -9,6 +9,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'config/routes/app_router.dart';
 import 'core/data/services/push_notification_service.dart';
 import 'shared/providers/liturgy_theme_provider.dart';
+import 'shared/providers/font_scale_provider.dart';
+import 'shared/providers/locale_provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -20,7 +22,7 @@ void main() async {
   // 환경 변수 로드
   await dotenv.load(fileName: '.env');
 
-  // 날짜 로케일 초기화
+  // 날짜 로케일 초기화 (기본값: 일본어, 나중에 localeProvider에서 동적으로 변경됨)
   await initializeDateFormatting('ja', null);
 
   // Firebase 초기화
@@ -44,28 +46,40 @@ class CredoApp extends ConsumerWidget {
     // 푸시 알림 서비스에 router 설정
     PushNotificationService().setRouter(router);
 
-    return MaterialApp.router(
-      title: 'Credo',
-      debugShowCheckedModeBanner: false,
+    final fontScale = ref.watch(fontScaleProvider);
+    final locale = ref.watch(localeProvider);
 
-      // 테마
-      theme: theme,
+    return MediaQuery(
+      data: MediaQuery.of(
+        context,
+      ).copyWith(textScaler: TextScaler.linear(fontScale)),
+      child: MaterialApp.router(
+        title: 'Credo',
+        debugShowCheckedModeBanner: false,
 
-      // 라우팅
-      routerConfig: router,
+        // 테마
+        theme: theme,
 
-      // 로케일 설정
-      locale: const Locale('ja', 'JP'),
-      supportedLocales: const [
-        Locale('ja', 'JP'),
-        Locale('en', 'US'),
-        Locale('ko', 'KR'),
-      ],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
+        // 라우팅
+        routerConfig: router,
+
+        // 로케일 설정
+        locale: locale,
+        supportedLocales: const [
+          Locale('ja', 'JP'),
+          Locale('en', 'US'),
+          Locale('ko', 'KR'),
+          Locale('zh', 'CN'),
+          Locale('vi', 'VN'),
+          Locale('es', 'ES'),
+          Locale('pt', 'PT'),
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+      ),
     );
   }
 }

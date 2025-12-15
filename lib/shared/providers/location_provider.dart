@@ -82,16 +82,7 @@ final parishDistanceProvider = Provider.family<double?, Map<String, dynamic>>((
   final coordinatesAsync = ref.watch(parishCoordinatesProvider(parish));
 
   // 캐시된 위치가 있으면 사용, 없으면 비동기 위치 사용
-  Position? userPosition;
-  if (cachedLocation != null) {
-    userPosition = cachedLocation;
-  } else {
-    userPosition = locationAsync.valueOrNull;
-    // 위치를 가져오면 캐시에 저장
-    if (userPosition != null) {
-      ref.read(cachedLocationProvider.notifier).state = userPosition;
-    }
-  }
+  final userPosition = cachedLocation ?? locationAsync.valueOrNull;
 
   if (userPosition == null) {
     return null;

@@ -8,8 +8,12 @@ import '../../../../config/routes/app_routes.dart';
 import '../../../../core/data/services/liturgical_reading_service.dart';
 import '../../../../core/services/logger_service.dart';
 import '../../../../core/utils/date_utils.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
+import '../../../../shared/providers/bible_license_provider.dart';
+import '../../../../shared/providers/meditation_guide_provider.dart';
+import '../../../../shared/providers/locale_provider.dart';
 import '../../../../shared/widgets/expandable_content_card.dart';
 import '../../../../shared/widgets/login_required_dialog.dart';
 
@@ -81,10 +85,12 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
         '${displayDate.year}-${displayDate.month.toString().padLeft(2, '0')}-${displayDate.day.toString().padLeft(2, '0')}';
     final liturgicalDayAsync = ref.watch(liturgicalDayProvider(dateKey));
 
+    final l10n = ref.watch(appLocalizationsSyncProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('日々の黙想'),
+        title: Text(l10n.mass.title),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -119,7 +125,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
                   padding: const EdgeInsets.all(16),
                   children: [
                     // 면책 조항
-                    _buildDisclaimerCard(theme),
+                    _buildDisclaimerCard(theme, l10n),
 
                     const SizedBox(height: 16),
 
@@ -139,11 +145,17 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
                         theme,
                         primaryColor,
                         liturgicalDay,
+                        l10n,
                       ),
                       const SizedBox(height: 24),
-                      _buildReadingsSection(primaryColor, liturgicalDay),
+                      _buildReadingsSection(
+                        primaryColor,
+                        liturgicalDay,
+                        l10n,
+                        dateKey,
+                      ),
                     ] else
-                      _buildNoDataCard(theme, primaryColor),
+                      _buildNoDataCard(theme, primaryColor, l10n),
 
                     const SizedBox(height: 24),
 
@@ -154,7 +166,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
               ),
               // 댓글 입력 필드 (로그인한 사용자만 표시)
               if (currentUser != null)
-                _buildCommentInput(context, theme, primaryColor, dateKey)
+                _buildCommentInput(context, theme, primaryColor, dateKey, l10n)
               else
                 _buildLoginPrompt(context, theme, primaryColor),
             ],
@@ -169,12 +181,12 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
               children: [
                 const Icon(Icons.error_outline, size: 48, color: Colors.red),
                 const SizedBox(height: 16),
-                Text('エラーが発生しました: $error'),
+                Text('${l10n.common.error}: $error'),
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () =>
                       ref.invalidate(liturgicalDayProvider(dateKey)),
-                  child: const Text('再試行'),
+                  child: Text(l10n.common.retry),
                 ),
               ],
             ),
@@ -184,7 +196,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
     );
   }
 
-  Widget _buildDisclaimerCard(ThemeData theme) {
+  Widget _buildDisclaimerCard(ThemeData theme, AppLocalizations l10n) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
@@ -194,7 +206,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
         border: Border.all(color: Colors.grey.shade300, width: 1),
       ),
       child: Text(
-        '※本コンテンツは個人の黙想のためのガイドです。\n聖書本文の提供は行っていません。',
+        l10n.mass.bibleNotice,
         style: TextStyle(
           fontSize: 12,
           color: Colors.grey.shade700,
@@ -245,6 +257,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
     ThemeData theme,
     Color primaryColor,
     LiturgicalDay day,
+    AppLocalizations l10n,
   ) {
     final liturgicalColor = _getLiturgicalColor(day.color);
 
@@ -278,7 +291,9 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  day.name.isNotEmpty ? day.name : _getDefaultDayName(day),
+                  day.name.isNotEmpty
+                      ? day.name
+                      : _getDefaultDayName(day, l10n),
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -313,60 +328,164 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
     );
   }
 
-  Widget _buildReadingsSection(Color primaryColor, LiturgicalDay day) {
+  Widget _buildReadingsSection(
+    Color primaryColor,
+    LiturgicalDay day,
+    AppLocalizations l10n,
+    String dateKey,
+  ) {
     final readings = day.readings;
-    // TODO: 실제 라이선스 상태를 확인하는 로직으로 교체 필요
-    const isBibleTextLicensed = false; // 현재는 false로 설정
+    // Firestore의 app_settings/bible_license 문서에서 라이선스 상태 확인
+    final isBibleTextLicensed = ref.watch(bibleLicenseStatusSyncProvider);
+    // 현재 로케일 가져오기
+    final currentLocale = ref.watch(localeProvider);
+    final languageCode = currentLocale.languageCode;
 
     return Column(
       children: [
         // 제1독서 묵상 가이드
-        ExpandableContentCard(
-          title: '聖書に基づく黙想I',
-          subtitle: '',
-          icon: Icons.menu_book,
+        _buildMeditationCard(
           primaryColor: primaryColor,
-          content: _buildMeditationGuide('第一朗読'),
-          referenceLabel: _formatReferenceLabel(readings.first.reference),
+          title: l10n.mass.prayer.meditationGuideTitle('firstReading'),
+          icon: Icons.menu_book,
+          reference: readings.first.reference,
+          readingType: 'firstReading',
+          dateKey: dateKey,
+          languageCode: languageCode,
           isBibleTextLicensed: isBibleTextLicensed,
+          titleText: readings.first.title,
         ),
 
         // 화답송 묵상 가이드 (있는 경우만 표시)
         if (readings.psalm != null && readings.psalm!.reference.isNotEmpty)
-          ExpandableContentCard(
-            title: '詩編に基づく黙想',
-            subtitle: '',
-            icon: Icons.library_music,
+          _buildMeditationCard(
             primaryColor: primaryColor,
-            content: _buildMeditationGuide('答唱詩編'),
-            referenceLabel: _formatReferenceLabel(readings.psalm!.reference),
+            title: l10n.mass.prayer.meditationGuideTitle('psalm'),
+            icon: Icons.library_music,
+            reference: readings.psalm!.reference,
+            readingType: 'psalm',
+            dateKey: dateKey,
+            languageCode: languageCode,
             isBibleTextLicensed: isBibleTextLicensed,
+            titleText: readings.psalm!.title,
           ),
 
         // 제2독서 묵상 가이드 (있는 경우)
         if (readings.second != null)
-          ExpandableContentCard(
-            title: '第二朗読の黙想II',
-            subtitle: '',
-            icon: Icons.menu_book,
+          _buildMeditationCard(
             primaryColor: primaryColor,
-            content: _buildMeditationGuide('第二朗読'),
-            referenceLabel: _formatReferenceLabel(readings.second!.reference),
+            title: l10n.mass.prayer.meditationGuideTitle('secondReading'),
+            icon: Icons.menu_book,
+            reference: readings.second!.reference,
+            readingType: 'secondReading',
+            dateKey: dateKey,
+            languageCode: languageCode,
             isBibleTextLicensed: isBibleTextLicensed,
+            titleText: readings.second!.title,
           ),
 
         // 복음 묵상 가이드
-        ExpandableContentCard(
-          title: ' 聖書のことばをめぐる黙想（福音）',
-          subtitle: '',
-          icon: Icons.auto_stories,
+        _buildMeditationCard(
           primaryColor: primaryColor,
-          content: _buildMeditationGuide('福音'),
-          referenceLabel: _formatReferenceLabel(readings.gospel.reference),
+          title: l10n.mass.prayer.meditationGuideTitle('gospel'),
+          icon: Icons.auto_stories,
+          reference: readings.gospel.reference,
+          readingType: 'gospel',
+          dateKey: dateKey,
+          languageCode: languageCode,
           isBibleTextLicensed: isBibleTextLicensed,
+          titleText: readings.gospel.title,
         ),
       ],
     );
+  }
+
+  /// 묵상 가이드 카드 위젯
+  Widget _buildMeditationCard({
+    required Color primaryColor,
+    required String title,
+    required IconData icon,
+    required String reference,
+    required String readingType,
+    required String dateKey,
+    required String languageCode,
+    required bool isBibleTextLicensed,
+    String? titleText,
+  }) {
+    final params = MeditationGuideParams(
+      dateKey: dateKey,
+      readingType: readingType,
+      reference: reference,
+      title: titleText,
+      language: languageCode,
+    );
+
+    final meditationGuideAsync = ref.watch(meditationGuideProvider(params));
+
+    return meditationGuideAsync.when(
+      data: (guide) => ExpandableContentCard(
+        title: title,
+        subtitle: '',
+        icon: icon,
+        primaryColor: primaryColor,
+        content: guide,
+        referenceLabel: _formatReferenceLabel(reference),
+        isBibleTextLicensed: isBibleTextLicensed,
+      ),
+      loading: () => ExpandableContentCard(
+        title: title,
+        subtitle: '',
+        icon: icon,
+        primaryColor: primaryColor,
+        content: _getLoadingMessage(languageCode),
+        referenceLabel: _formatReferenceLabel(reference),
+        isBibleTextLicensed: isBibleTextLicensed,
+      ),
+      error: (error, stackTrace) {
+        AppLogger.error(
+          '[DailyMassScreen] 묵상 가이드 로드 실패: $readingType',
+          error,
+          stackTrace,
+        );
+        return ExpandableContentCard(
+          title: title,
+          subtitle: '',
+          icon: icon,
+          primaryColor: primaryColor,
+          content: _getErrorMessage(languageCode),
+          referenceLabel: _formatReferenceLabel(reference),
+          isBibleTextLicensed: isBibleTextLicensed,
+        );
+      },
+    );
+  }
+
+  /// 로딩 메시지
+  String _getLoadingMessage(String languageCode) {
+    switch (languageCode) {
+      case 'ja':
+        return '묵상 가이드를 생성하고 있습니다...';
+      case 'ko':
+        return '묵상 가이드를 생성하고 있습니다...';
+      case 'en':
+        return 'Generating meditation guide...';
+      default:
+        return '묵상 가이드를 생성하고 있습니다...';
+    }
+  }
+
+  /// 에러 메시지
+  String _getErrorMessage(String languageCode) {
+    switch (languageCode) {
+      case 'ja':
+        return '묵상 가이드를 불러오는 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+      case 'ko':
+        return '묵상 가이드를 불러오는 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+      case 'en':
+        return 'An error occurred while loading the meditation guide. Please try again later.';
+      default:
+        return '묵상 가이드를 불러오는 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.';
+    }
   }
 
   /// reference를 referenceLabel 형식으로 변환
@@ -386,48 +505,38 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
     return '参考箇所：$reference';
   }
 
-  String _buildMeditationGuide(String readingType) {
-    return '''今日のテーマ：待つということ
-
-今日の問い：
-・私は今、何を急いでいるだろうか
-・信頼できていないことは何だろうか
-
-今日の黙想：
-静かな時間の中で、
-自分の心の動きを見つめてみましょう。
-
-※聖書の本文は、教会でお聞きになるか、公式の聖書をお読みください。''';
-  }
-
-  String _getDefaultDayName(LiturgicalDay day) {
-    // 이름이 비어있을 때 기본 이름 생성 (일본어)
+  String _getDefaultDayName(LiturgicalDay day, AppLocalizations l10n) {
+    // 이름이 비어있을 때 기본 이름 생성
     // 주일, 대축일, 축일은 시기와 관계없이 우선 표시
     if (day.isSunday) {
-      return '主日';
+      return l10n.mass.sunday;
     } else if (day.isSolemnity) {
-      return '大祝日';
+      return l10n.mass.solemnity;
     } else if (day.isFeast) {
-      return '祝日';
+      return l10n.mass.feast;
     } else {
       // 시기에 따라 기본 이름 반환
       switch (day.season) {
         case 'advent':
-          return '待降節';
+          return l10n.mass.advent;
         case 'christmas':
-          return '降誕節';
+          return l10n.mass.christmas;
         case 'lent':
-          return '四旬節';
+          return l10n.mass.lent;
         case 'easter':
-          return '復活節';
+          return l10n.mass.easter;
         case 'ordinary':
         default:
-          return '年間平日';
+          return l10n.mass.ordinary;
       }
     }
   }
 
-  Widget _buildNoDataCard(ThemeData theme, Color primaryColor) {
+  Widget _buildNoDataCard(
+    ThemeData theme,
+    Color primaryColor,
+    AppLocalizations l10n,
+  ) {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -440,14 +549,14 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
           Icon(Icons.event_busy, size: 48, color: Colors.grey.shade400),
           const SizedBox(height: 16),
           Text(
-            '本日の黙想情報がありません',
+            l10n.mass.noDataToday,
             style: theme.textTheme.titleMedium?.copyWith(
               color: Colors.grey.shade600,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            '平日の黙想情報は現在準備中です',
+            l10n.mass.noDataWeekday,
             style: theme.textTheme.bodySmall?.copyWith(
               color: Colors.grey.shade500,
             ),
@@ -670,6 +779,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
     ThemeData theme,
     Color primaryColor,
     String dateKey,
+    AppLocalizations l10n,
   ) {
     return Container(
       padding: EdgeInsets.only(
@@ -689,10 +799,10 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
           Expanded(
             child: TextField(
               controller: _commentController,
-              decoration: const InputDecoration(
-                hintText: '今日の黙想を共有しましょう...',
+              decoration: InputDecoration(
+                hintText: l10n.mass.prayer.shareHint,
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(
+                contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 12,
                 ),
@@ -772,9 +882,10 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
     final currentUser = ref.read(currentUserProvider);
     if (currentUser == null) {
       if (mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('ログインが必要です')));
+        ).showSnackBar(SnackBar(content: Text(l10n.auth.loginRequired)));
       }
       return;
     }
@@ -798,9 +909,10 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
 
       _commentController.clear();
       if (mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('黙想を共有しました')));
+        ).showSnackBar(SnackBar(content: Text(l10n.community.shareMeditation)));
         // 댓글 섹션으로 스크롤
         Future.delayed(const Duration(milliseconds: 100), () {
           if (_scrollController.hasClients) {

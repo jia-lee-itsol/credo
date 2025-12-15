@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/services/logger_service.dart';
-import '../../core/services/image_upload_service.dart';
+import '../../../../core/data/services/image_upload_service.dart';
+import '../../../../core/error/failures.dart';
 import '../../data/models/app_user.dart';
 import '../../data/models/notification.dart' as models;
 import '../../data/models/post.dart';
@@ -133,13 +134,24 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
 
   /// 본문 설정
   void setBody(String body) {
-    AppLogger.community(
-      'setBody 호출: "${body.substring(0, body.length > 50 ? 50 : body.length)}..."',
-    );
-    state = state.copyWith(
-      body: body,
-      errorMessage: null, // 에러 메시지 초기화
-    );
+    try {
+      // 로깅을 위한 안전한 문자열 처리
+      final preview = body.isEmpty
+          ? '(empty)'
+          : body.length > 50
+          ? '${body.substring(0, 50)}...'
+          : body;
+      AppLogger.community('setBody 호출: "$preview" (length: ${body.length})');
+
+      state = state.copyWith(
+        body: body,
+        errorMessage: null, // 에러 메시지 초기화
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error('setBody 호출 중 에러 발생: $e', e, stackTrace);
+      // 에러가 발생해도 상태는 업데이트 시도
+      state = state.copyWith(body: body, errorMessage: null);
+    }
   }
 
   /// 카테고리 설정
@@ -208,16 +220,28 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
     try {
       final now = DateTime.now();
 
-      // 이미지 업로드
+      // 이미지 업로드 (이미지가 있는 경우 필수)
       List<String> uploadedImageUrls = List.from(state.imageUrls);
       if (state.selectedImages.isNotEmpty) {
         AppLogger.image('이미지 업로드 시작: ${state.selectedImages.length}개');
-        final urls = await _imageUploadService.uploadImages(
-          imageFiles: state.selectedImages,
-          userId: _currentUser.uid,
-        );
-        uploadedImageUrls.addAll(urls);
-        AppLogger.image('이미지 업로드 완료: ${uploadedImageUrls.length}개');
+        try {
+          final urls = await _imageUploadService.uploadImages(
+            imageFiles: state.selectedImages,
+            userId: _currentUser.uid,
+          );
+          uploadedImageUrls.addAll(urls);
+          AppLogger.image('이미지 업로드 완료: ${uploadedImageUrls.length}개');
+        } catch (e) {
+          AppLogger.error('이미지 업로드 실패: $e', e);
+          // 이미지가 선택된 경우 업로드 실패 시 게시물 작성 중단
+          String errorMessage;
+          if (e is FirebaseFailure) {
+            errorMessage = e.message;
+          } else {
+            errorMessage = '이미지 업로드에 실패했습니다. 네트워크 연결을 확인하고 다시 시도해주세요.';
+          }
+          throw Exception(errorMessage);
+        }
       }
 
       if (_initialPost == null) {
@@ -259,8 +283,13 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
         AppLogger.debug('   - type: ${post.type}');
         AppLogger.debug('   - parishId: ${post.parishId}');
         AppLogger.debug('   - title: ${post.title}');
+        final bodyPreview = post.body.isEmpty
+            ? '(empty)'
+            : post.body.length > 100
+            ? '${post.body.substring(0, 100)}...'
+            : post.body;
         AppLogger.debug(
-          '   - body: ${post.body.substring(0, post.body.length > 100 ? 100 : post.body.length)}...',
+          '   - body: $bodyPreview (length: ${post.body.length})',
         );
         AppLogger.debug('   - status: ${post.status}');
         AppLogger.debug('   - createdAt: ${post.createdAt}');

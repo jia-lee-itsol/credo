@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/data/services/parish_service.dart' as core;
+import '../../../../core/utils/app_localizations.dart';
 import '../constants/parish_colors.dart';
 
 /// 교회 필터 바텀시트 위젯
-class ParishFilterBottomSheet extends StatefulWidget {
+class ParishFilterBottomSheet extends ConsumerStatefulWidget {
   final Set<String> selectedPrefectures;
   final bool onlyCathedrals;
   final bool onlyWithMassTime;
@@ -31,11 +33,12 @@ class ParishFilterBottomSheet extends StatefulWidget {
   });
 
   @override
-  State<ParishFilterBottomSheet> createState() =>
+  ConsumerState<ParishFilterBottomSheet> createState() =>
       _ParishFilterBottomSheetState();
 }
 
-class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
+class _ParishFilterBottomSheetState
+    extends ConsumerState<ParishFilterBottomSheet> {
   late Set<String> _tempSelectedPrefectures;
   late bool _tempOnlyCathedrals;
   late bool _tempOnlyWithMassTime;
@@ -91,6 +94,7 @@ class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
       minChildSize: 0.5,
       expand: false,
       builder: (context, scrollController) {
+        final dialogL10n = AppLocalizations.of(context);
         return Column(
           children: [
             // 핸들 바
@@ -115,7 +119,7 @@ class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'フィルター',
+                    dialogL10n.parish.filter.title,
                     style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -123,7 +127,7 @@ class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
                   if (_hasChanges)
                     TextButton(
                       onPressed: widget.onReset,
-                      child: const Text('リセット'),
+                      child: Text(dialogL10n.parish.filter.reset),
                     ),
                 ],
               ),
@@ -138,19 +142,19 @@ class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       children: [
                         // 도도부현 필터
-                        _buildSectionTitle('都道府県'),
+                        _buildSectionTitle(dialogL10n.parish.filter.prefecture),
                         const SizedBox(height: 12),
                         _buildPrefectureFilter(),
                         const SizedBox(height: 24),
 
                         // 미사 필터 칩
-                        _buildSectionTitle('ミサ'),
+                        _buildSectionTitle(dialogL10n.parish.filter.mass),
                         const SizedBox(height: 12),
                         _buildMassFilterChips(),
                         const SizedBox(height: 24),
 
                         // 옵션 필터
-                        _buildSectionTitle('オプション'),
+                        _buildSectionTitle(dialogL10n.parish.filter.options),
                         const SizedBox(height: 12),
                         _buildOptionFilter(),
                         const SizedBox(height: 24),
@@ -179,7 +183,7 @@ class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
                         style: OutlinedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
-                        child: const Text('リセット'),
+                        child: Text(dialogL10n.parish.filter.reset),
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -192,7 +196,7 @@ class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
                           backgroundColor: ParishColors.purple600,
                           foregroundColor: Colors.white,
                         ),
-                        child: const Text('適用'),
+                        child: Text(dialogL10n.parish.filter.apply),
                       ),
                     ),
                   ],
@@ -248,12 +252,13 @@ class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
   }
 
   Widget _buildMassFilterChips() {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     return Wrap(
       spacing: 8,
       runSpacing: 8,
       children: [
         FilterChip(
-          label: const Text('今日のミサあり'),
+          label: Text(l10n.parish.filter.todayMass),
           selected: _tempOnlyTodayMass,
           onSelected: (selected) {
             setState(() {
@@ -272,7 +277,7 @@ class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
           ),
         ),
         FilterChip(
-          label: const Text('外国語ミサあり'),
+          label: Text(l10n.parish.filter.foreignMass),
           selected: _tempOnlyForeignLanguageMass,
           onSelected: (selected) {
             setState(() {
@@ -295,11 +300,12 @@ class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
   }
 
   Widget _buildOptionFilter() {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     return Column(
       children: [
         CheckboxListTile(
-          title: const Text('大聖堂のみ'),
-          subtitle: const Text('大聖堂のみを表示'),
+          title: Text(l10n.parish.filter.cathedralOnly),
+          subtitle: Text(l10n.parish.filter.cathedralOnlySubtitle),
           value: _tempOnlyCathedrals,
           onChanged: (value) {
             setState(() {
@@ -309,8 +315,8 @@ class _ParishFilterBottomSheetState extends State<ParishFilterBottomSheet> {
           contentPadding: EdgeInsets.zero,
         ),
         CheckboxListTile(
-          title: const Text('ミサ時間あり'),
-          subtitle: const Text('ミサ時間情報がある教会のみを表示'),
+          title: Text(l10n.parish.filter.massTimeAvailable),
+          subtitle: Text(l10n.parish.filter.massTimeAvailableSubtitle),
           value: _tempOnlyWithMassTime,
           onChanged: (value) {
             setState(() {

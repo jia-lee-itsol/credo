@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../core/data/services/parish_service.dart' as core;
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
@@ -74,6 +75,7 @@ class _FavoriteParishesScreenState
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final currentUser = ref.watch(currentUserProvider);
     final favoriteParishIds = currentUser?.favoriteParishIds ?? [];
 
@@ -86,19 +88,19 @@ class _FavoriteParishesScreenState
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('よく行く教会'),
+        title: Text(l10n.profile.favoriteParishesSection.title),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
               context.go(AppRoutes.parishList);
             },
-            tooltip: '教会を検索',
+            tooltip: l10n.profile.favoriteParishesSection.searchParish,
           ),
         ],
       ),
       body: favoriteParishIds.isEmpty
-          ? _buildEmptyState(context, theme, primaryColor)
+          ? _buildEmptyState(context, ref, theme, primaryColor)
           : _buildParishList(
               context,
               ref,
@@ -111,9 +113,11 @@ class _FavoriteParishesScreenState
 
   Widget _buildEmptyState(
     BuildContext context,
+    WidgetRef ref,
     ThemeData theme,
     Color primaryColor,
   ) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -125,14 +129,14 @@ class _FavoriteParishesScreenState
           ),
           const SizedBox(height: 16),
           Text(
-            '登録された教会がありません',
+            l10n.profile.favoriteParishesSection.noParishes,
             style: theme.textTheme.titleMedium?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            '教会を検索して追加してください',
+            l10n.profile.favoriteParishesSection.addParishMessage,
             style: theme.textTheme.bodySmall?.copyWith(
               color: theme.colorScheme.onSurfaceVariant,
             ),
@@ -143,7 +147,7 @@ class _FavoriteParishesScreenState
               context.go(AppRoutes.parishList);
             },
             icon: const Icon(Icons.search),
-            label: const Text('教会を検索'),
+            label: Text(l10n.profile.favoriteParishesSection.searchParish),
             style: ElevatedButton.styleFrom(
               backgroundColor: primaryColor,
               foregroundColor: Colors.white,
@@ -212,6 +216,7 @@ class _FavoriteParishesScreenState
 
     if (!context.mounted) return;
 
+    final l10n = ref.read(appLocalizationsSyncProvider);
     result.fold(
       (failure) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -225,8 +230,8 @@ class _FavoriteParishesScreenState
         ref.invalidate(authStateStreamProvider);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('削除しました'),
+          SnackBar(
+            content: Text(l10n.profile.favoriteParishesSection.deleted),
             backgroundColor: Colors.green,
           ),
         );
@@ -251,6 +256,7 @@ class _FavoriteParishTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final currentUser = ref.watch(currentUserProvider);
     final isMainParish = parishId == currentUser?.mainParishId;
     final parishAsync = ref.watch(core.parishByIdProvider(parishId));
@@ -314,12 +320,14 @@ class _FavoriteParishTile extends ConsumerWidget {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: const Text('削除'),
+                            title: Text(
+                              l10n.profile.favoriteParishesSection.deleteTitle,
+                            ),
                             content: Text('$nameを削除しますか？'),
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context),
-                                child: const Text('キャンセル'),
+                                child: Text(l10n.common.cancel),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -327,7 +335,7 @@ class _FavoriteParishTile extends ConsumerWidget {
                                   onRemove();
                                 },
                                 child: Text(
-                                  '削除',
+                                  l10n.common.delete,
                                   style: TextStyle(color: Colors.red),
                                 ),
                               ),
@@ -359,7 +367,7 @@ class _FavoriteParishTile extends ConsumerWidget {
         margin: const EdgeInsets.only(bottom: 12),
         child: ListTile(
           leading: Icon(Icons.error_outline, color: Colors.red),
-          title: Text('エラー: $error'),
+          title: Text('${l10n.common.error}: $error'),
         ),
       ),
     );

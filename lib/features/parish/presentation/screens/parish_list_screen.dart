@@ -4,11 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../../../../config/routes/app_routes.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../core/data/services/parish_service.dart' as core;
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/location_provider.dart';
 import '../../../../core/utils/location_utils.dart';
+import '../../../../core/constants/app_constants.dart';
 import '../constants/parish_colors.dart';
 import '../widgets/parish_card.dart';
 import '../widgets/parish_filter_chip.dart';
@@ -27,14 +29,24 @@ class ParishListScreen extends ConsumerStatefulWidget {
 
 class _ParishListScreenState extends ConsumerState<ParishListScreen> {
   final TextEditingController _searchController = TextEditingController();
-  bool _sortByDistance = true;
+  bool _sortByDistance = false;
 
   // 필터 상태
   Set<String> _selectedPrefectures = {};
+  final Set<String> _selectedMassLanguages = {}; // 언어 필터 (JP 제외)
   bool _onlyCathedrals = false;
   bool _onlyWithMassTime = false;
   bool _onlyTodayMass = false;
   bool _onlyForeignLanguageMass = false;
+
+  // 일본어 제외 언어 목록
+  static const List<String> _availableMassLanguages = [
+    MassLanguage.english,
+    MassLanguage.filipino,
+    MassLanguage.portuguese,
+    MassLanguage.vietnamese,
+    MassLanguage.korean,
+  ];
 
   @override
   void initState() {
@@ -71,6 +83,7 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
 
   /// 위치 권한 요청 다이얼로그 표시
   Future<void> _showLocationPermissionDialog() async {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     final permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.deniedForever) {
@@ -79,18 +92,16 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
       final shouldOpen = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('位置情報の許可が必要です'),
-          content: const Text(
-            '近くの教会を探すために位置情報の許可が必要です。\n設定から位置情報の許可を有効にしてください。',
-          ),
+          title: Text(l10n.parish.locationPermissionRequired),
+          content: Text(l10n.parish.locationPermissionMessage),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('キャンセル'),
+              child: Text(l10n.common.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('設定を開く'),
+              child: Text(l10n.location.openSettings),
             ),
           ],
         ),
@@ -129,14 +140,15 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
 
   /// 위치 권한 요청
   Future<void> _requestLocationPermission() async {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     LocationPermission permission = await Geolocator.requestPermission();
 
     if (!mounted) return;
 
     if (permission == LocationPermission.denied) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('位置情報の許可が必要です。')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.parish.locationPermissionRequired)),
+      );
       return;
     }
 
@@ -144,16 +156,16 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
       final shouldOpen = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('位置情報の許可が必要です'),
-          content: const Text('設定から位置情報の許可を有効にしてください。'),
+          title: Text(l10n.parish.locationPermissionRequired),
+          content: Text(l10n.parish.locationPermissionMessage),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('キャンセル'),
+              child: Text(l10n.common.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('設定を開く'),
+              child: Text(l10n.location.openSettings),
             ),
           ],
         ),
@@ -182,13 +194,14 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final currentUser = ref.watch(currentUserProvider);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('教会を探す'),
+        title: Text(l10n.parish.search),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -226,6 +239,9 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
   }
 
   Widget _buildHeader() {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
+    final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+
     return Container(
       padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
       decoration: const BoxDecoration(
@@ -241,6 +257,46 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
           ParishSearchBar(
             controller: _searchController,
             onChanged: (value) => setState(() {}),
+          ),
+
+          const SizedBox(height: 16),
+
+          // 언어 검색 칩
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: _availableMassLanguages.map((languageCode) {
+                final isSelected = _selectedMassLanguages.contains(
+                  languageCode,
+                );
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: FilterChip(
+                    label: Text(MassLanguage.getDisplayName(languageCode)),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      setState(() {
+                        if (selected) {
+                          _selectedMassLanguages.add(languageCode);
+                        } else {
+                          _selectedMassLanguages.remove(languageCode);
+                        }
+                      });
+                    },
+                    selectedColor: primaryColor.withValues(alpha: 0.2),
+                    checkmarkColor: primaryColor,
+                    labelStyle: TextStyle(
+                      color: isSelected
+                          ? primaryColor
+                          : ParishColors.neutral700,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.normal,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
           ),
 
           const SizedBox(height: 16),
@@ -271,6 +327,32 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
                       await _showLocationPermissionDialog();
                       return;
                     }
+                    // 위치 정보 가져오기 시도
+                    final locationAsync = ref.read(currentLocationProvider);
+                    final cachedLocation = ref.read(cachedLocationProvider);
+                    final userPosition =
+                        cachedLocation ?? locationAsync.valueOrNull;
+
+                    if (userPosition == null) {
+                      // 위치 정보가 없으면 위치 가져오기 시도
+                      try {
+                        final position = await Geolocator.getCurrentPosition(
+                          desiredAccuracy: LocationAccuracy.high,
+                          timeLimit: const Duration(seconds: 10),
+                        );
+                        // 캐시에 저장
+                        ref.read(cachedLocationProvider.notifier).state =
+                            position;
+                      } catch (e) {
+                        // 위치 가져오기 실패 시 정렬 비활성화
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(l10n.parish.locationFailed)),
+                          );
+                        }
+                        return;
+                      }
+                    }
                   }
                   setState(() {
                     _sortByDistance = !_sortByDistance;
@@ -285,6 +367,7 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
   }
 
   Widget _buildParishList() {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final allParishesAsync = ref.watch(core.allParishesProvider);
 
     return allParishesAsync.when(
@@ -304,11 +387,13 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
 
         // 거리순 정렬
         if (_sortByDistance) {
-          filteredParishes = _sortParishesByDistance(filteredParishes);
+          filteredParishes = _sortParishesByDistance(ref, filteredParishes);
         }
 
         if (filteredParishes.isEmpty &&
-            (_searchController.text.isNotEmpty || _hasActiveFilters)) {
+            (_searchController.text.isNotEmpty ||
+                _selectedMassLanguages.isNotEmpty ||
+                _hasActiveFilters)) {
           return const ParishNoResultState();
         }
 
@@ -333,7 +418,8 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
         );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (error, _) => Center(child: Text('エラーが発生しました: $error')),
+      error: (error, _) =>
+          Center(child: Text('${l10n.community.errorOccurred}: $error')),
     );
   }
 
@@ -402,6 +488,60 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
         }
       }
 
+      // 선택된 언어별 미사가 있는 성당만 보기
+      if (_selectedMassLanguages.isNotEmpty) {
+        final parishName = parish['name'] as String? ?? '';
+
+        // 도쿄한인성당은 한국어 필터만 선택되었을 때만 표시
+        if (parishName.contains('東京韓人') || parishName.contains('韓人')) {
+          if (!_selectedMassLanguages.contains(MassLanguage.korean)) {
+            return false;
+          }
+          // 한국어 필터가 선택되어 있으면 계속 진행 (다른 언어 필터 체크는 스킵)
+        } else {
+          // 일반 성당은 선택된 언어 중 하나라도 있으면 표시
+          bool hasSelectedLanguage = false;
+
+          // mass_times 필드 확인 (리스트 형태)
+          final massTimes = parish['mass_times'] as List<dynamic>? ?? [];
+          if (massTimes.isNotEmpty) {
+            hasSelectedLanguage = massTimes.any((mt) {
+              final mtMap = mt as Map<String, dynamic>;
+              final language = mtMap['language'] as String? ?? '';
+              return _selectedMassLanguages.contains(language);
+            });
+          }
+
+          // foreignMassTimes 필드 확인 (요일별 객체 형태)
+          if (!hasSelectedLanguage) {
+            final foreignMassTimes =
+                parish['foreignMassTimes'] as Map<String, dynamic>?;
+            if (foreignMassTimes != null) {
+              // 모든 요일의 미사 시간 확인
+              for (final weekdayMassTimes in foreignMassTimes.values) {
+                if (weekdayMassTimes is List) {
+                  final hasLang = weekdayMassTimes.any((mt) {
+                    if (mt is Map<String, dynamic>) {
+                      final language = mt['language'] as String? ?? '';
+                      return _selectedMassLanguages.contains(language);
+                    }
+                    return false;
+                  });
+                  if (hasLang) {
+                    hasSelectedLanguage = true;
+                    break;
+                  }
+                }
+              }
+            }
+          }
+
+          if (!hasSelectedLanguage) {
+            return false;
+          }
+        }
+      }
+
       return true;
     }).toList();
   }
@@ -447,6 +587,7 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
 
   bool get _hasActiveFilters {
     return _selectedPrefectures.isNotEmpty ||
+        _selectedMassLanguages.isNotEmpty ||
         _onlyCathedrals ||
         _onlyWithMassTime ||
         _onlyTodayMass ||
@@ -492,6 +633,7 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
 
   /// 거리순으로 교회 정렬
   List<Map<String, dynamic>> _sortParishesByDistance(
+    WidgetRef ref,
     List<Map<String, dynamic>> parishes,
   ) {
     // 거리 정보가 있는 교회와 없는 교회를 분리
@@ -499,7 +641,8 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
         <({Map<String, dynamic> parish, double distance})>[];
     final parishesWithoutDistance = <Map<String, dynamic>>[];
 
-    final locationAsync = ref.read(currentLocationProvider);
+    // FutureProvider는 watch로 가져와야 함
+    final locationAsync = ref.watch(currentLocationProvider);
     final cachedLocation = ref.read(cachedLocationProvider);
     final userPosition = cachedLocation ?? locationAsync.valueOrNull;
 

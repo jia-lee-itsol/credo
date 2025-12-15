@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../config/routes/app_routes.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 /// 위치 정보 권한 화면 (온보딩 2단계)
-class LocationPermissionScreen extends StatelessWidget {
+class LocationPermissionScreen extends ConsumerWidget {
   const LocationPermissionScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     const primaryColor = Color(0xFF722F37);
 
     return Scaffold(
@@ -41,7 +44,7 @@ class LocationPermissionScreen extends StatelessWidget {
 
               // 타이틀
               Text(
-                '位置情報の利用',
+                l10n.parish.locationUsage,
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -51,7 +54,7 @@ class LocationPermissionScreen extends StatelessWidget {
 
               // 설명
               Text(
-                '近くの教会を探すために\n位置情報の利用を許可してください',
+                l10n.parish.locationUsageMessage.replaceAll('\n', '\n'),
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,
@@ -75,16 +78,19 @@ class LocationPermissionScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '位置情報の使用目的',
+                      l10n.location.usagePurpose,
                       style: theme.textTheme.titleSmall?.copyWith(
                         color: primaryColor,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 16),
-                    _buildPurposeItem(theme, '現在地から近い教会の検索'),
+                    _buildPurposeItem(theme, l10n.location.purposeNearbySearch),
                     const SizedBox(height: 12),
-                    _buildPurposeItem(theme, '教会までの距離表示'),
+                    _buildPurposeItem(
+                      theme,
+                      l10n.location.purposeDistanceDisplay,
+                    ),
                   ],
                 ),
               ),
@@ -95,7 +101,7 @@ class LocationPermissionScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: FilledButton(
-                  onPressed: () => _onAllow(context),
+                  onPressed: () => _onAllow(context, ref),
                   style: FilledButton.styleFrom(
                     backgroundColor: primaryColor,
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -103,9 +109,12 @@ class LocationPermissionScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text(
-                    '位置情報を許可する',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  child: Text(
+                    l10n.parish.allow,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
@@ -116,7 +125,7 @@ class LocationPermissionScreen extends StatelessWidget {
               TextButton(
                 onPressed: () => _onSkip(context),
                 child: Text(
-                  '今はしない',
+                  l10n.parish.notNow,
                   style: TextStyle(
                     color: theme.colorScheme.onSurfaceVariant,
                     fontSize: 14,
@@ -149,7 +158,8 @@ class LocationPermissionScreen extends StatelessWidget {
     );
   }
 
-  Future<void> _onAllow(BuildContext context) async {
+  Future<void> _onAllow(BuildContext context, WidgetRef ref) async {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     // 현재 권한 상태 확인
     LocationPermission permission = await Geolocator.checkPermission();
 
@@ -167,16 +177,16 @@ class LocationPermissionScreen extends StatelessWidget {
       final shouldOpen = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
-          title: const Text('位置情報の許可が必要です'),
-          content: const Text('設定から位置情報の許可を有効にしてください。'),
+          title: Text(l10n.location.permissionRequired),
+          content: Text(l10n.location.permissionMessage),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('キャンセル'),
+              child: Text(l10n.common.cancel),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('設定を開く'),
+              child: Text(l10n.location.openSettings),
             ),
           ],
         ),
@@ -194,9 +204,9 @@ class LocationPermissionScreen extends StatelessWidget {
       if (!context.mounted) return;
 
       if (permission == LocationPermission.denied) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('位置情報の許可が必要です。')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(l10n.parish.locationPermissionRequired)),
+        );
         return;
       }
 

@@ -1,5 +1,7 @@
 # Credo 백엔드 아키텍처 제안서
 
+**마지막 업데이트**: 2025-12-15 (에러 수정 완료)
+
 ## 현재 상태 분석
 
 ### 사용 중인 서비스
@@ -10,11 +12,21 @@
   - `PushNotificationService` 구현 완료
   - 알림 탭 시 게시글 상세 화면 네비게이션 구현
   - 사용자 FCM 토큰 관리 구현
+- ✅ Google Maps Geocoding API - **구현 완료**
+  - `GeocodingService` 구현 완료
+  - 주소를 좌표로 변환 (교회 위치 계산)
+  - 환경 변수로 API 키 관리 (`.env` 파일)
 - 📦 로컬 JSON 파일 (교회 데이터) - 현재 사용 중
 
 ### 주요 기능
 1. **인증**: 사용자 로그인/회원가입 - **구현 완료**
 2. **교회 정보**: 교회 검색, 상세 정보, 미사 시간 - **구현 완료** (로컬 JSON 사용)
+   - 위치 기반 거리 계산 구현 완료
+   - 거리순 정렬 기능 구현 완료 (버그 수정 완료)
+     - `FutureProvider` 접근 방식 수정 (`ref.read` → `ref.watch`)
+     - 기본값을 `false`로 변경 (사용자가 명시적으로 활성화)
+     - 위치 정보 가져오기 로직 개선
+   - Google Maps 연동 (지도 앱으로 열기)
 3. **커뮤니티**: 게시글, 댓글, 좋아요 - **구현 완료**
    - 게시글 CRUD 구현 완료
    - 댓글 시스템 구현 완료 (`commentCount` 자동 업데이트)
@@ -25,6 +37,11 @@
 5. **알림**: 푸시 알림 - **구현 완료**
    - FCM 토큰 관리 구현 완료
    - 알림 네비게이션 구현 완료
+6. **위치 서비스**: 위치 기반 기능 - **구현 완료**
+   - 사용자 현재 위치 가져오기 (Geolocator)
+   - 교회 주소를 좌표로 변환 (Google Maps Geocoding API)
+   - 거리 계산 및 표시 (Haversine 공식)
+   - 위치 권한 요청 기능
 
 ---
 
@@ -63,11 +80,11 @@
         │                 │                 │
         ▼                 ▼                 ▼
 ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│ Firebase     │  │ Algolia      │  │ Cloud       │
-│ Storage      │  │ (선택사항)   │  │ Scheduler   │
-│              │  │              │  │ (선택사항)  │
-│ - 이미지     │  │ - 고급 검색  │  │ - 스케줄    │
-│ - 파일       │  │              │  │   작업      │
+│ Firebase     │  │ Google Maps  │  │ Algolia      │
+│ Storage      │  │ Geocoding    │  │ (선택사항)   │
+│              │  │ API          │  │              │
+│ - 이미지     │  │              │  │ - 고급 검색  │
+│ - 파일       │  │ - 주소→좌표  │  │              │
 └──────────────┘  └──────────────┘  └──────────────┘
 ```
 
@@ -167,19 +184,22 @@
 - 좋아요 토글 기능 구현 완료
 - 게시글의 `likeCount` 필드와 동기화
 
-#### 6. `reports` (신고)
+#### 6. `reports` (신고) ✅ 구현 완료
 ```typescript
 {
-  reportId: string,
-  type: 'post' | 'comment',
+  targetType: "post" | "comment" | "user",
   targetId: string,
-  reporterId: string,
   reason: string,
-  description?: string,
-  status: 'pending' | 'reviewed' | 'resolved',
+  reporterId: string,
   createdAt: Timestamp
 }
 ```
+**구현 현황**:
+- 신고 모델 및 리포지토리 구현 완료
+- 게시글/댓글 신고 버튼 UI 구현 완료
+- 중복 신고 방지 로직 구현 (5분 내 동일 대상 신고 방지)
+- Cloud Functions onCreate 트리거로 Slack 알림 전송 구현 완료
+- Firestore Rules에 reports 컬렉션 규칙 추가 완료
 
 ---
 
@@ -265,7 +285,86 @@ exports.togglePostLike = functions.https.onCall(async (data, context) => {
 });
 ```
 
-#### 5. **푸시 알림 전송** ⚠️ 클라이언트 측 구현 완료, 서버 측 미구현
+#### 5. **신고 알림 전송 및 자동 숨김 처리** ✅ 구현 완료
+```typescript
+exports.onReportCreated = functions.firestore
+  .document('reports/{reportId}')
+  .onCreate(async (snap, context) => {
+    const report = snap.data();
+    
+    // Slack Incoming Webhook으로 알림 전송
+    const webhookUrl = process.env.SLACK_WEBHOOK_URL;
+    
+    const slackMessage = {
+      text: "🚨 새로운 신고가 접수되었습니다",
+      blocks: [
+        {
+          type: "header",
+          text: {
+            type: "plain_text",
+            text: "🚨 새로운 신고가 접수되었습니다",
+            emoji: true,
+          },
+        },
+        {
+          type: "section",
+          fields: [
+            { type: "mrkdwn", text: `*신고 ID:*\n${reportId}` },
+            { type: "mrkdwn", text: `*신고 유형:*\n${targetTypeDisplay}` },
+            { type: "mrkdwn", text: `*대상 ID:*\n${targetId}` },
+            { type: "mrkdwn", text: `*신고 사유:*\n${reason}` },
+            { type: "mrkdwn", text: `*신고자 ID:*\n${reporterId}` },
+            { type: "mrkdwn", text: `*신고 시간:*\n${createdAt}` },
+          ],
+        },
+      ],
+    };
+    
+    await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(slackMessage),
+    });
+    
+    // 게시글 신고인 경우 자동 숨김 처리 (신고 3개 이상)
+    if (targetType === "post") {
+      const reportsSnapshot = await db
+        .collection("reports")
+        .where("targetType", "==", "post")
+        .where("targetId", "==", targetId)
+        .get();
+      
+      const reportCount = reportsSnapshot.size;
+      const HIDE_THRESHOLD = 3;
+      
+      if (reportCount >= HIDE_THRESHOLD) {
+        const postRef = db.collection("posts").doc(targetId);
+        const postDoc = await postRef.get();
+        
+        if (postDoc.exists) {
+          const postData = postDoc.data();
+          const currentStatus = postData?.status || "published";
+          
+          if (currentStatus === "published") {
+            await postRef.update({
+              status: "hidden",
+              updatedAt: new Date(),
+            });
+          }
+        }
+      }
+    }
+  });
+```
+**구현 현황**:
+- ✅ Cloud Functions v2 `onDocumentCreated` 트리거 구현 완료
+- ✅ Slack Incoming Webhook 연동 완료
+- ✅ 신고 정보 포맷팅 및 전송 완료
+- ✅ 환경 변수 관리: `functions/.env` 파일에 dotenv로 설정, `functions/.gitignore`에 포함
+- ✅ dotenv 패키지 추가 및 `functions/src/index.ts`에서 자동 로드
+- ✅ 게시글 자동 숨김 처리: 신고 3개 이상 시 자동으로 `status`를 "hidden"으로 변경
+
+#### 6. **푸시 알림 전송** ⚠️ 클라이언트 측 구현 완료, 서버 측 미구현
 ```typescript
 exports.sendNotification = functions.firestore
   .document('posts/{postId}')
@@ -299,7 +398,7 @@ exports.sendNotification = functions.firestore
 - ✅ 알림 수신 및 네비게이션 구현 완료 (알림 탭 시 게시글 상세 화면으로 이동)
 - ❌ Firebase Cloud Functions를 통한 자동 알림 전송 미구현 (향후 구현 필요)
 
-#### 6. **교회 데이터 동기화 (선택사항)**
+#### 7. **교회 데이터 동기화 (선택사항)**
 ```typescript
 // 주기적으로 로컬 JSON을 Firestore에 동기화
 exports.syncParishData = functions.pubsub
@@ -317,6 +416,25 @@ exports.syncParishData = functions.pubsub
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Helper function: 관리자 여부 확인
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Helper function: 관리자가 자신의 교회 게시글인지 확인
+    function isAdminOfPostParish() {
+      let adminUser = get(/databases/$(database)/documents/users/$(request.auth.uid));
+      let adminParishId = adminUser.data.main_parish_id;
+      let postParishId = resource.data.parishId;
+      return adminParishId is string
+        && adminParishId != ''
+        && postParishId is string
+        && postParishId != ''
+        && adminParishId == postParishId;
+    }
+    
     // Users
     match /users/{userId} {
       allow read: if request.auth != null;
@@ -328,9 +446,21 @@ service cloud.firestore {
       allow read: if request.auth != null;
       allow create: if request.auth != null 
         && request.resource.data.authorId == request.auth.uid;
-      allow update, delete: if request.auth != null 
-        && (resource.data.authorId == request.auth.uid 
-            || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true);
+      // update: 작성자는 모든 필드 수정 가능
+      // 다른 사용자는 likeCount 또는 commentCount만 수정 가능
+      // 관리자는 자신이 소속된 교회의 게시글만 status 수정 가능
+      allow update: if request.auth != null
+        && (resource.data.authorId == request.auth.uid ||
+            (request.resource.data.diff(resource.data).affectedKeys()
+                .hasOnly(['likeCount', 'updatedAt'])) ||
+            (request.resource.data.diff(resource.data).affectedKeys()
+                .hasOnly(['commentCount', 'updatedAt'])) ||
+            (isAdmin()
+                && isAdminOfPostParish()
+                && request.resource.data.diff(resource.data).affectedKeys()
+                    .hasOnly(['status', 'updatedAt'])));
+      allow delete: if request.auth != null 
+        && resource.data.authorId == request.auth.uid;
     }
     
     // Comments
@@ -350,9 +480,27 @@ service cloud.firestore {
       allow delete: if request.auth != null 
         && resource.data.userId == request.auth.uid;
     }
+    
+    // Reports
+    match /reports/{reportId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null 
+        && request.resource.data.reporterId == request.auth.uid
+        && request.resource.data.targetType is string
+        && request.resource.data.targetId is string
+        && request.resource.data.reason is string
+        && request.resource.data.createdAt is timestamp;
+      allow update, delete: if false;
+    }
   }
 }
 ```
+
+**주요 변경사항**:
+- ✅ `isAdmin()` helper function 추가: 관리자 권한 확인
+- ✅ `isAdminOfPostParish()` helper function 추가: 관리자가 자신의 교회 게시글인지 확인
+- ✅ Posts update 규칙: 관리자는 자신이 소속된 교회의 게시글만 `status`와 `updatedAt` 수정 가능
+- ✅ `commentCount` 업데이트 규칙 추가: 다른 사용자가 댓글 수만 수정 가능
 
 ---
 
@@ -430,9 +578,20 @@ service cloud.firestore {
 
 ### Phase 3: 고급 기능 🔄 진행 중
 - [x] 푸시 알림 클라이언트 구현 (FCM 토큰 관리, 알림 수신, 네비게이션)
+- [x] 위치 기반 기능 구현 (사용자 위치, 거리 계산, Google Maps 연동)
+  - 사용자 현재 위치 가져오기 (Geolocator)
+  - 교회 주소를 좌표로 변환 (Google Maps Geocoding API)
+  - 거리 계산 및 표시
+  - 위치 권한 요청 기능
+  - Google Maps 앱으로 교회 위치 열기
+- [x] 신고 시스템 구현 완료
+  - 신고 모델 및 리포지토리 구현
+  - 게시글/댓글 신고 버튼 UI 구현
+  - 중복 신고 방지 로직 (5분 내 동일 대상 신고 방지)
+  - Cloud Functions onCreate 트리거로 Slack 알림 전송
+  - Firestore Rules에 reports 컬렉션 규칙 추가
 - [ ] 푸시 알림 서버 구현 (Firebase Cloud Functions를 통한 자동 알림 전송)
 - [ ] 검색 기능 (Algolia 또는 Firestore 검색)
-- [ ] 신고 시스템
 - [ ] 관리자 기능
 
 ### Phase 4: 최적화 🔄 진행 중

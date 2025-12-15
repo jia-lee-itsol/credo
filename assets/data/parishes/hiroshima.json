@@ -13,18 +13,6 @@
       "diocese": "hiroshima",
       "deanery": "hiroshima",
       "massTimes": {
-        "monday": [
-          "07:00"
-        ],
-        "tuesday": [
-          "07:00"
-        ],
-        "wednesday": [
-          "07:00"
-        ],
-        "thursday": [
-          "07:00"
-        ],
         "friday": [
           "07:00",
           "10:00"
@@ -53,7 +41,7 @@
           {
             "time": "17:00",
             "language": "ES",
-            "note": "最終日曜"
+            "note": ""
           },
           {
             "time": "14:30",
@@ -61,7 +49,9 @@
             "note": ""
           }
         ]
-      }
+      },
+      "latitude": 34.3958382,
+      "longitude": 132.4683478
     },
     {
       "name": "カトリック岩国教会",
@@ -77,7 +67,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.1750542,
+      "longitude": 132.2154878
     },
     {
       "name": "カトリック宇部教会",
@@ -117,7 +109,9 @@
             "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 33.9548045,
+      "longitude": 131.2497587
     },
     {
       "name": "カトリック下松教会",
@@ -142,7 +136,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.0197403,
+      "longitude": 131.863857
     },
     {
       "name": "カトリック徳山教会",
@@ -183,10 +179,12 @@
           {
             "time": "14:00",
             "language": "EN",
-            "note": "第1・3日曜"
+            "note": ""
           }
         ]
-      }
+      },
+      "latitude": 34.0543828,
+      "longitude": 131.8103038
     },
     {
       "name": "カトリック山口教会",
@@ -221,15 +219,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {
-        "sunday": [
-          {
-            "time": "09:30",
-            "language": "SIGN",
-            "note": ""
-          }
-        ]
-      }
+      "foreignMassTimes": {},
+      "latitude": 34.1790628,
+      "longitude": 131.473071
     },
     {
       "name": "カトリック防府教会",
@@ -263,7 +255,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.05647250000001,
+      "longitude": 131.5660522
     },
     {
       "name": "カトリック長府教会",
@@ -298,7 +292,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.0024448,
+      "longitude": 130.9924015
     },
     {
       "name": "カトリック萩教会",
@@ -332,13 +328,15 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.4105423,
+      "longitude": 131.4074565
     },
     {
       "name": "カトリック北若山教会（巡回）",
       "prefecture": "山口県",
       "isCathedral": false,
-      "massTime": "第1日曜11:00 / 第1金曜09:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "hiroshima",
       "deanery": "hiroshima",
@@ -349,7 +347,7 @@
       "name": "カトリック高千帆教会（巡回）",
       "prefecture": "山口県",
       "isCathedral": false,
-      "massTime": "第3日曜11:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "hiroshima",
       "deanery": "hiroshima",
@@ -388,14 +386,16 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.9528034,
+      "longitude": 131.9514949
     },
     {
       "name": "カトリック柳井教会（巡回）",
       "address": "〒742-0032 山口県柳井市古開作瀬戸側275-4",
       "prefecture": "山口県",
       "isCathedral": false,
-      "massTime": "主日：11:00 / 第3日曜14:00 / 木曜14:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "phone": "0820-23-3734",
       "note": "巡回教会",
       "diocese": "hiroshima",
@@ -408,7 +408,9 @@
           "14:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.9670132,
+      "longitude": 132.0946124
     },
     {
       "name": "カトリック彦島教会",
@@ -442,7 +444,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 33.9385631,
+      "longitude": 130.9125415
     },
     {
       "name": "カトリック細江教会",
@@ -472,20 +476,24 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 33.9503636,
+      "longitude": 130.9308024
     },
     {
       "name": "カトリック地福教会（巡回）",
       "address": "〒759-1421 山口県阿武郡阿東町大字地福",
       "prefecture": "山口県",
       "isCathedral": false,
-      "massTime": "主日（不定期）",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "phone": "08395-2-0308",
       "note": "巡回教会（原医院に問い合わせ）",
       "diocese": "hiroshima",
       "deanery": "hiroshima",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.9866046,
+      "longitude": 135.8162433
     },
     {
       "name": "カトリック出雲教会",
@@ -516,7 +524,9 @@
           "07:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.3667932,
+      "longitude": 132.76029
     },
     {
       "name": "カトリック松江教会",
@@ -550,7 +560,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.4739995,
+      "longitude": 133.0552572
     },
     {
       "name": "カトリック浜田教会",
@@ -584,7 +596,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.8999551,
+      "longitude": 132.0769491
     },
     {
       "name": "カトリック益田教会",
@@ -618,7 +632,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.6846196,
+      "longitude": 131.8378804
     },
     {
       "name": "カトリック津和野教会",
@@ -652,7 +668,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.4691237,
+      "longitude": 131.7681107
     },
     {
       "name": "カトリック尾道教会",
@@ -700,7 +718,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.4091692,
+      "longitude": 133.19019
     },
     {
       "name": "カトリック観音町教会",
@@ -732,7 +752,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.3948549,
+      "longitude": 132.4385116
     },
     {
       "name": "カトリック祇園教会",
@@ -752,7 +774,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.4416031,
+      "longitude": 132.4610897
     },
     {
       "name": "カトリック呉教会",
@@ -787,7 +811,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.2472342,
+      "longitude": 132.5686731
     },
     {
       "name": "カトリック廿日市教会",
@@ -812,7 +838,9 @@
           "08:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.3524928,
+      "longitude": 132.333687
     },
     {
       "name": "カトリック福山教会",
@@ -845,12 +873,12 @@
           {
             "time": "15:00",
             "language": "VI",
-            "note": "第1・3日曜"
+            "note": ""
           },
           {
             "time": "15:00",
             "language": "EN",
-            "note": "第2・4日曜"
+            "note": ""
           },
           {
             "time": "15:00",
@@ -858,7 +886,9 @@
             "note": "第5日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.48460170000001,
+      "longitude": 133.3670984
     },
     {
       "name": "カトリック三篠教会",
@@ -889,7 +919,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.4153989,
+      "longitude": 132.4579538
     },
     {
       "name": "カトリック翠町教会",
@@ -906,7 +938,9 @@
           "10:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.3692501,
+      "longitude": 132.4683394
     },
     {
       "name": "カトリック三原教会",
@@ -944,12 +978,12 @@
           {
             "time": "14:00",
             "language": "EN",
-            "note": "第1・3日曜"
+            "note": ""
           },
           {
             "time": "18:30",
             "language": "ES",
-            "note": "第2・4日曜"
+            "note": ""
           },
           {
             "time": "09:00",
@@ -957,7 +991,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.4024299,
+      "longitude": 133.0904922
     },
     {
       "name": "カトリック三次教会",
@@ -979,19 +1015,28 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.8038595,
+      "longitude": 132.8549464
     },
     {
       "name": "カトリック向原教会",
       "address": "〒739-1201 広島県安芸高田市向原町坂158-2",
       "prefecture": "広島県",
       "isCathedral": false,
-      "massTime": "第1・3・5日曜14:00 / 第2日曜14:00 / 第4日曜15:00",
+      "massTime": "主日：第1・2・3・5日曜14:00 / 第4日曜15:00",
       "phone": "0826-46-2203",
       "diocese": "hiroshima",
       "deanery": "hiroshima",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "14:00",
+          "15:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 34.6147107,
+      "longitude": 132.7172036
     },
     {
       "name": "カトリック東広島教会",
@@ -1036,7 +1081,9 @@
             "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.4619562,
+      "longitude": 132.7898467
     },
     {
       "name": "カトリック倉吉教会",
@@ -1080,7 +1127,9 @@
             "note": "第5日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.4544076,
+      "longitude": 133.8488906
     },
     {
       "name": "カトリック鳥取教会",
@@ -1110,7 +1159,9 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.4924569,
+      "longitude": 134.234252
     },
     {
       "name": "カトリック米子教会",
@@ -1134,7 +1185,9 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.4315746,
+      "longitude": 133.332747
     },
     {
       "name": "カトリック岡山教会",
@@ -1175,7 +1228,7 @@
           {
             "time": "15:00",
             "language": "EN",
-            "note": "第1・3日曜"
+            "note": ""
           },
           {
             "time": "15:00",
@@ -1183,7 +1236,9 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.662918,
+      "longitude": 133.9276261
     },
     {
       "name": "カトリック岡山南教会",
@@ -1200,7 +1255,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.6175209,
+      "longitude": 133.9432782
     },
     {
       "name": "カトリック笠岡教会",
@@ -1232,7 +1289,9 @@
           "07:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.5027151,
+      "longitude": 133.5043929
     },
     {
       "name": "カトリック倉敷教会",
@@ -1264,7 +1323,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.6030623,
+      "longitude": 133.7739827
     },
     {
       "name": "カトリック玉島教会",
@@ -1277,15 +1338,16 @@
       "deanery": "hiroshima",
       "massTimes": {
         "sunday": [
-          "09:30",
-          "11:00"
+          "09:30"
         ],
         "friday": [
           "09:30",
           "11:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.5457098,
+      "longitude": 133.6725522
     },
     {
       "name": "カトリック玉野教会",
@@ -1304,7 +1366,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.494459,
+      "longitude": 133.9516727
     },
     {
       "name": "カトリック津山教会",
@@ -1331,7 +1395,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.0727773,
+      "longitude": 134.0043805
     },
     {
       "name": "カトリック水島教会",
@@ -1361,25 +1427,34 @@
       "isCathedral": false,
       "phone": "086-222-4093",
       "fax": "086-222-4017",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "hiroshima",
       "deanery": "hiroshima",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 34.6806787,
+      "longitude": 134.2549022
     },
     {
       "name": "カトリック境港教会（巡回）",
       "address": "〒684-0031 鳥取県境港市湊町66",
       "prefecture": "鳥取県",
       "isCathedral": false,
-      "massTime": "第1・3日曜14:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "phone": "0859-22-6340",
       "fax": "0859-22-6340",
       "note": "巡回教会",
       "diocese": "hiroshima",
       "deanery": "hiroshima",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.541256,
+      "longitude": 133.2310552
     }
   ]
 }

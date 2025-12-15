@@ -20,6 +20,7 @@ class PushNotificationService {
 
   String? _fcmToken;
   GoRouter? _router;
+  String? _currentUserId;
 
   String? get fcmToken => _fcmToken;
 
@@ -43,14 +44,30 @@ class PushNotificationService {
 
       if (settings.authorizationStatus == AuthorizationStatus.authorized ||
           settings.authorizationStatus == AuthorizationStatus.provisional) {
-        // FCM 토큰 가져오기
-        _fcmToken = await _messaging.getToken();
-        AppLogger.notification('토큰: $_fcmToken');
+        try {
+          // FCM 토큰 가져오기
+          AppLogger.notification('FCM 토큰 가져오기 시도...');
+          _fcmToken = await _messaging.getToken();
+          AppLogger.notification('FCM 토큰 가져오기 성공: $_fcmToken');
+        } catch (e, stackTrace) {
+          AppLogger.error('FCM 토큰 가져오기 실패: $e', e, stackTrace);
+          // iOS 시뮬레이터에서는 토큰을 가져올 수 없을 수 있음
+          if (Platform.isIOS) {
+            AppLogger.warning(
+              'iOS 시뮬레이터에서는 FCM 토큰을 가져올 수 없을 수 있습니다. 실제 기기에서 테스트해주세요.',
+            );
+          }
+          // 토큰이 없어도 리스너는 설정 (나중에 토큰이 생성될 수 있음)
+        }
 
-        // 토큰 갱신 리스너
-        _messaging.onTokenRefresh.listen((newToken) {
+        // 토큰 갱신 리스너 - 갱신된 토큰을 자동으로 Firestore에 저장
+        _messaging.onTokenRefresh.listen((newToken) async {
           AppLogger.notification('토큰 갱신: $newToken');
           _fcmToken = newToken;
+          // 현재 로그인된 사용자가 있으면 자동으로 토큰 저장
+          if (_currentUserId != null) {
+            await _saveTokenToFirestore(_currentUserId!);
+          }
         });
 
         // 포그라운드 메시지 리스너
@@ -60,31 +77,53 @@ class PushNotificationService {
         FirebaseMessaging.onMessageOpenedApp.listen(_handleMessageOpenedApp);
 
         // 앱이 종료된 상태에서 알림 탭으로 열린 경우
-        final initialMessage = await _messaging.getInitialMessage();
-        if (initialMessage != null) {
-          _handleMessageOpenedApp(initialMessage);
+        try {
+          final initialMessage = await _messaging.getInitialMessage();
+          if (initialMessage != null) {
+            _handleMessageOpenedApp(initialMessage);
+          }
+        } catch (e, stackTrace) {
+          AppLogger.error('초기 메시지 가져오기 실패: $e', e, stackTrace);
         }
 
         // iOS 포그라운드 알림 표시 설정
         if (Platform.isIOS) {
-          await _messaging.setForegroundNotificationPresentationOptions(
-            alert: true,
-            badge: true,
-            sound: true,
-          );
+          try {
+            await _messaging.setForegroundNotificationPresentationOptions(
+              alert: true,
+              badge: true,
+              sound: true,
+            );
+            AppLogger.notification('iOS 포그라운드 알림 설정 완료');
+          } catch (e, stackTrace) {
+            AppLogger.error('iOS 포그라운드 알림 설정 실패: $e', e, stackTrace);
+          }
         }
+      } else {
+        AppLogger.warning('알림 권한이 없습니다: ${settings.authorizationStatus}');
       }
     } catch (e, stackTrace) {
       AppLogger.error('FCM 초기화 에러', e, stackTrace);
+      AppLogger.error('에러 타입: ${e.runtimeType}', null);
+      // FCM 초기화 실패해도 앱은 계속 실행되도록 함
     }
   }
 
   /// 사용자 FCM 토큰 저장
   Future<void> saveTokenForUser(String userId) async {
+    _currentUserId = userId;
+
     if (_fcmToken == null) {
       AppLogger.notification('토큰이 없어서 저장 불가');
       return;
     }
+
+    await _saveTokenToFirestore(userId);
+  }
+
+  /// Firestore에 토큰 저장 (내부 헬퍼)
+  Future<void> _saveTokenToFirestore(String userId) async {
+    if (_fcmToken == null) return;
 
     try {
       await _firestore.collection('users').doc(userId).update({
@@ -99,6 +138,8 @@ class PushNotificationService {
 
   /// 사용자 FCM 토큰 삭제 (로그아웃 시)
   Future<void> removeTokenForUser(String userId) async {
+    _currentUserId = null;
+
     try {
       await _firestore.collection('users').doc(userId).update({
         'fcmToken': FieldValue.delete(),

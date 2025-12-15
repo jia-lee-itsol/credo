@@ -6,43 +6,66 @@
       "address": "〒900-0021 沖縄県那覇市樋川1-13-10",
       "prefecture": "沖縄県",
       "isCathedral": true,
-      "massTime": "平日：07:00 / 主日：07:00, 09:00, 11:00",
+      "massTime": "主日：09:30, 19:00 / 平日：月曜日から土曜日06:30 / 第1金曜日：19:00 / 火曜日：14:00(アンナ会ミサ)",
       "diocese": "naha",
       "deanery": "naha",
       "massTimes": {
         "sunday": [
-          "07:00",
-          "09:00",
-          "11:00"
-        ],
-        "monday": [
-          "07:00"
+          "09:30",
+          "19:00"
         ],
         "tuesday": [
-          "07:00"
+          "14:00",
+          "06:30"
+        ],
+        "monday": [
+          "06:30"
         ],
         "wednesday": [
-          "07:00"
+          "06:30"
         ],
         "thursday": [
-          "07:00"
+          "06:30"
         ],
         "friday": [
-          "07:00"
+          "06:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 26.2093976,
+      "longitude": 127.6871176
     },
     {
       "name": "カトリック安里教会",
       "address": "〒902-0067 沖縄県那覇市安里3-7-2",
       "prefecture": "沖縄県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：09:00 / 平日：月曜日から土曜日06:30",
       "diocese": "naha",
       "deanery": "naha",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 26.2217556,
+      "longitude": 127.69756
     },
     {
       "name": "カトリック名護教会",
@@ -59,22 +82,29 @@
           "10:00"
         ],
         "monday": [
-          "06:00"
+          "06:00",
+          "19:00"
         ],
         "tuesday": [
-          "06:00"
+          "06:00",
+          "19:00"
         ],
         "wednesday": [
-          "06:00"
+          "06:00",
+          "19:00"
         ],
         "thursday": [
-          "06:00"
+          "06:00",
+          "19:00"
         ],
         "friday": [
+          "06:00",
           "19:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 26.5936798,
+      "longitude": 127.983175
     },
     {
       "name": "愛楽園教会（巡回）",
@@ -82,7 +112,7 @@
       "address": "〒905-0000 沖縄県名護市済井出1192",
       "prefecture": "沖縄県",
       "isCathedral": false,
-      "massTime": "主日：08:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会（国立療養所沖縄愛楽園内）",
       "diocese": "naha",
       "deanery": "naha",
@@ -91,23 +121,23 @@
           "08:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 26.6765237,
+      "longitude": 128.0196572
     },
     {
       "name": "伊江島教会（巡回）",
       "address": "〒905-0505 沖縄県国頭郡伊江村西江上14",
       "prefecture": "沖縄県",
       "isCathedral": false,
-      "massTime": "毎月第1・第2・第3土曜日：10:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "naha",
       "deanery": "naha",
-      "massTimes": {
-        "saturday": [
-          "10:00"
-        ]
-      },
-      "foreignMassTimes": {}
+      "massTimes": {},
+      "foreignMassTimes": {},
+      "latitude": 26.7161759,
+      "longitude": 127.8045433
     },
     {
       "name": "カトリック石川教会",
@@ -124,29 +154,43 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 26.4203117,
+      "longitude": 127.8223329
     },
     {
       "name": "カトリック具志川教会",
       "address": "〒904-2221 沖縄県うるま市字喜屋武58",
       "prefecture": "沖縄県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "naha",
       "deanery": "naha",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 26.3637794,
+      "longitude": 127.8516662
     },
     {
       "name": "カトリック読谷教会",
       "address": "〒904-0305 沖縄県中頭郡読谷村都屋243-1",
       "prefecture": "沖縄県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "naha",
       "deanery": "naha",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 26.3929382,
+      "longitude": 127.7282825
     },
     {
       "name": "カトリック泡瀬教会",
@@ -163,7 +207,9 @@
           "09:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 26.3318758,
+      "longitude": 127.8255649
     },
     {
       "name": "カトリックコザ教会",
@@ -180,7 +226,9 @@
           "08:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 26.3405711,
+      "longitude": 127.8044942
     },
     {
       "name": "カトリック普天間教会",
@@ -188,31 +236,7 @@
       "prefecture": "沖縄県",
       "isCathedral": false,
       "phone": "098-892-2503",
-      "massTime": "",
-      "diocese": "naha",
-      "deanery": "naha",
-      "massTimes": {},
-      "foreignMassTimes": {}
-    },
-    {
-      "name": "カトリック真栄原教会",
-      "address": "〒901-2215 沖縄県宜野湾市真栄原3-16-1",
-      "prefecture": "沖縄県",
-      "isCathedral": false,
-      "phone": "098-897-7484",
-      "massTime": "",
-      "diocese": "naha",
-      "deanery": "naha",
-      "massTimes": {},
-      "foreignMassTimes": {}
-    },
-    {
-      "name": "カトリック首里教会",
-      "address": "〒903-0814 沖縄県那覇市首里崎山町4-60",
-      "prefecture": "沖縄県",
-      "isCathedral": false,
-      "phone": "098-884-4787",
-      "massTime": "主日：09:00 / 平日 月～木：06:30、金：19:00",
+      "massTime": "主日：09:00 / 英語ミサ：土曜日18:30 / 平日：月曜日から土曜日06:30",
       "diocese": "naha",
       "deanery": "naha",
       "massTimes": {
@@ -232,10 +256,76 @@
           "06:30"
         ],
         "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "18:30",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 26.2884193,
+      "longitude": 127.7812328
+    },
+    {
+      "name": "カトリック真栄原教会",
+      "address": "〒901-2215 沖縄県宜野湾市真栄原3-16-1",
+      "prefecture": "沖縄県",
+      "isCathedral": false,
+      "phone": "098-897-7484",
+      "massTime": "主日：10:00",
+      "diocese": "naha",
+      "deanery": "naha",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 26.262407,
+      "longitude": 127.7443302
+    },
+    {
+      "name": "カトリック首里教会",
+      "address": "〒903-0814 沖縄県那覇市首里崎山町4-60",
+      "prefecture": "沖縄県",
+      "isCathedral": false,
+      "phone": "098-884-4787",
+      "massTime": "主日：09:00 / 平日 月～木：06:30、金：19:00",
+      "diocese": "naha",
+      "deanery": "naha",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:30",
+          "19:00"
+        ],
+        "tuesday": [
+          "06:30",
+          "19:00"
+        ],
+        "wednesday": [
+          "06:30",
+          "19:00"
+        ],
+        "thursday": [
+          "06:30",
+          "19:00"
+        ],
+        "friday": [
+          "06:30",
           "19:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 26.2124765,
+      "longitude": 127.7214881
     },
     {
       "name": "カトリック与那原教会",
@@ -252,15 +342,28 @@
           "09:00"
         ],
         "monday": [
+          "06:30",
+          "07:00",
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30",
+          "07:00",
           "06:30"
         ],
         "wednesday": [
+          "06:30",
+          "07:00",
           "06:30"
         ],
         "thursday": [
+          "06:30",
+          "07:00",
           "06:30"
         ],
         "friday": [
+          "06:30",
+          "07:00",
           "06:30"
         ]
       },
@@ -277,31 +380,45 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 26.2006414,
+      "longitude": 127.7541914
     },
     {
       "name": "大里教会（巡回）",
       "address": "〒901-1204 沖縄県南城市大里字古堅10",
       "prefecture": "沖縄県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "naha",
       "deanery": "naha",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 26.1894749,
+      "longitude": 127.7521569
     },
     {
       "name": "具志頭教会（巡回）",
       "address": "〒901-0612 沖縄県島尻郡八重瀬町具志頭957",
       "prefecture": "沖縄県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "naha",
       "deanery": "naha",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 26.1266883,
+      "longitude": 127.7470831
     },
     {
       "name": "カトリック小禄教会",
@@ -309,11 +426,25 @@
       "prefecture": "沖縄県",
       "isCathedral": false,
       "phone": "098-857-2128",
-      "massTime": "",
+      "massTime": "主日：10:00 / 英語ミサ：土曜日19:00",
       "diocese": "naha",
       "deanery": "naha",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 26.1957503,
+      "longitude": 127.671254
     },
     {
       "name": "カトリック宮古平良教会",
@@ -330,30 +461,44 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 24.8028112,
+      "longitude": 125.2778481
     },
     {
       "name": "保良教会（巡回）",
       "address": "〒906-0102 沖縄県宮古島市城辺字保良539-2",
       "prefecture": "沖縄県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "naha",
       "deanery": "naha",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 24.7312841,
+      "longitude": 125.4262852
     },
     {
       "name": "カトリック石垣教会",
       "address": "〒907-0022 沖縄県石垣市大川67",
       "prefecture": "沖縄県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "naha",
       "deanery": "naha",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 24.342695,
+      "longitude": 124.1626786
     }
   ]
 }

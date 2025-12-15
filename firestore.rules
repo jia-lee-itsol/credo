@@ -1,6 +1,28 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Helper function: 관리자 여부 확인
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    
+    // Helper function: 관리자가 자신의 교회 게시글인지 확인
+    function isAdminOfPostParish() {
+      let adminUser = get(/databases/$(database)/documents/users/$(request.auth.uid));
+      // Firestore에는 main_parish_id로 저장됨 (snake_case)
+      let adminParishId = adminUser.data.main_parish_id;
+      let postParishId = resource.data.parishId;
+      // admin의 parishId와 게시글의 parishId가 일치해야 함 (둘 다 null이면 false)
+      // null 체크와 빈 문자열 체크
+      return adminParishId is string
+        && adminParishId != ''
+        && postParishId is string
+        && postParishId != ''
+        && adminParishId == postParishId;
+    }
+    
     // Users Collection
     match /users/{userId} {
       // 읽기: 로그인한 사용자는 모든 사용자 정보 읽기 가능
@@ -23,8 +45,21 @@ service cloud.firestore {
       allow read: if request.auth != null;
       allow create: if request.auth != null 
         && request.resource.data.authorId == request.auth.uid;
-      allow update, delete: if request.auth != null 
-        && (resource.data.authorId == request.auth.uid);
+      // update: 작성자는 모든 필드 수정 가능
+      // 다른 사용자는 likeCount 또는 commentCount만 수정 가능
+      // 관리자는 자신이 소속된 교회의 게시글만 status 수정 가능
+      allow update: if request.auth != null
+        && (resource.data.authorId == request.auth.uid ||
+            (request.resource.data.diff(resource.data).affectedKeys()
+                .hasOnly(['likeCount', 'updatedAt'])) ||
+            (request.resource.data.diff(resource.data).affectedKeys()
+                .hasOnly(['commentCount', 'updatedAt'])) ||
+            (isAdmin()
+                && isAdminOfPostParish()
+                && request.resource.data.diff(resource.data).affectedKeys()
+                    .hasOnly(['status', 'updatedAt'])));
+      allow delete: if request.auth != null 
+        && resource.data.authorId == request.auth.uid;
     }
     
     // Comments Collection (향후 구현)
@@ -79,6 +114,52 @@ service cloud.firestore {
         allow update, delete: if request.auth != null 
           && resource.data.authorId == request.auth.uid;
       }
+    }
+    
+    // Reports Collection (신고)
+    match /reports/{reportId} {
+      // 읽기: 자신이 작성한 신고만 읽기 가능 (중복 신고 체크를 위해 필요)
+      // 또는 관리자만 읽을 수 있도록 제한 (실제 운영 시에는 관리자 역할 체크 추가 권장)
+      allow read: if request.auth != null 
+        && resource.data.reporterId == request.auth.uid;
+      
+      // 생성: 로그인한 사용자만 신고 가능
+      // 신고자 ID가 현재 사용자와 일치해야 함
+      // 동일 유저가 동일 targetId를 짧은 시간에 반복 신고하는 것은
+      // 애플리케이션 레벨에서 체크 (Firestore Rules로는 시간 기반 제한이 어려움)
+      allow create: if request.auth != null 
+        && request.resource.data.reporterId == request.auth.uid
+        && request.resource.data.targetType is string
+        && request.resource.data.targetId is string
+        && request.resource.data.reason is string
+        && request.resource.data.createdAt is timestamp;
+      
+      // 수정/삭제: 신고는 생성 후 수정/삭제 불가
+      allow update, delete: if false;
+    }
+    
+    // App Settings Collection (앱 설정)
+    match /app_settings/{settingId} {
+      // 읽기: 모든 사용자가 앱 설정 읽기 가능 (로그인 불필요)
+      // 성경 텍스트 라이선스 상태 등 공개 설정 정보
+      allow read: if true;
+      
+      // 쓰기: 관리자만 수정 가능
+      allow create, update, delete: if isAdmin();
+    }
+    
+    // Meditation Guides Collection (묵상 가이드)
+    match /meditation_guides/{guideId} {
+      // 읽기: 모든 사용자가 묵상 가이드 읽기 가능 (로그인 불필요)
+      allow read: if true;
+      
+      // 쓰기: 앱에서만 생성 가능 (GPT로 생성된 묵상 가이드)
+      // 실제로는 Cloud Functions나 서버에서만 쓰기하도록 제한하는 것이 좋지만,
+      // 현재는 앱에서 직접 쓰기하므로 로그인한 사용자만 가능하도록 설정
+      allow create, update: if request.auth != null;
+      
+      // 삭제: 관리자만 가능
+      allow delete: if isAdmin();
     }
   }
 }

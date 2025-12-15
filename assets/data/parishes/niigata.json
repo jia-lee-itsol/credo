@@ -18,11 +18,13 @@
           "17:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.7188687,
+      "longitude": 140.1196293
     },
     {
       "name": "カトリック大館教会",
-      "address": "秋田県大館市",
+      "address": "秋田県大館市有浦1丁目7-45",
       "prefecture": "秋田県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -33,11 +35,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.2714146,
+      "longitude": 140.5641387
     },
     {
       "name": "カトリック鹿角教会",
-      "address": "秋田県鹿角市",
+      "address": "秋田県鹿角市十和田毛馬内字下小路25",
       "prefecture": "秋田県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -48,11 +52,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.2157715,
+      "longitude": 140.7885015
     },
     {
       "name": "カトリック土崎教会",
-      "address": "秋田県秋田市土崎",
+      "address": "秋田県秋田市土崎港南3-13-35",
       "prefecture": "秋田県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -63,11 +69,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.7589133,
+      "longitude": 140.073417
     },
     {
       "name": "カトリック能代教会",
-      "address": "秋田県能代市",
+      "address": "秋田県能代市追分町2-50",
       "prefecture": "秋田県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -78,11 +86,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.2118632,
+      "longitude": 140.027125
     },
     {
       "name": "カトリック本荘教会",
-      "address": "秋田県由利本荘市",
+      "address": "秋田県由利本荘市給人町100-1",
       "prefecture": "秋田県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -93,11 +103,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.3862586,
+      "longitude": 140.0508038
     },
     {
       "name": "カトリック横手教会",
-      "address": "秋田県横手市",
+      "address": "秋田県横手市寿町7-25",
       "prefecture": "秋田県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -108,11 +120,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.3138283,
+      "longitude": 140.5665878
     },
     {
       "name": "カトリック上宿教会",
-      "address": "秋田県秋田市上宿",
+      "address": "秋田県大仙市協和中淀川上宿13",
       "prefecture": "秋田県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -123,11 +137,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.5196283,
+      "longitude": 140.3022037
     },
     {
       "name": "カトリック加茂教会",
-      "address": "新潟県加茂市",
+      "address": "新潟県加茂市寿町6-21",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -138,11 +154,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.6663153,
+      "longitude": 139.0402073
     },
     {
       "name": "カトリック三条教会",
-      "address": "新潟県三条市",
+      "address": "新潟県三条市興野1-5-18",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -153,11 +171,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.6365293,
+      "longitude": 138.9616061
     },
     {
       "name": "カトリック見附教会",
-      "address": "新潟県見附市",
+      "address": "新潟県見附市学校町2-14-4",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -168,11 +188,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.5324559,
+      "longitude": 138.9140916
     },
     {
       "name": "カトリック栃尾教会",
-      "address": "新潟県長岡市栃尾",
+      "address": "新潟県長岡市金沢2丁目1-36",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -183,7 +205,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.4782581,
+      "longitude": 138.9871307
     },
     {
       "name": "カトリック長岡教会",
@@ -209,11 +233,13 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 37.4515845,
+      "longitude": 138.848146
     },
     {
       "name": "カトリック十日町教会",
-      "address": "新潟県十日町市",
+      "address": "新潟県十日町市本町6丁目3-22",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -224,11 +250,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.1282799,
+      "longitude": 138.7553633
     },
     {
       "name": "カトリック柏崎教会",
-      "address": "新潟県柏崎市",
+      "address": "新潟県柏崎市柳橋町3-10",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -239,11 +267,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.371918,
+      "longitude": 138.5590073
     },
     {
       "name": "カトリック直江津教会",
-      "address": "新潟県上越市直江津",
+      "address": "新潟県上越市西本町4丁目11-1",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -254,11 +284,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.17083290000001,
+      "longitude": 138.2432133
     },
     {
       "name": "カトリック高田教会",
-      "address": "新潟県上越市高田",
+      "address": "新潟県上越市西城町2丁目3番12号",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -269,11 +301,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.1151574,
+      "longitude": 138.2422264
     },
     {
       "name": "カトリック妙高教会",
-      "address": "新潟県妙高市",
+      "address": "新潟県妙高市田切字西原218-37",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -284,11 +318,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.02521790000001,
+      "longitude": 138.2535519
     },
     {
       "name": "カトリック糸魚川教会",
-      "address": "新潟県糸魚川市",
+      "address": "新潟県糸魚川市大町2丁目3-7",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -299,11 +335,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.0390497,
+      "longitude": 137.862814
     },
     {
       "name": "カトリック新発田教会",
-      "address": "新潟県新発田市",
+      "address": "新潟県新発田市中央町1丁目7-7",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -314,11 +352,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.9483728,
+      "longitude": 139.3274172
     },
     {
       "name": "カトリック村上教会",
-      "address": "新潟県村上市",
+      "address": "新潟県村上市若葉町14-5",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -329,7 +369,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.2240045,
+      "longitude": 139.480171
     },
     {
       "name": "カトリック新潟教会",
@@ -355,11 +397,13 @@
             "note": "第1日曜"
           }
         ]
-      }
+      },
+      "latitude": 37.9250282,
+      "longitude": 139.0390707
     },
     {
       "name": "カトリック佐渡教会",
-      "address": "新潟県佐渡市",
+      "address": "新潟県佐渡市両津夷249",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -370,11 +414,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.0183025,
+      "longitude": 138.3681401
     },
     {
       "name": "カトリック花園教会",
-      "address": "新潟県新潟市花園",
+      "address": "新潟市中央区花園2-6-9",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -385,11 +431,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.9123335,
+      "longitude": 139.0627523
     },
     {
       "name": "カトリック鳥屋野教会",
-      "address": "新潟県新潟市鳥屋野",
+      "address": "新潟市中央区小張木2-7-46",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -400,11 +448,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.8865624,
+      "longitude": 139.0220304
     },
     {
       "name": "カトリック青山教会",
-      "address": "新潟県新潟市青山",
+      "address": "新潟市西区青山8-5-17",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -415,11 +465,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.9000306,
+      "longitude": 138.9911076
     },
     {
       "name": "カトリック寺尾教会",
-      "address": "新潟県新潟市寺尾",
+      "address": "新潟市西区寺尾上3-1-1",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -430,11 +482,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.8804761,
+      "longitude": 138.9781985
     },
     {
       "name": "カトリック白根教会",
-      "address": "新潟県新潟市白根",
+      "address": "新潟市南区上下諏訪木字前田甲107-1",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -445,11 +499,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.768249,
+      "longitude": 139.0358409
     },
     {
       "name": "カトリック新津教会",
-      "address": "新潟県新潟市新津",
+      "address": "新潟県新潟市秋葉区新津本町3丁目3-12",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -460,11 +516,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.8024952,
+      "longitude": 139.1105776
     },
     {
       "name": "カトリック村松教会",
-      "address": "新潟県五泉市村松",
+      "address": "五泉市村松甲2210",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -475,11 +533,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.6896257,
+      "longitude": 139.1787684
     },
     {
       "name": "カトリック亀田教会",
-      "address": "新潟県新潟市亀田",
+      "address": "新潟市江南区西町3-1-1",
       "prefecture": "新潟県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -490,7 +550,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.8830278,
+      "longitude": 139.0971262
     },
     {
       "name": "カトリック酒田教会",
@@ -507,7 +569,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.9272313,
+      "longitude": 139.8341678
     },
     {
       "name": "カトリック鶴岡教会",
@@ -524,11 +588,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.7273929,
+      "longitude": 139.8285918
     },
     {
       "name": "カトリック長井教会",
-      "address": "山形県長井市",
+      "address": "山形県長井市屋城町3-27",
       "prefecture": "山形県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -539,7 +605,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.1074728,
+      "longitude": 140.0405256
     },
     {
       "name": "カトリック山形教会",
@@ -556,11 +624,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.2520802,
+      "longitude": 140.3418075
     },
     {
       "name": "カトリック新庄教会",
-      "address": "山形県新庄市",
+      "address": "山形県最上郡舟形町舟形445-1",
       "prefecture": "山形県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -571,11 +641,13 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.7650067,
+      "longitude": 140.3016961
     },
     {
       "name": "カトリック米沢教会",
-      "address": "山形県米沢市",
+      "address": "山形県米沢市大町4丁目5番37号",
       "prefecture": "山形県",
       "isCathedral": false,
       "massTime": "主日：10:00",
@@ -586,7 +658,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.9223201,
+      "longitude": 140.1167445
     }
   ]
 }

@@ -108,18 +108,113 @@ class FirestorePostRepository implements PostRepository {
   @override
   Future<Either<Failure, void>> updatePost(Post post) async {
     try {
+      AppLogger.community('===== updatePost() 호출됨 =====');
+      AppLogger.community('게시글 ID: ${post.postId}');
+      AppLogger.community('업데이트할 필드:');
+
+      // 현재 문서 가져오기 (diff를 위해)
+      final currentDoc = await _firestore
+          .collection('posts')
+          .doc(post.postId)
+          .get();
+      final currentData = currentDoc.data() ?? <String, dynamic>{};
+
+      AppLogger.community('현재 문서 데이터 키: ${currentData.keys.toList()}');
+
+      final postData = post.toFirestore();
+      AppLogger.community('업데이트할 데이터 키: ${postData.keys.toList()}');
+
+      // 변경된 필드만 추출
+      final changedFields = <String, dynamic>{};
+      postData.forEach((key, value) {
+        final currentValue = currentData[key];
+
+        // 리스트 비교: 내용이 같으면 변경되지 않은 것으로 처리
+        if (value is List && currentValue is List) {
+          if (!_listEquals(value, currentValue)) {
+            changedFields[key] = value;
+            AppLogger.community(
+              '변경된 필드 (리스트): $key = $value (이전: $currentValue)',
+            );
+          }
+          return;
+        }
+
+        // 기존 문서에 없는 필드는 기본값과 비교
+        // commentCount가 null이고 새 값이 0이면 변경되지 않은 것으로 처리
+        if (!currentData.containsKey(key)) {
+          // 기본값과 같으면 무시
+          if ((key == 'commentCount' && value == 0) ||
+              (key == 'likeCount' && value == 0) ||
+              (key == 'isPinned' && value == false) ||
+              (key == 'status' && value == 'published') ||
+              (key == 'imageUrls' && value is List && value.isEmpty)) {
+            return;
+          }
+          changedFields[key] = value;
+          AppLogger.community(
+            '변경된 필드 (새 필드): $key = $value',
+          );
+          return;
+        }
+
+        // 일반 값 비교
+        if (currentValue != value) {
+          changedFields[key] = value;
+          AppLogger.community(
+            '변경된 필드: $key = $value (이전: $currentValue)',
+          );
+        }
+      });
+
+      AppLogger.community('실제 변경된 필드: ${changedFields.keys.toList()}');
+      AppLogger.community('변경된 필드 개수: ${changedFields.length}');
+
+      if (changedFields.isEmpty) {
+        AppLogger.community('⚠️ 변경된 필드가 없습니다. 업데이트를 건너뜁니다.');
+        return const Right(null);
+      }
+
+      // 변경된 필드 상세 로그
+      changedFields.forEach((key, value) {
+        if (value is Timestamp) {
+          AppLogger.community('  변경: $key = ${value.toDate()} (Timestamp)');
+        } else {
+          AppLogger.community('  변경: $key = $value (${value.runtimeType})');
+        }
+      });
+
+      AppLogger.community('Firestore 업데이트 시작: posts/${post.postId}');
+      AppLogger.community('업데이트할 필드: ${changedFields.keys.join(", ")}');
+      AppLogger.community(
+        'Rules 체크: affectedKeys()는 ${changedFields.keys.toList()}를 반환해야 함',
+      );
+
+      // 변경된 필드만 업데이트
       await _firestore
           .collection('posts')
           .doc(post.postId)
-          .update(post.toFirestore());
+          .update(changedFields);
+
+      AppLogger.community('✅ Firestore 업데이트 성공!');
       return const Right(null);
-    } on FirebaseException catch (e) {
-      AppLogger.error('게시글 업데이트 실패: $e', e);
+    } on FirebaseException catch (e, stackTrace) {
+      AppLogger.error(
+        '===== 게시글 업데이트 실패 (FirebaseException) =====',
+        e,
+        stackTrace,
+      );
+      AppLogger.error('에러 코드: ${e.code}');
+      AppLogger.error('에러 메시지: ${e.message}');
+      AppLogger.error('스택 트레이스: $stackTrace');
       return Left(
         FirebaseFailure(message: e.message ?? '게시글 업데이트 실패', code: e.code),
       );
-    } catch (e) {
-      AppLogger.error('게시글 업데이트 실패: $e', e);
+    } catch (e, stackTrace) {
+      AppLogger.error('===== 게시글 업데이트 실패 (일반 예외) =====', e, stackTrace);
+      AppLogger.error('에러 타입: ${e.runtimeType}');
+      AppLogger.error('에러 메시지: $e');
+      AppLogger.error('스택 트레이스: $stackTrace');
       return Left(PostUpdateFailure(message: e.toString()));
     }
   }
@@ -306,6 +401,20 @@ class FirestorePostRepository implements PostRepository {
           })
           .handleError((error, stackTrace) {
             AppLogger.error('watchAllPosts 스트림 에러: $error', error, stackTrace);
+
+            // 인덱스 에러인 경우 더 자세한 정보 제공
+            if (error is FirebaseException &&
+                error.code == 'failed-precondition' &&
+                error.message?.contains('index') == true) {
+              AppLogger.error(
+                '⚠️ Firestore 인덱스가 필요합니다. 다음 명령어로 인덱스를 배포하세요:',
+                error,
+                stackTrace,
+              );
+              AppLogger.error('firebase deploy --only firestore:indexes');
+              AppLogger.error('또는 에러 메시지의 URL을 통해 수동으로 인덱스를 생성할 수 있습니다.');
+            }
+
             throw error;
           });
     } catch (e, stackTrace) {
@@ -350,10 +459,21 @@ class FirestorePostRepository implements PostRepository {
       AppLogger.community('댓글 생성: postId=$postId, authorId=$authorId');
 
       // Firestore transaction을 사용하여 댓글 생성과 게시글 commentCount 업데이트를 원자적으로 처리
+      // 중요: 트랜잭션에서는 모든 읽기(get)를 먼저 수행한 후 쓰기(set/update)를 해야 함
       final commentId = await _firestore.runTransaction<String>((
         transaction,
       ) async {
-        // 댓글 문서 생성
+        // 1. 먼저 읽기 수행: 게시글 문서 조회
+        final postRef = _firestore.collection('posts').doc(postId);
+        final postDoc = await transaction.get(postRef);
+
+        if (!postDoc.exists) {
+          throw Exception('게시글을 찾을 수 없습니다: $postId');
+        }
+
+        final currentCount = (postDoc.data()?['commentCount'] as int?) ?? 0;
+
+        // 2. 그 다음 쓰기 수행: 댓글 문서 생성
         final commentRef = _firestore.collection('comments').doc();
         final comment = Comment(
           commentId: commentRef.id,
@@ -365,15 +485,7 @@ class FirestorePostRepository implements PostRepository {
         );
         transaction.set(commentRef, comment.toFirestore());
 
-        // 게시글 문서의 commentCount 증가
-        final postRef = _firestore.collection('posts').doc(postId);
-        final postDoc = await transaction.get(postRef);
-
-        if (!postDoc.exists) {
-          throw Exception('게시글을 찾을 수 없습니다: $postId');
-        }
-
-        final currentCount = (postDoc.data()?['commentCount'] as int?) ?? 0;
+        // 3. 게시글 문서의 commentCount 증가
         transaction.update(postRef, {
           'commentCount': currentCount + 1,
           'updatedAt': FieldValue.serverTimestamp(),
@@ -519,5 +631,14 @@ class FirestorePostRepository implements PostRepository {
         .doc(likeDocId)
         .snapshots()
         .map((doc) => doc.exists);
+  }
+
+  /// 두 리스트의 내용이 같은지 비교
+  bool _listEquals(List a, List b) {
+    if (a.length != b.length) return false;
+    for (int i = 0; i < a.length; i++) {
+      if (a[i] != b[i]) return false;
+    }
+    return true;
   }
 }

@@ -57,9 +57,20 @@ class FirestoreNotificationRepository implements NotificationRepository {
             final notifications = snapshot.docs
                 .map((doc) {
                   try {
-                    return models.AppNotification.fromFirestore(doc);
-                  } catch (e) {
-                    AppLogger.error('알림 파싱 에러 (docId: ${doc.id}): $e', e);
+                    final notification = models.AppNotification.fromFirestore(
+                      doc,
+                    );
+                    AppLogger.notification(
+                      '알림 파싱 성공: id=${notification.notificationId}, type=${notification.type}, title=${notification.title}',
+                    );
+                    return notification;
+                  } catch (e, stackTrace) {
+                    AppLogger.error(
+                      '알림 파싱 에러 (docId: ${doc.id}): $e',
+                      e,
+                      stackTrace,
+                    );
+                    AppLogger.error('알림 문서 데이터: ${doc.data()}', null);
                     return null;
                   }
                 })

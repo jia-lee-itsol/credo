@@ -4,7 +4,7 @@
 
 Credo는 가톨릭 커뮤니티 참여를 위한 Flutter 모바일 애플리케이션입니다. 이 앱은 **기능 기반 모듈 구조**와 함께 **Clean Architecture**를 구현합니다.
 
-**마지막 업데이트**: 2025-12-12
+**마지막 업데이트**: 2025-12-15 (성당 좌표 데이터 추가, 거리순 필터 개선)
 **전체 코드베이스**: 약 27,000줄의 Dart 코드, 135개 파일
 
 ---
@@ -25,11 +25,13 @@ lib/
 │   │   │   ├── liturgical_calendar_model.dart
 │   │   │   └── saint_feast_day_model.dart
 │   │   └── services/          # 핵심 서비스
+│   │       ├── geocoding_service.dart          # Google Maps Geocoding API
+│   │       ├── image_upload_service.dart        # Firebase Storage 이미지 업로드
 │   │       ├── liturgical_calendar_service.dart
 │   │       ├── liturgical_reading_service.dart
 │   │       ├── parish_service.dart
 │   │       ├── prayer_service.dart
-│   │       ├── push_notification_service.dart # FCM 푸시 알림
+│   │       ├── push_notification_service.dart   # FCM 푸시 알림
 │   │       └── saint_feast_day_service.dart
 │   ├── error/                 # 에러 처리
 │   │   ├── exceptions.dart    # 예외 정의
@@ -58,6 +60,12 @@ lib/
 │   ├── providers/             # 전역 Riverpod providers
 │   └── widgets/                # 재사용 가능한 UI 컴포넌트
 │
+├── functions/                 # Firebase Cloud Functions
+│   ├── src/
+│   │   └── index.ts           # Cloud Functions 진입점
+│   ├── .env                   # 환경 변수 (로컬 개발용, Git에 커밋 안 됨)
+│   └── package.json           # Node.js 의존성
+│
 └── main.dart                  # 앱 진입점
 ```
 
@@ -81,7 +89,7 @@ features/{feature_name}/
 │
 └── presentation/              # 프레젠테이션 레이어
     ├── notifiers/              # State notifiers
-    ├── providers/              # UI 상태 providers
+    ├── providers/              # UI 상태 providers (StreamProvider, FutureProvider, StateNotifierProvider)
     ├── screens/                # 화면 위젯
     └── widgets/                # 기능별 위젯
 ```
@@ -98,6 +106,7 @@ features/{feature_name}/
 - **Screens**: UI를 구성하는 전체 페이지 위젯 (라우팅에 등록된 독립 화면)
 - **Widgets**: 재사용 가능한 UI 컴포넌트
 - **Notifiers**: 복잡한 UI 상태를 위한 StateNotifier 클래스
+- **Providers** (`presentation/providers/`): UI 상태를 관리하는 Provider (StreamProvider, FutureProvider, StateNotifierProvider)
 
 **구조 원칙**:
 - 모든 화면은 `screens/` 디렉토리에 위치 (이전 `pages/` 디렉토리는 `screens/`로 통합됨)
@@ -146,7 +155,7 @@ abstract class AuthRepository {
 **구성 요소**:
 - **Models**: JSON/Firestore 직렬화
 - **Repository Implementations**: 구체적인 데이터 접근 (모두 `Either<Failure, T>` 패턴 사용)
-- **Providers**: 의존성 주입을 위한 Riverpod providers
+- **Providers** (`data/providers/`): Repository 인스턴스를 제공하는 Provider
 
 **에러 처리 원칙**:
 - 모든 Repository 메서드는 `Either<Failure, T>` 반환
@@ -204,21 +213,38 @@ Future<Either<Failure, Post>> createPost(Post post) async {
 | `StateNotifierProvider` | 복잡한 가변 상태 | `postFormNotifierProvider` |
 
 **Provider 구성**:
+
+Provider는 레이어별로 분리되어 있습니다:
+
+1. **Repository Provider** (`features/{feature}/data/providers/`):
+   - Repository 인스턴스를 제공하는 Provider
+   - 예: `postRepositoryProvider`, `userRepositoryProvider`
+
+2. **UI State Provider** (`features/{feature}/presentation/providers/`):
+   - UI 상태를 관리하는 Provider (StreamProvider, FutureProvider, StateNotifierProvider)
+   - 예: `communityPostsProvider`, `postByIdProvider`, `postFormNotifierProvider`
+
+3. **Global Provider** (`shared/providers/`):
+   - 앱 전역에서 사용되는 Provider
+   - 예: `auth_provider.dart`, `location_provider.dart`, `liturgy_theme_provider.dart`, `font_scale_provider.dart`
+
+**예시**:
 ```dart
+// lib/features/community/data/providers/community_repository_providers.dart
+final postRepositoryProvider = Provider<PostRepository>((ref) {
+  return FirestorePostRepository();
+});
+
+// lib/features/community/presentation/providers/community_presentation_providers.dart
+final communityPostsProvider = StreamProvider.autoDispose
+    .family<List<Post>, String?>((ref, String? parishId) {
+      final repo = ref.watch(postRepositoryProvider);
+      return repo.watchCommunityPosts(parishId: parishId);
+    });
+
 // lib/shared/providers/auth_provider.dart
-final firebaseAuthProvider = Provider<FirebaseAuth>((ref) {
-  return FirebaseAuth.instance;
-});
-
-final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return AuthRepositoryImpl(
-    ref.watch(firebaseAuthProvider),
-    ref.watch(firestoreProvider),
-  );
-});
-
-final currentUserProvider = StreamProvider<UserEntity?>((ref) {
-  return ref.watch(authRepositoryProvider).watchCurrentUser();
+final currentUserProvider = Provider<UserEntity?>((ref) {
+  return ref.watch(authStateProvider);
 });
 ```
 
@@ -300,6 +326,7 @@ class UserNotFoundFailure extends NotFoundFailure { ... }
 class UserSaveFailure extends Failure { ... }
 class LikeToggleFailure extends Failure { ... }
 class InsufficientPermissionFailure extends PermissionFailure { ... }
+class ReportCreationFailure extends Failure { ... }
 ```
 
 ### Either 패턴
@@ -342,15 +369,21 @@ Future<Either<Failure, Post>> createPost(Post post) async {
 - 댓글 및 답글
 - 이미지 업로드 및 갤러리 뷰어
 - 좋아요 기능
+- 신고 기능 (게시글/댓글 신고, Slack 알림, 자동 숨김 처리)
 - 푸시 알림
 - 공식 공지 vs 커뮤니티 게시글
 - 게시글 정렬 (핀 고정 우선, 시간순/인기순)
+- Admin 게시글 비표시 기능 (소속 교회 게시글만)
+- 두 손가락 줌 기능 (InteractiveViewer)
 
 **주요 파일**:
 - `lib/features/community/data/repositories/firestore_post_repository.dart`
 - `lib/features/community/data/models/post.dart`
+- `lib/features/community/data/models/report.dart` - 신고 모델
+- `lib/features/community/data/repositories/firestore_report_repository.dart` - 신고 리포지토리
+- `lib/features/community/presentation/widgets/report_dialog.dart` - 신고 다이얼로그 위젯
 - `lib/features/community/domain/extensions/post_extensions.dart` - 게시글 정렬 로직
-- `lib/features/community/domain/failures/community_failures.dart` - 커뮤니티 전용 실패 타입
+- `lib/features/community/domain/failures/community_failures.dart` - 커뮤니티 전용 실패 타입 (ReportCreationFailure 포함)
 - `lib/features/community/presentation/screens/post_detail_screen.dart` (304줄, 8개 위젯으로 분할됨)
   - 위젯: `PostImageViewer`, `PostDetailHeader`, `PostDetailAuthorInfo`, `PostDetailImages`, `PostDetailLikeButton`, `PostDetailCommentsSection`, `PostDetailCommentInput`, `PostCommentSubmitter`
 - `lib/features/parish/presentation/screens/parish_list_screen.dart` (336줄, 4개 위젯으로 분할됨)
@@ -363,10 +396,17 @@ Future<Either<Failure, Post>> createPost(Post post) async {
 - 도, 대성당, 미사 시간별 필터링
 - 외국어 미사 지원
 - 성당 상세 정보
+- 거리순 정렬 기능 (위치 기반)
+  - 사용자 위치 기반 거리 계산
+  - 거리순 정렬 (기본값: 비활성화, 사용자가 활성화 가능)
+  - 위치 권한 요청 및 처리
+  - 위치 정보 없을 때 정렬 비활성화
 
 **주요 파일**:
 - `lib/features/parish/data/repositories/parish_repository_impl.dart`
 - `lib/features/parish/presentation/screens/parish_list_screen.dart`
+- `lib/shared/providers/location_provider.dart` - 위치 및 거리 계산 Provider
+- `lib/core/data/services/geocoding_service.dart` - Google Maps Geocoding API
 
 ### Profile 기능
 
@@ -379,6 +419,23 @@ Future<Either<Failure, Post>> createPost(Post post) async {
 **주요 파일**:
 - `lib/features/profile/presentation/screens/edit_profile_screen.dart`
 - `lib/features/profile/presentation/screens/my_page_screen.dart`
+
+### Admin 기능
+
+**기능**:
+- 소속 교회 게시글 비표시/표시 기능
+- 신고 기반 자동 게시글 숨김 (신고 3개 이상 시)
+
+**구현 현황**:
+- Admin 권한 체크 (`UserEntity.isAdmin` getter)
+- Firestore Rules에 `isAdminOfPostParish()` helper function 추가
+- UI에서 소속 교회 체크 및 권한 없는 경우 에러 메시지 표시
+- Cloud Functions에서 신고 3개 이상 시 자동 숨김 처리
+
+**주요 파일**:
+- `lib/features/community/presentation/screens/post_detail_screen.dart` - 비표시 UI
+- `firestore.rules` - Admin 권한 규칙
+- `functions/src/index.ts` - 자동 숨김 로직
 
 ---
 
@@ -408,6 +465,12 @@ Future<Either<Failure, Post>> createPost(Post post) async {
 - 알림 탭 시 게시글 상세 화면으로 자동 네비게이션
 - 사용자 FCM 토큰 관리
 
+**Cloud Functions 구현**:
+- `functions/src/index.ts` - Firebase Cloud Functions
+  - 신고 알림 전송: `reports` 문서 생성 시 Slack으로 알림 전송
+  - 환경 변수: `functions/.env` 파일에서 dotenv로 로드 (로컬 개발)
+  - 배포 시: Firebase Console 환경 변수 또는 Secret Manager 사용
+
 ### UI 의존성
 
 | 패키지 | 목적 |
@@ -415,6 +478,13 @@ Future<Either<Failure, Post>> createPost(Post post) async {
 | `cached_network_image` | 이미지 캐싱 |
 | `image_picker` | 이미지 선택 |
 | `flutter_svg` | SVG 지원 |
+
+**접근성 기능**:
+- 글씨 크기 설정: `MediaQuery.textScaler`를 통해 앱 전체 텍스트 크기 조절 지원
+  - `font_scale_provider.dart` - 글씨 크기 배율 관리 (0.85 ~ 1.4)
+  - `main.dart` - 전체 앱에 textScaler 적용
+  - `my_page_screen.dart` - 마이페이지에서 슬라이더로 글씨 크기 설정
+  - SharedPreferences로 설정 영속화
 
 ---
 
@@ -444,6 +514,9 @@ firestore/
 │       ├── isOfficial: bool
 │       ├── isPinned: bool
 │       ├── imageUrls: array<string>
+│       ├── status: string ("published" | "hidden" | "reported")
+│       ├── likeCount: number
+│       ├── commentCount: number
 │       ├── createdAt: timestamp
 │       └── updatedAt: timestamp
 │
@@ -453,6 +526,14 @@ firestore/
 │       ├── authorId: string
 │       ├── content: string
 │       ├── parentCommentId: string?
+│       └── createdAt: timestamp
+│
+├── reports/
+│   └── {reportId}/
+│       ├── targetType: string ("post" | "comment" | "user")
+│       ├── targetId: string
+│       ├── reason: string
+│       ├── reporterId: string
 │       └── createdAt: timestamp
 │
 ├── parishes/
@@ -540,7 +621,7 @@ AppLogger.error('에러 메시지', error, stackTrace);
 
 **적용 현황**:
 - ✅ 주요 repository 파일들 (`auth_repository_impl.dart`, `firestore_post_repository.dart` 등)
-- ✅ 주요 서비스 파일들 (`image_upload_service.dart`, `liturgical_reading_service.dart`, `push_notification_service.dart`, `parish_service.dart`, `saint_feast_day_service.dart`, `prayer_service.dart` 등)
+- ✅ 주요 서비스 파일들 (`core/data/services/` 디렉토리: `image_upload_service.dart`, `geocoding_service.dart`, `liturgical_reading_service.dart`, `push_notification_service.dart`, `parish_service.dart`, `saint_feast_day_service.dart`, `prayer_service.dart` 등)
 - ✅ 주요 화면 파일들 (`home_screen.dart` 등)
 - ✅ Provider 파일들 (`auth_provider.dart` 등)
 
@@ -590,7 +671,7 @@ AppLogger.error('에러 메시지', error, stackTrace);
    │   ├── entities/
    │   └── repositories/
    └── presentation/
-       ├── screens/        # 모든 화면은 여기에 위치 (pages 디렉토리 사용 안 함)
+       ├── screens/        
        └── widgets/        # 재사용 가능한 위젯
    ```
 
@@ -598,6 +679,55 @@ AppLogger.error('에러 메시지', error, stackTrace);
 3. 도메인 레이어에 repository 인터페이스 생성
 4. 데이터 레이어에 repository 구현
 5. 의존성 주입을 위한 providers 생성
+   - Repository Provider는 `data/providers/`에 위치
+   - UI state Provider는 `presentation/providers/`에 위치
 6. ConsumerWidget을 사용하여 화면 구축
 7. GoRouter 설정에 라우트 추가
 8. repository 및 providers에 대한 테스트 작성
+
+---
+
+## 데이터 관리
+
+### 성당 데이터 (`assets/data/parishes/`)
+
+성당 정보는 JSON 파일로 관리되며, 각 교구별로 파일이 분리되어 있습니다:
+- `tokyo.json`, `yokohama.json`, `osaka.json`, `kyoto.json`, `nagasaki.json`, `nagoya.json`, `fukuoka.json`, `hiroshima.json`, `saitama.json`, `sendai.json`, `niigata.json`, `oita.json`, `kagoshima.json`, `sapporo.json`, `naha.json`
+
+**데이터 구조**:
+```json
+{
+  "diocese": "tokyo",
+  "parishes": [
+    {
+      "name": "성당명",
+      "address": "상세 주소 (번지수 포함)",
+      "prefecture": "도도부현",
+      "latitude": 35.xxx,
+      "longitude": 139.xxx,
+      "massTime": "미사 시간 문자열",
+      "massTimes": { ... },
+      "foreignMassTimes": { ... }
+    }
+  ]
+}
+```
+
+**주소 업데이트**:
+- 2025-12-15: 799개 성당 중 798개 성당에 상세 주소 추가 (99.9% 완료율)
+- `scripts/batch_update_addresses.py`: 주소 업데이트 자동화 스크립트
+- 웹 검색을 통한 주소 수집 및 검증
+- 파일별 완료율: 14개 파일 100% 완료, sapporo.json 98.4% (61/62)
+- 미완료: カトリック奥尻教会 (번지수 정보 확인 불가)
+
+**좌표 데이터 추가**:
+- 2025-12-15: 모든 성당에 latitude/longitude 좌표 추가
+- Google Maps Geocoding API를 사용하여 주소를 좌표로 변환
+- `scripts/add_coordinates.py`: 좌표 추가 자동화 스크립트
+- 거리순 정렬 기능 활성화
+
+**외국어 미사 데이터 수정**:
+- 2025-12-15: `massTime` 텍스트와 `foreignMassTimes` 불일치 수정
+- 末吉町教会 등 13개 성당의 데이터 수정 (중국어, 영어, 한국어, 스페인어, 포르투갈어 등)
+- `scripts/fix_foreign_mass_times.py`: 불일치 분석 스크립트
+- `scripts/auto_fix_foreign_mass.py`: 자동 수정 스크립트

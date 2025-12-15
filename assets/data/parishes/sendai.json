@@ -17,7 +17,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.8237374,
+      "longitude": 140.7802829
     },
     {
       "name": "カトリック青森本町教会",
@@ -35,7 +37,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.8282733,
+      "longitude": 140.7523294
     },
     {
       "name": "カトリック松ヶ丘教会（巡回）",
@@ -43,13 +47,15 @@
       "address": "〒038-0003 青森市大字石江字平山19",
       "prefecture": "青森県",
       "isCathedral": false,
-      "massTime": "巡回教会",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "phone": null,
       "fax": null,
       "diocese": "sendai",
       "deanery": "chiku1",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.8223478,
+      "longitude": 140.68313
     },
     {
       "name": "カトリック野辺地教会",
@@ -67,7 +73,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.8677167,
+      "longitude": 141.126166
     },
     {
       "name": "カトリック大湊教会",
@@ -86,7 +94,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 41.27595360000001,
+      "longitude": 141.1543566
     },
     {
       "name": "カトリック弘前教会",
@@ -104,7 +114,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.6063736,
+      "longitude": 140.4721825
     },
     {
       "name": "カトリック黒石教会",
@@ -122,7 +134,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.6469499,
+      "longitude": 140.5912255
     },
     {
       "name": "カトリック五所川原教会",
@@ -140,7 +154,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.8135692,
+      "longitude": 140.4414182
     },
     {
       "name": "カトリック三沢教会",
@@ -159,7 +175,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.6799115,
+      "longitude": 141.3642105
     },
     {
       "name": "カトリック十和田教会",
@@ -177,7 +195,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.6173892,
+      "longitude": 141.2127935
     },
     {
       "name": "カトリック八戸塩町教会",
@@ -195,7 +215,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.5157359,
+      "longitude": 141.5001699
     },
     {
       "name": "カトリック鮫町教会",
@@ -213,7 +235,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.5304915,
+      "longitude": 141.5618277
     },
     {
       "name": "カトリック久慈教会",
@@ -231,7 +255,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 40.1912836,
+      "longitude": 141.7681558
     },
     {
       "name": "カトリック花巻教会",
@@ -249,7 +275,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.3909487,
+      "longitude": 141.1143085
     },
     {
       "name": "カトリック北上教会",
@@ -267,7 +295,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.29343069999999,
+      "longitude": 141.1265675
     },
     {
       "name": "カトリック水沢教会",
@@ -285,7 +315,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.1302624,
+      "longitude": 141.1332818
     },
     {
       "name": "カトリック遠野教会",
@@ -303,7 +335,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.3296202,
+      "longitude": 141.5388554
     },
     {
       "name": "カトリック宮古教会",
@@ -321,7 +355,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.6400616,
+      "longitude": 141.9440176
     },
     {
       "name": "カトリック釜石教会",
@@ -339,7 +375,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.2764951,
+      "longitude": 141.8824263
     },
     {
       "name": "カトリック四ツ家教会",
@@ -358,7 +396,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.7070928,
+      "longitude": 141.1484133
     },
     {
       "name": "カトリック志家教会",
@@ -376,7 +416,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.6997739,
+      "longitude": 141.1608476
     },
     {
       "name": "カトリック盛岡上堂教会",
@@ -394,7 +436,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.7245982,
+      "longitude": 141.1222535
     },
     {
       "name": "カトリック一関教会",
@@ -412,7 +456,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.9304269,
+      "longitude": 141.1347571
     },
     {
       "name": "カトリック千厩教会",
@@ -430,7 +476,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.9168729,
+      "longitude": 141.3327047
     },
     {
       "name": "カトリック築館教会",
@@ -448,7 +496,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.7339912,
+      "longitude": 141.0216002
     },
     {
       "name": "カトリック新生園（巡回）",
@@ -456,13 +506,15 @@
       "address": "〒989-4601 登米市迫町新田字上葉の木沢1",
       "prefecture": "宮城県",
       "isCathedral": false,
-      "massTime": "巡回教会",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "phone": "0228-38-2121",
       "fax": null,
       "diocese": "sendai",
       "deanery": "chiku3",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.7103973,
+      "longitude": 141.1103088
     },
     {
       "name": "カトリック古川教会",
@@ -481,7 +533,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.5751585,
+      "longitude": 140.9640103
     },
     {
       "name": "カトリック石巻教会",
@@ -499,7 +553,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.4287329,
+      "longitude": 141.2985462
     },
     {
       "name": "カトリック気仙沼教会",
@@ -517,7 +573,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.9064316,
+      "longitude": 141.5706997
     },
     {
       "name": "カトリック大船渡教会",
@@ -535,7 +593,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 39.07213,
+      "longitude": 141.7176274
     },
     {
       "name": "カトリック米川教会",
@@ -554,7 +614,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.7707705,
+      "longitude": 141.3276444
     },
     {
       "name": "カトリック元寺小路教会",
@@ -587,7 +649,9 @@
             "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 38.26366460000001,
+      "longitude": 140.8784273
     },
     {
       "name": "カトリック八木山教会",
@@ -605,7 +669,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.2401521,
+      "longitude": 140.8479452
     },
     {
       "name": "カトリック亘理教会",
@@ -623,7 +689,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.0370283,
+      "longitude": 140.8561662
     },
     {
       "name": "カトリック角田教会",
@@ -641,7 +709,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.970083,
+      "longitude": 140.7860346
     },
     {
       "name": "カトリック大河原教会",
@@ -659,7 +729,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.0475237,
+      "longitude": 140.7339403
     },
     {
       "name": "カトリック白石教会",
@@ -677,7 +749,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.0054856,
+      "longitude": 140.6192383
     },
     {
       "name": "カトリック一本杉教会",
@@ -695,7 +769,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.2442772,
+      "longitude": 140.9021729
     },
     {
       "name": "カトリック畳屋丁教会",
@@ -713,7 +789,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.2455757,
+      "longitude": 140.890173
     },
     {
       "name": "カトリック北仙台教会",
@@ -732,7 +810,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.2798115,
+      "longitude": 140.8674979
     },
     {
       "name": "カトリック西仙台教会",
@@ -750,7 +830,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.2706143,
+      "longitude": 140.8431745
     },
     {
       "name": "カトリック塩釜教会",
@@ -768,7 +850,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.3125586,
+      "longitude": 141.0254536
     },
     {
       "name": "カトリック東仙台教会",
@@ -786,7 +870,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 38.2791508,
+      "longitude": 140.9118746
     },
     {
       "name": "カトリック会津若松教会",
@@ -804,7 +890,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.4929884,
+      "longitude": 139.9252908
     },
     {
       "name": "カトリック喜多方教会",
@@ -822,7 +910,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.6467929,
+      "longitude": 139.8734707
     },
     {
       "name": "カトリック南会津教会",
@@ -841,7 +931,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.2052544,
+      "longitude": 139.7246493
     },
     {
       "name": "カトリック原町教会",
@@ -859,7 +951,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.6355764,
+      "longitude": 140.9599835
     },
     {
       "name": "カトリックいわき教会",
@@ -877,7 +971,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.05187799999999,
+      "longitude": 140.8907517
     },
     {
       "name": "カトリック湯本教会（巡回）",
@@ -885,14 +981,16 @@
       "address": "〒972-8321 いわき市常磐湯本町三函142",
       "prefecture": "福島県",
       "isCathedral": false,
-      "massTime": "巡回教会",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "phone": "0246-42-2517",
       "fax": "0246-42-2517",
       "note": "桑折",
       "diocese": "sendai",
       "deanery": "chiku5",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.0113624,
+      "longitude": 140.8449113
     },
     {
       "name": "カトリック松木町教会",
@@ -910,7 +1008,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.7570644,
+      "longitude": 140.4410441
     },
     {
       "name": "カトリック桑折教会（巡回）",
@@ -918,14 +1018,16 @@
       "address": "〒969-1603 伊達郡桑折町字上町12",
       "prefecture": "福島県",
       "isCathedral": false,
-      "massTime": "巡回教会",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "phone": "024-582-3864",
       "fax": null,
       "note": "湯澤",
       "diocese": "sendai",
       "deanery": "chiku5",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.8508111,
+      "longitude": 140.5181945
     },
     {
       "name": "カトリック野田町教会",
@@ -943,7 +1045,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.7566919,
+      "longitude": 140.4495146
     },
     {
       "name": "カトリック二本松教会",
@@ -961,7 +1065,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.5909858,
+      "longitude": 140.4296551
     },
     {
       "name": "カトリック郡山教会",
@@ -980,7 +1086,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.3996358,
+      "longitude": 140.3742717
     },
     {
       "name": "カトリック須賀川教会",
@@ -999,7 +1107,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.2854862,
+      "longitude": 140.3794703
     },
     {
       "name": "カトリック白河教会",
@@ -1017,7 +1127,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.12881429999999,
+      "longitude": 140.2097424
     }
   ]
 }

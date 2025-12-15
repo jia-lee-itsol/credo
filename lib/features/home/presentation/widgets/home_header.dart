@@ -7,6 +7,7 @@ import '../../../../config/routes/app_routes.dart';
 import '../../../../core/constants/liturgy_constants.dart';
 import '../../../../core/data/services/saint_feast_day_service.dart' as core;
 import '../../../../shared/providers/liturgy_theme_provider.dart';
+import '../../../../shared/providers/locale_provider.dart';
 
 /// 홈 화면 헤더 위젯
 class HomeHeader extends ConsumerWidget {
@@ -26,9 +27,12 @@ class HomeHeader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final currentLocale = ref.watch(localeProvider);
     final testDate = ref.watch(testDateOverrideProvider);
     final now = testDate ?? DateTime.now();
-    final dateFormat = DateFormat('yyyy年M月d日（E）', 'ja');
+
+    // 현재 로케일에 맞는 날짜 포맷 생성
+    final dateFormat = HomeHeader._getDateFormatForLocale(currentLocale);
     final todaySaintsAsync = ref.watch(core.todaySaintsProvider);
 
     return Container(
@@ -59,7 +63,7 @@ class HomeHeader extends ConsumerWidget {
                       ),
                     ),
 
-                    // 오늘의 성인 축일
+                    // 오늘의 성인 축일 (리스트)
                     todaySaintsAsync.when(
                       data: (saints) {
                         if (saints.isEmpty) {
@@ -67,24 +71,33 @@ class HomeHeader extends ConsumerWidget {
                         }
                         return Padding(
                           padding: const EdgeInsets.only(top: 4),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.star,
-                                size: 14,
-                                color: Colors.amber,
-                              ),
-                              const SizedBox(width: 4),
-                              Flexible(
-                                child: Text(
-                                  saints.first.name,
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: Colors.white,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: saints.map((saint) {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 2),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.star,
+                                      size: 14,
+                                      color: Colors.amber,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Flexible(
+                                      child: Text(
+                                        saint.getName(
+                                          currentLocale.languageCode,
+                                        ),
+                                        style: theme.textTheme.bodySmall
+                                            ?.copyWith(color: Colors.white),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                              );
+                            }).toList(),
                           ),
                         );
                       },
@@ -130,5 +143,27 @@ class HomeHeader extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  /// 로케일에 맞는 날짜 포맷 생성
+  static DateFormat _getDateFormatForLocale(Locale locale) {
+    switch (locale.languageCode) {
+      case 'ja':
+        return DateFormat('yyyy年M月d日（E）', 'ja');
+      case 'ko':
+        return DateFormat('yyyy년 M월 d일 (E)', 'ko');
+      case 'en':
+        return DateFormat('MMMM d, yyyy (EEE)', 'en');
+      case 'zh':
+        return DateFormat('yyyy年M月d日 (E)', 'zh');
+      case 'vi':
+        return DateFormat("d 'tháng' M, yyyy (EEE)", 'vi');
+      case 'es':
+        return DateFormat("d 'de' MMMM, yyyy (EEE)", 'es');
+      case 'pt':
+        return DateFormat("d 'de' MMMM, yyyy (EEE)", 'pt');
+      default:
+        return DateFormat('yyyy年M月d日（E）', 'ja');
+    }
   }
 }

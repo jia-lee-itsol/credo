@@ -72,3 +72,7 @@ class InsufficientPermissionFailure extends PermissionFailure {
   });
 }
 
+/// 신고 생성 실패
+class ReportCreationFailure extends Failure {
+  const ReportCreationFailure({super.message = '신고 생성에 실패했습니다.', super.code});
+}

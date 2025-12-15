@@ -1,0 +1,382 @@
+{
+  "app": {
+    "name": "Credo",
+    "description": "일본 전국의 가톨릭 교회와 신자들을 연결하는 커뮤니티 앱입니다."
+  },
+  "common": {
+    "ok": "확인",
+    "cancel": "취소",
+    "save": "저장",
+    "delete": "삭제",
+    "edit": "편집",
+    "close": "닫기",
+    "loading": "로딩 중...",
+    "error": "오류",
+    "success": "성공",
+    "retry": "다시 시도",
+    "search": "검색",
+    "select": "선택",
+    "add": "추가",
+    "remove": "삭제",
+    "send": "전송",
+    "reset": "초기화",
+    "apply": "적용",
+    "login": "로그인",
+    "logout": "로그아웃",
+    "guest": "게스트",
+    "user": "사용자",
+    "required": "필수",
+    "optional": "선택",
+    "notSet": "미설정",
+    "small": "작게",
+    "medium": "보통",
+    "large": "크게",
+    "extraLarge": "매우 크게",
+    "sampleText": "샘플 텍스트",
+    "or": "또는",
+    "pageNotFound": "페이지를 찾을 수 없습니다",
+    "backToHome": "홈으로 돌아가기",
+    "noMassTimeInfo": "미사 시간 정보가 없습니다",
+    "favoriteAdded": "즐겨찾기에 추가되었습니다",
+    "favoriteRemoved": "즐겨찾기에서 제거되었습니다",
+    "commentHint": "댓글을 입력..."
+  },
+  "navigation": {
+    "home": "홈",
+    "meditation": "묵상",
+    "share": "공유",
+    "church": "교회",
+    "community": "커뮤니티"
+  },
+  "language": {
+    "settings": "언어 설정",
+    "switched": "{language}(으)로 전환했습니다",
+    "switchedButProfileUpdateFailed": "{language}(으)로 전환했지만 프로필 업데이트에 실패했습니다: {error}",
+    "switchedButProfileUpdateFailed@language": "언어 이름",
+    "switchedButProfileUpdateFailed@error": "오류 메시지"
+  },
+  "auth": {
+    "signIn": "로그인",
+    "signUp": "회원가입",
+    "signOut": "로그아웃",
+    "signOutSuccess": "로그아웃했습니다",
+    "signInFailed": "로그인에 실패했습니다",
+    "signUpFailed": "회원가입에 실패했습니다",
+    "accountCreated": "계정이 생성되었습니다",
+    "loginRequired": "로그인이 필요합니다",
+    "loginRequiredMessage": "게시하려면 로그인이 필요합니다.",
+    "loginRequiredQuestion": "게시하려면 로그인이 필요합니다. 로그인하시겠습니까?",
+    "continueAsGuest": "게스트로 계속하기",
+    "alreadyHaveAccount": "이미 계정이 있으신가요?",
+    "noAccount": "계정이 없으신가요?",
+    "forgotPassword": "비밀번호를 잊으셨나요?",
+    "passwordReset": "비밀번호 재설정",
+    "passwordResetEmailSent": "비밀번호 재설정 이메일을 보냈습니다",
+    "passwordResetEmailFailed": "비밀번호 재설정 이메일 전송에 실패했습니다",
+    "email": "이메일",
+    "emailHint": "이메일 주소를 입력하세요",
+    "password": "비밀번호",
+    "passwordConfirm": "비밀번호 (확인)",
+    "passwordMismatch": "비밀번호가 일치하지 않습니다",
+    "saveEmail": "이메일 주소 저장",
+    "nickname": "닉네임",
+    "parish": "소속 교회",
+    "selectParish": "선택하세요 (선택사항)",
+    "selectParishTitle": "소속 교회 선택",
+    "baptismName": "세례명 (선택사항)",
+    "baptismNameHint": "세례명을 입력하세요",
+    "feastDay": "수호성인 축일 (선택사항)",
+    "selectFeastDay": "선택하세요 (선택사항)",
+    "selectFeastDayTitle": "수호성인 축일 선택",
+    "createAccount": "계정 만들기",
+    "termsRequired": "이용약관 및 개인정보처리방침에 동의해주세요",
+    "subtitle": "신앙으로 연결되는"
+  },
+  "validation": {
+    "emailRequired": "이메일 주소를 입력하세요",
+    "emailInvalid": "유효한 이메일 주소를 입력하세요",
+    "passwordRequired": "비밀번호를 입력하세요",
+    "passwordMinLength": "비밀번호는 8자 이상이어야 합니다",
+    "nicknameRequired": "닉네임을 입력하세요",
+    "nicknameMaxLength": "닉네임은 {max}자 이하여야 합니다",
+    "nicknameMaxLength@max": "최대 문자 수",
+    "invalidCharacters": "사용할 수 없는 문자가 포함되어 있습니다",
+    "titleRequired": "제목을 입력하세요",
+    "titleMaxLength": "제목은 {max}자 이하여야 합니다",
+    "titleMaxLength@max": "최대 문자 수",
+    "contentRequired": "내용을 입력하세요",
+    "contentMaxLength": "내용은 {max}자 이하여야 합니다",
+    "contentMaxLength@max": "최대 문자 수",
+    "commentRequired": "댓글을 입력하세요",
+    "commentMaxLength": "댓글은 {max}자 이하여야 합니다",
+    "commentMaxLength@max": "최대 문자 수",
+    "baptismNameRequired": "세례명을 입력하세요",
+    "monthInvalid": "유효한 월(1-12)을 입력하세요",
+    "dayInvalid": "유효한 일(1-31)을 입력하세요"
+  },
+  "community": {
+    "title": "커뮤니티",
+    "newPost": "새 게시글",
+    "postCreated": "게시글이 작성되었습니다",
+    "postCreateFailed": "게시글 작성에 실패했습니다. 네트워크 연결을 확인하세요.",
+    "postDeleted": "게시글이 삭제되었습니다",
+    "postDeleteFailed": "게시글 삭제에 실패했습니다",
+    "postDeleteConfirmTitle": "삭제 확인",
+    "postDeleteConfirmMessage": "이 게시글을 삭제하시겠습니까?\n이 작업은 취소할 수 없습니다.",
+    "postHidden": "게시글이 숨겨졌습니다",
+    "postShow": "게시글이 표시되었습니다",
+    "postHideFailed": "게시글 숨기기에 실패했습니다",
+    "postShowFailed": "게시글 표시에 실패했습니다",
+    "postHideConfirmTitle": "숨기기 확인",
+    "postHideConfirmMessage": "이 게시글을 숨기시겠습니까?\n숨겨진 게시글은 목록에 표시되지 않습니다.",
+    "postShowConfirmTitle": "표시 확인",
+    "postShowConfirmMessage": "이 게시글을 표시하시겠습니까?\n목록에 다시 표시됩니다.",
+    "postHideNoPermission": "이 게시글을 숨길 권한이 없습니다. 자신의 소속 교회 게시글만 숨길 수 있습니다.",
+    "postShowNoPermission": "이 게시글을 표시할 권한이 없습니다. 자신의 소속 교회 게시글만 표시할 수 있습니다.",
+    "editPost": "편집",
+    "deletePost": "삭제",
+    "hidePost": "숨기기",
+    "showPost": "표시",
+    "reportPost": "신고",
+    "commentPosted": "댓글이 작성되었습니다",
+    "commentPostFailed": "댓글 작성에 실패했습니다",
+    "likeFailed": "좋아요 처리에 실패했습니다",
+    "shareMeditation": "묵상을 공유했습니다",
+    "noSearchResults": "검색 결과가 없습니다",
+    "errorOccurred": "오류가 발생했습니다",
+    "swipeToRefresh": "아래로 당겨서 새로고침",
+    "official": "공식",
+    "officialAccountSettings": "공식 계정 설정",
+    "registerAsNotice": "공지로 등록",
+    "registerAsNoticeSubtitle": "교회 멤버 모두에게 알림이 전송됩니다",
+    "pinToTop": "상단 고정",
+    "pinToTopSubtitle": "게시글 목록 최상단에 표시됩니다",
+    "guidelines": "게시함으로써 커뮤니티 가이드라인에 동의한 것으로 간주됩니다. 다른 사용자를 존중하고 적절한 내용을 게시하세요.",
+    "home": {
+      "title": "커뮤니티",
+      "parish": "소속 교회",
+      "parishNotSet": "소속 교회가 설정되지 않았습니다",
+      "parishLoadFailed": "소속 교회 정보를 불러올 수 없습니다",
+      "searchOtherParishes": "다른 교회의 커뮤니티 찾기",
+      "todayMass": "오늘의 미사",
+      "todayBibleReadingAndPrayer": "오늘의 성경 봉독과 기도",
+      "recentNotices": "최근 공지사항",
+      "noNotices": "공지사항이 없습니다"
+    },
+    "notificationLabels": {
+      "mention": "멘션",
+      "notice": "공지",
+      "comment": "댓글"
+    }
+  },
+  "report": {
+    "title": "신고",
+    "reasonRequired": "신고 사유를 선택하세요",
+    "reasonInputRequired": "신고 사유를 입력하세요",
+    "reportFailed": "신고에 실패했습니다",
+    "reportSuccess": "신고되었습니다. 신고해주셔서 감사합니다.",
+    "reasons": {
+      "spam": "스팸",
+      "inappropriate": "부적절한 콘텐츠",
+      "harassment": "비방",
+      "other": "기타"
+    },
+    "reasonHint": "신고 사유를 입력하세요"
+  },
+  "image": {
+    "title": "이미지",
+    "add": "이미지 추가",
+    "addButton": "추가",
+    "max3Images": "최대 3장까지 첨부할 수 있습니다",
+    "camera": "카메라",
+    "gallery": "갤러리",
+    "selectFailed": "이미지 선택에 실패했습니다",
+    "permissionRequired": "권한이 필요합니다",
+    "cameraPermissionMessage": "카메라를 사용하려면 설정에서 카메라 접근을 허용하세요.",
+    "galleryPermissionMessage": "사진 라이브러리를 사용하려면 설정에서 사진 라이브러리 접근을 허용하세요.",
+    "openSettings": "설정 열기",
+    "permissionDeniedMessage": "설정 앱에서 카메라/사진 라이브러리 접근을 허용하세요",
+    "permissionDeniedMessageAlt": "설정에서 카메라/저장소 접근을 허용하세요"
+  },
+  "profile": {
+    "myPage": "마이페이지",
+    "editProfile": "프로필 편집",
+    "profileUpdated": "프로필이 업데이트되었습니다",
+    "updateFailed": "업데이트에 실패했습니다",
+    "favoriteParishes": "자주 가는 교회",
+    "notificationSettings": "알림 설정",
+    "notificationSettingsComingSoon": "알림 설정은 준비 중입니다",
+    "languageSettings": "언어 설정",
+    "termsOfService": "이용약관",
+    "termsOfServiceComingSoon": "이용약관은 준비 중입니다",
+    "privacyPolicy": "개인정보처리방침",
+    "privacyPolicyComingSoon": "개인정보처리방침은 준비 중입니다",
+    "aboutApp": "앱 정보",
+    "shareProfileQR": "QR 코드로 프로필 공유",
+    "userId": "사용자 ID",
+    "userIdCopied": "사용자 ID가 복사되었습니다",
+    "loginRequired": "로그인이 필요합니다",
+    "pleaseLogin": "로그인하세요",
+    "fontSize": "글자 크기",
+    "directInput": "기타 (직접 입력)",
+    "directInputTitle": "세례명과 축일 직접 입력",
+    "directInputDialogTitle": "세례명과 축일 입력",
+    "month": "월",
+    "day": "일",
+    "godparent": {
+      "add": "추가",
+      "remove": "삭제",
+      "searchUser": "이메일 주소 또는 사용자 ID로 검색하세요",
+      "userNotFound": "사용자를 찾을 수 없습니다",
+      "userFound": "사용자를 찾았습니다",
+      "nickname": "닉네임",
+      "email": "이메일",
+      "userId": "사용자 ID"
+    },
+    "favoriteParishes": {
+      "title": "자주 가는 교회",
+      "searchParish": "교회 검색",
+      "noParishes": "등록된 교회가 없습니다",
+      "addParishMessage": "교회를 검색하여 추가하세요",
+      "cannotDeleteParish": "소속 교회는 삭제할 수 없습니다",
+      "deleted": "삭제되었습니다",
+      "deleteTitle": "삭제"
+    }
+  },
+  "parish": {
+    "detail": "교회 상세",
+    "notFound": "교회 정보를 찾을 수 없습니다",
+    "favoriteAdded": "즐겨찾기에 추가되었습니다",
+    "favoriteRemoved": "즐겨찾기에서 제거되었습니다",
+    "cannotRemoveParish": "소속 교회는 즐겨찾기에서 제거할 수 없습니다",
+    "openInMap": "지도 앱에서 열기",
+    "community": "커뮤니티",
+    "search": "교회 찾기",
+    "searchFromCurrentLocation": "현재 위치에서 교회 검색",
+    "locationPermissionRequired": "위치 권한이 필요합니다",
+    "locationPermissionMessage": "설정에서 위치 권한을 활성화하세요.",
+    "locationUsage": "위치 사용",
+    "locationUsageMessage": "근처 교회를 찾기 위해 위치 사용을 허용하세요.\n교회까지의 거리 표시에도 사용됩니다.",
+    "notNow": "나중에",
+    "allow": "허용",
+    "locationFailed": "위치를 가져올 수 없습니다",
+    "filter": {
+      "title": "필터",
+      "reset": "초기화",
+      "prefecture": "도도부현",
+      "mass": "미사",
+      "options": "옵션",
+      "apply": "적용",
+      "todayMass": "오늘 미사 있음",
+      "foreignMass": "외국어 미사 있음",
+      "cathedralOnly": "대성당만",
+      "cathedralOnlySubtitle": "대성당만 표시",
+      "massTimeAvailable": "미사 시간 있음",
+      "massTimeAvailableSubtitle": "미사 시간 정보가 있는 교회만 표시"
+    },
+    "empty": {
+      "notFound": "교회 데이터를 찾을 수 없습니다"
+    },
+    "detail": {
+      "noMassTimeInfo": "미사 시간 정보가 없습니다"
+    }
+  },
+  "mass": {
+    "title": "일일 묵상",
+    "noDataToday": "오늘의 묵상 정보가 없습니다",
+    "noDataWeekday": "평일 묵상 정보는 현재 준비 중입니다",
+    "bibleNotice": "※성경 본문은 교회에서 들으시거나 공식 성경을 읽어주세요.",
+    "liturgicalDays": {
+      "sunday": "주일",
+      "solemnity": "대축일",
+      "feast": "축일",
+      "advent": "대림절",
+      "christmas": "성탄절",
+      "lent": "사순절",
+      "easter": "부활절",
+      "ordinary": "연중 평일"
+    },
+    "prayer": {
+      "title": "묵상 가이드",
+      "morningMeditation": "아침 묵상",
+      "guides": {
+        "morning": {
+          "title": "아침 묵상",
+          "subtitle": "Morning",
+          "content": "하루를 시작하며 하나님께 감사하고 새로운 하루를 하나님의 보호 아래 맡기는 시간입니다. 아침에 일어나 하루를 시작할 때, 하루 종일의 은혜와 보호를 구하는 시간입니다."
+        },
+        "meal": {
+          "title": "식사 묵상",
+          "subtitle": "Meal",
+          "content": "식사 전후에 음식을 주신 하나님께 감사하는 시간입니다. 식사 전에는 음식을 주신 것에 감사하고, 식사 후에는 배부름에 감사하는 시간입니다."
+        },
+        "evening": {
+          "title": "저녁 묵상",
+          "subtitle": "Evening",
+          "content": "하루를 마무리하며 하나님께 감사하고, 하루의 죄를 회개하며 용서를 구하는 시간입니다. 잠자리에 들기 전 하루를 돌아보고 내일을 위해 기도하는 시간입니다."
+        },
+        "difficult": {
+          "title": "어려운 때의 묵상",
+          "subtitle": "In Difficult Times",
+          "content": "어려운 상황이나 고통스러운 때에 하나님의 도움과 위로를 구하는 시간입니다. 시련과 고난 가운데서도 하나님의 사랑과 보호를 믿는 시간입니다."
+        },
+        "thanksgiving": {
+          "title": "감사 묵상",
+          "subtitle": "Thanksgiving",
+          "content": "하나님이 주신 은혜와 축복에 감사하는 시간입니다. 일상의 작은 기쁨부터 큰 축복까지, 모든 것에 감사하는 마음을 갖는 시간입니다."
+        },
+        "meditation": {
+          "title": "묵상의 시간",
+          "subtitle": "Meditation Time",
+          "content": "고요한 시간을 가지고 하나님과 대화하며 자신의 마음을 돌아보는 시간입니다. 말씀을 묵상하고 하나님의 뜻을 구하며 평화로운 시간을 보냅니다."
+        }
+      },
+      "meditationGuides": {
+        "firstReading": "성경에 기반한 묵상 I",
+        "psalm": "시편에 기반한 묵상",
+        "secondReading": "제2독서 묵상 II",
+        "gospel": "성경 말씀을 통한 묵상 (복음)"
+      },
+      "shareHint": "오늘의 묵상을 공유해보세요...",
+      "readings": {
+        "firstReading": "제1독서",
+        "psalm": "화답송",
+        "secondReading": "제2독서",
+        "gospel": "복음"
+      }
+    }
+  },
+  "qr": {
+    "invalid": "유효하지 않은 QR 코드입니다",
+    "ownProfile": "자신의 프로필입니다",
+    "userNotFound": "사용자를 찾을 수 없습니다",
+    "scanError": "스캔 오류",
+    "userFound": "사용자를 찾았습니다",
+    "startScan": "스캔 시작"
+  },
+  "location": {
+    "permissionRequired": "위치 권한이 필요합니다",
+    "permissionMessage": "설정에서 위치 권한을 활성화하세요.",
+    "openSettings": "설정 열기",
+    "usagePurpose": "위치 정보 사용 목적",
+    "purposeNearbySearch": "현재 위치에서 가까운 교회 검색",
+    "purposeDistanceDisplay": "교회까지의 거리 표시"
+  },
+  "search": {
+    "userNotFound": "사용자를 찾을 수 없습니다",
+    "userSearchHint": "이메일 주소 또는 사용자 ID",
+    "userSearchRequired": "이메일 주소 또는 사용자 ID를 입력하세요",
+    "parishSearchHint": "교회명으로 검색",
+    "saintSearchHint": "성인명으로 검색",
+    "noResults": "검색 결과가 없습니다"
+  },
+  "comingSoon": {
+    "notificationSettings": "알림 설정은 준비 중입니다",
+    "termsOfService": "이용약관은 준비 중입니다",
+    "privacyPolicy": "개인정보처리방침은 준비 중입니다"
+  },
+  "community": {
+    "postsCount": "{count}개의 게시글",
+    "postsCount@count": "게시글 수"
+  }
+}

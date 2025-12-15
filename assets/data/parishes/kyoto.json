@@ -14,8 +14,10 @@
       "phone": "075-231-4785",
       "fax": "075-211-8021",
       "massTimes": {
-        "saturday": ["18:30"],
-        "sunday": ["07:00", "10:30"]
+        "sunday": [
+          "07:00",
+          "10:30"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
@@ -30,7 +32,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.0012678,
+      "longitude": 135.7692946
     },
     {
       "name": "カトリック河原町教会",
@@ -43,8 +47,10 @@
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {
-        "saturday": ["18:30"],
-        "sunday": ["07:00", "10:30"]
+        "sunday": [
+          "07:00",
+          "10:30"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
@@ -59,7 +65,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.0012678,
+      "longitude": 135.7692946
     },
     {
       "name": "カトリック伏見教会",
@@ -81,15 +89,17 @@
           {
             "time": "14:00",
             "language": "VI",
-            "note": "12月21日"
+            "note": ""
           },
           {
             "time": "19:30",
             "language": "VI",
-            "note": "12月27日"
+            "note": ""
           }
         ]
-      }
+      },
+      "latitude": 34.9589664,
+      "longitude": 135.7715559
     },
     {
       "name": "カトリック桃山教会",
@@ -106,7 +116,9 @@
           "10:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.9295327,
+      "longitude": 135.7687142
     },
     {
       "name": "カトリック山科教会",
@@ -123,7 +135,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.9906862,
+      "longitude": 135.8083185
     },
     {
       "name": "カトリック北白川教会",
@@ -140,7 +154,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.0335567,
+      "longitude": 135.7862693
     },
     {
       "name": "カトリック衣笠教会",
@@ -157,31 +173,37 @@
           "10:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.0403438,
+      "longitude": 135.7334817
     },
     {
       "name": "カトリック宇津教会（巡回）",
       "address": "〒601-0265 京都府京都市右京区京北中地町横谷口15-1",
       "prefecture": "京都府",
       "isCathedral": false,
-      "massTime": "第2前土曜15:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1400494,
+      "longitude": 135.5902321
     },
     {
       "name": "カトリック山国教会（巡回）",
       "address": "〒601-0321 京都府京都市右京区京北塔町宮ノ上13-2",
       "prefecture": "京都府",
       "isCathedral": false,
-      "massTime": "第4前土曜15:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.1817515,
+      "longitude": 135.6610805
     },
     {
       "name": "カトリック小山教会",
@@ -198,7 +220,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.0479797,
+      "longitude": 135.7543795
     },
     {
       "name": "カトリック高野教会",
@@ -215,7 +239,9 @@
           "10:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.0431872,
+      "longitude": 135.7779169
     },
     {
       "name": "カトリック西陣教会",
@@ -232,7 +258,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.0012678,
+      "longitude": 135.7692946
     },
     {
       "name": "カトリック桂教会",
@@ -244,21 +272,32 @@
       "fax": "075-381-3269",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 34.9777953,
+      "longitude": 135.6992077
     },
     {
       "name": "カトリック西院教会",
       "address": "〒604-8854 京都府京都市中京区壬生仙念町23",
       "prefecture": "京都府",
       "isCathedral": false,
-      "massTime": "12月14日09:00 / 12月21日11:30 / 12月27日19:00 / 1月4日11:30 / 1月11日09:00 / 1月18日11:30 / 1月24日19:00",
+      "massTime": "ミサ時間はブログまたは教会にご確認ください（毎月更新）",
       "phone": "075-841-1023",
       "fax": "075-841-1040",
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.0039534,
+      "longitude": 135.7339127
     },
     {
       "name": "カトリック九条教会",
@@ -270,8 +309,17 @@
       "fax": "075-691-3482",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 34.9785694,
+      "longitude": 135.7356419
     },
     {
       "name": "カトリック長岡教会",
@@ -283,8 +331,18 @@
       "fax": "075-955-8355",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00",
+          "11:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 34.9254629,
+      "longitude": 135.6863197
     },
     {
       "name": "カトリック丹波教会",
@@ -296,8 +354,17 @@
       "fax": "0771-22-3473",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "11:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 35.013115,
+      "longitude": 135.5697611
     },
     {
       "name": "カトリック田辺教会",
@@ -309,8 +376,15 @@
       "fax": "0774-62-0456",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "11:00",
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 34.81907959999999,
+      "longitude": 135.7716587
     },
     {
       "name": "カトリック青谷教会",
@@ -322,8 +396,15 @@
       "fax": "0774-52-0116",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 34.8302894,
+      "longitude": 135.8050463
     },
     {
       "name": "カトリック宇治教会",
@@ -344,7 +425,9 @@
             "note": "第1日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.8915954,
+      "longitude": 135.8095864
     },
     {
       "name": "カトリック精華教会",
@@ -356,8 +439,15 @@
       "fax": "0774-95-3124",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 34.7598371,
+      "longitude": 135.788187
     },
     {
       "name": "カトリック八幡教会",
@@ -369,21 +459,33 @@
       "fax": "075-981-0208",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "saturday": [
+          "10:30"
+        ],
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 34.8837377,
+      "longitude": 135.7024267
     },
     {
       "name": "カトリック丹後教会",
       "address": "〒626-0023 京都府宮津市宮本500",
       "prefecture": "京都府",
       "isCathedral": false,
-      "massTime": "網野教会堂・加悦教会堂：12月21日10:00 / 宮津教会堂：12月14日10:00, 12月28日10:00",
+      "massTime": "ミサ時間はウェブサイトまたは教会にご確認ください（毎月更新）",
       "phone": "0772-22-3127",
       "fax": "0772-22-3684",
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.5352274,
+      "longitude": 135.1948195
     },
     {
       "name": "カトリック福知山教会",
@@ -413,7 +515,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.2947688,
+      "longitude": 135.1202436
     },
     {
       "name": "カトリック西舞鶴教会",
@@ -438,7 +542,9 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.4492325,
+      "longitude": 135.3297541
     },
     {
       "name": "カトリック東舞鶴教会",
@@ -454,7 +560,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.4769913,
+      "longitude": 135.3978087
     },
     {
       "name": "カトリック安曇川教会",
@@ -471,7 +579,9 @@
           "14:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.3308751,
+      "longitude": 136.0223945
     },
     {
       "name": "カトリック大津教会",
@@ -488,7 +598,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.0017988,
+      "longitude": 135.8798806
     },
     {
       "name": "カトリック唐崎教会",
@@ -505,7 +617,9 @@
           "10:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.0386193,
+      "longitude": 135.8613955
     },
     {
       "name": "カトリック草津教会",
@@ -518,8 +632,10 @@
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {
-        "saturday": ["19:00"],
-        "sunday": ["08:00", "10:00"]
+        "sunday": [
+          "08:00",
+          "10:00"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
@@ -544,19 +660,23 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.01625260000001,
+      "longitude": 135.9632513
     },
     {
       "name": "カトリック甲賀教会（巡回）",
       "address": "〒520-3326 滋賀県甲賀市甲南町耕心1-764-30",
       "prefecture": "滋賀県",
       "isCathedral": false,
-      "massTime": "第2・4土曜16:00",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {},
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.9421876,
+      "longitude": 136.1628173
     },
     {
       "name": "カトリック長浜教会",
@@ -587,7 +707,9 @@
             "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.3775966,
+      "longitude": 136.2784843
     },
     {
       "name": "カトリック彦根教会",
@@ -618,7 +740,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.2724185,
+      "longitude": 136.2558268
     },
     {
       "name": "カトリック奈良教会",
@@ -640,10 +764,12 @@
           {
             "time": "15:00",
             "language": "EN",
-            "note": "最終日曜"
+            "note": ""
           }
         ]
-      }
+      },
+      "latitude": 34.6848397,
+      "longitude": 135.831533
     },
     {
       "name": "カトリック登美が丘教会",
@@ -660,7 +786,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.7163807,
+      "longitude": 135.7526633
     },
     {
       "name": "カトリック富雄教会",
@@ -677,7 +805,9 @@
           "11:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.6959819,
+      "longitude": 135.7349159
     },
     {
       "name": "カトリック大和郡山教会",
@@ -694,7 +824,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.646956,
+      "longitude": 135.7773869
     },
     {
       "name": "カトリック大和八木教会",
@@ -719,7 +851,9 @@
             "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.5102173,
+      "longitude": 135.7919971
     },
     {
       "name": "カトリック西大和カトリックセンター",
@@ -736,7 +870,9 @@
           "10:30"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.5806346,
+      "longitude": 135.7195736
     },
     {
       "name": "カトリック御所教会",
@@ -753,7 +889,9 @@
           "09:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 34.435342,
+      "longitude": 135.7564405
     },
     {
       "name": "カトリック大和高田教会",
@@ -778,7 +916,9 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.509539,
+      "longitude": 135.7404777
     },
     {
       "name": "カトリック桑名教会",
@@ -803,7 +943,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.0596558,
+      "longitude": 136.6835422
     },
     {
       "name": "カトリック鈴鹿教会",
@@ -828,25 +970,22 @@
           {
             "time": "18:00",
             "language": "ES",
-            "note": "第1・2日曜"
+            "note": ""
           },
           {
             "time": "18:00",
             "language": "PT",
-            "note": "第3・4日曜"
+            "note": ""
           },
           {
             "time": "11:00",
             "language": "VI",
             "note": "第3日曜"
-          },
-          {
-            "time": "15:00",
-            "language": "PH",
-            "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.8782246,
+      "longitude": 136.5847624
     },
     {
       "name": "カトリック四日市教会",
@@ -859,16 +998,13 @@
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {
-        "saturday": ["18:00"],
-        "sunday": ["07:00", "10:00"]
+        "sunday": [
+          "07:00",
+          "10:00"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
-          {
-            "time": "13:00",
-            "language": "PH",
-            "note": "第1日曜"
-          },
           {
             "time": "16:00",
             "language": "PT",
@@ -885,7 +1021,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.9604616,
+      "longitude": 136.6221144
     },
     {
       "name": "カトリック上野教会",
@@ -897,9 +1035,7 @@
       "fax": "0595-21-8099",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {
-        "saturday": ["19:30"]
-      },
+      "massTimes": {},
       "foreignMassTimes": {
         "sunday": [
           {
@@ -923,7 +1059,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.7695073,
+      "longitude": 136.1312259
     },
     {
       "name": "カトリック名張教会",
@@ -948,7 +1086,9 @@
             "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.6235157,
+      "longitude": 136.0945429
     },
     {
       "name": "カトリック津教会",
@@ -961,8 +1101,9 @@
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {
-        "saturday": ["18:30"],
-        "sunday": ["09:00"]
+        "sunday": [
+          "09:00"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
@@ -982,7 +1123,9 @@
             "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.7178066,
+      "longitude": 136.5031824
     },
     {
       "name": "カトリック久居教会",
@@ -1007,7 +1150,9 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.6780856,
+      "longitude": 136.4715646
     },
     {
       "name": "カトリック松阪教会",
@@ -1033,7 +1178,9 @@
             "note": "第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 34.5747828,
+      "longitude": 136.5294734
     },
     {
       "name": "カトリック伊勢教会",
@@ -1045,8 +1192,15 @@
       "fax": "0596-27-0525",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "09:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 34.4869793,
+      "longitude": 136.7093508
     }
   ]
 }

@@ -32,6 +32,9 @@ class UserEntity with _$UserEntity {
   /// 공식 계정인지 확인
   bool get isOfficialAccount => isVerified && verifiedParishId != null;
 
+  /// 관리자 권한이 있는지 확인
+  bool get isAdmin => role == 'admin';
+
   /// 기본 표시 이름
   String get displayName => nickname;
 }

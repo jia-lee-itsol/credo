@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/utils/validators.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../core/services/logger_service.dart';
 import '../notifiers/post_form_notifier.dart';
 
 /// 게시글 폼 필드 위젯 (제목, 본문)
-class PostFormFields extends StatelessWidget {
+class PostFormFields extends ConsumerWidget {
   final TextEditingController titleController;
   final TextEditingController contentController;
   final PostFormNotifier notifier;
@@ -17,17 +19,22 @@ class PostFormFields extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
+
     return Column(
       children: [
         // 제목 입력
         TextFormField(
           controller: titleController,
-          decoration: const InputDecoration(
-            labelText: 'タイトル',
-            hintText: 'タイトルを入力してください',
+          decoration: InputDecoration(
+            labelText: l10n.validation.titleRequired.replaceAll(
+              'を入力してください',
+              '',
+            ),
+            hintText: l10n.validation.titleRequired,
           ),
-          validator: Validators.validatePostTitle,
+          validator: (value) => Validators.validatePostTitle(value, l10n),
           maxLength: 50,
           onChanged: (value) {
             AppLogger.community('제목 입력: "$value"');
@@ -39,12 +46,15 @@ class PostFormFields extends StatelessWidget {
         // 본문 입력
         TextFormField(
           controller: contentController,
-          decoration: const InputDecoration(
-            labelText: '本文',
-            hintText: '本文を入力してください',
+          decoration: InputDecoration(
+            labelText: l10n.validation.contentRequired.replaceAll(
+              'を入力してください',
+              '',
+            ),
+            hintText: l10n.validation.contentRequired,
             alignLabelWithHint: true,
           ),
-          validator: Validators.validatePostContent,
+          validator: (value) => Validators.validatePostContent(value, l10n),
           maxLines: 10,
           maxLength: 2000,
           onChanged: (value) {

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/utils/validators.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../config/routes/app_routes.dart';
@@ -83,6 +84,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final backgroundColor = ref.watch(liturgyBackgroundColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -103,18 +105,18 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   AuthLogoHeader(
                     primaryColor: primaryColor,
                     backgroundColor: backgroundColor,
-                    subtitle: '信仰でつながる',
+                    subtitle: l10n.auth.subtitle,
                   ),
 
                   // 이메일 입력
                   TextFormField(
                     controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'メールアドレス',
-                      prefixIcon: Icon(Icons.email_outlined),
+                    decoration: InputDecoration(
+                      labelText: l10n.auth.email,
+                      prefixIcon: const Icon(Icons.email_outlined),
                     ),
                     keyboardType: TextInputType.emailAddress,
-                    validator: Validators.validateEmail,
+                    validator: (value) => Validators.validateEmail(value, l10n),
                     textInputAction: TextInputAction.next,
                   ),
                   const SizedBox(height: 16),
@@ -122,7 +124,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   // 비밀번호 입력
                   PasswordField(
                     controller: _passwordController,
-                    validator: Validators.validatePassword,
+                    validator: (value) =>
+                        Validators.validatePassword(value, l10n),
                     onFieldSubmitted: (_) => _signIn(),
                   ),
                   const SizedBox(height: 8),
@@ -141,7 +144,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                               },
                         activeColor: primaryColor,
                       ),
-                      const Text('メールアドレスを保存'),
+                      Text(l10n.auth.saveEmail),
                     ],
                   ),
                   const SizedBox(height: 8),
@@ -151,7 +154,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: _isLoading ? null : _resetPassword,
-                      child: const Text('パスワードをお忘れですか？'),
+                      child: Text(l10n.auth.forgotPassword),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -159,14 +162,14 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   // 로그인 버튼
                   LoadingButton(
                     onPressed: _signIn,
-                    label: 'ログイン',
+                    label: l10n.auth.signIn,
                     backgroundColor: primaryColor,
                     isLoading: _isLoading,
                   ),
                   const SizedBox(height: 24),
 
                   // 구분선
-                  const DividerWithText(text: 'または'),
+                  DividerWithText(text: l10n.common.or),
                   const SizedBox(height: 24),
 
                   // 소셜 로그인 버튼
@@ -188,14 +191,14 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'アカウントをお持ちでないですか？',
+                        l10n.auth.noAccount,
                         style: theme.textTheme.bodyMedium,
                       ),
                       TextButton(
                         onPressed: () {
                           context.push(AppRoutes.signUp);
                         },
-                        child: const Text('新規登録'),
+                        child: Text(l10n.auth.signUp),
                       ),
                     ],
                   ),
@@ -205,7 +208,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     onPressed: () {
                       context.go(AppRoutes.home);
                     },
-                    child: const Text('ゲストとして続ける'),
+                    child: Text(l10n.auth.continueAsGuest),
                   ),
                 ],
               ),
@@ -254,9 +257,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       );
     } catch (e) {
       if (mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('ログインに失敗しました'),
+          SnackBar(
+            content: Text(l10n.auth.signInFailed),
             backgroundColor: Colors.red,
           ),
         );
@@ -390,9 +394,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         },
         (_) {
           if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('パスワードリセットメールを送信しました'),
+              SnackBar(
+                content: Text(l10n.auth.passwordResetEmailSent),
                 backgroundColor: Colors.green,
               ),
             );
@@ -401,9 +406,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       );
     } catch (e) {
       if (mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('パスワードリセットメールの送信に失敗しました'),
+          SnackBar(
+            content: Text(l10n.auth.passwordResetEmailFailed),
             backgroundColor: Colors.red,
           ),
         );

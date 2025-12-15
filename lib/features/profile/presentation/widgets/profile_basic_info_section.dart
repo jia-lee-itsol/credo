@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/utils/validators.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 /// 프로필 기본 정보 섹션
-class ProfileBasicInfoSection extends StatelessWidget {
+class ProfileBasicInfoSection extends ConsumerWidget {
   final TextEditingController nicknameController;
   final String? email;
   final String? userId;
@@ -18,8 +20,9 @@ class ProfileBasicInfoSection extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
 
     return Card(
       child: Padding(
@@ -37,18 +40,18 @@ class ProfileBasicInfoSection extends StatelessWidget {
             // 닉네임 입력
             TextFormField(
               controller: nicknameController,
-              decoration: const InputDecoration(
-                labelText: 'ニックネーム',
-                hintText: 'ニックネームを入力してください',
+              decoration: InputDecoration(
+                labelText: l10n.auth.nickname,
+                hintText: l10n.validation.nicknameRequired,
               ),
-              validator: Validators.validateNickname,
+              validator: (value) => Validators.validateNickname(value, l10n),
               maxLength: 20,
             ),
             const SizedBox(height: 16),
             // 이메일 (읽기 전용)
             TextFormField(
               initialValue: email ?? '',
-              decoration: const InputDecoration(labelText: 'メールアドレス'),
+              decoration: InputDecoration(labelText: l10n.auth.email),
               enabled: false,
             ),
             const SizedBox(height: 8),
@@ -65,16 +68,16 @@ class ProfileBasicInfoSection extends StatelessWidget {
                   ? () {
                       Clipboard.setData(ClipboardData(text: userId!));
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('ユーザーIDをコピーしました'),
-                          duration: Duration(seconds: 2),
+                        SnackBar(
+                          content: Text(l10n.profile.userIdCopied),
+                          duration: const Duration(seconds: 2),
                         ),
                       );
                     }
                   : null,
               child: TextFormField(
                 initialValue: userId ?? '',
-                decoration: const InputDecoration(labelText: 'ユーザーID'),
+                decoration: InputDecoration(labelText: l10n.profile.userId),
                 enabled: false,
               ),
             ),
@@ -88,8 +91,8 @@ class ProfileBasicInfoSection extends StatelessWidget {
             const SizedBox(height: 16),
             // 세례명 (읽기 전용)
             TextFormField(
-              initialValue: baptismalName ?? '未設定',
-              decoration: const InputDecoration(labelText: '洗礼名'),
+              initialValue: baptismalName ?? l10n.common.notSet,
+              decoration: InputDecoration(labelText: l10n.auth.baptismName),
               enabled: false,
             ),
             const SizedBox(height: 8),

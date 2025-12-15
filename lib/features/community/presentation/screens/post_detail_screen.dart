@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/error/failures.dart';
+import '../../../../core/services/logger_service.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../data/models/post.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
 import 'post_edit_screen.dart';
 import '../widgets/post_detail_comment_input.dart'
     show PostDetailCommentInput, PostDetailCommentInputState;
@@ -11,6 +15,7 @@ import '../widgets/post_detail_comments_section.dart';
 import '../widgets/post_detail_header.dart';
 import '../widgets/post_detail_images.dart';
 import '../widgets/post_detail_like_button.dart';
+import '../widgets/report_dialog.dart';
 
 /// 게시글 상세 화면
 class PostDetailScreen extends ConsumerStatefulWidget {
@@ -33,17 +38,28 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('🔍 [PostDetail] build() 호출됨, postId: ${widget.postId}');
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final isAuthenticated = ref.watch(isAuthenticatedProvider);
     final currentUser = ref.watch(currentUserProvider);
     final postAsync = ref.watch(postByIdProvider(widget.postId));
+
+    debugPrint('🔍 [PostDetail] postAsync 상태: ${postAsync.runtimeType}');
+    debugPrint(
+      '🔍 [PostDetail] currentUser: ${currentUser?.userId}, role: ${currentUser?.role}',
+    );
 
     return Scaffold(
       appBar: AppBar(
         actions: [
           postAsync.when(
             data: (post) {
+              debugPrint(
+                '🔍 [PostDetail] postAsync.when(data) 호출됨, post: ${post?.postId}',
+              );
               if (post == null) {
+                debugPrint('🔍 [PostDetail] post가 null입니다!');
                 return const SizedBox.shrink();
               }
 
@@ -51,14 +67,53 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
               final isAuthor =
                   currentUser != null && currentUser.userId == post.authorId;
 
+              // 관리자 권한 확인
+              final isAdmin = currentUser?.isAdmin ?? false;
+
+              // 관리자가 자신의 교회 게시글인지 확인
+              final adminParishId = currentUser?.mainParishId;
+              final postParishId = post.parishId;
+              final isAdminOfPostParish =
+                  isAdmin &&
+                  adminParishId != null &&
+                  postParishId != null &&
+                  adminParishId == postParishId;
+
+              // 디버그 로그 (항상 출력)
+              debugPrint('🔍 [PostDetail] kDebugMode: $kDebugMode');
+              debugPrint('🔍 [PostDetail] 현재 사용자: ${currentUser?.userId}');
+              debugPrint('🔍 [PostDetail] 사용자 role: ${currentUser?.role}');
+              debugPrint(
+                '🔍 [PostDetail] role == "admin": ${currentUser?.role == "admin"}',
+              );
+              debugPrint('🔍 [PostDetail] isAdmin: $isAdmin');
+              debugPrint('🔍 [PostDetail] isAuthor: $isAuthor');
+              debugPrint('🔍 [PostDetail] 게시글 상태: ${post.status}');
+              debugPrint('🔍 [PostDetail] adminParishId: $adminParishId');
+              debugPrint('🔍 [PostDetail] postParishId: $postParishId');
+              debugPrint(
+                '🔍 [PostDetail] isAdminOfPostParish: $isAdminOfPostParish',
+              );
+              AppLogger.community(
+                '현재 사용자: ${currentUser?.userId}, role: "${currentUser?.role}", isAdmin: $isAdmin, adminParishId: $adminParishId, postParishId: $postParishId, isAdminOfPostParish: $isAdminOfPostParish',
+              );
+
               return PopupMenuButton<String>(
                 onSelected: (value) {
+                  debugPrint('🔍 [PostDetail] 메뉴 선택: $value');
+                  AppLogger.community('메뉴 선택: $value');
                   if (value == 'edit') {
                     _navigateToEdit(context, post);
                   } else if (value == 'delete') {
                     _showDeleteConfirmDialog(context, post);
                   } else if (value == 'report') {
-                    _showReportDialog(context);
+                    ReportDialog.showForPost(context, post.postId);
+                  } else if (value == 'hide') {
+                    AppLogger.community('비표시 다이얼로그 표시 시작');
+                    _showHideConfirmDialog(context, post);
+                  } else if (value == 'unhide') {
+                    AppLogger.community('표시 다이얼로그 표시 시작');
+                    _showUnhideConfirmDialog(context, post);
                   }
                 },
                 itemBuilder: (context) {
@@ -67,17 +122,17 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                   // 작성자 본인인 경우 수정/삭제 옵션 추가
                   if (isAuthor) {
                     items.addAll([
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'edit',
                         child: Row(
                           children: [
-                            Icon(Icons.edit_outlined, size: 20),
-                            SizedBox(width: 8),
-                            Text('編集する'),
+                            const Icon(Icons.edit_outlined, size: 20),
+                            const SizedBox(width: 8),
+                            Text(l10n.community.editPost),
                           ],
                         ),
                       ),
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'delete',
                         child: Row(
                           children: [
@@ -87,7 +142,10 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                               color: Colors.red,
                             ),
                             SizedBox(width: 8),
-                            Text('削除する', style: TextStyle(color: Colors.red)),
+                            Text(
+                              l10n.community.deletePost,
+                              style: TextStyle(color: Colors.red),
+                            ),
                           ],
                         ),
                       ),
@@ -95,16 +153,50 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                     ]);
                   }
 
+                  // 관리자 옵션 (숨기기/표시하기) - 자신의 교회 게시글인 경우에만 표시
+                  if (isAdminOfPostParish) {
+                    items.addAll([
+                      const PopupMenuDivider(),
+                      PopupMenuItem(
+                        value: post.status == 'hidden' ? 'unhide' : 'hide',
+                        child: Row(
+                          children: [
+                            Icon(
+                              post.status == 'hidden'
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              size: 20,
+                              color: post.status == 'hidden'
+                                  ? Colors.green
+                                  : Colors.orange,
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              post.status == 'hidden'
+                                  ? l10n.community.showPost
+                                  : l10n.community.hidePost,
+                              style: TextStyle(
+                                color: post.status == 'hidden'
+                                    ? Colors.green
+                                    : Colors.orange,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ]);
+                  }
+
                   // 신고 옵션 (작성자가 아닌 경우에만 표시)
-                  if (!isAuthor) {
+                  if (!isAuthor && !isAdmin) {
                     items.add(
-                      const PopupMenuItem(
+                      PopupMenuItem(
                         value: 'report',
                         child: Row(
                           children: [
                             Icon(Icons.flag_outlined, size: 20),
                             SizedBox(width: 8),
-                            Text('通報する'),
+                            Text(l10n.community.reportPost),
                           ],
                         ),
                       ),
@@ -115,8 +207,14 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                 },
               );
             },
-            loading: () => const SizedBox.shrink(),
-            error: (error, stackTrace) => const SizedBox.shrink(),
+            loading: () {
+              debugPrint('🔍 [PostDetail] postAsync.when(loading)');
+              return const SizedBox.shrink();
+            },
+            error: (error, stackTrace) {
+              debugPrint('🔍 [PostDetail] postAsync.when(error): $error');
+              return const SizedBox.shrink();
+            },
           ),
         ],
       ),
@@ -202,15 +300,16 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
   }
 
   void _showDeleteConfirmDialog(BuildContext context, Post post) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('削除確認'),
-        content: const Text('この投稿を削除してもよろしいですか？\nこの操作は取り消せません。'),
+        title: Text(l10n.community.postDeleteConfirmTitle),
+        content: Text(l10n.community.postDeleteConfirmMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: Text(l10n.common.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -218,7 +317,7 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
               _deletePost(post);
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('削除する'),
+            child: Text(l10n.community.deletePost),
           ),
         ],
       ),
@@ -232,73 +331,259 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
       result.fold(
         (failure) {
           if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('投稿の削除に失敗しました: ${failure.message}')),
+              SnackBar(
+                content: Text(
+                  '${l10n.community.postDeleteFailed}: ${failure.message}',
+                ),
+              ),
             );
           }
         },
         (_) {
           if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
             ScaffoldMessenger.of(
               context,
-            ).showSnackBar(const SnackBar(content: Text('投稿を削除しました')));
+            ).showSnackBar(SnackBar(content: Text(l10n.community.postDeleted)));
             Navigator.of(context).pop(); // 상세 화면 닫기
           }
         },
       );
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('削除に失敗しました: $e')));
+        final l10n = ref.read(appLocalizationsSyncProvider);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${l10n.community.postDeleteFailed}: $e')),
+        );
       }
     }
   }
 
-  void _showReportDialog(BuildContext context) {
+  void _showHideConfirmDialog(BuildContext context, Post post) {
+    AppLogger.community('_showHideConfirmDialog() 호출됨, 게시글 ID: ${post.postId}');
+    final l10n = ref.read(appLocalizationsSyncProvider);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('通報する'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              title: const Text('スパム'),
-              onTap: () {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('通報しました')));
-              },
-            ),
-            ListTile(
-              title: const Text('不適切なコンテンツ'),
-              onTap: () {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('通報しました')));
-              },
-            ),
-            ListTile(
-              title: const Text('誹謗中傷'),
-              onTap: () {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(
-                  context,
-                ).showSnackBar(const SnackBar(content: Text('通報しました')));
-              },
-            ),
-          ],
-        ),
+        title: Text(l10n.community.postHideConfirmTitle),
+        content: Text(l10n.community.postHideConfirmMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('キャンセル'),
+            child: Text(l10n.common.cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              AppLogger.community('비표시 확인 다이얼로그에서 확인 버튼 클릭');
+              Navigator.pop(context);
+              AppLogger.community('_hidePost() 호출 전');
+              _hidePost(post).catchError((error, stackTrace) {
+                AppLogger.error(
+                  '_hidePost() 예외 발생 (catchError): $error',
+                  error,
+                  stackTrace,
+                );
+              });
+            },
+            style: TextButton.styleFrom(foregroundColor: Colors.orange),
+            child: Text(l10n.community.hidePost),
           ),
         ],
       ),
     );
+  }
+
+  void _showUnhideConfirmDialog(BuildContext context, Post post) {
+    AppLogger.community(
+      '_showUnhideConfirmDialog() 호출됨, 게시글 ID: ${post.postId}',
+    );
+    final l10n = ref.read(appLocalizationsSyncProvider);
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.community.postShowConfirmTitle),
+        content: Text(l10n.community.postShowConfirmMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(l10n.common.cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              AppLogger.community('표시 확인 다이얼로그에서 확인 버튼 클릭');
+              Navigator.pop(context);
+              AppLogger.community('_unhidePost() 호출 전');
+              _unhidePost(post).catchError((error, stackTrace) {
+                AppLogger.error(
+                  '_unhidePost() 예외 발생 (catchError): $error',
+                  error,
+                  stackTrace,
+                );
+              });
+            },
+            style: TextButton.styleFrom(foregroundColor: Colors.green),
+            child: Text(l10n.community.showPost),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _hidePost(Post post) async {
+    try {
+      AppLogger.community('===== _hidePost() 시작 =====');
+      AppLogger.community('게시글 ID: ${post.postId}');
+      AppLogger.community('현재 상태: ${post.status}');
+    } catch (e, stackTrace) {
+      AppLogger.error('_hidePost() 시작 부분 예외: $e', e, stackTrace);
+      rethrow;
+    }
+
+    final currentUser = ref.read(currentUserProvider);
+    AppLogger.community('현재 사용자: ${currentUser?.userId}');
+    AppLogger.community('관리자 여부: ${currentUser?.isAdmin ?? false}');
+    AppLogger.community('사용자 mainParishId: ${currentUser?.mainParishId}');
+    AppLogger.community('게시글 parishId: ${post.parishId}');
+    AppLogger.community(
+      '소속 교회 일치 여부: ${currentUser?.mainParishId == post.parishId}',
+    );
+
+    try {
+      final repository = ref.read(postRepositoryProvider);
+      final updatedPost = post.copyWith(
+        status: 'hidden',
+        updatedAt: DateTime.now(),
+      );
+
+      AppLogger.community('업데이트할 게시글 데이터:');
+      AppLogger.community('  - postId: ${updatedPost.postId}');
+      AppLogger.community('  - status: ${updatedPost.status}');
+      AppLogger.community('  - updatedAt: ${updatedPost.updatedAt}');
+
+      final postData = updatedPost.toFirestore();
+      AppLogger.community('Firestore 데이터: $postData');
+
+      AppLogger.community('updatePost() 호출 시작...');
+      final result = await repository.updatePost(updatedPost);
+
+      result.fold(
+        (failure) {
+          AppLogger.error('게시글 숨기기 실패: ${failure.message}', failure);
+          AppLogger.community('에러 타입: ${failure.runtimeType}');
+          if (failure is FirebaseFailure) {
+            AppLogger.community('Firebase 에러 코드: ${failure.code}');
+          }
+          if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            String errorMessage =
+                '${l10n.community.postHideFailed}: ${failure.message}';
+            if (failure is FirebaseFailure &&
+                failure.code == 'permission-denied') {
+              errorMessage = l10n.community.postHideNoPermission;
+            }
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(errorMessage)));
+          }
+        },
+        (_) {
+          AppLogger.community('✅ 게시글 숨기기 성공!');
+          if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(l10n.community.postHidden)));
+            // 게시글 목록 새로고침
+            ref.invalidate(postByIdProvider(widget.postId));
+            ref.invalidate(allPostsProvider(widget.parishId));
+            // 커뮤니티 화면으로 돌아가기
+            Navigator.of(context).pop();
+          }
+        },
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error('게시글 숨기기 예외 발생: $e', e, stackTrace);
+      if (mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${l10n.community.postHideFailed}: $e')),
+        );
+      }
+    }
+    AppLogger.community('===== _hidePost() 종료 =====');
+  }
+
+  Future<void> _unhidePost(Post post) async {
+    AppLogger.community('===== _unhidePost() 시작 =====');
+    AppLogger.community('게시글 ID: ${post.postId}');
+    AppLogger.community('현재 상태: ${post.status}');
+
+    final currentUser = ref.read(currentUserProvider);
+    AppLogger.community('현재 사용자: ${currentUser?.userId}');
+    AppLogger.community('관리자 여부: ${currentUser?.isAdmin ?? false}');
+
+    try {
+      final repository = ref.read(postRepositoryProvider);
+      final updatedPost = post.copyWith(
+        status: 'published',
+        updatedAt: DateTime.now(),
+      );
+
+      AppLogger.community('업데이트할 게시글 데이터:');
+      AppLogger.community('  - postId: ${updatedPost.postId}');
+      AppLogger.community('  - status: ${updatedPost.status}');
+      AppLogger.community('  - updatedAt: ${updatedPost.updatedAt}');
+
+      final postData = updatedPost.toFirestore();
+      AppLogger.community('Firestore 데이터: $postData');
+
+      AppLogger.community('updatePost() 호출 시작...');
+      final result = await repository.updatePost(updatedPost);
+
+      result.fold(
+        (failure) {
+          AppLogger.error('게시글 표시하기 실패: ${failure.message}', failure);
+          AppLogger.community('에러 타입: ${failure.runtimeType}');
+          if (failure is FirebaseFailure) {
+            AppLogger.community('Firebase 에러 코드: ${failure.code}');
+          }
+          if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            String errorMessage =
+                '${l10n.community.postShowFailed}: ${failure.message}';
+            if (failure is FirebaseFailure &&
+                failure.code == 'permission-denied') {
+              errorMessage = l10n.community.postShowNoPermission;
+            }
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(errorMessage)));
+          }
+        },
+        (_) {
+          AppLogger.community('✅ 게시글 표시하기 성공!');
+          if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(l10n.community.postShow)));
+            // 게시글 새로고침
+            ref.invalidate(postByIdProvider(widget.postId));
+            ref.invalidate(allPostsProvider(widget.parishId));
+          }
+        },
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error('게시글 표시하기 예외 발생: $e', e, stackTrace);
+      if (mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${l10n.community.postShowFailed}: $e')),
+        );
+      }
+    }
+    AppLogger.community('===== _unhidePost() 종료 =====');
   }
 }

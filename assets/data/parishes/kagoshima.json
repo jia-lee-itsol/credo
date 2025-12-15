@@ -11,13 +11,30 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "saturday": ["06:30", "18:30"],
-        "sunday": ["07:00", "09:00", "19:00"],
-        "monday": ["06:30"],
-        "tuesday": ["06:30"],
-        "wednesday": ["06:30"],
-        "thursday": ["06:30"],
-        "friday": ["06:30"]
+        "saturday": [
+          "06:30",
+          "18:30"
+        ],
+        "sunday": [
+          "07:00",
+          "09:00",
+          "19:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
@@ -27,7 +44,9 @@
             "note": ""
           }
         ]
-      }
+      },
+      "latitude": 31.5916293,
+      "longitude": 130.5507185
     },
     {
       "name": "カトリック川内教会",
@@ -40,12 +59,22 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "saturday": ["19:00"],
-        "sunday": ["09:00"],
-        "tuesday": ["18:10"],
-        "thursday": ["18:10"]
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "9:00"
+        ],
+        "tuesday": [
+          "18:10"
+        ],
+        "thursday": [
+          "18:10"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.8146253,
+      "longitude": 130.3027078
     },
     {
       "name": "カトリック垂水教会",
@@ -57,10 +86,16 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "saturday": ["18:30"],
-        "sunday": ["10:00"]
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.4914427,
+      "longitude": 130.704068
     },
     {
       "name": "カトリック大笠利教会",
@@ -74,9 +109,13 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["08:00"]
+        "sunday": [
+          "08:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 28.4863186,
+      "longitude": 129.6958427
     },
     {
       "name": "カトリック瀬留教会",
@@ -88,14 +127,28 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["09:00"],
-        "monday": ["08:00"],
-        "tuesday": ["08:00"],
-        "wednesday": ["08:00"],
-        "thursday": ["08:00"],
-        "friday": ["08:00"]
+        "sunday": [
+          "9:00"
+        ],
+        "monday": [
+          "8:00"
+        ],
+        "tuesday": [
+          "8:00"
+        ],
+        "wednesday": [
+          "8:00"
+        ],
+        "thursday": [
+          "8:00"
+        ],
+        "friday": [
+          "8:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 28.4239641,
+      "longitude": 129.5915078
     },
     {
       "name": "カトリック大熊教会",
@@ -107,12 +160,22 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["07:30"],
-        "monday": ["06:30"],
-        "wednesday": ["19:30"],
-        "friday": ["06:30"]
+        "sunday": [
+          "7:30"
+        ],
+        "monday": [
+          "6:30"
+        ],
+        "wednesday": [
+          "19:30"
+        ],
+        "friday": [
+          "6:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 28.4050061,
+      "longitude": 129.5224933
     },
     {
       "name": "カトリック古田町教会",
@@ -124,15 +187,32 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "saturday": ["19:30", "06:30"],
-        "sunday": ["09:00"],
-        "monday": ["06:30"],
-        "tuesday": ["06:30"],
-        "wednesday": ["19:30"],
-        "thursday": ["06:30"],
-        "friday": ["06:30"]
+        "saturday": [
+          "19:30",
+          "06:30"
+        ],
+        "sunday": [
+          "9:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "19:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 28.3691618,
+      "longitude": 129.4993828
     },
     {
       "name": "カトリック名瀬聖心教会",
@@ -144,15 +224,29 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["06:30", "09:00"],
-        "monday": ["06:30"],
-        "tuesday": ["06:30"],
-        "wednesday": ["06:30"],
-        "thursday": ["06:30"],
-        "friday": ["06:30"],
-        "saturday": ["06:30"]
+        "sunday": [
+          "6:30",
+          "9:00"
+        ],
+        "monday": [
+          "6:30"
+        ],
+        "tuesday": [
+          "6:30"
+        ],
+        "wednesday": [
+          "6:30"
+        ],
+        "thursday": [
+          "6:30"
+        ],
+        "friday": [
+          "6:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 28.3781896,
+      "longitude": 129.4937511
     },
     {
       "name": "カトリック小宿教会",
@@ -164,14 +258,28 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["09:30"],
-        "monday": ["11:00"],
-        "tuesday": ["06:30"],
-        "thursday": ["11:00"],
-        "friday": ["06:30"],
-        "saturday": ["06:30"]
+        "sunday": [
+          "9:30"
+        ],
+        "monday": [
+          "11:00"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "11:00"
+        ],
+        "friday": [
+          "06:30"
+        ],
+        "saturday": [
+          "06:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 28.3958265,
+      "longitude": 129.4651381
     },
     {
       "name": "カトリック古仁屋教会",
@@ -183,9 +291,13 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["07:00"]
+        "sunday": [
+          "7:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 28.1494261,
+      "longitude": 129.3115838
     },
     {
       "name": "カトリック母間教会",
@@ -197,10 +309,14 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "saturday": ["09:00"],
-        "sunday": ["09:00"]
+        "sunday": [
+          "9:00",
+          "9:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 27.8127542,
+      "longitude": 128.9775531
     },
     {
       "name": "カトリック和泊教会",
@@ -212,9 +328,13 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["09:00"]
+        "sunday": [
+          "9:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 27.3924475,
+      "longitude": 128.6545502
     },
     {
       "name": "カトリック指宿教会",
@@ -227,14 +347,32 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["09:30"],
-        "tuesday": ["06:30"],
-        "wednesday": ["06:30"],
-        "thursday": ["06:30"],
-        "friday": ["19:00"],
-        "saturday": ["06:30"]
+        "sunday": [
+          "9:30"
+        ],
+        "tuesday": [
+          "6:30",
+          "7:00"
+        ],
+        "wednesday": [
+          "6:30",
+          "7:00"
+        ],
+        "thursday": [
+          "6:30",
+          "7:00"
+        ],
+        "friday": [
+          "19:00"
+        ],
+        "saturday": [
+          "6:30",
+          "7:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.2450151,
+      "longitude": 130.6469167
     },
     {
       "name": "カトリック加世田教会",
@@ -247,14 +385,28 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["09:30"],
-        "tuesday": ["19:00"],
-        "wednesday": ["19:00"],
-        "thursday": ["19:00"],
-        "friday": ["10:00"],
-        "saturday": ["10:00"]
+        "sunday": [
+          "9:30"
+        ],
+        "tuesday": [
+          "19:00"
+        ],
+        "wednesday": [
+          "19:00"
+        ],
+        "thursday": [
+          "19:00"
+        ],
+        "friday": [
+          "10:00"
+        ],
+        "saturday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.41755109999999,
+      "longitude": 130.321279
     },
     {
       "name": "カトリック種子島教会",
@@ -267,15 +419,33 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["09:00"],
-        "monday": ["05:45"],
-        "tuesday": ["05:45"],
-        "wednesday": ["05:45"],
-        "thursday": ["05:45"],
-        "friday": ["05:45"],
-        "saturday": ["05:45"]
+        "sunday": [
+          "9:00"
+        ],
+        "monday": [
+          "5:45",
+          "5:30"
+        ],
+        "tuesday": [
+          "5:45",
+          "5:30"
+        ],
+        "wednesday": [
+          "5:45",
+          "5:30"
+        ],
+        "thursday": [
+          "5:45",
+          "5:30"
+        ],
+        "friday": [
+          "5:45",
+          "5:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 30.7368958,
+      "longitude": 130.9921326
     },
     {
       "name": "カトリック国分教会",
@@ -288,15 +458,31 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "saturday": ["19:00"],
-        "sunday": ["09:30"],
-        "monday": ["07:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["07:00"]
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "9:30"
+        ],
+        "monday": [
+          "7:00"
+        ],
+        "tuesday": [
+          "7:00"
+        ],
+        "wednesday": [
+          "7:00"
+        ],
+        "thursday": [
+          "7:00"
+        ],
+        "friday": [
+          "7:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.7388613,
+      "longitude": 130.7679962
     },
     {
       "name": "カトリック鹿屋教会",
@@ -308,15 +494,31 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "saturday": ["19:00"],
-        "sunday": ["10:00"],
-        "monday": ["17:30"],
-        "tuesday": ["17:30"],
-        "wednesday": ["17:30"],
-        "thursday": ["17:30"],
-        "friday": ["17:30"]
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "17:30"
+        ],
+        "tuesday": [
+          "17:30"
+        ],
+        "wednesday": [
+          "17:30"
+        ],
+        "thursday": [
+          "17:30"
+        ],
+        "friday": [
+          "17:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.3885763,
+      "longitude": 130.8544438
     },
     {
       "name": "カトリック志布志教会",
@@ -329,12 +531,22 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["10:00"],
-        "tuesday": ["07:30"],
-        "thursday": ["07:30"],
-        "saturday": ["07:30"]
+        "sunday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "7:30"
+        ],
+        "thursday": [
+          "7:30"
+        ],
+        "saturday": [
+          "7:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.4751352,
+      "longitude": 131.1005062
     },
     {
       "name": "カトリック阿久根教会",
@@ -346,10 +558,16 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["18:00"],
-        "thursday": ["19:00"]
+        "sunday": [
+          "18:00"
+        ],
+        "thursday": [
+          "19:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.0204073,
+      "longitude": 130.2002781
     },
     {
       "name": "カトリック出水教会",
@@ -362,14 +580,28 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["09:00"],
-        "monday": ["06:30"],
-        "wednesday": ["06:30"],
-        "thursday": ["06:30"],
-        "friday": ["06:30"],
-        "saturday": ["06:30"]
+        "sunday": [
+          "9:00"
+        ],
+        "monday": [
+          "6:30"
+        ],
+        "tuesday": [
+          "6:30"
+        ],
+        "wednesday": [
+          "6:30"
+        ],
+        "thursday": [
+          "6:30"
+        ],
+        "friday": [
+          "6:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.0769098,
+      "longitude": 130.3595143
     },
     {
       "name": "カトリック入来教会",
@@ -382,9 +614,13 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["10:30"]
+        "sunday": [
+          "10:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.8255414,
+      "longitude": 130.4323529
     },
     {
       "name": "カトリック大口教会",
@@ -396,10 +632,28 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["09:00"],
-        "tuesday": ["14:00"]
+        "sunday": [
+          "9:00"
+        ],
+        "monday": [
+          "14:00"
+        ],
+        "tuesday": [
+          "14:00"
+        ],
+        "wednesday": [
+          "14:00"
+        ],
+        "thursday": [
+          "14:00"
+        ],
+        "friday": [
+          "14:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 32.0614929,
+      "longitude": 130.6124104
     },
     {
       "name": "カトリック溝辺教会（マリア山荘）",
@@ -411,15 +665,29 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["07:00", "09:00"],
-        "monday": ["07:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["07:00"],
-        "saturday": ["07:00"]
+        "sunday": [
+          "7:00",
+          "9:00"
+        ],
+        "monday": [
+          "7:00"
+        ],
+        "tuesday": [
+          "7:00"
+        ],
+        "wednesday": [
+          "7:00"
+        ],
+        "thursday": [
+          "7:00"
+        ],
+        "friday": [
+          "7:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.8221486,
+      "longitude": 130.6831859
     },
     {
       "name": "カトリック姶良教会",
@@ -432,15 +700,32 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "saturday": ["19:00", "07:00"],
-        "sunday": ["09:00"],
-        "monday": ["07:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["10:00"],
-        "friday": ["10:00"]
+        "saturday": [
+          "19:00",
+          "7:00"
+        ],
+        "sunday": [
+          "9:00"
+        ],
+        "monday": [
+          "7:00"
+        ],
+        "tuesday": [
+          "7:00"
+        ],
+        "wednesday": [
+          "7:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.7250712,
+      "longitude": 130.6297315
     },
     {
       "name": "カトリック吉野教会",
@@ -454,14 +739,29 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["09:00"],
-        "tuesday": ["06:30"],
-        "wednesday": ["06:30"],
-        "thursday": ["06:30"],
-        "friday": ["06:30", "15:00"],
-        "saturday": ["06:30"]
+        "sunday": [
+          "9:00"
+        ],
+        "tuesday": [
+          "6:30"
+        ],
+        "wednesday": [
+          "6:30"
+        ],
+        "thursday": [
+          "6:30"
+        ],
+        "friday": [
+          "6:30",
+          "15:00"
+        ],
+        "saturday": [
+          "6:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.643789,
+      "longitude": 130.5737316
     },
     {
       "name": "カトリック玉里教会",
@@ -474,15 +774,33 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["09:00"],
-        "monday": ["06:30"],
-        "tuesday": ["06:30"],
-        "wednesday": ["06:30"],
-        "thursday": ["06:30"],
-        "friday": ["18:30"],
-        "saturday": ["06:30"]
+        "sunday": [
+          "9:00"
+        ],
+        "monday": [
+          "6:30",
+          "18:30"
+        ],
+        "tuesday": [
+          "6:30",
+          "18:30"
+        ],
+        "wednesday": [
+          "6:30",
+          "18:30"
+        ],
+        "thursday": [
+          "6:30",
+          "18:30"
+        ],
+        "friday": [
+          "6:30",
+          "18:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.6069305,
+      "longitude": 130.537669
     },
     {
       "name": "カトリック鴨池教会",
@@ -495,15 +813,34 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["06:30", "09:00"],
-        "monday": ["06:30"],
-        "tuesday": ["06:30"],
-        "wednesday": ["06:30"],
-        "thursday": ["06:30"],
-        "friday": ["19:00"],
-        "saturday": ["06:30"]
+        "sunday": [
+          "6:30",
+          "9:00"
+        ],
+        "monday": [
+          "6:30",
+          "19:00"
+        ],
+        "tuesday": [
+          "6:30",
+          "19:00"
+        ],
+        "wednesday": [
+          "6:30",
+          "19:00"
+        ],
+        "thursday": [
+          "6:30",
+          "19:00"
+        ],
+        "friday": [
+          "6:30",
+          "19:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.57056889999999,
+      "longitude": 130.5482362
     },
     {
       "name": "カトリック紫原教会",
@@ -516,15 +853,29 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "sunday": ["06:30", "09:00"],
-        "monday": ["06:30"],
-        "tuesday": ["06:30"],
-        "wednesday": ["06:30"],
-        "thursday": ["06:30"],
-        "friday": ["06:30"],
-        "saturday": ["06:30"]
+        "sunday": [
+          "6:30",
+          "9:00"
+        ],
+        "monday": [
+          "6:30"
+        ],
+        "tuesday": [
+          "6:30"
+        ],
+        "wednesday": [
+          "6:30"
+        ],
+        "thursday": [
+          "6:30"
+        ],
+        "friday": [
+          "6:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.5535701,
+      "longitude": 130.5350685
     },
     {
       "name": "カトリック谷山教会",
@@ -537,15 +888,35 @@
       "diocese": "kagoshima",
       "deanery": "kagoshima",
       "massTimes": {
-        "saturday": ["19:00"],
-        "sunday": ["06:30", "09:00"],
-        "monday": ["06:30"],
-        "tuesday": ["06:30"],
-        "wednesday": ["19:00"],
-        "thursday": ["06:30"],
-        "friday": ["06:30"]
+        "sunday": [
+          "19:00",
+          "6:30",
+          "9:00"
+        ],
+        "monday": [
+          "6:30",
+          "19:00"
+        ],
+        "tuesday": [
+          "6:30",
+          "19:00"
+        ],
+        "wednesday": [
+          "6:30",
+          "19:00"
+        ],
+        "thursday": [
+          "6:30",
+          "19:00"
+        ],
+        "friday": [
+          "6:30",
+          "19:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 31.5968539,
+      "longitude": 130.5571392
     }
   ]
 }

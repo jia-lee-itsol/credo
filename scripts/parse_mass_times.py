@@ -101,6 +101,49 @@ def parse_mass_time(mass_time_str: str) -> Dict[str, Any]:
     previous_weekday = None
     
     for i, part in enumerate(parts):
+        # "第X日曜XX:XX(언어)" 형식 먼저 처리
+        week_sunday_pattern = re.compile(r'第(\d+)[・]?第?(\d*)[日曜]\s*(\d{1,2}:\d{2})\s*\(([^)]+)\)')
+        week_matches = list(week_sunday_pattern.finditer(part))
+        if week_matches:
+            for match in week_matches:
+                week1 = match.group(1)
+                week2 = match.group(2) if match.group(2) else ""
+                time_str = match.group(3)
+                lang_text = match.group(4)
+                
+                lang_code = detect_language(lang_text)
+                if lang_code and lang_code != 'JA':
+                    # 주 정보 구성
+                    if week2:
+                        week_numbers = [week1, week2]
+                    else:
+                        week_numbers = [week1]
+                    
+                    if 'sunday' not in foreign_mass_times:
+                        foreign_mass_times['sunday'] = []
+                    
+                    for week_num in week_numbers:
+                        week_note = f"第{week_num}日曜"
+                        exists = any(
+                            existing.get('time') == time_str and 
+                            existing.get('language') == lang_code and
+                            existing.get('note') == week_note
+                            for existing in foreign_mass_times['sunday']
+                        )
+                        if not exists:
+                            foreign_mass_times['sunday'].append({
+                                "time": time_str,
+                                "language": lang_code,
+                                "note": week_note
+                            })
+            
+            # 처리된 패턴을 part에서 제거하고 계속 처리
+            for match in week_matches:
+                part = part.replace(match.group(0), '').strip()
+            # part가 비어있으면 다음으로
+            if not part:
+                continue
+        
         # 먼저 언어 코드 패턴 확인 ([E], [V], [S], [P], [T], [O] 등)
         lang_code_from_bracket = None
         bracket_match = re.search(r'\[([EVSPTOJ])\]', part)
@@ -174,29 +217,95 @@ def parse_mass_time(mass_time_str: str) -> Dict[str, Any]:
                  part.startswith('土曜：') or part.startswith('土曜:'):
                 weekday = 'saturday'
                 times_str = re.sub(r'^土曜日?[：:]', '', part).strip()
+                
+                # 시간들을 분리하여 각각 처리
+                times_list = re.split(r'[,、]', times_str)
+                for single_time_str in times_list:
+                    single_time_str = single_time_str.strip()
+                    
+                    # 언어 감지
+                    time_lang = detect_language(single_time_str)
+                    
+                    # 시간 추출
+                    time_match = re.search(r'(\d{1,2}:\d{2})', single_time_str)
+                    if not time_match:
+                        continue
+                    
+                    time_str = time_match.group(1)
+                    
+                    # 외국어 미사인 경우
+                    if time_lang and time_lang[0] != 'JA':
+                        lang_code, _ = time_lang
+                        if weekday not in foreign_mass_times:
+                            foreign_mass_times[weekday] = []
+                        
+                        exists = any(
+                            existing.get('time') == time_str and 
+                            existing.get('language') == lang_code
+                            for existing in foreign_mass_times[weekday]
+                        )
+                        if not exists:
+                            foreign_mass_times[weekday].append({
+                                "time": time_str,
+                                "language": lang_code,
+                                "note": ""
+                            })
+                    else:
+                        # 일본어 미사인 경우
+                        if weekday not in mass_times:
+                            mass_times[weekday] = []
+                        if time_str not in mass_times[weekday]:
+                            mass_times[weekday].append(time_str)
+                
+                previous_weekday = weekday
+                continue  # 이미 처리했으므로 다음으로
             # 일요일 처리
             elif part.startswith('主日：') or part.startswith('主日:') or \
                  part.startswith('日曜：') or part.startswith('日曜:'):
                 weekday = 'sunday'
                 times_str = re.sub(r'^(主日|日曜)[：:]', '', part).strip()
                 
-                # 시간 뒤에 언어 표시가 있는 경우 (예: "09:00 / 14:00英語ミサ")
-                # 외국어 미사로 분리
-                if is_foreign_language(times_str):
-                    lang_info = detect_language(times_str)
-                    if lang_info:
-                        lang_code, _ = lang_info
-                        time_match = re.search(r'(\d{1,2}:\d{2})', times_str)
-                        if time_match:
-                            time_str = time_match.group(1)
-                            if weekday not in foreign_mass_times:
-                                foreign_mass_times[weekday] = []
+                # 시간들을 분리하여 각각 처리
+                times_list = re.split(r'[,、]', times_str)
+                for single_time_str in times_list:
+                    single_time_str = single_time_str.strip()
+                    
+                    # 언어 감지
+                    time_lang = detect_language(single_time_str)
+                    
+                    # 시간 추출
+                    time_match = re.search(r'(\d{1,2}:\d{2})', single_time_str)
+                    if not time_match:
+                        continue
+                    
+                    time_str = time_match.group(1)
+                    
+                    # 외국어 미사인 경우
+                    if time_lang and time_lang[0] != 'JA':
+                        lang_code, _ = time_lang
+                        if weekday not in foreign_mass_times:
+                            foreign_mass_times[weekday] = []
+                        
+                        exists = any(
+                            existing.get('time') == time_str and 
+                            existing.get('language') == lang_code
+                            for existing in foreign_mass_times[weekday]
+                        )
+                        if not exists:
                             foreign_mass_times[weekday].append({
                                 "time": time_str,
                                 "language": lang_code,
                                 "note": ""
                             })
-                            continue  # 이미 처리했으므로 다음으로
+                    else:
+                        # 일본어 미사인 경우
+                        if weekday not in mass_times:
+                            mass_times[weekday] = []
+                        if time_str not in mass_times[weekday]:
+                            mass_times[weekday].append(time_str)
+                
+                previous_weekday = weekday
+                continue  # 이미 처리했으므로 다음으로
             # 개별 요일 처리
             else:
                 for ja_key, en_key in WEEKDAY_MAP.items():
@@ -245,6 +354,38 @@ def parse_mass_time(mass_time_str: str) -> Dict[str, Any]:
                 
                 # 다음 반복을 위해 요일 저장
                 previous_weekday = weekday
+        
+        # "平日：月曜日から土曜日XX:XX(日本語・水曜日は英語)" 형식 처리
+        if '平日' in part and 'から' in part and 'まで' in part:
+            time_match = re.search(r'(\d{1,2}:\d{2})', part)
+            if time_match:
+                time = time_match.group(1)
+                # 기본적으로 모든 평일에 일본어 미사로 추가
+                for day in ['monday', 'tuesday', 'thursday', 'friday', 'saturday']:
+                    if day not in mass_times:
+                        mass_times[day] = []
+                    if time not in mass_times[day]:
+                        mass_times[day].append(time)
+                
+                # 특정 요일 예외 처리 (예: "水曜日は英語")
+                exception_match = re.search(r'(\w+曜日)は([^・)]+)', part)
+                if exception_match:
+                    exception_day = parse_weekday(exception_match.group(1))
+                    exception_lang_text = exception_match.group(2)
+                    exception_lang = detect_language(exception_lang_text)
+                    if exception_day and exception_lang and exception_lang[0] != 'JA':
+                        exception_lang_code = exception_lang[0]
+                        # 해당 요일은 외국어 미사로
+                        if exception_day not in foreign_mass_times:
+                            foreign_mass_times[exception_day] = []
+                        foreign_mass_times[exception_day].append({
+                            'time': time,
+                            'language': exception_lang_code,
+                            'note': ''
+                        })
+                        # massTimes에서 제거
+                        if exception_day in mass_times and time in mass_times[exception_day]:
+                            mass_times[exception_day].remove(time)
     
     # weekdays를 개별 요일로 분리
     if 'weekdays' in mass_times:

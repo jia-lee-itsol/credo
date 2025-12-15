@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../constants/parish_colors.dart';
 
 /// 교회 검색바 위젯
-class ParishSearchBar extends StatelessWidget {
+class ParishSearchBar extends ConsumerWidget {
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
 
   const ParishSearchBar({super.key, required this.controller, this.onChanged});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: 49.361,
       decoration: BoxDecoration(

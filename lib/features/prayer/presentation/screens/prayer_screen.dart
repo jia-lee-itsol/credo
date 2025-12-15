@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/widgets/expandable_content_card.dart';
@@ -13,58 +14,54 @@ class PrayerScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final currentUser = ref.watch(currentUserProvider);
 
     // 기도 바치는 시기 가이드 데이터
     final prayerGuides = [
       _PrayerGuide(
-        title: '朝の黙想',
-        subtitle: 'Morning',
+        title: l10n.mass.prayer.morning.title,
+        subtitle: l10n.mass.prayer.morning.subtitle,
         icon: Icons.wb_sunny,
-        content:
-            '一日の始まりに、神様に感謝しながら新しい一日を神様の保護の下に委ねる時間です。朝起きて一日を始めるとき、一日中のお恵みと保護を願う時です。',
+        content: l10n.mass.prayer.morning.content,
       ),
       _PrayerGuide(
-        title: '食事の黙想',
-        subtitle: 'Meal',
+        title: l10n.mass.prayer.meal.title,
+        subtitle: l10n.mass.prayer.meal.subtitle,
         icon: Icons.restaurant,
-        content:
-            '食事の前後に、食べ物を与えてくださった神様に感謝する時間です。食事の前には食べ物を与えてくださったことに感謝し、食事の後には満腹になったことに感謝する時です。',
+        content: l10n.mass.prayer.meal.content,
       ),
       _PrayerGuide(
-        title: '夜の黙想',
-        subtitle: 'Evening',
+        title: l10n.mass.prayer.evening.title,
+        subtitle: l10n.mass.prayer.evening.subtitle,
         icon: Icons.bedtime,
-        content:
-            '一日を終えるにあたり、神様に感謝し、一日の罪を悔い改めて赦しを願う時間です。就寝前に一日を振り返り、明日のために祈る時です。',
+        content: l10n.mass.prayer.evening.content,
       ),
       _PrayerGuide(
-        title: '困難な時の黙想',
-        subtitle: 'In Difficult Times',
+        title: l10n.mass.prayer.difficult.title,
+        subtitle: l10n.mass.prayer.difficult.subtitle,
         icon: Icons.shield,
-        content: '困難な状況や苦しい時に、神様の助けと慰めを願う時間です。試練や苦難の中でも、神様の愛と保護を信じる時です。',
+        content: l10n.mass.prayer.difficult.content,
       ),
       _PrayerGuide(
-        title: '感謝の黙想',
-        subtitle: 'Thanksgiving',
+        title: l10n.mass.prayer.thanksgiving.title,
+        subtitle: l10n.mass.prayer.thanksgiving.subtitle,
         icon: Icons.favorite,
-        content:
-            '神様が与えてくださった恵みと祝福に感謝する時間です。日常の小さな喜びから大きな祝福まで、すべてのことに感謝の心を持つ時です。',
+        content: l10n.mass.prayer.thanksgiving.content,
       ),
       _PrayerGuide(
-        title: '黙想の時間',
-        subtitle: 'Meditation Time',
+        title: l10n.mass.prayer.meditation.title,
+        subtitle: l10n.mass.prayer.meditation.subtitle,
         icon: Icons.self_improvement,
-        content:
-            '静かな時間を持ち、神様と対話しながら自分の心を見つめ直す時間です。み言葉を黙想し、神様の御心を求めながら平和な時間を過ごします。',
+        content: l10n.mass.prayer.meditation.content,
       ),
     ];
 
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('黙想のガイド'),
+        title: Text(l10n.mass.title),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -99,7 +96,7 @@ class PrayerScreen extends ConsumerWidget {
                 border: Border.all(color: Colors.grey.shade300, width: 1),
               ),
               child: Text(
-                '※本コンテンツは個人の黙想のためのガイドです。\n聖書本文の提供は行っていません。',
+                l10n.mass.bibleNotice,
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey.shade700,

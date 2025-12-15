@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/widgets/info_row.dart';
@@ -19,6 +20,7 @@ class ParishDetailScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final currentUser = ref.watch(currentUserProvider);
 
     // 실제 데이터 조회
@@ -32,8 +34,8 @@ class ParishDetailScreen extends ConsumerWidget {
       data: (parish) {
         if (parish == null || parish.isEmpty) {
           return Scaffold(
-            appBar: AppBar(title: const Text('教会詳細')),
-            body: const Center(child: Text('教会情報が見つかりませんでした')),
+            appBar: AppBar(title: Text(l10n.parish.detail)),
+            body: Center(child: Text(l10n.parish.notFound)),
           );
         }
 
@@ -51,7 +53,14 @@ class ParishDetailScreen extends ConsumerWidget {
 
               // 기본 정보
               SliverToBoxAdapter(
-                child: _buildBasicInfo(context, parish, primaryColor, parishId),
+                child: _buildBasicInfo(
+                  context,
+                  ref,
+                  parish,
+                  primaryColor,
+                  parishId,
+                  l10n,
+                ),
               ),
 
               // 미사 시간
@@ -61,6 +70,7 @@ class ParishDetailScreen extends ConsumerWidget {
                   theme,
                   primaryColor,
                   parish,
+                  l10n,
                 ),
               ),
 
@@ -71,12 +81,12 @@ class ParishDetailScreen extends ConsumerWidget {
         );
       },
       loading: () => Scaffold(
-        appBar: AppBar(title: const Text('教会詳細')),
+        appBar: AppBar(title: Text(l10n.parish.detail)),
         body: const Center(child: CircularProgressIndicator()),
       ),
       error: (error, stack) => Scaffold(
-        appBar: AppBar(title: const Text('教会詳細')),
-        body: Center(child: Text('エラーが発生しました: $error')),
+        appBar: AppBar(title: Text(l10n.parish.detail)),
+        body: Center(child: Text('${l10n.community.errorOccurred}: $error')),
       ),
     );
   }
@@ -133,11 +143,12 @@ class ParishDetailScreen extends ConsumerWidget {
     WidgetRef ref,
     bool isCurrentlyFavorite,
   ) async {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     final currentUser = ref.read(currentUserProvider);
     if (currentUser == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('ログインが必要です'),
+        SnackBar(
+          content: Text(l10n.auth.loginRequired),
           backgroundColor: Colors.orange,
         ),
       );
@@ -147,8 +158,8 @@ class ParishDetailScreen extends ConsumerWidget {
     // 소속 성당은 즐겨찾기에서 제거할 수 없음
     if (isCurrentlyFavorite && parishId == currentUser.mainParishId) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('所属教会はお気に入りから削除できません'),
+        SnackBar(
+          content: Text(l10n.parish.cannotRemoveParish),
           backgroundColor: Colors.orange,
         ),
       );
@@ -185,7 +196,9 @@ class ParishDetailScreen extends ConsumerWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              isCurrentlyFavorite ? 'お気に入りから削除しました' : 'お気に入りに追加しました',
+              isCurrentlyFavorite
+                  ? l10n.common.favoriteRemoved
+                  : l10n.common.favoriteAdded,
             ),
             backgroundColor: Colors.green,
           ),
@@ -196,9 +209,11 @@ class ParishDetailScreen extends ConsumerWidget {
 
   Widget _buildBasicInfo(
     BuildContext context,
+    WidgetRef ref,
     Map<String, dynamic> parish,
     Color primaryColor,
     String parishId,
+    AppLocalizations l10n,
   ) {
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -269,7 +284,7 @@ class ParishDetailScreen extends ConsumerWidget {
                       _launchMapByAddress(address);
                     },
                     icon: const Icon(Icons.map),
-                    label: const Text('地図アプリで開く'),
+                    label: Text(l10n.parish.openInMap),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -299,7 +314,7 @@ class ParishDetailScreen extends ConsumerWidget {
                       }
                     },
                     icon: const Icon(Icons.forum),
-                    label: const Text('コミュニティ'),
+                    label: Text(l10n.parish.community),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
                       foregroundColor: Colors.white,
@@ -318,6 +333,7 @@ class ParishDetailScreen extends ConsumerWidget {
     ThemeData theme,
     Color primaryColor,
     Map<String, dynamic> parish,
+    AppLocalizations l10n,
   ) {
     final massTime = parish['massTime'] as String?;
 
@@ -332,13 +348,45 @@ class ParishDetailScreen extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          // 경고 문구 (항상 표시, 위에 표시)
+          const SizedBox(height: 12),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.surfaceVariant.withValues(alpha: 0.5),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: theme.colorScheme.outline.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  Icons.info_outline,
+                  size: 20,
+                  color: theme.colorScheme.primary,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '※ ミサ時間は各本堂のホームページでご確認ください',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                      height: 1.5,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(height: 12),
           massTime == null || massTime.isEmpty
               ? Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Text(
-                      'ミサ時間情報がありません',
+                      l10n.parish.detailSection.noMassTimeInfo,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: theme.colorScheme.onSurfaceVariant,
                       ),
@@ -525,6 +573,9 @@ class ParishDetailScreen extends ConsumerWidget {
       'PH': [r'フィリピン', r'Filipino'],
       'PT': [r'ポルトガル', r'Português'],
       'KR': [r'韓国語', r'Korean'],
+      'VI': [r'ベトナム語', r'Vietnamese'],
+      'ID': [r'インドネシア語', r'Indonesian'],
+      'PL': [r'ポーランド語', r'Polish'],
       'FR': [r'フランス語', r'French', r'Français'],
       'DE': [r'ドイツ語', r'German', r'Deutsch'],
       'IT': [r'イタリア語', r'Italian', r'Italiano'],
@@ -549,6 +600,9 @@ class ParishDetailScreen extends ConsumerWidget {
       'PH': '🇵🇭',
       'PT': '🇵🇹',
       'KR': '🇰🇷',
+      'VI': '🇻🇳',
+      'ID': '🇮🇩',
+      'PL': '🇵🇱',
       'FR': '🇫🇷',
       'DE': '🇩🇪',
       'IT': '🇮🇹',
@@ -566,6 +620,9 @@ class ParishDetailScreen extends ConsumerWidget {
       'PH': 'フィリピン語',
       'PT': 'ポルトガル語',
       'KR': '韓国語',
+      'VI': 'ベトナム語',
+      'ID': 'インドネシア語',
+      'PL': 'ポーランド語',
       'FR': 'フランス語',
       'DE': 'ドイツ語',
       'IT': 'イタリア語',
@@ -634,7 +691,53 @@ class ParishDetailScreen extends ConsumerWidget {
           _addToWeekdayMap(weekday, times, weekdayMap);
         }
       }
-      // 기타 (언어 표시가 포함된 경우 등)
+      // 외국어 미사 처리 (예: "ベトナム語：土19:30、日15:00", "英語ミサ：12:00", "インドネシア語：16:30(第2・第4日曜)")
+      else if (trimmed.contains('語') && trimmed.contains('：')) {
+        // "언어語：土19:30、日15:00" 또는 "언어語：16:30(第2・第4日曜)" 형식 파싱
+        final langMatch = RegExp(r'^(.+語)[：:]\s*(.+)$').firstMatch(trimmed);
+        if (langMatch != null) {
+          final languagePart = langMatch.group(1)!;
+          final timesPart = langMatch.group(2)!;
+
+          // "土19:30、日15:00" 형식에서 각 요일과 시간 추출
+          final timeMatches = RegExp(
+            r'([土日])(\d{1,2}:\d{2})',
+          ).allMatches(timesPart);
+
+          if (timeMatches.isNotEmpty) {
+            // 각 요일에 시간 추가
+            for (final match in timeMatches) {
+              final weekdayJa = match.group(1)!;
+              final time = match.group(2)!;
+              final weekday = weekdayJa == '土' ? '土' : '日';
+              final timeWithLang = '$time($languagePart)';
+              _addToWeekdayMap(weekday, timeWithLang, weekdayMap);
+            }
+          } else {
+            // "16:30(第2・第4日曜)" 또는 "12:00" 형식 처리
+            // 시간과 주일 정보 추출
+            final timeWithNoteMatch = RegExp(
+              r'(\d{1,2}:\d{2})\s*(\(第\d+[・]?第?\d*日曜\))?',
+            ).firstMatch(timesPart);
+
+            if (timeWithNoteMatch != null) {
+              final time = timeWithNoteMatch.group(1)!;
+              final notePart = timeWithNoteMatch.group(2) ?? '';
+              // 언어 정보를 시간 뒤에 추가 (예: "16:30(インドネシア語) (第2・第4日曜)")
+              final timeWithLang = notePart.isNotEmpty
+                  ? '$time($languagePart) $notePart'
+                  : '$time($languagePart)';
+              _addToWeekdayMap('日', timeWithLang, weekdayMap);
+            } else {
+              // 형식이 맞지 않으면 기타로
+              _addToWeekdayMap('その他', trimmed, weekdayMap);
+            }
+          }
+        } else {
+          _addToWeekdayMap('その他', trimmed, weekdayMap);
+        }
+      }
+      // 기타
       else {
         _addToWeekdayMap('その他', trimmed, weekdayMap);
       }
@@ -788,14 +891,6 @@ class ParishDetailScreen extends ConsumerWidget {
     final uri = Uri.parse('tel:$phone');
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
-    }
-  }
-
-  /// 좌표를 사용하여 Google Maps 열기
-  Future<void> _launchMapByCoordinates(double lat, double lon) async {
-    final uri = Uri.parse('https://www.google.com/maps?q=$lat,$lon');
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
   }
 

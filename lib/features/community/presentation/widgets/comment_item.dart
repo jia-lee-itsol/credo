@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../core/utils/date_utils.dart';
+import '../../../../shared/providers/auth_provider.dart';
 import '../../core/utils/mention_parser.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
+import 'report_dialog.dart';
 
 /// 댓글 아이템 위젯
 class CommentItem extends ConsumerWidget {
+  final String commentId;
   final String author;
   final String authorId;
   final String content;
@@ -16,6 +20,7 @@ class CommentItem extends ConsumerWidget {
 
   const CommentItem({
     super.key,
+    required this.commentId,
     required this.author,
     required this.authorId,
     required this.content,
@@ -27,7 +32,10 @@ class CommentItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final parts = MentionParser.parseText(content);
+    final currentUser = ref.watch(currentUserProvider);
+    final isAuthor = currentUser != null && currentUser.userId == authorId;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
@@ -68,6 +76,20 @@ class CommentItem extends ConsumerWidget {
                       AppDateUtils.formatRelativeTime(createdAt),
                       style: theme.textTheme.bodySmall,
                     ),
+                    // 신고 버튼 (작성자가 아닌 경우에만 표시)
+                    if (!isAuthor && currentUser != null) ...[
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.flag_outlined, size: 16),
+                        color: theme.colorScheme.onSurfaceVariant,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () {
+                          ReportDialog.showForComment(context, commentId);
+                        },
+                        tooltip: l10n.community.reportPost,
+                      ),
+                    ],
                   ],
                 ),
                 const SizedBox(height: 4),

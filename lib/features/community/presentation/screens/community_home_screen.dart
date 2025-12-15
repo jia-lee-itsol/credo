@@ -3,10 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../parish/presentation/providers/parish_presentation_providers.dart';
-import '../../data/providers/community_repository_providers.dart';
+import '../providers/community_presentation_providers.dart';
 
 /// 커뮤니티 홈 화면 (교회 선택)
 class CommunityHomeScreen extends ConsumerWidget {
@@ -16,6 +17,7 @@ class CommunityHomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final currentUser = ref.watch(currentUserProvider);
     final mainParishId = currentUser?.mainParishId;
 
@@ -27,7 +29,7 @@ class CommunityHomeScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('コミュニティ'),
+        title: Text(l10n.community.title),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
@@ -54,7 +56,7 @@ class CommunityHomeScreen extends ConsumerWidget {
         children: [
           // 소속 교회 섹션
           Text(
-            '所属教会',
+            l10n.community.home.parish,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -64,7 +66,10 @@ class CommunityHomeScreen extends ConsumerWidget {
             mainParishAsync.when(
               data: (parish) {
                 if (parish == null) {
-                  return _buildEmptyParishCard('所属教会が設定されていません', primaryColor);
+                  return _buildEmptyParishCard(
+                    l10n.community.home.parishNotSet,
+                    primaryColor,
+                  );
                 }
                 // 게시글 수와 새 게시글 여부 가져오기
                 final postCountAsync = ref.watch(
@@ -144,11 +149,16 @@ class CommunityHomeScreen extends ConsumerWidget {
                   child: CircularProgressIndicator(),
                 ),
               ),
-              error: (error, stackTrace) =>
-                  _buildEmptyParishCard('所属教会の情報を読み込めませんでした', primaryColor),
+              error: (error, stackTrace) => _buildEmptyParishCard(
+                l10n.community.home.parishLoadFailed,
+                primaryColor,
+              ),
             )
           else
-            _buildEmptyParishCard('所属教会が設定されていません', primaryColor),
+            _buildEmptyParishCard(
+              l10n.community.home.parishNotSet,
+              primaryColor,
+            ),
 
           const SizedBox(height: 24),
 
@@ -158,7 +168,7 @@ class CommunityHomeScreen extends ConsumerWidget {
               context.push(AppRoutes.parishList);
             },
             icon: const Icon(Icons.search),
-            label: const Text('他の教会のコミュニティを探す'),
+            label: Text(l10n.community.home.searchOtherParishes),
           ),
         ],
       ),
@@ -184,7 +194,7 @@ Widget _buildEmptyParishCard(String message, Color primaryColor) {
   );
 }
 
-class _CommunityParishCard extends StatelessWidget {
+class _CommunityParishCard extends ConsumerWidget {
   final String name;
   final int postCount;
   final bool hasNewPosts;
@@ -202,7 +212,8 @@ class _CommunityParishCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final theme = Theme.of(context);
 
     return Card(
@@ -258,7 +269,10 @@ class _CommunityParishCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text('$postCount件の投稿', style: theme.textTheme.bodySmall),
+                    Text(
+                      l10n.community.postsCount(postCount),
+                      style: theme.textTheme.bodySmall,
+                    ),
                   ],
                 ),
               ),

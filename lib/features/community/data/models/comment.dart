@@ -40,17 +40,4 @@ class Comment with _$Comment {
     json['createdAt'] = Timestamp.fromDate(createdAt);
     return json;
   }
-
-  /// JSON 직렬화를 위한 DateTime 변환기
-  static DateTime _dateTimeFromJson(dynamic value) {
-    if (value == null) return DateTime.now();
-    if (value is Timestamp) return value.toDate();
-    if (value is String) return DateTime.parse(value);
-    if (value is DateTime) return value;
-    return DateTime.now();
-  }
-
-  /// JSON 직렬화를 위한 DateTime 변환기
-  static String _dateTimeToJson(DateTime dateTime) =>
-      dateTime.toIso8601String();
 }

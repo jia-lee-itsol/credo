@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../notifiers/post_form_notifier.dart';
 
 /// 공식 계정 설정 위젯 (공지/핀 옵션)
-class PostOfficialSettings extends StatelessWidget {
+class PostOfficialSettings extends ConsumerWidget {
   final PostFormState formState;
   final PostFormNotifier notifier;
   final Color primaryColor;
@@ -15,8 +17,9 @@ class PostOfficialSettings extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -33,7 +36,7 @@ class PostOfficialSettings extends StatelessWidget {
               Icon(Icons.verified, size: 18, color: primaryColor),
               const SizedBox(width: 8),
               Text(
-                '公式アカウント設定',
+                l10n.community.officialAccountSettings,
                 style: theme.textTheme.titleSmall?.copyWith(
                   color: primaryColor,
                   fontWeight: FontWeight.bold,
@@ -48,8 +51,8 @@ class PostOfficialSettings extends StatelessWidget {
             onChanged: (value) {
               notifier.setIsOfficial(value ?? false);
             },
-            title: const Text('お知らせとして登録'),
-            subtitle: const Text('教会メンバー全員に通知されます'),
+            title: Text(l10n.community.registerAsNotice),
+            subtitle: Text(l10n.community.registerAsNoticeSubtitle),
             dense: true,
             contentPadding: EdgeInsets.zero,
             controlAffinity: ListTileControlAffinity.leading,
@@ -61,8 +64,8 @@ class PostOfficialSettings extends StatelessWidget {
             onChanged: (value) {
               notifier.setIsPinned(value ?? false);
             },
-            title: const Text('上部に固定'),
-            subtitle: const Text('投稿リストの最上部に表示されます'),
+            title: Text(l10n.community.pinToTop),
+            subtitle: Text(l10n.community.pinToTopSubtitle),
             dense: true,
             contentPadding: EdgeInsets.zero,
             controlAffinity: ListTileControlAffinity.leading,

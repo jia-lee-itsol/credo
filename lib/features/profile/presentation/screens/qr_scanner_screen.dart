@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../auth/domain/entities/user_entity.dart';
@@ -19,6 +20,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
 
   Future<void> _scanBarcode() async {
     if (_isProcessing) return;
+    final l10n = ref.read(appLocalizationsSyncProvider);
 
     setState(() {
       _isProcessing = true;
@@ -46,8 +48,8 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
       // "credo:userId" 형식인지 확인
       if (!rawValue.startsWith('credo:')) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('無効なQRコードです'),
+          SnackBar(
+            content: Text(l10n.qr.invalid),
             backgroundColor: Colors.orange,
           ),
         );
@@ -99,8 +101,8 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
           });
           if (user == null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('ユーザーが見つかりませんでした'),
+              SnackBar(
+                content: Text(l10n.qr.userNotFound),
                 backgroundColor: Colors.orange,
               ),
             );
@@ -124,25 +126,26 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
   }
 
   void _showUserFoundDialog(UserEntity user) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('ユーザーが見つかりました'),
+        title: Text(l10n.qr.userFound),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('ニックネーム: ${user.nickname}'),
+            Text('${l10n.profile.godparent.nickname}: ${user.nickname}'),
             const SizedBox(height: 8),
-            Text('メール: ${user.email}'),
+            Text('${l10n.profile.godparent.email}: ${user.email}'),
             const SizedBox(height: 8),
-            Text('ユーザーID: ${user.userId}'),
+            Text('${l10n.profile.userId}: ${user.userId}'),
           ],
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('閉じる'),
+            child: Text(l10n.common.close),
           ),
           // TODO: 메신저 기능 구현 시 "友達追加" 버튼 추가
         ],
@@ -153,11 +156,12 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('QRコードをスキャン'),
+        title: Text('QRコードをスキャン'),
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
       ),
@@ -185,7 +189,7 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
             ElevatedButton.icon(
               onPressed: _isProcessing ? null : _scanBarcode,
               icon: const Icon(Icons.qr_code_scanner),
-              label: const Text('スキャン開始'),
+              label: Text(l10n.qr.startScan),
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor,
                 foregroundColor: Colors.white,

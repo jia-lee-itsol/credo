@@ -13,46 +13,102 @@
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["10:00"],
-        "tuesday": ["09:30"],
-        "wednesday": ["09:30"],
-        "thursday": ["09:30"],
-        "friday": ["09:30"]
+        "sunday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "9:30"
+        ],
+        "wednesday": [
+          "9:30"
+        ],
+        "thursday": [
+          "9:30"
+        ],
+        "friday": [
+          "9:30"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
-          {"time": "14:00", "language": "VI", "note": "第3主日"},
-          {"time": "14:00", "language": "EN", "note": "第4主日"}
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 35.8608682,
+      "longitude": 139.644094
     },
     {
       "name": "カトリック上尾教会",
-      "address": "埼玉県上尾市",
+      "address": "埼玉県上尾市上106-1",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "主日：09:00 / 平日：10:00 金",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["09:00"],
-        "friday": ["10:00"]
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.9774474,
+      "longitude": 139.5931801
     },
     {
       "name": "カトリック朝霞教会",
-      "address": "埼玉県朝霞市",
+      "address": "埼玉県朝霞市本町1丁目1-1",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "主日：14:00 第1・第2・第4 / 10:00 第3 / 14:00または10:00 第5 / 平日：18:30 火",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["14:00", "10:00"],
-        "tuesday": ["18:30"]
+        "sunday": [
+          "14:00"
+        ],
+        "monday": [
+          "18:30"
+        ],
+        "tuesday": [
+          "18:30"
+        ],
+        "wednesday": [
+          "18:30"
+        ],
+        "thursday": [
+          "18:30"
+        ],
+        "friday": [
+          "18:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.7971702,
+      "longitude": 139.5936412
     },
     {
       "name": "カトリック大宮教会",
@@ -65,87 +121,177 @@
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["11:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["07:00"]
+        "sunday": [
+          "11:00"
+        ],
+        "monday": [
+          "7:00"
+        ],
+        "tuesday": [
+          "7:00"
+        ],
+        "wednesday": [
+          "7:00"
+        ],
+        "thursday": [
+          "7:00"
+        ],
+        "friday": [
+          "7:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "14:00", "language": "EN", "note": "第1"}]
-      }
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 35.9140738,
+      "longitude": 139.6340596
     },
     {
       "name": "カトリック春日部教会",
-      "address": "埼玉県春日部市",
+      "address": "埼玉県春日部市中央5-7-15",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "主日：10:00 / 15:00 第1 [V]",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "15:00", "language": "VI", "note": "第1"}]
-      }
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 35.9752624,
+      "longitude": 139.752313
     },
     {
       "name": "カトリック加須教会",
-      "address": "埼玉県加須市",
+      "address": "埼玉県加須市富士見町3-22",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "土曜：19:00 第3 [P] / 主日：14:00 / 平日：07:00 月・火・水・木 / 10:00 金・土",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "saturday": ["10:00"],
-        "sunday": ["14:00"],
-        "monday": ["07:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["10:00"]
+        "sunday": [
+          "14:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
       },
       "foreignMassTimes": {
-        "saturday": [{"time": "19:00", "language": "PT", "note": "第3"}]
-      }
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "PT",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.1313882,
+      "longitude": 139.6017706
     },
     {
       "name": "カトリック上福岡教会",
-      "address": "埼玉県ふじみ野市",
+      "address": "埼玉県ふじみ野市上福岡1-11-23",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "主日：10:00 / 18:00 第3 [E] / 14:00 第4 [V] / 平日：10:00 金",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["10:00"],
-        "friday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
-          {"time": "18:00", "language": "EN", "note": "第3"},
-          {"time": "14:00", "language": "VI", "note": "第4"}
+          {
+            "time": "18:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 35.8793521,
+      "longitude": 139.5196171
     },
     {
       "name": "カトリック川口教会",
-      "address": "埼玉県川口市",
+      "address": "埼玉県川口市川口6丁目4-2",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "主日：10:30 / 10:30 第3 [V] / 平日：11:00 水 / 07:30 金",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["10:30"],
-        "wednesday": ["11:00"],
-        "friday": ["07:30"]
+        "sunday": [
+          "10:30"
+        ],
+        "wednesday": [
+          "11:00"
+        ],
+        "friday": [
+          "07:30"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "10:30", "language": "VI", "note": "第3"}]
-      }
+        "sunday": [
+          {
+            "time": "10:30",
+            "language": "VI",
+            "note": "第3日曜"
+          }
+        ]
+      },
+      "latitude": 35.8077356,
+      "longitude": 139.7241874
     },
     {
       "name": "カトリック川越教会",
@@ -158,243 +304,467 @@
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "saturday": ["18:00"],
-        "sunday": ["08:00", "10:00"],
-        "wednesday": ["10:00"],
-        "thursday": ["10:00"],
-        "friday": ["10:00"]
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "08:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
-          {"time": "14:00", "language": "TH", "note": "第2"},
-          {"time": "13:30", "language": "VI", "note": "第3"},
-          {"time": "15:00", "language": "PT", "note": "第4"}
+          {
+            "time": "14:00",
+            "language": "TH",
+            "note": ""
+          },
+          {
+            "time": "13:30",
+            "language": "VI",
+            "note": ""
+          },
+          {
+            "time": "15:00",
+            "language": "PT",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 35.917233,
+      "longitude": 139.4793617
     },
     {
       "name": "カトリック北浦和教会",
-      "address": "埼玉県さいたま市浦和区",
+      "address": "埼玉県さいたま市浦和区北浦和1丁目14-23",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "主日：09:00 / 平日：10:00 初金",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["09:00"],
-        "friday": ["10:00"]
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.8752537,
+      "longitude": 139.6554124
     },
     {
       "name": "カトリック行田教会",
-      "address": "埼玉県行田市",
+      "address": "埼玉県行田市旭町16-2",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "主日：09:00 / 09:00 第5 [S]",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["09:00"]
+        "sunday": [
+          "09:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "09:00", "language": "ES", "note": "第5"}]
-      }
+        "sunday": [
+          {
+            "time": "09:00",
+            "language": "ES",
+            "note": "第5日曜"
+          }
+        ]
+      },
+      "latitude": 36.13905,
+      "longitude": 139.4559326
     },
     {
       "name": "カトリック熊谷教会",
-      "address": "埼玉県熊谷市",
+      "address": "埼玉県熊谷市末広2丁目115",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "土曜：07:00 / 主日：11:00 / 平日：07:00 月-金",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "saturday": ["07:00"],
-        "sunday": ["11:00"],
-        "monday": ["07:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["07:00"]
+        "saturday": [
+          "07:00"
+        ],
+        "sunday": [
+          "11:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.1471963,
+      "longitude": 139.3889796
     },
     {
       "name": "カトリック草加教会",
-      "address": "埼玉県草加市",
+      "address": "埼玉県草加市松江1丁目6-11",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "土曜：19:00 / 主日：10:30 / 平日：19:00 火 / 07:00 木",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "saturday": ["19:00"],
-        "sunday": ["10:30"],
-        "tuesday": ["19:00"],
-        "thursday": ["07:00"]
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "10:30"
+        ],
+        "monday": [
+          "19:00"
+        ],
+        "tuesday": [
+          "19:00"
+        ],
+        "wednesday": [
+          "19:00"
+        ],
+        "thursday": [
+          "19:00"
+        ],
+        "friday": [
+          "19:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.8254078,
+      "longitude": 139.805378
     },
     {
       "name": "カトリック秩父教会",
-      "address": "埼玉県秩父市",
+      "address": "埼玉県秩父市宮側町14-16",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "主日：14:30",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["14:30"]
+        "sunday": [
+          "14:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.9916443,
+      "longitude": 139.0855869
     },
     {
       "name": "カトリック所沢教会",
-      "address": "埼玉県所沢市",
+      "address": "埼玉県所沢市小手指町1-23-1",
       "prefecture": "埼玉県",
       "isCathedral": false,
-      "massTime": "土曜：9:30 偶数月第1 / 19:00(ES) / 主日：10:00 / 平日：11:00 金 (L)",
+      "massTime": "土曜：19:00(スペイン語) / 主日：10:00 / 平日：11:00(金)",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "saturday": ["09:30", "19:00"],
-        "sunday": ["10:00"],
-        "friday": ["11:00"]
+        "sunday": [
+          "10:00"
+        ],
+        "friday": [
+          "11:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "ES",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 35.799423,
+      "longitude": 139.4687112
     },
     {
       "name": "カトリック飯能教会",
-      "address": "埼玉県飯能市",
+      "address": "埼玉県飯能市仲町14-5",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "土曜：奇数月第1 19:00（ES）/ 主日：10:00 / 平日：14:00 金",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "saturday": ["19:00"],
-        "sunday": ["10:00"],
-        "friday": ["14:00"]
+        "sunday": [
+          "10:00"
+        ],
+        "friday": [
+          "14:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "ES",
+            "note": "奇数月第1"
+          }
+        ]
+      },
+      "latitude": 35.8551031,
+      "longitude": 139.3286081
     },
     {
       "name": "カトリック東松山教会",
-      "address": "埼玉県東松山市",
+      "address": "埼玉県東松山市神明町2-9-3",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "土曜：7:30 / 主日：9:30 第3 / 15:00 [6月 8月 10月 12月] [S] / 平日：7:30 月 / 7:30 金",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "saturday": ["07:30"],
-        "sunday": ["09:30"],
-        "monday": ["07:30"],
-        "friday": ["07:30"]
+        "saturday": [
+          "7:30"
+        ],
+        "sunday": [
+          "9:30"
+        ],
+        "monday": [
+          "7:30"
+        ],
+        "tuesday": [
+          "7:30"
+        ],
+        "wednesday": [
+          "7:30"
+        ],
+        "thursday": [
+          "7:30"
+        ],
+        "friday": [
+          "7:30"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "15:00", "language": "ES", "note": "6月 8月 10月 12月"}]
-      }
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "ES",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.0422084,
+      "longitude": 139.399972
     },
     {
       "name": "カトリック深谷教会",
-      "address": "埼玉県深谷市",
+      "address": "埼玉県深谷市栄町1-48",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "主日：9:00",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["09:00"]
+        "sunday": [
+          "9:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.19748149999999,
+      "longitude": 139.2814476
     },
     {
       "name": "カトリック本庄教会",
-      "address": "埼玉県本庄市",
+      "address": "埼玉県本庄市千代田1-3-28",
       "prefecture": "埼玉県",
       "isCathedral": false,
       "massTime": "土曜：19:00 第1 [P] / 08:00 第2,3,4,5 / 主日：09:00 第1,3,5 / 11:00 第2,4 / 平日：10:00 月水金 / 20:00 木",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "saturday": ["08:00"],
-        "sunday": ["09:00", "11:00"],
-        "monday": ["10:00"],
-        "wednesday": ["10:00"],
-        "thursday": ["20:00"],
-        "friday": ["10:00"]
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
       "foreignMassTimes": {
-        "saturday": [{"time": "19:00", "language": "PT", "note": "第1"}]
-      }
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "PT",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.2435479,
+      "longitude": 139.1904765
     },
     {
       "name": "カトリック入間宮寺教会（巡回）",
-      "address": "埼玉県入間市",
+      "address": "埼玉県入間市宮寺2837",
       "prefecture": "埼玉県",
       "isCathedral": false,
-      "massTime": "主日：第1 14:00 / 第2〜5 10:00 / 平日：7:00 水",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "saitama",
       "deanery": "saitama",
       "massTimes": {
-        "sunday": ["14:00", "10:00"],
-        "wednesday": ["07:00"]
+        "sunday": [
+          "14:00"
+        ],
+        "monday": [
+          "7:00"
+        ],
+        "tuesday": [
+          "7:00"
+        ],
+        "wednesday": [
+          "7:00"
+        ],
+        "thursday": [
+          "7:00"
+        ],
+        "friday": [
+          "7:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.8358,
+      "longitude": 139.3910788
     },
     {
       "name": "カトリック足利教会",
-      "address": "栃木県足利市",
+      "address": "栃木県足利市通3丁目2758",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "土曜：19:30 / 主日：10:00 / 10:00 第2 [J][E] / 10:00 第3 [J][S] / 平日：6:30 第1,3 土 / 19:30 水",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "saturday": ["19:30", "06:30"],
-        "sunday": ["10:00"],
-        "wednesday": ["19:30"]
+        "saturday": [
+          "19:30"
+        ],
+        "sunday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "19:30"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
-          {"time": "10:00", "language": "EN", "note": "第2"},
-          {"time": "10:00", "language": "ES", "note": "第3"}
+          {
+            "time": "10:00",
+            "language": "EN",
+            "note": "第2日曜(日本語+English)"
+          },
+          {
+            "time": "10:00",
+            "language": "ES",
+            "note": "第3日曜(日本語+Spanish)"
+          }
         ]
-      }
+      },
+      "latitude": 36.3401874,
+      "longitude": 139.4497602
     },
     {
       "name": "カトリック今市教会",
-      "address": "栃木県日光市",
+      "address": "栃木県日光市今市本町19-1",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "主日：第2,第4 14:00",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "sunday": ["14:00"]
+        "sunday": [
+          "14:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.7198987,
+      "longitude": 139.6982361
     },
     {
       "name": "カトリック大田原教会",
-      "address": "栃木県大田原市",
+      "address": "栃木県大田原市中央1丁目3-15",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "土曜：19:00 第4 [E] / 19:00 第2 [P] / 主日：09:00",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "sunday": ["09:00"]
+        "sunday": [
+          "09:00"
+        ]
       },
       "foreignMassTimes": {
         "saturday": [
-          {"time": "19:00", "language": "EN", "note": "第4"},
-          {"time": "19:00", "language": "PT", "note": "第2"}
+          {
+            "time": "19:00",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "other": [
+          {
+            "time": "19:00",
+            "language": "PT",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 36.8712697,
+      "longitude": 140.0153213
     },
     {
       "name": "カトリック小山教会",
@@ -407,119 +777,227 @@
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "saturday": ["07:00"],
-        "sunday": ["10:00"],
-        "monday": ["07:00"],
-        "thursday": ["10:00"],
-        "friday": ["19:00"]
+        "saturday": [
+          "7:00"
+        ],
+        "monday": [
+          "7:00"
+        ],
+        "tuesday": [
+          "7:00"
+        ],
+        "wednesday": [
+          "7:00"
+        ],
+        "thursday": [
+          "7:00"
+        ],
+        "friday": [
+          "7:00"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
-          {"time": "10:00", "language": "EN", "note": "第2,4"},
-          {"time": "14:00", "language": "ES", "note": "第1"},
-          {"time": "14:00", "language": "VI", "note": "第2"}
+          {
+            "time": "10:00",
+            "language": "JA",
+            "note": ""
+          }
+        ],
+        "other": [
+          {
+            "time": "10:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "ES",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 36.3178881,
+      "longitude": 139.8041759
     },
     {
       "name": "カトリック鹿沼教会",
-      "address": "栃木県鹿沼市",
+      "address": "栃木県鹿沼市天神町1852-1",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "主日：14:00",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "sunday": ["14:00"]
+        "sunday": [
+          "14:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.5669696,
+      "longitude": 139.7450679
     },
     {
       "name": "カトリック上三川教会（巡回）",
-      "address": "栃木県上三川町",
+      "address": "栃木県河内郡上三川町上三川4917-1",
       "prefecture": "栃木県",
       "isCathedral": false,
-      "massTime": "主日：14:00 第1,3,5 / 14:00 第2,4 [E]",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "sunday": ["14:00"]
+        "sunday": [
+          "14:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "14:00", "language": "EN", "note": "第2,4"}]
-      }
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2,4日曜"
+          }
+        ]
+      },
+      "latitude": 36.4393763,
+      "longitude": 139.9099658
     },
     {
       "name": "カトリック烏山教会",
-      "address": "栃木県那須烏山市",
+      "address": "栃木県那須烏山市金井2-5-8",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "主日：第1・第2：10:00 (教会) / 第3・第4・第5：10:00（老人ホーム）",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "sunday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.6569328,
+      "longitude": 140.1517676
     },
     {
       "name": "カトリック佐野教会",
-      "address": "栃木県佐野市",
+      "address": "栃木県佐野市若松町225",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "主日：13:00 第1,3,5 / 11:30 第2 / 11:30 第4 [P] / 平日：19:00 金",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "sunday": ["13:00", "11:30"],
-        "friday": ["19:00"]
+        "sunday": [
+          "13:00"
+        ],
+        "monday": [
+          "19:00"
+        ],
+        "tuesday": [
+          "19:00"
+        ],
+        "wednesday": [
+          "19:00"
+        ],
+        "thursday": [
+          "19:00"
+        ],
+        "friday": [
+          "19:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "11:30", "language": "PT", "note": "第4"}]
-      }
+        "sunday": [
+          {
+            "time": "11:30",
+            "language": "PT",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.3143908,
+      "longitude": 139.5783915
     },
     {
       "name": "カトリック栃木教会",
-      "address": "栃木県栃木市",
+      "address": "栃木県栃木市入舟町12-12",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "主日：15:30 第1,3,5 / 14:00 第2,4 / 11:00 第3 [T] / 平日：10:00 木",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "sunday": ["15:30", "14:00"],
-        "thursday": ["10:00"]
+        "sunday": [
+          "15:30"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "11:00", "language": "TH", "note": "第3"}]
-      }
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "TH",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.3823772,
+      "longitude": 139.7341396
     },
     {
       "name": "カトリック那須教会",
-      "address": "栃木県那須町",
+      "address": "栃木県那須郡那須町高久乙3370-1",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "主日：9:30（第2はミサなし）",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "sunday": ["09:30"]
+        "sunday": [
+          "9:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 37.0197825,
+      "longitude": 140.1209869
     },
     {
       "name": "カトリック日光教会",
-      "address": "栃木県日光市",
+      "address": "栃木県日光市御幸町5-1",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "主日：第1,第3 14:00",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "sunday": ["14:00"]
+        "sunday": [
+          "14:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.7198987,
+      "longitude": 139.6982361
     },
     {
       "name": "カトリック松が峰教会",
@@ -532,170 +1010,342 @@
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "saturday": ["07:00"],
-        "sunday": ["10:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["11:00"],
-        "thursday": ["18:30"],
-        "friday": ["10:00"]
+        "saturday": [
+          "07:00"
+        ],
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "12:00", "language": "EN", "note": "第1,3"}]
-      }
+        "sunday": [
+          {
+            "time": "12:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.5581502,
+      "longitude": 139.8813564
     },
     {
       "name": "カトリック峰教会",
-      "address": "栃木県",
+      "address": "栃木県宇都宮市峰2丁目19番9号",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "土曜：18:30 / 主日：9:00 / 平日：7:00",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "saturday": ["18:30"],
-        "sunday": ["09:00"],
-        "monday": ["07:00"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["07:00"]
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "9:00"
+        ],
+        "monday": [
+          "7:00"
+        ],
+        "tuesday": [
+          "7:00"
+        ],
+        "wednesday": [
+          "7:00"
+        ],
+        "thursday": [
+          "7:00"
+        ],
+        "friday": [
+          "7:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.6714739,
+      "longitude": 139.8547266
     },
     {
       "name": "カトリック真岡教会",
-      "address": "栃木県真岡市",
+      "address": "栃木県真岡市荒町3-45-1",
       "prefecture": "栃木県",
       "isCathedral": false,
       "massTime": "主日：14:00",
       "diocese": "saitama",
       "deanery": "tochigi",
       "massTimes": {
-        "sunday": ["14:00"]
+        "sunday": [
+          "14:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.4404432,
+      "longitude": 140.0133686
     },
     {
       "name": "カトリック伊勢崎教会",
-      "address": "群馬県伊勢崎市",
+      "address": "群馬県伊勢崎市中央町24-4",
       "prefecture": "群馬県",
       "isCathedral": false,
       "massTime": "土曜：19:00 / 主日：09:00 / 14:00 第2 [S] / 11:00 第3 [P] / 14:00 第4 [V] / 14:00 第1 [E] / 平日：08:00 月水木 / 19:00 火 / 10:00 金",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "saturday": ["19:00"],
-        "sunday": ["09:00"],
-        "monday": ["08:00"],
-        "tuesday": ["19:00"],
-        "wednesday": ["08:00"],
-        "thursday": ["08:00"],
-        "friday": ["10:00"]
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "08:00"
+        ],
+        "tuesday": [
+          "08:00"
+        ],
+        "wednesday": [
+          "08:00"
+        ],
+        "thursday": [
+          "08:00"
+        ],
+        "friday": [
+          "08:00"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
-          {"time": "14:00", "language": "ES", "note": "第2"},
-          {"time": "11:00", "language": "PT", "note": "第3"},
-          {"time": "14:00", "language": "VI", "note": "第4"},
-          {"time": "14:00", "language": "EN", "note": "第1"}
+          {
+            "time": "14:00",
+            "language": "ES",
+            "note": ""
+          },
+          {
+            "time": "11:00",
+            "language": "PT",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 36.3118354,
+      "longitude": 139.1965435
     },
     {
       "name": "カトリック太田教会",
-      "address": "群馬県太田市",
+      "address": "群馬県太田市東本町46-20",
       "prefecture": "群馬県",
       "isCathedral": false,
       "massTime": "土曜：19:00 第2・第3 [S] / 主日：09:30 / 11:30 第1 [V] / 14:00 第2 [T] / 17:30 第4 [E] / 平日：7:30 水木金 / 10:30 初金",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "sunday": ["09:30"],
-        "wednesday": ["07:30"],
-        "thursday": ["07:30"],
-        "friday": ["07:30", "10:30"]
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "7:30"
+        ],
+        "tuesday": [
+          "7:30"
+        ],
+        "wednesday": [
+          "7:30"
+        ],
+        "thursday": [
+          "7:30"
+        ],
+        "friday": [
+          "7:30"
+        ]
       },
       "foreignMassTimes": {
-        "saturday": [{"time": "19:00", "language": "ES", "note": "第2・第3"}],
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "ES",
+            "note": ""
+          }
+        ],
         "sunday": [
-          {"time": "11:30", "language": "VI", "note": "第1"},
-          {"time": "14:00", "language": "TH", "note": "第2"},
-          {"time": "17:30", "language": "EN", "note": "第4"}
+          {
+            "time": "11:30",
+            "language": "VI",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "TH",
+            "note": ""
+          },
+          {
+            "time": "17:30",
+            "language": "EN",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 36.2909373,
+      "longitude": 139.3760432
     },
     {
       "name": "カトリック大間々教会",
-      "address": "群馬県みどり市",
+      "address": "群馬県みどり市大間々町大間々1457-1",
       "prefecture": "群馬県",
       "isCathedral": false,
       "massTime": "主日：09:00 第2,4 / 13:00 第1,3 / 11:00 第5 (変更する場合があります）",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "sunday": ["09:00", "13:00", "11:00"]
+        "sunday": [
+          "09:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.39483180000001,
+      "longitude": 139.2811456
     },
     {
       "name": "カトリック桐生教会",
-      "address": "群馬県桐生市",
+      "address": "群馬県桐生市錦町1-3-52",
       "prefecture": "群馬県",
       "isCathedral": false,
       "massTime": "主日：09:00 第1,3,4,5 / 13:00 第2 / 平日：06:30 火,水,木,金",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "sunday": ["09:00", "13:00"],
-        "tuesday": ["06:30"],
-        "wednesday": ["06:30"],
-        "thursday": ["06:30"],
-        "friday": ["06:30"]
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.4053581,
+      "longitude": 139.3304143
     },
     {
       "name": "カトリック草津教会（巡回）",
-      "address": "群馬県草津町",
+      "address": "群馬県吾妻郡草津町草津647",
       "prefecture": "群馬県",
       "isCathedral": false,
-      "massTime": "平日：13:00 第2水 ※12〜3月は休み / ※事前に前橋教会にご連絡ください",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "wednesday": ["13:00"]
+        "monday": [
+          "13:00"
+        ],
+        "tuesday": [
+          "13:00"
+        ],
+        "wednesday": [
+          "13:00"
+        ],
+        "thursday": [
+          "13:00"
+        ],
+        "friday": [
+          "13:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.6207181,
+      "longitude": 138.5960945
     },
     {
       "name": "カトリック渋川教会",
-      "address": "群馬県渋川市",
+      "address": "群馬県渋川市渋川1694-18",
       "prefecture": "群馬県",
       "isCathedral": false,
       "massTime": "主日：10:00 / 15:00 第4 [E] / 平日：10:00 金",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "sunday": ["10:00"],
-        "friday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "15:00", "language": "EN", "note": "第4"}]
-      }
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.489471,
+      "longitude": 139.000443
     },
     {
       "name": "カトリック新町教会",
-      "address": "群馬県高崎市新町",
+      "address": "群馬県高崎市新町2490-1",
       "prefecture": "群馬県",
       "isCathedral": false,
       "massTime": "主日：08:45（第3はなし）",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "sunday": ["08:45"]
+        "sunday": [
+          "08:45"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.2740351,
+      "longitude": 139.1095042
     },
     {
       "name": "カトリック高崎教会",
@@ -708,85 +1358,145 @@
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "saturday": ["19:00", "06:30"],
-        "sunday": ["11:00"],
-        "wednesday": ["10:00"],
-        "thursday": ["06:30"],
-        "friday": ["06:30"]
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "11:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "14:00", "language": "EN", "note": "第1"}]
-      }
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.3237187,
+      "longitude": 139.0004713
     },
     {
       "name": "カトリック館林教会",
-      "address": "群馬県館林市",
+      "address": "群馬県館林市緑町1-7-16",
       "prefecture": "群馬県",
       "isCathedral": false,
       "massTime": "主日：09:00 / 12:00 第3 [V]",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "sunday": ["09:00"]
+        "sunday": [
+          "09:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "12:00", "language": "VI", "note": "第3"}]
-      }
+        "sunday": [
+          {
+            "time": "12:00",
+            "language": "VI",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.244806,
+      "longitude": 139.5422532
     },
     {
       "name": "カトリック富岡教会",
-      "address": "群馬県富岡市",
+      "address": "群馬県富岡市富岡1161",
       "prefecture": "群馬県",
       "isCathedral": false,
       "massTime": "主日：11:00",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "sunday": ["11:00"]
+        "sunday": [
+          "11:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.2598997,
+      "longitude": 138.8901439
     },
     {
       "name": "カトリック中之条教会（巡回）",
-      "address": "群馬県中之条町",
+      "address": "群馬県吾妻郡中之条町1837",
       "prefecture": "群馬県",
       "isCathedral": false,
-      "massTime": "主日：14:00 第3 [E]",
+      "massTime": "巡回教会（ミサ時間は教会にご確認ください）",
       "note": "巡回教会",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {},
       "foreignMassTimes": {
-        "sunday": [{"time": "14:00", "language": "EN", "note": "第3"}]
-      }
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.5884191,
+      "longitude": 138.8419977
     },
     {
       "name": "カトリック沼田教会",
-      "address": "群馬県沼田市",
+      "address": "群馬県沼田市鍛冶町967-2",
       "prefecture": "群馬県",
       "isCathedral": false,
       "massTime": "主日：14:00 / 19:00 第1 [E]",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "sunday": ["14:00"]
+        "sunday": [
+          "14:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "19:00", "language": "EN", "note": "第1"}]
-      }
+        "sunday": [
+          {
+            "time": "19:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.64615380000001,
+      "longitude": 139.0441704
     },
     {
       "name": "カトリック藤岡教会",
-      "address": "群馬県藤岡市",
+      "address": "群馬県藤岡市藤岡855",
       "prefecture": "群馬県",
       "isCathedral": false,
       "massTime": "主日：9:00",
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "sunday": ["09:00"]
+        "sunday": [
+          "9:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.2585982,
+      "longitude": 139.0745188
     },
     {
       "name": "カトリック前橋教会",
@@ -799,69 +1509,131 @@
       "diocese": "saitama",
       "deanery": "gunma",
       "massTimes": {
-        "saturday": ["07:15", "18:30"],
-        "sunday": ["10:00"],
-        "tuesday": ["18:30"],
-        "wednesday": ["10:00"],
-        "thursday": ["07:15"],
-        "friday": ["10:00"]
+        "saturday": [
+          "07:15"
+        ],
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "18:30"
+        ],
+        "tuesday": [
+          "18:30"
+        ],
+        "wednesday": [
+          "18:30"
+        ],
+        "thursday": [
+          "18:30"
+        ],
+        "friday": [
+          "18:30"
+        ]
       },
       "foreignMassTimes": {
         "sunday": [
-          {"time": "10:00", "language": "SIGN", "note": ""},
-          {"time": "14:00", "language": "EN", "note": "第1"}
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 36.3896687,
+      "longitude": 139.065133
     },
     {
       "name": "カトリック鹿島教会",
-      "address": "茨城県鹿嶋市",
+      "address": "茨城県神栖市大野原1-7-3",
       "prefecture": "茨城県",
       "isCathedral": false,
       "massTime": "土曜：18:00 / 主日：10:00 / 10:00 第3 [E] / 平日：10:00 初金",
       "diocese": "saitama",
       "deanery": "ibaraki",
       "massTimes": {
-        "saturday": ["18:00"],
-        "sunday": ["10:00"],
-        "friday": ["10:00"]
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "10:00", "language": "EN", "note": "第3"}]
-      }
+        "sunday": [
+          {
+            "time": "10:00",
+            "language": "EN",
+            "note": "第3日曜"
+          }
+        ]
+      },
+      "latitude": 35.9656835,
+      "longitude": 140.6447937
     },
     {
       "name": "カトリック古河教会",
-      "address": "茨城県古河市",
+      "address": "茨城県古河市東1-5-1",
       "prefecture": "茨城県",
       "isCathedral": false,
       "massTime": "主日：09:30 / 14:00 第3 [T]",
       "diocese": "saitama",
       "deanery": "ibaraki",
       "massTimes": {
-        "sunday": ["09:30"]
+        "sunday": [
+          "09:30"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "14:00", "language": "TH", "note": "第3"}]
-      }
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "TH",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.1787948,
+      "longitude": 139.7557348
     },
     {
       "name": "カトリック下館教会",
-      "address": "茨城県筑西市",
+      "address": "茨城県筑西市甲301-4",
       "prefecture": "茨城県",
       "isCathedral": false,
       "massTime": "主日：10:00 / 平日：10:00 金",
       "diocese": "saitama",
       "deanery": "ibaraki",
       "massTimes": {
-        "sunday": ["10:00"],
-        "friday": ["10:00"]
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.3052343,
+      "longitude": 139.9794265
     },
     {
       "name": "カトリック常総教会",
-      "address": "茨城県常総市",
+      "address": "茨城県常総市鴻野山字農場1443-8",
       "prefecture": "茨城県",
       "isCathedral": false,
       "massTime": "土曜：18:00 第1 [S] / 19:30 第1 [P] / 主日：17:30 第1 [E] / 15:00 第4 [V] / 18:00 第3 [P] / 18:00 第4 [S]",
@@ -870,16 +1642,44 @@
       "massTimes": {},
       "foreignMassTimes": {
         "saturday": [
-          {"time": "18:00", "language": "ES", "note": "第1"},
-          {"time": "19:30", "language": "PT", "note": "第1"}
+          {
+            "time": "18:00",
+            "language": "ES",
+            "note": ""
+          }
+        ],
+        "other": [
+          {
+            "time": "19:30",
+            "language": "PT",
+            "note": ""
+          },
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": ""
+          },
+          {
+            "time": "18:00",
+            "language": "PT",
+            "note": ""
+          },
+          {
+            "time": "18:00",
+            "language": "ES",
+            "note": ""
+          }
         ],
         "sunday": [
-          {"time": "17:30", "language": "EN", "note": "第1"},
-          {"time": "15:00", "language": "VI", "note": "第4"},
-          {"time": "18:00", "language": "PT", "note": "第3"},
-          {"time": "18:00", "language": "ES", "note": "第4"}
+          {
+            "time": "17:30",
+            "language": "EN",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 36.0241324,
+      "longitude": 139.9942635
     },
     {
       "name": "カトリックつくば教会",
@@ -892,83 +1692,185 @@
       "diocese": "saitama",
       "deanery": "ibaraki",
       "massTimes": {
-        "saturday": ["07:00"],
-        "sunday": ["10:30"],
-        "wednesday": ["19:00"],
-        "thursday": ["07:00"],
-        "friday": ["10:00"]
+        "saturday": [
+          "07:00"
+        ],
+        "monday": [
+          "19:00"
+        ],
+        "tuesday": [
+          "19:00"
+        ],
+        "wednesday": [
+          "19:00"
+        ],
+        "thursday": [
+          "19:00"
+        ],
+        "friday": [
+          "19:00"
+        ]
       },
       "foreignMassTimes": {
-        "saturday": [{"time": "18:00", "language": "EN", "note": ""}],
+        "other": [
+          {
+            "time": "18:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "15:00",
+            "language": "ES",
+            "note": ""
+          }
+        ],
         "sunday": [
-          {"time": "08:30", "language": "EN", "note": ""},
-          {"time": "15:00", "language": "ES", "note": "第3"}
+          {
+            "time": "08:30",
+            "language": "EN",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 36.0585195,
+      "longitude": 140.1029883
     },
     {
       "name": "カトリック土浦教会",
-      "address": "茨城県土浦市",
+      "address": "茨城県土浦市中央1丁目12-5",
       "prefecture": "茨城県",
       "isCathedral": false,
       "massTime": "土曜：17:30 / 19:30 第3 [P] / 19:30 第4 [V] / 主日：09:30 / 18:00 第3 [V] / 平日：07:15 水木 / 10:00 金",
       "diocese": "saitama",
       "deanery": "ibaraki",
       "massTimes": {
-        "saturday": ["17:30"],
-        "sunday": ["09:30"],
-        "wednesday": ["07:15"],
-        "thursday": ["07:15"],
-        "friday": ["10:00"]
+        "saturday": [
+          "17:30"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:15"
+        ],
+        "tuesday": [
+          "07:15"
+        ],
+        "wednesday": [
+          "07:15"
+        ],
+        "thursday": [
+          "07:15"
+        ],
+        "friday": [
+          "07:15"
+        ]
       },
       "foreignMassTimes": {
-        "saturday": [
-          {"time": "19:30", "language": "PT", "note": "第3"},
-          {"time": "19:30", "language": "VI", "note": "第4"}
+        "other": [
+          {
+            "time": "19:30",
+            "language": "PT",
+            "note": ""
+          },
+          {
+            "time": "19:30",
+            "language": "VI",
+            "note": ""
+          }
         ],
-        "sunday": [{"time": "18:00", "language": "VI", "note": "第3"}]
-      }
+        "sunday": [
+          {
+            "time": "18:00",
+            "language": "VI",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 36.0783182,
+      "longitude": 140.2042457
     },
     {
       "name": "カトリック友部教会",
-      "address": "茨城県笠間市",
+      "address": "茨城県笠間市大田町1071",
       "prefecture": "茨城県",
       "isCathedral": false,
       "massTime": "土曜：07:00 / 主日：09:30 / 平日：07:00 火-土",
       "diocese": "saitama",
       "deanery": "ibaraki",
       "massTimes": {
-        "saturday": ["07:00"],
-        "sunday": ["09:30"],
-        "tuesday": ["07:00"],
-        "wednesday": ["07:00"],
-        "thursday": ["07:00"],
-        "friday": ["07:00"]
+        "saturday": [
+          "07:00"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.3452638,
+      "longitude": 140.3043225
     },
     {
       "name": "カトリック取手教会",
-      "address": "茨城県取手市",
+      "address": "茨城県取手市戸頭219-1",
       "prefecture": "茨城県",
       "isCathedral": false,
       "massTime": "土曜：18:30 / 主日：09:30 / 11:00 第2,4 [E] / 平日：08:00 水木 / 10:00 金",
       "diocese": "saitama",
       "deanery": "ibaraki",
       "massTimes": {
-        "saturday": ["18:30"],
-        "sunday": ["09:30"],
-        "wednesday": ["08:00"],
-        "thursday": ["08:00"],
-        "friday": ["10:00"]
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "08:00"
+        ],
+        "tuesday": [
+          "08:00"
+        ],
+        "wednesday": [
+          "08:00"
+        ],
+        "thursday": [
+          "08:00"
+        ],
+        "friday": [
+          "08:00"
+        ]
       },
       "foreignMassTimes": {
-        "sunday": [{"time": "11:00", "language": "EN", "note": "第2,4"}]
-      }
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 35.9114223,
+      "longitude": 140.0503534
     },
     {
       "name": "カトリック那珂教会（分）",
-      "address": "茨城県那珂市",
+      "address": "茨城県那珂市額田東郷480-1",
       "prefecture": "茨城県",
       "isCathedral": false,
       "massTime": "土曜：7:00 / 主日：09:30 / 平日：10:00 金",
@@ -976,27 +1878,66 @@
       "diocese": "saitama",
       "deanery": "ibaraki",
       "massTimes": {
-        "saturday": ["07:00"],
-        "sunday": ["09:30"],
-        "friday": ["10:00"]
+        "saturday": [
+          "7:00"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.4574235,
+      "longitude": 140.4867341
     },
     {
       "name": "カトリック日立教会",
-      "address": "茨城県日立市",
+      "address": "茨城県日立市神峰町2-10-6",
       "prefecture": "茨城県",
       "isCathedral": false,
       "massTime": "土曜：07:00 / 主日：10:00 / 平日：07:00 木 / 10:00 金",
       "diocese": "saitama",
       "deanery": "ibaraki",
       "massTimes": {
-        "saturday": ["07:00"],
-        "sunday": ["10:00"],
-        "thursday": ["07:00"],
-        "friday": ["10:00"]
+        "saturday": [
+          "07:00"
+        ],
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 36.59912730000001,
+      "longitude": 140.6504712
     },
     {
       "name": "カトリック水戸教会",
@@ -1009,20 +1950,51 @@
       "diocese": "saitama",
       "deanery": "ibaraki",
       "massTimes": {
-        "saturday": ["18:30"],
-        "sunday": ["09:30"],
-        "tuesday": ["06:50"],
-        "wednesday": ["06:50"],
-        "thursday": ["06:50"],
-        "friday": ["10:00", "18:30"]
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "06:50"
+        ],
+        "tuesday": [
+          "06:50"
+        ],
+        "wednesday": [
+          "06:50"
+        ],
+        "thursday": [
+          "06:50"
+        ],
+        "friday": [
+          "06:50"
+        ]
       },
       "foreignMassTimes": {
-        "saturday": [{"time": "20:00", "language": "ID", "note": "第2,3,4 大洗集会所"}],
+        "other": [
+          {
+            "time": "20:00",
+            "language": "ID",
+            "note": ""
+          }
+        ],
         "sunday": [
-          {"time": "11:30", "language": "EN", "note": "第1,3"},
-          {"time": "11:30", "language": "TH", "note": "第2"}
+          {
+            "time": "11:30",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "11:30",
+            "language": "TH",
+            "note": ""
+          }
         ]
-      }
+      },
+      "latitude": 36.3815235,
+      "longitude": 140.4635192
     }
   ]
 }

@@ -1,0 +1,30 @@
+{
+  "app": {
+    "name": "Credo"
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "close": "Fechar",
+    "loading": "Carregando...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "retry": "Tentar novamente"
+  },
+  "language": {
+    "settings": "Configurações de idioma",
+    "switched": "Alterado para {language}",
+    "switched@language": "Nome do idioma",
+    "switchedButProfileUpdateFailed": "Alterado para {language}, mas a atualização do perfil falhou: {error}",
+    "switchedButProfileUpdateFailed@language": "Nome do idioma",
+    "switchedButProfileUpdateFailed@error": "Mensagem de erro"
+  },
+  "mass": {
+    "noDataToday": "Não há informações de meditação para hoje",
+    "noDataWeekday": "As informações de meditação dos dias úteis estão sendo preparadas",
+    "bibleNotice": "※Por favor, ouça o texto da Bíblia na igreja ou leia uma Bíblia oficial."
+  }
+}

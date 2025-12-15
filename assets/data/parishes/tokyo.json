@@ -16,11 +16,6 @@
         "saturday": [
           "18:00"
         ],
-        "sunday": [
-          "08:00",
-          "10:00",
-          "18:00"
-        ],
         "monday": [
           "07:00"
         ],
@@ -40,7 +35,7 @@
       "foreignMassTimes": {
         "sunday": [
           {
-            "time": "12:00",
+            "time": "08:00",
             "language": "KR",
             "note": ""
           },
@@ -50,7 +45,9 @@
             "note": "第2・第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.7141917,
+      "longitude": 139.7264929
     },
     {
       "name": "カトリック麹町教会",
@@ -58,7 +55,7 @@
       "address": "東京都千代田区麹町6-5-1",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "平日：07:00 / 土曜日：18:00 / 主日：09:00, 11:00 / 第1・第3日曜14:00(英語ミサ) / 第2・第4日曜14:00(スペイン語ミサ)",
+      "massTime": "平日：07:00, 12:00, 18:00 / 土曜日：18:00 / 主日：07:00, 08:30, 10:00(手話付き), 18:00 / 英語ミサ：12:00 / ポルトガル語：12:30(第1日曜) / スペイン語：13:30 / ベトナム語：土19:30、日15:00 / インドネシア語：16:30(第2・第4日曜) / ポーランド語：16:00(第1日曜)",
       "diocese": "tokyo",
       "deanery": "tokyo",
       "massTimes": {
@@ -66,39 +63,68 @@
           "18:00"
         ],
         "sunday": [
-          "09:00",
-          "11:00"
+          "07:00",
+          "08:30",
+          "10:00",
+          "18:00"
         ],
         "monday": [
-          "07:00"
+          "07:00",
+          "12:00",
+          "18:00"
         ],
         "tuesday": [
-          "07:00"
+          "07:00",
+          "12:00",
+          "18:00"
         ],
         "wednesday": [
-          "07:00"
+          "07:00",
+          "12:00",
+          "18:00"
         ],
         "thursday": [
-          "07:00"
+          "07:00",
+          "12:00",
+          "18:00"
         ],
         "friday": [
-          "07:00"
+          "07:00",
+          "12:00",
+          "18:00"
         ]
       },
       "foreignMassTimes": {
         "sunday": [
           {
-            "time": "14:00",
+            "time": "12:00",
             "language": "EN",
-            "note": "第1・第3日曜"
+            "note": ""
           },
           {
-            "time": "14:00",
+            "time": "12:30",
+            "language": "PT",
+            "note": "第1日曜"
+          },
+          {
+            "time": "13:30",
             "language": "ES",
+            "note": ""
+          },
+          {
+            "time": "19:30",
+            "language": "VI",
+            "note": ""
+          },
+          {
+            "time": "16:30",
+            "language": "ID",
             "note": "第2・第4日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.6850816,
+      "longitude": 139.7310446
     },
     {
       "name": "カトリック築地教会",
@@ -121,14 +147,394 @@
             "note": "第2日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.6680252,
+      "longitude": 139.777191
     },
     {
       "name": "カトリック麻布教会",
       "address": "東京都港区西麻布3-21-6",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "主日：09:30 / 第1・第3日曜14:00(英語ミサ)",
+      "massTime": "主日：07:00, 09:00 / 平日：火曜日から土曜日07:00 / 第1金曜日：10:00",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "latitude": 35.6593038,
+      "longitude": 139.7252647,
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック目黒教会",
+      "address": "東京都品川区上大崎4-6-22",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "土曜日：17:00(インドネシア語), 19:30(タガログ語) / 主日：07:30(日本語), 10:00(日本語), 12:00(英語), 14:00(英語), 17:00(日本語) / 平日：月曜日から土曜日07:30(日本語・水曜日は英語)",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {},
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "17:00",
+            "language": "ID",
+            "note": ""
+          }
+        ],
+        "sunday": [
+          {
+            "time": "07:30",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "monday": [
+          {
+            "time": "07:30",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "tuesday": [
+          {
+            "time": "07:30",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "wednesday": [
+          {
+            "time": "07:30",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "thursday": [
+          {
+            "time": "07:30",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "friday": [
+          {
+            "time": "07:30",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 35.6322919,
+      "longitude": 139.715282
+    },
+    {
+      "name": "カトリック赤羽教会",
+      "address": "東京都北区赤羽1丁目19-6",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：07:00, 09:00, 17:00 / 平日：06:30 / 第1金曜日：10:00",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00",
+          "17:00"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "latitude": 35.7528727,
+      "longitude": 139.7337701,
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック赤堤教会",
+      "address": "東京都世田谷区赤堤3-20-1",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第1金曜日：10:30",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ]
+      },
+      "latitude": 35.6468095,
+      "longitude": 139.653582,
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック秋津教会",
+      "address": "東京都東村山市秋津町5丁目24-1",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 平日：木曜日06:30、金曜日09:00",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:30",
+          "09:00"
+        ],
+        "tuesday": [
+          "06:30",
+          "09:00"
+        ],
+        "wednesday": [
+          "06:30",
+          "09:00"
+        ],
+        "thursday": [
+          "06:30",
+          "09:00"
+        ],
+        "friday": [
+          "06:30",
+          "09:00"
+        ]
+      },
+      "latitude": 35.754598,
+      "longitude": 139.4685613,
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリックあきる野教会",
+      "address": "東京都あきる野市秋川1丁目1-1",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：5月～10月11:00、11月～4月08:00（季節により変更）",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "11:00",
+          "08:00"
+        ]
+      },
+      "latitude": 35.7285903,
+      "longitude": 139.2934663,
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック浅草教会",
+      "address": "東京都台東区浅草橋5-20-5",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：08:00, 10:00 / 平日：月曜日から土曜日まで07:00",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "08:00",
+          "10:00"
+        ],
+        "monday": [
+          "07:00",
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00",
+          "07:00"
+        ],
+        "thursday": [
+          "07:00",
+          "07:00"
+        ],
+        "friday": [
+          "07:00",
+          "07:00"
+        ],
+        "saturday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 35.7125736,
+      "longitude": 139.7802043
+    },
+    {
+      "name": "カトリック足立教会",
+      "address": "東京都足立区綾瀬2丁目32-12",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：09:00 / 平日：月曜日から土曜日まで06:45 / 第1金曜日：19:00",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ],
+        "monday": [
+          "06:45",
+          "06:45"
+        ],
+        "tuesday": [
+          "06:45",
+          "06:45"
+        ],
+        "thursday": [
+          "06:45",
+          "06:45"
+        ],
+        "friday": [
+          "06:45",
+          "06:45"
+        ],
+        "saturday": [
+          "06:45"
+        ],
+        "wednesday": [
+          "06:45"
+        ]
+      },
+      "latitude": 35.775017,
+      "longitude": 139.8044129,
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック板橋教会",
+      "address": "東京都板橋区幸町8-6",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "latitude": 35.7512311,
+      "longitude": 139.7092786,
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック上野教会",
+      "address": "東京都台東区下谷1丁目5-9",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：10:00 / 木曜日：10:00 / 主日：13:30(中国語ミサ)",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:30",
+            "language": "CN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 35.7125736,
+      "longitude": 139.7802043
+    },
+    {
+      "name": "カトリック梅田教会",
+      "address": "東京都青梅市今井1丁目264-1",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：11:00",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "latitude": 35.788025,
+      "longitude": 139.2757976,
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック青梅教会",
+      "address": "東京都青梅市勝沼1-197",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：土曜日19:30、日曜日09:30",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "19:30",
+          "09:30"
+        ]
+      },
+      "latitude": 35.788025,
+      "longitude": 139.2757976,
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大島教会",
+      "address": "東京都大島町元町馬の背251",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：第4日曜10:00",
+      "diocese": "tokyo",
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "latitude": 34.7499419,
+      "longitude": 139.3559809,
+      "foreignMassTimes": {}
+    },
+    {
+      "name": "カトリック大森教会",
+      "address": "東京都大田区大森北2-5-11",
+      "prefecture": "東京都",
+      "isCathedral": false,
+      "massTime": "主日：09:30 / 第3日曜：14:00(英語ミサ)",
       "diocese": "tokyo",
       "deanery": "tokyo",
       "massTimes": {
@@ -141,17 +547,19 @@
           {
             "time": "14:00",
             "language": "EN",
-            "note": "第1・第3日曜"
+            "note": "第3日曜"
           }
         ]
-      }
+      },
+      "latitude": 35.5620838,
+      "longitude": 139.7169362
     },
     {
-      "name": "カトリック目黒教会",
-      "address": "東京都品川区上大崎4-6-22",
+      "name": "カトリック荻窪教会",
+      "address": "東京都杉並区荻窪4丁目32-7",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "主日：10:00 / 第4日曜14:00(英語ミサ)",
+      "massTime": "主日：10:00 / 第1金曜日：10:00",
       "diocese": "tokyo",
       "deanery": "tokyo",
       "massTimes": {
@@ -159,520 +567,1410 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {
-        "sunday": [
-          {
-            "time": "14:00",
-            "language": "EN",
-            "note": "第4日曜"
-          }
-        ]
-      }
-    },
-    {
-      "name": "カトリック赤羽教会",
-      "address": "東京都北区",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック赤堤教会",
-      "address": "東京都世田谷区",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック秋津教会",
-      "address": "東京都東村山市",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリックあきる野教会",
-      "address": "東京都あきる野市",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック浅草教会",
-      "address": "東京都台東区",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック足立教会",
-      "address": "東京都足立区",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック板橋教会",
-      "address": "東京都板橋区",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック上野教会",
-      "address": "東京都台東区",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック梅田教会",
-      "address": "東京都青梅市",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック青梅教会",
-      "address": "東京都青梅市",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック大島教会",
-      "address": "東京都大島町",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック大森教会",
-      "address": "東京都大田区",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
-    },
-    {
-      "name": "カトリック荻窪教会",
-      "address": "東京都杉並区",
-      "prefecture": "東京都",
-      "isCathedral": false,
-      "massTime": "",
-      "diocese": "tokyo",
-      "deanery": "tokyo"
+      "latitude": 35.6994705,
+      "longitude": 139.6355204,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック葛西教会",
-      "address": "東京都江戸川区",
+      "address": "東京都江戸川区中葛西5丁目34-1",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日19:00、日曜日10:00 / 平日：月曜日から金曜日まで08:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "19:00",
+          "10:00"
+        ],
+        "monday": [
+          "08:00",
+          "08:00"
+        ],
+        "tuesday": [
+          "08:00",
+          "08:00"
+        ],
+        "thursday": [
+          "08:00",
+          "08:00"
+        ],
+        "friday": [
+          "08:00",
+          "08:00"
+        ],
+        "saturday": [
+          "08:00"
+        ],
+        "wednesday": [
+          "08:00"
+        ]
+      },
+      "latitude": 35.7067011,
+      "longitude": 139.8681899,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック蒲田教会",
-      "address": "東京都大田区",
+      "address": "東京都大田区蒲田5丁目32-3",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：09:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "latitude": 35.5620838,
+      "longitude": 139.7169362,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック上野毛教会",
-      "address": "東京都世田谷区",
+      "address": "東京都世田谷区上野毛2-14-25",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日16:30、日曜日07:00, 08:30(子どもと共に), 10:30 / 平日：月曜日から土曜日06:30 / 第1金曜日：06:30, 10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "16:30",
+          "07:00",
+          "08:30",
+          "10:30"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "latitude": 35.6468095,
+      "longitude": 139.653582,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック亀有教会",
-      "address": "東京都葛飾区",
+      "address": "東京都足立区東和4-3-20",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日18:30、日曜日09:30、日曜日16:00(英語ミサ) / 平日：月曜日18:00、水曜日18:00、木曜日06:15、金曜日06:15 / 第1金曜日：15:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "monday": [
+          "18:00",
+          "18:00",
+          "06:15",
+          "06:15"
+        ],
+        "tuesday": [
+          "18:00",
+          "18:00",
+          "06:15",
+          "06:15"
+        ],
+        "wednesday": [
+          "18:00",
+          "18:00",
+          "06:15",
+          "06:15"
+        ],
+        "thursday": [
+          "18:00",
+          "18:00",
+          "06:15",
+          "06:15"
+        ],
+        "friday": [
+          "18:00",
+          "18:00",
+          "06:15",
+          "06:15"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "18:30",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 35.7432853,
+      "longitude": 139.8472243
     },
     {
       "name": "カトリック東京韓人教会",
       "churchName": "東京韓人天主教会",
-      "address": "東京都",
+      "address": "東京都江東区森下1丁目3-1",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：12:00 / 火曜日：19:00 / 水曜日、木曜日、金曜日：10:30",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "12:00"
+        ],
+        "tuesday": [
+          "19:00"
+        ],
+        "wednesday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 35.6764225,
+      "longitude": 139.650027
     },
     {
       "name": "カトリック神田教会",
-      "address": "東京都千代田区",
+      "address": "東京都千代田区西神田1丁目1-12",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00 / 金曜日：10:30",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:30"
+        ]
+      },
+      "latitude": 35.6940309,
+      "longitude": 139.7537719,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック北町教会",
-      "address": "東京都練馬区",
+      "address": "東京都練馬区北町3-16-1",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：09:30 / 平日：07:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "latitude": 35.7356446,
+      "longitude": 139.6516675,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック吉祥寺教会",
-      "address": "東京都武蔵野市",
+      "address": "東京都武蔵野市御殿山1-7-8",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：07:00, 09:00, 11:00, 18:00 / 平日：07:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00",
+          "11:00",
+          "18:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "latitude": 35.71769159999999,
+      "longitude": 139.5660882,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック清瀬教会",
-      "address": "東京都清瀬市",
+      "address": "東京都清瀬市松山1-21-12",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：08:00, 10:00 / 平日：火曜日08:00、金曜日11:00 / 第1日曜13:00(英語ミサ) / 第3日曜16:00(タガログ語ミサ)",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "08:00",
+          "10:00"
+        ],
+        "monday": [
+          "08:00",
+          "11:00"
+        ],
+        "tuesday": [
+          "08:00",
+          "11:00"
+        ],
+        "wednesday": [
+          "08:00",
+          "11:00"
+        ],
+        "thursday": [
+          "08:00",
+          "11:00"
+        ],
+        "friday": [
+          "08:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "EN",
+            "note": "第1日曜"
+          }
+        ]
+      },
+      "latitude": 35.7860547,
+      "longitude": 139.5261729
     },
     {
       "name": "カトリック小岩教会",
-      "address": "東京都江戸川区",
+      "address": "東京都江戸川区西小岩4-4-1",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：09:30 / 平日：水曜日、木曜日、土曜日07:00、金曜日10:00 / 第2日曜13:30(タガログ語ミサ) / 第4日曜13:30(英語ミサ)",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "07:00",
+          "10:00"
+        ],
+        "tuesday": [
+          "07:00",
+          "10:00"
+        ],
+        "wednesday": [
+          "07:00",
+          "10:00"
+        ],
+        "thursday": [
+          "07:00",
+          "10:00"
+        ],
+        "friday": [
+          "07:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:30",
+            "language": "PH",
+            "note": "第2日曜"
+          },
+          {
+            "time": "13:30",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      },
+      "latitude": 35.7067011,
+      "longitude": 139.8681899
     },
     {
       "name": "カトリック高円寺教会",
-      "address": "東京都杉並区",
+      "address": "東京都杉並区高円寺南4丁目39-17",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "latitude": 35.6994705,
+      "longitude": 139.6355204,
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック小金井教会",
-      "address": "東京都小金井市",
+      "address": "東京都小金井市桜町1-2-20",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：08:00, 10:00 / 木曜日、金曜日：06:30 / 火曜日：06:30(集会祭儀)",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "08:00",
+          "10:00"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ]
+      },
+      "latitude": 35.6994563,
+      "longitude": 139.5030584,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック小平教会",
-      "address": "東京都小平市",
+      "address": "東京都小平市大沼町2-32-10",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日18:00、日曜日09:30 / 平日：水曜日08:00、金曜日10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "18:00",
+          "09:30"
+        ],
+        "monday": [
+          "08:00",
+          "10:00"
+        ],
+        "tuesday": [
+          "08:00",
+          "10:00"
+        ],
+        "wednesday": [
+          "08:00",
+          "10:00"
+        ],
+        "thursday": [
+          "08:00",
+          "10:00"
+        ],
+        "friday": [
+          "08:00",
+          "10:00"
+        ]
+      },
+      "latitude": 35.72861270000001,
+      "longitude": 139.4775654,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック三軒茶屋教会",
-      "address": "東京都世田谷区",
+      "address": "東京都世田谷区三軒茶屋2丁目51-32",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日18:30、日曜日08:30, 10:30",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "18:30",
+          "08:30",
+          "10:30"
+        ]
+      },
+      "latitude": 35.6468095,
+      "longitude": 139.653582,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック潮見教会",
-      "address": "東京都江東区",
+      "address": "東京都江東区潮見2丁目10-10",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "latitude": 35.6727748,
+      "longitude": 139.8174521,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック渋谷教会",
-      "address": "東京都渋谷区",
+      "address": "東京都渋谷区南平台町18-13",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：08:00, 10:00 / 平日：07:00 / 第1金曜日：11:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "08:00",
+          "10:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "latitude": 35.6619707,
+      "longitude": 139.703795,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック志村教会",
-      "address": "東京都板橋区",
+      "address": "東京都板橋区坂下1-38-22",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：日曜日09:30 / 平日：土曜日18:00 / 第1金曜日：10:00 / 第4日曜：11:00(英語ミサ)",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "18:00"
+        ],
+        "tuesday": [
+          "18:00"
+        ],
+        "wednesday": [
+          "18:00"
+        ],
+        "thursday": [
+          "18:00"
+        ],
+        "friday": [
+          "18:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      },
+      "latitude": 35.7512311,
+      "longitude": 139.7092786
     },
     {
       "name": "カトリック下井草教会",
-      "address": "東京都杉並区",
+      "address": "東京都杉並区井草2-31-25",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：07:00, 09:30, 18:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:30",
+          "18:00"
+        ]
+      },
+      "latitude": 35.6994705,
+      "longitude": 139.6355204,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック成城教会",
-      "address": "東京都世田谷区",
+      "address": "東京都世田谷区成城2-21-16",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日18:00、日曜日08:00, 10:00 / 平日：月曜日から金曜日07:00 / 第1金曜日：10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "18:00",
+          "08:00",
+          "10:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "latitude": 35.6468095,
+      "longitude": 139.653582,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック関町教会",
-      "address": "東京都練馬区",
+      "address": "東京都練馬区関町北4丁目16-12",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：07:00, 10:00 / 平日：金曜日10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "10:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "latitude": 35.7356446,
+      "longitude": 139.6516675,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック瀬田教会",
-      "address": "東京都世田谷区",
+      "address": "東京都世田谷区瀬田4-16-1",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：07:00, 09:30 / 平日：月曜日から土曜日06:20",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:30"
+        ],
+        "monday": [
+          "06:20"
+        ],
+        "tuesday": [
+          "06:20"
+        ],
+        "wednesday": [
+          "06:20"
+        ],
+        "thursday": [
+          "06:20"
+        ],
+        "friday": [
+          "06:20"
+        ]
+      },
+      "latitude": 35.6468095,
+      "longitude": 139.653582,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック世田谷教会",
-      "address": "東京都世田谷区",
+      "address": "東京都世田谷区北沢1-45-12",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：11:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "latitude": 35.6468095,
+      "longitude": 139.653582,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック洗足教会",
-      "address": "東京都目黒区",
+      "address": "東京都目黒区洗足2丁目26-13",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日16:00、日曜日09:30 / 平日：07:00 / 第1金曜日：10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "16:00",
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "latitude": 35.6414529,
+      "longitude": 139.6980773,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック高輪教会",
-      "address": "東京都港区",
+      "address": "東京都港区高輪4丁目7-1",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日18:00、日曜日08:00, 10:00 / 平日：月曜日から土曜日07:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "18:00",
+          "08:00",
+          "10:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "latitude": 35.65808130000001,
+      "longitude": 139.7515077,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック高幡教会",
-      "address": "東京都日野市",
+      "address": "東京都日野市程久保4-7-14",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00 / 平日：金曜日10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "latitude": 35.671354,
+      "longitude": 139.3950975,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック立川教会",
-      "address": "東京都立川市",
+      "address": "東京都立川市錦町2-8-10",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日17:00、日曜日08:00, 10:30 / 第1・第3日曜15:00(英語ミサ) / 第2日曜14:00(スペイン語ミサ) / 平日：水曜日、木曜日09:00、金曜日10:30",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "17:00",
+          "08:00",
+          "10:30"
+        ],
+        "monday": [
+          "09:00",
+          "10:30"
+        ],
+        "tuesday": [
+          "09:00",
+          "10:30"
+        ],
+        "wednesday": [
+          "09:00",
+          "10:30"
+        ],
+        "thursday": [
+          "09:00",
+          "10:30"
+        ],
+        "friday": [
+          "09:00",
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第1・第3日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "ES",
+            "note": "第2日曜"
+          }
+        ]
+      },
+      "latitude": 35.7134355,
+      "longitude": 139.4080089
     },
     {
       "name": "カトリック多摩教会",
-      "address": "東京都多摩市",
+      "address": "東京都多摩市豊ヶ丘1-5-1",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日18:30、日曜日09:00, 11:00 / 平日：月曜日、水曜日、木曜日、金曜日、土曜日06:20 / 第1金曜日：10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "18:30",
+          "09:00",
+          "11:00"
+        ],
+        "monday": [
+          "06:20"
+        ],
+        "tuesday": [
+          "06:20"
+        ],
+        "wednesday": [
+          "06:20"
+        ],
+        "thursday": [
+          "06:20"
+        ],
+        "friday": [
+          "06:20"
+        ]
+      },
+      "latitude": 35.63711,
+      "longitude": 139.4465075,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック調布教会",
-      "address": "東京都調布市",
+      "address": "東京都調布市富士見町3-21-12",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日19:00、日曜日08:00, 09:15(子ども向け), 10:30 / 第2日曜：14:30(英語ミサ) / 平日：06:30 / 第1金曜日：10:30",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "19:00",
+          "08:00",
+          "09:15",
+          "10:30"
+        ],
+        "monday": [
+          "06:30"
+        ],
+        "tuesday": [
+          "06:30"
+        ],
+        "wednesday": [
+          "06:30"
+        ],
+        "thursday": [
+          "06:30"
+        ],
+        "friday": [
+          "06:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:30",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      },
+      "latitude": 35.6506111,
+      "longitude": 139.5407215
     },
     {
       "name": "カトリック田園調布教会",
-      "address": "東京都大田区",
+      "address": "東京都大田区田園調布3丁目43番1号",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：日曜日07:30, 09:00(子供とともに), 11:00(手話通訳あり) / 土曜日07:00, 19:00 / 平日：07:00 / 第1金曜日：10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "07:30",
+          "09:00",
+          "11:00"
+        ],
+        "saturday": [
+          "07:00",
+          "19:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "latitude": 35.5620838,
+      "longitude": 139.7169362,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック徳田教会",
-      "address": "東京都足立区",
+      "address": "東京都足立区千住橋戸町66",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00 / 第1金曜日：11:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "latitude": 35.775017,
+      "longitude": 139.8044129,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック豊島教会",
-      "address": "東京都豊島区",
+      "address": "東京都豊島区長崎1丁目28-22",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：09:30(日本語), 12:00(英語ミサ) / 平日：火曜日、水曜日、金曜日、土曜日07:30",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "monday": [
+          "07:30"
+        ],
+        "tuesday": [
+          "07:30"
+        ],
+        "wednesday": [
+          "07:30"
+        ],
+        "thursday": [
+          "07:30"
+        ],
+        "friday": [
+          "07:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "09:30",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 35.7262664,
+      "longitude": 139.7168209
     },
     {
       "name": "カトリック豊田教会",
-      "address": "東京都日野市",
+      "address": "東京都日野市多摩平3-12-10",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：日曜日07:00, 09:00, 11:00 / 土曜日18:00 / 平日：07:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "09:00",
+          "11:00"
+        ],
+        "saturday": [
+          "18:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "latitude": 35.671354,
+      "longitude": 139.3950975,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック八王子教会",
-      "address": "東京都八王子市",
+      "address": "東京都八王子市本町16-3",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日18:00、日曜日07:00, 10:00 / 第2日曜13:00(英語ミサ) / 平日：火曜日、木曜日07:00、金曜日10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "18:00",
+          "07:00",
+          "10:00"
+        ],
+        "monday": [
+          "07:00",
+          "10:00"
+        ],
+        "tuesday": [
+          "07:00",
+          "10:00"
+        ],
+        "wednesday": [
+          "07:00",
+          "10:00"
+        ],
+        "thursday": [
+          "07:00",
+          "10:00"
+        ],
+        "friday": [
+          "07:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      },
+      "latitude": 35.6664381,
+      "longitude": 139.3160068
     },
     {
       "name": "カトリック碑文谷教会",
-      "address": "東京都目黒区",
+      "address": "東京都目黒区碑文谷1丁目26-24",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：07:00, 10:30, 18:00 / 平日：月曜日から土曜日07:00 / 第1金曜日：10:30",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "10:30",
+          "18:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "latitude": 35.6414529,
+      "longitude": 139.6980773,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック初台教会",
-      "address": "東京都渋谷区",
+      "address": "東京都渋谷区代々木5丁目16-3",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日17:00、日曜日08:30, 10:00 / 平日：月曜日、火曜日、水曜日、木曜日、土曜日06:30、金曜日10:30",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "17:00",
+          "08:30",
+          "10:00"
+        ],
+        "monday": [
+          "06:30",
+          "10:30"
+        ],
+        "tuesday": [
+          "06:30",
+          "10:30"
+        ],
+        "wednesday": [
+          "06:30",
+          "10:30"
+        ],
+        "thursday": [
+          "06:30",
+          "10:30"
+        ],
+        "friday": [
+          "06:30",
+          "10:30"
+        ]
+      },
+      "latitude": 35.6619707,
+      "longitude": 139.703795,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック府中教会",
-      "address": "東京都府中市",
+      "address": "東京都府中市府中町1-40-11",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日16:30、日曜日10:00 / 平日：金曜日09:30 / 第1日曜：インターナショナルミサ",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "16:30",
+          "10:00"
+        ],
+        "monday": [
+          "09:30"
+        ],
+        "tuesday": [
+          "09:30"
+        ],
+        "wednesday": [
+          "09:30"
+        ],
+        "thursday": [
+          "09:30"
+        ],
+        "friday": [
+          "09:30"
+        ]
+      },
+      "latitude": 35.6689919,
+      "longitude": 139.4777247,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック本郷教会",
-      "address": "東京都文京区",
+      "address": "東京都文京区本駒込5-4-3",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "latitude": 35.7078686,
+      "longitude": 139.7524369,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック本所教会",
-      "address": "東京都墨田区",
+      "address": "東京都墨田区東駒形1丁目1-15",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "latitude": 35.7107479,
+      "longitude": 139.8016393,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック町田教会",
-      "address": "東京都町田市",
+      "address": "東京都町田市中町1丁目21-16",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日18:30、日曜日07:30, 10:30 / 平日：金曜日10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "18:30",
+          "07:30",
+          "10:30"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "latitude": 35.546656,
+      "longitude": 139.4385568,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック町屋教会",
-      "address": "東京都荒川区",
+      "address": "東京都荒川区町屋4-7-9",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：09:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "09:00"
+        ]
+      },
+      "latitude": 35.7359339,
+      "longitude": 139.7834758,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック松原教会",
-      "address": "東京都世田谷区",
+      "address": "東京都世田谷区松原3丁目30-2",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日19:00、日曜日08:30, 11:00 / 平日：火曜日、水曜日、木曜日、土曜日07:00、金曜日10:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "19:00",
+          "08:30",
+          "11:00"
+        ],
+        "monday": [
+          "07:00",
+          "10:00"
+        ],
+        "tuesday": [
+          "07:00",
+          "10:00"
+        ],
+        "wednesday": [
+          "07:00",
+          "10:00"
+        ],
+        "thursday": [
+          "07:00",
+          "10:00"
+        ],
+        "friday": [
+          "07:00",
+          "10:00"
+        ]
+      },
+      "latitude": 35.6468095,
+      "longitude": 139.653582,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック三河島教会",
-      "address": "東京都荒川区",
+      "address": "東京都荒川区荒川3-11-1",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：07:00, 10:00 / 平日：07:00 / 第1・第3日曜14:00(韓国語ミサ) / 第1金曜日：07:00",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "sunday": [
+          "07:00",
+          "10:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "KR",
+            "note": "第1・第3日曜"
+          }
+        ]
+      },
+      "latitude": 35.7359339,
+      "longitude": 139.7834758
     },
     {
       "name": "フランシスカン・チャペル・センター",
-      "address": "東京都",
+      "address": "東京都港区六本木4-2-37",
       "prefecture": "東京都",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日17:00(英語)、日曜日07:00(日本語), 09:00(英語), 11:00(英語), 17:00(英語) / 平日：月曜日から土曜日07:00(日本語) / 水曜日19:00(英語) / 金曜日19:00(英語)",
       "diocese": "tokyo",
-      "deanery": "tokyo"
+      "deanery": "tokyo",
+      "massTimes": {
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "17:00",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "wednesday": [
+          {
+            "time": "19:00",
+            "language": "EN",
+            "note": ""
+          }
+        ],
+        "friday": [
+          {
+            "time": "19:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 35.6764225,
+      "longitude": 139.650027
     },
     {
       "name": "カトリック市川教会",
@@ -689,25 +1987,66 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.7241279,
+      "longitude": 139.9243902
     },
     {
       "name": "カトリック鴨川教会",
-      "address": "千葉県鴨川市",
+      "address": "千葉県鴨川市横渚1727-1",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "latitude": 35.1133206,
+      "longitude": 140.0990322,
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック木更津教会",
-      "address": "千葉県木更津市",
+      "address": "千葉県木更津市富士見3丁目1-13",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00 / 第2・第4日曜14:00(英語ミサ) / 平日：月曜日から土曜日07:00 / 第1金曜日：10:00",
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2・第4日曜"
+          }
+        ]
+      },
+      "latitude": 35.3812515,
+      "longitude": 139.9248871
     },
     {
       "name": "カトリック五井教会",
@@ -724,70 +2063,207 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.5161339,
+      "longitude": 140.0856791
     },
     {
       "name": "カトリック佐原教会",
-      "address": "千葉県香取市",
+      "address": "千葉県香取市佐原イ417",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：14:00",
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "14:00"
+        ]
+      },
+      "latitude": 35.8977688,
+      "longitude": 140.4993404,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック館山教会",
-      "address": "千葉県館山市",
+      "address": "千葉県館山市北条1901-7",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：14:00",
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "14:00"
+        ]
+      },
+      "latitude": 34.9965461,
+      "longitude": 139.870044,
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック銚子教会",
-      "address": "千葉県銚子市",
+      "address": "千葉県銚子市栄町1-1448",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:20(国際ミサ)、08:00(海上寮にて、要問い合わせ)",
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "10:20",
+          "08:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 35.7340035,
+      "longitude": 140.8267464
     },
     {
       "name": "カトリック富津教会",
-      "address": "千葉県富津市",
+      "address": "千葉県富津市大堀2丁目16-10",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：10:00（詳細は教会にお問い合わせください）",
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "latitude": 35.3040598,
+      "longitude": 139.8571263,
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {}
     },
     {
       "name": "カトリック習志野教会",
-      "address": "千葉県習志野市",
+      "address": "千葉県習志野市津田沼6丁目12-12",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：07:30, 10:00 / 第4日曜12:30(ポルトガル語ミサ) / 平日：金曜日10:00",
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "07:30",
+          "10:00"
+        ],
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "12:30",
+            "language": "PT",
+            "note": "第4日曜"
+          }
+        ]
+      },
+      "latitude": 35.6816407,
+      "longitude": 140.0271941
     },
     {
       "name": "カトリック成田教会",
-      "address": "千葉県成田市",
+      "address": "千葉県成田市公津の杜2-2-1",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日18:00、日曜日09:30 / 第3日曜11:30(英語ミサ), 13:30(スペイン語ミサ) / 平日：木曜日10:00、金曜日10:00",
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {
+        "sunday": [
+          "18:00",
+          "09:30"
+        ],
+        "monday": [
+          "10:00",
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00",
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00",
+          "10:00"
+        ],
+        "thursday": [
+          "10:00",
+          "10:00"
+        ],
+        "friday": [
+          "10:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:30",
+            "language": "EN",
+            "note": "第3日曜"
+          }
+        ]
+      },
+      "latitude": 35.7766588,
+      "longitude": 140.3187418
     },
     {
       "name": "カトリック西千葉教会",
-      "address": "千葉県千葉市",
+      "address": "千葉市中央区汐見丘町11-14",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：土曜日17:30、日曜日07:30, 09:30, 14:00(英語ミサ) / 第4日曜17:00(スペイン語ミサ) / 平日：火曜日から土曜日10:00",
       "diocese": "tokyo",
-      "deanery": "chiba"
+      "deanery": "chiba",
+      "massTimes": {
+        "monday": [
+          "10:00"
+        ],
+        "tuesday": [
+          "10:00"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "thursday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "17:30",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "17:00",
+            "language": "ES",
+            "note": "第4日曜"
+          }
+        ]
+      },
+      "latitude": 35.6074041,
+      "longitude": 140.1065366
     },
     {
       "name": "カトリック松戸教会",
@@ -804,18 +2280,50 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.7804536,
+      "longitude": 139.9029385
     },
     {
       "name": "カトリック茂原教会",
-      "address": "千葉県茂原市",
+      "address": "千葉県茂原市高師992",
       "prefecture": "千葉県",
       "isCathedral": false,
-      "massTime": "",
+      "massTime": "主日：第1日曜14:00(国際ミサ)、第2・第4日曜09:30、第3・第5日曜14:00 / 第2日曜14:00(英語ミサ) / 平日：水曜日から金曜日07:00",
       "diocese": "tokyo",
       "deanery": "chiba",
-      "massTimes": {},
-      "foreignMassTimes": {}
+      "massTimes": {
+        "sunday": [
+          "14:00",
+          "09:30"
+        ],
+        "monday": [
+          "07:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      },
+      "latitude": 35.4285509,
+      "longitude": 140.2881398
     },
     {
       "name": "カトリック豊四季教会",
@@ -832,7 +2340,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.8610783,
+      "longitude": 139.9296119
     },
     {
       "name": "カトリック東金教会",
@@ -849,7 +2359,9 @@
           "10:00"
         ]
       },
-      "foreignMassTimes": {}
+      "foreignMassTimes": {},
+      "latitude": 35.5609556,
+      "longitude": 140.3563739
     }
   ]
 }

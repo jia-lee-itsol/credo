@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/data/models/saint_feast_day_model.dart';
-import '../../../../core/data/services/parish_service.dart' as core;
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../auth/domain/entities/user_entity.dart';
@@ -17,6 +16,9 @@ import '../widgets/profile_basic_info_section.dart';
 import '../widgets/profile_parish_info_section.dart';
 import '../widgets/profile_sacrament_dates_section.dart';
 import '../widgets/profile_godparent_section.dart';
+import '../widgets/feast_day_search_sheet.dart';
+import '../widgets/user_search_sheet.dart';
+import '../widgets/parish_search_sheet.dart';
 
 /// 프로필 편집 화면
 class EditProfileScreen extends ConsumerStatefulWidget {
@@ -122,7 +124,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
             month: saint.month,
             day: saint.day,
             name: saint.name,
-            nameEnglish: saint.nameEnglish,
+            nameEn: saint.nameEnglish,
             type: saint.type,
             isJapanese: saint.isJapanese,
             greeting: saint.greeting,
@@ -158,11 +160,12 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final currentUser = ref.watch(currentUserProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('プロフィール編集'),
+        title: Text(l10n.profile.editProfile),
         actions: [
           TextButton(
             onPressed: _isSaving ? null : _save,
@@ -173,7 +176,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
                 : Text(
-                    '保存',
+                    l10n.common.save,
                     style: TextStyle(
                       color: primaryColor,
                       fontWeight: FontWeight.bold,
@@ -221,7 +224,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 context,
                 ref,
                 primaryColor,
-                '代父母を選択',
+                l10n.profile.godparent.add,
                 (user) {
                   setState(() {
                     _godparentId = user.userId;
@@ -300,7 +303,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
-        return _UserSearchSheet(
+        return UserSearchSheet(
           primaryColor: primaryColor,
           title: title,
           onUserSelected: (user) {
@@ -330,7 +333,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           minChildSize: 0.5,
           expand: false,
           builder: (context, scrollController) {
-            return _ParishSearchSheet(
+            return ParishSearchSheet(
               scrollController: scrollController,
               primaryColor: primaryColor,
               selectedParishId: _selectedParishId,
@@ -360,7 +363,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
-        return _FeastDaySearchSheet(
+        return FeastDaySearchSheet(
           primaryColor: primaryColor,
           selectedFeastDayId: _selectedFeastDayId,
           onFeastDaySelected: (saint) {
@@ -382,6 +385,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       _isSaving = true;
     });
 
+    final l10n = ref.read(appLocalizationsSyncProvider);
     try {
       final repository = ref.read(authRepositoryProvider);
       final currentUser = ref.read(currentUserProvider);
@@ -431,8 +435,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           ref.invalidate(authStateStreamProvider);
 
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('プロフィールを更新しました'),
+            SnackBar(
+              content: Text(l10n.profile.profileUpdated),
               backgroundColor: Colors.green,
             ),
           );
@@ -443,7 +447,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(const SnackBar(content: Text('更新に失敗しました')));
+        ).showSnackBar(SnackBar(content: Text(l10n.profile.updateFailed)));
       }
     } finally {
       if (mounted) {
@@ -452,654 +456,5 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         });
       }
     }
-  }
-}
-
-/// 축일 검색 시트
-class _FeastDaySearchSheet extends ConsumerStatefulWidget {
-  final Color primaryColor;
-  final String? selectedFeastDayId;
-  final void Function(SaintFeastDayModel) onFeastDaySelected;
-
-  const _FeastDaySearchSheet({
-    required this.primaryColor,
-    this.selectedFeastDayId,
-    required this.onFeastDaySelected,
-  });
-
-  @override
-  ConsumerState<_FeastDaySearchSheet> createState() =>
-      _FeastDaySearchSheetState();
-}
-
-class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
-  final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final allSaintsAsync = ref.watch(_allSaintsProvider);
-
-    return Column(
-      children: [
-        // 핸들
-        Container(
-          margin: const EdgeInsets.only(top: 12),
-          width: 40,
-          height: 4,
-          decoration: BoxDecoration(
-            color: theme.colorScheme.outlineVariant,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        const SizedBox(height: 8),
-
-        // 타이틀
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            '守護聖人の祝日を選択',
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-
-        // 검색바
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              hintText: '聖人名で検索',
-              hintStyle: TextStyle(color: Colors.grey.shade500),
-              prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
-              suffixIcon: _searchQuery.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {
-                        _searchController.clear();
-                        setState(() => _searchQuery = '');
-                      },
-                    )
-                  : null,
-              filled: true,
-              fillColor: Colors.grey.shade100,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
-              ),
-            ),
-            onChanged: (value) => setState(() => _searchQuery = value),
-          ),
-        ),
-
-        const SizedBox(height: 16),
-
-        // 성인 목록
-        Expanded(
-          child: allSaintsAsync.when(
-            data: (allSaints) {
-              // 검색 필터링
-              final filteredSaints = _searchQuery.isEmpty
-                  ? allSaints
-                  : allSaints.where((saint) {
-                      final name = saint.name.toLowerCase();
-                      final nameEn = saint.nameEnglish.toLowerCase();
-                      final query = _searchQuery.toLowerCase();
-                      return name.contains(query) || nameEn.contains(query);
-                    }).toList();
-
-              if (filteredSaints.isEmpty) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search_off,
-                        size: 48,
-                        color: Colors.grey.shade400,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        '検索結果がありません',
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-              return ListView.builder(
-                itemCount: filteredSaints.length,
-                itemBuilder: (context, index) {
-                  final saint = filteredSaints[index];
-                  final feastDayId = '${saint.month}-${saint.day}';
-                  final isSelected = widget.selectedFeastDayId == feastDayId;
-
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: widget.primaryColor.withValues(
-                        alpha: 0.1,
-                      ),
-                      child: Icon(
-                        Icons.celebration,
-                        color: widget.primaryColor,
-                        size: 20,
-                      ),
-                    ),
-                    title: Text(
-                      saint.name,
-                      style: TextStyle(
-                        fontWeight: isSelected
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '${saint.month}月${saint.day}日',
-                      style: theme.textTheme.bodySmall,
-                    ),
-                    trailing: isSelected
-                        ? Icon(Icons.check, color: widget.primaryColor)
-                        : null,
-                    onTap: () => widget.onFeastDaySelected(saint),
-                  );
-                },
-              );
-            },
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) => Center(child: Text('エラー: $error')),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// 모든 성인 목록 Provider
-final _allSaintsProvider = FutureProvider<List<SaintFeastDayModel>>((
-  ref,
-) async {
-  final repository = ref.read(saintFeastDayRepositoryProvider);
-  final result = await repository.loadSaintsFeastDays();
-  return result.fold(
-    (_) => <SaintFeastDayModel>[],
-    (saints) => saints
-        .map(
-          (saint) => SaintFeastDayModel(
-            month: saint.month,
-            day: saint.day,
-            name: saint.name,
-            nameEnglish: saint.nameEnglish,
-            type: saint.type,
-            isJapanese: saint.isJapanese,
-            greeting: saint.greeting,
-            description: saint.description,
-          ),
-        )
-        .toList(),
-  );
-});
-
-/// 유저 검색 시트
-class _UserSearchSheet extends ConsumerStatefulWidget {
-  final Color primaryColor;
-  final String title;
-  final void Function(UserEntity) onUserSelected;
-
-  const _UserSearchSheet({
-    required this.primaryColor,
-    required this.title,
-    required this.onUserSelected,
-  });
-
-  @override
-  ConsumerState<_UserSearchSheet> createState() => _UserSearchSheetState();
-}
-
-class _UserSearchSheetState extends ConsumerState<_UserSearchSheet> {
-  final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
-  bool _isSearching = false;
-  UserEntity? _foundUser;
-  String? _errorMessage;
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  Future<void> _searchUser() async {
-    if (_searchQuery.trim().isEmpty) {
-      setState(() {
-        _foundUser = null;
-        _errorMessage = 'メールアドレスまたはユーザーIDを入力してください';
-      });
-      return;
-    }
-
-    setState(() {
-      _isSearching = true;
-      _foundUser = null;
-      _errorMessage = null;
-    });
-
-    final repository = ref.read(authRepositoryProvider);
-
-    // email 또는 userId로 검색
-    final isEmail = _searchQuery.contains('@');
-    final result = isEmail
-        ? await repository.searchUser(email: _searchQuery.trim())
-        : await repository.searchUser(userId: _searchQuery.trim());
-
-    if (!mounted) return;
-
-    result.fold(
-      (failure) {
-        setState(() {
-          _isSearching = false;
-          _errorMessage = failure.message;
-        });
-      },
-      (user) {
-        setState(() {
-          _isSearching = false;
-          if (user == null) {
-            _errorMessage = 'ユーザーが見つかりませんでした';
-          } else {
-            _foundUser = user;
-          }
-        });
-      },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Column(
-      children: [
-        // 핸들
-        Container(
-          margin: const EdgeInsets.only(top: 12),
-          width: 40,
-          height: 4,
-          decoration: BoxDecoration(
-            color: theme.colorScheme.outlineVariant,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        const SizedBox(height: 8),
-
-        // 타이틀
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            widget.title,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-
-        // 검색바
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    hintText: 'メールアドレスまたはユーザーID',
-                    hintStyle: TextStyle(color: Colors.grey.shade500),
-                    prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
-                    filled: true,
-                    fillColor: Colors.grey.shade100,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                  ),
-                  onChanged: (value) => setState(() => _searchQuery = value),
-                  onSubmitted: (_) => _searchUser(),
-                ),
-              ),
-              const SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: _isSearching ? null : _searchUser,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: widget.primaryColor,
-                  foregroundColor: Colors.white,
-                ),
-                child: _isSearching
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.white,
-                          ),
-                        ),
-                      )
-                    : const Text('検索'),
-              ),
-            ],
-          ),
-        ),
-
-        const SizedBox(height: 16),
-
-        // 검색 결과
-        Expanded(
-          child: _isSearching
-              ? const Center(child: CircularProgressIndicator())
-              : _errorMessage != null
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.error_outline,
-                        size: 48,
-                        color: Colors.red.shade300,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        _errorMessage!,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: Colors.red.shade300,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : _foundUser != null
-              ? Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: widget.primaryColor.withValues(
-                          alpha: 0.1,
-                        ),
-                        child: Icon(Icons.person, color: widget.primaryColor),
-                      ),
-                      title: Text(
-                        _foundUser!.nickname,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 4),
-                          Text(_foundUser!.email),
-                          const SizedBox(height: 4),
-                          GestureDetector(
-                            onLongPress: () {
-                              Clipboard.setData(
-                                ClipboardData(text: _foundUser!.userId),
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('ユーザーIDをコピーしました'),
-                                  duration: Duration(seconds: 2),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              'ユーザーID: ${_foundUser!.userId}',
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      trailing: ElevatedButton(
-                        onPressed: () => widget.onUserSelected(_foundUser!),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: widget.primaryColor,
-                          foregroundColor: Colors.white,
-                        ),
-                        child: const Text('選択'),
-                      ),
-                    ),
-                  ),
-                )
-              : Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.search, size: 48, color: Colors.grey.shade400),
-                      const SizedBox(height: 16),
-                      Text(
-                        'メールアドレスまたはユーザーIDで検索してください',
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: Colors.grey.shade600,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-        ),
-      ],
-    );
-  }
-}
-
-/// 교회 검색 시트 (프로필 편집용)
-class _ParishSearchSheet extends ConsumerStatefulWidget {
-  final ScrollController scrollController;
-  final Color primaryColor;
-  final String? selectedParishId;
-  final void Function(String parishId, String parishName) onParishSelected;
-
-  const _ParishSearchSheet({
-    required this.scrollController,
-    required this.primaryColor,
-    this.selectedParishId,
-    required this.onParishSelected,
-  });
-
-  @override
-  ConsumerState<_ParishSearchSheet> createState() => _ParishSearchSheetState();
-}
-
-class _ParishSearchSheetState extends ConsumerState<_ParishSearchSheet> {
-  final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final allParishesAsync = ref.watch(core.allParishesProvider);
-
-    return Column(
-      children: [
-        // 핸들
-        Container(
-          margin: const EdgeInsets.only(top: 12),
-          width: 40,
-          height: 4,
-          decoration: BoxDecoration(
-            color: theme.colorScheme.outlineVariant,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        const SizedBox(height: 8),
-
-        // 타이틀
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            '所属教会を選択',
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-
-        // 검색바
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              hintText: '教会名で検索',
-              hintStyle: TextStyle(color: Colors.grey.shade500),
-              prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
-              suffixIcon: _searchQuery.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {
-                        _searchController.clear();
-                        setState(() => _searchQuery = '');
-                      },
-                    )
-                  : null,
-              filled: true,
-              fillColor: Colors.grey.shade100,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
-              ),
-            ),
-            onChanged: (value) => setState(() => _searchQuery = value),
-          ),
-        ),
-
-        const SizedBox(height: 16),
-
-        // 교회 목록
-        Expanded(
-          child: allParishesAsync.when(
-            data: (allParishesMap) {
-              final allParishes = <Map<String, dynamic>>[];
-              allParishesMap.forEach((dioceseId, parishes) {
-                for (final parish in parishes) {
-                  final parishId = '$dioceseId-${parish['name']}';
-                  allParishes.add({...parish, 'parishId': parishId});
-                }
-              });
-
-              // 검색 필터링
-              final filteredParishes = _searchQuery.isEmpty
-                  ? allParishes
-                  : allParishes.where((parish) {
-                      final name = (parish['name'] as String? ?? '')
-                          .toLowerCase();
-                      final address = (parish['address'] as String? ?? '')
-                          .toLowerCase();
-                      final query = _searchQuery.toLowerCase();
-                      return name.contains(query) || address.contains(query);
-                    }).toList();
-
-              if (filteredParishes.isEmpty) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search_off,
-                        size: 48,
-                        color: Colors.grey.shade400,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        '検索結果がありません',
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-              return ListView.builder(
-                controller: widget.scrollController,
-                itemCount: filteredParishes.length,
-                itemBuilder: (context, index) {
-                  final parish = filteredParishes[index];
-                  final name = parish['name'] as String? ?? '';
-                  final address = parish['address'] as String? ?? '';
-                  final parishId = parish['parishId'] as String? ?? '';
-                  final isSelected = widget.selectedParishId == parishId;
-
-                  return ListTile(
-                    key: ValueKey(parishId),
-                    leading: CircleAvatar(
-                      backgroundColor: widget.primaryColor.withValues(
-                        alpha: 0.1,
-                      ),
-                      child: Icon(
-                        Icons.church,
-                        color: widget.primaryColor,
-                        size: 20,
-                      ),
-                    ),
-                    title: Text(
-                      name,
-                      style: TextStyle(
-                        fontWeight: isSelected
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                      ),
-                    ),
-                    subtitle: Text(
-                      address,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    trailing: isSelected
-                        ? Icon(Icons.check, color: widget.primaryColor)
-                        : Icon(
-                            Icons.chevron_right,
-                            color: Colors.grey.shade400,
-                          ),
-                    onTap: () => widget.onParishSelected(parishId, name),
-                  );
-                },
-              );
-            },
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) => Center(child: Text('エラー: $error')),
-          ),
-        ),
-      ],
-    );
   }
 }
