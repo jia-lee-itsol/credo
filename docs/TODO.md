@@ -2,7 +2,7 @@
 
 이 문서는 코드베이스에서 발견된 모든 TODO 주석과 보류 중인 기능 구현을 추적합니다.
 
-**마지막 업데이트**: 2025-12-15 (성당 좌표 데이터 추가, 외국어 미사 데이터 수정)
+**마지막 업데이트**: 2025-12-15 (미사 시간 데이터 일관성 검증 및 수정)
 **전체 코드베이스**: 약 27,000줄의 Dart 코드, 135개 파일
 
 ---
@@ -245,6 +245,7 @@
 | 2025-12-15 | 거리순 필터 Provider 버그 수정 - `parishDistanceProvider`에서 빌드 중 다른 Provider 수정 문제 해결 (`StateNotifierListenerError` 수정) | - |
 | 2025-12-15 | 거리순 필터칩 UI 개선 - `ParishFilterChip`에서 `isSelected` 상태에 따른 체크 아이콘 및 배경색 변경 | - |
 | 2025-12-15 | 외국어 미사 데이터 수정 - 末吉町教会 등 13개 성당의 `foreignMassTimes` 데이터를 `massTime` 텍스트 기반으로 수정, `scripts/fix_foreign_mass_times.py` 및 `scripts/auto_fix_foreign_mass.py` 생성 | - |
+| 2025-12-15 | 미사 시간 데이터 일관성 검증 및 수정 - kagoshima.json의 志布志教会, 阿久根教会 `massTimes` 데이터를 `massTime` 텍스트와 일치하도록 수정, kyoto.json의 上野教会 `massTimes`에 토요일 19:30 및 일요일 09:00, 10:30, 17:00 추가, `foreignMassTimes`에 타갈로그어 미사 추가 | - |
 
 ---
 
@@ -292,7 +293,7 @@
 
 このドキュメントは、コードベースで発見されたすべてのTODOコメントと保留中の機能実装を追跡します。
 
-**最終更新**: 2025-12-15 (聖堂座標データ追加、外国語ミサデータ修正)
+**最終更新**: 2025-12-15 (ミサ時間データ一貫性検証および修正)
 **コードベース全体**: 約27,000行のDartコード、135ファイル
 
 ---
@@ -535,6 +536,7 @@
 | 2025-12-15 | 距離順フィルターProviderバグ修正 - `parishDistanceProvider`でビルド中他のProvider修正問題解決 (`StateNotifierListenerError`修正) | - |
 | 2025-12-15 | 距離順フィルターチップUI改善 - `ParishFilterChip`で`isSelected`状態によるチェックアイコンおよび背景色変更 | - |
 | 2025-12-15 | 外国語ミサデータ修正 - 末吉町教会など13個の聖堂の`foreignMassTimes`データを`massTime`テキストベースで修正、`scripts/fix_foreign_mass_times.py`および`scripts/auto_fix_foreign_mass.py`生成 | - |
+| 2025-12-15 | ミサ時間データ一貫性検証および修正 - kagoshima.jsonの志布志教会、阿久根教会`massTimes`データを`massTime`テキストと一致するように修正、kyoto.jsonの上野教会`massTimes`に土曜日19:30および日曜日09:00、10:30、17:00追加、`foreignMassTimes`にタガログ語ミサ追加 | - |
 
 ---
 

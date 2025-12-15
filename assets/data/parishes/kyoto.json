@@ -1035,7 +1035,16 @@
       "fax": "0595-21-8099",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
+      "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
+        "sunday": [
+          "09:00",
+          "10:30",
+          "17:00"
+        ]
+      },
       "foreignMassTimes": {
         "sunday": [
           {
@@ -1051,6 +1060,11 @@
           {
             "time": "09:00",
             "language": "ES",
+            "note": "第4日曜"
+          },
+          {
+            "time": "10:30",
+            "language": "TL",
             "note": "第4日曜"
           },
           {
