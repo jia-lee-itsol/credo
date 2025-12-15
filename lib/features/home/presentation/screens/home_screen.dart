@@ -25,7 +25,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final l10n = ref.watch(appLocalizationsSyncProvider);
+    final l10nAsync = ref.watch(appLocalizationsProvider);
     final currentLocale = ref.watch(localeProvider);
 
     final seasonAsync = ref.watch(currentLiturgySeasonProvider);
@@ -40,75 +40,87 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final backgroundColor = ref.watch(liturgyBackgroundColorProvider);
     final currentUser = ref.watch(currentUserProvider);
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: RefreshIndicator(
-        onRefresh: () async {
-          // 알림 provider 새로고침
-          if (currentUser != null) {
-            ref.invalidate(notificationsProvider(currentUser.userId));
-          }
-        },
-        child: CustomScrollView(
-          slivers: [
-            // 헤더
-            SliverToBoxAdapter(
-              child: HomeHeader(
-                season: season,
-                seasonName: seasonName,
-                primaryColor: primaryColor,
-                backgroundColor: backgroundColor,
-              ),
-            ),
-
-            // 근처 교회 찾기 버튼
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                child: HomeActionButton(
-                  icon: Icons.location_on_outlined,
-                  title: l10n.parish.search,
-                  subtitle: l10n.parish.searchFromCurrentLocation,
+    return l10nAsync.when(
+      data: (l10n) => Scaffold(
+        backgroundColor: Colors.white,
+        body: RefreshIndicator(
+          onRefresh: () async {
+            // 알림 provider 새로고침
+            if (currentUser != null) {
+              ref.invalidate(notificationsProvider(currentUser.userId));
+            }
+          },
+          child: CustomScrollView(
+            slivers: [
+              // 헤더
+              SliverToBoxAdapter(
+                child: HomeHeader(
+                  season: season,
+                  seasonName: seasonName,
                   primaryColor: primaryColor,
-                  backgroundColor: primaryColor.withValues(alpha: 0.1),
-                  onTap: () => context.go(AppRoutes.parishList),
+                  backgroundColor: backgroundColor,
                 ),
               ),
-            ),
 
-            // 오늘의 미사 버튼
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-                child: HomeActionButton(
-                  icon: Icons.auto_stories,
-                  title: l10n.community.home.todayMass,
-                  subtitle: l10n.community.home.todayBibleReadingAndPrayer,
-                  primaryColor: primaryColor,
-                  backgroundColor: primaryColor.withValues(alpha: 0.1),
-                  onTap: () => context.go(AppRoutes.dailyMass),
+              // 근처 교회 찾기 버튼
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                  child: HomeActionButton(
+                    icon: Icons.location_on_outlined,
+                    title: l10n.parish.search,
+                    subtitle: l10n.parish.searchFromCurrentLocation,
+                    primaryColor: primaryColor,
+                    backgroundColor: primaryColor.withValues(alpha: 0.1),
+                    onTap: () => context.go(AppRoutes.parishList),
+                  ),
                 ),
               ),
-            ),
 
-            // 섹션 타이틀: 最近のお知らせ
-            SliverToBoxAdapter(
-              child: _buildSectionTitle(
-                context,
-                l10n.community.home.recentNotices,
+              // 오늘의 미사 버튼
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                  child: HomeActionButton(
+                    icon: Icons.auto_stories,
+                    title: l10n.community.home.todayMass,
+                    subtitle: l10n.community.home.todayBibleReadingAndPrayer,
+                    primaryColor: primaryColor,
+                    backgroundColor: primaryColor.withValues(alpha: 0.1),
+                    onTap: () => context.go(AppRoutes.dailyMass),
+                  ),
+                ),
               ),
-            ),
 
-            // お知らせ 리스트
-            SliverToBoxAdapter(
-              child: _buildNotificationsList(context, ref, theme, primaryColor),
-            ),
+              // 섹션 타이틀
+              SliverToBoxAdapter(
+                child: _buildSectionTitle(
+                  context,
+                  l10n.community.home.recentNotices,
+                ),
+              ),
 
-            // 하단 여백
-            const SliverToBoxAdapter(child: SizedBox(height: 32)),
-          ],
+              // 공지사항 리스트
+              SliverToBoxAdapter(
+                child: _buildNotificationsList(
+                  context,
+                  ref,
+                  theme,
+                  primaryColor,
+                  l10n,
+                ),
+              ),
+
+              // 하단 여백
+              const SliverToBoxAdapter(child: SizedBox(height: 32)),
+            ],
+          ),
         ),
       ),
+      loading: () =>
+          const Scaffold(body: Center(child: CircularProgressIndicator())),
+      error: (error, stack) =>
+          Scaffold(body: Center(child: Text('Error: $error'))),
     );
   }
 
@@ -129,8 +141,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     WidgetRef ref,
     ThemeData theme,
     Color primaryColor,
+    AppLocalizations l10n,
   ) {
-    final l10n = ref.watch(appLocalizationsSyncProvider);
     final currentUser = ref.watch(currentUserProvider);
 
     if (currentUser == null) {

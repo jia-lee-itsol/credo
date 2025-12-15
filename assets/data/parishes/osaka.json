@@ -2,22 +2,2377 @@
   "diocese": "osaka",
   "parishes": [
     {
-      "name": "神戸教会",
-      "address": "兵庫県神戸市中央区三宮町1-1",
-      "prefecture": "兵庫県",
+      "name": "カトリック阿倍野教会",
+      "address": "〒545-0053 大阪市阿倍野区松崎町3-6-25",
+      "prefecture": "大阪府",
       "isCathedral": false,
-      "massTime": "主日：09:00, 11:00",
+      "massTime": "日曜日 10:00",
       "diocese": "osaka",
-      "deanery": "kobe",
+      "deanery": "osaka",
       "massTimes": {
         "sunday": [
-          "09:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6621-6024"
+    },
+    {
+      "name": "カトリック生野教会",
+      "address": "〒544-0011 大阪市生野区田島1-16-10",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30 / 11:00 (韓国語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "KR",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6757-1792"
+    },
+    {
+      "name": "カトリック池田教会",
+      "address": "〒563-0041 池田市満寿美町9-26",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "土曜日 18:00 / 日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-751-2400"
+    },
+    {
+      "name": "カトリック和泉教会",
+      "address": "〒594-0023 和泉市伯太町2-2-41",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "土曜日 19:30(第4) / 日曜日 9:30 / 第3日曜日 11:00 (英語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "EN",
+            "note": "第3日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0725-41-5768"
+    },
+    {
+      "name": "カトリック泉佐野教会",
+      "address": "〒598-0004 泉佐野市市場南2-66-1",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "土曜日 19:00 / 日曜日 8:00 / 9:30",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "8:00",
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-463-2971"
+    },
+    {
+      "name": "カトリック茨木教会",
+      "address": "〒567-0888 茨木市駅前3-5-4",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 11:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
           "11:00"
         ]
       },
       "foreignMassTimes": {},
-      "latitude": 34.6930497,
-      "longitude": 135.1928421
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-622-4442"
+    },
+    {
+      "name": "カトリック今市教会",
+      "address": "〒535-0001 大阪市旭区太子橋1-1-27",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "土曜日 19:00 / 日曜日 10:00 / 第4日曜日 8:30",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "10:00",
+          "8:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6951-5018"
+    },
+    {
+      "name": "カトリック大阪梅田教会",
+      "address": "〒531-0072 大阪市北区豊崎3-12-8",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 7:00 / 9:00 (英語） / 11:00 / 13:00 (英語) / 第2日曜日 15:00 (スペイン語) / 第4土曜日 17:00 (インドネシア語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "7:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "17:00",
+            "language": "ID",
+            "note": "第4土曜"
+          }
+        ],
+        "sunday": [
+          {
+            "time": "9:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "13:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "15:00",
+            "language": "ES",
+            "note": "第2日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6371-4060"
+    },
+    {
+      "name": "カトリック大阪田辺教会",
+      "address": "〒546-0033 大阪市東住吉区南田辺2-12-25",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6692-2330"
+    },
+    {
+      "name": "カトリック貝塚教会",
+      "address": "〒597-0071 貝塚市加神1-3-12",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 8:30 (5～10月) / 10:30 (11～4月)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "8:30",
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-422-5639"
+    },
+    {
+      "name": "カトリック門真教会",
+      "address": "〒571-0057 門真市元町5-16",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30 / 第1,3日曜日 13:00 (ベトナム語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "VI",
+            "note": ""
+          },
+          {
+            "time": "13:00",
+            "language": "VI",
+            "note": "第1・第3日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6908-5841"
+    },
+    {
+      "name": "カトリック岸和田教会",
+      "address": "〒596-0057 岸和田市筋海町18-17",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30 / 第4日曜日 11:00 (英語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "11:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-437-3308"
+    },
+    {
+      "name": "カトリック熊取教会",
+      "address": "〒590-0432 泉南郡熊取町小垣内3-5-39",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 10:30 (5～10月) / 8:30 (11～4月)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "8:30",
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-452-4680"
+    },
+    {
+      "name": "カトリック香里教会",
+      "address": "〒572-0081 寝屋川市東香里園町31-3",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 7:00 / 9:30",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "7:00",
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-834-3800"
+    },
+    {
+      "name": "カトリック金剛教会",
+      "address": "〒584-0074 富田林市久野喜台2-4-10",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0721-29-3120"
+    },
+    {
+      "name": "カトリック堺教会",
+      "address": "〒590-0024 堺市堺区向陵中町6-2-3",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 7:00 / 10:00 / 第2日曜日 14:00 (英語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "7:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-252-1498"
+    },
+    {
+      "name": "カトリック吹田教会",
+      "address": "〒564-0072 吹田市出口町17-21",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00 / 14:00 (英語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6388-1083"
+    },
+    {
+      "name": "カトリック住之江教会",
+      "address": "〒559-0013 大阪市住之江区御崎3-6-7",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6681-1895"
+    },
+    {
+      "name": "カトリック関目教会",
+      "address": "〒536-0007 大阪市城東区成育4-8-25",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6931-4807"
+    },
+    {
+      "name": "カトリック泉南教会",
+      "address": "〒590-0521 泉南市樽井9-2-8",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 8:30 / 第4日曜日 17:00 (スペイン語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "8:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "17:00",
+            "language": "ES",
+            "note": ""
+          },
+          {
+            "time": "17:00",
+            "language": "ES",
+            "note": "第4日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-482-3668"
+    },
+    {
+      "name": "カトリック泉北教会",
+      "address": "〒590-0131 堺市南区栂393-4",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-292-3820"
+    },
+    {
+      "name": "カトリック千里ニュータウン教会",
+      "address": "〒560-0085 豊中市上新田2-13-2",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6832-1111"
+    },
+    {
+      "name": "カトリック大東教会",
+      "address": "〒574-0011 大東市北条1-23-30",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "土曜日 19:00 / 日曜日 10:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-876-5434"
+    },
+    {
+      "name": "カトリック高槻教会",
+      "address": "〒569-0077 高槻市野見町2-26",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 7:00 / 9:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "7:00",
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-675-1472"
+    },
+    {
+      "name": "カトリック玉造教会",
+      "address": "〒540-0004 大阪市中央区玉造2-24-22",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "土曜日 18:30 / 日曜日 7:00 / 10:00 / 14:00 (英語) / 15:30 (ベトナム語) / 17:00 (韓国語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "7:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "15:30",
+            "language": "VI",
+            "note": ""
+          },
+          {
+            "time": "17:00",
+            "language": "KR",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6941-2332"
+    },
+    {
+      "name": "カトリック豊中教会",
+      "address": "〒560-0021 豊中市本町6-1-6",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6852-4110"
+    },
+    {
+      "name": "カトリックなみはや教会",
+      "address": "〒551-0002 大阪市大正区三軒家東5-11-7",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 11:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6551-6253"
+    },
+    {
+      "name": "カトリック浜寺教会",
+      "address": "〒592-0002 高石市羽衣2-2-27",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30 / 第2日曜日 11:00 (ポルトガル語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:00",
+            "language": "PT",
+            "note": ""
+          },
+          {
+            "time": "11:00",
+            "language": "PT",
+            "note": "第2日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-261-1563"
+    },
+    {
+      "name": "カトリック枚岡教会",
+      "address": "〒579-8061 東大阪市六万寺町3-6-14",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-984-4831"
+    },
+    {
+      "name": "カトリック枚方教会",
+      "address": "〒573-0033 枚方市岡南町3-1",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "土曜日 19:00 / 日曜日 9:00 / 11:00 / 第1日曜日 15:00 (ポルトガル語) / 第2日曜日 15:00 (英語) / 第4日曜日 15:00 (スペイン語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "9:00",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "PT",
+            "note": "第1日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第2日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "ES",
+            "note": "第4日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-841-5333"
+    },
+    {
+      "name": "カトリック平野教会",
+      "address": "〒547-0032 大阪市平野区流町4-2-26",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6709-1541"
+    },
+    {
+      "name": "カトリック藤井寺教会",
+      "address": "〒583-0021 藤井寺市御舟町11-3",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-955-4743"
+    },
+    {
+      "name": "カトリック布施教会",
+      "address": "〒577-0809 東大阪市永和1-10-10",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 11:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6721-6214"
+    },
+    {
+      "name": "カトリック岬教会",
+      "address": "〒599-0303 泉南郡岬町深日2240-2",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 8:30 (第1は前晩 18:00 )",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "8:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-489-6601"
+    },
+    {
+      "name": "カトリック箕面教会",
+      "address": "〒562-0013 箕面市坊島1-7-22",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 7:00 / 9:00",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "7:00",
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-721-2734"
+    },
+    {
+      "name": "カトリック八尾教会",
+      "address": "〒581-0019 八尾市南小阪合町3-2-15",
+      "prefecture": "大阪府",
+      "isCathedral": false,
+      "massTime": "日曜日 7:00 / 10:00 / 第3日曜日 15:00 (ベトナム語)",
+      "diocese": "osaka",
+      "deanery": "osaka",
+      "massTimes": {
+        "sunday": [
+          "7:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": "第3日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-999-1149"
+    },
+    {
+      "name": "カトリック相生教会",
+      "address": "〒678-0008 相生市栄町17-1",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0791-22-0087"
+    },
+    {
+      "name": "カトリック明石教会",
+      "address": "〒673-0885 明石市桜町2-26",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30 / 第1日曜日 12:00 (英語) / 第3日曜日 13:00 (スペイン語) / 第4日曜日 14:00 (英語)",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "12:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "13:00",
+            "language": "ES",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "12:00",
+            "language": "EN",
+            "note": "第1日曜"
+          },
+          {
+            "time": "13:00",
+            "language": "ES",
+            "note": "第3日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第4日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "078-911-6330"
+    },
+    {
+      "name": "カトリック赤穂教会",
+      "address": "〒678-0237 赤穂市上仮屋北15-7",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 11:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0791-42-2444"
+    },
+    {
+      "name": "カトリック芦屋教会",
+      "address": "〒659-0065 芦屋市公光町5-15",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 11:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0797-22-3982"
+    },
+    {
+      "name": "カトリック網干教会",
+      "address": "〒671-1242 姫路市網干区浜田816",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 11:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "079-272-0404"
+    },
+    {
+      "name": "カトリックたつの分教会",
+      "address": "〒679-4129 たつの市龍野町堂本66-9",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 14:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0
+    },
+    {
+      "name": "カトリック尼崎教会",
+      "address": "〒660-0804 尼崎市北大物町16-12",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "土曜日 18:00 / 日曜日 9:30 / 14:00 (英語) / 第1日曜日 12:00 (スペイン語) / 第3日曜日 15:30 (ポルトガル語)",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "12:00",
+            "language": "ES",
+            "note": ""
+          },
+          {
+            "time": "15:30",
+            "language": "PT",
+            "note": ""
+          },
+          {
+            "time": "12:00",
+            "language": "ES",
+            "note": "第1日曜"
+          },
+          {
+            "time": "15:30",
+            "language": "PT",
+            "note": "第3日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6481-4235"
+    },
+    {
+      "name": "カトリック伊丹教会",
+      "address": "〒664-0882 伊丹市鈴原町1-9-1",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-772-2487"
+    },
+    {
+      "name": "カトリック加古川教会",
+      "address": "〒675-0038 加古川市加古川町木村57",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30 / 第2,4土曜日 19:00 / 第1,3日曜日 13:00 (英語)",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "13:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "13:00",
+            "language": "EN",
+            "note": "第1・第3日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "079-422-2870"
+    },
+    {
+      "name": "カトリック西脇分教会",
+      "address": "〒677-0052 西脇市和田町118",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 16:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "16:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0
+    },
+    {
+      "name": "カトリック北須磨教会",
+      "address": "〒654-0151 神戸市須磨区北落合2-3-1",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "078-791-3788"
+    },
+    {
+      "name": "カトリック甲子園教会",
+      "address": "〒663-8152 西宮市甲子園町20-14",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0798-41-1602"
+    },
+    {
+      "name": "カトリック神戸中央教会",
+      "address": "〒650-0004 神戸市中央区中山手通1-28-7",
+      "prefecture": "兵庫県",
+      "isCathedral": true,
+      "massTime": "日曜日 9:30 / 11:15 (英語) / 第3土曜日 15:00 (韓国語) / 第1日曜日 15:00 (ポルトガル語) / 第2日曜日 15:30 (インドネシア語) / 第5日曜日 14:00 (タガログ語)",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "15:00",
+            "language": "KR",
+            "note": "第3土曜"
+          }
+        ],
+        "sunday": [
+          {
+            "time": "11:15",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "15:00",
+            "language": "PT",
+            "note": "第1日曜"
+          },
+          {
+            "time": "15:30",
+            "language": "ID",
+            "note": "第2日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "PH",
+            "note": "第5日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "078-221-4682"
+    },
+    {
+      "name": "カトリック佐用教会",
+      "address": "〒679-5301 佐用郡佐用町佐用2847",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "土曜日 17:30",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "saturday": [
+          "17:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0790-82-4082"
+    },
+    {
+      "name": "カトリック三田教会",
+      "address": "〒669-1532 三田市屋敷町8-15",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "079-562-4404"
+    },
+    {
+      "name": "カトリック飾磨教会",
+      "address": "〒672-8064 姫路市飾磨区細江2586",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00 / 第1,3水曜日 11:30 (英語。休止期間あり)",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ],
+        "wednesday": [
+          "11:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "11:30",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "079-233-0193"
+    },
+    {
+      "name": "カトリック夙川教会",
+      "address": "〒662-0052 西宮市霞町5-40",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "土曜日 18:00 / 日曜日 7:00 / 10:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "7:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0798-22-1649"
+    },
+    {
+      "name": "カトリック鈴蘭台教会",
+      "address": "〒651-1114 神戸市北区鈴蘭台西町1-23-1",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "078-593-0025"
+    },
+    {
+      "name": "カトリック住吉教会",
+      "address": "〒658-0053 神戸市東灘区住吉宮町2-18-23",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30 / 第1,3土曜日 19:00 (スペイン語)",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "19:00",
+            "language": "ES",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "078-851-2756"
+    },
+    {
+      "name": "カトリック洲本教会",
+      "address": "〒656-0051 洲本市物部1-11-12",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0799-24-5144"
+    },
+    {
+      "name": "カトリック園田教会",
+      "address": "〒661-0972 尼崎市小中島2-17-1",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6491-4424"
+    },
+    {
+      "name": "カトリックたかとり教会",
+      "address": "〒653-0052 神戸市長田区海運町3-3-8",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "078-731-8300"
+    },
+    {
+      "name": "カトリック宝塚教会",
+      "address": "〒665-0011 宝塚市南口1-7-7",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "土曜日 17:00 / 日曜日9:30",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0797-72-4628"
+    },
+    {
+      "name": "カトリック垂水教会",
+      "address": "〒655-0025 神戸市垂水区瑞ヶ丘2-9",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00（原則として）",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "078-707-4434"
+    },
+    {
+      "name": "カトリック豊岡教会",
+      "address": "〒668-0056 豊岡市妙楽寺28",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0796-22-2018"
+    },
+    {
+      "name": "カトリック仁川教会",
+      "address": "〒663-8006 西宮市段上町4-2-11",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "土曜日 17:00 / 日曜日 7:00 / 9:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "7:00",
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0798-51-0176"
+    },
+    {
+      "name": "カトリック日生中央教会",
+      "address": "〒666-0242 川辺郡猪名川町原字焼山597-4",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "072-766-1519"
+    },
+    {
+      "name": "カトリック仁豊野教会",
+      "address": "〒670-0801 姫路市仁豊野900",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00(於・聖フランシスコ病院修道女会)",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "079-264-0040"
+    },
+    {
+      "name": "カトリック生野分教会",
+      "address": "〒679-3301 朝来市生野町口銀谷619",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 14:00 (第2,4)",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0
+    },
+    {
+      "name": "カトリック姫路教会",
+      "address": "〒670-0012 姫路市本町68",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 7:00 / 10:00 (第5は国際ミサ) / 15:00 (英語。第5無し) / 第4土曜日 19:00 (ベトナム語)",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
+        "sunday": [
+          "7:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "VI",
+            "note": "第4土曜"
+          }
+        ],
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "079-222-0043"
+    },
+    {
+      "name": "カトリック兵庫教会",
+      "address": "〒652-0804 神戸市兵庫区塚本通4-4-4",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 11:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "078-575-5294"
+    },
+    {
+      "name": "カトリック武庫之荘教会",
+      "address": "〒661-0035 尼崎市武庫之荘3-5-9",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "06-6431-7029"
+    },
+    {
+      "name": "カトリック六甲教会",
+      "address": "〒657-0061 神戸市灘区赤松町3-1-21",
+      "prefecture": "兵庫県",
+      "isCathedral": false,
+      "massTime": "土曜日 18:00 / 日曜日 7:30 / 10:00",
+      "diocese": "osaka",
+      "deanery": "hyogo",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "7:30",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "078-851-2846"
+    },
+    {
+      "name": "カトリック紀伊田辺教会",
+      "address": "〒646-0036 田辺市上屋敷2-15-24",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "前晩 16:00 (第4.5) / 日曜日 9:30 (第3) / 11:00 (第1.2)",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "saturday": [
+          "16:00"
+        ],
+        "sunday": [
+          "9:30",
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0739-22-0281"
+    },
+    {
+      "name": "カトリック紀の川教会",
+      "address": "〒649-6434 紀の川市中三谷160-1",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:30",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0736-60-8712"
+    },
+    {
+      "name": "カトリック串本教会",
+      "address": "〒649-3503 東牟婁郡串本町串本1495",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00 (5～10月は 11:30 )",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "sunday": [
+          "9:00",
+          "11:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0735-62-0573"
+    },
+    {
+      "name": "カトリック御坊教会",
+      "address": "〒644-0002 御坊市薗275-1",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "前晩 16:00 (第2。11～3月は 15:00 ) / 日曜日 9:00 (第1,4) / 14:00 (第3,5)",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "saturday": [
+          "15:00",
+          "16:00"
+        ],
+        "sunday": [
+          "9:00",
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0738-22-3457"
+    },
+    {
+      "name": "カトリック新宮教会",
+      "address": "〒647-0044 新宮市神倉4-6-38",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "日曜日 11:30 (復活祭～9月は 9:00 )",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "sunday": [
+          "9:00",
+          "11:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0735-22-3260"
+    },
+    {
+      "name": "カトリック橋本教会",
+      "address": "〒648-0065 橋本市古佐田3-11-4",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0736-32-0596"
+    },
+    {
+      "name": "カトリック龍神教会",
+      "address": "〒645-0417 田辺市龍神村柳瀬18",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00(第3は前晩 15:00 または 16:00、第4は 14:00 )",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "saturday": [
+          "15:00",
+          "16:00"
+        ],
+        "sunday": [
+          "9:00",
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0739-77-0132"
+    },
+    {
+      "name": "カトリック和歌山紀北教会",
+      "address": "〒640-8151 和歌山市屋形町3-33",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:30",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "073-425-1069"
+    },
+    {
+      "name": "カトリック和歌山紀北教会 今福聖堂",
+      "address": "〒641-0044 和歌山市今福3-5-21",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "土曜日 16:00",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "saturday": [
+          "16:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "073-499-7333"
+    },
+    {
+      "name": "カトリック和歌山紀北教会 海南聖堂",
+      "address": "〒642-0002 海南市日方1273-4",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "日曜日 14:00",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "sunday": [
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "073-482-0896"
+    },
+    {
+      "name": "カトリック和歌山紀北教会 古屋聖堂",
+      "address": "〒640-8435 和歌山市古屋182",
+      "prefecture": "和歌山県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "wakayama",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0
+    },
+    {
+      "name": "カトリック観音寺教会",
+      "address": "〒768-0066 観音寺市昭和町1-6-57",
+      "prefecture": "香川県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "kagawa",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0875-23-0004"
+    },
+    {
+      "name": "カトリック坂出教会",
+      "address": "〒762-0033 坂出市谷町1-3-24",
+      "prefecture": "香川県",
+      "isCathedral": false,
+      "massTime": "土曜日 18:30 / 日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "kagawa",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0877-46-5094"
+    },
+    {
+      "name": "カトリック桜町教会",
+      "address": "〒760-0074 高松市桜町1-8-9",
+      "prefecture": "香川県",
+      "isCathedral": true,
+      "massTime": "土曜日 18:00 / 日曜日 7:00 / 10:00 / 第2,4日曜日 15:00 (英語)",
+      "diocese": "osaka",
+      "deanery": "kagawa",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "7:00",
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": "第2・第4日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "087-831-7455"
+    },
+    {
+      "name": "カトリック三本松教会",
+      "address": "〒769-2606 東かがわ市水主396-1教区霊性センターC棟",
+      "prefecture": "香川県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00 (第3,5は 14:00 )",
+      "diocese": "osaka",
+      "deanery": "kagawa",
+      "massTimes": {
+        "sunday": [
+          "10:00",
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0879-25-3871"
+    },
+    {
+      "name": "カトリック小豆島・土庄教会",
+      "address": "〒761-4121 小豆郡土庄町淵崎甲1430-3",
+      "prefecture": "香川県",
+      "isCathedral": false,
+      "massTime": "日曜日 14:00",
+      "diocese": "osaka",
+      "deanery": "kagawa",
+      "massTimes": {
+        "sunday": [
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0879-62-0847"
+    },
+    {
+      "name": "カトリック小豆島・内海巡回教会",
+      "address": "〒761-4421 小豆郡小豆島町苗羽乙1212-17",
+      "prefecture": "香川県",
+      "isCathedral": false,
+      "massTime": "なし",
+      "diocese": "osaka",
+      "deanery": "kagawa",
+      "massTimes": {},
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0
+    },
+    {
+      "name": "カトリック善通寺教会",
+      "address": "〒765-0011 善通寺市上吉田町4-9-24",
+      "prefecture": "香川県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "kagawa",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0877-62-9752"
+    },
+    {
+      "name": "カトリック番町教会",
+      "address": "〒760-0017 高松市番町2-4-31",
+      "prefecture": "香川県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:00",
+      "diocese": "osaka",
+      "deanery": "kagawa",
+      "massTimes": {
+        "sunday": [
+          "9:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "087-823-0430"
+    },
+    {
+      "name": "カトリック丸亀教会",
+      "address": "〒763-0048 丸亀市幸町2-6-28",
+      "prefecture": "香川県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:30 / 第3土曜日 20:00 (スペイン語)",
+      "diocese": "osaka",
+      "deanery": "kagawa",
+      "massTimes": {
+        "saturday": [
+          "20:00"
+        ],
+        "sunday": [
+          "10:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "20:00",
+            "language": "ES",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0877-22-9620"
+    },
+    {
+      "name": "カトリック今治教会",
+      "address": "〒794-0028 今治市北宝来町1-2-13",
+      "prefecture": "愛媛県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00 / 第1日曜日 14:00 (英語) / 第4日曜日 14:00 (ベトナム語)",
+      "diocese": "osaka",
+      "deanery": "ehime",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "VI",
+            "note": "第4日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0898-32-2348"
+    },
+    {
+      "name": "カトリック伊予三島教会",
+      "address": "〒799-0422 四国中央市中之庄町宮の上618-19",
+      "prefecture": "愛媛県",
+      "isCathedral": false,
+      "massTime": "日曜日 16:00",
+      "diocese": "osaka",
+      "deanery": "ehime",
+      "massTimes": {
+        "sunday": [
+          "16:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0896-24-6148"
+    },
+    {
+      "name": "カトリック宇和島教会",
+      "address": "〒798-0060 宇和島市丸之内1-4-16",
+      "prefecture": "愛媛県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00 (第1,2は 13:00 )",
+      "diocese": "osaka",
+      "deanery": "ehime",
+      "massTimes": {
+        "sunday": [
+          "10:00",
+          "13:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0895-24-4850"
+    },
+    {
+      "name": "カトリック西条教会",
+      "address": "〒793-0030 西条市大町716-1",
+      "prefecture": "愛媛県",
+      "isCathedral": false,
+      "massTime": "日曜日 14:00",
+      "diocese": "osaka",
+      "deanery": "ehime",
+      "massTimes": {
+        "sunday": [
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0897-55-2787"
+    },
+    {
+      "name": "カトリック道後教会",
+      "address": "〒790-0848 松山市道後喜多町7-25",
+      "prefecture": "愛媛県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00",
+      "diocese": "osaka",
+      "deanery": "ehime",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "089-924-7522"
+    },
+    {
+      "name": "カトリック新居浜教会",
+      "address": "〒792-0011 新居浜市西原町1-4-6",
+      "prefecture": "愛媛県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "ehime",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0897-37-3122"
+    },
+    {
+      "name": "カトリック松山教会",
+      "address": "〒790-0003 松山市三番町4-5-5",
+      "prefecture": "愛媛県",
+      "isCathedral": false,
+      "massTime": "土曜日 18:00 / 日曜日10:00 / 15:00 (英語。月2回)",
+      "diocese": "osaka",
+      "deanery": "ehime",
+      "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "15:00",
+            "language": "EN",
+            "note": ""
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "089-921-1849"
+    },
+    {
+      "name": "カトリック八幡浜教会",
+      "address": "〒796-0033 八幡浜市大正町1182-7",
+      "prefecture": "愛媛県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00(第1,2。第5は於・宇和島教会) / 13:00 (第3,4)",
+      "diocese": "osaka",
+      "deanery": "ehime",
+      "massTimes": {
+        "sunday": [
+          "10:00",
+          "13:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0894-22-3003"
+    },
+    {
+      "name": "カトリック阿南教会",
+      "address": "〒774-0030 阿南市富岡町あ石19-1",
+      "prefecture": "徳島県",
+      "isCathedral": false,
+      "massTime": "日曜日 13:30 (要・確認)",
+      "diocese": "osaka",
+      "deanery": "tokushima",
+      "massTimes": {
+        "sunday": [
+          "13:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0884-22-1746"
+    },
+    {
+      "name": "カトリック池田教会",
+      "address": "〒778-0004 三好市池田町シンマチ1436-1",
+      "prefecture": "徳島県",
+      "isCathedral": false,
+      "massTime": "日曜日 13:00",
+      "diocese": "osaka",
+      "deanery": "tokushima",
+      "massTimes": {
+        "sunday": [
+          "13:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0883-72-0495"
+    },
+    {
+      "name": "カトリック徳島教会",
+      "address": "〒770-0854 徳島市徳島本町2-12",
+      "prefecture": "徳島県",
+      "isCathedral": false,
+      "massTime": "土曜日 18:30 / 日曜日 9:30 / 第1,4日曜日 16:00 (英語) / 第2日曜日 15:00 (ベトナム語)",
+      "diocese": "osaka",
+      "deanery": "tokushima",
+      "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "16:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": ""
+          },
+          {
+            "time": "16:00",
+            "language": "EN",
+            "note": "第1・第4日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "VI",
+            "note": "第2日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "088-626-2060"
+    },
+    {
+      "name": "カトリック鳴門教会",
+      "address": "〒772-0001 鳴門市撫養町黒崎字松島208",
+      "prefecture": "徳島県",
+      "isCathedral": false,
+      "massTime": "日曜日 10:00",
+      "diocese": "osaka",
+      "deanery": "tokushima",
+      "massTimes": {
+        "sunday": [
+          "10:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "088-686-2774"
+    },
+    {
+      "name": "カトリック江ノ口教会",
+      "address": "〒780-0062 高知市新本町1-7-31",
+      "prefecture": "高知県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30",
+      "diocese": "osaka",
+      "deanery": "kochi",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "088-872-2277"
+    },
+    {
+      "name": "カトリック江ノ口教会 赤岡礼拝所",
+      "address": "〒781-5310 香南市赤岡町741-1",
+      "prefecture": "高知県",
+      "isCathedral": false,
+      "massTime": "日曜日 14:00 (第2,4)",
+      "diocese": "osaka",
+      "deanery": "kochi",
+      "massTimes": {
+        "sunday": [
+          "14:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0
+    },
+    {
+      "name": "カトリック中島町教会",
+      "address": "〒780-0870 高知市本町5-6-26",
+      "prefecture": "高知県",
+      "isCathedral": false,
+      "massTime": "日曜日 9:30 / 第1,3日曜日 14:00 (英語)",
+      "diocese": "osaka",
+      "deanery": "kochi",
+      "massTimes": {
+        "sunday": [
+          "9:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1・第3日曜"
+          }
+        ]
+      },
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "088-872-3658"
+    },
+    {
+      "name": "カトリック中島町教会 安芸礼拝所",
+      "address": "〒784-0004 安芸市本町4-4-30",
+      "prefecture": "高知県",
+      "isCathedral": false,
+      "massTime": "前晩 16:00 (第1,3)",
+      "diocese": "osaka",
+      "deanery": "kochi",
+      "massTimes": {
+        "saturday": [
+          "16:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0
+    },
+    {
+      "name": "カトリック中村教会",
+      "address": "〒787-0012 四万十市右山五月町5-15",
+      "prefecture": "高知県",
+      "isCathedral": false,
+      "massTime": "日曜日 11:00",
+      "diocese": "osaka",
+      "deanery": "kochi",
+      "massTimes": {
+        "sunday": [
+          "11:00"
+        ]
+      },
+      "foreignMassTimes": {},
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "phone": "0880-34-8879"
     }
   ]
 }

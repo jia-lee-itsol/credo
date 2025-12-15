@@ -1,6 +1,7 @@
 {
   "app": {
-    "name": "Credo"
+    "name": "Credo",
+    "description": "Ứng dụng cộng đồng kết nối các nhà thờ Công giáo và tín hữu trên toàn Nhật Bản."
   },
   "common": {
     "ok": "OK",
@@ -12,7 +13,33 @@
     "loading": "Đang tải...",
     "error": "Lỗi",
     "success": "Thành công",
-    "retry": "Thử lại"
+    "retry": "Thử lại",
+    "search": "Tìm kiếm",
+    "select": "Chọn",
+    "add": "Thêm",
+    "remove": "Xóa",
+    "send": "Gửi",
+    "reset": "Đặt lại",
+    "apply": "Áp dụng",
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "guest": "Khách",
+    "user": "Người dùng",
+    "required": "Bắt buộc",
+    "optional": "Tùy chọn",
+    "notSet": "Chưa thiết lập",
+    "small": "Nhỏ",
+    "medium": "Vừa",
+    "large": "Lớn",
+    "extraLarge": "Rất lớn",
+    "sampleText": "Văn bản mẫu",
+    "or": "hoặc",
+    "pageNotFound": "Không tìm thấy trang",
+    "backToHome": "Về trang chủ",
+    "noMassTimeInfo": "Không có thông tin giờ lễ",
+    "favoriteAdded": "Đã thêm vào mục yêu thích",
+    "favoriteRemoved": "Đã xóa khỏi mục yêu thích",
+    "commentHint": "Nhập bình luận..."
   },
   "language": {
     "settings": "Cài đặt ngôn ngữ",
@@ -20,11 +47,406 @@
     "switched@language": "Tên ngôn ngữ",
     "switchedButProfileUpdateFailed": "Đã chuyển sang {language}, nhưng cập nhật hồ sơ thất bại: {error}",
     "switchedButProfileUpdateFailed@language": "Tên ngôn ngữ",
-    "switchedButProfileUpdateFailed@error": "Thông báo lỗi"
+    "switchedButProfileUpdateFailed@error": "Thông báo lỗi",
+    "names": {
+      "japanese": "Tiếng Nhật",
+      "english": "Tiếng Anh",
+      "chinese": "Tiếng Trung",
+      "vietnamese": "Tiếng Việt",
+      "korean": "한국어",
+      "spanish": "Español",
+      "portuguese": "Português"
+    }
   },
   "mass": {
     "noDataToday": "Không có thông tin suy niệm cho hôm nay",
     "noDataWeekday": "Thông tin suy niệm ngày thường đang được chuẩn bị",
-    "bibleNotice": "※Vui lòng nghe văn bản Kinh Thánh tại nhà thờ hoặc đọc Kinh Thánh chính thức."
+    "bibleNotice": "※Vui lòng nghe văn bản Kinh Thánh tại nhà thờ hoặc đọc Kinh Thánh chính thức.",
+    "title": "Suy Niệm Hàng Ngày",
+    "liturgicalDays": {
+      "sunday": "Chúa Nhật",
+      "solemnity": "Đại Lễ",
+      "feast": "Lễ",
+      "advent": "Mùa Vọng",
+      "christmas": "Giáng Sinh",
+      "lent": "Mùa Chay",
+      "easter": "Phục Sinh",
+      "ordinary": "Thường Niên"
+    },
+    "prayer": {
+      "title": "Hướng Dẫn Suy Niệm",
+      "morningMeditation": "Suy Niệm Buổi Sáng",
+      "guides": {
+        "morning": {
+          "title": "Suy Niệm Buổi Sáng",
+          "subtitle": "Morning",
+          "content": "Một khoảnh khắc để cảm ơn Chúa khi bắt đầu ngày mới và phó thác ngày mới dưới sự bảo vệ của Chúa. Khi thức dậy vào buổi sáng để bắt đầu ngày mới, đây là lúc cầu xin ân sủng và sự bảo vệ trong suốt cả ngày."
+        },
+        "meal": {
+          "title": "Suy Niệm Trong Bữa Ăn",
+          "subtitle": "Meal",
+          "content": "Một khoảnh khắc để cảm ơn Chúa về thức ăn trước và sau bữa ăn. Trước khi ăn, chúng ta cảm ơn vì thức ăn mà Chúa đã ban cho, và sau khi ăn, chúng ta cảm ơn vì được no đủ."
+        },
+        "evening": {
+          "title": "Suy Niệm Buổi Tối",
+          "subtitle": "Evening",
+          "content": "Khi kết thúc ngày, đây là lúc cảm ơn Chúa, ăn năn về tội lỗi trong ngày và cầu xin sự tha thứ. Trước khi đi ngủ, đây là lúc nhìn lại ngày đã qua và cầu nguyện cho ngày mai."
+        },
+        "difficult": {
+          "title": "Suy Niệm Trong Lúc Khó Khăn",
+          "subtitle": "In Difficult Times",
+          "content": "Trong những tình huống khó khăn hoặc những lúc đau khổ, đây là lúc cầu xin sự giúp đỡ và an ủi từ Chúa. Ngay cả giữa những thử thách và đau khổ, đây là lúc tin tưởng vào tình yêu và sự bảo vệ của Chúa."
+        },
+        "thanksgiving": {
+          "title": "Suy Niệm Tạ Ơn",
+          "subtitle": "Thanksgiving",
+          "content": "Một khoảnh khắc để cảm ơn những ân sủng và phước lành mà Chúa đã ban cho. Từ những niềm vui nhỏ bé hàng ngày đến những phước lành lớn lao, đây là lúc có lòng biết ơn về mọi thứ."
+        },
+        "meditation": {
+          "title": "Thời Gian Suy Niệm",
+          "subtitle": "Meditation Time",
+          "content": "Một khoảnh khắc để có thời gian yên tĩnh, đối thoại với Chúa và nhìn lại tấm lòng của mình. Chúng ta suy niệm Lời Chúa, tìm kiếm ý muốn của Chúa và trải qua thời gian bình an."
+        }
+      },
+      "meditationGuides": {
+        "firstReading": "Suy Niệm Dựa Trên Kinh Thánh I",
+        "psalm": "Suy Niệm Dựa Trên Thánh Vịnh",
+        "secondReading": "Suy Niệm Bài Đọc Thứ Hai II",
+        "gospel": "Suy Niệm Về Lời Kinh Thánh (Tin Mừng)"
+      },
+      "shareHint": "Chia sẻ suy niệm hôm nay...",
+      "readings": {
+        "firstReading": "Bài Đọc Thứ Nhất",
+        "psalm": "Thánh Vịnh Đáp Ca",
+        "secondReading": "Bài Đọc Thứ Hai",
+        "gospel": "Tin Mừng"
+      },
+      "everyoneMeditation": "Suy Niệm Của Mọi Người ({count})",
+      "everyoneMeditation@count": "Số bình luận",
+      "noMeditationYet": "Chưa có suy niệm",
+      "errorOccurred": "Đã xảy ra lỗi",
+      "permissionDenied": "Không có quyền. Vui lòng kiểm tra trạng thái đăng nhập.",
+      "networkError": "Đã xảy ra lỗi mạng.",
+      "anonymous": "Ẩn danh",
+      "loginToShare": "Đăng nhập để chia sẻ suy niệm"
+    }
+  },
+  "navigation": {
+    "home": "Trang chủ",
+    "meditation": "Suy niệm",
+    "share": "Chia sẻ",
+    "church": "Nhà thờ",
+    "community": "Cộng đồng"
+  },
+  "auth": {
+    "signIn": "Đăng nhập",
+    "signUp": "Đăng ký",
+    "signOut": "Đăng xuất",
+    "signOutSuccess": "Đã đăng xuất",
+    "signInFailed": "Đăng nhập thất bại",
+    "signUpFailed": "Đăng ký thất bại",
+    "accountCreated": "Đã tạo tài khoản",
+    "loginRequired": "Yêu cầu đăng nhập",
+    "loginRequiredMessage": "Cần đăng nhập để đăng bài.",
+    "loginRequiredQuestion": "Cần đăng nhập để đăng bài. Bạn có muốn đăng nhập không?",
+    "continueAsGuest": "Tiếp tục với tư cách khách",
+    "alreadyHaveAccount": "Bạn đã có tài khoản?",
+    "noAccount": "Bạn chưa có tài khoản?",
+    "forgotPassword": "Quên mật khẩu?",
+    "passwordReset": "Đặt lại mật khẩu",
+    "passwordResetEmailSent": "Đã gửi email đặt lại mật khẩu",
+    "passwordResetEmailFailed": "Gửi email đặt lại mật khẩu thất bại",
+    "email": "Email",
+    "emailHint": "Nhập địa chỉ email của bạn",
+    "password": "Mật khẩu",
+    "passwordConfirm": "Mật khẩu (xác nhận)",
+    "passwordMismatch": "Mật khẩu không khớp",
+    "saveEmail": "Lưu địa chỉ email",
+    "nickname": "Biệt danh",
+    "parish": "Giáo xứ đã đăng ký",
+    "selectParish": "Chọn (tùy chọn)",
+    "selectParishTitle": "Chọn giáo xứ đã đăng ký",
+    "baptismName": "Tên thánh (tùy chọn)",
+    "baptismNameHint": "Nhập tên thánh của bạn",
+    "feastDay": "Ngày lễ thánh bổn mạng (tùy chọn)",
+    "selectFeastDay": "Chọn (tùy chọn)",
+    "selectFeastDayTitle": "Chọn ngày lễ thánh bổn mạng",
+    "createAccount": "Tạo tài khoản",
+    "termsRequired": "Vui lòng đồng ý với điều khoản dịch vụ và chính sách bảo mật",
+    "subtitle": "Kết nối bằng đức tin"
+  },
+  "validation": {
+    "emailRequired": "Vui lòng nhập địa chỉ email của bạn",
+    "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ",
+    "passwordRequired": "Vui lòng nhập mật khẩu của bạn",
+    "passwordMinLength": "Mật khẩu phải có ít nhất 8 ký tự",
+    "nicknameRequired": "Vui lòng nhập biệt danh của bạn",
+    "nicknameMaxLength": "Biệt danh phải có {max} ký tự trở xuống",
+    "nicknameMaxLength@max": "Số ký tự tối đa",
+    "invalidCharacters": "Chứa ký tự không được phép",
+    "titleRequired": "Vui lòng nhập tiêu đề",
+    "titleMaxLength": "Tiêu đề phải có {max} ký tự trở xuống",
+    "titleMaxLength@max": "Số ký tự tối đa",
+    "contentRequired": "Vui lòng nhập nội dung",
+    "contentMaxLength": "Nội dung phải có {max} ký tự trở xuống",
+    "contentMaxLength@max": "Số ký tự tối đa",
+    "commentRequired": "Vui lòng nhập bình luận",
+    "commentMaxLength": "Bình luận phải có {max} ký tự trở xuống",
+    "commentMaxLength@max": "Số ký tự tối đa",
+    "baptismNameRequired": "Vui lòng nhập tên thánh của bạn",
+    "monthInvalid": "Vui lòng nhập tháng hợp lệ (1-12)",
+    "dayInvalid": "Vui lòng nhập ngày hợp lệ (1-31)"
+  },
+  "community": {
+    "postsCount": "{count} bài đăng",
+    "postsCount@count": "Số bài đăng",
+    "title": "Cộng đồng",
+    "newPost": "Bài Đăng Mới",
+    "postCreated": "Đã tạo bài đăng",
+    "postCreateFailed": "Tạo bài đăng thất bại. Vui lòng kiểm tra kết nối mạng của bạn.",
+    "postDeleted": "Đã xóa bài đăng",
+    "postDeleteFailed": "Xóa bài đăng thất bại",
+    "postDeleteConfirmTitle": "Xác Nhận Xóa",
+    "postDeleteConfirmMessage": "Bạn có chắc chắn muốn xóa bài đăng này không?\nHành động này không thể hoàn tác.",
+    "postHidden": "Đã ẩn bài đăng",
+    "postShow": "Đã hiển thị bài đăng",
+    "postHideFailed": "Ẩn bài đăng thất bại",
+    "postShowFailed": "Hiển thị bài đăng thất bại",
+    "postHideConfirmTitle": "Xác Nhận Ẩn",
+    "postHideConfirmMessage": "Bạn có chắc chắn muốn ẩn bài đăng này không?\nCác bài đăng đã ẩn sẽ không xuất hiện trong danh sách.",
+    "postShowConfirmTitle": "Xác Nhận Hiển Thị",
+    "postShowConfirmMessage": "Bạn có chắc chắn muốn hiển thị bài đăng này không?\nNó sẽ xuất hiện trong danh sách lại.",
+    "postHideNoPermission": "Bạn không có quyền ẩn bài đăng này. Bạn chỉ có thể ẩn các bài đăng từ giáo xứ đã đăng ký của mình.",
+    "postShowNoPermission": "Bạn không có quyền hiển thị bài đăng này. Bạn chỉ có thể hiển thị các bài đăng từ giáo xứ đã đăng ký của mình.",
+    "editPost": "Chỉnh sửa",
+    "deletePost": "Xóa",
+    "hidePost": "Ẩn",
+    "showPost": "Hiển thị",
+    "reportPost": "Báo cáo",
+    "commentPosted": "Đã đăng bình luận",
+    "commentPostFailed": "Đăng bình luận thất bại",
+    "likeFailed": "Xử lý thích thất bại",
+    "shareMeditation": "Đã chia sẻ suy niệm",
+    "noSearchResults": "Không có kết quả tìm kiếm",
+    "errorOccurred": "Đã xảy ra lỗi",
+    "swipeToRefresh": "Vuốt xuống để làm mới",
+    "official": "Chính thức",
+    "officialAccountSettings": "Cài Đặt Tài Khoản Chính Thức",
+    "registerAsNotice": "Đăng Ký Như Thông Báo",
+    "registerAsNoticeSubtitle": "Tất cả thành viên giáo xứ sẽ được thông báo",
+    "pinToTop": "Ghim Lên Đầu",
+    "pinToTopSubtitle": "Sẽ được hiển thị ở đầu danh sách bài đăng",
+    "guidelines": "Bằng cách đăng bài, bạn đồng ý với hướng dẫn cộng đồng. Vui lòng tôn trọng người dùng khác và đăng nội dung phù hợp.",
+    "searchPost": "Tìm kiếm bài đăng",
+    "pinned": "Đã ghim",
+    "noticesTitle": "Thông báo",
+    "noOfficialNotices": "Không có thông báo chính thức",
+    "createNotice": "Tạo thông báo",
+    "filter": {
+      "latest": "Mới nhất",
+      "popular": "Phổ biến",
+      "myPosts": "Bài đăng của tôi"
+    },
+    "home": {
+      "title": "Cộng đồng",
+      "parish": "Giáo xứ",
+      "parishNotSet": "Chưa đặt giáo xứ",
+      "parishLoadFailed": "Không thể tải thông tin giáo xứ",
+      "searchOtherParishes": "Tìm cộng đồng giáo xứ khác",
+      "todayMass": "Thánh lễ hôm nay",
+      "todayBibleReadingAndPrayer": "Đọc Kinh Thánh và cầu nguyện hôm nay",
+      "recentNotices": "Thông báo gần đây",
+      "noNotices": "Không có thông báo"
+    },
+    "notificationLabels": {
+      "mention": "Đề cập",
+      "notice": "Thông báo",
+      "comment": "Bình luận"
+    }
+  },
+  "report": {
+    "title": "Báo Cáo",
+    "reasonRequired": "Vui lòng chọn lý do báo cáo",
+    "reasonInputRequired": "Vui lòng nhập lý do báo cáo",
+    "reportFailed": "Báo cáo thất bại",
+    "reportSuccess": "Đã báo cáo. Cảm ơn bạn đã báo cáo.",
+    "reasons": {
+      "spam": "Spam",
+      "inappropriate": "Nội dung không phù hợp",
+      "harassment": "Quấy rối",
+      "other": "Khác"
+    },
+    "reasonHint": "Vui lòng nhập lý do báo cáo"
+  },
+  "image": {
+    "title": "Hình ảnh",
+    "add": "Thêm hình ảnh",
+    "addButton": "Thêm",
+    "max3Images": "Bạn có thể đính kèm tối đa 3 hình ảnh",
+    "camera": "Máy ảnh",
+    "gallery": "Thư viện",
+    "selectFailed": "Chọn hình ảnh thất bại",
+    "permissionRequired": "Yêu cầu quyền truy cập",
+    "cameraPermissionMessage": "Để sử dụng máy ảnh, vui lòng cho phép truy cập máy ảnh từ cài đặt.",
+    "galleryPermissionMessage": "Để sử dụng thư viện ảnh, vui lòng cho phép truy cập thư viện ảnh từ cài đặt.",
+    "openSettings": "Mở cài đặt",
+    "permissionDeniedMessage": "Vui lòng cho phép truy cập máy ảnh/thư viện ảnh từ ứng dụng cài đặt",
+    "permissionDeniedMessageAlt": "Vui lòng cho phép truy cập máy ảnh/bộ nhớ từ cài đặt"
+  },
+  "profile": {
+    "myPage": "Trang Cá Nhân",
+    "editProfile": "Chỉnh Sửa Hồ Sơ",
+    "profileUpdated": "Đã cập nhật hồ sơ",
+    "updateFailed": "Cập nhật thất bại",
+    "favoriteParishes": {
+      "title": "Nhà Thờ Yêu Thích",
+      "searchParish": "Tìm kiếm nhà thờ",
+      "noParishes": "Không có nhà thờ đã đăng ký",
+      "addParishMessage": "Tìm kiếm và thêm nhà thờ",
+      "cannotDeleteParish": "Không thể xóa giáo xứ đã đăng ký",
+      "deleted": "Đã xóa",
+      "deleteTitle": "Xóa",
+      "registeredCount": "{count} đã đăng ký",
+      "registeredCount@count": "Số đã đăng ký"
+    },
+    "notificationSettings": "Cài Đặt Thông Báo",
+    "notificationSettingsComingSoon": "Cài đặt thông báo đang được chuẩn bị",
+    "languageSettings": "Cài Đặt Ngôn Ngữ",
+    "termsOfService": "Điều Khoản Dịch Vụ",
+    "termsOfServiceComingSoon": "Điều khoản dịch vụ đang được chuẩn bị",
+    "privacyPolicy": "Chính Sách Bảo Mật",
+    "privacyPolicyComingSoon": "Chính sách bảo mật đang được chuẩn bị",
+    "aboutApp": "Về Ứng Dụng",
+    "shareProfileQR": "Chia sẻ hồ sơ bằng mã QR",
+    "userId": "ID Người Dùng",
+    "userIdCopied": "Đã sao chép ID người dùng",
+    "loginRequired": "Yêu cầu đăng nhập",
+    "pleaseLogin": "Vui lòng đăng nhập",
+    "fontSize": "Cỡ Chữ",
+    "directInput": "Khác (nhập trực tiếp)",
+    "directInputTitle": "Nhập tên thánh và ngày lễ trực tiếp",
+    "directInputDialogTitle": "Nhập tên thánh và ngày lễ",
+    "month": "Tháng",
+    "day": "Ngày",
+    "godparent": {
+      "add": "Thêm",
+      "remove": "Xóa",
+      "searchUser": "Tìm kiếm theo địa chỉ email hoặc ID người dùng",
+      "userNotFound": "Không tìm thấy người dùng",
+      "userFound": "Đã tìm thấy người dùng",
+      "nickname": "Biệt danh",
+      "email": "Email",
+      "userId": "ID Người Dùng"
+    }
+  },
+  "parish": {
+    "detail": "Chi tiết nhà thờ",
+    "notFound": "Không tìm thấy thông tin nhà thờ",
+    "favoriteAdded": "Đã thêm vào mục yêu thích",
+    "favoriteRemoved": "Đã xóa khỏi mục yêu thích",
+    "cannotRemoveParish": "Không thể xóa giáo xứ đã đăng ký khỏi mục yêu thích",
+    "openInMap": "Mở trong ứng dụng bản đồ",
+    "community": "Cộng đồng",
+    "search": "Tìm kiếm nhà thờ",
+    "searchFromCurrentLocation": "Tìm kiếm nhà thờ từ vị trí hiện tại",
+    "locationPermissionRequired": "Yêu cầu quyền vị trí",
+    "locationPermissionMessage": "Vui lòng bật quyền vị trí từ cài đặt.",
+    "locationUsage": "Sử dụng vị trí",
+    "locationUsageMessage": "Vui lòng cho phép sử dụng vị trí để tìm nhà thờ gần đây.\nCũng được sử dụng để hiển thị khoảng cách đến nhà thờ.",
+    "notNow": "Không phải bây giờ",
+    "allow": "Cho phép",
+    "locationFailed": "Không thể lấy vị trí",
+    "filter": {
+      "title": "Bộ Lọc",
+      "reset": "Đặt lại",
+      "prefecture": "Tỉnh",
+      "mass": "Thánh lễ",
+      "options": "Tùy chọn",
+      "apply": "Áp dụng",
+      "todayMass": "Có thánh lễ hôm nay",
+      "foreignMass": "Có thánh lễ ngoại ngữ",
+      "cathedralOnly": "Chỉ nhà thờ chính tòa",
+      "cathedralOnlySubtitle": "Chỉ hiển thị nhà thờ chính tòa",
+      "massTimeAvailable": "Có thông tin giờ lễ",
+      "massTimeAvailableSubtitle": "Chỉ hiển thị nhà thờ có thông tin giờ lễ",
+      "button": "Bộ lọc",
+      "sortByDistance": "Sắp xếp theo khoảng cách"
+    },
+    "empty": {
+      "notFound": "Không tìm thấy dữ liệu nhà thờ"
+    },
+    "detailSection": {
+      "noMassTimeInfo": "Không có thông tin giờ lễ",
+      "address": "Địa chỉ",
+      "phone": "Điện thoại",
+      "fax": "FAX",
+      "website": "Trang web",
+      "massTime": "Giờ Lễ",
+      "massTimeNotice": "※ Vui lòng kiểm tra giờ lễ trên trang web của từng nhà thờ",
+      "noMassTimeInfoInList": "Không có thông tin giờ lễ",
+      "weekdays": {
+        "monday": "T2",
+        "tuesday": "T3",
+        "wednesday": "T4",
+        "thursday": "T5",
+        "friday": "T6",
+        "mondayToFriday": "T2-T6",
+        "saturday": "T7",
+        "sunday": "Chúa Nhật"
+      },
+      "languages": {
+        "english": "Tiếng Anh",
+        "spanish": "Tiếng Tây Ban Nha",
+        "chinese": "Tiếng Trung",
+        "filipino": "Tiếng Philippines",
+        "portuguese": "Tiếng Bồ Đào Nha",
+        "korean": "Tiếng Hàn",
+        "vietnamese": "Tiếng Việt",
+        "indonesian": "Tiếng Indonesia",
+        "polish": "Tiếng Ba Lan",
+        "french": "Tiếng Pháp",
+        "german": "Tiếng Đức",
+        "italian": "Tiếng Ý"
+      },
+      "sundayNote": {
+        "first": "Chúa Nhật thứ 1",
+        "second": "Chúa Nhật thứ 2",
+        "third": "Chúa Nhật thứ 3",
+        "fourth": "Chúa Nhật thứ 4",
+        "secondAndFourth": "Chúa Nhật thứ 2 và 4",
+        "firstAndThird": "Chúa Nhật thứ 1 và 3"
+      },
+      "other": "Khác",
+      "withSignLanguage": "Có Ngôn Ngữ Ký Hiệu"
+    }
+  },
+  "qr": {
+    "invalid": "Mã QR không hợp lệ",
+    "ownProfile": "Đây là hồ sơ của chính bạn",
+    "userNotFound": "Không tìm thấy người dùng",
+    "scanError": "Lỗi quét",
+    "userFound": "Đã tìm thấy người dùng",
+    "startScan": "Bắt đầu quét"
+  },
+  "location": {
+    "permissionRequired": "Yêu cầu quyền vị trí",
+    "permissionMessage": "Vui lòng bật quyền vị trí từ cài đặt.",
+    "openSettings": "Mở cài đặt",
+    "usagePurpose": "Mục đích sử dụng vị trí",
+    "purposeNearbySearch": "Tìm kiếm nhà thờ gần từ vị trí hiện tại",
+    "purposeDistanceDisplay": "Hiển thị khoảng cách đến nhà thờ"
+  },
+  "search": {
+    "userNotFound": "Không tìm thấy người dùng",
+    "userSearchHint": "Địa chỉ email hoặc ID người dùng",
+    "userSearchRequired": "Vui lòng nhập địa chỉ email hoặc ID người dùng",
+    "parishSearchHint": "Tìm kiếm theo tên nhà thờ, khu vực",
+    "saintSearchHint": "Tìm kiếm theo tên thánh",
+    "noResults": "Không có kết quả tìm kiếm"
+  },
+  "comingSoon": {
+    "notificationSettings": "Cài đặt thông báo đang được chuẩn bị",
+    "termsOfService": "Điều khoản dịch vụ đang được chuẩn bị",
+    "privacyPolicy": "Chính sách bảo mật đang được chuẩn bị"
   }
 }

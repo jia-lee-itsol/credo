@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 /// 게시글 목록 필터 타입
 enum PostListFilterType { latest, popular, myPosts }
@@ -19,26 +20,27 @@ class PostListFilterBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
           _FilterChip(
-            label: '最新',
+            label: l10n.community.filter.latest,
             isSelected: filterType == PostListFilterType.latest,
             onTap: () => onFilterChanged(PostListFilterType.latest),
             primaryColor: primaryColor,
           ),
           const SizedBox(width: 8),
           _FilterChip(
-            label: '人気',
+            label: l10n.community.filter.popular,
             isSelected: filterType == PostListFilterType.popular,
             onTap: () => onFilterChanged(PostListFilterType.popular),
             primaryColor: primaryColor,
           ),
           const SizedBox(width: 8),
           _FilterChip(
-            label: '私の投稿',
+            label: l10n.community.filter.myPosts,
             isSelected: filterType == PostListFilterType.myPosts,
             onTap: () => onFilterChanged(PostListFilterType.myPosts),
             primaryColor: primaryColor,

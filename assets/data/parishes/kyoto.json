@@ -14,6 +14,9 @@
       "phone": "075-231-4785",
       "fax": "075-211-8021",
       "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
         "sunday": [
           "07:00",
           "10:30"
@@ -47,6 +50,9 @@
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
         "sunday": [
           "07:00",
           "10:30"
@@ -416,7 +422,16 @@
       "fax": "0774-21-2891",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
+      "massTimes": {
+        "saturday": [
+          "15:00"
+        ],
+        "sunday": [
+          "11:00",
+          "14:00",
+          "09:00"
+        ]
+      },
       "foreignMassTimes": {
         "sunday": [
           {
@@ -632,6 +647,9 @@
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {
+        "saturday": [
+          "19:00"
+        ],
         "sunday": [
           "08:00",
           "10:00"
@@ -970,16 +988,21 @@
           {
             "time": "18:00",
             "language": "ES",
-            "note": ""
+            "note": "第1・2日曜"
           },
           {
             "time": "18:00",
             "language": "PT",
-            "note": ""
+            "note": "第3・4日曜"
           },
           {
             "time": "11:00",
             "language": "VI",
+            "note": "第3日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "PH",
             "note": "第3日曜"
           }
         ]
@@ -998,6 +1021,9 @@
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
         "sunday": [
           "07:00",
           "10:00"
@@ -1115,6 +1141,9 @@
       "diocese": "kyoto",
       "deanery": "kyoto",
       "massTimes": {
+        "saturday": [
+          "18:30"
+        ],
         "sunday": [
           "09:00"
         ]
@@ -1178,7 +1207,12 @@
       "fax": "0598-21-0538",
       "diocese": "kyoto",
       "deanery": "kyoto",
-      "massTimes": {},
+      "massTimes": {
+        "sunday": [
+          "11:00",
+          "09:00"
+        ]
+      },
       "foreignMassTimes": {
         "sunday": [
           {
@@ -1187,9 +1221,19 @@
             "note": "第1日曜"
           },
           {
+            "time": "14:00",
+            "language": "PH",
+            "note": "第2日曜"
+          },
+          {
             "time": "11:00",
             "language": "EN",
             "note": "第4日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "",
+            "note": "第5日曜"
           }
         ]
       },

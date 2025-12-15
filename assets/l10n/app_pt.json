@@ -1,6 +1,7 @@
 {
   "app": {
-    "name": "Credo"
+    "name": "Credo",
+    "description": "Aplicativo comunitário que conecta igrejas católicas e fiéis em todo o Japão."
   },
   "common": {
     "ok": "OK",
@@ -12,7 +13,33 @@
     "loading": "Carregando...",
     "error": "Erro",
     "success": "Sucesso",
-    "retry": "Tentar novamente"
+    "retry": "Tentar novamente",
+    "search": "Buscar",
+    "select": "Selecionar",
+    "add": "Adicionar",
+    "remove": "Remover",
+    "send": "Enviar",
+    "reset": "Redefinir",
+    "apply": "Aplicar",
+    "login": "Entrar",
+    "logout": "Sair",
+    "guest": "Convidado",
+    "user": "Usuário",
+    "required": "Obrigatório",
+    "optional": "Opcional",
+    "notSet": "Não configurado",
+    "small": "Pequeno",
+    "medium": "Médio",
+    "large": "Grande",
+    "extraLarge": "Muito grande",
+    "sampleText": "Texto de exemplo",
+    "or": "ou",
+    "pageNotFound": "Página não encontrada",
+    "backToHome": "Voltar ao início",
+    "noMassTimeInfo": "Não há informações de horário de missa",
+    "favoriteAdded": "Adicionado aos favoritos",
+    "favoriteRemoved": "Removido dos favoritos",
+    "commentHint": "Digite um comentário..."
   },
   "language": {
     "settings": "Configurações de idioma",
@@ -20,11 +47,406 @@
     "switched@language": "Nome do idioma",
     "switchedButProfileUpdateFailed": "Alterado para {language}, mas a atualização do perfil falhou: {error}",
     "switchedButProfileUpdateFailed@language": "Nome do idioma",
-    "switchedButProfileUpdateFailed@error": "Mensagem de erro"
+    "switchedButProfileUpdateFailed@error": "Mensagem de erro",
+    "names": {
+      "japanese": "Japonês",
+      "english": "Inglês",
+      "chinese": "Chinês",
+      "vietnamese": "Tiếng Việt",
+      "korean": "한국어",
+      "spanish": "Español",
+      "portuguese": "Português"
+    }
   },
   "mass": {
     "noDataToday": "Não há informações de meditação para hoje",
     "noDataWeekday": "As informações de meditação dos dias úteis estão sendo preparadas",
-    "bibleNotice": "※Por favor, ouça o texto da Bíblia na igreja ou leia uma Bíblia oficial."
+    "bibleNotice": "※Por favor, ouça o texto da Bíblia na igreja ou leia uma Bíblia oficial.",
+    "title": "Meditação Diária",
+    "liturgicalDays": {
+      "sunday": "Domingo",
+      "solemnity": "Solenidade",
+      "feast": "Festa",
+      "advent": "Advento",
+      "christmas": "Natal",
+      "lent": "Quaresma",
+      "easter": "Páscoa",
+      "ordinary": "Tempo Comum"
+    },
+    "prayer": {
+      "title": "Guia de Meditação",
+      "morningMeditation": "Meditação Matutina",
+      "guides": {
+        "morning": {
+          "title": "Meditação Matutina",
+          "subtitle": "Morning",
+          "content": "Um momento para agradecer a Deus ao começar o dia e encomendar o novo dia sob a proteção de Deus. Ao levantar-se pela manhã para começar o dia, é um momento para pedir graça e proteção durante todo o dia."
+        },
+        "meal": {
+          "title": "Meditação nas Refeições",
+          "subtitle": "Meal",
+          "content": "Um momento para agradecer a Deus pela comida antes e depois das refeições. Antes de comer, agradecemos pela comida que Deus nos deu, e depois de comer, agradecemos por estarmos satisfeitos."
+        },
+        "evening": {
+          "title": "Meditação Noturna",
+          "subtitle": "Evening",
+          "content": "Ao terminar o dia, é um momento para agradecer a Deus, arrepender-se dos pecados do dia e pedir perdão. Antes de dormir, é um momento para refletir sobre o dia e orar pelo amanhã."
+        },
+        "difficult": {
+          "title": "Meditação em Tempos Difíceis",
+          "subtitle": "In Difficult Times",
+          "content": "Em situações difíceis ou momentos dolorosos, é um momento para pedir ajuda e consolo de Deus. Mesmo em meio a provações e sofrimentos, é um momento para acreditar no amor e na proteção de Deus."
+        },
+        "thanksgiving": {
+          "title": "Meditação de Ação de Graças",
+          "subtitle": "Thanksgiving",
+          "content": "Um momento para agradecer as graças e bênçãos que Deus deu. Desde as pequenas alegrias cotidianas até as grandes bênçãos, é um momento para ter um coração agradecido por tudo."
+        },
+        "meditation": {
+          "title": "Tempo de Meditação",
+          "subtitle": "Meditation Time",
+          "content": "Um momento para ter tempo tranquilo, dialogar com Deus e refletir sobre o próprio coração. Meditamos na Palavra, buscamos a vontade de Deus e passamos tempo em paz."
+        }
+      },
+      "meditationGuides": {
+        "firstReading": "Meditação Baseada na Bíblia I",
+        "psalm": "Meditação Baseada nos Salmos",
+        "secondReading": "Meditação da Segunda Leitura II",
+        "gospel": "Meditação sobre a Palavra da Bíblia (Evangelho)"
+      },
+      "shareHint": "Compartilhe a meditação de hoje...",
+      "readings": {
+        "firstReading": "Primeira Leitura",
+        "psalm": "Salmo Responsorial",
+        "secondReading": "Segunda Leitura",
+        "gospel": "Evangelho"
+      },
+      "everyoneMeditation": "Meditação de Todos ({count})",
+      "everyoneMeditation@count": "Número de comentários",
+      "noMeditationYet": "Ainda não há meditação",
+      "errorOccurred": "Ocorreu um erro",
+      "permissionDenied": "Permissão negada. Por favor, verifique seu status de login.",
+      "networkError": "Ocorreu um erro de rede.",
+      "anonymous": "Anônimo",
+      "loginToShare": "Faça login para compartilhar meditação"
+    }
+  },
+  "navigation": {
+    "home": "Início",
+    "meditation": "Meditação",
+    "share": "Compartilhar",
+    "church": "Igreja",
+    "community": "Comunidade"
+  },
+  "auth": {
+    "signIn": "Entrar",
+    "signUp": "Registrar",
+    "signOut": "Sair",
+    "signOutSuccess": "Sessão encerrada",
+    "signInFailed": "Erro ao entrar",
+    "signUpFailed": "Erro ao registrar",
+    "accountCreated": "Conta criada",
+    "loginRequired": "Login necessário",
+    "loginRequiredMessage": "É necessário fazer login para publicar.",
+    "loginRequiredQuestion": "É necessário fazer login para publicar. Deseja fazer login?",
+    "continueAsGuest": "Continuar como convidado",
+    "alreadyHaveAccount": "Já tem uma conta?",
+    "noAccount": "Não tem uma conta?",
+    "forgotPassword": "Esqueceu sua senha?",
+    "passwordReset": "Redefinir senha",
+    "passwordResetEmailSent": "E-mail de redefinição de senha enviado",
+    "passwordResetEmailFailed": "Erro ao enviar e-mail de redefinição de senha",
+    "email": "E-mail",
+    "emailHint": "Digite seu endereço de e-mail",
+    "password": "Senha",
+    "passwordConfirm": "Senha (confirmar)",
+    "passwordMismatch": "As senhas não coincidem",
+    "saveEmail": "Salvar endereço de e-mail",
+    "nickname": "Apelido",
+    "parish": "Igreja afiliada",
+    "selectParish": "Selecione (opcional)",
+    "selectParishTitle": "Selecionar igreja afiliada",
+    "baptismName": "Nome de batismo (opcional)",
+    "baptismNameHint": "Digite seu nome de batismo",
+    "feastDay": "Festa do santo padroeiro (opcional)",
+    "selectFeastDay": "Selecione (opcional)",
+    "selectFeastDayTitle": "Selecionar festa do santo padroeiro",
+    "createAccount": "Criar conta",
+    "termsRequired": "Por favor, aceite os termos de serviço e a política de privacidade",
+    "subtitle": "Conectados pela fé"
+  },
+  "validation": {
+    "emailRequired": "Por favor, digite seu endereço de e-mail",
+    "emailInvalid": "Por favor, digite um endereço de e-mail válido",
+    "passwordRequired": "Por favor, digite sua senha",
+    "passwordMinLength": "A senha deve ter pelo menos 8 caracteres",
+    "nicknameRequired": "Por favor, digite seu apelido",
+    "nicknameMaxLength": "O apelido deve ter {max} caracteres ou menos",
+    "nicknameMaxLength@max": "Número máximo de caracteres",
+    "invalidCharacters": "Contém caracteres não permitidos",
+    "titleRequired": "Por favor, digite um título",
+    "titleMaxLength": "O título deve ter {max} caracteres ou menos",
+    "titleMaxLength@max": "Número máximo de caracteres",
+    "contentRequired": "Por favor, digite o conteúdo",
+    "contentMaxLength": "O conteúdo deve ter {max} caracteres ou menos",
+    "contentMaxLength@max": "Número máximo de caracteres",
+    "commentRequired": "Por favor, digite um comentário",
+    "commentMaxLength": "O comentário deve ter {max} caracteres ou menos",
+    "commentMaxLength@max": "Número máximo de caracteres",
+    "baptismNameRequired": "Por favor, digite seu nome de batismo",
+    "monthInvalid": "Por favor, digite um mês válido (1-12)",
+    "dayInvalid": "Por favor, digite um dia válido (1-31)"
+  },
+  "community": {
+    "postsCount": "{count} publicações",
+    "postsCount@count": "Número de publicações",
+    "title": "Comunidade",
+    "newPost": "Nova Publicação",
+    "postCreated": "Publicação criada",
+    "postCreateFailed": "Erro ao criar publicação. Por favor, verifique sua conexão de rede.",
+    "postDeleted": "Publicação eliminada",
+    "postDeleteFailed": "Erro ao eliminar publicação",
+    "postDeleteConfirmTitle": "Confirmar Eliminação",
+    "postDeleteConfirmMessage": "Tem certeza de que deseja eliminar esta publicação?\nEsta ação não pode ser desfeita.",
+    "postHidden": "Publicação oculta",
+    "postShow": "Publicação mostrada",
+    "postHideFailed": "Erro ao ocultar publicação",
+    "postShowFailed": "Erro ao mostrar publicação",
+    "postHideConfirmTitle": "Confirmar Ocultar",
+    "postHideConfirmMessage": "Tem certeza de que deseja ocultar esta publicação?\nPublicações ocultas não aparecerão na lista.",
+    "postShowConfirmTitle": "Confirmar Mostrar",
+    "postShowConfirmMessage": "Tem certeza de que deseja mostrar esta publicação?\nEla aparecerá na lista novamente.",
+    "postHideNoPermission": "Você não tem permissão para ocultar esta publicação. Você só pode ocultar publicações da sua igreja afiliada.",
+    "postShowNoPermission": "Você não tem permissão para mostrar esta publicação. Você só pode mostrar publicações da sua igreja afiliada.",
+    "editPost": "Editar",
+    "deletePost": "Eliminar",
+    "hidePost": "Ocultar",
+    "showPost": "Mostrar",
+    "reportPost": "Reportar",
+    "commentPosted": "Comentário publicado",
+    "commentPostFailed": "Erro ao publicar comentário",
+    "likeFailed": "Erro ao processar curtida",
+    "shareMeditation": "Meditação compartilhada",
+    "noSearchResults": "Nenhum resultado de busca",
+    "errorOccurred": "Ocorreu um erro",
+    "swipeToRefresh": "Deslize para baixo para atualizar",
+    "official": "Oficial",
+    "officialAccountSettings": "Configurações de Conta Oficial",
+    "registerAsNotice": "Registrar como Aviso",
+    "registerAsNoticeSubtitle": "Todos os membros da igreja serão notificados",
+    "pinToTop": "Fixar no Topo",
+    "pinToTopSubtitle": "Será exibido no topo da lista de publicações",
+    "guidelines": "Ao publicar, você concorda com as diretrizes da comunidade. Por favor, respeite outros usuários e publique conteúdo apropriado.",
+    "searchPost": "Buscar publicações",
+    "pinned": "Fixado",
+    "noticesTitle": "Avisos",
+    "noOfficialNotices": "Não há avisos oficiais",
+    "createNotice": "Criar aviso",
+    "filter": {
+      "latest": "Mais recente",
+      "popular": "Popular",
+      "myPosts": "Minhas publicações"
+    },
+    "home": {
+      "title": "Comunidade",
+      "parish": "Paróquia",
+      "parishNotSet": "Paróquia não configurada",
+      "parishLoadFailed": "Não foi possível carregar informações da paróquia",
+      "searchOtherParishes": "Buscar outras comunidades paroquiais",
+      "todayMass": "Missa de hoje",
+      "todayBibleReadingAndPrayer": "Leituras bíblicas e orações de hoje",
+      "recentNotices": "Avisos recentes",
+      "noNotices": "Não há avisos"
+    },
+    "notificationLabels": {
+      "mention": "Menção",
+      "notice": "Aviso",
+      "comment": "Comentário"
+    }
+  },
+  "report": {
+    "title": "Reportar",
+    "reasonRequired": "Por favor, selecione um motivo para o reporte",
+    "reasonInputRequired": "Por favor, digite um motivo para o reporte",
+    "reportFailed": "Erro ao reportar",
+    "reportSuccess": "Reportado. Obrigado pelo seu relatório.",
+    "reasons": {
+      "spam": "Spam",
+      "inappropriate": "Conteúdo inadequado",
+      "harassment": "Assédio",
+      "other": "Outro"
+    },
+    "reasonHint": "Por favor, digite um motivo para o reporte"
+  },
+  "image": {
+    "title": "Imagem",
+    "add": "Adicionar imagem",
+    "addButton": "Adicionar",
+    "max3Images": "Você pode anexar até 3 imagens",
+    "camera": "Câmera",
+    "gallery": "Galeria",
+    "selectFailed": "Erro ao selecionar imagem",
+    "permissionRequired": "Permissão de acesso necessária",
+    "cameraPermissionMessage": "Para usar a câmera, por favor permita o acesso à câmera nas configurações.",
+    "galleryPermissionMessage": "Para usar a biblioteca de fotos, por favor permita o acesso à biblioteca de fotos nas configurações.",
+    "openSettings": "Abrir configurações",
+    "permissionDeniedMessage": "Por favor, permita o acesso à câmera/biblioteca de fotos no aplicativo de configurações",
+    "permissionDeniedMessageAlt": "Por favor, permita o acesso à câmera/armazenamento nas configurações"
+  },
+  "profile": {
+    "myPage": "Minha Página",
+    "editProfile": "Editar Perfil",
+    "profileUpdated": "Perfil atualizado",
+    "updateFailed": "Erro ao atualizar",
+    "favoriteParishes": {
+      "title": "Igrejas Favoritas",
+      "searchParish": "Buscar igreja",
+      "noParishes": "Nenhuma igreja registrada",
+      "addParishMessage": "Busque e adicione uma igreja",
+      "cannotDeleteParish": "Não é possível excluir a igreja afiliada",
+      "deleted": "Excluído",
+      "deleteTitle": "Excluir",
+      "registeredCount": "{count} registradas",
+      "registeredCount@count": "Número de registradas"
+    },
+    "notificationSettings": "Configurações de Notificações",
+    "notificationSettingsComingSoon": "As configurações de notificações estão em preparação",
+    "languageSettings": "Configurações de Idioma",
+    "termsOfService": "Termos de Serviço",
+    "termsOfServiceComingSoon": "Os termos de serviço estão em preparação",
+    "privacyPolicy": "Política de Privacidade",
+    "privacyPolicyComingSoon": "A política de privacidade está em preparação",
+    "aboutApp": "Sobre o Aplicativo",
+    "shareProfileQR": "Compartilhar perfil com código QR",
+    "userId": "ID do Usuário",
+    "userIdCopied": "ID do usuário copiado",
+    "loginRequired": "Login necessário",
+    "pleaseLogin": "Por favor, faça login",
+    "fontSize": "Tamanho da Fonte",
+    "directInput": "Outro (entrada direta)",
+    "directInputTitle": "Digite o nome de batismo e a festa diretamente",
+    "directInputDialogTitle": "Digite o nome de batismo e a festa",
+    "month": "Mês",
+    "day": "Dia",
+    "godparent": {
+      "add": "Adicionar",
+      "remove": "Remover",
+      "searchUser": "Buscar por endereço de e-mail ou ID de usuário",
+      "userNotFound": "Usuário não encontrado",
+      "userFound": "Usuário encontrado",
+      "nickname": "Apelido",
+      "email": "E-mail",
+      "userId": "ID do Usuário"
+    }
+  },
+  "parish": {
+    "detail": "Detalhes da igreja",
+    "notFound": "Informações da igreja não encontradas",
+    "favoriteAdded": "Adicionado aos favoritos",
+    "favoriteRemoved": "Removido dos favoritos",
+    "cannotRemoveParish": "Não é possível remover a igreja registrada dos favoritos",
+    "openInMap": "Abrir no aplicativo de mapas",
+    "community": "Comunidade",
+    "search": "Buscar igreja",
+    "searchFromCurrentLocation": "Buscar igrejas da localização atual",
+    "locationPermissionRequired": "Permissão de localização necessária",
+    "locationPermissionMessage": "Por favor, habilite a permissão de localização nas configurações.",
+    "locationUsage": "Uso da localização",
+    "locationUsageMessage": "Por favor, permita o uso da localização para encontrar igrejas próximas.\nTambém é usado para exibir a distância até as igrejas.",
+    "notNow": "Agora não",
+    "allow": "Permitir",
+    "locationFailed": "Não foi possível obter a localização",
+    "filter": {
+      "title": "Filtro",
+      "reset": "Redefinir",
+      "prefecture": "Prefeituras",
+      "mass": "Missa",
+      "options": "Opções",
+      "apply": "Aplicar",
+      "todayMass": "Missa de hoje disponível",
+      "foreignMass": "Missa em idioma estrangeiro disponível",
+      "cathedralOnly": "Apenas catedrais",
+      "cathedralOnlySubtitle": "Mostrar apenas catedrais",
+      "massTimeAvailable": "Horário de missa disponível",
+      "massTimeAvailableSubtitle": "Mostrar apenas igrejas com informações de horário de missa",
+      "button": "Filtro",
+      "sortByDistance": "Ordenar por distância"
+    },
+    "empty": {
+      "notFound": "Dados da igreja não encontrados"
+    },
+    "detailSection": {
+      "noMassTimeInfo": "Não há informações de horário de missa",
+      "address": "Endereço",
+      "phone": "Telefone",
+      "fax": "FAX",
+      "website": "Site",
+      "massTime": "Horário de Missa",
+      "massTimeNotice": "※ Por favor, verifique o horário de missa no site de cada igreja",
+      "noMassTimeInfoInList": "Não há informações de horário de missa",
+      "weekdays": {
+        "monday": "Seg",
+        "tuesday": "Ter",
+        "wednesday": "Qua",
+        "thursday": "Qui",
+        "friday": "Sex",
+        "mondayToFriday": "Seg-Sex",
+        "saturday": "Sáb",
+        "sunday": "Domingo"
+      },
+      "languages": {
+        "english": "Inglês",
+        "spanish": "Espanhol",
+        "chinese": "Chinês",
+        "filipino": "Filipino",
+        "portuguese": "Português",
+        "korean": "Coreano",
+        "vietnamese": "Vietnamita",
+        "indonesian": "Indonésio",
+        "polish": "Polonês",
+        "french": "Francês",
+        "german": "Alemão",
+        "italian": "Italiano"
+      },
+      "sundayNote": {
+        "first": "1º Domingo",
+        "second": "2º Domingo",
+        "third": "3º Domingo",
+        "fourth": "4º Domingo",
+        "secondAndFourth": "2º e 4º Domingo",
+        "firstAndThird": "1º e 3º Domingo"
+      },
+      "other": "Outro",
+      "withSignLanguage": "Com Língua de Sinais"
+    }
+  },
+  "qr": {
+    "invalid": "Código QR inválido",
+    "ownProfile": "Este é seu próprio perfil",
+    "userNotFound": "Usuário não encontrado",
+    "scanError": "Erro ao escanear",
+    "userFound": "Usuário encontrado",
+    "startScan": "Iniciar varredura"
+  },
+  "location": {
+    "permissionRequired": "Permissão de localização necessária",
+    "permissionMessage": "Por favor, habilite a permissão de localização nas configurações.",
+    "openSettings": "Abrir configurações",
+    "usagePurpose": "Propósito do uso de localização",
+    "purposeNearbySearch": "Busca de igrejas próximas da localização atual",
+    "purposeDistanceDisplay": "Exibir distância até as igrejas"
+  },
+  "search": {
+    "userNotFound": "Usuário não encontrado",
+    "userSearchHint": "Endereço de e-mail ou ID de usuário",
+    "userSearchRequired": "Por favor, digite um endereço de e-mail ou ID de usuário",
+    "parishSearchHint": "Buscar por nome da igreja, região",
+    "saintSearchHint": "Buscar por nome de santo",
+    "noResults": "Nenhum resultado de busca"
+  },
+  "comingSoon": {
+    "notificationSettings": "As configurações de notificações estão em preparação",
+    "termsOfService": "Os termos de serviço estão em preparação",
+    "privacyPolicy": "A política de privacidade está em preparação"
   }
 }

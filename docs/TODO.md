@@ -2,7 +2,7 @@
 
 이 문서는 코드베이스에서 발견된 모든 TODO 주석과 보류 중인 기능 구현을 추적합니다.
 
-**마지막 업데이트**: 2025-12-15 (성인 축일 데이터 업데이트 - 전체 월별 누락된 성인 추가)
+**마지막 업데이트**: 2025-01-XX (fukuoka.json 데이터 구조 개선 및 검증 완료)
 **전체 코드베이스**: 약 27,000줄의 Dart 코드, 135개 파일
 
 ---
@@ -236,6 +236,7 @@
 | 2025-12-15 | `edit_profile_screen.dart` 추가 분할 완료 (1,106줄 → 457줄, 649줄 감소, 59% 감소) - 검색 시트 위젯 3개를 별도 파일로 분리: `FeastDaySearchSheet`, `UserSearchSheet`, `ParishSearchSheet` | cfc4ab29 |
 | 2025-12-15 | 성당 주소 업데이트 작업 완료 - 799개 성당 중 798개 성당에 상세 주소 추가 (99.9% 완료율), 웹 검색을 통한 주소 수집, `scripts/batch_update_addresses.py` 스크립트 생성, 파일별 완료율: 14개 파일 100% 완료, sapporo.json 98.4% (61/62), 미완료: カトリック奥尻教会 (번지수 정보 없음) | cfc4ab29 |
 | 2025-12-15 | 미사 시간 데이터 정리 작업 완료 - massTime 문자열 기반으로 massTimes/foreignMassTimes 재생성, 중복 항목 6개 해결, 순회 교회 96개 성당 문의 안내로 통일, 빈 데이터 항목 17개 처리 (kyoto.json 9개, nagoya.json 1개, osaka.json 1개, sapporo.json 4개, yokohama.json 2개), `scripts/parse_mass_times.py` 개선, 홈페이지 확인이 필요한 교회들 안내 문구 추가, 백업 파일 28개 삭제 | cfc4ab29 |
+| 2025-01-XX | fukuoka.json 데이터 구조 개선 및 검증 완료 - 福岡カテドラル에 필수 `diocese` 및 `deanery` 필드 추가 (앱 연결 문제 해결), 모든 교구의 `massTimes`와 `foreignMassTimes` 분리 확인, 외국어 미사 시간 `note` 필드 표준화 ("第○日" → "第○日曜"), 누락된 미사 시간 추가 (大楠教会, 水俣教会, 菊池教会 등), 大江教会 수요일/목요일 미사 시간 추가, JSON 형식 유효성 검증 완료, `assets/data/README.md` 업데이트 | - |
 | 2025-12-15 | 전체 코드베이스 에러 수정 완료 - RadioListTile의 deprecated onChanged를 RadioGroup으로 마이그레이션 (report_dialog.dart), l10n 변수 누락 문제 수정 (20+ 파일), const 키워드 오류 수정 (런타임 값 사용 시), 사용하지 않는 변수/import 제거, 중복 import 제거, 사용하지 않는 함수 제거 (_dateTimeToJson, _dateTimeFromJson), 모든 심각한 에러(severity 1) 수정 완료 | cfc4ab29 |
 | 2025-12-15 | 언어 설정 구현 완료 - `locale_provider.dart`에 날짜 포맷 로케일 동적 업데이트 추가 (`initializeDateFormatting`), `language_settings_screen.dart`에서 `appLocalizationsProvider` invalidate 추가하여 번역 데이터 자동 재로드 | cfc4ab29 |
 | 2025-12-15 | 에러 수정 완료 - `daily_mass_screen.dart`에서 l10n 파라미터 누락 수정 (`_buildCommentInput` 메서드에 `AppLocalizations l10n` 파라미터 추가), `parish_detail_screen.dart`에서 l10n 파라미터 누락 수정 및 사용하지 않는 메서드 제거 (`_buildMassTimeSection` 메서드에 `AppLocalizations l10n` 파라미터 추가, `_launchMapByCoordinates` 메서드 제거) | cfc4ab29 |
@@ -247,6 +248,7 @@
 | 2025-12-15 | 외국어 미사 데이터 수정 - 末吉町教会 등 13개 성당의 `foreignMassTimes` 데이터를 `massTime` 텍스트 기반으로 수정, `scripts/fix_foreign_mass_times.py` 및 `scripts/auto_fix_foreign_mass.py` 생성 | cfc4ab29 |
 | 2025-12-15 | 미사 시간 데이터 일관성 검증 및 수정 - kagoshima.json의 志布志教会, 阿久根教会 `massTimes` 데이터를 `massTime` 텍스트와 일치하도록 수정, kyoto.json의 上野教会 `massTimes`에 토요일 19:30 및 일요일 09:00, 10:30, 17:00 추가, `foreignMassTimes`에 타갈로그어 미사 추가 | bad05ad |
 | 2025-12-15 | 성인 축일 데이터 업데이트 - ChatGPT API를 사용하여 전체 월별 누락된 성인 추가: 12,1,2월 95명, 3,4,5월 112명, 6,7,8월 82명, 9,10,11월 95명 추가 (총 384명), `scripts/check_and_fix_missing_saints.py` 스크립트 사용 | - |
+| 2025-12-15 | 다국어 지원 완료 - 모든 언어 파일의 일본어 텍스트를 각 언어로 번역 완료: 영어 76개, 스페인어 289개, 포르투갈어 289개, 베트남어 289개, 중국어 번역 완료, 모든 언어 파일에서 일본어 문자(히라가나/가타카나) 제거 완료 | - |
 
 ---
 
@@ -294,7 +296,7 @@
 
 このドキュメントは、コードベースで発見されたすべてのTODOコメントと保留中の機能実装を追跡します。
 
-**最終更新**: 2025-12-15 (聖人祝日データ更新 - 全体月別欠落聖人追加)
+**最終更新**: 2025-12-15 (多言語サポート完了 - すべての言語ファイル翻訳完了)
 **コードベース全体**: 約27,000行のDartコード、135ファイル
 
 ---
@@ -539,6 +541,7 @@
 | 2025-12-15 | 外国語ミサデータ修正 - 末吉町教会など13個の聖堂の`foreignMassTimes`データを`massTime`テキストベースで修正、`scripts/fix_foreign_mass_times.py`および`scripts/auto_fix_foreign_mass.py`生成 | cfc4ab29 |
 | 2025-12-15 | ミサ時間データ一貫性検証および修正 - kagoshima.jsonの志布志教会、阿久根教会`massTimes`データを`massTime`テキストと一致するように修正、kyoto.jsonの上野教会`massTimes`に土曜日19:30および日曜日09:00、10:30、17:00追加、`foreignMassTimes`にタガログ語ミサ追加 | bad05ad |
 | 2025-12-15 | 聖人祝日データ更新 - ChatGPT APIを使用して全体月別欠落聖人追加: 12,1,2月 95名、3,4,5月 112名、6,7,8月 82名、9,10,11月 95名追加 (合計 384名)、`scripts/check_and_fix_missing_saints.py`スクリプト使用 | - |
+| 2025-12-15 | 多言語サポート完了 - すべての言語ファイルの日本語テキストを各言語に翻訳完了: 英語 76個、スペイン語 289個、ポルトガル語 289個、ベトナム語 289個、中国語翻訳完了、すべての言語ファイルから日本語文字(ひらがな/カタカナ)削除完了 | - |
 
 ---
 

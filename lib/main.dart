@@ -8,6 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'config/routes/app_router.dart';
 import 'core/data/services/push_notification_service.dart';
+import 'core/utils/app_localizations.dart';
 import 'shared/providers/liturgy_theme_provider.dart';
 import 'shared/providers/font_scale_provider.dart';
 import 'shared/providers/locale_provider.dart';
@@ -75,6 +76,7 @@ class CredoApp extends ConsumerWidget {
           Locale('pt', 'PT'),
         ],
         localizationsDelegates: const [
+          AppLocalizationsDelegate(),
           GlobalMaterialLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,

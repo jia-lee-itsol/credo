@@ -118,16 +118,16 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
     final shouldRequest = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('位置情報の利用'),
-        content: const Text('近くの教会を探すために位置情報の利用を許可してください。\n教会までの距離表示にも使用されます。'),
+        title: Text(l10n.parish.locationUsage),
+        content: Text(l10n.parish.locationUsageMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('今はしない'),
+            child: Text(l10n.parish.notNow),
           ),
           FilledButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('許可する'),
+            child: Text(l10n.parish.allow),
           ),
         ],
       ),
@@ -307,7 +307,7 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
               // 필터 버튼
               ParishFilterChip(
                 icon: Icons.tune,
-                label: 'フィルター',
+                label: l10n.parish.filter.button,
                 isSelected: _hasActiveFilters,
                 onTap: _showFilterBottomSheet,
               ),
@@ -315,7 +315,7 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
               // 정렬 버튼
               ParishFilterChip(
                 icon: Icons.swap_vert,
-                label: '距離順',
+                label: l10n.parish.filter.sortByDistance,
                 isSelected: _sortByDistance,
                 onTap: () async {
                   if (!_sortByDistance) {

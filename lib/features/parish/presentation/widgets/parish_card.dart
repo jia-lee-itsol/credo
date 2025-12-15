@@ -25,9 +25,6 @@ class ParishCard extends ConsumerWidget {
         ? LocationUtils.formatDistance(distanceKm)
         : null;
 
-    // 오늘/내일 미사 시간 추출
-    final nextMass = _getNextMassTime(massTime);
-
     // 지원 언어 추출
     final languages = _getSupportedLanguages(massTime);
 
@@ -96,7 +93,7 @@ class ParishCard extends ConsumerWidget {
 
                     const SizedBox(height: 12),
 
-                    // 거리, 미사 시간, 언어 태그 - 한 줄 가로 배치 (가로 스크롤 가능)
+                    // 거리, 언어 태그 - 한 줄 가로 배치 (가로 스크롤 가능)
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -107,15 +104,6 @@ class ParishCard extends ConsumerWidget {
                               text: distance,
                               backgroundColor: ParishColors.purple100,
                               textColor: ParishColors.purple600,
-                            ),
-                            const SizedBox(width: 8),
-                          ],
-                          // 미사 시간 태그
-                          if (nextMass.isNotEmpty) ...[
-                            ParishTag(
-                              text: nextMass,
-                              backgroundColor: ParishColors.neutral100,
-                              textColor: ParishColors.neutral600,
                             ),
                             const SizedBox(width: 8),
                           ],
@@ -148,30 +136,6 @@ class ParishCard extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  String _getNextMassTime(String massTime) {
-    if (massTime.isEmpty) return '';
-
-    // 간단하게 주일 미사 시간 추출
-    final parts = massTime.split(' / ');
-    for (final part in parts) {
-      if (part.contains('主日') || part.contains('日曜')) {
-        // 시간만 추출
-        final timeMatch = RegExp(r'(\d{1,2}:\d{2})').firstMatch(part);
-        if (timeMatch != null) {
-          return 'ミサ: 今日 ${timeMatch.group(1)}';
-        }
-      }
-    }
-
-    // 첫 번째 시간 반환
-    final timeMatch = RegExp(r'(\d{1,2}:\d{2})').firstMatch(massTime);
-    if (timeMatch != null) {
-      return 'ミサ: 今日 ${timeMatch.group(1)}';
-    }
-
-    return '';
   }
 
   List<String> _getSupportedLanguages(String massTime) {

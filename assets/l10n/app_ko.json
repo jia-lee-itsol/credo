@@ -51,9 +51,19 @@
   "language": {
     "settings": "언어 설정",
     "switched": "{language}(으)로 전환했습니다",
+    "switched@language": "언어 이름",
     "switchedButProfileUpdateFailed": "{language}(으)로 전환했지만 프로필 업데이트에 실패했습니다: {error}",
     "switchedButProfileUpdateFailed@language": "언어 이름",
-    "switchedButProfileUpdateFailed@error": "오류 메시지"
+    "switchedButProfileUpdateFailed@error": "오류 메시지",
+    "names": {
+      "japanese": "일본어",
+      "english": "영어",
+      "chinese": "중국어",
+      "vietnamese": "베트남어",
+      "korean": "한국어",
+      "spanish": "스페인어",
+      "portuguese": "포르투갈어"
+    }
   },
   "auth": {
     "signIn": "로그인",
@@ -152,6 +162,16 @@
     "pinToTop": "상단 고정",
     "pinToTopSubtitle": "게시글 목록 최상단에 표시됩니다",
     "guidelines": "게시함으로써 커뮤니티 가이드라인에 동의한 것으로 간주됩니다. 다른 사용자를 존중하고 적절한 내용을 게시하세요.",
+    "searchPost": "게시물 검색",
+    "pinned": "고정",
+    "noticesTitle": "공지사항",
+    "noOfficialNotices": "공식 공지사항이 없습니다",
+    "createNotice": "공지 작성",
+    "filter": {
+      "latest": "최신",
+      "popular": "인기",
+      "myPosts": "내 게시물"
+    },
     "home": {
       "title": "커뮤니티",
       "parish": "소속 교회",
@@ -167,7 +187,9 @@
       "mention": "멘션",
       "notice": "공지",
       "comment": "댓글"
-    }
+    },
+    "postsCount": "{count}개의 게시글",
+    "postsCount@count": "게시글 수"
   },
   "report": {
     "title": "신고",
@@ -203,7 +225,6 @@
     "editProfile": "프로필 편집",
     "profileUpdated": "프로필이 업데이트되었습니다",
     "updateFailed": "업데이트에 실패했습니다",
-    "favoriteParishes": "자주 가는 교회",
     "notificationSettings": "알림 설정",
     "notificationSettingsComingSoon": "알림 설정은 준비 중입니다",
     "languageSettings": "언어 설정",
@@ -240,7 +261,9 @@
       "addParishMessage": "교회를 검색하여 추가하세요",
       "cannotDeleteParish": "소속 교회는 삭제할 수 없습니다",
       "deleted": "삭제되었습니다",
-      "deleteTitle": "삭제"
+      "deleteTitle": "삭제",
+      "registeredCount": "{count}개 등록됨",
+      "registeredCount@count": "등록된 개수"
     }
   },
   "parish": {
@@ -262,6 +285,8 @@
     "locationFailed": "위치를 가져올 수 없습니다",
     "filter": {
       "title": "필터",
+      "button": "필터",
+      "sortByDistance": "거리순",
       "reset": "초기화",
       "prefecture": "도도부현",
       "mass": "미사",
@@ -277,8 +302,49 @@
     "empty": {
       "notFound": "교회 데이터를 찾을 수 없습니다"
     },
-    "detail": {
-      "noMassTimeInfo": "미사 시간 정보가 없습니다"
+    "detailSection": {
+      "noMassTimeInfo": "미사 시간 정보가 없습니다",
+      "address": "주소",
+      "phone": "전화",
+      "fax": "FAX",
+      "website": "웹사이트",
+      "massTime": "미사 시간",
+      "massTimeNotice": "※ 미사 시간은 각 본당 홈페이지에서 확인해 주세요",
+      "noMassTimeInfoInList": "미사 시간 정보가 없습니다",
+      "weekdays": {
+        "monday": "월",
+        "tuesday": "화",
+        "wednesday": "수",
+        "thursday": "목",
+        "friday": "금",
+        "mondayToFriday": "월-금",
+        "saturday": "토",
+        "sunday": "주일"
+      },
+      "languages": {
+        "english": "영어",
+        "spanish": "스페인어",
+        "chinese": "중국어",
+        "filipino": "필리핀어",
+        "portuguese": "포르투갈어",
+        "korean": "한국어",
+        "vietnamese": "베트남어",
+        "indonesian": "인도네시아어",
+        "polish": "폴란드어",
+        "french": "프랑스어",
+        "german": "독일어",
+        "italian": "이탈리아어"
+      },
+      "sundayNote": {
+        "first": "제1주일",
+        "second": "제2주일",
+        "third": "제3주일",
+        "fourth": "제4주일",
+        "secondAndFourth": "제2・제4주일",
+        "firstAndThird": "제1・제3주일"
+      },
+      "other": "기타",
+      "withSignLanguage": "수화 포함"
     }
   },
   "mass": {
@@ -343,7 +409,15 @@
         "psalm": "화답송",
         "secondReading": "제2독서",
         "gospel": "복음"
-      }
+      },
+      "everyoneMeditation": "모두의 묵상 ({count})",
+      "everyoneMeditation@count": "댓글 수",
+      "noMeditationYet": "아직 묵상이 없습니다",
+      "errorOccurred": "오류가 발생했습니다",
+      "permissionDenied": "권한이 없습니다. 로그인 상태를 확인하세요.",
+      "networkError": "네트워크 오류가 발생했습니다.",
+      "anonymous": "익명",
+      "loginToShare": "로그인하여 묵상을 공유해보세요"
     }
   },
   "qr": {
@@ -374,9 +448,5 @@
     "notificationSettings": "알림 설정은 준비 중입니다",
     "termsOfService": "이용약관은 준비 중입니다",
     "privacyPolicy": "개인정보처리방침은 준비 중입니다"
-  },
-  "community": {
-    "postsCount": "{count}개의 게시글",
-    "postsCount@count": "게시글 수"
   }
 }

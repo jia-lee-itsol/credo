@@ -27,10 +27,10 @@ class PostDetailHeader extends ConsumerWidget {
             child: Row(
               children: [
                 if (post.isPinned) ...[
-                  const BadgeChip.pinned(),
+                  BadgeChip.pinned(),
                   if (post.isOfficial) const SizedBox(width: 8),
                 ],
-                if (post.isOfficial) const BadgeChip.official(),
+                if (post.isOfficial) BadgeChip.official(),
               ],
             ),
           ),

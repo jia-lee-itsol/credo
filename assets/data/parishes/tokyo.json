@@ -35,7 +35,7 @@
       "foreignMassTimes": {
         "sunday": [
           {
-            "time": "08:00",
+            "time": "12:00",
             "language": "KR",
             "note": ""
           },
@@ -50,11 +50,12 @@
       "longitude": 139.7264929
     },
     {
-      "name": "カトリック麹町教会",
+      "name": "カトリック麹町教会(聖イグナチオ教会)",
       "churchName": "聖イグナチオ教会",
       "address": "東京都千代田区麹町6-5-1",
       "prefecture": "東京都",
       "isCathedral": false,
+      "website": "https://ignatius.gr.jp/",
       "massTime": "平日：07:00, 12:00, 18:00 / 土曜日：18:00 / 主日：07:00, 08:30, 10:00(手話付き), 18:00 / 英語ミサ：12:00 / ポルトガル語：12:30(第1日曜) / スペイン語：13:30 / ベトナム語：土19:30、日15:00 / インドネシア語：16:30(第2・第4日曜) / ポーランド語：16:00(第1日曜)",
       "diocese": "tokyo",
       "deanery": "tokyo",
@@ -95,6 +96,13 @@
         ]
       },
       "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "19:30",
+            "language": "VI",
+            "note": ""
+          }
+        ],
         "sunday": [
           {
             "time": "12:00",
@@ -112,9 +120,14 @@
             "note": ""
           },
           {
-            "time": "19:30",
+            "time": "15:00",
             "language": "VI",
             "note": ""
+          },
+          {
+            "time": "16:00",
+            "language": "PL",
+            "note": "第1日曜"
           },
           {
             "time": "16:30",
@@ -176,12 +189,23 @@
         "thursday": [
           "07:00"
         ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
         "friday": [
+          "07:00",
+          "10:00"
+        ],
+        "saturday": [
           "07:00"
         ]
       },
-      "latitude": 35.6593038,
-      "longitude": 139.7252647,
       "foreignMassTimes": {}
     },
     {
@@ -192,51 +216,54 @@
       "massTime": "土曜日：17:00(インドネシア語), 19:30(タガログ語) / 主日：07:30(日本語), 10:00(日本語), 12:00(英語), 14:00(英語), 17:00(日本語) / 平日：月曜日から土曜日07:30(日本語・水曜日は英語)",
       "diocese": "tokyo",
       "deanery": "tokyo",
-      "massTimes": {},
+      "massTimes": {
+        "saturday": [
+          "07:30"
+        ],
+        "sunday": [
+          "07:30",
+          "10:00",
+          "17:00"
+        ],
+        "monday": [
+          "07:30"
+        ],
+        "tuesday": [
+          "07:30"
+        ],
+        "thursday": [
+          "07:30"
+        ],
+        "friday": [
+          "07:30"
+        ]
+      },
       "foreignMassTimes": {
         "saturday": [
           {
             "time": "17:00",
             "language": "ID",
             "note": ""
+          },
+          {
+            "time": "19:30",
+            "language": "PH",
+            "note": ""
           }
         ],
         "sunday": [
           {
-            "time": "07:30",
+            "time": "12:00",
             "language": "EN",
             "note": ""
-          }
-        ],
-        "monday": [
+          },
           {
-            "time": "07:30",
-            "language": "EN",
-            "note": ""
-          }
-        ],
-        "tuesday": [
-          {
-            "time": "07:30",
+            "time": "14:00",
             "language": "EN",
             "note": ""
           }
         ],
         "wednesday": [
-          {
-            "time": "07:30",
-            "language": "EN",
-            "note": ""
-          }
-        ],
-        "thursday": [
-          {
-            "time": "07:30",
-            "language": "EN",
-            "note": ""
-          }
-        ],
-        "friday": [
           {
             "time": "07:30",
             "language": "EN",
@@ -274,11 +301,10 @@
           "06:30"
         ],
         "friday": [
-          "06:30"
+          "06:30",
+          "10:00"
         ]
       },
-      "latitude": 35.7528727,
-      "longitude": 139.7337701,
       "foreignMassTimes": {}
     },
     {
@@ -292,10 +318,11 @@
       "massTimes": {
         "sunday": [
           "09:30"
+        ],
+        "friday": [
+          "10:30"
         ]
       },
-      "latitude": 35.6468095,
-      "longitude": 139.653582,
       "foreignMassTimes": {}
     },
     {
@@ -310,24 +337,10 @@
         "sunday": [
           "09:00"
         ],
-        "monday": [
-          "06:30",
-          "09:00"
-        ],
-        "tuesday": [
-          "06:30",
-          "09:00"
-        ],
-        "wednesday": [
-          "06:30",
-          "09:00"
-        ],
         "thursday": [
-          "06:30",
-          "09:00"
+          "06:30"
         ],
         "friday": [
-          "06:30",
           "09:00"
         ]
       },
@@ -367,25 +380,21 @@
           "10:00"
         ],
         "monday": [
-          "07:00",
           "07:00"
         ],
         "tuesday": [
-          "07:00",
-          "07:00"
-        ],
-        "thursday": [
-          "07:00",
-          "07:00"
-        ],
-        "friday": [
-          "07:00",
-          "07:00"
-        ],
-        "saturday": [
           "07:00"
         ],
         "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00"
+        ],
+        "saturday": [
           "07:00"
         ]
       },
@@ -406,25 +415,22 @@
           "09:00"
         ],
         "monday": [
-          "06:45",
           "06:45"
         ],
         "tuesday": [
-          "06:45",
+          "06:45"
+        ],
+        "wednesday": [
           "06:45"
         ],
         "thursday": [
-          "06:45",
           "06:45"
         ],
         "friday": [
           "06:45",
-          "06:45"
+          "19:00"
         ],
         "saturday": [
-          "06:45"
-        ],
-        "wednesday": [
           "06:45"
         ]
       },
@@ -672,41 +678,30 @@
       "diocese": "tokyo",
       "deanery": "tokyo",
       "massTimes": {
-        "monday": [
-          "18:00",
-          "18:00",
-          "06:15",
-          "06:15"
+        "saturday": [
+          "18:30"
         ],
-        "tuesday": [
-          "18:00",
-          "18:00",
-          "06:15",
-          "06:15"
+        "sunday": [
+          "09:30"
+        ],
+        "monday": [
+          "18:00"
         ],
         "wednesday": [
-          "18:00",
-          "18:00",
-          "06:15",
-          "06:15"
+          "18:00"
         ],
         "thursday": [
-          "18:00",
-          "18:00",
-          "06:15",
           "06:15"
         ],
         "friday": [
-          "18:00",
-          "18:00",
           "06:15",
-          "06:15"
+          "15:00"
         ]
       },
       "foreignMassTimes": {
         "sunday": [
           {
-            "time": "18:30",
+            "time": "16:00",
             "language": "EN",
             "note": ""
           }
@@ -839,24 +834,10 @@
           "08:00",
           "10:00"
         ],
-        "monday": [
-          "08:00",
-          "11:00"
-        ],
         "tuesday": [
-          "08:00",
-          "11:00"
-        ],
-        "wednesday": [
-          "08:00",
-          "11:00"
-        ],
-        "thursday": [
-          "08:00",
-          "11:00"
+          "08:00"
         ],
         "friday": [
-          "08:00",
           "11:00"
         ]
       },
@@ -866,6 +847,11 @@
             "time": "13:00",
             "language": "EN",
             "note": "第1日曜"
+          },
+          {
+            "time": "16:00",
+            "language": "PH",
+            "note": "第3日曜"
           }
         ]
       },
@@ -1538,8 +1524,8 @@
       "diocese": "tokyo",
       "deanery": "tokyo",
       "massTimes": {
-        "monday": [
-          "07:30"
+        "sunday": [
+          "09:30"
         ],
         "tuesday": [
           "07:30"
@@ -1547,17 +1533,17 @@
         "wednesday": [
           "07:30"
         ],
-        "thursday": [
+        "friday": [
           "07:30"
         ],
-        "friday": [
+        "saturday": [
           "07:30"
         ]
       },
       "foreignMassTimes": {
         "sunday": [
           {
-            "time": "09:30",
+            "time": "12:00",
             "language": "EN",
             "note": ""
           }
@@ -1930,13 +1916,16 @@
       "diocese": "tokyo",
       "deanery": "tokyo",
       "massTimes": {
+        "saturday": [
+          "17:00"
+        ],
+        "sunday": [
+          "07:00"
+        ],
         "monday": [
           "07:00"
         ],
         "tuesday": [
-          "07:00"
-        ],
-        "wednesday": [
           "07:00"
         ],
         "thursday": [
@@ -1947,7 +1936,24 @@
         ]
       },
       "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "17:00",
+            "language": "EN",
+            "note": ""
+          }
+        ],
         "sunday": [
+          {
+            "time": "09:00",
+            "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "11:00",
+            "language": "EN",
+            "note": ""
+          },
           {
             "time": "17:00",
             "language": "EN",
@@ -2186,28 +2192,16 @@
       "diocese": "tokyo",
       "deanery": "chiba",
       "massTimes": {
+        "saturday": [
+          "18:00"
+        ],
         "sunday": [
-          "18:00",
           "09:30"
         ],
-        "monday": [
-          "10:00",
-          "10:00"
-        ],
-        "tuesday": [
-          "10:00",
-          "10:00"
-        ],
-        "wednesday": [
-          "10:00",
-          "10:00"
-        ],
         "thursday": [
-          "10:00",
           "10:00"
         ],
         "friday": [
-          "10:00",
           "10:00"
         ]
       },
@@ -2216,6 +2210,11 @@
           {
             "time": "11:30",
             "language": "EN",
+            "note": "第3日曜"
+          },
+          {
+            "time": "13:30",
+            "language": "ES",
             "note": "第3日曜"
           }
         ]
@@ -2232,8 +2231,12 @@
       "diocese": "tokyo",
       "deanery": "chiba",
       "massTimes": {
-        "monday": [
-          "10:00"
+        "saturday": [
+          "17:30"
+        ],
+        "sunday": [
+          "07:30",
+          "09:30"
         ],
         "tuesday": [
           "10:00"
@@ -2246,12 +2249,15 @@
         ],
         "friday": [
           "10:00"
+        ],
+        "saturday": [
+          "10:00"
         ]
       },
       "foreignMassTimes": {
         "sunday": [
           {
-            "time": "17:30",
+            "time": "14:00",
             "language": "EN",
             "note": ""
           },

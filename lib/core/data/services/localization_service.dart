@@ -31,7 +31,9 @@ class LocalizationService {
       // 캐시에 저장
       _cache[languageCode] = translations;
 
-      AppLogger.debug('번역 데이터 로드 완료: $languageCode');
+      // 번역 데이터 로드 완료 로그 (prayer.guides 존재 여부 확인)
+      final hasPrayerGuides = translations['mass']?['prayer']?['guides'] != null;
+      AppLogger.debug('번역 데이터 로드 완료: $languageCode (prayer.guides: $hasPrayerGuides)');
       return translations;
     } catch (e) {
       // 로드 실패 시 일본어로 폴백

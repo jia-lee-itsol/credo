@@ -53,7 +53,17 @@
     "switched": "Switched to {language}",
     "switchedButProfileUpdateFailed": "Switched to {language}, but profile update failed: {error}",
     "switchedButProfileUpdateFailed@language": "Language name",
-    "switchedButProfileUpdateFailed@error": "Error message"
+    "switchedButProfileUpdateFailed@error": "Error message",
+    "switched@language": "Language name",
+    "names": {
+      "japanese": "Japanese",
+      "english": "English",
+      "chinese": "Chinese",
+      "vietnamese": "Tiếng Việt",
+      "korean": "한국어",
+      "spanish": "Español",
+      "portuguese": "Português"
+    }
   },
   "auth": {
     "signIn": "Sign In",
@@ -115,6 +125,8 @@
     "dayInvalid": "Please enter a valid day (1-31)"
   },
   "community": {
+    "postsCount": "{count} posts",
+    "postsCount@count": "Number of posts",
     "title": "Community",
     "newPost": "New Post",
     "postCreated": "Post created",
@@ -131,8 +143,8 @@
     "postHideConfirmMessage": "Are you sure you want to hide this post?\nHidden posts will not appear in the list.",
     "postShowConfirmTitle": "Confirm Show",
     "postShowConfirmMessage": "Are you sure you want to show this post?\nIt will appear in the list again.",
-    "postHideNoPermission": "You do not have permission to hide this post. You can only hide posts from your parish.",
-    "postShowNoPermission": "You do not have permission to show this post. You can only show posts from your parish.",
+    "postHideNoPermission": "You do not have permission to hide this post. You can only hide posts from your affiliated church.",
+    "postShowNoPermission": "You do not have permission to show this post. You can only show posts from your affiliated church.",
     "editPost": "Edit",
     "deletePost": "Delete",
     "hidePost": "Hide",
@@ -140,7 +152,7 @@
     "reportPost": "Report",
     "commentPosted": "Comment posted",
     "commentPostFailed": "Failed to post comment",
-    "likeFailed": "Failed to like",
+    "likeFailed": "Failed to process like",
     "shareMeditation": "Shared meditation",
     "noSearchResults": "No search results",
     "errorOccurred": "An error occurred",
@@ -151,15 +163,25 @@
     "registerAsNoticeSubtitle": "All church members will be notified",
     "pinToTop": "Pin to Top",
     "pinToTopSubtitle": "Will be displayed at the top of the post list",
-    "guidelines": "By posting, you agree to the Community Guidelines. Please respect other users and post appropriate content.",
+    "guidelines": "By posting, you agree to the community guidelines. Please respect other users and post appropriate content.",
+    "searchPost": "Search posts",
+    "pinned": "Pinned",
+    "noticesTitle": "Notices",
+    "noOfficialNotices": "No official notices",
+    "createNotice": "Create notice",
+    "filter": {
+      "latest": "Latest",
+      "popular": "Popular",
+      "myPosts": "My Posts"
+    },
     "home": {
       "title": "Community",
       "parish": "Parish",
       "parishNotSet": "Parish not set",
       "parishLoadFailed": "Failed to load parish information",
-      "searchOtherParishes": "Search other parishes' communities",
+      "searchOtherParishes": "Search other parish communities",
       "todayMass": "Today's Mass",
-      "todayBibleReadingAndPrayer": "Today's Bible Reading and Prayer",
+      "todayBibleReadingAndPrayer": "Today's Bible readings and prayers",
       "recentNotices": "Recent Notices",
       "noNotices": "No notices"
     },
@@ -203,7 +225,17 @@
     "editProfile": "Edit Profile",
     "profileUpdated": "Profile updated",
     "updateFailed": "Update failed",
-    "favoriteParishes": "Favorite Parishes",
+    "favoriteParishes": {
+      "title": "Favorite Parishes",
+      "searchParish": "Search Church",
+      "noParishes": "No registered churches",
+      "addParishMessage": "Please search and add a church",
+      "cannotDeleteParish": "Cannot delete your parish",
+      "deleted": "Deleted",
+      "deleteTitle": "Delete",
+      "registeredCount": "{count} registered",
+      "registeredCount@count": "Number of registered items"
+    },
     "notificationSettings": "Notification Settings",
     "notificationSettingsComingSoon": "Notification settings coming soon",
     "languageSettings": "Language Settings",
@@ -232,15 +264,6 @@
       "nickname": "Nickname",
       "email": "Email",
       "userId": "User ID"
-    },
-    "favoriteParishes": {
-      "title": "Favorite Parishes",
-      "searchParish": "Search Church",
-      "noParishes": "No registered churches",
-      "addParishMessage": "Please search and add a church",
-      "cannotDeleteParish": "Cannot delete your parish",
-      "deleted": "Deleted",
-      "deleteTitle": "Delete"
     }
   },
   "parish": {
@@ -272,13 +295,56 @@
       "cathedralOnly": "Cathedrals Only",
       "cathedralOnlySubtitle": "Show only cathedrals",
       "massTimeAvailable": "Mass Times Available",
-      "massTimeAvailableSubtitle": "Show only churches with mass time information"
+      "massTimeAvailableSubtitle": "Show only churches with mass time information",
+      "button": "Filter",
+      "sortByDistance": "Sort by Distance"
     },
     "empty": {
       "notFound": "Church data not found"
     },
-    "detail": {
-      "noMassTimeInfo": "No mass time information"
+    "detailSection": {
+      "noMassTimeInfo": "No mass time information",
+      "address": "Address",
+      "phone": "Phone",
+      "fax": "FAX",
+      "website": "Website",
+      "massTime": "Mass Times",
+      "massTimeNotice": "※ Please check each church's homepage for mass times",
+      "noMassTimeInfoInList": "No mass time information",
+      "weekdays": {
+        "monday": "Mon",
+        "tuesday": "Tue",
+        "wednesday": "Wed",
+        "thursday": "Thu",
+        "friday": "Fri",
+        "mondayToFriday": "Mon-Fri",
+        "saturday": "Sat",
+        "sunday": "Sunday"
+      },
+      "languages": {
+        "english": "English",
+        "spanish": "Spanish",
+        "chinese": "Chinese",
+        "filipino": "Filipino",
+        "portuguese": "Portuguese",
+        "korean": "Korean",
+        "vietnamese": "Vietnamese",
+        "indonesian": "Indonesian",
+        "polish": "Polish",
+        "french": "French",
+        "german": "German",
+        "italian": "Italian"
+      },
+      "sundayNote": {
+        "first": "1st Sunday",
+        "second": "2nd Sunday",
+        "third": "3rd Sunday",
+        "fourth": "4th Sunday",
+        "secondAndFourth": "2nd & 4th Sunday",
+        "firstAndThird": "1st & 3rd Sunday"
+      },
+      "other": "Other",
+      "withSignLanguage": "With Sign Language"
     }
   },
   "mass": {
@@ -343,7 +409,15 @@
         "psalm": "Responsorial Psalm",
         "secondReading": "Second Reading",
         "gospel": "Gospel"
-      }
+      },
+      "everyoneMeditation": "Everyone's Meditation ({count})",
+      "everyoneMeditation@count": "Number of comments",
+      "noMeditationYet": "No meditation yet",
+      "errorOccurred": "An error occurred",
+      "permissionDenied": "Permission denied. Please check your login status.",
+      "networkError": "A network error occurred.",
+      "anonymous": "Anonymous",
+      "loginToShare": "Login to share meditation"
     }
   },
   "qr": {
@@ -374,9 +448,5 @@
     "notificationSettings": "Notification settings coming soon",
     "termsOfService": "Terms of Service coming soon",
     "privacyPolicy": "Privacy Policy coming soon"
-  },
-  "community": {
-    "postsCount": "{count} posts",
-    "postsCount@count": "Number of posts"
   }
 }

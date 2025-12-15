@@ -50,10 +50,10 @@ class PostCard extends StatelessWidget {
                   child: Row(
                     children: [
                       if (isPinned) ...[
-                        const BadgeChip.pinned(),
+                        BadgeChip.pinned(),
                         if (isOfficial) const SizedBox(width: 8),
                       ],
-                      if (isOfficial) const BadgeChip.official(),
+                      if (isOfficial) BadgeChip.official(),
                     ],
                   ),
                 ),

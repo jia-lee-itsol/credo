@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import '../../core/data/services/localization_service.dart';
 
 const String _localeLanguageKey = 'locale_language';
 const String _localeCountryKey = 'locale_country';
@@ -27,6 +28,13 @@ class LocaleNotifier extends StateNotifier<Locale> {
       final loadedLocale = Locale(language, country);
       state = loadedLocale;
 
+      // 번역 데이터 미리 로드
+      try {
+        await LocalizationService.instance.loadTranslations(loadedLocale);
+      } catch (e) {
+        // 번역 데이터 로드 실패 시 무시 (나중에 필요할 때 로드됨)
+      }
+
       // 날짜 포맷 로케일 초기화
       try {
         await initializeDateFormatting(language, country);
@@ -49,6 +57,13 @@ class LocaleNotifier extends StateNotifier<Locale> {
         await prefs.setString(_localeCountryKey, locale.countryCode!);
       } else {
         await prefs.remove(_localeCountryKey);
+      }
+
+      // 번역 데이터 미리 로드
+      try {
+        await LocalizationService.instance.loadTranslations(locale);
+      } catch (e) {
+        // 번역 데이터 로드 실패 시 무시 (나중에 필요할 때 로드됨)
       }
 
       // 날짜 포맷 로케일 동적 업데이트

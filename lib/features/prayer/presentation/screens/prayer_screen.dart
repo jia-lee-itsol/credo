@@ -14,50 +14,81 @@ class PrayerScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = ref.watch(appLocalizationsSyncProvider);
+    final l10nAsync = ref.watch(appLocalizationsProvider);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final currentUser = ref.watch(currentUserProvider);
 
-    // 기도 바치는 시기 가이드 데이터
-    final prayerGuides = [
-      _PrayerGuide(
-        title: l10n.mass.prayer.morning.title,
-        subtitle: l10n.mass.prayer.morning.subtitle,
-        icon: Icons.wb_sunny,
-        content: l10n.mass.prayer.morning.content,
-      ),
-      _PrayerGuide(
-        title: l10n.mass.prayer.meal.title,
-        subtitle: l10n.mass.prayer.meal.subtitle,
-        icon: Icons.restaurant,
-        content: l10n.mass.prayer.meal.content,
-      ),
-      _PrayerGuide(
-        title: l10n.mass.prayer.evening.title,
-        subtitle: l10n.mass.prayer.evening.subtitle,
-        icon: Icons.bedtime,
-        content: l10n.mass.prayer.evening.content,
-      ),
-      _PrayerGuide(
-        title: l10n.mass.prayer.difficult.title,
-        subtitle: l10n.mass.prayer.difficult.subtitle,
-        icon: Icons.shield,
-        content: l10n.mass.prayer.difficult.content,
-      ),
-      _PrayerGuide(
-        title: l10n.mass.prayer.thanksgiving.title,
-        subtitle: l10n.mass.prayer.thanksgiving.subtitle,
-        icon: Icons.favorite,
-        content: l10n.mass.prayer.thanksgiving.content,
-      ),
-      _PrayerGuide(
-        title: l10n.mass.prayer.meditation.title,
-        subtitle: l10n.mass.prayer.meditation.subtitle,
-        icon: Icons.self_improvement,
-        content: l10n.mass.prayer.meditation.content,
-      ),
-    ];
+    return l10nAsync.when(
+      data: (l10n) {
+        // 기도 바치는 시기 가이드 데이터
+        final morningGuide = l10n.mass.prayer.morning;
+        final mealGuide = l10n.mass.prayer.meal;
+        final eveningGuide = l10n.mass.prayer.evening;
+        final difficultGuide = l10n.mass.prayer.difficult;
+        final thanksgivingGuide = l10n.mass.prayer.thanksgiving;
+        final meditationGuide = l10n.mass.prayer.meditation;
 
+        final prayerGuides = [
+          _PrayerGuide(
+            title: morningGuide.title,
+            subtitle: morningGuide.subtitle,
+            icon: Icons.wb_sunny,
+            content: morningGuide.content,
+          ),
+          _PrayerGuide(
+            title: mealGuide.title,
+            subtitle: mealGuide.subtitle,
+            icon: Icons.restaurant,
+            content: mealGuide.content,
+          ),
+          _PrayerGuide(
+            title: eveningGuide.title,
+            subtitle: eveningGuide.subtitle,
+            icon: Icons.bedtime,
+            content: eveningGuide.content,
+          ),
+          _PrayerGuide(
+            title: difficultGuide.title,
+            subtitle: difficultGuide.subtitle,
+            icon: Icons.shield,
+            content: difficultGuide.content,
+          ),
+          _PrayerGuide(
+            title: thanksgivingGuide.title,
+            subtitle: thanksgivingGuide.subtitle,
+            icon: Icons.favorite,
+            content: thanksgivingGuide.content,
+          ),
+          _PrayerGuide(
+            title: meditationGuide.title,
+            subtitle: meditationGuide.subtitle,
+            icon: Icons.self_improvement,
+            content: meditationGuide.content,
+          ),
+        ];
+
+        return _buildContent(
+          context,
+          l10n,
+          primaryColor,
+          currentUser,
+          prayerGuides,
+        );
+      },
+      loading: () =>
+          const Scaffold(body: Center(child: CircularProgressIndicator())),
+      error: (error, stack) =>
+          Scaffold(body: Center(child: Text('Error: $error'))),
+    );
+  }
+
+  Widget _buildContent(
+    BuildContext context,
+    AppLocalizations l10n,
+    Color primaryColor,
+    dynamic currentUser,
+    List<_PrayerGuide> prayerGuides,
+  ) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

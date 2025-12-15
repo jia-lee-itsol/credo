@@ -100,9 +100,11 @@ class MyPageScreen extends ConsumerWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: SettingsListTile(
               icon: Icons.favorite,
-              title: 'よく行く教会',
+              title: l10n.profile.favoriteParishes,
               subtitle: isAuthenticated
-                  ? '${currentUser?.favoriteParishIds.length ?? 0}件登録済み'
+                  ? l10n.profile.favoriteParishesSection.registeredCount(
+                      currentUser?.favoriteParishIds.length ?? 0,
+                    )
                   : l10n.profile.loginRequired,
               primaryColor: primaryColor,
               onTap: () {
@@ -110,8 +112,8 @@ class MyPageScreen extends ConsumerWidget {
                   context.push(AppRoutes.favoriteParishes);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('ログインが必要です'),
+                    SnackBar(
+                      content: Text(l10n.profile.loginRequired),
                       backgroundColor: Colors.orange,
                     ),
                   );
@@ -144,6 +146,7 @@ class MyPageScreen extends ConsumerWidget {
               icon: Icons.language,
               title: l10n.profile.languageSettings,
               subtitle: _getLanguageDisplayName(
+                ref,
                 currentUser?.preferredLanguages.isNotEmpty == true
                     ? currentUser!.preferredLanguages.first
                     : 'ja',
@@ -166,7 +169,7 @@ class MyPageScreen extends ConsumerWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: SettingsListTile(
               icon: Icons.description,
-              title: '利用規約',
+              title: l10n.profile.termsOfService,
               primaryColor: primaryColor,
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -183,7 +186,7 @@ class MyPageScreen extends ConsumerWidget {
             margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: SettingsListTile(
               icon: Icons.privacy_tip,
-              title: 'プライバシーポリシー',
+              title: l10n.profile.privacyPolicy,
               primaryColor: primaryColor,
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -276,31 +279,31 @@ class MyPageScreen extends ConsumerWidget {
               break;
           }
         },
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: 'ホーム',
+            icon: const Icon(Icons.home_outlined),
+            selectedIcon: const Icon(Icons.home),
+            label: l10n.navigation.home,
           ),
           NavigationDestination(
-            icon: Icon(Icons.menu_book_outlined),
-            selectedIcon: Icon(Icons.menu_book),
-            label: '黙想',
+            icon: const Icon(Icons.menu_book_outlined),
+            selectedIcon: const Icon(Icons.menu_book),
+            label: l10n.navigation.meditation,
           ),
           NavigationDestination(
-            icon: Icon(Icons.add),
-            selectedIcon: Icon(Icons.add),
-            label: '共有',
+            icon: const Icon(Icons.add),
+            selectedIcon: const Icon(Icons.add),
+            label: l10n.navigation.share,
           ),
           NavigationDestination(
-            icon: Icon(Icons.church_outlined),
-            selectedIcon: Icon(Icons.church),
-            label: '教会',
+            icon: const Icon(Icons.church_outlined),
+            selectedIcon: const Icon(Icons.church),
+            label: l10n.navigation.church,
           ),
           NavigationDestination(
-            icon: Icon(Icons.forum_outlined),
-            selectedIcon: Icon(Icons.forum),
-            label: 'コミュニティ',
+            icon: const Icon(Icons.forum_outlined),
+            selectedIcon: const Icon(Icons.forum),
+            label: l10n.navigation.community,
           ),
         ],
       ),
@@ -355,7 +358,7 @@ class MyPageScreen extends ConsumerWidget {
                               currentUser != null &&
                               currentUser.isVerified) ...[
                             const SizedBox(width: 8),
-                            const BadgeChip.official(),
+                            BadgeChip.official(),
                           ],
                         ],
                       ),
@@ -383,7 +386,7 @@ class MyPageScreen extends ConsumerWidget {
                             );
                           },
                           child: Text(
-                            'ユーザーID: ${currentUser.userId}',
+                            '${l10n.profile.userId}: ${currentUser.userId}',
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: theme.colorScheme.onSurfaceVariant,
                               fontSize: 11,
@@ -518,24 +521,27 @@ class MyPageScreen extends ConsumerWidget {
   }
 
   /// 언어 코드를 표시 이름으로 변환
-  String _getLanguageDisplayName(String languageCode) {
+  String _getLanguageDisplayName(WidgetRef ref, String languageCode) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
+    final names = l10n.language.names;
+
     switch (languageCode) {
       case 'ja':
-        return '日本語';
+        return names.japanese;
       case 'en':
-        return 'English';
+        return names.english;
       case 'zh':
-        return '中文';
+        return names.chinese;
       case 'vi':
-        return 'Tiếng Việt';
+        return names.vietnamese;
       case 'ko':
-        return '한국어';
+        return names.korean;
       case 'es':
-        return 'Español';
+        return names.spanish;
       case 'pt':
-        return 'Português';
+        return names.portuguese;
       default:
-        return '日本語';
+        return names.japanese;
     }
   }
 }

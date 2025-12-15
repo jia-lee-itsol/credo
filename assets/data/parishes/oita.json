@@ -212,12 +212,15 @@
       "massTimes": {
         "saturday": [
           "19:00"
+        ],
+        "sunday": [
+          "09:00"
         ]
       },
       "foreignMassTimes": {
         "sunday": [
           {
-            "time": "09:00",
+            "time": "13:30",
             "language": "EN",
             "note": ""
           }

@@ -51,9 +51,19 @@
   "language": {
     "settings": "言語設定",
     "switched": "{language}に切り替えました",
+    "switched@language": "言語名",
     "switchedButProfileUpdateFailed": "{language}に切り替えましたが、プロフィールの更新に失敗しました: {error}",
     "switchedButProfileUpdateFailed@language": "言語名",
-    "switchedButProfileUpdateFailed@error": "エラーメッセージ"
+    "switchedButProfileUpdateFailed@error": "エラーメッセージ",
+    "names": {
+      "japanese": "日本語",
+      "english": "English",
+      "chinese": "中文",
+      "vietnamese": "Tiếng Việt",
+      "korean": "한국어",
+      "spanish": "Español",
+      "portuguese": "Português"
+    }
   },
   "auth": {
     "signIn": "ログイン",
@@ -152,6 +162,16 @@
     "pinToTop": "上部に固定",
     "pinToTopSubtitle": "投稿リストの最上部に表示されます",
     "guidelines": "投稿することで、コミュニティガイドラインに同意したものとみなされます。他のユーザーを尊重し、適切な内容を投稿してください。",
+    "searchPost": "投稿を検索",
+    "pinned": "固定",
+    "noticesTitle": "お知らせ",
+    "noOfficialNotices": "公式お知らせがありません",
+    "createNotice": "お知らせを作成",
+    "filter": {
+      "latest": "最新",
+      "popular": "人気",
+      "myPosts": "私の投稿"
+    },
     "home": {
       "title": "コミュニティ",
       "parish": "所属教会",
@@ -167,7 +187,9 @@
       "mention": "メンション",
       "notice": "お知らせ",
       "comment": "コメント"
-    }
+    },
+    "postsCount": "{count}件の投稿",
+    "postsCount@count": "投稿数"
   },
   "report": {
     "title": "通報する",
@@ -203,7 +225,6 @@
     "editProfile": "プロフィール編集",
     "profileUpdated": "プロフィールを更新しました",
     "updateFailed": "更新に失敗しました",
-    "favoriteParishes": "よく行く教会",
     "notificationSettings": "通知設定",
     "notificationSettingsComingSoon": "通知設定は準備中です",
     "languageSettings": "言語設定",
@@ -240,7 +261,9 @@
       "addParishMessage": "教会を検索して追加してください",
       "cannotDeleteParish": "所属教会は削除できません",
       "deleted": "削除しました",
-      "deleteTitle": "削除"
+      "deleteTitle": "削除",
+      "registeredCount": "{count}件登録済み",
+      "registeredCount@count": "등록된 개수"
     }
   },
   "parish": {
@@ -262,6 +285,8 @@
     "locationFailed": "位置情報を取得できませんでした",
     "filter": {
       "title": "フィルター",
+      "button": "フィルター",
+      "sortByDistance": "距離順",
       "reset": "リセット",
       "prefecture": "都道府県",
       "mass": "ミサ",
@@ -277,8 +302,49 @@
     "empty": {
       "notFound": "教会データが見つかりませんでした"
     },
-    "detail": {
-      "noMassTimeInfo": "ミサ時間情報がありません"
+    "detailSection": {
+      "noMassTimeInfo": "ミサ時間情報がありません",
+      "address": "住所",
+      "phone": "電話",
+      "fax": "FAX",
+      "website": "ウェブサイト",
+      "massTime": "ミサ時間",
+      "massTimeNotice": "※ ミサ時間は各本堂のホームページでご確認ください",
+      "noMassTimeInfoInList": "ミサ時間情報がありません",
+      "weekdays": {
+        "monday": "月",
+        "tuesday": "火",
+        "wednesday": "水",
+        "thursday": "木",
+        "friday": "金",
+        "mondayToFriday": "月-金",
+        "saturday": "土",
+        "sunday": "主日"
+      },
+      "languages": {
+        "english": "英語",
+        "spanish": "スペイン語",
+        "chinese": "中国語",
+        "filipino": "フィリピン語",
+        "portuguese": "ポルトガル語",
+        "korean": "韓国語",
+        "vietnamese": "ベトナム語",
+        "indonesian": "インドネシア語",
+        "polish": "ポーランド語",
+        "french": "フランス語",
+        "german": "ドイツ語",
+        "italian": "イタリア語"
+      },
+      "sundayNote": {
+        "first": "第1日曜",
+        "second": "第2日曜",
+        "third": "第3日曜",
+        "fourth": "第4日曜",
+        "secondAndFourth": "第2・第4日曜",
+        "firstAndThird": "第1・第3日曜"
+      },
+      "other": "その他",
+      "withSignLanguage": "手話付き"
     }
   },
   "mass": {
@@ -343,7 +409,15 @@
         "psalm": "答唱詩編",
         "secondReading": "第二朗読",
         "gospel": "福音"
-      }
+      },
+      "everyoneMeditation": "みんなの黙想 ({count})",
+      "everyoneMeditation@count": "コメント数",
+      "noMeditationYet": "まだ黙想がありません",
+      "errorOccurred": "エラーが発生しました",
+      "permissionDenied": "権限がありません。ログイン状態を確認してください。",
+      "networkError": "ネットワークエラーが発生しました。",
+      "anonymous": "匿名",
+      "loginToShare": "ログインして黙想を共有しましょう"
     }
   },
   "qr": {
@@ -374,9 +448,5 @@
     "notificationSettings": "通知設定は準備中です",
     "termsOfService": "利用規約は準備中です",
     "privacyPolicy": "プライバシーポリシーは準備中です"
-  },
-  "community": {
-    "postsCount": "{count}件の投稿",
-    "postsCount@count": "投稿数"
   }
 }

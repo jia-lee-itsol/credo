@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../constants/parish_colors.dart';
 
 /// 교회 검색바 위젯
@@ -11,6 +12,8 @@ class ParishSearchBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
+
     return Container(
       height: 49.361,
       decoration: BoxDecoration(
@@ -26,7 +29,7 @@ class ParishSearchBar extends ConsumerWidget {
           letterSpacing: -0.31,
         ),
         decoration: InputDecoration(
-          hintText: '教会名、地域で検索',
+          hintText: l10n.search.parishSearchHint,
           hintStyle: const TextStyle(
             color: Color(0x800A0A0A),
             fontSize: 16,

@@ -2,6 +2,41 @@
 
 Catholic community app for Japan
 
+## Overview
+
+Credo is a Flutter mobile application that connects Catholic churches and believers across Japan. The app provides daily meditations, parish information, community features, and more.
+
+## Features
+
+- **Daily Meditations**: Access daily Bible readings and prayer guides
+- **Parish Directory**: Search and find Catholic churches across Japan with mass schedules
+- **Community**: Connect with other believers through posts and comments
+- **Multilingual Support**: Available in 7 languages (Japanese, English, Korean, Chinese, Vietnamese, Spanish, Portuguese)
+- **Location-based Services**: Find nearby churches and view distances
+- **User Profiles**: Manage your profile, favorite parishes, and settings
+
+## Internationalization
+
+The app supports 7 languages:
+- 🇯🇵 Japanese (日本語) - Default
+- 🇺🇸 English
+- 🇰🇷 Korean (한국어)
+- 🇨🇳 Chinese (中文)
+- 🇻🇳 Vietnamese (Tiếng Việt)
+- 🇪🇸 Spanish (Español)
+- 🇵🇹 Portuguese (Português)
+
+Translation files are located in `assets/l10n/`:
+- `app_ja.json` - Japanese (base language)
+- `app_en.json` - English
+- `app_ko.json` - Korean
+- `app_zh.json` - Chinese
+- `app_vi.json` - Vietnamese
+- `app_es.json` - Spanish
+- `app_pt.json` - Portuguese
+
+Users can change the language in Settings > Language Settings.
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
@@ -14,3 +49,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Architecture
+
+This project follows Clean Architecture principles with feature-based modules. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture documentation.

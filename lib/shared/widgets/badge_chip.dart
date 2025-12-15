@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/utils/app_localizations.dart';
 
 /// 배지 타입
 enum BadgeType {
@@ -9,13 +11,13 @@ enum BadgeType {
 
 /// 배지 칩 위젯
 /// 공식, 고정 등의 배지 표시용
-class BadgeChip extends StatelessWidget {
+class BadgeChip extends ConsumerWidget {
   final BadgeType type;
   final String? customLabel;
   final IconData? customIcon;
   final Color? customColor;
 
-  const BadgeChip({
+  BadgeChip({
     super.key,
     required this.type,
     this.customLabel,
@@ -25,17 +27,17 @@ class BadgeChip extends StatelessWidget {
 
   /// 공식 배지 생성
   const BadgeChip.official({super.key})
-      : type = BadgeType.official,
-        customLabel = null,
-        customIcon = null,
-        customColor = null;
+    : type = BadgeType.official,
+      customLabel = null,
+      customIcon = null,
+      customColor = null;
 
   /// 고정 배지 생성
   const BadgeChip.pinned({super.key})
-      : type = BadgeType.pinned,
-        customLabel = null,
-        customIcon = null,
-        customColor = null;
+    : type = BadgeType.pinned,
+      customLabel = null,
+      customIcon = null,
+      customColor = null;
 
   /// 커스텀 배지 생성
   const BadgeChip.custom({
@@ -43,14 +45,15 @@ class BadgeChip extends StatelessWidget {
     required String label,
     required IconData icon,
     required Color color,
-  })  : type = BadgeType.custom,
-        customLabel = label,
-        customIcon = icon,
-        customColor = color;
+  }) : type = BadgeType.custom,
+       customLabel = label,
+       customIcon = icon,
+       customColor = color;
 
   @override
-  Widget build(BuildContext context) {
-    final (label, icon, bgColor, fgColor) = _getBadgeStyle();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
+    final (label, icon, bgColor, fgColor) = _getBadgeStyle(l10n);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
@@ -76,18 +79,18 @@ class BadgeChip extends StatelessWidget {
     );
   }
 
-  (String, IconData, Color, Color) _getBadgeStyle() {
+  (String, IconData, Color, Color) _getBadgeStyle(AppLocalizations l10n) {
     switch (type) {
       case BadgeType.official:
         return (
-          '公式',
+          l10n.community.official,
           Icons.verified,
           Colors.amber.shade100,
           Colors.amber.shade700,
         );
       case BadgeType.pinned:
         return (
-          '固定',
+          l10n.community.pinned,
           Icons.push_pin,
           Colors.orange.shade100,
           Colors.orange.shade700,

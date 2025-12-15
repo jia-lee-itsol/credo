@@ -35,8 +35,14 @@ class LanguageSettingsScreen extends ConsumerWidget {
       appBar: AppBar(
         title: l10nAsync.when(
           data: (l10n) => Text(l10n.language.settings),
-          loading: () => const Text('言語設定'),
-          error: (_, _) => const Text('言語設定'),
+          loading: () {
+            final l10nSync = ref.read(appLocalizationsSyncProvider);
+            return Text(l10nSync.language.settings);
+          },
+          error: (_, _) {
+            final l10nSync = ref.read(appLocalizationsSyncProvider);
+            return Text(l10nSync.language.settings);
+          },
         ),
       ),
       body: ListView(
@@ -60,6 +66,9 @@ class LanguageSettingsScreen extends ConsumerWidget {
                   // 이미 선택된 언어면 무시
                   if (isSelected) return;
 
+                  // AppLocalizationsDelegate 및 LocalizationService 캐시 무효화 (로케일 변경 전)
+                  clearAppLocalizationsCache();
+
                   // 로케일 업데이트 (즉시 UI 반영)
                   await ref
                       .read(localeProvider.notifier)
@@ -67,11 +76,12 @@ class LanguageSettingsScreen extends ConsumerWidget {
 
                   // 번역 데이터 Provider 무효화하여 새 로케일로 다시 로드
                   ref.invalidate(appLocalizationsProvider);
+                  ref.invalidate(appLocalizationsSyncProvider);
 
                   // 로그인된 사용자가 있으면 프로필도 업데이트
                   final currentUser = ref.read(currentUserProvider);
 
-                  // 번역 데이터 로드 (로케일 변경 후)
+                  // 번역 데이터 로드 (로케일 변경 후) - 새 로케일의 번역 데이터를 캐시에 저장
                   final updatedL10n = await ref.read(
                     appLocalizationsProvider.future,
                   );

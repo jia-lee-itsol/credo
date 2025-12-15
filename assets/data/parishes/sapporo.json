@@ -10,25 +10,11 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "monday": [
-          "10:00",
-          "9:30"
-        ],
-        "tuesday": [
-          "10:00",
-          "9:30"
-        ],
-        "wednesday": [
-          "10:00",
-          "9:30"
-        ],
-        "thursday": [
-          "10:00",
+        "sunday": [
           "9:30"
         ],
         "friday": [
-          "10:00",
-          "9:30"
+          "10:00"
         ]
       },
       "foreignMassTimes": {},
@@ -44,19 +30,7 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "monday": [
-          "9:30"
-        ],
-        "tuesday": [
-          "9:30"
-        ],
-        "wednesday": [
-          "9:30"
-        ],
-        "thursday": [
-          "9:30"
-        ],
-        "friday": [
+        "sunday": [
           "9:30"
         ]
       },
@@ -73,19 +47,7 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "monday": [
-          "16:30"
-        ],
-        "tuesday": [
-          "16:30"
-        ],
-        "wednesday": [
-          "16:30"
-        ],
-        "thursday": [
-          "16:30"
-        ],
-        "friday": [
+        "sunday": [
           "16:30"
         ]
       },
@@ -204,19 +166,7 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "monday": [
-          "14:00"
-        ],
-        "tuesday": [
-          "14:00"
-        ],
-        "wednesday": [
-          "14:00"
-        ],
-        "thursday": [
-          "14:00"
-        ],
-        "friday": [
+        "sunday": [
           "14:00"
         ]
       },
@@ -233,25 +183,11 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "monday": [
-          "10:30",
-          "11:00"
-        ],
-        "tuesday": [
-          "10:30",
-          "11:00"
-        ],
-        "wednesday": [
-          "10:30",
-          "11:00"
-        ],
-        "thursday": [
-          "10:30",
+        "sunday": [
           "11:00"
         ],
         "friday": [
-          "10:30",
-          "11:00"
+          "10:30"
         ]
       },
       "foreignMassTimes": {},
@@ -267,24 +203,7 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "monday": [
-          "11:00",
-          "10:00"
-        ],
-        "tuesday": [
-          "11:00",
-          "10:00"
-        ],
-        "wednesday": [
-          "11:00",
-          "10:00"
-        ],
-        "thursday": [
-          "11:00",
-          "10:00"
-        ],
-        "friday": [
-          "11:00",
+        "sunday": [
           "10:00"
         ]
       },
@@ -301,24 +220,7 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "monday": [
-          "9:00",
-          "9:30"
-        ],
-        "tuesday": [
-          "9:00",
-          "9:30"
-        ],
-        "wednesday": [
-          "9:00",
-          "9:30"
-        ],
-        "thursday": [
-          "9:00",
-          "9:30"
-        ],
-        "friday": [
-          "9:00",
+        "sunday": [
           "9:30"
         ]
       },
@@ -335,19 +237,7 @@
       "diocese": "sapporo",
       "deanery": "asahikawa",
       "massTimes": {
-        "monday": [
-          "9:30"
-        ],
-        "tuesday": [
-          "9:30"
-        ],
-        "wednesday": [
-          "9:30"
-        ],
-        "thursday": [
-          "9:30"
-        ],
-        "friday": [
+        "sunday": [
           "9:30"
         ]
       },
@@ -364,19 +254,7 @@
       "diocese": "sapporo",
       "deanery": "hakodate",
       "massTimes": {
-        "monday": [
-          "15:00"
-        ],
-        "tuesday": [
-          "15:00"
-        ],
-        "wednesday": [
-          "15:00"
-        ],
-        "thursday": [
-          "15:00"
-        ],
-        "friday": [
+        "sunday": [
           "15:00"
         ]
       },
@@ -393,19 +271,7 @@
       "diocese": "sapporo",
       "deanery": "hakodate",
       "massTimes": {
-        "monday": [
-          "8:45"
-        ],
-        "tuesday": [
-          "8:45"
-        ],
-        "wednesday": [
-          "8:45"
-        ],
-        "thursday": [
-          "8:45"
-        ],
-        "friday": [
+        "sunday": [
           "8:45"
         ]
       },
@@ -421,41 +287,23 @@
       "massTime": "平日：18:30（金曜）主日：9:30 土曜/18:30 第4/英語ミサ11:00",
       "diocese": "sapporo",
       "deanery": "hakodate",
-      "massTimes": {},
-      "foreignMassTimes": {
-        "monday": [
-          {
-            "time": "18:30",
-            "language": "EN",
-            "note": ""
-          }
+      "massTimes": {
+        "saturday": [
+          "18:30"
         ],
-        "tuesday": [
-          {
-            "time": "18:30",
-            "language": "EN",
-            "note": ""
-          }
-        ],
-        "wednesday": [
-          {
-            "time": "18:30",
-            "language": "EN",
-            "note": ""
-          }
-        ],
-        "thursday": [
-          {
-            "time": "18:30",
-            "language": "EN",
-            "note": ""
-          }
+        "sunday": [
+          "9:30"
         ],
         "friday": [
+          "18:30"
+        ]
+      },
+      "foreignMassTimes": {
+        "sunday": [
           {
-            "time": "18:30",
+            "time": "11:00",
             "language": "EN",
-            "note": ""
+            "note": "第4日曜"
           }
         ]
       },
@@ -471,19 +319,7 @@
       "diocese": "sapporo",
       "deanery": "hakodate",
       "massTimes": {
-        "monday": [
-          "11:00"
-        ],
-        "tuesday": [
-          "11:00"
-        ],
-        "wednesday": [
-          "11:00"
-        ],
-        "thursday": [
-          "11:00"
-        ],
-        "friday": [
+        "sunday": [
           "11:00"
         ]
       },

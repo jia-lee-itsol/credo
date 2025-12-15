@@ -50,9 +50,7 @@ final liturgyInfoFromChatGPTProvider =
 
         String liturgyJson;
         if (cachedJson != null && cachedJson.isNotEmpty) {
-          AppLogger.debug(
-            '[LiturgyThemeProvider] 캐시에서 전례력 정보 로드: $year-$month-$day',
-          );
+          // 캐시 히트는 로그 출력 생략 (너무 자주 호출됨)
           liturgyJson = cachedJson;
         } else {
           // 캐시가 없으면 ChatGPT로 검색

@@ -19,11 +19,11 @@ class NoticeListScreen extends ConsumerWidget {
     final currentAppUserAsync = ref.watch(currentAppUserProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text('공지사항')),
+      appBar: AppBar(title: Text(l10n.community.noticesTitle)),
       body: noticesAsync.when(
         data: (notices) {
           if (notices.isEmpty) {
-            return Center(child: Text('공식 공지사항이 없습니다.'));
+            return Center(child: Text(l10n.community.noOfficialNotices));
           }
 
           return ListView.builder(
@@ -39,10 +39,13 @@ class NoticeListScreen extends ConsumerWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  trailing: const Chip(
-                    label: Text('公式'),
-                    labelStyle: TextStyle(fontSize: 12),
-                    padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  trailing: Chip(
+                    label: Text(l10n.community.official),
+                    labelStyle: const TextStyle(fontSize: 12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
                   ),
                   onTap: () {
                     if (post.parishId != null) {
@@ -72,7 +75,7 @@ class NoticeListScreen extends ConsumerWidget {
                   ),
                 );
               },
-              tooltip: '공지 작성',
+              tooltip: l10n.community.createNotice,
               child: const Icon(Icons.edit),
             );
           }

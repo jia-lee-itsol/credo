@@ -10,32 +10,34 @@
       "diocese": "yokohama",
       "deanery": "kanagawa",
       "massTimes": {
-        "monday": [
-          "07:00"
-        ],
         "tuesday": [
           "07:00"
         ],
-        "wednesday": [
-          "07:00"
+        "saturday": [
+          "17:00"
         ],
-        "thursday": [
-          "07:00"
-        ],
-        "friday": [
-          "07:00"
+        "sunday": [
+          "07:30",
+          "11:30"
         ]
       },
       "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "EN",
+            "note": ""
+          }
+        ],
         "sunday": [
           {
-            "time": "17:00",
+            "time": "09:30",
             "language": "EN",
             "note": ""
           },
           {
-            "time": "07:30",
-            "language": "EN",
+            "time": "14:00",
+            "language": "ES",
             "note": "第4日曜"
           }
         ]
@@ -356,8 +358,18 @@
         "sunday": [
           {
             "time": "08:00",
+            "language": "CN",
+            "note": "第1・第2日曜"
+          },
+          {
+            "time": "14:00",
             "language": "EN",
-            "note": "第２日曜"
+            "note": "第1・第3日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "KR",
+            "note": "第2・第4日曜"
           }
         ]
       },
@@ -382,14 +394,27 @@
           "17:00"
         ],
         "sunday": [
-          "07:30"
+          "07:30",
+          "11:30"
         ]
       },
       "foreignMassTimes": {
+        "saturday": [
+          {
+            "time": "19:00",
+            "language": "EN",
+            "note": ""
+          }
+        ],
         "sunday": [
           {
             "time": "09:30",
             "language": "EN",
+            "note": ""
+          },
+          {
+            "time": "14:00",
+            "language": "ES",
             "note": "第4日曜"
           }
         ]
@@ -688,7 +713,8 @@
       "deanery": "kanagawa",
       "massTimes": {
         "sunday": [
-          "07:00"
+          "07:00",
+          "09:30"
         ]
       },
       "foreignMassTimes": {
@@ -696,7 +722,17 @@
           {
             "time": "13:00",
             "language": "EN",
+            "note": "第1・第3日曜"
+          },
+          {
+            "time": "16:00",
+            "language": "VI",
             "note": "第1日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "ES",
+            "note": "第2日曜"
           }
         ]
       },
@@ -941,6 +977,11 @@
           {
             "time": "14:00",
             "language": "EN",
+            "note": "第1・第3日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "ES",
             "note": "第4日曜"
           }
         ]
@@ -1320,15 +1361,36 @@
           "18:00"
         ],
         "sunday": [
-          "07:00"
+          "07:00",
+          "09:30"
         ]
       },
       "foreignMassTimes": {
         "sunday": [
           {
             "time": "12:00",
-            "language": "EN",
+            "language": "VI",
             "note": "第2日曜"
+          },
+          {
+            "time": "12:00",
+            "language": "PT",
+            "note": "第3日曜"
+          },
+          {
+            "time": "15:00",
+            "language": "ES",
+            "note": "第3日曜"
+          },
+          {
+            "time": "13:30",
+            "language": "EN",
+            "note": "第4日曜"
+          },
+          {
+            "time": "13:30",
+            "language": "PH",
+            "note": "第5日曜"
           }
         ]
       },
@@ -1654,16 +1716,32 @@
       "diocese": "yokohama",
       "deanery": "shizuoka",
       "massTimes": {
+        "saturday": [
+          "19:30"
+        ],
         "sunday": [
-          "07:00"
+          "07:00",
+          "09:30"
         ]
       },
       "foreignMassTimes": {
-        "sunday": [
+        "saturday": [
           {
             "time": "19:30",
-            "language": "EN",
+            "language": "PT",
+            "note": ""
+          }
+        ],
+        "sunday": [
+          {
+            "time": "16:00",
+            "language": "ES",
             "note": "第3日曜"
+          },
+          {
+            "time": "13:00",
+            "language": "EN",
+            "note": "第4日曜"
           }
         ]
       },
@@ -1744,8 +1822,18 @@
         "sunday": [
           {
             "time": "17:00",
-            "language": "EN",
+            "language": "ES",
             "note": "第2日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第1日曜"
+          },
+          {
+            "time": "17:00",
+            "language": "PT",
+            "note": "第4日曜"
           }
         ]
       },
@@ -1774,8 +1862,13 @@
         "sunday": [
           {
             "time": "17:30",
-            "language": "EN",
+            "language": "PT",
             "note": "第1日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第2日曜"
           }
         ]
       },
@@ -1892,9 +1985,16 @@
         ]
       },
       "foreignMassTimes": {
-        "sunday": [
+        "saturday": [
           {
             "time": "20:00",
+            "language": "PT",
+            "note": "第3土曜"
+          }
+        ],
+        "sunday": [
+          {
+            "time": "14:00",
             "language": "EN",
             "note": "第1日曜"
           }
@@ -2160,8 +2260,18 @@
         "sunday": [
           {
             "time": "15:00",
-            "language": "EN",
+            "language": "PT",
             "note": "第2日曜"
+          },
+          {
+            "time": "12:30",
+            "language": "KR",
+            "note": "第3日曜"
+          },
+          {
+            "time": "14:00",
+            "language": "EN",
+            "note": "第4日曜"
           }
         ]
       },

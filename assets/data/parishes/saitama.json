@@ -34,12 +34,12 @@
           {
             "time": "14:00",
             "language": "VI",
-            "note": ""
+            "note": "第3日曜"
           },
           {
             "time": "14:00",
             "language": "EN",
-            "note": ""
+            "note": "第4日曜"
           }
         ]
       },
@@ -57,18 +57,6 @@
       "massTimes": {
         "sunday": [
           "09:00"
-        ],
-        "monday": [
-          "10:00"
-        ],
-        "tuesday": [
-          "10:00"
-        ],
-        "wednesday": [
-          "10:00"
-        ],
-        "thursday": [
-          "10:00"
         ],
         "friday": [
           "10:00"
@@ -88,21 +76,10 @@
       "deanery": "saitama",
       "massTimes": {
         "sunday": [
+          "10:00",
           "14:00"
         ],
-        "monday": [
-          "18:30"
-        ],
         "tuesday": [
-          "18:30"
-        ],
-        "wednesday": [
-          "18:30"
-        ],
-        "thursday": [
-          "18:30"
-        ],
-        "friday": [
           "18:30"
         ]
       },
@@ -124,9 +101,6 @@
         "sunday": [
           "11:00"
         ],
-        "monday": [
-          "7:00"
-        ],
         "tuesday": [
           "7:00"
         ],
@@ -145,7 +119,7 @@
           {
             "time": "14:00",
             "language": "EN",
-            "note": ""
+            "note": "第1日曜"
           }
         ]
       },
@@ -202,7 +176,10 @@
           "07:00"
         ],
         "friday": [
-          "07:00"
+          "10:00"
+        ],
+        "saturday": [
+          "10:00"
         ]
       },
       "foreignMassTimes": {
@@ -210,7 +187,7 @@
           {
             "time": "19:00",
             "language": "PT",
-            "note": ""
+            "note": "第3土曜"
           }
         ]
       },
@@ -229,18 +206,6 @@
         "sunday": [
           "10:00"
         ],
-        "monday": [
-          "10:00"
-        ],
-        "tuesday": [
-          "10:00"
-        ],
-        "wednesday": [
-          "10:00"
-        ],
-        "thursday": [
-          "10:00"
-        ],
         "friday": [
           "10:00"
         ]
@@ -250,12 +215,12 @@
           {
             "time": "18:00",
             "language": "EN",
-            "note": ""
+            "note": "第3日曜"
           },
           {
             "time": "14:00",
             "language": "VI",
-            "note": ""
+            "note": "第4日曜"
           }
         ]
       },
@@ -308,12 +273,7 @@
           "18:00"
         ],
         "sunday": [
-          "08:00"
-        ],
-        "monday": [
-          "10:00"
-        ],
-        "tuesday": [
+          "08:00",
           "10:00"
         ],
         "wednesday": [
@@ -331,17 +291,17 @@
           {
             "time": "14:00",
             "language": "TH",
-            "note": ""
+            "note": "第2日曜"
           },
           {
             "time": "13:30",
             "language": "VI",
-            "note": ""
+            "note": "第3日曜"
           },
           {
             "time": "15:00",
             "language": "PT",
-            "note": ""
+            "note": "第4日曜"
           }
         ]
       },
@@ -359,18 +319,6 @@
       "massTimes": {
         "sunday": [
           "09:00"
-        ],
-        "monday": [
-          "10:00"
-        ],
-        "tuesday": [
-          "10:00"
-        ],
-        "wednesday": [
-          "10:00"
-        ],
-        "thursday": [
-          "10:00"
         ],
         "friday": [
           "10:00"
@@ -455,20 +403,11 @@
         "sunday": [
           "10:30"
         ],
-        "monday": [
-          "19:00"
-        ],
         "tuesday": [
           "19:00"
         ],
-        "wednesday": [
-          "19:00"
-        ],
         "thursday": [
-          "19:00"
-        ],
-        "friday": [
-          "19:00"
+          "07:00"
         ]
       },
       "foreignMassTimes": {},

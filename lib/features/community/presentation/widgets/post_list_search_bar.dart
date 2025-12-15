@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 /// 게시글 목록 검색 바 위젯
 class PostListSearchBar extends ConsumerWidget {
@@ -18,12 +19,13 @@ class PostListSearchBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          hintText: '投稿を検索',
+          hintText: l10n.community.searchPost,
           hintStyle: TextStyle(color: Colors.grey.shade500),
           prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
           suffixIcon: searchQuery.isNotEmpty

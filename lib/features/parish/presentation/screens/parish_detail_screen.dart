@@ -215,6 +215,12 @@ class ParishDetailScreen extends ConsumerWidget {
     String parishId,
     AppLocalizations l10n,
   ) {
+    // 웹사이트 (website 또는 officialSite 또는 official_site 필드 확인)
+    final website =
+        parish['website'] as String? ??
+        parish['officialSite'] as String? ??
+        parish['official_site'] as String?;
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -224,7 +230,7 @@ class ParishDetailScreen extends ConsumerWidget {
           if (parish['address'] != null) ...[
             InfoRow(
               icon: Icons.location_on,
-              title: '住所',
+              title: l10n.parish.detailSection.address,
               content:
                   '${parish['prefecture'] as String? ?? ''} ${parish['address'] as String? ?? ''}',
               primaryColor: primaryColor,
@@ -237,7 +243,7 @@ class ParishDetailScreen extends ConsumerWidget {
               (parish['phone'] as String).isNotEmpty) ...[
             InfoRow(
               icon: Icons.phone,
-              title: '電話',
+              title: l10n.parish.detailSection.phone,
               content: parish['phone'] as String,
               primaryColor: primaryColor,
               onTap: () => _launchPhone(parish['phone'] as String),
@@ -250,7 +256,7 @@ class ParishDetailScreen extends ConsumerWidget {
               (parish['fax'] as String).isNotEmpty) ...[
             InfoRow(
               icon: Icons.fax,
-              title: 'FAX',
+              title: l10n.parish.detailSection.fax,
               content: parish['fax'] as String,
               primaryColor: primaryColor,
             ),
@@ -258,14 +264,13 @@ class ParishDetailScreen extends ConsumerWidget {
           ],
 
           // 웹사이트
-          if (parish['website'] != null &&
-              (parish['website'] as String).isNotEmpty) ...[
+          if (website != null && website.isNotEmpty) ...[
             InfoRow(
               icon: Icons.language,
-              title: 'ウェブサイト',
-              content: parish['website'] as String,
+              title: l10n.parish.detailSection.website,
+              content: website,
               primaryColor: primaryColor,
-              onTap: () => _launchUrl(parish['website'] as String),
+              onTap: () => _launchUrl(website),
             ),
             const SizedBox(height: 16),
           ],
@@ -343,7 +348,7 @@ class ParishDetailScreen extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'ミサ時間',
+            l10n.parish.detailSection.massTime,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -353,7 +358,9 @@ class ParishDetailScreen extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceVariant.withValues(alpha: 0.5),
+              color: theme.colorScheme.surfaceContainerHighest.withValues(
+                alpha: 0.5,
+              ),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: theme.colorScheme.outline.withValues(alpha: 0.3),
@@ -370,7 +377,7 @@ class ParishDetailScreen extends ConsumerWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    '※ ミサ時間は各本堂のホームページでご確認ください',
+                    l10n.parish.detailSection.massTimeNotice,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: theme.colorScheme.onSurfaceVariant,
                       height: 1.5,
@@ -393,14 +400,20 @@ class ParishDetailScreen extends ConsumerWidget {
                     ),
                   ),
                 )
-              : _buildMassTimeCards(theme, massTime),
+              : _buildMassTimeCards(context, theme, massTime, parish, l10n),
         ],
       ),
     );
   }
 
-  Widget _buildMassTimeCards(ThemeData theme, String massTime) {
-    final separated = _separateMassTimeByLanguage(massTime);
+  Widget _buildMassTimeCards(
+    BuildContext context,
+    ThemeData theme,
+    String massTime,
+    Map<String, dynamic> parish,
+    AppLocalizations l10n,
+  ) {
+    final separated = _separateMassTimeByLanguage(massTime, parish);
     final japaneseGroups = separated['japanese'] as List<Map<String, String>>;
     final foreignGroups = separated['foreign'] as List<Map<String, String>>;
 
@@ -411,7 +424,7 @@ class ParishDetailScreen extends ConsumerWidget {
       return Card(
         child: Padding(
           padding: const EdgeInsets.all(16),
-          child: _buildMassTimeByWeekday(theme, japaneseGroups),
+          child: _buildMassTimeByWeekday(context, theme, japaneseGroups, l10n),
         ),
       );
     }
@@ -423,7 +436,12 @@ class ParishDetailScreen extends ConsumerWidget {
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: _buildMassTimeByWeekday(theme, japaneseGroups),
+            child: _buildMassTimeByWeekday(
+              context,
+              theme,
+              japaneseGroups,
+              l10n,
+            ),
           ),
         ),
         const SizedBox(height: 12),
@@ -431,7 +449,7 @@ class ParishDetailScreen extends ConsumerWidget {
         Card(
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: _buildMassTimeByWeekday(theme, foreignGroups),
+            child: _buildMassTimeByWeekday(context, theme, foreignGroups, l10n),
           ),
         ),
       ],
@@ -439,12 +457,14 @@ class ParishDetailScreen extends ConsumerWidget {
   }
 
   Widget _buildMassTimeByWeekday(
+    BuildContext context,
     ThemeData theme,
     List<Map<String, String>> weekdayGroups,
+    AppLocalizations l10n,
   ) {
     if (weekdayGroups.isEmpty) {
       return Text(
-        'ミサ時間情報がありません',
+        l10n.parish.detailSection.noMassTimeInfoInList,
         style: theme.textTheme.bodyMedium?.copyWith(
           color: theme.colorScheme.onSurfaceVariant,
         ),
@@ -458,8 +478,29 @@ class ParishDetailScreen extends ConsumerWidget {
         final times = group['times'] as String;
         final timesList = times.split('\n');
 
-        // 일요일을 "主日"로 표시
-        final displayWeekday = weekday == '日' ? '主日' : weekday;
+        // 요일 표시 변환
+        String displayWeekday;
+        if (weekday == '日') {
+          displayWeekday = l10n.parish.detailSection.weekdays.sunday;
+        } else if (weekday == '土') {
+          displayWeekday = l10n.parish.detailSection.weekdays.saturday;
+        } else if (weekday == '月-金') {
+          displayWeekday = l10n.parish.detailSection.weekdays.mondayToFriday;
+        } else if (weekday == '月') {
+          displayWeekday = l10n.parish.detailSection.weekdays.monday;
+        } else if (weekday == '火') {
+          displayWeekday = l10n.parish.detailSection.weekdays.tuesday;
+        } else if (weekday == '水') {
+          displayWeekday = l10n.parish.detailSection.weekdays.wednesday;
+        } else if (weekday == '木') {
+          displayWeekday = l10n.parish.detailSection.weekdays.thursday;
+        } else if (weekday == '金') {
+          displayWeekday = l10n.parish.detailSection.weekdays.friday;
+        } else if (weekday == 'その他') {
+          displayWeekday = l10n.parish.detailSection.other;
+        } else {
+          displayWeekday = weekday;
+        }
 
         return Padding(
           padding: const EdgeInsets.only(bottom: 16),
@@ -480,9 +521,21 @@ class ParishDetailScreen extends ConsumerWidget {
                 final languageCode = _detectLanguageCode(time);
 
                 // 외국어 미사인 경우 순서를 "언어 시간"으로 변경
-                final displayText = languageCode != null
-                    ? _reorderForeignMassText(time, languageCode)
-                    : time;
+                String displayText;
+                if (languageCode != null) {
+                  displayText = _reorderForeignMassText(
+                    time,
+                    languageCode,
+                    l10n,
+                  );
+                } else {
+                  // 일반 미사 시간에서 일본어 표현 번역 처리
+                  displayText = _translateJapaneseExpressions(
+                    context,
+                    time,
+                    l10n,
+                  );
+                }
 
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 4),
@@ -520,39 +573,175 @@ class ParishDetailScreen extends ConsumerWidget {
   /// 미사 시간을 일본어와 외국어로 분리
   Map<String, List<Map<String, String>>> _separateMassTimeByLanguage(
     String massTime,
+    Map<String, dynamic> parish,
   ) {
-    final allGroups = _parseMassTimeByWeekday(massTime);
     final japaneseGroups = <Map<String, String>>[];
     final foreignGroups = <Map<String, String>>[];
 
-    for (final group in allGroups) {
-      final weekday = group['weekday'] as String;
-      final times = group['times'] as String;
-      final timesList = times.split('\n');
+    // massTimes 구조화된 데이터 우선 사용
+    final massTimes = parish['massTimes'] as Map<String, dynamic>?;
+    final massTimesMap = <String, List<String>>{};
+    if (massTimes != null) {
+      final weekdayMap = {
+        'saturday': '土',
+        'sunday': '日',
+        'monday': '月',
+        'tuesday': '火',
+        'wednesday': '水',
+        'thursday': '木',
+        'friday': '金',
+      };
 
-      final japaneseTimes = <String>[];
-      final foreignTimes = <String>[];
+      massTimes.forEach((weekdayKey, timesList) {
+        if (timesList is List && timesList.isNotEmpty) {
+          final weekday = weekdayMap[weekdayKey] ?? weekdayKey;
+          final times = timesList
+              .where((t) => t is String && t.isNotEmpty)
+              .map((t) => t.toString())
+              .toList();
+          if (times.isNotEmpty) {
+            massTimesMap[weekday] = times;
+          }
+        }
+      });
+    }
 
-      for (final time in timesList) {
-        if (_isForeignLanguageMass(time)) {
-          foreignTimes.add(time);
-        } else {
-          japaneseTimes.add(time);
+    // foreignMassTimes 데이터 처리
+    final foreignMassTimesMap = <String, List<String>>{};
+    final foreignMassTimes =
+        parish['foreignMassTimes'] as Map<String, dynamic>?;
+    if (foreignMassTimes != null) {
+      // 요일별로 foreignMassTimes 데이터 변환
+      final weekdayMap = {
+        'saturday': '土',
+        'sunday': '日',
+        'monday': '月-金',
+        'tuesday': '月-金',
+        'wednesday': '月-金',
+        'thursday': '月-金',
+        'friday': '月-金',
+      };
+
+      foreignMassTimes.forEach((weekdayKey, massTimesList) {
+        if (massTimesList is List) {
+          final weekday = weekdayMap[weekdayKey] ?? weekdayKey;
+          final times = <String>[];
+
+          for (final mt in massTimesList) {
+            if (mt is Map<String, dynamic>) {
+              final time = mt['time'] as String? ?? '';
+              final language = mt['language'] as String? ?? '';
+              final note = mt['note'] as String? ?? '';
+
+              // 언어 이름 매핑
+              final languageNames = {
+                'EN': '英語',
+                'ES': 'スペイン語',
+                'CN': '中国語',
+                'PH': 'フィリピン語',
+                'PT': 'ポルトガル語',
+                'KR': '韓国語',
+                'VI': 'ベトナム語',
+                'ID': 'インドネシア語',
+                'PL': 'ポーランド語',
+                'FR': 'フランス語',
+                'DE': 'ドイツ語',
+                'IT': 'イタリア語',
+              };
+
+              final languageName = languageNames[language] ?? language;
+              String timeStr = '$time($languageName)';
+              if (note.isNotEmpty) {
+                timeStr = '$timeStr($note)';
+              }
+              times.add(timeStr);
+            }
+          }
+
+          if (times.isNotEmpty) {
+            if (foreignMassTimesMap.containsKey(weekday)) {
+              foreignMassTimesMap[weekday]!.addAll(times);
+            } else {
+              foreignMassTimesMap[weekday] = times;
+            }
+          }
+        }
+      });
+    }
+
+    // massTimes 구조화된 데이터가 있으면 우선 사용
+    if (massTimesMap.isNotEmpty) {
+      massTimesMap.forEach((weekday, times) {
+        if (times.isNotEmpty) {
+          japaneseGroups.add({'weekday': weekday, 'times': times.join('\n')});
+        }
+      });
+    }
+
+    // foreignMassTimes 데이터 추가
+    // note가 있는 미사와 없는 미사를 분리하여 표시
+    foreignMassTimesMap.forEach((weekday, times) {
+      if (times.isNotEmpty) {
+        // note가 있는 미사와 없는 미사 분리
+        final withNote = <String>[];
+        final withoutNote = <String>[];
+
+        for (final time in times) {
+          // note가 있는지 확인 (예: "15:00(スペイン語)(第2日曜)")
+          if (RegExp(r'\(第\d+[・]?第?\d*日曜\)').hasMatch(time)) {
+            withNote.add(time);
+          } else {
+            withoutNote.add(time);
+          }
+        }
+
+        // note가 있는 미사는 "主日" 섹션에
+        if (withNote.isNotEmpty) {
+          foreignGroups.add({'weekday': weekday, 'times': withNote.join('\n')});
+        }
+
+        // note가 없는 미사는 "その他" 섹션에
+        if (withoutNote.isNotEmpty) {
+          foreignGroups.add({
+            'weekday': 'その他',
+            'times': withoutNote.join('\n'),
+          });
         }
       }
+    });
 
-      if (japaneseTimes.isNotEmpty) {
-        japaneseGroups.add({
-          'weekday': weekday,
-          'times': japaneseTimes.join('\n'),
-        });
-      }
+    // massTimes와 foreignMassTimes가 없으면 massTime 문자열 파싱 사용 (fallback)
+    if (massTimesMap.isEmpty && foreignMassTimesMap.isEmpty) {
+      final fallbackGroups = _parseMassTimeByWeekday(massTime);
+      for (final group in fallbackGroups) {
+        final weekday = group['weekday'] as String;
+        final times = group['times'] as String;
+        final timesList = times.split('\n');
 
-      if (foreignTimes.isNotEmpty) {
-        foreignGroups.add({
-          'weekday': weekday,
-          'times': foreignTimes.join('\n'),
-        });
+        final japaneseTimes = <String>[];
+        final foreignTimes = <String>[];
+
+        for (final time in timesList) {
+          if (_isForeignLanguageMass(time)) {
+            foreignTimes.add(time);
+          } else {
+            japaneseTimes.add(time);
+          }
+        }
+
+        if (japaneseTimes.isNotEmpty) {
+          japaneseGroups.add({
+            'weekday': weekday,
+            'times': japaneseTimes.join('\n'),
+          });
+        }
+
+        if (foreignTimes.isNotEmpty) {
+          foreignGroups.add({
+            'weekday': weekday,
+            'times': foreignTimes.join('\n'),
+          });
+        }
       }
     }
 
@@ -611,21 +800,25 @@ class ParishDetailScreen extends ConsumerWidget {
   }
 
   /// 외국어 미사 텍스트를 "언어 시간 주일정보" 순서로 재정렬
-  String _reorderForeignMassText(String time, String languageCode) {
+  String _reorderForeignMassText(
+    String time,
+    String languageCode,
+    AppLocalizations l10n,
+  ) {
     // 언어 이름 추출
     final languageNames = {
-      'EN': '英語',
-      'ES': 'スペイン語',
-      'CN': '中国語',
-      'PH': 'フィリピン語',
-      'PT': 'ポルトガル語',
-      'KR': '韓国語',
-      'VI': 'ベトナム語',
-      'ID': 'インドネシア語',
-      'PL': 'ポーランド語',
-      'FR': 'フランス語',
-      'DE': 'ドイツ語',
-      'IT': 'イタリア語',
+      'EN': l10n.parish.detailSection.languages.english,
+      'ES': l10n.parish.detailSection.languages.spanish,
+      'CN': l10n.parish.detailSection.languages.chinese,
+      'PH': l10n.parish.detailSection.languages.filipino,
+      'PT': l10n.parish.detailSection.languages.portuguese,
+      'KR': l10n.parish.detailSection.languages.korean,
+      'VI': l10n.parish.detailSection.languages.vietnamese,
+      'ID': l10n.parish.detailSection.languages.indonesian,
+      'PL': l10n.parish.detailSection.languages.polish,
+      'FR': l10n.parish.detailSection.languages.french,
+      'DE': l10n.parish.detailSection.languages.german,
+      'IT': l10n.parish.detailSection.languages.italian,
     };
     final languageName = languageNames[languageCode] ?? '';
 
@@ -633,17 +826,117 @@ class ParishDetailScreen extends ConsumerWidget {
     final timeMatch = RegExp(r'(\d{1,2}:\d{2})').firstMatch(time);
     final timeStr = timeMatch?.group(1) ?? '';
 
-    // 특정 주일 정보 추출 (예: "第1・第3日曜")
+    // 특정 주일 정보 추출 및 번역 (예: "第1・第3日曜")
     final noteMatch = RegExp(r'(第\d+[・・]?第\d+日曜|第\d+日曜)').firstMatch(time);
-    final noteStr = noteMatch?.group(1) ?? '';
-
-    // 순서: 언어명 + 시간 + (특정 주일 정보)
-    // 형식: "언어 시간 주일정보"
-    if (noteStr.isNotEmpty) {
-      return '$languageName $timeStr $noteStr';
-    } else {
-      return '$languageName $timeStr';
+    String noteStr = '';
+    if (noteMatch != null) {
+      final originalNote = noteMatch.group(1)!;
+      // 주일 표기를 번역 키로 변환
+      noteStr = _translateSundayNote(originalNote, l10n);
     }
+
+    // 수화 포함 표기 처리
+    String signLanguageNote = '';
+    if (time.contains('手話付き')) {
+      signLanguageNote = '(${l10n.parish.detailSection.withSignLanguage})';
+    }
+
+    // 순서: 언어명 + 시간 + (수화 포함) + (특정 주일 정보)
+    // 형식: "언어 시간 (수화 포함) 주일정보"
+    final parts = <String>[];
+    if (languageName.isNotEmpty) parts.add(languageName);
+    if (timeStr.isNotEmpty) parts.add(timeStr);
+    if (signLanguageNote.isNotEmpty) parts.add(signLanguageNote);
+    if (noteStr.isNotEmpty) parts.add(noteStr);
+
+    return parts.join(' ');
+  }
+
+  /// 미사 시간 텍스트 내의 일본어 표현들을 번역 처리
+  String _translateJapaneseExpressions(
+    BuildContext context,
+    String time,
+    AppLocalizations l10n,
+  ) {
+    String result = time;
+
+    // "手話付き" 번역 처리
+    result = result.replaceAll(
+      '手話付き',
+      l10n.parish.detailSection.withSignLanguage,
+    );
+
+    // "日から土曜日" -> "일요일부터 토요일" 형식 번역
+    // 한국어: "일요일부터 토요일", 일본어: "主日から土", 영어: "Sunday to Saturday" 등
+    result = result.replaceAllMapped(RegExp(r'日から土曜日'), (match) {
+      // 언어별로 적절한 연결어 사용
+      final locale = Localizations.localeOf(context);
+      if (locale.languageCode == 'ko') {
+        return '${l10n.parish.detailSection.weekdays.sunday}부터 ${l10n.parish.detailSection.weekdays.saturday}';
+      } else if (locale.languageCode == 'ja') {
+        return '${l10n.parish.detailSection.weekdays.sunday}から${l10n.parish.detailSection.weekdays.saturday}';
+      } else {
+        return '${l10n.parish.detailSection.weekdays.sunday} to ${l10n.parish.detailSection.weekdays.saturday}';
+      }
+    });
+
+    // "第\d+金曜日" -> 특정 주일 금요일 번역
+    result = result.replaceAllMapped(RegExp(r'第(\d+)金曜日'), (match) {
+      final weekNumber = match.group(1);
+      if (weekNumber == '1') {
+        return l10n.parish.detailSection.sundayNote.first.replaceAll(
+          '주일',
+          '금요일',
+        );
+      } else if (weekNumber == '2') {
+        return l10n.parish.detailSection.sundayNote.second.replaceAll(
+          '주일',
+          '금요일',
+        );
+      } else if (weekNumber == '3') {
+        return l10n.parish.detailSection.sundayNote.third.replaceAll(
+          '주일',
+          '금요일',
+        );
+      } else if (weekNumber == '4') {
+        return l10n.parish.detailSection.sundayNote.fourth.replaceAll(
+          '주일',
+          '금요일',
+        );
+      }
+      return match.group(0) ?? '';
+    });
+
+    // 주일 표기도 번역
+    result = result.replaceAllMapped(RegExp(r'第\d+[・・]?第\d+日曜|第\d+日曜'), (
+      match,
+    ) {
+      final original = match.group(0);
+      if (original != null) {
+        return _translateSundayNote(original, l10n);
+      }
+      return match.group(0) ?? '';
+    });
+
+    return result;
+  }
+
+  /// 주일 표기를 번역 키로 변환
+  String _translateSundayNote(String note, AppLocalizations l10n) {
+    if (note.contains('第1') && note.contains('第3')) {
+      return l10n.parish.detailSection.sundayNote.firstAndThird;
+    } else if (note.contains('第2') && note.contains('第4')) {
+      return l10n.parish.detailSection.sundayNote.secondAndFourth;
+    } else if (note.contains('第1')) {
+      return l10n.parish.detailSection.sundayNote.first;
+    } else if (note.contains('第2')) {
+      return l10n.parish.detailSection.sundayNote.second;
+    } else if (note.contains('第3')) {
+      return l10n.parish.detailSection.sundayNote.third;
+    } else if (note.contains('第4')) {
+      return l10n.parish.detailSection.sundayNote.fourth;
+    }
+    return note; // 번역할 수 없으면 원본 반환
   }
 
   List<Map<String, String>> _parseMassTimeByWeekday(String massTime) {
@@ -692,9 +985,10 @@ class ParishDetailScreen extends ConsumerWidget {
         }
       }
       // 외국어 미사 처리 (예: "ベトナム語：土19:30、日15:00", "英語ミサ：12:00", "インドネシア語：16:30(第2・第4日曜)")
-      else if (trimmed.contains('語') && trimmed.contains('：')) {
-        // "언어語：土19:30、日15:00" 또는 "언어語：16:30(第2・第4日曜)" 형식 파싱
-        final langMatch = RegExp(r'^(.+語)[：:]\s*(.+)$').firstMatch(trimmed);
+      else if ((trimmed.contains('語') || trimmed.contains('ミサ')) &&
+          trimmed.contains('：')) {
+        // "언어語：土19:30、日15:00" 또는 "언어語：16:30(第2・第4日曜)" 또는 "언어ミサ：12:00" 형식 파싱
+        final langMatch = RegExp(r'^(.+[語ミサ])[：:]\s*(.+)$').firstMatch(trimmed);
         if (langMatch != null) {
           final languagePart = langMatch.group(1)!;
           final timesPart = langMatch.group(2)!;
@@ -754,7 +1048,6 @@ class ParishDetailScreen extends ConsumerWidget {
       '月-金': 5,
       '土': 6,
       '日': 7,
-      'その他': 8,
     };
 
     // 월-금이 모두 있고 시간이 같으면 "月-金"으로 합치기
@@ -812,10 +1105,11 @@ class ParishDetailScreen extends ConsumerWidget {
       final trimmed = item.trim();
       if (trimmed.isEmpty) continue;
 
-      // 개별 요일 패턴 확인 (예: "水曜 10:00" 또는 "火、木、土曜 6:30")
+      // 개별 요일 패턴 확인 (예: "水曜 10:00" 또는 "火、木、土曜 6:30" 또는 "火曜日07:00")
       // 토요일(土)도 포함 가능
-      final singleWeekdayPattern = RegExp(r'^([月火水木金土]曜)[：:]?\s*(.+)$');
-      final multipleWeekdayPattern = RegExp(r'^([月火水木金土]、?)+曜[：:]?\s*(.+)$');
+      // "火曜日" 형식도 처리하기 위해 "曜日?" 패턴 사용
+      final singleWeekdayPattern = RegExp(r'^([月火水木金土]曜日?)[：:]?\s*(.+)$');
+      final multipleWeekdayPattern = RegExp(r'^([月火水木金土]、?)+曜日?[：:]?\s*(.+)$');
 
       final singleMatch = singleWeekdayPattern.firstMatch(trimmed);
       final multipleMatch = multipleWeekdayPattern.firstMatch(trimmed);
@@ -870,6 +1164,12 @@ class ParishDetailScreen extends ConsumerWidget {
       '木曜': '木',
       '金曜': '金',
       '土曜': '土',
+      '月曜日': '月',
+      '火曜日': '火',
+      '水曜日': '水',
+      '木曜日': '木',
+      '金曜日': '金',
+      '土曜日': '土',
     };
     return weekdayMap[weekdayJa] ?? weekdayJa;
   }

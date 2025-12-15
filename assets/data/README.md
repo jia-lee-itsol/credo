@@ -135,18 +135,30 @@ assets/data/
 
 ### 교회 데이터 필드
 
-- `name`: 교회 이름
+- `name`: 교회 이름 (필수)
 - `churchName`: 교회당 이름 (선택)
-- `address`: 주소
-- `prefecture`: 도도부현
+- `address`: 주소 (필수)
+- `prefecture`: 도도부현 (필수)
 - `isCathedral`: 주교좌 성당 여부 (true/false)
-- `massTime`: 미사 시간 (문자열)
+- `massTime`: 미사 시간 (문자열, 레거시 필드 - 호환성을 위해 유지)
+- `massTimes`: 구조화된 미사 시간 (객체, 필수)
+  - `sunday`: 일요일 미사 시간 배열 (예: `["08:00", "10:00"]`)
+  - `saturday`: 토요일 미사 시간 배열
+  - `monday` ~ `friday`: 평일 미사 시간 배열
+  - `wednesday`, `thursday` 등: 특정 요일 미사 시간 배열
+- `foreignMassTimes`: 외국어 미사 시간 (객체, 선택)
+  - 요일별 배열로 구성
+  - 각 항목은 `{ "time": "14:00", "language": "EN", "note": "第1・第3日曜" }` 형식
+  - `language`: 언어 코드 (예: "EN", "VI", "KO", "ZH", "PT")
+  - `note`: 특별한 조건 (예: "第1日曜", "第2・4日曜", "第3日曜")
 - `phone`: 전화번호 (선택)
 - `fax`: 팩스번호 (선택)
 - `website`: 웹사이트 URL (선택)
 - `note`: 비고 (선택)
-- `diocese`: 교구 ID (정규화된 필드)
-- `deanery`: 소교구/지역 ID (정규화된 필드, null 가능)
+- `diocese`: 교구 ID (필수, 앱에서 교회 조회를 위해 필요)
+- `deanery`: 소교구/지역 ID (선택, null 가능)
+- `latitude`: 위도 (필수)
+- `longitude`: 경도 (필수)
 
 ### 파일 구조 규칙
 
@@ -155,4 +167,87 @@ assets/data/
   - `parishes/tokyo.json` (도쿄 대사교구)
   - `parishes/yokohama.json` (요코하마 교구)
   - `parishes/sapporo.json` (삿포로 교구)
+
+### 미사 시간 데이터 구조 예시
+
+```json
+{
+  "name": "福岡カテドラル",
+  "massTime": "主日：08:00, 10:00, 12:00 / 第1・第3日曜14:00(英語ミサ)",
+  "massTimes": {
+    "sunday": ["08:00", "10:00", "12:00"]
+  },
+  "foreignMassTimes": {
+    "sunday": [
+      {
+        "time": "14:00",
+        "language": "EN",
+        "note": "第1・第3日曜"
+      }
+    ]
+  }
+}
+```
+
+### 중요 사항
+
+1. **`diocese` 필드는 필수입니다**: 앱에서 교회를 조회하기 위해 `parishId`를 생성할 때 `diocese`와 `name`을 조합합니다. `diocese` 필드가 없으면 교회 정보를 찾을 수 없습니다.
+
+2. **`massTimes`와 `foreignMassTimes` 구조**: 
+   - `massTimes`: 일반 미사 시간을 요일별로 구조화
+   - `foreignMassTimes`: 외국어 미사 시간을 요일별로 구조화하며, 각 항목은 `time`, `language`, `note` 필드를 포함
+
+3. **`note` 필드 일관성**: 
+   - 외국어 미사 시간의 `note` 필드에는 "第○日" 대신 "第○日曜" 형식을 사용합니다 (예: "第1日曜", "第2・4日曜")
+
+4. **`massTime` 필드**: 
+   - 레거시 필드로 호환성을 위해 유지되지만, 실제 사용은 `massTimes`와 `foreignMassTimes`를 우선합니다.
+
+## 최근 업데이트 (2025-01-XX)
+
+### osaka.json 대규모 데이터 추가 (2025-01-XX)
+
+1. **교회 데이터 대폭 확장**:
+   - 기존 1개 교회에서 **106개 교회**로 확장
+   - 웹사이트 데이터 기반 추가: https://ostk.catholic.jp/parish_mass/
+   - 지역별 분포:
+     - 大阪府: 36개
+     - 兵庫県: 33개
+     - 和歌山県: 11개
+     - 香川県: 9개
+     - 愛媛県: 8개
+     - 徳島県: 4개
+     - 高知県: 5개
+
+2. **미사 시간 데이터 구조화**:
+   - 모든 교회의 `massTime` 문자열을 `massTimes`와 `foreignMassTimes`로 정확히 분리
+   - 특수 조건 처리 (第X日曜, 前晩, 계절별 시간 등)
+   - 외국어 미사 시간의 `note` 필드 표준화
+
+3. **데이터 검증 완료**:
+   - 모든 106개 교회의 `massTime`과 구조화된 데이터 일치 확인
+   - JSON 형식 유효성 검증 완료
+   - 특수 조건(初金曜日, 第X日曜, 외국어 미사 등) 정확성 확인
+
+4. **참고 사항**:
+   - 위도/경도는 임시 값(0.0)으로 설정됨
+   - geocoding 스크립트(`scripts/add_coordinates.py`)로 업데이트 필요
+
+### fukuoka.json 데이터 개선
+
+1. **필수 필드 추가**: 
+   - 모든 교구에 `diocese` 필드 추가 (앱 연결을 위해 필수)
+   - `deanery` 필드 추가 (일관성 유지)
+
+2. **미사 시간 데이터 보완**:
+   - 일부 교구의 누락된 미사 시간 추가
+   - `massTimes` 구조에서 요일별 시간 정확성 개선
+
+3. **외국어 미사 시간 note 필드 표준화**:
+   - "第○日" → "第○日曜" 형식으로 통일
+   - 예: "第1日" → "第1日曜", "第2・4日" → "第2・4日曜"
+
+4. **데이터 검증 완료**:
+   - 모든 교구에 `massTimes`와 `foreignMassTimes` 필드 존재 확인
+   - JSON 형식 유효성 검증 완료
 

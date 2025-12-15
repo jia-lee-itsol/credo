@@ -320,6 +320,38 @@ class LanguageTranslations {
         .replaceAll('{error}', error);
   }
 
+  LanguageNamesTranslations get names =>
+      LanguageNamesTranslations(_getValue('names'));
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+
+  dynamic _getValue(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key];
+    }
+    return null;
+  }
+}
+
+/// 언어 이름 번역
+class LanguageNamesTranslations {
+  final dynamic _data;
+
+  LanguageNamesTranslations(this._data);
+
+  String get japanese => _getString('japanese') ?? '日本語';
+  String get english => _getString('english') ?? 'English';
+  String get chinese => _getString('chinese') ?? '中文';
+  String get vietnamese => _getString('vietnamese') ?? 'Tiếng Việt';
+  String get korean => _getString('korean') ?? '한국어';
+  String get spanish => _getString('spanish') ?? 'Español';
+  String get portuguese => _getString('portuguese') ?? 'Português';
+
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
       return _data[key] as String?;
@@ -438,6 +470,15 @@ class CommunityTranslations {
   String get guidelines =>
       _getString('guidelines') ??
       '投稿することで、コミュニティガイドラインに同意したものとみなされます。他のユーザーを尊重し、適切な内容を投稿してください。';
+  String get searchPost => _getString('searchPost') ?? '投稿を検索';
+  String get pinned => _getString('pinned') ?? '固定';
+  String get noticesTitle => _getString('noticesTitle') ?? 'お知らせ';
+  String get noOfficialNotices =>
+      _getString('noOfficialNotices') ?? '公式お知らせがありません';
+  String get createNotice => _getString('createNotice') ?? 'お知らせを作成';
+
+  CommunityFilterTranslations get filter =>
+      CommunityFilterTranslations(_getValue('filter'));
 
   CommunityHomeTranslations get home =>
       CommunityHomeTranslations(_getValue('home'));
@@ -471,18 +512,34 @@ class CommunityHomeTranslations {
 
   CommunityHomeTranslations(this._data);
 
-  String get title => _getString('title') ?? 'コミュニティ';
-  String get parish => _getString('parish') ?? '所属教会';
-  String get parishNotSet => _getString('parishNotSet') ?? '所属教会が設定されていません';
-  String get parishLoadFailed =>
-      _getString('parishLoadFailed') ?? '所属教会の情報を読み込めませんでした';
-  String get searchOtherParishes =>
-      _getString('searchOtherParishes') ?? '他の教会のコミュニティを探す';
-  String get todayMass => _getString('todayMass') ?? '今日のミサ';
+  String get title => _getString('title') ?? '';
+  String get parish => _getString('parish') ?? '';
+  String get parishNotSet => _getString('parishNotSet') ?? '';
+  String get parishLoadFailed => _getString('parishLoadFailed') ?? '';
+  String get searchOtherParishes => _getString('searchOtherParishes') ?? '';
+  String get todayMass => _getString('todayMass') ?? '';
   String get todayBibleReadingAndPrayer =>
-      _getString('todayBibleReadingAndPrayer') ?? '今日の聖書朗読と祈り';
-  String get recentNotices => _getString('recentNotices') ?? '最近のお知らせ';
-  String get noNotices => _getString('noNotices') ?? 'お知らせはありません';
+      _getString('todayBibleReadingAndPrayer') ?? '';
+  String get recentNotices => _getString('recentNotices') ?? '';
+  String get noNotices => _getString('noNotices') ?? '';
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
+/// 커뮤니티 필터 번역
+class CommunityFilterTranslations {
+  final dynamic _data;
+
+  CommunityFilterTranslations(this._data);
+
+  String get latest => _getString('latest') ?? '最新';
+  String get popular => _getString('popular') ?? '人気';
+  String get myPosts => _getString('myPosts') ?? '私の投稿';
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -613,7 +670,7 @@ class ProfileTranslations {
   String get editProfile => _getString('editProfile') ?? 'プロフィール編集';
   String get profileUpdated => _getString('profileUpdated') ?? 'プロフィールを更新しました';
   String get updateFailed => _getString('updateFailed') ?? '更新に失敗しました';
-  String get favoriteParishes => _getString('favoriteParishes') ?? 'よく行く教会';
+  String get favoriteParishes => favoriteParishesSection.title;
   String get notificationSettings =>
       _getString('notificationSettings') ?? '通知設定';
   String get notificationSettingsComingSoon =>
@@ -701,6 +758,11 @@ class ProfileFavoriteParishesTranslations {
   String get deleted => _getString('deleted') ?? '削除しました';
   String get deleteTitle => _getString('deleteTitle') ?? '削除';
 
+  String registeredCount(int count) {
+    final template = _getString('registeredCount') ?? '{count}件登録済み';
+    return template.replaceAll('{count}', count.toString());
+  }
+
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
       return _data[key] as String?;
@@ -745,7 +807,7 @@ class ParishTranslations {
   ParishEmptyTranslations get empty =>
       ParishEmptyTranslations(_getValue('empty'));
   ParishDetailTranslations get detailSection =>
-      ParishDetailTranslations(_getValue('detail'));
+      ParishDetailTranslations(_getValue('detailSection'));
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -769,6 +831,105 @@ class ParishDetailTranslations {
   ParishDetailTranslations(this._data);
 
   String get noMassTimeInfo => _getString('noMassTimeInfo') ?? 'ミサ時間情報がありません';
+  String get address => _getString('address') ?? '住所';
+  String get phone => _getString('phone') ?? '電話';
+  String get fax => _getString('fax') ?? 'FAX';
+  String get website => _getString('website') ?? 'ウェブサイト';
+  String get massTime => _getString('massTime') ?? 'ミサ時間';
+  String get massTimeNotice =>
+      _getString('massTimeNotice') ?? '※ ミサ時間は各本堂のホームページでご確認ください';
+  String get noMassTimeInfoInList =>
+      _getString('noMassTimeInfoInList') ?? 'ミサ時間情報がありません';
+
+  ParishWeekdaysTranslations get weekdays =>
+      ParishWeekdaysTranslations(_getValue('weekdays'));
+
+  ParishLanguagesTranslations get languages =>
+      ParishLanguagesTranslations(_getValue('languages'));
+
+  ParishSundayNoteTranslations get sundayNote =>
+      ParishSundayNoteTranslations(_getValue('sundayNote'));
+
+  String get other => _getString('other') ?? 'その他';
+  String get withSignLanguage => _getString('withSignLanguage') ?? '手話付き';
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+
+  dynamic _getValue(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key];
+    }
+    return null;
+  }
+}
+
+/// 교회 상세 요일 번역
+class ParishWeekdaysTranslations {
+  final dynamic _data;
+
+  ParishWeekdaysTranslations(this._data);
+
+  String get monday => _getString('monday') ?? '月';
+  String get tuesday => _getString('tuesday') ?? '火';
+  String get wednesday => _getString('wednesday') ?? '水';
+  String get thursday => _getString('thursday') ?? '木';
+  String get friday => _getString('friday') ?? '金';
+  String get mondayToFriday => _getString('mondayToFriday') ?? '月-金';
+  String get saturday => _getString('saturday') ?? '土';
+  String get sunday => _getString('sunday') ?? '主日';
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
+/// 교회 상세 언어 번역
+class ParishLanguagesTranslations {
+  final dynamic _data;
+
+  ParishLanguagesTranslations(this._data);
+
+  String get english => _getString('english') ?? '英語';
+  String get spanish => _getString('spanish') ?? 'スペイン語';
+  String get chinese => _getString('chinese') ?? '中国語';
+  String get filipino => _getString('filipino') ?? 'フィリピン語';
+  String get portuguese => _getString('portuguese') ?? 'ポルトガル語';
+  String get korean => _getString('korean') ?? '韓国語';
+  String get vietnamese => _getString('vietnamese') ?? 'ベトナム語';
+  String get indonesian => _getString('indonesian') ?? 'インドネシア語';
+  String get polish => _getString('polish') ?? 'ポーランド語';
+  String get french => _getString('french') ?? 'フランス語';
+  String get german => _getString('german') ?? 'ドイツ語';
+  String get italian => _getString('italian') ?? 'イタリア語';
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
+/// 교회 상세 주일 표기 번역
+class ParishSundayNoteTranslations {
+  final dynamic _data;
+
+  ParishSundayNoteTranslations(this._data);
+
+  String get first => _getString('first') ?? '第1日曜';
+  String get second => _getString('second') ?? '第2日曜';
+  String get third => _getString('third') ?? '第3日曜';
+  String get fourth => _getString('fourth') ?? '第4日曜';
+  String get secondAndFourth => _getString('secondAndFourth') ?? '第2・第4日曜';
+  String get firstAndThird => _getString('firstAndThird') ?? '第1・第3日曜';
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -787,19 +948,66 @@ class PrayerTranslations {
   String get title => _getString('title') ?? '黙想のガイド';
   String get morningMeditation => _getString('morningMeditation') ?? '朝の黙想';
   String get shareHint => _getString('shareHint') ?? '今日の黙想を共有しましょう...';
+  String everyoneMeditation(int count) {
+    final template = _getString('everyoneMeditation') ?? 'みんなの黙想 ({count})';
+    return template.replaceAll('{count}', count.toString());
+  }
 
-  PrayerGuideTranslations get morning =>
-      PrayerGuideTranslations(_getValue('guides')?['morning']);
-  PrayerGuideTranslations get meal =>
-      PrayerGuideTranslations(_getValue('guides')?['meal']);
-  PrayerGuideTranslations get evening =>
-      PrayerGuideTranslations(_getValue('guides')?['evening']);
-  PrayerGuideTranslations get difficult =>
-      PrayerGuideTranslations(_getValue('guides')?['difficult']);
-  PrayerGuideTranslations get thanksgiving =>
-      PrayerGuideTranslations(_getValue('guides')?['thanksgiving']);
-  PrayerGuideTranslations get meditation =>
-      PrayerGuideTranslations(_getValue('guides')?['meditation']);
+  String get noMeditationYet => _getString('noMeditationYet') ?? 'まだ黙想がありません';
+  String get errorOccurred => _getString('errorOccurred') ?? 'エラーが発生しました';
+  String get permissionDenied =>
+      _getString('permissionDenied') ?? '権限がありません。ログイン状態を確認してください。';
+  String get networkError => _getString('networkError') ?? 'ネットワークエラーが発生しました。';
+  String get anonymous => _getString('anonymous') ?? '匿名';
+  String get loginToShare => _getString('loginToShare') ?? 'ログインして黙想を共有しましょう';
+
+  PrayerGuideTranslations get morning {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('morning')) {
+      return PrayerGuideTranslations(guides['morning']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get meal {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('meal')) {
+      return PrayerGuideTranslations(guides['meal']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get evening {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('evening')) {
+      return PrayerGuideTranslations(guides['evening']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get difficult {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('difficult')) {
+      return PrayerGuideTranslations(guides['difficult']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get thanksgiving {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('thanksgiving')) {
+      return PrayerGuideTranslations(guides['thanksgiving']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get meditation {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('meditation')) {
+      return PrayerGuideTranslations(guides['meditation']);
+    }
+    return PrayerGuideTranslations(null);
+  }
 
   String meditationGuideTitle(String key) {
     final guides = _getValue('meditationGuides');
@@ -848,6 +1056,10 @@ class PrayerGuideTranslations {
     }
     return null;
   }
+
+  /// 데이터가 유효한지 확인
+  bool get hasData =>
+      _data is Map<String, dynamic> && (_data as Map).isNotEmpty;
 }
 
 /// 교회 필터 번역
@@ -857,6 +1069,8 @@ class ParishFilterTranslations {
   ParishFilterTranslations(this._data);
 
   String get title => _getString('title') ?? 'フィルター';
+  String get button => _getString('button') ?? 'フィルター';
+  String get sortByDistance => _getString('sortByDistance') ?? '距離順';
   String get reset => _getString('reset') ?? 'リセット';
   String get prefecture => _getString('prefecture') ?? '都道府県';
   String get mass => _getString('mass') ?? 'ミサ';
@@ -964,7 +1178,7 @@ class SearchTranslations {
   }
 }
 
-/// AppLocalizations 로드 델리게이트
+/// AppLocalizations 로드 델리게이트 (내부용)
 class _AppLocalizationsDelegate {
   static final _AppLocalizationsDelegate instance =
       _AppLocalizationsDelegate._();
@@ -980,12 +1194,22 @@ class _AppLocalizationsDelegate {
     final translations = await LocalizationService.instance.loadTranslations(
       locale,
     );
+
+    // 번역 데이터가 비어있지 않은지 확인
+    if (translations.isEmpty) {
+      // 빈 데이터인 경우, 기본 로케일로 재시도
+      if (locale.languageCode != 'ja') {
+        return await load(const Locale('ja', 'JP'));
+      }
+    }
+
     final appLocalizations = AppLocalizations(locale, translations);
     _cache[locale] = appLocalizations;
     return appLocalizations;
   }
 
   AppLocalizations loadSync(Locale locale) {
+    // 캐시에 해당 로케일이 있으면 반환
     if (_cache.containsKey(locale)) {
       return _cache[locale]!;
     }
@@ -994,19 +1218,53 @@ class _AppLocalizationsDelegate {
     final cached = LocalizationService.instance.getCachedTranslations(
       locale.languageCode,
     );
-    if (cached != null) {
+    if (cached != null && cached.isNotEmpty) {
       final appLocalizations = AppLocalizations(locale, cached);
       _cache[locale] = appLocalizations;
       return appLocalizations;
     }
 
-    // 캐시에 없으면 기본값 사용 (나중에 비동기 로드로 업데이트됨)
+    // 캐시에 없으면 이전 로케일의 캐시를 확인하지 않고 빈 맵 반환
+    // 비동기 provider가 로드되면 자동으로 업데이트됨
+    // 빈 데이터를 반환하면 fallback 값들이 사용됨
     return AppLocalizations(locale, {});
   }
 
   void clearCache() {
     _cache.clear();
   }
+}
+
+/// AppLocalizations 캐시 무효화 (언어 변경 시 사용)
+void clearAppLocalizationsCache() {
+  _AppLocalizationsDelegate.instance.clearCache();
+  LocalizationService.instance.clearCache();
+}
+
+/// Flutter LocalizationsDelegate 구현
+class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+  const AppLocalizationsDelegate();
+
+  @override
+  bool isSupported(Locale locale) {
+    return const [
+      'ja',
+      'en',
+      'ko',
+      'zh',
+      'vi',
+      'es',
+      'pt',
+    ].contains(locale.languageCode);
+  }
+
+  @override
+  Future<AppLocalizations> load(Locale locale) async {
+    return await _AppLocalizationsDelegate.instance.load(locale);
+  }
+
+  @override
+  bool shouldReload(AppLocalizationsDelegate old) => true;
 }
 
 /// AppLocalizations Provider (Riverpod) - 비동기

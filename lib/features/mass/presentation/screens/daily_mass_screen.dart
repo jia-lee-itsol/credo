@@ -78,7 +78,8 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
 
     // 선택한 날짜가 있으면 사용, 없으면 테스트 날짜 또는 오늘 날짜
     final displayDate = _selectedDate ?? testDate ?? DateTime.now();
-    final dateFormat = DateFormat('yyyy年M月d日 (E)', 'ja');
+    final currentLocale = ref.watch(localeProvider);
+    final dateFormat = DateFormat.yMMMEd(currentLocale.languageCode);
 
     // 날짜를 문자열로 변환하여 Provider family 키로 사용 (무한 반복 방지)
     final dateKey =
@@ -160,7 +161,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
                     const SizedBox(height: 24),
 
                     // 댓글 섹션
-                    _buildCommentsSection(theme, primaryColor, dateKey),
+                    _buildCommentsSection(theme, primaryColor, dateKey, l10n),
                   ],
                 ),
               ),
@@ -168,7 +169,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
               if (currentUser != null)
                 _buildCommentInput(context, theme, primaryColor, dateKey, l10n)
               else
-                _buildLoginPrompt(context, theme, primaryColor),
+                _buildLoginPrompt(context, theme, primaryColor, l10n),
             ],
           );
         },
@@ -625,6 +626,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
     ThemeData theme,
     Color primaryColor,
     String dateKey,
+    AppLocalizations l10n,
   ) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
@@ -640,13 +642,13 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
 
         if (snapshot.hasError) {
           final error = snapshot.error;
-          String errorMessage = 'エラーが発生しました';
+          String errorMessage = l10n.mass.prayer.errorOccurred;
           if (error.toString().contains('permission-denied')) {
-            errorMessage = '権限がありません。ログイン状態を確認してください。';
+            errorMessage = l10n.mass.prayer.permissionDenied;
           } else if (error.toString().contains('network')) {
-            errorMessage = 'ネットワークエラーが発生しました。';
+            errorMessage = l10n.mass.prayer.networkError;
           } else {
-            errorMessage = 'エラーが発生しました: $error';
+            errorMessage = '${l10n.mass.prayer.errorOccurred}: $error';
           }
           return Padding(
             padding: const EdgeInsets.all(16),
@@ -678,7 +680,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'みんなの黙想 (${comments.length})',
+              l10n.mass.prayer.everyoneMeditation(comments.length),
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -689,7 +691,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: Center(
                   child: Text(
-                    'まだ黙想がありません',
+                    l10n.mass.prayer.noMeditationYet,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.onSurfaceVariant,
                     ),
@@ -699,7 +701,8 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
             else
               ...comments.map((doc) {
                 final data = doc.data() as Map<String, dynamic>;
-                final authorName = data['authorName'] as String? ?? '匿名';
+                final authorName =
+                    data['authorName'] as String? ?? l10n.mass.prayer.anonymous;
                 final content = data['content'] as String? ?? '';
                 final createdAt =
                     (data['createdAt'] as Timestamp?)?.toDate() ??
@@ -824,6 +827,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
     BuildContext context,
     ThemeData theme,
     Color primaryColor,
+    AppLocalizations l10n,
   ) {
     return Container(
       padding: EdgeInsets.only(
@@ -855,7 +859,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
               Icon(Icons.login, color: primaryColor, size: 20),
               const SizedBox(width: 8),
               Text(
-                'ログインして黙想を共有しましょう',
+                l10n.mass.prayer.loginToShare,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: primaryColor,
                   fontWeight: FontWeight.w500,
@@ -927,11 +931,12 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
     } catch (e, stackTrace) {
       AppLogger.error('댓글 작성 실패: $e', e, stackTrace);
       if (mounted) {
-        String errorMessage = 'エラーが発生しました';
+        final l10n = ref.read(appLocalizationsSyncProvider);
+        String errorMessage = l10n.mass.prayer.errorOccurred;
         if (e.toString().contains('permission-denied')) {
-          errorMessage = '権限がありません。ログイン状態を確認してください。';
+          errorMessage = l10n.mass.prayer.permissionDenied;
         } else if (e.toString().contains('network')) {
-          errorMessage = 'ネットワークエラーが発生しました。';
+          errorMessage = l10n.mass.prayer.networkError;
         }
         ScaffoldMessenger.of(
           context,

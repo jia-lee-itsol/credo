@@ -16,6 +16,12 @@
           "06:30",
           "09:30",
           "17:30"
+        ],
+        "wednesday": [
+          "10:00"
+        ],
+        "friday": [
+          "10:00"
         ]
       },
       "foreignMassTimes": {},
@@ -223,6 +229,22 @@
         "sunday": [
           "09:30",
           "18:00"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "07:00",
+          "10:00"
+        ],
+        "saturday": [
+          "07:00"
         ]
       },
       "foreignMassTimes": {
@@ -387,6 +409,21 @@
         "sunday": [
           "07:00",
           "09:30"
+        ],
+        "tuesday": [
+          "07:00"
+        ],
+        "wednesday": [
+          "07:00"
+        ],
+        "thursday": [
+          "07:00"
+        ],
+        "friday": [
+          "10:00"
+        ],
+        "saturday": [
+          "07:00"
         ]
       },
       "foreignMassTimes": {

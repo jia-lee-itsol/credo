@@ -4,7 +4,7 @@
 
 Credo는 가톨릭 커뮤니티 참여를 위한 Flutter 모바일 애플리케이션입니다. 이 앱은 **기능 기반 모듈 구조**와 함께 **Clean Architecture**를 구현합니다.
 
-**마지막 업데이트**: 2025-12-15 (성당 좌표 데이터 추가, 거리순 필터 개선)
+**마지막 업데이트**: 2025-12-15 (다국어 지원 완료 - 모든 언어 파일 번역 완료)
 **전체 코드베이스**: 약 27,000줄의 Dart 코드, 135개 파일
 
 ---
@@ -486,6 +486,45 @@ Future<Either<Failure, Post>> createPost(Post post) async {
   - `my_page_screen.dart` - 마이페이지에서 슬라이더로 글씨 크기 설정
   - SharedPreferences로 설정 영속화
 
+**다국어 지원 (Internationalization)**:
+- 지원 언어: 7개 언어 (일본어, 영어, 한국어, 중국어, 베트남어, 스페인어, 포르투갈어)
+- 번역 파일 위치: `assets/l10n/app_{languageCode}.json`
+- 구현 방식:
+  - `LocalizationService`: JSON 파일 기반 번역 데이터 로드 및 캐싱
+  - `AppLocalizations`: 타입 안전한 번역 키 접근을 위한 클래스
+  - `AppLocalizationsDelegate`: Flutter의 `LocalizationsDelegate` 구현
+  - `localeProvider`: Riverpod을 통한 로케일 상태 관리
+  - `appLocalizationsProvider`: 비동기 번역 데이터 로드 (FutureProvider)
+  - `appLocalizationsSyncProvider`: 동기 번역 데이터 접근 (캐시된 데이터 사용)
+- 주요 파일:
+  - `lib/core/data/services/localization_service.dart` - 번역 데이터 로드 서비스
+  - `lib/core/utils/app_localizations.dart` - 번역 키 접근 유틸리티 (1,241줄)
+  - `lib/shared/providers/locale_provider.dart` - 로케일 상태 관리
+  - `lib/features/profile/presentation/screens/language_settings_screen.dart` - 언어 설정 화면
+- 번역 완료 상태:
+  - ✅ 일본어 (기본 언어) - 완료
+  - ✅ 한국어 - 완료
+  - ✅ 영어 - 완료 (일본어 텍스트 제거 완료)
+  - ✅ 중국어 - 완료 (일본어 텍스트 제거 완료)
+  - ✅ 베트남어 - 완료 (일본어 텍스트 제거 완료)
+  - ✅ 스페인어 - 완료 (일본어 텍스트 제거 완료)
+  - ✅ 포르투갈어 - 완료 (일본어 텍스트 제거 완료)
+- 사용 예시:
+  ```dart
+  // 비동기 방식 (권장)
+  final l10nAsync = ref.watch(appLocalizationsProvider);
+  return l10nAsync.when(
+    data: (l10n) => Text(l10n.common.ok),
+    loading: () => CircularProgressIndicator(),
+    error: (e, st) => Text('Error'),
+  );
+
+  // 동기 방식 (캐시된 데이터 사용)
+  final l10n = ref.read(appLocalizationsSyncProvider);
+  Text(l10n.parish.search);
+  Text(l10n.mass.prayer.title);
+  ```
+
 ---
 
 ## 데이터베이스 스키마 (Firestore)
@@ -731,3 +770,12 @@ AppLogger.error('에러 메시지', error, stackTrace);
 - 末吉町教会 등 13개 성당의 데이터 수정 (중국어, 영어, 한국어, 스페인어, 포르투갈어 등)
 - `scripts/fix_foreign_mass_times.py`: 불일치 분석 스크립트
 - `scripts/auto_fix_foreign_mass.py`: 자동 수정 스크립트
+
+**osaka.json 대규모 데이터 추가**:
+- 2025-12-XX: 기존 1개 교회에서 **106개 교회**로 대폭 확장
+- 웹사이트 데이터 기반 추가: https://ostk.catholic.jp/parish_mass/
+- 지역별 분포: 大阪府 36개, 兵庫県 33개, 和歌山県 11개, 香川県 9개, 愛媛県 8개, 徳島県 4개, 高知県 5개
+- 모든 교회의 `massTime`을 `massTimes`와 `foreignMassTimes`로 정확히 분리
+- 특수 조건 처리 (第X日曜, 前晩, 계절별 시간 등) 완료
+- `scripts/update_osaka_parishes.py`: 교회 데이터 추가 자동화 스크립트
+- 참고: 위도/경도는 임시 값(0.0)으로 설정되어 geocoding 업데이트 필요
