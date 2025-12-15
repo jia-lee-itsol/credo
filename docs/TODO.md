@@ -225,27 +225,27 @@
 | 2025-12-12 | 위치 기반 거리 계산 기능 구현 - `location_provider.dart`, `geocoding_service.dart` 생성, `parish_card.dart`에서 실제 거리 표시, `parish_list_screen.dart`에서 거리순 정렬 및 위치 권한 요청 기능 추가 | d8f1c84d |
 | 2025-12-12 | Google Maps API 키를 환경 변수로 분리 - `flutter_dotenv` 추가, `.env` 파일 생성, `geocoding_service.dart`에서 환경 변수 사용 | d8f1c84d |
 | 2025-12-12 | 교회 카드 UI 개선 - 오버플로우 문제 해결 (가로 스크롤 가능), JP 뱃지 제거 (기본 언어이므로), 지도 버튼을 Google Maps로 연결 (주소 검색) | d8f1c84d |
-| 2025-12-15 | Provider 구성 표준화 - Repository Provider는 `data/providers/`에 유지, UI state Provider는 `presentation/providers/`로 이동, `community_presentation_providers.dart` 생성 | - |
-| 2025-12-15 | 공유 서비스를 core로 이동 - `image_upload_service.dart`를 `core/data/services/`로 이동, import 경로 업데이트 | - |
-| 2025-12-15 | Slack webhook URL을 dotenv로 처리 - `functions/.env` 파일 생성, dotenv 패키지 추가, `functions/src/index.ts`에서 dotenv 사용 | - |
-| 2025-12-15 | Admin 게시글 비표시 버그 수정 - Firestore Rules에 `commentCount` 업데이트 권한 추가, `updatePost()` 필드 비교 로직 개선 (리스트 비교, 기본값 처리) | - |
-| 2025-12-15 | 댓글 기능 버그 수정 - `PostCommentSubmitter`의 `Ref` 타입을 `WidgetRef`로 변경, `currentAppUserProvider.future` 사용, Firestore 트랜잭션 순서 수정 (읽기 → 쓰기) | - |
-| 2025-12-15 | 게시글 숨기기 후 목록으로 돌아가기 - `_hidePost()` 성공 시 `Navigator.pop()` 추가 | - |
-| 2025-12-15 | 글씨 크기 설정 기능 추가 - `font_scale_provider.dart` 생성, `main.dart`에서 `MediaQuery.textScaler` 적용, 마이페이지에 설정 UI 추가 | - |
-| 2025-12-15 | 거리순 필터링 버그 수정 - `parish_list_screen.dart`에서 `FutureProvider` 접근 방식 수정 (`ref.read` → `ref.watch`), 기본값을 `false`로 변경, 위치 정보 가져오기 로직 개선 | - |
-| 2025-12-15 | `edit_profile_screen.dart` 추가 분할 완료 (1,106줄 → 457줄, 649줄 감소, 59% 감소) - 검색 시트 위젯 3개를 별도 파일로 분리: `FeastDaySearchSheet`, `UserSearchSheet`, `ParishSearchSheet` | - |
-| 2025-12-15 | 성당 주소 업데이트 작업 완료 - 799개 성당 중 798개 성당에 상세 주소 추가 (99.9% 완료율), 웹 검색을 통한 주소 수집, `scripts/batch_update_addresses.py` 스크립트 생성, 파일별 완료율: 14개 파일 100% 완료, sapporo.json 98.4% (61/62), 미완료: カトリック奥尻教会 (번지수 정보 없음) | - |
-| 2025-12-15 | 미사 시간 데이터 정리 작업 완료 - massTime 문자열 기반으로 massTimes/foreignMassTimes 재생성, 중복 항목 6개 해결, 순회 교회 96개 성당 문의 안내로 통일, 빈 데이터 항목 17개 처리 (kyoto.json 9개, nagoya.json 1개, osaka.json 1개, sapporo.json 4개, yokohama.json 2개), `scripts/parse_mass_times.py` 개선, 홈페이지 확인이 필요한 교회들 안내 문구 추가, 백업 파일 28개 삭제 | - |
-| 2025-12-15 | 전체 코드베이스 에러 수정 완료 - RadioListTile의 deprecated onChanged를 RadioGroup으로 마이그레이션 (report_dialog.dart), l10n 변수 누락 문제 수정 (20+ 파일), const 키워드 오류 수정 (런타임 값 사용 시), 사용하지 않는 변수/import 제거, 중복 import 제거, 사용하지 않는 함수 제거 (_dateTimeToJson, _dateTimeFromJson), 모든 심각한 에러(severity 1) 수정 완료 | - |
-| 2025-12-15 | 언어 설정 구현 완료 - `locale_provider.dart`에 날짜 포맷 로케일 동적 업데이트 추가 (`initializeDateFormatting`), `language_settings_screen.dart`에서 `appLocalizationsProvider` invalidate 추가하여 번역 데이터 자동 재로드 | - |
-| 2025-12-15 | 에러 수정 완료 - `daily_mass_screen.dart`에서 l10n 파라미터 누락 수정 (`_buildCommentInput` 메서드에 `AppLocalizations l10n` 파라미터 추가), `parish_detail_screen.dart`에서 l10n 파라미터 누락 수정 및 사용하지 않는 메서드 제거 (`_buildMassTimeSection` 메서드에 `AppLocalizations l10n` 파라미터 추가, `_launchMapByCoordinates` 메서드 제거) | - |
-| 2025-12-15 | 성경 텍스트 라이선스 상태 확인 기능 구현 - `bible_license_provider.dart` 생성 (Firestore의 `app_settings/bible_license` 문서에서 라이선스 상태 확인), `daily_mass_screen.dart`에서 하드코딩된 `isBibleTextLicensed`를 Provider로 교체, Firestore Rules에 `app_settings` 컬렉션 읽기 권한 추가 | - |
-| 2025-12-15 | 공지글 푸시 알림 기능 개선 - FCM 토큰 갱신 시 자동 Firestore 저장, `_currentUserId` 관리 추가 | - |
-| 2025-12-15 | 성당 좌표 데이터 추가 - Google Maps Geocoding API를 사용하여 모든 성당 JSON 파일에 latitude/longitude 좌표 추가, `scripts/add_coordinates.py` 생성 | - |
-| 2025-12-15 | 거리순 필터 Provider 버그 수정 - `parishDistanceProvider`에서 빌드 중 다른 Provider 수정 문제 해결 (`StateNotifierListenerError` 수정) | - |
-| 2025-12-15 | 거리순 필터칩 UI 개선 - `ParishFilterChip`에서 `isSelected` 상태에 따른 체크 아이콘 및 배경색 변경 | - |
-| 2025-12-15 | 외국어 미사 데이터 수정 - 末吉町教会 등 13개 성당의 `foreignMassTimes` 데이터를 `massTime` 텍스트 기반으로 수정, `scripts/fix_foreign_mass_times.py` 및 `scripts/auto_fix_foreign_mass.py` 생성 | - |
-| 2025-12-15 | 미사 시간 데이터 일관성 검증 및 수정 - kagoshima.json의 志布志教会, 阿久根教会 `massTimes` 데이터를 `massTime` 텍스트와 일치하도록 수정, kyoto.json의 上野教会 `massTimes`에 토요일 19:30 및 일요일 09:00, 10:30, 17:00 추가, `foreignMassTimes`에 타갈로그어 미사 추가 | - |
+| 2025-12-15 | Provider 구성 표준화 - Repository Provider는 `data/providers/`에 유지, UI state Provider는 `presentation/providers/`로 이동, `community_presentation_providers.dart` 생성 | cfc4ab29 |
+| 2025-12-15 | 공유 서비스를 core로 이동 - `image_upload_service.dart`를 `core/data/services/`로 이동, import 경로 업데이트 | cfc4ab29 |
+| 2025-12-15 | Slack webhook URL을 dotenv로 처리 - `functions/.env` 파일 생성, dotenv 패키지 추가, `functions/src/index.ts`에서 dotenv 사용 | cfc4ab29 |
+| 2025-12-15 | Admin 게시글 비표시 버그 수정 - Firestore Rules에 `commentCount` 업데이트 권한 추가, `updatePost()` 필드 비교 로직 개선 (리스트 비교, 기본값 처리) | cfc4ab29 |
+| 2025-12-15 | 댓글 기능 버그 수정 - `PostCommentSubmitter`의 `Ref` 타입을 `WidgetRef`로 변경, `currentAppUserProvider.future` 사용, Firestore 트랜잭션 순서 수정 (읽기 → 쓰기) | cfc4ab29 |
+| 2025-12-15 | 게시글 숨기기 후 목록으로 돌아가기 - `_hidePost()` 성공 시 `Navigator.pop()` 추가 | cfc4ab29 |
+| 2025-12-15 | 글씨 크기 설정 기능 추가 - `font_scale_provider.dart` 생성, `main.dart`에서 `MediaQuery.textScaler` 적용, 마이페이지에 설정 UI 추가 | cfc4ab29 |
+| 2025-12-15 | 거리순 필터링 버그 수정 - `parish_list_screen.dart`에서 `FutureProvider` 접근 방식 수정 (`ref.read` → `ref.watch`), 기본값을 `false`로 변경, 위치 정보 가져오기 로직 개선 | cfc4ab29 |
+| 2025-12-15 | `edit_profile_screen.dart` 추가 분할 완료 (1,106줄 → 457줄, 649줄 감소, 59% 감소) - 검색 시트 위젯 3개를 별도 파일로 분리: `FeastDaySearchSheet`, `UserSearchSheet`, `ParishSearchSheet` | cfc4ab29 |
+| 2025-12-15 | 성당 주소 업데이트 작업 완료 - 799개 성당 중 798개 성당에 상세 주소 추가 (99.9% 완료율), 웹 검색을 통한 주소 수집, `scripts/batch_update_addresses.py` 스크립트 생성, 파일별 완료율: 14개 파일 100% 완료, sapporo.json 98.4% (61/62), 미완료: カトリック奥尻教会 (번지수 정보 없음) | cfc4ab29 |
+| 2025-12-15 | 미사 시간 데이터 정리 작업 완료 - massTime 문자열 기반으로 massTimes/foreignMassTimes 재생성, 중복 항목 6개 해결, 순회 교회 96개 성당 문의 안내로 통일, 빈 데이터 항목 17개 처리 (kyoto.json 9개, nagoya.json 1개, osaka.json 1개, sapporo.json 4개, yokohama.json 2개), `scripts/parse_mass_times.py` 개선, 홈페이지 확인이 필요한 교회들 안내 문구 추가, 백업 파일 28개 삭제 | cfc4ab29 |
+| 2025-12-15 | 전체 코드베이스 에러 수정 완료 - RadioListTile의 deprecated onChanged를 RadioGroup으로 마이그레이션 (report_dialog.dart), l10n 변수 누락 문제 수정 (20+ 파일), const 키워드 오류 수정 (런타임 값 사용 시), 사용하지 않는 변수/import 제거, 중복 import 제거, 사용하지 않는 함수 제거 (_dateTimeToJson, _dateTimeFromJson), 모든 심각한 에러(severity 1) 수정 완료 | cfc4ab29 |
+| 2025-12-15 | 언어 설정 구현 완료 - `locale_provider.dart`에 날짜 포맷 로케일 동적 업데이트 추가 (`initializeDateFormatting`), `language_settings_screen.dart`에서 `appLocalizationsProvider` invalidate 추가하여 번역 데이터 자동 재로드 | cfc4ab29 |
+| 2025-12-15 | 에러 수정 완료 - `daily_mass_screen.dart`에서 l10n 파라미터 누락 수정 (`_buildCommentInput` 메서드에 `AppLocalizations l10n` 파라미터 추가), `parish_detail_screen.dart`에서 l10n 파라미터 누락 수정 및 사용하지 않는 메서드 제거 (`_buildMassTimeSection` 메서드에 `AppLocalizations l10n` 파라미터 추가, `_launchMapByCoordinates` 메서드 제거) | cfc4ab29 |
+| 2025-12-15 | 성경 텍스트 라이선스 상태 확인 기능 구현 - `bible_license_provider.dart` 생성 (Firestore의 `app_settings/bible_license` 문서에서 라이선스 상태 확인), `daily_mass_screen.dart`에서 하드코딩된 `isBibleTextLicensed`를 Provider로 교체, Firestore Rules에 `app_settings` 컬렉션 읽기 권한 추가 | cfc4ab29 |
+| 2025-12-15 | 공지글 푸시 알림 기능 개선 - FCM 토큰 갱신 시 자동 Firestore 저장, `_currentUserId` 관리 추가 | cfc4ab29 |
+| 2025-12-15 | 성당 좌표 데이터 추가 - Google Maps Geocoding API를 사용하여 모든 성당 JSON 파일에 latitude/longitude 좌표 추가, `scripts/add_coordinates.py` 생성 | cfc4ab29 |
+| 2025-12-15 | 거리순 필터 Provider 버그 수정 - `parishDistanceProvider`에서 빌드 중 다른 Provider 수정 문제 해결 (`StateNotifierListenerError` 수정) | cfc4ab29 |
+| 2025-12-15 | 거리순 필터칩 UI 개선 - `ParishFilterChip`에서 `isSelected` 상태에 따른 체크 아이콘 및 배경색 변경 | cfc4ab29 |
+| 2025-12-15 | 외국어 미사 데이터 수정 - 末吉町教会 등 13개 성당의 `foreignMassTimes` 데이터를 `massTime` 텍스트 기반으로 수정, `scripts/fix_foreign_mass_times.py` 및 `scripts/auto_fix_foreign_mass.py` 생성 | cfc4ab29 |
+| 2025-12-15 | 미사 시간 데이터 일관성 검증 및 수정 - kagoshima.json의 志布志教会, 阿久根教会 `massTimes` 데이터를 `massTime` 텍스트와 일치하도록 수정, kyoto.json의 上野教会 `massTimes`에 토요일 19:30 및 일요일 09:00, 10:30, 17:00 추가, `foreignMassTimes`에 타갈로그어 미사 추가 | bad05ad |
 
 ---
 
@@ -516,27 +516,27 @@
 | 2025-12-12 | 位置ベース距離計算機能実装 - `location_provider.dart`, `geocoding_service.dart`生成、`parish_card.dart`で実際の距離表示、`parish_list_screen.dart`で距離順ソートおよび位置権限リクエスト機能追加 | d8f1c84d |
 | 2025-12-12 | Google Maps APIキーを環境変数に分離 - `flutter_dotenv`追加、`.env`ファイル生成、`geocoding_service.dart`で環境変数使用 | d8f1c84d |
 | 2025-12-12 | 教会カードUI改善 - オーバーフロー問題解決 (横スクロール可能)、JPバッジ削除 (基本言語のため)、地図ボタンをGoogle Mapsに接続 (住所検索) | d8f1c84d |
-| 2025-12-15 | Provider構成標準化 - Repository Providerは`data/providers/`に維持、UI state Providerは`presentation/providers/`に移動、`community_presentation_providers.dart`生成 | - |
-| 2025-12-15 | 共有サービスをcoreに移動 - `image_upload_service.dart`を`core/data/services/`に移動、importパス更新 | - |
-| 2025-12-15 | Slack webhook URLをdotenvで処理 - `functions/.env`ファイル生成、dotenvパッケージ追加、`functions/src/index.ts`でdotenv使用 | - |
-| 2025-12-15 | Admin投稿非表示バグ修正 - Firestore Rulesに`commentCount`更新権限追加、`updatePost()`フィールド比較ロジック改善 (リスト比較、デフォルト値処理) | - |
-| 2025-12-15 | コメント機能バグ修正 - `PostCommentSubmitter`の`Ref`タイプを`WidgetRef`に変更、`currentAppUserProvider.future`使用、Firestoreトランザクション順序修正 (読み取り → 書き込み) | - |
-| 2025-12-15 | 投稿非表示後リストに戻る - `_hidePost()`成功時`Navigator.pop()`追加 | - |
-| 2025-12-15 | 文字サイズ設定機能追加 - `font_scale_provider.dart`生成、`main.dart`で`MediaQuery.textScaler`適用、マイページに設定UI追加 | - |
-| 2025-12-15 | 距離順フィルタリングバグ修正 - `parish_list_screen.dart`で`FutureProvider`アクセス方式修正 (`ref.read` → `ref.watch`)、デフォルト値を`false`に変更、位置情報取得ロジック改善 | - |
-| 2025-12-15 | `edit_profile_screen.dart`追加分割完了 (1,106行 → 457行、649行減少、59%減少) - 検索シートウィジェット3個を別ファイルに分離: `FeastDaySearchSheet`, `UserSearchSheet`, `ParishSearchSheet` | - |
-| 2025-12-15 | 聖堂住所更新作業完了 - 799個の聖堂中798個の聖堂に詳細住所追加 (99.9%完了率)、ウェブ検索による住所収集、`scripts/batch_update_addresses.py`スクリプト生成、ファイル別完了率: 14個のファイル100%完了、sapporo.json 98.4% (61/62)、未完了: カトリック奥尻教会 (番地情報なし) | - |
-| 2025-12-15 | ミサ時間データ整理作業完了 - massTime文字列ベースでmassTimes/foreignMassTimes再生成、重複項目6個解決、巡回教会96個の聖堂問い合わせ案内で統一、空データ項目17個処理 (kyoto.json 9個、nagoya.json 1個、osaka.json 1個、sapporo.json 4個、yokohama.json 2個)、`scripts/parse_mass_times.py`改善、ホームページ確認が必要な教会たち案内文句追加、バックアップファイル28個削除 | - |
-| 2025-12-15 | 全体コードベースエラー修正完了 - RadioListTileのdeprecated onChangedをRadioGroupにマイグレーション (report_dialog.dart)、l10n変数欠落問題修正 (20+ファイル)、constキーワードエラー修正 (ランタイム値使用時)、使用していない変数/import削除、重複import削除、使用していない関数削除 (_dateTimeToJson, _dateTimeFromJson)、すべての深刻なエラー(severity 1)修正完了 | - |
-| 2025-12-15 | 言語設定実装完了 - `locale_provider.dart`に日付フォーマットロケール動的更新追加 (`initializeDateFormatting`)、`language_settings_screen.dart`で`appLocalizationsProvider` invalidate追加して翻訳データ自動再読み込み | - |
-| 2025-12-15 | エラー修正完了 - `daily_mass_screen.dart`でl10nパラメータ欠落修正 (`_buildCommentInput`メソッドに`AppLocalizations l10n`パラメータ追加)、`parish_detail_screen.dart`でl10nパラメータ欠落修正および使用していないメソッド削除 (`_buildMassTimeSection`メソッドに`AppLocalizations l10n`パラメータ追加、`_launchMapByCoordinates`メソッド削除) | - |
-| 2025-12-15 | 聖書テキストライセンス状態確認機能実装 - `bible_license_provider.dart`生成 (Firestoreの`app_settings/bible_license`ドキュメントでライセンス状態確認)、`daily_mass_screen.dart`でハードコードされた`isBibleTextLicensed`をProviderに置き換え、Firestore Rulesに`app_settings`コレクション読み取り権限追加 | - |
-| 2025-12-15 | お知らせ投稿プッシュ通知機能改善 - FCMトークン更新時自動Firestore保存、`_currentUserId`管理追加 | - |
-| 2025-12-15 | 聖堂座標データ追加 - Google Maps Geocoding APIを使用してすべての聖堂JSONファイルにlatitude/longitude座標追加、`scripts/add_coordinates.py`生成 | - |
-| 2025-12-15 | 距離順フィルターProviderバグ修正 - `parishDistanceProvider`でビルド中他のProvider修正問題解決 (`StateNotifierListenerError`修正) | - |
-| 2025-12-15 | 距離順フィルターチップUI改善 - `ParishFilterChip`で`isSelected`状態によるチェックアイコンおよび背景色変更 | - |
-| 2025-12-15 | 外国語ミサデータ修正 - 末吉町教会など13個の聖堂の`foreignMassTimes`データを`massTime`テキストベースで修正、`scripts/fix_foreign_mass_times.py`および`scripts/auto_fix_foreign_mass.py`生成 | - |
-| 2025-12-15 | ミサ時間データ一貫性検証および修正 - kagoshima.jsonの志布志教会、阿久根教会`massTimes`データを`massTime`テキストと一致するように修正、kyoto.jsonの上野教会`massTimes`に土曜日19:30および日曜日09:00、10:30、17:00追加、`foreignMassTimes`にタガログ語ミサ追加 | - |
+| 2025-12-15 | Provider構成標準化 - Repository Providerは`data/providers/`に維持、UI state Providerは`presentation/providers/`に移動、`community_presentation_providers.dart`生成 | cfc4ab29 |
+| 2025-12-15 | 共有サービスをcoreに移動 - `image_upload_service.dart`を`core/data/services/`に移動、importパス更新 | cfc4ab29 |
+| 2025-12-15 | Slack webhook URLをdotenvで処理 - `functions/.env`ファイル生成、dotenvパッケージ追加、`functions/src/index.ts`でdotenv使用 | cfc4ab29 |
+| 2025-12-15 | Admin投稿非表示バグ修正 - Firestore Rulesに`commentCount`更新権限追加、`updatePost()`フィールド比較ロジック改善 (リスト比較、デフォルト値処理) | cfc4ab29 |
+| 2025-12-15 | コメント機能バグ修正 - `PostCommentSubmitter`の`Ref`タイプを`WidgetRef`に変更、`currentAppUserProvider.future`使用、Firestoreトランザクション順序修正 (読み取り → 書き込み) | cfc4ab29 |
+| 2025-12-15 | 投稿非表示後リストに戻る - `_hidePost()`成功時`Navigator.pop()`追加 | cfc4ab29 |
+| 2025-12-15 | 文字サイズ設定機能追加 - `font_scale_provider.dart`生成、`main.dart`で`MediaQuery.textScaler`適用、マイページに設定UI追加 | cfc4ab29 |
+| 2025-12-15 | 距離順フィルタリングバグ修正 - `parish_list_screen.dart`で`FutureProvider`アクセス方式修正 (`ref.read` → `ref.watch`)、デフォルト値を`false`に変更、位置情報取得ロジック改善 | cfc4ab29 |
+| 2025-12-15 | `edit_profile_screen.dart`追加分割完了 (1,106行 → 457行、649行減少、59%減少) - 検索シートウィジェット3個を別ファイルに分離: `FeastDaySearchSheet`, `UserSearchSheet`, `ParishSearchSheet` | cfc4ab29 |
+| 2025-12-15 | 聖堂住所更新作業完了 - 799個の聖堂中798個の聖堂に詳細住所追加 (99.9%完了率)、ウェブ検索による住所収集、`scripts/batch_update_addresses.py`スクリプト生成、ファイル別完了率: 14個のファイル100%完了、sapporo.json 98.4% (61/62)、未完了: カトリック奥尻教会 (番地情報なし) | cfc4ab29 |
+| 2025-12-15 | ミサ時間データ整理作業完了 - massTime文字列ベースでmassTimes/foreignMassTimes再生成、重複項目6個解決、巡回教会96個の聖堂問い合わせ案内で統一、空データ項目17個処理 (kyoto.json 9個、nagoya.json 1個、osaka.json 1個、sapporo.json 4個、yokohama.json 2個)、`scripts/parse_mass_times.py`改善、ホームページ確認が必要な教会たち案内文句追加、バックアップファイル28個削除 | cfc4ab29 |
+| 2025-12-15 | 全体コードベースエラー修正完了 - RadioListTileのdeprecated onChangedをRadioGroupにマイグレーション (report_dialog.dart)、l10n変数欠落問題修正 (20+ファイル)、constキーワードエラー修正 (ランタイム値使用時)、使用していない変数/import削除、重複import削除、使用していない関数削除 (_dateTimeToJson, _dateTimeFromJson)、すべての深刻なエラー(severity 1)修正完了 | cfc4ab29 |
+| 2025-12-15 | 言語設定実装完了 - `locale_provider.dart`に日付フォーマットロケール動的更新追加 (`initializeDateFormatting`)、`language_settings_screen.dart`で`appLocalizationsProvider` invalidate追加して翻訳データ自動再読み込み | cfc4ab29 |
+| 2025-12-15 | エラー修正完了 - `daily_mass_screen.dart`でl10nパラメータ欠落修正 (`_buildCommentInput`メソッドに`AppLocalizations l10n`パラメータ追加)、`parish_detail_screen.dart`でl10nパラメータ欠落修正および使用していないメソッド削除 (`_buildMassTimeSection`メソッドに`AppLocalizations l10n`パラメータ追加、`_launchMapByCoordinates`メソッド削除) | cfc4ab29 |
+| 2025-12-15 | 聖書テキストライセンス状態確認機能実装 - `bible_license_provider.dart`生成 (Firestoreの`app_settings/bible_license`ドキュメントでライセンス状態確認)、`daily_mass_screen.dart`でハードコードされた`isBibleTextLicensed`をProviderに置き換え、Firestore Rulesに`app_settings`コレクション読み取り権限追加 | cfc4ab29 |
+| 2025-12-15 | お知らせ投稿プッシュ通知機能改善 - FCMトークン更新時自動Firestore保存、`_currentUserId`管理追加 | cfc4ab29 |
+| 2025-12-15 | 聖堂座標データ追加 - Google Maps Geocoding APIを使用してすべての聖堂JSONファイルにlatitude/longitude座標追加、`scripts/add_coordinates.py`生成 | cfc4ab29 |
+| 2025-12-15 | 距離順フィルターProviderバグ修正 - `parishDistanceProvider`でビルド中他のProvider修正問題解決 (`StateNotifierListenerError`修正) | cfc4ab29 |
+| 2025-12-15 | 距離順フィルターチップUI改善 - `ParishFilterChip`で`isSelected`状態によるチェックアイコンおよび背景色変更 | cfc4ab29 |
+| 2025-12-15 | 外国語ミサデータ修正 - 末吉町教会など13個の聖堂の`foreignMassTimes`データを`massTime`テキストベースで修正、`scripts/fix_foreign_mass_times.py`および`scripts/auto_fix_foreign_mass.py`生成 | cfc4ab29 |
+| 2025-12-15 | ミサ時間データ一貫性検証および修正 - kagoshima.jsonの志布志教会、阿久根教会`massTimes`データを`massTime`テキストと一致するように修正、kyoto.jsonの上野教会`massTimes`に土曜日19:30および日曜日09:00、10:30、17:00追加、`foreignMassTimes`にタガログ語ミサ追加 | bad05ad |
 
 ---
 
