@@ -29,6 +29,24 @@
     },
     {
       "month": 1,
+      "day": 2,
+      "name": "聖バシリウス",
+      "nameEn": "Saint Basil the Great",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖バシリウスの祝日を祝います！"
+    },
+    {
+      "month": 1,
+      "day": 2,
+      "name": "聖グレゴリウス",
+      "nameEn": "Saint Gregory of Nazianzus",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖グレゴリウスの祝日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 3,
       "name": "聖ジュヌヴィェーヴ",
       "nameEn": "Saint Genevieve",
@@ -57,6 +75,24 @@
     },
     {
       "month": 1,
+      "day": 3,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの祝日を祝います！"
+    },
+    {
+      "month": 1,
+      "day": 3,
+      "name": "聖ゲオルギウス",
+      "nameEn": "Saint George",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ゲオルギウスの記念日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 4,
       "name": "聖エリザベス・アン・シートン",
       "nameEn": "Saint Elizabeth Ann Seton",
@@ -71,6 +107,15 @@
     },
     {
       "month": 1,
+      "day": 4,
+      "name": "エルメネジルド",
+      "nameEn": "Saint Hermenegild",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "エルメネジルドの祝日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 5,
       "name": "聖シメオン（柱の行者）",
       "nameEn": "Saint Simeon Stylites",
@@ -82,6 +127,24 @@
       "nameVi": "Thánh Simêon Stylites",
       "nameEs": "San Simeón Estilita",
       "namePt": "São Simeão Estilita"
+    },
+    {
+      "month": 1,
+      "day": 5,
+      "name": "セバスティアヌス",
+      "nameEn": "Sebastian",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "セバスティアヌスの祝日を祝います！"
+    },
+    {
+      "month": 1,
+      "day": 5,
+      "name": "ジョン・ネポムセ",
+      "nameEn": "John Nepomucene",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "ジョン・ネポムセの記念日を祝います！"
     },
     {
       "month": 1,
@@ -127,6 +190,24 @@
     },
     {
       "month": 1,
+      "day": 7,
+      "name": "聖アンドレア・ボニファティウス",
+      "nameEn": "Saint André Bessette",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アンドレア・ボニファティウスの記念日を祝います！"
+    },
+    {
+      "month": 1,
+      "day": 7,
+      "name": "聖レオ大聖人",
+      "nameEn": "Saint Leo the Great",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖レオ大聖人の記念日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 8,
       "name": "聖セヴェリノ（ノリクム）",
       "nameEn": "Saint Severinus of Noricum",
@@ -155,6 +236,24 @@
     },
     {
       "month": 1,
+      "day": 9,
+      "name": "イグナチオ・デ・ロヨラ",
+      "nameEn": "Ignatius of Loyola",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "イグナチオ・デ・ロヨラの記念日を祝います！"
+    },
+    {
+      "month": 1,
+      "day": 9,
+      "name": "アウグスティヌス・キュプリアヌス",
+      "nameEn": "Augustine of Hippo",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "アウグスティヌス・キュプリアヌスの記念日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 10,
       "name": "聖ウィルヘルモ大司教",
       "nameEn": "Saint William of Bourges",
@@ -166,6 +265,15 @@
       "nameVi": "Thánh William của Bourges",
       "nameEs": "San Guillermo de Bourges",
       "namePt": "São Guilherme de Bourges"
+    },
+    {
+      "month": 1,
+      "day": 10,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
     },
     {
       "month": 1,
@@ -183,6 +291,24 @@
     },
     {
       "month": 1,
+      "day": 11,
+      "name": "聖ダニエル",
+      "nameEn": "Saint Daniel",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ダニエルの記念日を祝います！"
+    },
+    {
+      "month": 1,
+      "day": 11,
+      "name": "聖ジュリアン",
+      "nameEn": "Saint Julian",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ジュリアンの記念日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 12,
       "name": "聖マルグリット・ブルジョワ修道女",
       "nameEn": "Saint Marguerite Bourgeoys",
@@ -194,6 +320,24 @@
       "nameVi": "Thánh Marguerite Bourgeoys",
       "nameEs": "Santa Margarita Bourgeoys",
       "namePt": "Santa Margarida Bourgeoys"
+    },
+    {
+      "month": 1,
+      "day": 12,
+      "name": "聖アモロス",
+      "nameEn": "Saint Amaro",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アモロスの記念日を祝います！"
+    },
+    {
+      "month": 1,
+      "day": 12,
+      "name": "聖ベネディクト",
+      "nameEn": "Saint Benedict",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ベネディクトの記念日を祝います！"
     },
     {
       "month": 1,
@@ -262,6 +406,15 @@
     },
     {
       "month": 1,
+      "day": 16,
+      "name": "アグネス",
+      "nameEn": "Agnes",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "アグネスの祝日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 17,
       "name": "聖アントニオ",
       "nameEn": "Saint Anthony the Great",
@@ -273,6 +426,15 @@
       "nameVi": "Thánh An-tôn Lớn",
       "nameEs": "San Antonio el Grande",
       "namePt": "São Antônio"
+    },
+    {
+      "month": 1,
+      "day": 17,
+      "name": "アントニオ・アバド",
+      "nameEn": "Saint Anthony Abbot",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "アントニオ・アバドの祝日を祝います！"
     },
     {
       "month": 1,
@@ -290,6 +452,15 @@
     },
     {
       "month": 1,
+      "day": 18,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アグネスの祝日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 19,
       "name": "聖カヌート4世殉教者",
       "nameEn": "Saint Canute IV",
@@ -301,6 +472,15 @@
       "nameVi": "Thánh Canh-tút IV",
       "nameEs": "San Canuto IV",
       "namePt": "São Canuto IV"
+    },
+    {
+      "month": 1,
+      "day": 19,
+      "name": "アグネス",
+      "nameEn": "Agnes",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "アグネスの祝日を祝います！"
     },
     {
       "month": 1,
@@ -383,6 +563,24 @@
     },
     {
       "month": 1,
+      "day": 23,
+      "name": "聖ヴィンセント",
+      "nameEn": "Saint Vincent",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ヴィンセントの祝日を祝います！"
+    },
+    {
+      "month": 1,
+      "day": 23,
+      "name": "聖マリウス",
+      "nameEn": "Saint Marius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マリウスの記念日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 24,
       "name": "聖フランシスコ・サレジオ司教教会博士",
       "nameEn": "Saint Francis de Sales",
@@ -394,6 +592,24 @@
       "nameVi": "Thánh Phanxicô Salesio",
       "nameEs": "San Francisco de Sales",
       "namePt": "São Francisco de Sales"
+    },
+    {
+      "month": 1,
+      "day": 24,
+      "name": "聖ティモテ",
+      "nameEn": "Saint Timothy",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ティモテの記念日を祝います！"
+    },
+    {
+      "month": 1,
+      "day": 24,
+      "name": "聖テトス",
+      "nameEn": "Saint Titus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖テトスの記念日を祝います！"
     },
     {
       "month": 1,
@@ -425,6 +641,15 @@
     },
     {
       "month": 1,
+      "day": 26,
+      "name": "聖ティモテと聖ティト",
+      "nameEn": "Saint Timothy and Saint Titus",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ティモテと聖ティトの祝日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 27,
       "name": "聖アンジェラ・メリチおとめ",
       "nameEn": "Saint Angela Merici",
@@ -436,6 +661,15 @@
       "nameVi": "Thánh Angela Merici",
       "nameEs": "Santa Ángela Merici",
       "namePt": "Santa Ângela Merici"
+    },
+    {
+      "month": 1,
+      "day": 27,
+      "name": "聖アンゼルム",
+      "nameEn": "Saint Anselm",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アンゼルムの記念日を祝います！"
     },
     {
       "month": 1,
@@ -476,6 +710,15 @@
     },
     {
       "month": 1,
+      "day": 29,
+      "name": "聖トマス・アクィナス",
+      "nameEn": "Saint Thomas Aquinas",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖トマス・アクィナスの祝日を祝います！"
+    },
+    {
+      "month": 1,
       "day": 30,
       "name": "聖バルドヒルド",
       "nameEn": "Saint Bathildis",
@@ -487,6 +730,24 @@
       "nameVi": "Thánh Bathildis",
       "nameEs": "Santa Batilde",
       "namePt": "Santa Balthildes"
+    },
+    {
+      "month": 1,
+      "day": 30,
+      "name": "聖ヒエロニムス",
+      "nameEn": "Saint Jerome",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ヒエロニムスの祝日を祝います！"
+    },
+    {
+      "month": 1,
+      "day": 30,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの記念日を祝います！"
     },
     {
       "month": 1,
@@ -514,6 +775,24 @@
       "nameVi": "Thánh Brigitte",
       "nameEs": "Santa Brígida",
       "namePt": "Santa Brígida"
+    },
+    {
+      "month": 2,
+      "day": 1,
+      "name": "聖ブリギッタ",
+      "nameEn": "Saint Brigid",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ブリギッタの祝日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 1,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
     },
     {
       "month": 2,
@@ -559,6 +838,15 @@
     },
     {
       "month": 2,
+      "day": 3,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 4,
       "name": "聖アンドレア・コルシーニ司教",
       "nameEn": "Saint アンドレア・コルシーニ",
@@ -570,6 +858,24 @@
       "nameVi": "Thánh André Corsini",
       "nameEs": "San Andrés Corsini",
       "namePt": "São André Corsini"
+    },
+    {
+      "month": 2,
+      "day": 4,
+      "name": "聖アンデレ・アポスティル",
+      "nameEn": "Saint Andrew the Apostle",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アンデレ・アポスティルの祝日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 4,
+      "name": "聖ヨハネ・グリマルディ",
+      "nameEn": "Saint John of Grimaldi",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ヨハネ・グリマルディの記念日を祝います！"
     },
     {
       "month": 2,
@@ -647,6 +953,24 @@
     },
     {
       "month": 2,
+      "day": 6,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アグネスの祝日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 6,
+      "name": "聖パウロの使徒",
+      "nameEn": "Saint Paul the Apostle",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖パウロの使徒の記念日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 7,
       "name": "福者エウジェニ・スメット（み摂理のマリア）修道女",
       "nameEn": "Saint 福者エウジェニ・スメット（み摂理のマリア）",
@@ -658,6 +982,24 @@
       "nameVi": "Thánh Eugénie Smet (Maria của sự Quan phòng)",
       "nameEs": "Beata Eugenia Smet (de la Providencia María)",
       "namePt": "Beata Eugênia Smet (Maria da Providência)"
+    },
+    {
+      "month": 2,
+      "day": 7,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 7,
+      "name": "聖パウロの使徒",
+      "nameEn": "Saint Paul the Apostle",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖パウロの使徒の記念日を祝います！"
     },
     {
       "month": 2,
@@ -689,6 +1031,24 @@
     },
     {
       "month": 2,
+      "day": 8,
+      "name": "聖ヒエロニムス",
+      "nameEn": "Saint Jerome",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ヒエロニムスの祝日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 8,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの記念日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 9,
       "name": "聖アポローニア殉教者",
       "nameEn": "Saint アポローニア",
@@ -700,6 +1060,24 @@
       "nameVi": "Thánh Apolonia",
       "nameEs": "Santa Apolonia",
       "namePt": "Santa Apolônia"
+    },
+    {
+      "month": 2,
+      "day": 9,
+      "name": "聖アポロニウス",
+      "nameEn": "Saint Apollonius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アポロニウスの記念日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 9,
+      "name": "聖テオドール",
+      "nameEn": "Saint Theodore",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖テオドールの記念日を祝います！"
     },
     {
       "month": 2,
@@ -742,6 +1120,15 @@
       "nameVi": "Đức Mẹ Lộ Đức",
       "nameEs": "Nuestra Señora de Lourdes",
       "namePt": "Nossa Senhora de Lourdes"
+    },
+    {
+      "month": 2,
+      "day": 11,
+      "name": "聖ベルナデッタ",
+      "nameEn": "Saint Bernadette",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ベルナデッタの記念日を祝います！"
     },
     {
       "month": 2,
@@ -791,6 +1178,24 @@
     },
     {
       "month": 2,
+      "day": 13,
+      "name": "聖キリル",
+      "nameEn": "Saint Cyril",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖キリルの祝日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 13,
+      "name": "聖メトディウス",
+      "nameEn": "Saint Methodius",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖メトディウスの祝日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 14,
       "name": "聖キリロとメトディオ",
       "nameEn": "Saints Cyril and Methodius",
@@ -819,6 +1224,15 @@
     },
     {
       "month": 2,
+      "day": 14,
+      "name": "聖バレンタイン",
+      "nameEn": "Saint Valentine",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖バレンタインの祝日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 15,
       "name": "聖ジークフリード",
       "nameEn": "Saint ジークフリード",
@@ -833,6 +1247,24 @@
     },
     {
       "month": 2,
+      "day": 15,
+      "name": "聖シルヴェステル",
+      "nameEn": "Saint Silvester",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖シルヴェステルの祝日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 15,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 16,
       "name": "聖オネシモ",
       "nameEn": "Saint オネシモ",
@@ -843,6 +1275,24 @@
       "nameZh": "圣奥尼西모",
       "nameVi": "Thánh Onêsimô",
       "nameEs": "San Onésimo"
+    },
+    {
+      "month": 2,
+      "day": 16,
+      "name": "聖ジュゼッペ",
+      "nameEn": "Saint Joseph",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ジュゼッペの祝日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 16,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの記念日を祝います！"
     },
     {
       "month": 2,
@@ -888,6 +1338,15 @@
     },
     {
       "month": 2,
+      "day": 18,
+      "name": "カトリーヌ・ド・シエナ",
+      "nameEn": "Catherine of Siena",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "カトリーヌ・ド・シエナの記念日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 19,
       "name": "聖コンラド（ピアチェンツァ）修道者",
       "nameEn": "Saint コンラド（ピアチェンツァ）",
@@ -920,6 +1379,15 @@
     },
     {
       "month": 2,
+      "day": 19,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの記念日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 20,
       "name": "聖ヨセフ（レオニッサ）司祭",
       "nameEn": "Saint ヨセフ（レオニッサ）",
@@ -931,6 +1399,15 @@
       "nameVi": "Thánh Giuse (Leonisa)",
       "nameEs": "San José (Leonisa)",
       "namePt": "São José (Leonissa)"
+    },
+    {
+      "month": 2,
+      "day": 20,
+      "name": "聖アルフォンソ・マリア・デ・リゴーリ",
+      "nameEn": "St. Alphonsus Maria de Liguori",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アルフォンソ・マリア・デ・リゴーリの記念日を祝います！"
     },
     {
       "month": 2,
@@ -976,6 +1453,15 @@
     },
     {
       "month": 2,
+      "day": 22,
+      "name": "聖ペトロと聖パウロ",
+      "nameEn": "Saint Peter and Saint Paul",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖ペトロと聖パウロの大祝日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 23,
       "name": "聖ポリカルポ",
       "nameEn": "Saint Polycarp",
@@ -1018,6 +1504,15 @@
     },
     {
       "month": 2,
+      "day": 24,
+      "name": "聖マティア",
+      "nameEn": "Saint Matthias",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マティアの祝日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 25,
       "name": "聖ワルブルガ",
       "nameEn": "Saint ワルブルガ",
@@ -1029,6 +1524,24 @@
       "nameVi": "Thánh Walburga",
       "nameEs": "Santa Walburga",
       "namePt": "Santa Walburga"
+    },
+    {
+      "month": 2,
+      "day": 25,
+      "name": "聖エレナ",
+      "nameEn": "Saint Helena",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖エレナの祝日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 25,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの記念日を祝います！"
     },
     {
       "month": 2,
@@ -1069,6 +1582,24 @@
     },
     {
       "month": 2,
+      "day": 27,
+      "name": "聖ガブリエル",
+      "nameEn": "Saint Gabriel",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ガブリエルの祝日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 27,
+      "name": "聖アナスタシア",
+      "nameEn": "Saint Anastasia",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アナスタシアの記念日を祝います！"
+    },
+    {
+      "month": 2,
       "day": 28,
       "name": "聖レミジオ司教",
       "nameEn": "Saint レミジオ",
@@ -1080,6 +1611,24 @@
       "nameVi": "Thánh Remigius",
       "nameEs": "San Remigio",
       "namePt": "São Remígio"
+    },
+    {
+      "month": 2,
+      "day": 28,
+      "name": "聖ロマン",
+      "nameEn": "Saint Romanus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ロマンの記念日を祝います！"
+    },
+    {
+      "month": 2,
+      "day": 28,
+      "name": "聖ヒラリウス",
+      "nameEn": "Saint Hilarius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ヒラリウスの記念日を祝います！"
     },
     {
       "month": 3,
@@ -1097,6 +1646,24 @@
     },
     {
       "month": 3,
+      "day": 1,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アグネスの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 1,
+      "name": "聖ダニエル",
+      "nameEn": "Saint Daniel",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ダニエルの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 2,
       "name": "ボヘミア（プラハ）の聖アグネス",
       "nameEn": "Saint ボヘミア（プラハ）のSaint アグネス",
@@ -1111,6 +1678,15 @@
     },
     {
       "month": 3,
+      "day": 2,
+      "name": "聖チャールズ・ボロメオ",
+      "nameEn": "Saint Charles Borromeo",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖チャールズ・ボロメオの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 3,
       "name": "聖クネグンダ皇后",
       "nameEn": "Saint クネグンダ皇后",
@@ -1122,6 +1698,15 @@
       "nameVi": "Thánh Cunegunda",
       "nameEs": "Santa Cunegunda",
       "namePt": "Santa Cunegunda"
+    },
+    {
+      "month": 3,
+      "day": 3,
+      "name": "聖カシミール",
+      "nameEn": "Saint Casimir",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖カシミールの祝日を祝います！"
     },
     {
       "month": 3,
@@ -1190,6 +1775,24 @@
     },
     {
       "month": 3,
+      "day": 6,
+      "name": "聖コルベ",
+      "nameEn": "Saint Maximilian Kolbe",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖コルベの記念日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 6,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 7,
       "name": "聖ペルペトゥアとフェリシタス",
       "nameEn": "Saints Perpetua and Felicity",
@@ -1218,6 +1821,15 @@
     },
     {
       "month": 3,
+      "day": 7,
+      "name": "聖トマス・アクィナス",
+      "nameEn": "Saint Thomas Aquinas",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖トマス・アクィナスの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 8,
       "name": "聖ヨハネ・ア・デオ修道者",
       "nameEn": "Saint ヨハネ・ア・デオ",
@@ -1229,6 +1841,24 @@
       "nameVi": "Thánh Gioan Đề-ô",
       "nameEs": "San Juan de Dios",
       "namePt": "São João da Cruz"
+    },
+    {
+      "month": 3,
+      "day": 8,
+      "name": "聖フランシスコ・サレジオ",
+      "nameEn": "Saint Francis de Sales",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・サレジオの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 8,
+      "name": "聖ジュリアン",
+      "nameEn": "Saint Julian",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ジュリアンの記念日を祝います！"
     },
     {
       "month": 3,
@@ -1260,6 +1890,24 @@
     },
     {
       "month": 3,
+      "day": 9,
+      "name": "聖フランシスコ・サレジオ",
+      "nameEn": "Saint Francis de Sales",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・サレジオの記念日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 9,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 10,
       "name": "聖ドメニコ・サヴィオ",
       "nameEn": "Saint ドメニコ・サヴィオ",
@@ -1274,6 +1922,15 @@
     },
     {
       "month": 3,
+      "day": 10,
+      "name": "聖カタリナ・ダレッサ",
+      "nameEn": "Saint Catherine of Bologna",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖カタリナ・ダレッサの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 11,
       "name": "聖ソフロニオ司教",
       "nameEn": "Saint ソフロニオ",
@@ -1285,6 +1942,24 @@
       "nameVi": "Thánh Sofronio",
       "nameEs": "San Sofronio",
       "namePt": "São Sofrônio"
+    },
+    {
+      "month": 3,
+      "day": 11,
+      "name": "聖カリスト",
+      "nameEn": "Saint Callistus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖カリストの記念日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 11,
+      "name": "聖アレクサンダー",
+      "nameEn": "Saint Alexander",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アレクサンダーの記念日を祝います！"
     },
     {
       "month": 3,
@@ -1311,6 +1986,24 @@
     },
     {
       "month": 3,
+      "day": 12,
+      "name": "聖グスタフ",
+      "nameEn": "Saint Gustav",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖グスタフの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 12,
+      "name": "聖アレクシウス",
+      "nameEn": "Saint Alexius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アレクシウスの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 13,
       "name": "聖エウフラシア修道女",
       "nameEn": "Saint エウフラシア",
@@ -1322,6 +2015,24 @@
       "nameVi": "Thánh Euphrasia",
       "nameEs": "Santa Eufrasia",
       "namePt": "Santa Eufrásia"
+    },
+    {
+      "month": 3,
+      "day": 13,
+      "name": "聖カトリーヌ・シエナ",
+      "nameEn": "Saint Catherine of Siena",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖カトリーヌ・シエナの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 13,
+      "name": "聖ロベルト・ベラルミーノ",
+      "nameEn": "Saint Robert Bellarmine",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ロベルト・ベラルミーノの記念日を祝います！"
     },
     {
       "month": 3,
@@ -1339,6 +2050,24 @@
     },
     {
       "month": 3,
+      "day": 14,
+      "name": "マチュー",
+      "nameEn": "Saint Matthew",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "マチューの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 14,
+      "name": "聖カリスト",
+      "nameEn": "Saint Callistus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖カリストの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 15,
       "name": "聖ルイーズ・ド・マリアック",
       "nameEn": "Saint ルイーズ・ド・マリアック",
@@ -1353,6 +2082,24 @@
     },
     {
       "month": 3,
+      "day": 15,
+      "name": "聖クロディウス",
+      "nameEn": "Saint Claudius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖クロディウスの記念日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 15,
+      "name": "聖ルカ",
+      "nameEn": "Saint Luke",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ルカの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 16,
       "name": "聖ヘリベルト大司教",
       "nameEn": "Saint ヘリベルト大",
@@ -1364,6 +2111,15 @@
       "nameVi": "Thánh Hilbert",
       "nameEs": "San Hildegardo",
       "namePt": "São Helberto"
+    },
+    {
+      "month": 3,
+      "day": 16,
+      "name": "聖パトリック",
+      "nameEn": "Saint Patrick",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖パトリックの祝日を祝います！"
     },
     {
       "month": 3,
@@ -1395,6 +2151,24 @@
     },
     {
       "month": 3,
+      "day": 18,
+      "name": "聖カリスト",
+      "nameEn": "Saint Callistus",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖カリストの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 18,
+      "name": "聖フランシスコ・サレジオ",
+      "nameEn": "Saint Francis de Sales",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・サレジオの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 19,
       "name": "聖ヨセフ",
       "nameEn": "Saint Joseph",
@@ -1423,6 +2197,15 @@
     },
     {
       "month": 3,
+      "day": 20,
+      "name": "ヨセフ",
+      "nameEn": "Joseph",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "ヨセフの大祝日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 21,
       "name": "聖ニコラウス（フリューエ）",
       "nameEn": "Saint ニコラウス（フリューエ）",
@@ -1434,6 +2217,24 @@
       "nameVi": "Thánh Nicolas (Flue)",
       "nameEs": "San Nicolás de Flüe",
       "namePt": "São Nicolau (de Flüe)"
+    },
+    {
+      "month": 3,
+      "day": 21,
+      "name": "ヨセフ",
+      "nameEn": "Saint Joseph",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "ヨセフの大祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 21,
+      "name": "聖クレメンス",
+      "nameEn": "Saint Clement",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖クレメンスの記念日を祝います！"
     },
     {
       "month": 3,
@@ -1451,6 +2252,24 @@
     },
     {
       "month": 3,
+      "day": 22,
+      "name": "聖レオナルド",
+      "nameEn": "Saint Leonard",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖レオナルドの記念日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 22,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes of Montepulciano",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 23,
       "name": "聖トゥリビオ（モグロベホの）司教",
       "nameEn": "Saint トゥリビオ（モグロベホの）",
@@ -1465,6 +2284,24 @@
     },
     {
       "month": 3,
+      "day": 23,
+      "name": "聖ゲオルギウス",
+      "nameEn": "Saint George",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ゲオルギウスの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 23,
+      "name": "聖ブレーズ",
+      "nameEn": "Saint Blaise",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ブレーズの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 24,
       "name": "聖カタリナおとめ（スウェーデン）",
       "nameEn": "Saint カタリナ（スウェーデン）",
@@ -1476,6 +2313,24 @@
       "nameVi": "Thánh Catarina (Thụy Điển)",
       "nameEs": "Santa Catalina (de Suecia)",
       "namePt": "Santa Catarina (Suécia)"
+    },
+    {
+      "month": 3,
+      "day": 24,
+      "name": "聖ゲオルギオス",
+      "nameEn": "Saint George",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ゲオルギオスの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 24,
+      "name": "聖ルカ",
+      "nameEn": "Saint Luke",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ルカの記念日を祝います！"
     },
     {
       "month": 3,
@@ -1507,6 +2362,15 @@
     },
     {
       "month": 3,
+      "day": 25,
+      "name": "受胎告知の聖マリア",
+      "nameEn": "Annunciation of the Blessed Virgin Mary",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "受胎告知の聖マリアの大祝日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 26,
       "name": "聖ルドゲーロ司教",
       "nameEn": "Saint ルドゲーロ",
@@ -1530,6 +2394,24 @@
     },
     {
       "month": 3,
+      "day": 26,
+      "name": "聖テオドリック",
+      "nameEn": "Saint Theodoric",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖テオドリックの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 26,
+      "name": "聖ルカ",
+      "nameEn": "Saint Luke",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ルカの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 27,
       "name": "聖ルペルト司教（ザルツブルク）",
       "nameEn": "Saint ルペルト（ザルツブルク）",
@@ -1541,6 +2423,15 @@
       "nameVi": "Thánh Rupert",
       "nameEs": "San Ruperto de Salzburgo",
       "namePt": "São Ruperto de Salzburgo"
+    },
+    {
+      "month": 3,
+      "day": 27,
+      "name": "聖ルカ",
+      "nameEn": "Saint Luke",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ルカの祝日を祝います！"
     },
     {
       "month": 3,
@@ -1558,6 +2449,24 @@
     },
     {
       "month": 3,
+      "day": 28,
+      "name": "聖テオドール",
+      "nameEn": "Saint Theodore",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖テオドールの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 28,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 29,
       "name": "聖ヨナ、聖パラキシオ兄弟殉教者",
       "nameEn": "Saint ヨナ、Saint パラキシオ兄弟",
@@ -1569,6 +2478,24 @@
       "nameVi": "Thánh Giôna, Thánh Pharao Kixio, Anh em tử đạo",
       "nameEs": "San Jonás, San Paracisio, mártir",
       "namePt": "São Jonas, São Parácio, mártir"
+    },
+    {
+      "month": 3,
+      "day": 29,
+      "name": "聖バルバラ",
+      "nameEn": "Saint Barbara",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖バルバラの祝日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 29,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの記念日を祝います！"
     },
     {
       "month": 3,
@@ -1586,6 +2513,24 @@
     },
     {
       "month": 3,
+      "day": 30,
+      "name": "聖ペトロ・チョルス",
+      "nameEn": "Saint Peter Chosrus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ペトロ・チョルスの記念日を祝います！"
+    },
+    {
+      "month": 3,
+      "day": 30,
+      "name": "聖アポロニウス",
+      "nameEn": "Saint Apollonius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アポロニウスの記念日を祝います！"
+    },
+    {
+      "month": 3,
       "day": 31,
       "name": "聖バルビナおとめ",
       "nameEn": "Saint バルビナ",
@@ -1597,6 +2542,15 @@
       "nameVi": "Thánh Barvina",
       "nameEs": "Santa Balbina",
       "namePt": "Santa Barbina"
+    },
+    {
+      "month": 3,
+      "day": 31,
+      "name": "聖ベネディクト",
+      "nameEn": "Saint Benedict",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ベネディクトの祝日を祝います！"
     },
     {
       "month": 4,
@@ -1611,6 +2565,24 @@
       "nameVi": "Thánh Hugo",
       "nameEs": "San Hugo",
       "namePt": "São Hugo"
+    },
+    {
+      "month": 4,
+      "day": 1,
+      "name": "聖フランシスコ・サレジオ",
+      "nameEn": "Saint Francis de Sales",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・サレジオの祝日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 1,
+      "name": "聖イヴァン",
+      "nameEn": "Saint Ivan",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖イヴァンの記念日を祝います！"
     },
     {
       "month": 4,
@@ -1660,6 +2632,15 @@
     },
     {
       "month": 4,
+      "day": 2,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの記念日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 3,
       "name": "聖シクストゥス1世教皇",
       "nameEn": "Saint シクストゥス1世教皇",
@@ -1685,6 +2666,24 @@
       "nameVi": "Thánh Isidore",
       "nameEs": "San Isidro",
       "namePt": "São Isidoro"
+    },
+    {
+      "month": 4,
+      "day": 4,
+      "name": "聖イグナチオ・デ・ロヨラ",
+      "nameEn": "Saint Ignatius of Loyola",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖イグナチオ・デ・ロヨラの祝日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 4,
+      "name": "聖フランシスコ・サビエル",
+      "nameEn": "Saint Francis Xavier",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・サビエルの記念日を祝います！"
     },
     {
       "month": 4,
@@ -1744,6 +2743,24 @@
     },
     {
       "month": 4,
+      "day": 7,
+      "name": "聖フランシスコ・サレジオ",
+      "nameEn": "Saint Francis de Sales",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・サレジオの祝日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 7,
+      "name": "聖ルカ",
+      "nameEn": "Saint Luke",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ルカの記念日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 8,
       "name": "聖ジュリア・ビリアート修道女",
       "nameEn": "Saint ジュリア・ビリアート",
@@ -1755,6 +2772,24 @@
       "nameVi": "Thánh Julia Billiart",
       "nameEs": "Santa Julia Billiart",
       "namePt": "Santa Júlia Billiart"
+    },
+    {
+      "month": 4,
+      "day": 8,
+      "name": "聖ダニエル",
+      "nameEn": "Saint Daniel",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ダニエルの祝日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 8,
+      "name": "聖ジュリアン",
+      "nameEn": "Saint Julian",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ジュリアンの記念日を祝います！"
     },
     {
       "month": 4,
@@ -1781,6 +2816,15 @@
     },
     {
       "month": 4,
+      "day": 9,
+      "name": "聖レオ大司教",
+      "nameEn": "Saint Leo the Great",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖レオ大司教の記念日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 10,
       "name": "聖ジェンマ・ガルガーニ",
       "nameEn": "Saint ジェンマ・ガルガーニ",
@@ -1792,6 +2836,15 @@
       "nameVi": "Thánh Gemma Galgani",
       "nameEs": "Santa Gemma Galgani",
       "namePt": "Santa Gemma Galgani"
+    },
+    {
+      "month": 4,
+      "day": 10,
+      "name": "聖ダマスス",
+      "nameEn": "Saint Damasus I",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ダマススの記念日を祝います！"
     },
     {
       "month": 4,
@@ -1809,6 +2862,15 @@
     },
     {
       "month": 4,
+      "day": 11,
+      "name": "聖ダマスス",
+      "nameEn": "Saint Damasus I",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ダマススの記念日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 12,
       "name": "福者ルケシオ夫妻",
       "nameEn": "Saint 福者ルケシオ夫妻",
@@ -1820,6 +2882,24 @@
       "nameVi": "Thánh Phúc giả Luca và vợ",
       "nameEs": "San Lucas de la Ascensión",
       "namePt": "Bem-aventurados Lucas e Maria"
+    },
+    {
+      "month": 4,
+      "day": 12,
+      "name": "聖アレクサンダー",
+      "nameEn": "Saint Alexander",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アレクサンダーの祝日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 12,
+      "name": "聖ジュリアン",
+      "nameEn": "Saint Julian",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ジュリアンの祝日を祝います！"
     },
     {
       "month": 4,
@@ -1865,6 +2945,24 @@
     },
     {
       "month": 4,
+      "day": 14,
+      "name": "聖マクシミリアノ・コルベ",
+      "nameEn": "Saint Maximilian Kolbe",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マクシミリアノ・コルベの記念日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 14,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの記念日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 15,
       "name": "聖リドヴィナおとめ",
       "nameEn": "Saint リドヴィナ",
@@ -1876,6 +2974,24 @@
       "nameVi": "Thánh Lidvina",
       "nameEs": "Santa Liduvina",
       "namePt": "Santa Lidwina"
+    },
+    {
+      "month": 4,
+      "day": 15,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの祝日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 15,
+      "name": "聖タチアナ",
+      "nameEn": "Saint Tatiana",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖タチアナの記念日を祝います！"
     },
     {
       "month": 4,
@@ -1893,6 +3009,15 @@
     },
     {
       "month": 4,
+      "day": 16,
+      "name": "聖ベネディクト",
+      "nameEn": "Saint Benedict",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ベネディクトの祝日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 17,
       "name": "聖ベネディクト・ラブル巡礼者",
       "nameEn": "Saint ベネディクト・ラブル巡礼者",
@@ -1904,6 +3029,24 @@
       "nameVi": "Thánh Benedictus Labre",
       "nameEs": "San Benito de Nursia",
       "namePt": "São Bento Labre"
+    },
+    {
+      "month": 4,
+      "day": 17,
+      "name": "アニエス",
+      "nameEn": "Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "アニエスの記念日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 17,
+      "name": "シモン・マグス",
+      "nameEn": "Simon Magus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "シモン・マグスの記念日を祝います！"
     },
     {
       "month": 4,
@@ -1921,6 +3064,24 @@
     },
     {
       "month": 4,
+      "day": 18,
+      "name": "聖アニバル・マリア・ディ・フランチェスコ・デ・フランチェスコ・アッバーテ",
+      "nameEn": "Saint Annibale Maria di Francia",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アニバル・マリア・ディ・フランチェスコ・デ・フランチェスコ・アッバーテの記念日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 18,
+      "name": "聖アニバル・マリア・ディ・フランチェスコ・デ・フランチェスコ・アッバーテ",
+      "nameEn": "Saint Annibale Maria di Francia",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アニバル・マリア・ディ・フランチェスコ・デ・フランチェスコ・アッバーテの祝日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 19,
       "name": "聖アルフェッジ大司教",
       "nameEn": "Saint アルフェッジ大",
@@ -1932,6 +3093,15 @@
       "nameVi": "Thánh Alphege",
       "nameEs": "San Alfejo",
       "namePt": "São Alfege"
+    },
+    {
+      "month": 4,
+      "day": 19,
+      "name": "レオ大聖人",
+      "nameEn": "Saint Leo the Great",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "レオ大聖人の祝日を祝います！"
     },
     {
       "month": 4,
@@ -1949,6 +3119,15 @@
     },
     {
       "month": 4,
+      "day": 20,
+      "name": "聖アナスタシア",
+      "nameEn": "Saint Anastasia",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アナスタシアの記念日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 21,
       "name": "聖アンセルモ",
       "nameEn": "Saint Anselm",
@@ -1963,6 +3142,24 @@
     },
     {
       "month": 4,
+      "day": 21,
+      "name": "聖アニアス",
+      "nameEn": "Saint Agnes",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アニアスの祝日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 21,
+      "name": "聖レオナール",
+      "nameEn": "Saint Leonard",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖レオナールの記念日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 22,
       "name": "聖エウフラジア修道女",
       "nameEn": "Saint エウフラジア",
@@ -1974,6 +3171,15 @@
       "nameVi": "Thánh Euphrasia",
       "nameEs": "Santa Eufrasia",
       "namePt": "Santa Eufrázia"
+    },
+    {
+      "month": 4,
+      "day": 22,
+      "name": "聖レオ大司教",
+      "nameEn": "Saint Leo the Great",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖レオ大司教の記念日を祝います！"
     },
     {
       "month": 4,
@@ -2028,6 +3234,24 @@
     },
     {
       "month": 4,
+      "day": 24,
+      "name": "聖ゲオルギオス",
+      "nameEn": "Saint George",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ゲオルギオスの祝日を祝います！"
+    },
+    {
+      "month": 4,
+      "day": 24,
+      "name": "聖ファデル",
+      "nameEn": "Saint Fidelis",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ファデルの記念日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 25,
       "name": "聖マルコ福音記者",
       "nameEn": "Saint Mark",
@@ -2056,6 +3280,15 @@
     },
     {
       "month": 4,
+      "day": 26,
+      "name": "聖マルコ",
+      "nameEn": "Saint Mark",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マルコの祝日を祝います！"
+    },
+    {
+      "month": 4,
       "day": 27,
       "name": "聖ジタおとめ",
       "nameEn": "Saint ジタ",
@@ -2067,6 +3300,15 @@
       "nameVi": "Thánh Gita",
       "nameEs": "Santa Gita",
       "namePt": "Santa Jita"
+    },
+    {
+      "month": 4,
+      "day": 27,
+      "name": "カタリナ・シエナの聖女",
+      "nameEn": "Saint Catherine of Siena",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "カタリナ・シエナの聖女の祝日を祝います！"
     },
     {
       "month": 4,
@@ -2095,6 +3337,15 @@
       "nameVi": "Thánh Louis-Marie Grignion de Montfort",
       "nameEs": "San Luis María Grignion de Montfort",
       "namePt": "São Luís Maria Grignion de Montfort"
+    },
+    {
+      "month": 4,
+      "day": 28,
+      "name": "聖ルカ",
+      "nameEn": "Saint Luke",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ルカの祝日を祝います！"
     },
     {
       "month": 4,
@@ -2219,6 +3470,15 @@
     },
     {
       "month": 5,
+      "day": 3,
+      "name": "フィリポ・ネリ",
+      "nameEn": "Philip Neri",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "フィリポ・ネリの祝日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 4,
       "name": "聖十字架発見の記念",
       "nameEn": "Saint 十字架発見の記念",
@@ -2230,6 +3490,24 @@
       "nameVi": "Thánh Tìm Thấy Thánh Giá",
       "nameEs": "San Juan de la Cruz",
       "namePt": "São da Descoberta da Santa Cruz"
+    },
+    {
+      "month": 5,
+      "day": 4,
+      "name": "聖フリードリヒ",
+      "nameEn": "Saint Friedrich",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖フリードリヒの祝日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 4,
+      "name": "聖カタリナ・シエナの聖女",
+      "nameEn": "Saint Catherine of Siena",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖カタリナ・シエナの聖女の記念日を祝います！"
     },
     {
       "month": 5,
@@ -2247,6 +3525,24 @@
     },
     {
       "month": 5,
+      "day": 5,
+      "name": "聖母マリアの神秘",
+      "nameEn": "Our Lady of the Mysteries",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖母マリアの神秘の祝日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 5,
+      "name": "聖ゼノビウス",
+      "nameEn": "Saint Zenobius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ゼノビウスの記念日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 6,
       "name": "聖フェルナンド3世・王",
       "nameEn": "Saint フェルナンド3世・王",
@@ -2258,6 +3554,24 @@
       "nameVi": "Thánh Fernando III",
       "nameEs": "San Fernando III, Rey",
       "namePt": "São Fernando III, Rei"
+    },
+    {
+      "month": 5,
+      "day": 6,
+      "name": "聖母マリア",
+      "nameEn": "Saint Mary",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖母マリアの祝日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 6,
+      "name": "聖ジョージ",
+      "nameEn": "Saint George",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ジョージの記念日を祝います！"
     },
     {
       "month": 5,
@@ -2293,6 +3607,15 @@
     },
     {
       "month": 5,
+      "day": 7,
+      "name": "聖フランシスコ・デ・シスコ",
+      "nameEn": "Saint Francis de Sales",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・デ・シスコの記念日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 8,
       "name": "聖ヴィクトル・ムーア",
       "nameEn": "Saint ヴィクトル・ムーア",
@@ -2307,6 +3630,15 @@
     },
     {
       "month": 5,
+      "day": 8,
+      "name": "聖マチア",
+      "nameEn": "Saint Matthias",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マチアの祝日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 9,
       "name": "聖パコミオ",
       "nameEn": "Saint パコミオ",
@@ -2318,6 +3650,24 @@
       "nameVi": "Thánh Pakhomius",
       "nameEs": "San Pacomio",
       "namePt": "São Pacômio"
+    },
+    {
+      "month": 5,
+      "day": 9,
+      "name": "聖ペテロと聖パウロ",
+      "nameEn": "Saint Peter and Saint Paul",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖ペテロと聖パウロの大祝日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 9,
+      "name": "聖エリザベト",
+      "nameEn": "Saint Elizabeth",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖エリザベトの記念日を祝います！"
     },
     {
       "month": 5,
@@ -2349,6 +3699,15 @@
     },
     {
       "month": 5,
+      "day": 10,
+      "name": "聖ダマスス",
+      "nameEn": "Saint Damasus I",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ダマススの祝日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 11,
       "name": "聖レステルプのウォルター大修院長",
       "nameEn": "Saint レステルプのウォルター大修院長",
@@ -2360,6 +3719,15 @@
       "nameVi": "Thánh Walter của Lestelp",
       "nameEs": "San Walter de Restrepo",
       "namePt": "São Walter de Restelpe"
+    },
+    {
+      "month": 5,
+      "day": 11,
+      "name": "聖母マリアの顕現",
+      "nameEn": "Our Lady of Fatima",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖母マリアの顕現の祝日を祝います！"
     },
     {
       "month": 5,
@@ -2388,6 +3756,24 @@
       "nameVi": "Thánh Nê-rê-ô, Thánh A-ki-lê-ô",
       "nameEs": "San Neleo, San Aquileo",
       "namePt": "São Neleu e São Aquiles"
+    },
+    {
+      "month": 5,
+      "day": 12,
+      "name": "聖母マリアの顕現",
+      "nameEn": "Our Lady of Fatima",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖母マリアの顕現の祝日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 12,
+      "name": "聖ニコラオス",
+      "nameEn": "Saint Nicholas",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ニコラオスの記念日を祝います！"
     },
     {
       "month": 5,
@@ -2461,6 +3847,15 @@
     },
     {
       "month": 5,
+      "day": 15,
+      "name": "聖マティア",
+      "nameEn": "Saint Matthias",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マティアの祝日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 16,
       "name": "ネポムクの聖ヨハネ司祭",
       "nameEn": "Saint ネポムクのSaint ヨハネ",
@@ -2475,6 +3870,24 @@
     },
     {
       "month": 5,
+      "day": 16,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの祝日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 16,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの記念日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 17,
       "name": "聖フェリクス・カンタリチオ修道士",
       "nameEn": "Saint フェリクス・カンタリチオ修道士",
@@ -2486,6 +3899,15 @@
       "nameVi": "Thánh Phê-rô Can-ta-ri-chio",
       "nameEs": "San Félix de Cantalicio",
       "namePt": "São Félix de Cantalice"
+    },
+    {
+      "month": 5,
+      "day": 17,
+      "name": "聖アンドレア・ボッツァ",
+      "nameEn": "Saint Andrew Bobola",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アンドレア・ボッツァの記念日を祝います！"
     },
     {
       "month": 5,
@@ -2517,6 +3939,15 @@
     },
     {
       "month": 5,
+      "day": 18,
+      "name": "聖マルコ",
+      "nameEn": "Saint Mark",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マルコの祝日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 19,
       "name": "聖イヴォ司祭",
       "nameEn": "Saint イヴォ",
@@ -2528,6 +3959,15 @@
       "nameVi": "Thánh Ivo",
       "nameEs": "San Ivo",
       "namePt": "São Ivo"
+    },
+    {
+      "month": 5,
+      "day": 19,
+      "name": "聖マティア",
+      "nameEn": "Saint Matthias",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マティアの祝日を祝います！"
     },
     {
       "month": 5,
@@ -2556,6 +3996,24 @@
       "nameVi": "Thánh Bernardino (Siena)",
       "nameEs": "San Bernardino de Siena",
       "namePt": "São Bernardino de Siena"
+    },
+    {
+      "month": 5,
+      "day": 20,
+      "name": "聖バルバラ",
+      "nameEn": "Saint Barbara",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖バルバラの記念日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 20,
+      "name": "聖クリストフォロス",
+      "nameEn": "Saint Christopher",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖クリストフォロスの記念日を祝います！"
     },
     {
       "month": 5,
@@ -2605,6 +4063,15 @@
     },
     {
       "month": 5,
+      "day": 21,
+      "name": "聖アンドレア・ボッツ",
+      "nameEn": "Saint Andrew Bobola",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アンドレア・ボッツの記念日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 22,
       "name": "聖リタ",
       "nameEn": "Saint Rita of Cascia",
@@ -2633,6 +4100,33 @@
     },
     {
       "month": 5,
+      "day": 23,
+      "name": "聖リタ",
+      "nameEn": "Saint Rita",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖リタの記念日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 24,
+      "name": "聖マリア・マグダレナ",
+      "nameEn": "Saint Mary Magdalene",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マリア・マグダレナの祝日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 24,
+      "name": "聖シモン",
+      "nameEn": "Saint Simon",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖シモンの記念日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 25,
       "name": "聖ベド",
       "nameEn": "Saint Bede the Venerable",
@@ -2658,6 +4152,24 @@
       "nameVi": "Thánh Maria Mađalena (Pazzi)",
       "nameEs": "Santa María Magdalena de Pazzi",
       "namePt": "Santa Maria Madalena (Pazzi)"
+    },
+    {
+      "month": 5,
+      "day": 25,
+      "name": "聖ベード",
+      "nameEn": "Saint Bede",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ベードの祝日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 25,
+      "name": "聖グレゴリウス",
+      "nameEn": "Saint Gregory VII",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖グレゴリウスの記念日を祝います！"
     },
     {
       "month": 5,
@@ -2735,6 +4247,15 @@
     },
     {
       "month": 5,
+      "day": 28,
+      "name": "聖マリア・マグダレナ",
+      "nameEn": "Saint Mary Magdalene",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マリア・マグダレナの祝日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 29,
       "name": "聖テオドシア殉教者",
       "nameEn": "Saint テオドシア",
@@ -2749,6 +4270,15 @@
     },
     {
       "month": 5,
+      "day": 29,
+      "name": "聖マリア・マグダレナ",
+      "nameEn": "Saint Mary Magdalene",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マリア・マグダレナの祝日を祝います！"
+    },
+    {
+      "month": 5,
       "day": 30,
       "name": "聖ジャンヌ・ダルクおとめ",
       "nameEn": "Saint ジャンヌ・ダルク",
@@ -2760,6 +4290,24 @@
       "nameVi": "Thánh Jeanne d'Arc",
       "nameEs": "Santa Juana de Arco",
       "namePt": "Santa Joana d'Arc"
+    },
+    {
+      "month": 5,
+      "day": 30,
+      "name": "聖フェリックス",
+      "nameEn": "Saint Felix",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖フェリックスの記念日を祝います！"
+    },
+    {
+      "month": 5,
+      "day": 30,
+      "name": "聖ジョゼフの聖体",
+      "nameEn": "Saint Joseph's Body",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ジョゼフの聖体の祝日を祝います！"
     },
     {
       "month": 5,
@@ -2790,6 +4338,15 @@
       "namePt": "Visitação de Nossa Senhora"
     },
     {
+      "month": 5,
+      "day": 31,
+      "name": "聖テレジア・ベネディクト・オブ・十字架",
+      "nameEn": "Saint Teresa Benedicta of the Cross",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖テレジア・ベネディクト・オブ・十字架の祝日を祝います！"
+    },
+    {
       "month": 6,
       "day": 1,
       "name": "聖ユスティノ",
@@ -2802,6 +4359,24 @@
       "nameVi": "Thánh Justino",
       "nameEs": "San Justino",
       "namePt": "São Justino"
+    },
+    {
+      "month": 6,
+      "day": 1,
+      "name": "聖バルタザール",
+      "nameEn": "Saint Balthasar",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖バルタザールの祝日を祝います！"
+    },
+    {
+      "month": 6,
+      "day": 1,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
     },
     {
       "month": 6,
@@ -2833,6 +4408,15 @@
     },
     {
       "month": 6,
+      "day": 2,
+      "name": "聖ペトロと聖パウロ",
+      "nameEn": "Saints Peter and Paul",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖ペトロと聖パウロの大祝日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 3,
       "name": "聖カール・ルワンガ",
       "nameEn": "Saints Charles Lwanga and Companions",
@@ -2858,6 +4442,24 @@
       "nameVi": "Thánh Carlo Lwanga và các bạn tử đạo",
       "nameEs": "San Carlos Lwanga y compañeros mártires",
       "namePt": "São Carlos Lwanga e Companheiros Mártires"
+    },
+    {
+      "month": 6,
+      "day": 3,
+      "name": "聖イグナチオ・デ・ロヨラ",
+      "nameEn": "Saint Ignatius of Loyola",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖イグナチオ・デ・ロヨラの祝日を祝います！"
+    },
+    {
+      "month": 6,
+      "day": 3,
+      "name": "聖カロルス・ボロメオ",
+      "nameEn": "Saint Charles Borromeo",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖カロルス・ボロメオの記念日を祝います！"
     },
     {
       "month": 6,
@@ -2890,6 +4492,15 @@
       "type": "memorial",
       "isJapanese": false,
       "greeting": "聖カリストの記念日を祝います！"
+    },
+    {
+      "month": 6,
+      "day": 4,
+      "name": "ペトロとパウロの祭日",
+      "nameEn": "Feast of Saints Peter and Paul",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "ペトロとパウロの祭日の大祝日を祝います！"
     },
     {
       "month": 6,
@@ -2935,6 +4546,15 @@
     },
     {
       "month": 6,
+      "day": 6,
+      "name": "聖霊降臨祭",
+      "nameEn": "Pentecost",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖霊降臨祭の大祝日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 7,
       "name": "聖メリアドク司教",
       "nameEn": "Saint メリアドク",
@@ -2949,6 +4569,15 @@
     },
     {
       "month": 6,
+      "day": 7,
+      "name": "聖アンソニー・オブ・パドヴァ",
+      "nameEn": "Saint Anthony of Padua",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アンソニー・オブ・パドヴァの祝日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 8,
       "name": "福者アンナ・タイギ",
       "nameEn": "Saint 福者アンナ・タイギ",
@@ -2960,6 +4589,24 @@
       "nameVi": "Thánh Anna Thái Giới",
       "nameEs": "Beata Ana de Taigi",
       "namePt": "Beata Anna de Taigi"
+    },
+    {
+      "month": 6,
+      "day": 8,
+      "name": "聖霊降臨祭",
+      "nameEn": "Pentecost",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖霊降臨祭の大祝日を祝います！"
+    },
+    {
+      "month": 6,
+      "day": 8,
+      "name": "聖マルコ",
+      "nameEn": "Saint Mark",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マルコの祝日を祝います！"
     },
     {
       "month": 6,
@@ -2988,6 +4635,15 @@
       "nameVi": "Thánh Landry (Paris)",
       "nameEs": "San Landriano de París",
       "namePt": "São Landri (de Paris)"
+    },
+    {
+      "month": 6,
+      "day": 10,
+      "name": "聖エフレム",
+      "nameEn": "Saint Ephrem",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖エフレムの記念日を祝います！"
     },
     {
       "month": 6,
@@ -3023,6 +4679,15 @@
     },
     {
       "month": 6,
+      "day": 11,
+      "name": "聖アントニオ・デ・パドヴァ",
+      "nameEn": "Saint Anthony of Padua",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アントニオ・デ・パドヴァの記念日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 12,
       "name": "聖ヨハネ（サハグン）司祭",
       "nameEn": "Saint ヨハネ（サハグン）",
@@ -3034,6 +4699,15 @@
       "nameVi": "Thánh Gioan (Sakaguchi)",
       "nameEs": "San Juan Sahagún",
       "namePt": "São João (Sahagún)"
+    },
+    {
+      "month": 6,
+      "day": 12,
+      "name": "聖アンソニー・オブ・パドヴァ",
+      "nameEn": "Saint Anthony of Padua",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アンソニー・オブ・パドヴァの祝日を祝います！"
     },
     {
       "month": 6,
@@ -3065,6 +4739,15 @@
     },
     {
       "month": 6,
+      "day": 14,
+      "name": "聖アントニオ・デ・パドヴァ",
+      "nameEn": "Saint Anthony of Padua",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アントニオ・デ・パドヴァの祝日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 15,
       "name": "聖ヴィト殉教者",
       "nameEn": "Saint ヴィト",
@@ -3076,6 +4759,24 @@
       "nameVi": "Thánh Vít",
       "nameEs": "San Vito",
       "namePt": "São Vito"
+    },
+    {
+      "month": 6,
+      "day": 15,
+      "name": "聖ゴルディアヌス",
+      "nameEn": "Saint Gordianus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ゴルディアヌスの記念日を祝います！"
+    },
+    {
+      "month": 6,
+      "day": 15,
+      "name": "聖バルバラ",
+      "nameEn": "Saint Barbara",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖バルバラの記念日を祝います！"
     },
     {
       "month": 6,
@@ -3093,6 +4794,15 @@
     },
     {
       "month": 6,
+      "day": 16,
+      "name": "聖エドワード",
+      "nameEn": "Saint Edward",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖エドワードの祝日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 17,
       "name": "聖フランシスコ・レジス司祭",
       "nameEn": "Saint フランシスコ・レジス",
@@ -3104,6 +4814,15 @@
       "nameVi": "Thánh Phanxicô Xaviê",
       "nameEs": "San Francisco de Regis",
       "namePt": "São Francisco Regis"
+    },
+    {
+      "month": 6,
+      "day": 17,
+      "name": "聖アントニオ・デ・パドヴァ",
+      "nameEn": "Saint Anthony of Padua",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アントニオ・デ・パドヴァの記念日を祝います！"
     },
     {
       "month": 6,
@@ -3144,6 +4863,24 @@
     },
     {
       "month": 6,
+      "day": 19,
+      "name": "聖ジュリアン",
+      "nameEn": "Saint Julian",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ジュリアンの祝日を祝います！"
+    },
+    {
+      "month": 6,
+      "day": 19,
+      "name": "聖ロマン",
+      "nameEn": "Saint Romanus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ロマンの記念日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 20,
       "name": "聖シルヴェリオ教皇殉教者",
       "nameEn": "Saint シルヴェリオ教皇",
@@ -3155,6 +4892,24 @@
       "nameVi": "Thánh Silvério",
       "nameEs": "San Silverio",
       "namePt": "São Silvério"
+    },
+    {
+      "month": 6,
+      "day": 20,
+      "name": "聖アルバン",
+      "nameEn": "Saint Alban",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アルバンの祝日を祝います！"
+    },
+    {
+      "month": 6,
+      "day": 20,
+      "name": "聖シルベストロ",
+      "nameEn": "Saint Silverius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖シルベストロの記念日を祝います！"
     },
     {
       "month": 6,
@@ -3186,6 +4941,15 @@
     },
     {
       "month": 6,
+      "day": 21,
+      "name": "聖ルカ",
+      "nameEn": "Saint Luke",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ルカの祝日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 22,
       "name": "聖パウリノ",
       "nameEn": "Saint Paulinus of Nola",
@@ -3214,6 +4978,15 @@
     },
     {
       "month": 6,
+      "day": 22,
+      "name": "聖トマス・モア",
+      "nameEn": "Saint Thomas More",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖トマス・モアの記念日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 23,
       "name": "聖エテルドレダ",
       "nameEn": "Saint エテルドレダ",
@@ -3225,6 +4998,15 @@
       "nameVi": "Thánh Ethelreda",
       "nameEs": "Santa Ethelreda",
       "namePt": "Santa Etheldreda"
+    },
+    {
+      "month": 6,
+      "day": 23,
+      "name": "聖ヨハネ・バプティスタ",
+      "nameEn": "Saint John the Baptist",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖ヨハネ・バプティスタの大祝日を祝います！"
     },
     {
       "month": 6,
@@ -3279,6 +5061,15 @@
     },
     {
       "month": 6,
+      "day": 25,
+      "name": "聖ウィルフリッド",
+      "nameEn": "Saint Wilfrid",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ウィルフリッドの祝日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 26,
       "name": "聖ヨハネ、聖パウロ殉教者",
       "nameEn": "Saint ヨハネ、Saint パウロ",
@@ -3290,6 +5081,15 @@
       "nameVi": "Thánh Gioan, Thánh Phaolô Tử Đạo",
       "nameEs": "San Juan, San Pablo mártir",
       "namePt": "São João, São Paulo Mártir"
+    },
+    {
+      "month": 6,
+      "day": 26,
+      "name": "聖ペトロと聖パウロ",
+      "nameEn": "Saint Peter and Saint Paul",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖ペトロと聖パウロの大祝日を祝います！"
     },
     {
       "month": 6,
@@ -3321,6 +5121,24 @@
     },
     {
       "month": 6,
+      "day": 27,
+      "name": "聖シルベストロ",
+      "nameEn": "Saint Silvester",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖シルベストロの祝日を祝います！"
+    },
+    {
+      "month": 6,
+      "day": 27,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの記念日を祝います！"
+    },
+    {
+      "month": 6,
       "day": 28,
       "name": "聖イレネオ",
       "nameEn": "Saint Irenaeus",
@@ -3332,6 +5150,15 @@
       "nameVi": "Thánh Irenaeus",
       "nameEs": "San Ireneo",
       "namePt": "São Irineu"
+    },
+    {
+      "month": 6,
+      "day": 28,
+      "name": "聖ペトロと聖パウロ",
+      "nameEn": "Saint Peter and Saint Paul",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖ペトロと聖パウロの大祝日を祝います！"
     },
     {
       "month": 6,
@@ -3390,6 +5217,15 @@
       "namePt": "São Pedro e São Paulo"
     },
     {
+      "month": 6,
+      "day": 30,
+      "name": "ペトロとパウロ",
+      "nameEn": "Saints Peter and Paul",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "ペトロとパウロの大祝日を祝います！"
+    },
+    {
       "month": 7,
       "day": 1,
       "name": "聖シメオン・サルス",
@@ -3425,6 +5261,15 @@
       "type": "solemnity",
       "isJapanese": false,
       "greeting": "聖ペテロと聖パウロの大祝日を祝います！"
+    },
+    {
+      "month": 7,
+      "day": 2,
+      "name": "聖ペトロと聖パウロ",
+      "nameEn": "Saints Peter and Paul",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖ペトロと聖パウロの大祝日を祝います！"
     },
     {
       "month": 7,
@@ -3498,6 +5343,15 @@
     },
     {
       "month": 7,
+      "day": 5,
+      "name": "聖アントニウス",
+      "nameEn": "Saint Anthony of Padua",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アントニウスの記念日を祝います！"
+    },
+    {
+      "month": 7,
       "day": 6,
       "name": "聖マリア・ゴレッティ",
       "nameEn": "Saint Maria Goretti",
@@ -3526,6 +5380,24 @@
     },
     {
       "month": 7,
+      "day": 7,
+      "name": "聖トマス・モア",
+      "nameEn": "Saint Thomas More",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖トマス・モアの記念日を祝います！"
+    },
+    {
+      "month": 7,
+      "day": 7,
+      "name": "聖シモン・スタイル",
+      "nameEn": "Saint Simon Stock",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖シモン・スタイルの記念日を祝います！"
+    },
+    {
+      "month": 7,
       "day": 8,
       "name": "聖プロコピオス",
       "nameEn": "Saint プロコピオス",
@@ -3537,6 +5409,24 @@
       "nameVi": "Thánh Procopio",
       "nameEs": "San Procopio",
       "namePt": "São Procópio"
+    },
+    {
+      "month": 7,
+      "day": 8,
+      "name": "聖ペトロと聖パウロ",
+      "nameEn": "Saint Peter and Saint Paul",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖ペトロと聖パウロの大祝日を祝います！"
+    },
+    {
+      "month": 7,
+      "day": 8,
+      "name": "聖エリザベト",
+      "nameEn": "Saint Elizabeth",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖エリザベトの記念日を祝います！"
     },
     {
       "month": 7,
@@ -3572,6 +5462,15 @@
     },
     {
       "month": 7,
+      "day": 9,
+      "name": "聖ニコラオス",
+      "nameEn": "Saint Nicholas",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ニコラオスの記念日を祝います！"
+    },
+    {
+      "month": 7,
       "day": 10,
       "name": "ゴルクムの聖殉教者",
       "nameEn": "Saint ゴルクムのSaint",
@@ -3583,6 +5482,15 @@
       "nameVi": "Thánh Gorkum",
       "nameEs": "San Golcúm",
       "namePt": "São Golcom"
+    },
+    {
+      "month": 7,
+      "day": 10,
+      "name": "聖アポロニウス",
+      "nameEn": "Saint Apollonius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アポロニウスの記念日を祝います！"
     },
     {
       "month": 7,
@@ -3611,6 +5519,15 @@
       "nameVi": "Thánh Gioan Gualberto",
       "nameEs": "San Juan de la Cruz",
       "namePt": "São João Gualberto"
+    },
+    {
+      "month": 7,
+      "day": 12,
+      "name": "聖女ルチア",
+      "nameEn": "Saint Lucy",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖女ルチアの記念日を祝います！"
     },
     {
       "month": 7,
@@ -3684,6 +5601,15 @@
     },
     {
       "month": 7,
+      "day": 15,
+      "name": "セバスティアヌス",
+      "nameEn": "Sebastian",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "セバスティアヌスの記念日を祝います！"
+    },
+    {
+      "month": 7,
       "day": 16,
       "name": "カルメル山の聖母",
       "nameEn": "Our Lady of Mount Carmel",
@@ -3730,6 +5656,24 @@
     },
     {
       "month": 7,
+      "day": 17,
+      "name": "聖アレクシウス",
+      "nameEn": "Saint Alexius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アレクシウスの記念日を祝います！"
+    },
+    {
+      "month": 7,
+      "day": 17,
+      "name": "聖シリルと聖メトディオス",
+      "nameEn": "Saints Cyril and Methodius",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖シリルと聖メトディオスの祝日を祝います！"
+    },
+    {
+      "month": 7,
       "day": 18,
       "name": "聖パンボ修道士",
       "nameEn": "Saint パンボ修道士",
@@ -3741,6 +5685,15 @@
       "nameVi": "Thánh Pambo",
       "nameEs": "San Pambo",
       "namePt": "São Pambo"
+    },
+    {
+      "month": 7,
+      "day": 18,
+      "name": "カミーユ・ド・ロネル",
+      "nameEn": "Camillus de Lellis",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "カミーユ・ド・ロネルの祝日を祝います！"
     },
     {
       "month": 7,
@@ -3758,6 +5711,15 @@
     },
     {
       "month": 7,
+      "day": 19,
+      "name": "聖マクシミリアノ・コルベ",
+      "nameEn": "Saint Maximilian Kolbe",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マクシミリアノ・コルベの記念日を祝います！"
+    },
+    {
+      "month": 7,
       "day": 20,
       "name": "聖アポリナリス",
       "nameEn": "Saint Apollinaris",
@@ -3769,6 +5731,24 @@
       "nameVi": "Thánh Apolinaris",
       "nameEs": "San Apolinaris",
       "namePt": "São Apolinário"
+    },
+    {
+      "month": 7,
+      "day": 20,
+      "name": "セバスティアヌス",
+      "nameEn": "Sebastian",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "セバスティアヌスの記念日を祝います！"
+    },
+    {
+      "month": 7,
+      "day": 20,
+      "name": "アポロニウス",
+      "nameEn": "Apollonius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "アポロニウスの記念日を祝います！"
     },
     {
       "month": 7,
@@ -3856,6 +5836,15 @@
     },
     {
       "month": 7,
+      "day": 23,
+      "name": "聖ブリギッタ",
+      "nameEn": "Saint Bridget",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ブリギッタの祝日を祝います！"
+    },
+    {
+      "month": 7,
       "day": 24,
       "name": "聖シャルベル・マクロフ",
       "nameEn": "Saint Sharbel Makhluf",
@@ -3881,6 +5870,24 @@
       "nameVi": "Thánh Sharbel Makhlouf",
       "nameEs": "San Charbel Makhlouf",
       "namePt": "São Charbel Makhlouf"
+    },
+    {
+      "month": 7,
+      "day": 24,
+      "name": "シモン・ペトロ",
+      "nameEn": "Saint Simon Peter",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "シモン・ペトロの祝日を祝います！"
+    },
+    {
+      "month": 7,
+      "day": 24,
+      "name": "聖クリストフォロス",
+      "nameEn": "Saint Christopher",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖クリストフォロスの記念日を祝います！"
     },
     {
       "month": 7,
@@ -3912,6 +5919,15 @@
     },
     {
       "month": 7,
+      "day": 25,
+      "name": "クリストフォロス",
+      "nameEn": "Christopher",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "クリストフォロスの記念日を祝います！"
+    },
+    {
+      "month": 7,
       "day": 26,
       "name": "聖ヨアキムとアンナ",
       "nameEn": "Saints Joachim and Anne",
@@ -3940,6 +5956,15 @@
     },
     {
       "month": 7,
+      "day": 26,
+      "name": "聖ヨアキム",
+      "nameEn": "Saint Joachim",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ヨアキムの祝日を祝います！"
+    },
+    {
+      "month": 7,
       "day": 27,
       "name": "聖パンタレオン",
       "nameEn": "Saint パンタレオン",
@@ -3954,6 +5979,24 @@
     },
     {
       "month": 7,
+      "day": 27,
+      "name": "聖アナ",
+      "nameEn": "Saint Anne",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アナの祝日を祝います！"
+    },
+    {
+      "month": 7,
+      "day": 27,
+      "name": "聖ジョアキム",
+      "nameEn": "Saint Joachim",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ジョアキムの祝日を祝います！"
+    },
+    {
+      "month": 7,
       "day": 28,
       "name": "聖ナザリオと聖チェルソ殉教者",
       "nameEn": "Saint ナザリオとSaint チェルソ",
@@ -3965,6 +6008,24 @@
       "nameVi": "Thánh Nazario và Thánh Celso",
       "nameEs": "San Nazario y San Celso",
       "namePt": "São Nazário e São Celsos"
+    },
+    {
+      "month": 7,
+      "day": 28,
+      "name": "聖キリロス",
+      "nameEn": "Saint Cyril",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖キリロスの祝日を祝います！"
+    },
+    {
+      "month": 7,
+      "day": 28,
+      "name": "聖アポロニウス",
+      "nameEn": "Saint Apollonius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アポロニウスの記念日を祝います！"
     },
     {
       "month": 7,
@@ -4046,6 +6107,15 @@
       "namePt": "São Inácio de Loyola"
     },
     {
+      "month": 7,
+      "day": 31,
+      "name": "聖エミリオ",
+      "nameEn": "Saint Emilius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖エミリオの記念日を祝います！"
+    },
+    {
       "month": 8,
       "day": 1,
       "name": "聖アルフォンソ・リゴリ",
@@ -4075,6 +6145,15 @@
     },
     {
       "month": 8,
+      "day": 1,
+      "name": "聖アルフォンソ・マリア・デ・リゴーリ",
+      "nameEn": "Saint Alphonsus Maria de Liguori",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アルフォンソ・マリア・デ・リゴーリの祝日を祝います！"
+    },
+    {
+      "month": 8,
       "day": 2,
       "name": "聖エウセビオ",
       "nameEn": "Saint Eusebius of Vercelli",
@@ -4089,6 +6168,15 @@
     },
     {
       "month": 8,
+      "day": 2,
+      "name": "聖ペトロ・ジュリアニ・マエリオ",
+      "nameEn": "Saint Peter Julian Eymard",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ペトロ・ジュリアニ・マエリオの祝日を祝います！"
+    },
+    {
+      "month": 8,
       "day": 3,
       "name": "聖ニコデモ",
       "nameEn": "Saint ニコデモ",
@@ -4100,6 +6188,24 @@
       "nameVi": "Thánh Nicôđêmô",
       "nameEs": "San Nicodemo",
       "namePt": "São Nicodemos"
+    },
+    {
+      "month": 8,
+      "day": 3,
+      "name": "聖ゲオルギオス",
+      "nameEn": "Saint George",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ゲオルギオスの祝日を祝います！"
+    },
+    {
+      "month": 8,
+      "day": 3,
+      "name": "聖エミリアヌス",
+      "nameEn": "Saint Aemilian",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖エミリアヌスの記念日を祝います！"
     },
     {
       "month": 8,
@@ -4159,6 +6265,15 @@
     },
     {
       "month": 8,
+      "day": 5,
+      "name": "聖マリアの御昇天",
+      "nameEn": "Assumption of Mary",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "聖マリアの御昇天の大祝日を祝います！"
+    },
+    {
+      "month": 8,
       "day": 6,
       "name": "主の変容",
       "nameEn": "Transfiguration of the Lord",
@@ -4215,6 +6330,15 @@
     },
     {
       "month": 8,
+      "day": 7,
+      "name": "聖カシミール",
+      "nameEn": "Saint Casimir",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖カシミールの記念日を祝います！"
+    },
+    {
+      "month": 8,
       "day": 8,
       "name": "聖ドミニコ",
       "nameEn": "Saint Dominic",
@@ -4240,6 +6364,15 @@
       "nameVi": "Thánh Oswald (Northumbria)",
       "nameEs": "San Oswaldo (de Northumbria)",
       "namePt": "São Osvaldo (de Nortúmbria)"
+    },
+    {
+      "month": 8,
+      "day": 9,
+      "name": "聖テレジア・ベネディクトの十字架",
+      "nameEn": "Saint Teresa Benedicta of the Cross",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖テレジア・ベネディクトの十字架の祝日を祝います！"
     },
     {
       "month": 8,
@@ -4296,6 +6429,15 @@
       "nameVi": "Thánh Tarcisius",
       "nameEs": "San Tarcisio diácono y mártir",
       "namePt": "São Tarcísio"
+    },
+    {
+      "month": 8,
+      "day": 12,
+      "name": "聖クララ",
+      "nameEn": "Saint Clare",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖クララの祝日を祝います！"
     },
     {
       "month": 8,
@@ -4457,6 +6599,24 @@
     },
     {
       "month": 8,
+      "day": 18,
+      "name": "聖ヘリナ",
+      "nameEn": "Saint Helena",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ヘリナの記念日を祝います！"
+    },
+    {
+      "month": 8,
+      "day": 18,
+      "name": "聖シメオン",
+      "nameEn": "Saint Simeon",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖シメオンの記念日を祝います！"
+    },
+    {
+      "month": 8,
       "day": 19,
       "name": "聖ヨハネ・エウデス",
       "nameEn": "Saint John Eudes",
@@ -4482,6 +6642,24 @@
       "nameVi": "Thánh Gioan Tẩy Giả",
       "nameEs": "San Juan Yudo",
       "namePt": "São João Yudo"
+    },
+    {
+      "month": 8,
+      "day": 19,
+      "name": "聖ヨハネ・エヴァンゲリスト",
+      "nameEn": "Saint John Eavangelist",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ヨハネ・エヴァンゲリストの祝日を祝います！"
+    },
+    {
+      "month": 8,
+      "day": 19,
+      "name": "聖ルカ",
+      "nameEn": "Saint Luke",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ルカの記念日を祝います！"
     },
     {
       "month": 8,
@@ -4517,6 +6695,24 @@
     },
     {
       "month": 8,
+      "day": 20,
+      "name": "聖バルナバ",
+      "nameEn": "Saint Barnabas",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖バルナバの祝日を祝います！"
+    },
+    {
+      "month": 8,
+      "day": 20,
+      "name": "聖ヒエロニムス",
+      "nameEn": "Saint Jerome",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ヒエロニムスの記念日を祝います！"
+    },
+    {
+      "month": 8,
       "day": 21,
       "name": "聖ピオ十世",
       "nameEn": "Saint Pius X",
@@ -4545,6 +6741,15 @@
     },
     {
       "month": 8,
+      "day": 21,
+      "name": "聖ピウスX世",
+      "nameEn": "Pope Pius X",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ピウスX世の祝日を祝います！"
+    },
+    {
+      "month": 8,
       "day": 22,
       "name": "聖母の元后",
       "nameEn": "Queenship of the Blessed Virgin Mary",
@@ -4570,6 +6775,15 @@
       "nameVi": "Thánh Symphorianus",
       "nameEs": "San Sinforiano",
       "namePt": "São Sinforiano"
+    },
+    {
+      "month": 8,
+      "day": 22,
+      "name": "聖マリアの王",
+      "nameEn": "Mary, Queen of Heaven",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マリアの王の祝日を祝います！"
     },
     {
       "month": 8,
@@ -4615,6 +6829,24 @@
     },
     {
       "month": 8,
+      "day": 24,
+      "name": "バルバラ",
+      "nameEn": "Saint Barbara",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "バルバラの祝日を祝います！"
+    },
+    {
+      "month": 8,
+      "day": 24,
+      "name": "セバスティアヌス",
+      "nameEn": "Saint Sebastian",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "セバスティアヌスの記念日を祝います！"
+    },
+    {
+      "month": 8,
       "day": 25,
       "name": "聖ルイ",
       "nameEn": "Saint Louis",
@@ -4629,6 +6861,15 @@
     },
     {
       "month": 8,
+      "day": 25,
+      "name": "聖ヨハネ・バウティスタ・マリア・ヴィアンネイ",
+      "nameEn": "Saint John Vianney",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ヨハネ・バウティスタ・マリア・ヴィアンネイの記念日を祝います！"
+    },
+    {
+      "month": 8,
       "day": 26,
       "name": "聖ゼフィリーノ教皇",
       "nameEn": "Saint ゼフィリーノ教皇",
@@ -4640,6 +6881,24 @@
       "nameVi": "Thánh Giáo hoàng Xêphirinô",
       "nameEs": "San Zeferino",
       "namePt": "São Zeferino"
+    },
+    {
+      "month": 8,
+      "day": 26,
+      "name": "聖テレンス",
+      "nameEn": "Saint Terence",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖テレンスの記念日を祝います！"
+    },
+    {
+      "month": 8,
+      "day": 26,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの祝日を祝います！"
     },
     {
       "month": 8,
@@ -4731,6 +6990,24 @@
     },
     {
       "month": 8,
+      "day": 30,
+      "name": "聖エルモ",
+      "nameEn": "Saint Ermo",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖エルモの記念日を祝います！"
+    },
+    {
+      "month": 8,
+      "day": 30,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの祝日を祝います！"
+    },
+    {
+      "month": 8,
       "day": 31,
       "name": "聖ライムンド・ノンナート",
       "nameEn": "Saint ライムンド・ノンナート",
@@ -4742,6 +7019,24 @@
       "nameVi": "Thánh Raimundo Nonato",
       "nameEs": "San Raimundo Nonato",
       "namePt": "São Raimundo Nonato"
+    },
+    {
+      "month": 8,
+      "day": 31,
+      "name": "聖エリザベト",
+      "nameEn": "Saint Elizabeth",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖エリザベトの記念日を祝います！"
+    },
+    {
+      "month": 8,
+      "day": 31,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの祝日を祝います！"
     },
     {
       "month": 9,
@@ -4759,6 +7054,24 @@
     },
     {
       "month": 9,
+      "day": 1,
+      "name": "聖エルデリコ",
+      "nameEn": "Saint Ederico",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖エルデリコの記念日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 1,
+      "name": "聖ギー",
+      "nameEn": "Saint Guy",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ギーの記念日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 2,
       "name": "聖パウロ（エジプト）修道士",
       "nameEn": "Saint パウロ（エジプト）修道士",
@@ -4770,6 +7083,24 @@
       "nameVi": "Thánh Phaolô (Ai Cập) tu sĩ",
       "nameEs": "San Pablo de Egipto",
       "namePt": "São Paulo do Egito"
+    },
+    {
+      "month": 9,
+      "day": 2,
+      "name": "聖ゼノビウス",
+      "nameEn": "Saint Zenobius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ゼノビウスの記念日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 2,
+      "name": "聖マリア・アグレッペ",
+      "nameEn": "Saint Maria Agreppa",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マリア・アグレッペの記念日を祝います！"
     },
     {
       "month": 9,
@@ -4824,6 +7155,15 @@
     },
     {
       "month": 9,
+      "day": 4,
+      "name": "聖母マリアの誕生",
+      "nameEn": "Nativity of the Blessed Virgin Mary",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖母マリアの誕生の祝日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 5,
       "name": "聖ラウレンチオ・ユスチニアノ大司教",
       "nameEn": "Saint ラウレンチオ・ユスチニアノ大",
@@ -4838,6 +7178,24 @@
     },
     {
       "month": 9,
+      "day": 5,
+      "name": "サン・テオドリック",
+      "nameEn": "Saint Theodoric",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "サン・テオドリックの記念日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 5,
+      "name": "サン・グレゴリオ",
+      "nameEn": "Saint Gregory the Great",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "サン・グレゴリオの祝日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 6,
       "name": "聖カグノールド司教",
       "nameEn": "Saint カグノールド",
@@ -4849,6 +7207,15 @@
       "nameVi": "Thánh Cagnotto",
       "nameEs": "San Canuto",
       "namePt": "São Cugnoroldo"
+    },
+    {
+      "month": 9,
+      "day": 6,
+      "name": "グレゴリウス1世",
+      "nameEn": "Pope Gregory I",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "グレゴリウス1世の祝日を祝います！"
     },
     {
       "month": 9,
@@ -4922,6 +7289,15 @@
     },
     {
       "month": 9,
+      "day": 9,
+      "name": "聖ペトロ・クルス",
+      "nameEn": "Saint Peter of Alcántara",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ペトロ・クルスの記念日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 10,
       "name": "福者セバスチャン木村司祭と204殉教者",
       "nameEn": "Saint 福者セバスチャン木村と204",
@@ -4945,6 +7321,24 @@
     },
     {
       "month": 9,
+      "day": 10,
+      "name": "聖ペテロの聖母",
+      "nameEn": "Our Lady of Sorrows",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ペテロの聖母の祝日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 10,
+      "name": "聖アントニオ・マリア・ザッカリ",
+      "nameEn": "Saint Anthony Mary Zaccaria",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アントニオ・マリア・ザッカリの記念日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 11,
       "name": "福者ディエゴ司祭と殉教者たち",
       "nameEn": "Saint 福者ディエゴとたち",
@@ -4956,6 +7350,15 @@
       "nameVi": "Thánh Diego và các Thánh Tử Đạo",
       "nameEs": "Beato Diego y mártires",
       "namePt": "São Diego e Mártires"
+    },
+    {
+      "month": 9,
+      "day": 11,
+      "name": "聖マリア・グラツィア・バッシ",
+      "nameEn": "Saint Maria Grazia Bassi",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マリア・グラツィア・バッシの記念日を祝います！"
     },
     {
       "month": 9,
@@ -4984,6 +7387,15 @@
       "nameVi": "Thánh Anrê Kim Thông và các Thánh Tử Đạo",
       "nameEs": "San Ángel de la Guarda y mártires",
       "namePt": "São Ângelo e Mártires"
+    },
+    {
+      "month": 9,
+      "day": 12,
+      "name": "聖母マリアの名の祭日",
+      "nameEn": "Feast of the Holy Name of Mary",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖母マリアの名の祭日の祝日を祝います！"
     },
     {
       "month": 9,
@@ -5097,6 +7509,24 @@
     },
     {
       "month": 9,
+      "day": 16,
+      "name": "聖エディト・シュタイン",
+      "nameEn": "Saint Edith Stein",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖エディト・シュタインの記念日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 16,
+      "name": "聖コルベ神父",
+      "nameEn": "Saint Maximilian Kolbe",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖コルベ神父の記念日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 17,
       "name": "聖ロベルト・ベラルミーノ",
       "nameEn": "Saint Robert Bellarmine",
@@ -5124,6 +7554,15 @@
     },
     {
       "month": 9,
+      "day": 17,
+      "name": "聖アグスティヌス・チュルクス",
+      "nameEn": "Saint Augustine of Hippo",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグスティヌス・チュルクスの記念日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 18,
       "name": "聖ヨセフ（クペルティノ）司祭",
       "nameEn": "Saint ヨセフ（クペルティノ）",
@@ -5134,6 +7573,15 @@
       "nameVi": "Thánh Giuse (Cupertino)",
       "nameEs": "San José de Cupertino",
       "namePt": "São José de Cupertino"
+    },
+    {
+      "month": 9,
+      "day": 18,
+      "name": "聖マチア",
+      "nameEn": "Saint Matthias",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マチアの祝日を祝います！"
     },
     {
       "month": 9,
@@ -5148,6 +7596,24 @@
       "nameVi": "Thánh Giànuariô",
       "nameEs": "San Jenaro",
       "namePt": "São Januário"
+    },
+    {
+      "month": 9,
+      "day": 19,
+      "name": "聖ジュゼッペ・カラッサ",
+      "nameEn": "Saint Joseph of Cupertino",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ジュゼッペ・カラッサの記念日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 19,
+      "name": "聖マティア",
+      "nameEn": "Saint Matthias",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マティアの祝日を祝います！"
     },
     {
       "month": 9,
@@ -5179,6 +7645,15 @@
     },
     {
       "month": 9,
+      "day": 20,
+      "name": "聖マテオ",
+      "nameEn": "Saint Matthew",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マテオの祝日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 21,
       "name": "聖マタイ使徒",
       "nameEn": "Saint Matthew",
@@ -5204,6 +7679,24 @@
       "nameVi": "Thánh Tôma (Vilanôva)",
       "nameEs": "San Tomás de Villanueva",
       "namePt": "São Tomás de Vilanova"
+    },
+    {
+      "month": 9,
+      "day": 22,
+      "name": "성 요한 바오로 1세",
+      "nameEn": "Pope John Paul I",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "성 요한 바오로 1세の祝日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 22,
+      "name": "성 요한의 성모 마리아",
+      "nameEn": "Our Lady of Mercy",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "성 요한의 성모 마리아の記念日を祝います！"
     },
     {
       "month": 9,
@@ -5235,6 +7728,24 @@
     },
     {
       "month": 9,
+      "day": 23,
+      "name": "성 요한 바오로 1세",
+      "nameEn": "Pope John Paul I",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "성 요한 바오로 1세の記念日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 23,
+      "name": "성 피오 10세",
+      "nameEn": "Pope Pius X",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "성 피오 10세の記念日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 24,
       "name": "聖ノエル・シャバネル司祭殉教者",
       "nameEn": "Saint ノエル・シャバネル",
@@ -5249,6 +7760,15 @@
     },
     {
       "month": 9,
+      "day": 24,
+      "name": "マチューの使徒",
+      "nameEn": "Saint Matthew",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "マチューの使徒の祝日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 25,
       "name": "聖セルジオ（ラドネーシュ）",
       "nameEn": "Saint セルジオ（ラドネーシュ）",
@@ -5260,6 +7780,24 @@
       "nameVi": "Thánh Sergio (Radnêsh)",
       "nameEs": "San Sergio (Radonés)",
       "namePt": "São Sérgio (Radonês)"
+    },
+    {
+      "month": 9,
+      "day": 25,
+      "name": "聖クレメンス",
+      "nameEn": "Saint Clement",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖クレメンスの記念日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 25,
+      "name": "聖リュカ",
+      "nameEn": "Saint Luke",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖リュカの祝日を祝います！"
     },
     {
       "month": 9,
@@ -5291,6 +7829,24 @@
     },
     {
       "month": 9,
+      "day": 26,
+      "name": "聖コルベ神父",
+      "nameEn": "St. Maximilian Kolbe",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖コルベ神父の記念日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 26,
+      "name": "聖ユストス",
+      "nameEn": "St. Justus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ユストスの記念日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 27,
       "name": "聖ヴィンセンツォ・デ・パウル",
       "nameEn": "Saint Vincent de Paul",
@@ -5319,6 +7875,24 @@
     },
     {
       "month": 9,
+      "day": 27,
+      "name": "セバスティアヌス",
+      "nameEn": "Saint Sebastian",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "セバスティアヌスの祝日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 27,
+      "name": "聖ヴィンセント",
+      "nameEn": "Saint Vincent",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ヴィンセントの記念日を祝います！"
+    },
+    {
+      "month": 9,
       "day": 28,
       "name": "聖ヴェンセスラオ",
       "nameEn": "Saint Wenceslaus",
@@ -5344,6 +7918,33 @@
       "nameVi": "Thánh Tôma Tây và 15 Thánh Tử Đạo",
       "nameEs": "San Tomás de Japón y 15 mártires",
       "namePt": "São Tomás de Aquino e 15 Mártires"
+    },
+    {
+      "month": 9,
+      "day": 28,
+      "name": "ミカエル",
+      "nameEn": "Michael",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "ミカエルの祝日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 28,
+      "name": "ガブリエル",
+      "nameEn": "Gabriel",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "ガブリエルの祝日を祝います！"
+    },
+    {
+      "month": 9,
+      "day": 28,
+      "name": "ラファエル",
+      "nameEn": "Raphael",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "ラファエルの祝日を祝います！"
     },
     {
       "month": 9,
@@ -5388,6 +7989,15 @@
       "namePt": "São Jerônimo"
     },
     {
+      "month": 9,
+      "day": 30,
+      "name": "セバスティアヌス",
+      "nameEn": "Saint Sebastian",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "セバスティアヌスの祝日を祝います！"
+    },
+    {
       "month": 10,
       "day": 1,
       "name": "聖テレジア",
@@ -5418,6 +8028,15 @@
       "type": "feast",
       "isJapanese": false,
       "greeting": "聖エヴァンジェリスト・ルカの祝日を祝います！"
+    },
+    {
+      "month": 10,
+      "day": 1,
+      "name": "エドワード",
+      "nameEn": "Edward the Confessor",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "エドワードの祝日を祝います！"
     },
     {
       "month": 10,
@@ -5463,6 +8082,24 @@
     },
     {
       "month": 10,
+      "day": 3,
+      "name": "聖テレジア",
+      "nameEn": "Saint Therese",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖テレジアの祝日を祝います！"
+    },
+    {
+      "month": 10,
+      "day": 3,
+      "name": "聖ブレーズ",
+      "nameEn": "Saint Blaise",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ブレーズの記念日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 4,
       "name": "聖フランシスコ",
       "nameEn": "Saint Francis of Assisi",
@@ -5491,6 +8128,24 @@
     },
     {
       "month": 10,
+      "day": 5,
+      "name": "聖テレジア",
+      "nameEn": "Saint Thérèse of Lisieux",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖テレジアの祝日を祝います！"
+    },
+    {
+      "month": 10,
+      "day": 5,
+      "name": "聖フランシスコ・ザビエル",
+      "nameEn": "Saint Francis Xavier",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・ザビエルの記念日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 6,
       "name": "聖ブルーノ",
       "nameEn": "Saint Bruno",
@@ -5502,6 +8157,24 @@
       "nameVi": "Thánh Bruno",
       "nameEs": "San Bruno",
       "namePt": "São Bruno"
+    },
+    {
+      "month": 10,
+      "day": 6,
+      "name": "聖ブリギッタ",
+      "nameEn": "Saint Bridget",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ブリギッタの祝日を祝います！"
+    },
+    {
+      "month": 10,
+      "day": 6,
+      "name": "聖レオナルド",
+      "nameEn": "Saint Leonard",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖レオナルドの記念日を祝います！"
     },
     {
       "month": 10,
@@ -5569,6 +8242,15 @@
     },
     {
       "month": 10,
+      "day": 9,
+      "name": "聖ジョン・レオン",
+      "nameEn": "Saint John Leonardi",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ジョン・レオンの記念日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 10,
       "name": "聖フランシスコ・ボルジア司祭",
       "nameEn": "Saint フランシスコ・ボルジア",
@@ -5597,6 +8279,24 @@
     },
     {
       "month": 10,
+      "day": 11,
+      "name": "聖ヨハネ・XXIII世",
+      "nameEn": "Saint John XXIII",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ヨハネ・XXIII世の祝日を祝います！"
+    },
+    {
+      "month": 10,
+      "day": 11,
+      "name": "聖ダニエル",
+      "nameEn": "Saint Daniel",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ダニエルの記念日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 12,
       "name": "聖ウィルフリド司教",
       "nameEn": "Saint ウィルフリド",
@@ -5611,6 +8311,15 @@
     },
     {
       "month": 10,
+      "day": 12,
+      "name": "聖母マリアの神秘的な名",
+      "nameEn": "Our Lady of the Rosary",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖母マリアの神秘的な名の祝日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 13,
       "name": "聖エドワード王",
       "nameEn": "Saint エドワード王",
@@ -5622,6 +8331,24 @@
       "nameVi": "Thánh Edward vua",
       "nameEs": "San Eduardo Rey",
       "namePt": "São Eduardo"
+    },
+    {
+      "month": 10,
+      "day": 13,
+      "name": "聖エドワード",
+      "nameEn": "Saint Edward",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖エドワードの祝日を祝います！"
+    },
+    {
+      "month": 10,
+      "day": 13,
+      "name": "聖マリア・ファウスティナ",
+      "nameEn": "Saint Maria Faustina",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マリア・ファウスティナの記念日を祝います！"
     },
     {
       "month": 10,
@@ -5650,6 +8377,24 @@
       "nameVi": "Thánh Callixtus I",
       "nameEs": "San Calisto I",
       "namePt": "São Calisto I"
+    },
+    {
+      "month": 10,
+      "day": 14,
+      "name": "聖カリスト",
+      "nameEn": "Saint Callistus",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖カリストの祝日を祝います！"
+    },
+    {
+      "month": 10,
+      "day": 14,
+      "name": "聖テオドール",
+      "nameEn": "Saint Theodore",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖テオドールの記念日を祝います！"
     },
     {
       "month": 10,
@@ -5699,6 +8444,15 @@
     },
     {
       "month": 10,
+      "day": 15,
+      "name": "テレジア・リジューの聖女",
+      "nameEn": "Saint Thérèse of Lisieux",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "テレジア・リジューの聖女の祝日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 16,
       "name": "聖ヘドウィグ",
       "nameEn": "Saint Hedwig",
@@ -5727,6 +8481,24 @@
     },
     {
       "month": 10,
+      "day": 16,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin of Porres",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの記念日を祝います！"
+    },
+    {
+      "month": 10,
+      "day": 16,
+      "name": "聖テレジア・アビラ",
+      "nameEn": "Saint Teresa of Avila",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖テレジア・アビラの祝日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 17,
       "name": "聖イグナチオ・アンティオキア",
       "nameEn": "Saint Ignatius of Antioch",
@@ -5752,6 +8524,24 @@
       "nameVi": "Thánh Ignatiô (Antioquia)",
       "nameEs": "San Ignacio de Antioquía",
       "namePt": "São Inácio (de Antioquia)"
+    },
+    {
+      "month": 10,
+      "day": 17,
+      "name": "イグナチオ・デ・ロヨラ",
+      "nameEn": "Ignatius of Loyola",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "イグナチオ・デ・ロヨラの祝日を祝います！"
+    },
+    {
+      "month": 10,
+      "day": 17,
+      "name": "マルティノ・デ・ポレス",
+      "nameEn": "Martin de Porres",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "マルティノ・デ・ポレスの祝日を祝います！"
     },
     {
       "month": 10,
@@ -5797,6 +8587,15 @@
     },
     {
       "month": 10,
+      "day": 19,
+      "name": "聖ヨハネ・パウロ2世",
+      "nameEn": "Saint John Paul II",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ヨハネ・パウロ2世の祝日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 20,
       "name": "聖ヨハネ（カンチオ）",
       "nameEn": "Saint ヨハネ（カンチオ）",
@@ -5808,6 +8607,15 @@
       "nameVi": "Thánh Gioan (Cantiô)",
       "nameEs": "San Juan (Kanchio)",
       "namePt": "São João (Kanchio)"
+    },
+    {
+      "month": 10,
+      "day": 20,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin of Porres",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの記念日を祝います！"
     },
     {
       "month": 10,
@@ -5890,6 +8698,15 @@
     },
     {
       "month": 10,
+      "day": 23,
+      "name": "聖ジョン・パウロ2世",
+      "nameEn": "Saint John Paul II",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ジョン・パウロ2世の祝日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 24,
       "name": "聖アントニオ・マリア・クラレ",
       "nameEn": "Saint Anthony Mary Claret",
@@ -5904,6 +8721,15 @@
     },
     {
       "month": 10,
+      "day": 24,
+      "name": "聖アンデレ・アポストル",
+      "nameEn": "Saint Andrew the Apostle",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アンデレ・アポストルの祝日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 25,
       "name": "聖クリスピノと聖クリスピニアーノ",
       "nameEn": "Saint クリスピノとSaint クリスピニアーノ",
@@ -5915,6 +8741,15 @@
       "nameVi": "Thánh Crispino và Thánh Crispiniano",
       "nameEs": "San Crispín y Santa Crispiniana",
       "namePt": "São Crispino e São Crispiniano"
+    },
+    {
+      "month": 10,
+      "day": 25,
+      "name": "聖マルティノ",
+      "nameEn": "Saint Martin of Porres",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マルティノの記念日を祝います！"
     },
     {
       "month": 10,
@@ -5946,6 +8781,24 @@
     },
     {
       "month": 10,
+      "day": 27,
+      "name": "聖テオドール",
+      "nameEn": "Saint Theodore",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖テオドールの祝日を祝います！"
+    },
+    {
+      "month": 10,
+      "day": 27,
+      "name": "聖シモン",
+      "nameEn": "Saint Simon",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖シモンの祝日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 28,
       "name": "聖シモンとユダ使徒",
       "nameEn": "Saints Simon and Jude",
@@ -5971,6 +8824,15 @@
       "nameVi": "Thánh Simon, Thánh Giuđa Tông Đồ",
       "nameEs": "San Simón, San Judas Apóstol",
       "namePt": "São Simão, São Judas Apóstolo"
+    },
+    {
+      "month": 10,
+      "day": 28,
+      "name": "ユダ",
+      "nameEn": "Jude",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "ユダの祝日を祝います！"
     },
     {
       "month": 10,
@@ -6006,6 +8868,15 @@
     },
     {
       "month": 10,
+      "day": 29,
+      "name": "聖ジュゼッペ・ダ・カッシア",
+      "nameEn": "Saint Joseph of Cupertino",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ジュゼッペ・ダ・カッシアの記念日を祝います！"
+    },
+    {
+      "month": 10,
       "day": 30,
       "name": "聖アルフォンソ・ロドリゲス",
       "nameEn": "Saint アルフォンソ・ロドリゲス",
@@ -6016,6 +8887,15 @@
       "nameZh": "圣阿尔丰索·罗德里格斯",
       "nameEs": "San Alfonso Rodríguez",
       "namePt": "São Alfonso Rodrigues"
+    },
+    {
+      "month": 10,
+      "day": 30,
+      "name": "聖アルフォンソ・マリア・デ・リゴーリ",
+      "nameEn": "Saint Alphonsus Maria de Liguori",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アルフォンソ・マリア・デ・リゴーリの祝日を祝います！"
     },
     {
       "month": 10,
@@ -6044,6 +8924,15 @@
       "nameVi": "Lễ Các Thánh",
       "nameEs": "Todos los Santos",
       "namePt": "Todos os Santos"
+    },
+    {
+      "month": 11,
+      "day": 1,
+      "name": "万聖節",
+      "nameEn": "All Saints' Day",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "万聖節の大祝日を祝います！"
     },
     {
       "month": 11,
@@ -6085,6 +8974,24 @@
       "nameVi": "Thánh Hubert",
       "nameEs": "San Huberto",
       "namePt": "São Hubertus"
+    },
+    {
+      "month": 11,
+      "day": 3,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin of Porres",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの記念日を祝います！"
+    },
+    {
+      "month": 11,
+      "day": 3,
+      "name": "聖ウルスラ",
+      "nameEn": "Saint Ursula",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ウルスラの記念日を祝います！"
     },
     {
       "month": 11,
@@ -6148,6 +9055,15 @@
     },
     {
       "month": 11,
+      "day": 5,
+      "name": "サンタ・マルタ",
+      "nameEn": "Saint Martha",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "サンタ・マルタの記念日を祝います！"
+    },
+    {
+      "month": 11,
       "day": 6,
       "name": "聖レオナルド（ノブラク）",
       "nameEn": "Saint レオナルド（ノブラク）",
@@ -6159,6 +9075,15 @@
       "nameVi": "Thánh Leonardo (Noblak)",
       "nameEs": "San Leonardo de Noblac",
       "namePt": "São Leonardo de Noblac"
+    },
+    {
+      "month": 11,
+      "day": 6,
+      "name": "聖レオ大司教",
+      "nameEn": "Saint Leo the Great",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖レオ大司教の祝日を祝います！"
     },
     {
       "month": 11,
@@ -6176,6 +9101,15 @@
     },
     {
       "month": 11,
+      "day": 7,
+      "name": "聖ペトロ・クルス",
+      "nameEn": "Saint Peter of Alcántara",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ペトロ・クルスの記念日を祝います！"
+    },
+    {
+      "month": 11,
       "day": 8,
       "name": "聖ジダコ",
       "nameEn": "Saint ジダコ",
@@ -6187,6 +9121,24 @@
       "nameVi": "Thánh Giacôbê",
       "nameEs": "San Didaco",
       "namePt": "São Judas"
+    },
+    {
+      "month": 11,
+      "day": 8,
+      "name": "聖ミカエル",
+      "nameEn": "Saint Michael",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ミカエルの祝日を祝います！"
+    },
+    {
+      "month": 11,
+      "day": 8,
+      "name": "聖ギデオン",
+      "nameEn": "Saint Gideon",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ギデオンの記念日を祝います！"
     },
     {
       "month": 11,
@@ -6218,6 +9170,24 @@
     },
     {
       "month": 11,
+      "day": 9,
+      "name": "聖ベネディクト",
+      "nameEn": "Saint Benedict",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ベネディクトの祝日を祝います！"
+    },
+    {
+      "month": 11,
+      "day": 9,
+      "name": "聖テオドール",
+      "nameEn": "Saint Theodore",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖テオドールの記念日を祝います！"
+    },
+    {
+      "month": 11,
       "day": 10,
       "name": "聖レオ一世",
       "nameEn": "Saint Leo the Great",
@@ -6243,6 +9213,15 @@
       "nameVi": "Thánh Giáo Hoàng Lêô I",
       "nameEs": "San León I, Papa y Doctor de la Iglesia",
       "namePt": "São Leão I, Papa e Doutor da Igreja"
+    },
+    {
+      "month": 11,
+      "day": 10,
+      "name": "シルヴェステル",
+      "nameEn": "Saint Silvester",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "シルヴェステルの記念日を祝います！"
     },
     {
       "month": 11,
@@ -6324,6 +9303,24 @@
     },
     {
       "month": 11,
+      "day": 13,
+      "name": "聖フランシスコ・ザビエル",
+      "nameEn": "Saint Francis Xavier",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・ザビエルの祝日を祝います！"
+    },
+    {
+      "month": 11,
+      "day": 13,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
+    },
+    {
+      "month": 11,
       "day": 14,
       "name": "聖ヨセフ・ピニャテリ",
       "nameEn": "Saint ヨセフ・ピニャテリ",
@@ -6352,6 +9349,15 @@
     },
     {
       "month": 11,
+      "day": 15,
+      "name": "聖マリア・グラツィア",
+      "nameEn": "Saint Maria Grazia",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マリア・グラツィアの記念日を祝います！"
+    },
+    {
+      "month": 11,
       "day": 16,
       "name": "聖マルガリタ",
       "nameEn": "Saint Margaret of Scotland",
@@ -6363,6 +9369,15 @@
       "nameVi": "Thánh Margarita",
       "nameEs": "Santa Margarita de Escocia",
       "namePt": "Santa Margarida da Escócia"
+    },
+    {
+      "month": 11,
+      "day": 16,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin of Tours",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの祝日を祝います！"
     },
     {
       "month": 11,
@@ -6394,6 +9409,15 @@
     },
     {
       "month": 11,
+      "day": 17,
+      "name": "聖マクシミリアノ・コルベ",
+      "nameEn": "Saint Maximilian Kolbe",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マクシミリアノ・コルベの記念日を祝います！"
+    },
+    {
+      "month": 11,
       "day": 18,
       "name": "聖ペトロとパウロの聖堂の献堂",
       "nameEn": "Dedication of the Basilicas of Saints Peter and Paul",
@@ -6419,6 +9443,24 @@
       "nameVi": "Thánh Tông Đồ Phê-rô và Thánh Tông Đồ Phao-lô",
       "nameEs": "Iglesia de los Apóstoles San Pedro y San Pablo",
       "namePt": "São Pedro e São Paulo"
+    },
+    {
+      "month": 11,
+      "day": 18,
+      "name": "聖ゲオルギオス",
+      "nameEn": "Saint George",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ゲオルギオスの祝日を祝います！"
+    },
+    {
+      "month": 11,
+      "day": 18,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin of Tours",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの記念日を祝います！"
     },
     {
       "month": 11,
@@ -6465,6 +9507,24 @@
       "nameVi": "Thánh Phê-rô (Valois)",
       "nameEs": "San Félix de Valois",
       "namePt": "São Félix (de Valois)"
+    },
+    {
+      "month": 11,
+      "day": 20,
+      "name": "聖エドワード",
+      "nameEn": "Saint Edward",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖エドワードの祝日を祝います！"
+    },
+    {
+      "month": 11,
+      "day": 20,
+      "name": "聖イグナチオ・デ・ロヨラ",
+      "nameEn": "Saint Ignatius of Loyola",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖イグナチオ・デ・ロヨラの記念日を祝います！"
     },
     {
       "month": 11,
@@ -6550,6 +9610,24 @@
     },
     {
       "month": 11,
+      "day": 23,
+      "name": "聖クレメンス",
+      "nameEn": "Saint Clement",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖クレメンスの祝日を祝います！"
+    },
+    {
+      "month": 11,
+      "day": 23,
+      "name": "聖コルネリウス",
+      "nameEn": "Saint Cornelius",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖コルネリウスの記念日を祝います！"
+    },
+    {
+      "month": 11,
       "day": 24,
       "name": "聖コロンバン",
       "nameEn": "Saints Andrew Dung-Lac and Companions",
@@ -6578,6 +9656,24 @@
     },
     {
       "month": 11,
+      "day": 24,
+      "name": "アンドレ・アベラルド",
+      "nameEn": "Saint Andrew Dung-Lac",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "アンドレ・アベラルドの祝日を祝います！"
+    },
+    {
+      "month": 11,
+      "day": 24,
+      "name": "アンドレ・アベラルド",
+      "nameEn": "Saint Andrew Dung-Lac",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "アンドレ・アベラルドの記念日を祝います！"
+    },
+    {
+      "month": 11,
       "day": 25,
       "name": "聖カタリナ・アレクサンドリア",
       "nameEn": "Saint Catherine of Alexandria",
@@ -6603,6 +9699,15 @@
       "nameVi": "Thánh Catarina (Alexandria)",
       "nameEs": "Santa Catalina de Alejandría",
       "namePt": "Santa Catarina de Alexandria"
+    },
+    {
+      "month": 11,
+      "day": 25,
+      "name": "聖カタリナ・ド・シエナ",
+      "nameEn": "Saint Catherine of Siena",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖カタリナ・ド・シエナの記念日を祝います！"
     },
     {
       "month": 11,
@@ -6652,6 +9757,24 @@
     },
     {
       "month": 11,
+      "day": 27,
+      "name": "聖フランシスコ・アダウス",
+      "nameEn": "Saint Francis of Assisi",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・アダウスの祝日を祝います！"
+    },
+    {
+      "month": 11,
+      "day": 27,
+      "name": "聖アナスタシア",
+      "nameEn": "Saint Anastasia",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アナスタシアの記念日を祝います！"
+    },
+    {
+      "month": 11,
       "day": 28,
       "name": "聖カタリナ・ラブレ",
       "nameEn": "Saint カタリナ・ラブレ",
@@ -6666,6 +9789,24 @@
     },
     {
       "month": 11,
+      "day": 28,
+      "name": "聖ステファノ",
+      "nameEn": "Saint Stephen",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ステファノの祝日を祝います！"
+    },
+    {
+      "month": 11,
+      "day": 28,
+      "name": "聖アナスタシア",
+      "nameEn": "Saint Anastasia",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アナスタシアの祝日を祝います！"
+    },
+    {
+      "month": 11,
       "day": 29,
       "name": "聖セルニン殉教者（トゥールーズ）",
       "nameEn": "Saint セルニン（トゥールーズ）",
@@ -6677,6 +9818,15 @@
       "nameVi": "Thánh Sêlinh (Toulouse)",
       "nameEs": "San Sernin (de Tolosa)",
       "namePt": "São Sernin de Toulouse"
+    },
+    {
+      "month": 11,
+      "day": 29,
+      "name": "聖アンドレ",
+      "nameEn": "Saint Andrew",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アンドレの祝日を祝います！"
     },
     {
       "month": 11,
@@ -6708,6 +9858,15 @@
     },
     {
       "month": 12,
+      "day": 1,
+      "name": "アダムとイブ",
+      "nameEn": "Adam and Eve",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "アダムとイブの祝日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 2,
       "name": "聖ビビアナおとめ殉教者",
       "nameEn": "Saint Bibiana",
@@ -6719,6 +9878,15 @@
       "nameVi": "Thánh Bibiana",
       "nameEs": "Santa Bibiana",
       "namePt": "Santa Bibiana"
+    },
+    {
+      "month": 12,
+      "day": 2,
+      "name": "聖フランシスコ・ザビエル",
+      "nameEn": "Saint Francis Xavier",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・ザビエルの祝日を祝います！"
     },
     {
       "month": 12,
@@ -6764,6 +9932,24 @@
     },
     {
       "month": 12,
+      "day": 4,
+      "name": "聖バルバラ",
+      "nameEn": "Saint Barbara",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖バルバラの祝日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 4,
+      "name": "聖ヨハネ・ダマスケヌス",
+      "nameEn": "Saint John of Damascus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ヨハネ・ダマスケヌスの記念日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 5,
       "name": "聖サバス修道院長",
       "nameEn": "Saint Sabbas",
@@ -6775,6 +9961,24 @@
       "nameVi": "Thánh Sabas",
       "nameEs": "San Sabas",
       "namePt": "São Sabas"
+    },
+    {
+      "month": 12,
+      "day": 5,
+      "name": "バルバラ",
+      "nameEn": "Saint Barbara",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "バルバラの祝日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 5,
+      "name": "ニコラオス",
+      "nameEn": "Saint Nicholas",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "ニコラオスの祝日を祝います！"
     },
     {
       "month": 12,
@@ -6806,6 +10010,15 @@
     },
     {
       "month": 12,
+      "day": 7,
+      "name": "聖アンデレ・アポストル",
+      "nameEn": "Saint Andrew the Apostle",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖アンデレ・アポストルの祝日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 8,
       "name": "無原罪の御宿り",
       "nameEn": "Immaculate Conception",
@@ -6834,6 +10047,15 @@
     },
     {
       "month": 12,
+      "day": 8,
+      "name": "無原罪の聖マリア",
+      "nameEn": "Immaculate Conception of the Blessed Virgin Mary",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "無原罪の聖マリアの大祝日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 9,
       "name": "聖ペトロ・フリエ司祭",
       "nameEn": "Saint Peter Fourier",
@@ -6859,6 +10081,24 @@
       "nameVi": "Thánh Juan Diego",
       "nameEs": "San Juan Diego",
       "namePt": "São Juan Diego"
+    },
+    {
+      "month": 12,
+      "day": 9,
+      "name": "聖フランシスコ・アダウス",
+      "nameEn": "Saint Francis Xavier",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・アダウスの祝日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 9,
+      "name": "聖ジュゼッペ・ダ・レッジオ",
+      "nameEn": "Saint Joseph of Cupertino",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ジュゼッペ・ダ・レッジオの記念日を祝います！"
     },
     {
       "month": 12,
@@ -6894,6 +10134,24 @@
     },
     {
       "month": 12,
+      "day": 10,
+      "name": "聖ユゼフ",
+      "nameEn": "Saint Joseph",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ユゼフの祝日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 10,
+      "name": "聖フランシスコ・アダウ",
+      "nameEn": "Saint Francis of Adau",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖フランシスコ・アダウの記念日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 11,
       "name": "聖ダマソ一世",
       "nameEn": "Saint Damasus I",
@@ -6905,6 +10163,24 @@
       "nameVi": "Thánh Đamaso I",
       "nameEs": "San Damaso I",
       "namePt": "São Damaso I"
+    },
+    {
+      "month": 12,
+      "day": 11,
+      "name": "聖ダニエル",
+      "nameEn": "Saint Daniel",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ダニエルの祝日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 11,
+      "name": "聖アナスタシア",
+      "nameEn": "Saint Anastasia",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アナスタシアの記念日を祝います！"
     },
     {
       "month": 12,
@@ -6936,6 +10212,15 @@
     },
     {
       "month": 12,
+      "day": 13,
+      "name": "ルルドの聖母",
+      "nameEn": "Our Lady of Lourdes",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "ルルドの聖母の祝日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 14,
       "name": "聖ヨハネ・十字架",
       "nameEn": "Saint John of the Cross",
@@ -6964,6 +10249,24 @@
     },
     {
       "month": 12,
+      "day": 15,
+      "name": "聖アブラム",
+      "nameEn": "Saint Abram",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アブラムの記念日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 15,
+      "name": "聖マルティヌス",
+      "nameEn": "Saint Martin",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖マルティヌスの祝日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 16,
       "name": "聖アーデルハイト",
       "nameEn": "Saint Adelaide",
@@ -6975,6 +10278,24 @@
       "nameVi": "Thánh Adelheid",
       "nameEs": "Santa Adelina",
       "namePt": "Santa Adelaide"
+    },
+    {
+      "month": 12,
+      "day": 16,
+      "name": "聖アラン",
+      "nameEn": "Saint Alan",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アランの記念日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 16,
+      "name": "聖ラファエル",
+      "nameEn": "Saint Raphael",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ラファエルの記念日を祝います！"
     },
     {
       "month": 12,
@@ -7010,6 +10331,15 @@
     },
     {
       "month": 12,
+      "day": 17,
+      "name": "聖アダルベルト",
+      "nameEn": "Saint Adalbert",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アダルベルトの記念日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 18,
       "name": "聖ウィニバルド",
       "nameEn": "Saint Winibald",
@@ -7021,6 +10351,24 @@
       "nameVi": "Thánh Winibald",
       "nameEs": "San Winibaldo",
       "namePt": "São Winibaldo"
+    },
+    {
+      "month": 12,
+      "day": 18,
+      "name": "聖ラザロ",
+      "nameEn": "Saint Lazarus",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖ラザロの記念日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 18,
+      "name": "聖アグネス",
+      "nameEn": "Saint Agnes",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アグネスの記念日を祝います！"
     },
     {
       "month": 12,
@@ -7038,6 +10386,24 @@
     },
     {
       "month": 12,
+      "day": 19,
+      "name": "聖ニコラオス",
+      "nameEn": "Saint Nicholas",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ニコラオスの祝日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 19,
+      "name": "聖アウグスティヌス",
+      "nameEn": "Saint Augustine",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アウグスティヌスの記念日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 20,
       "name": "聖ドミニコ（シラスの）",
       "nameEn": "Saint Dominic of Silos",
@@ -7049,6 +10415,15 @@
       "nameVi": "Thánh Đaminh Silos",
       "nameEs": "San Domingo de Silos",
       "namePt": "São Domingos de Silos"
+    },
+    {
+      "month": 12,
+      "day": 20,
+      "name": "聖ヨセフ",
+      "nameEn": "Saint Joseph",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ヨセフの祝日を祝います！"
     },
     {
       "month": 12,
@@ -7080,6 +10455,15 @@
     },
     {
       "month": 12,
+      "day": 22,
+      "name": "聖母マリアの神秘",
+      "nameEn": "Our Lady of the Mystery",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖母マリアの神秘の祝日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 23,
       "name": "聖ヨハネ・カンタベリ",
       "nameEn": "Saint John of Kanty",
@@ -7091,6 +10475,15 @@
       "nameVi": "Thánh Gioan Cantius",
       "nameEs": "San Juan de Kanty",
       "namePt": "São João de Canti"
+    },
+    {
+      "month": 12,
+      "day": 23,
+      "name": "聖ヨハネ・クリソストモ",
+      "nameEn": "Saint John Chrysostom",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ヨハネ・クリソストモの祝日を祝います！"
     },
     {
       "month": 12,
@@ -7117,6 +10510,24 @@
     },
     {
       "month": 12,
+      "day": 24,
+      "name": "聖バルバラ",
+      "nameEn": "Saint Barbara",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖バルバラの祝日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 24,
+      "name": "聖アダルベルト",
+      "nameEn": "Saint Adalbert",
+      "type": "memorial",
+      "isJapanese": false,
+      "greeting": "聖アダルベルトの記念日を祝います！"
+    },
+    {
+      "month": 12,
       "day": 25,
       "name": "聖アナスタジアおとめ殉教者",
       "nameEn": "Saint Anastasia",
@@ -7128,6 +10539,24 @@
       "nameVi": "Thánh Anastasia",
       "nameEs": "Santa Anastasia",
       "namePt": "Santa Anastácia"
+    },
+    {
+      "month": 12,
+      "day": 25,
+      "name": "イエス・キリスト",
+      "nameEn": "Jesus Christ",
+      "type": "solemnity",
+      "isJapanese": false,
+      "greeting": "イエス・キリストの大祝日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 25,
+      "name": "聖母マリア",
+      "nameEn": "Mary, Mother of God",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖母マリアの祝日を祝います！"
     },
     {
       "month": 12,
@@ -7156,6 +10585,24 @@
       "nameVi": "Thánh Gioan",
       "nameEs": "San Juan",
       "namePt": "São João"
+    },
+    {
+      "month": 12,
+      "day": 27,
+      "name": "聖ヨセフ",
+      "nameEn": "Saint Joseph",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ヨセフの祝日を祝います！"
+    },
+    {
+      "month": 12,
+      "day": 27,
+      "name": "聖ジョン・アポスル",
+      "nameEn": "Saint John the Apostle",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ジョン・アポスルの祝日を祝います！"
     },
     {
       "month": 12,
@@ -7198,6 +10645,15 @@
       "nameVi": "Thánh Melania",
       "nameEs": "Santa Melania",
       "namePt": "Santa Melânia"
+    },
+    {
+      "month": 12,
+      "day": 30,
+      "name": "聖ファミリア",
+      "nameEn": "Holy Family",
+      "type": "feast",
+      "isJapanese": false,
+      "greeting": "聖ファミリアの祝日を祝います！"
     },
     {
       "month": 12,
