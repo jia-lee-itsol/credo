@@ -12,6 +12,8 @@ import 'core/utils/app_localizations.dart';
 import 'shared/providers/liturgy_theme_provider.dart';
 import 'shared/providers/font_scale_provider.dart';
 import 'shared/providers/locale_provider.dart';
+import 'shared/providers/auth_provider.dart';
+import 'features/auth/domain/entities/user_entity.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -46,6 +48,14 @@ class CredoApp extends ConsumerWidget {
 
     // 푸시 알림 서비스에 router 설정
     PushNotificationService().setRouter(router);
+
+    // 인증 상태 감시: 사용자가 로그인하면 FCM 토큰 저장
+    ref.listen<UserEntity?>(authStateProvider, (previous, next) {
+      if (next != null && previous != next) {
+        // 사용자가 로그인했거나 변경되었을 때 토큰 저장
+        PushNotificationService().saveTokenForUser(next.userId);
+      }
+    });
 
     final fontScale = ref.watch(fontScaleProvider);
     final locale = ref.watch(localeProvider);

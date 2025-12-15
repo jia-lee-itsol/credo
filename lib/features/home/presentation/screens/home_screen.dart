@@ -22,6 +22,9 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  // 삭제된 게시글 ID를 추적하는 Set
+  final Set<String> _dismissedPostIds = {};
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -102,12 +105,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
               // 공지사항 리스트
               SliverToBoxAdapter(
-                child: _buildNotificationsList(
+                child: _buildRecentNoticesList(
                   context,
                   ref,
                   theme,
                   primaryColor,
                   l10n,
+                  currentUser?.mainParishId,
                 ),
               ),
 
@@ -136,46 +140,48 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildNotificationsList(
+  /// 최근 공지사항 리스트 빌드
+  Widget _buildRecentNoticesList(
     BuildContext context,
     WidgetRef ref,
     ThemeData theme,
     Color primaryColor,
     AppLocalizations l10n,
+    String? parishId,
   ) {
-    final currentUser = ref.watch(currentUserProvider);
-
-    if (currentUser == null) {
-      AppLogger.notification('currentUser가 null입니다');
+    if (parishId == null) {
       return _buildNoticesPlaceholder(context, theme, l10n);
     }
 
-    AppLogger.notification('알림 조회 시작: userId=${currentUser.userId}');
-    final notificationsAsync = ref.watch(
-      notificationsProvider(currentUser.userId),
-    );
+    final noticesAsync = ref.watch(officialNoticesProvider(parishId));
 
-    return notificationsAsync.when(
-      data: (notifications) {
-        AppLogger.notification('알림 데이터 수신: ${notifications.length}개');
-        for (final n in notifications) {
-          AppLogger.debug(
-            '알림: id=${n.notificationId}, type=${n.type}, title=${n.title}, body=${n.body}',
-          );
-        }
-        if (notifications.isEmpty) {
+    return noticesAsync.when(
+      data: (notices) {
+        if (notices.isEmpty) {
           return _buildNoticesPlaceholder(context, theme, l10n);
         }
 
-        // 최근 5개만 표시
-        final recentNotifications = notifications.take(5).toList();
+        // 삭제된 게시글 제외
+        final filteredNotices = notices
+            .where((post) => !_dismissedPostIds.contains(post.postId))
+            .take(5)
+            .toList();
+
+        if (filteredNotices.isEmpty) {
+          return _buildNoticesPlaceholder(context, theme, l10n);
+        }
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
-            children: recentNotifications.map((notification) {
+            children: filteredNotices.map((post) {
+              // 게시글을 알림 형태로 변환
+              final notificationType = 'notice'; // 공지글은 항상 notice 타입
+              final notificationTitle = post.title;
+              final notificationBody = post.body.split('\n').first;
+
               return Dismissible(
-                key: Key(notification.notificationId),
+                key: Key(post.postId),
                 direction: DismissDirection.endToStart,
                 background: Container(
                   margin: const EdgeInsets.only(bottom: 8),
@@ -188,20 +194,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   child: const Icon(Icons.delete, color: Colors.white),
                 ),
                 onDismissed: (direction) {
-                  ref
-                      .read(notificationRepositoryProvider)
-                      .deleteNotification(notification.notificationId);
+                  // 삭제된 게시글 ID를 Set에 추가하여 리스트에서 제외
+                  setState(() {
+                    _dismissedPostIds.add(post.postId);
+                  });
                 },
                 child: Card(
                   margin: const EdgeInsets.only(bottom: 8),
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundColor: _getNotificationColor(
-                        notification.type,
+                        notificationType,
                       ).withValues(alpha: 0.1),
                       child: Icon(
-                        _getNotificationIcon(notification.type),
-                        color: _getNotificationColor(notification.type),
+                        _getNotificationIcon(notificationType),
+                        color: _getNotificationColor(notificationType),
                         size: 20,
                       ),
                     ),
@@ -214,14 +221,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           ),
                           decoration: BoxDecoration(
                             color: _getNotificationColor(
-                              notification.type,
+                              notificationType,
                             ).withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            _getNotificationLabel(notification.type, l10n),
+                            _getNotificationLabel(notificationType, l10n),
                             style: theme.textTheme.labelSmall?.copyWith(
-                              color: _getNotificationColor(notification.type),
+                              color: _getNotificationColor(notificationType),
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -229,12 +236,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            notification.authorName ?? '',
+                            notificationTitle,
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              fontWeight: notification.isRead
-                                  ? FontWeight.normal
-                                  : FontWeight.bold,
+                              fontWeight: FontWeight.bold,
                             ),
+                            maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -243,42 +249,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     subtitle: Padding(
                       padding: const EdgeInsets.only(top: 4),
                       child: Text(
-                        notification.body,
+                        notificationBody,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.bodySmall,
                       ),
                     ),
-                    trailing: notification.isRead
-                        ? const Icon(Icons.chevron_right, color: Colors.grey)
-                        : Container(
-                            width: 10,
-                            height: 10,
-                            decoration: BoxDecoration(
-                              color: _getNotificationColor(notification.type),
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                    onTap: () async {
-                      // 알림 읽음 처리
-                      if (!notification.isRead) {
-                        ref
-                            .read(notificationRepositoryProvider)
-                            .markAsRead(notification.notificationId);
-                      }
-
-                      // 게시글 상세 화면으로 이동
-                      final postId = notification.postId;
-                      if (postId != null && postId.isNotEmpty) {
-                        final post = await ref.read(
-                          postByIdProvider(postId).future,
+                    trailing: Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        color: _getNotificationColor(notificationType),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    onTap: () {
+                      if (post.parishId != null) {
+                        context.push(
+                          AppRoutes.postDetailPath(post.parishId!, post.postId),
                         );
-                        final parishId = post?.parishId ?? '';
-                        if (context.mounted) {
-                          context.push(
-                            AppRoutes.postDetailPath(parishId, postId),
-                          );
-                        }
                       }
                     },
                   ),
@@ -289,11 +278,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         );
       },
       loading: () {
-        AppLogger.notification('알림 로딩 중...');
-        return _buildNoticesPlaceholder(context, theme, l10n);
+        return const Padding(
+          padding: EdgeInsets.all(16),
+          child: Center(child: CircularProgressIndicator()),
+        );
       },
       error: (error, stack) {
-        AppLogger.error('알림 조회 에러: $error', error, stack);
+        AppLogger.error('공지사항 조회 에러: $error', error, stack);
         return _buildNoticesPlaceholder(context, theme, l10n);
       },
     );

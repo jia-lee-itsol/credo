@@ -364,39 +364,32 @@ exports.onReportCreated = functions.firestore
 - ✅ dotenv 패키지 추가 및 `functions/src/index.ts`에서 자동 로드
 - ✅ 게시글 자동 숨김 처리: 신고 3개 이상 시 자동으로 `status`를 "hidden"으로 변경
 
-#### 6. **푸시 알림 전송** ⚠️ 클라이언트 측 구현 완료, 서버 측 미구현
+#### 6. **푸시 알림 전송** ✅ 구현 완료
 ```typescript
-exports.sendNotification = functions.firestore
-  .document('posts/{postId}')
-  .onCreate(async (snap, context) => {
-    const post = snap.data();
-    
-    // 교회 구독자에게 알림 전송
-    const subscribers = await firestore
-      .collection('users')
-      .where('favoriteParishIds', 'array-contains', post.parishId)
-      .get();
-    
-    const messages = subscribers.docs.map(doc => ({
-      token: doc.data().fcmToken,
-      notification: {
-        title: post.title,
-        body: post.content.substring(0, 100)
-      },
-      data: {
-        postId: post.postId,
-        parishId: post.parishId
-      }
-    }));
-    
-    await admin.messaging().sendAll(messages);
-  });
+// 게시글 생성 시 알림 전송
+export const onPostCreated = onDocumentCreated(
+  "posts/{postId}",
+  async (event) => {
+    // 공지글(type == "official" && category == "notice")인 경우
+    // 해당 성당에 소속된 사용자에게 알림 전송 (작성자 제외)
+  }
+);
+
+// 댓글 생성 시 알림 전송
+export const onCommentCreated = onDocumentCreated(
+  "comments/{commentId}",
+  async (event) => {
+    // 게시글 작성자에게 알림 전송 (댓글 작성자 자신 제외)
+  }
+);
 ```
 **현재 구현 상태**:
 - ✅ 클라이언트 측 `PushNotificationService` 구현 완료 (`lib/core/data/services/push_notification_service.dart`)
 - ✅ FCM 토큰 관리 구현 완료
 - ✅ 알림 수신 및 네비게이션 구현 완료 (알림 탭 시 게시글 상세 화면으로 이동)
-- ❌ Firebase Cloud Functions를 통한 자동 알림 전송 미구현 (향후 구현 필요)
+- ✅ Firebase Cloud Functions를 통한 자동 알림 전송 구현 완료
+  - 게시글 생성 시: 공지글인 경우 소속 성당 사용자에게 알림 전송 (작성자 제외)
+  - 댓글 생성 시: 게시글 작성자에게 알림 전송 (댓글 작성자 자신 제외)
 
 #### 7. **교회 데이터 동기화 (선택사항)**
 ```typescript

@@ -49,6 +49,10 @@ class PushNotificationService {
           AppLogger.notification('FCM 토큰 가져오기 시도...');
           _fcmToken = await _messaging.getToken();
           AppLogger.notification('FCM 토큰 가져오기 성공: $_fcmToken');
+          // 토큰을 가져온 후 현재 사용자가 있으면 자동으로 저장
+          if (_fcmToken != null && _currentUserId != null) {
+            await _saveTokenToFirestore(_currentUserId!);
+          }
         } catch (e, stackTrace) {
           AppLogger.error('FCM 토큰 가져오기 실패: $e', e, stackTrace);
           // iOS 시뮬레이터에서는 토큰을 가져올 수 없을 수 있음
@@ -114,7 +118,21 @@ class PushNotificationService {
     _currentUserId = userId;
 
     if (_fcmToken == null) {
-      AppLogger.notification('토큰이 없어서 저장 불가');
+      AppLogger.notification('토큰이 아직 준비되지 않았습니다. 토큰을 다시 가져오는 중...');
+      // 토큰이 없으면 다시 시도
+      try {
+        _fcmToken = await _messaging.getToken();
+        if (_fcmToken != null) {
+          AppLogger.notification('토큰 가져오기 성공, 저장 중...');
+          await _saveTokenToFirestore(userId);
+          return;
+        }
+      } catch (e, stackTrace) {
+        AppLogger.error('토큰 재시도 실패: $e', e, stackTrace);
+      }
+      AppLogger.notification('토큰이 아직 준비되지 않았습니다. 토큰이 준비되면 자동으로 저장됩니다.');
+      // 토큰이 나중에 준비되면 자동으로 저장되도록 _currentUserId는 설정해둠
+      // onTokenRefresh 리스너에서 자동으로 저장됨
       return;
     }
 

@@ -10,8 +10,12 @@
 import {setGlobalOptions} from "firebase-functions";
 import {onDocumentCreated} from "firebase-functions/v2/firestore";
 import * as logger from "firebase-functions/logger";
+import {initializeApp} from "firebase-admin/app";
 import {getFirestore} from "firebase-admin/firestore";
 import {getMessaging} from "firebase-admin/messaging";
+
+// Firebase Admin SDK 초기화
+initializeApp();
 
 // Slack Webhook URL (환경 변수에서 로드)
 // Firebase Console 또는 .env 파일에서 SLACK_WEBHOOK_URL 설정 필요
@@ -187,7 +191,8 @@ export const onReportCreated = onDocumentCreated(
 );
 
 /**
- * 공지글 생성 시 소속 유저에게 푸시 알림 전송
+ * 게시글 생성 시 소속 유저에게 푸시 알림 전송
+ * 공지글(type == "official" && category == "notice")인 경우에만 알림 전송
  */
 export const onPostCreated = onDocumentCreated(
   "posts/{postId}",
@@ -202,8 +207,14 @@ export const onPostCreated = onDocumentCreated(
     const type = postData.type || "normal";
     const category = postData.category || "community";
     const parishId = postData.parishId;
+    const authorId = postData.authorId;
     const title = postData.title || "新着お知らせ";
     const body = postData.body || "";
+
+    logger.info(
+      `게시글 생성 이벤트: postId=${postId}, type=${type}, ` +
+      `category=${category}, parishId=${parishId}, authorId=${authorId}`,
+    );
 
     // 공지글인지 확인 (type == "official" && category == "notice")
     if (type !== "official" || category !== "notice") {
@@ -223,7 +234,7 @@ export const onPostCreated = onDocumentCreated(
       const db = getFirestore();
       const messaging = getMessaging();
 
-      // 해당 성당에 소속된 모든 사용자 조회 (mainParishId == parishId)
+      // 해당 성당에 소속된 모든 사용자 조회 (main_parish_id == parishId)
       const usersSnapshot = await db
         .collection("users")
         .where("main_parish_id", "==", parishId)
@@ -233,7 +244,11 @@ export const onPostCreated = onDocumentCreated(
         `성당 ${parishId}에 소속된 사용자 수: ${usersSnapshot.size}`,
       );
 
-      // FCM 토큰이 있는 사용자만 필터링
+      // FCM 토큰이 있는 사용자 수 확인
+      let usersWithToken = 0;
+      let usersWithoutToken = 0;
+
+      // FCM 토큰이 있는 사용자만 필터링 (작성자 제외)
       const messages: Array<{
         token: string;
         notification: {title: string; body: string};
@@ -241,11 +256,18 @@ export const onPostCreated = onDocumentCreated(
       }> = [];
 
       for (const userDoc of usersSnapshot.docs) {
+        const userId = userDoc.id;
         const userData = userDoc.data();
         const fcmToken = userData.fcmToken;
 
-        // FCM 토큰이 있는 사용자만 추가 (작성자 포함)
+        // 작성자는 알림에서 제외
+        if (userId === authorId) {
+          continue;
+        }
+
+        // FCM 토큰이 있는 사용자만 추가
         if (fcmToken && typeof fcmToken === "string") {
+          usersWithToken++;
           messages.push({
             token: fcmToken,
             notification: {
@@ -258,8 +280,15 @@ export const onPostCreated = onDocumentCreated(
               type: "official_notice",
             },
           });
+        } else {
+          usersWithoutToken++;
         }
       }
+
+      logger.info(
+        `FCM 토큰 통계: 토큰 있음 ${usersWithToken}명, ` +
+        `토큰 없음 ${usersWithoutToken}명`,
+      );
 
       logger.info(`전송할 알림 개수: ${messages.length}`);
 
@@ -292,6 +321,134 @@ export const onPostCreated = onDocumentCreated(
       }
     } catch (error) {
       logger.error(`공지글 알림 전송 중 오류 발생: ${error}`);
+    }
+  },
+);
+
+/**
+ * 댓글 생성 시 게시글 작성자에게 푸시 알림 전송
+ * (댓글 작성자 자신에게는 알림을 보내지 않음)
+ */
+export const onCommentCreated = onDocumentCreated(
+  "comments/{commentId}",
+  async (event) => {
+    const commentData = event.data?.data();
+    if (!commentData) {
+      logger.error("댓글 데이터가 없습니다.");
+      return;
+    }
+
+    const commentId = event.params.commentId;
+    const postId = commentData.postId;
+    const commentAuthorId = commentData.authorId;
+    const commentAuthorName = commentData.authorName || "ユーザー";
+    const commentContent = commentData.content || "";
+
+    logger.info(
+      `댓글 생성 이벤트: commentId=${commentId}, postId=${postId}, ` +
+      `commentAuthorId=${commentAuthorId}`,
+    );
+
+    if (!postId) {
+      logger.warn(`댓글 ${commentId}에 postId가 없습니다.`);
+      return;
+    }
+
+    try {
+      const db = getFirestore();
+      const messaging = getMessaging();
+
+      // 게시글 정보 가져오기
+      const postDoc = await db.collection("posts").doc(postId).get();
+      if (!postDoc.exists) {
+        logger.warn(`게시글 ${postId}를 찾을 수 없습니다.`);
+        return;
+      }
+
+      const postData = postDoc.data();
+      if (!postData) {
+        logger.warn(`게시글 ${postId}의 데이터가 없습니다.`);
+        return;
+      }
+
+      const postAuthorId = postData.authorId;
+      const postParishId = postData.parishId || "";
+
+      logger.info(
+        `게시글 정보: postId=${postId}, postAuthorId=${postAuthorId}, ` +
+        `postParishId=${postParishId}`,
+      );
+
+      // 댓글 작성자가 게시글 작성자와 같으면 알림 전송하지 않음
+      if (commentAuthorId === postAuthorId) {
+        logger.info(
+          `댓글 작성자(${commentAuthorId})가 게시글 작성자와 동일하므로 ` +
+          "알림을 전송하지 않습니다.",
+        );
+        return;
+      }
+
+      // 게시글 작성자 정보 가져오기
+      const postAuthorDoc = await db
+        .collection("users")
+        .doc(postAuthorId)
+        .get();
+      if (!postAuthorDoc.exists) {
+        logger.warn(`게시글 작성자 ${postAuthorId}를 찾을 수 없습니다.`);
+        return;
+      }
+
+      const postAuthorData = postAuthorDoc.data();
+      const fcmToken = postAuthorData?.fcmToken;
+
+      logger.info(
+        `게시글 작성자 정보: userId=${postAuthorId}, ` +
+        `fcmToken 존재 여부=${!!fcmToken}`,
+      );
+
+      // FCM 토큰이 없으면 알림 전송 불가
+      if (!fcmToken || typeof fcmToken !== "string") {
+        logger.warn(
+          `게시글 작성자 ${postAuthorId}의 FCM 토큰이 없습니다. ` +
+          "알림을 전송할 수 없습니다.",
+        );
+        return;
+      }
+
+      // 알림 메시지 생성
+      const notificationTitle = "新しいコメント";
+      const notificationBody =
+        `${commentAuthorName}: ${commentContent.length > 50 ?
+          `${commentContent.substring(0, 50)}...` :
+          commentContent}`;
+
+      try {
+        const message = {
+          token: fcmToken,
+          notification: {
+            title: notificationTitle,
+            body: notificationBody,
+          },
+          data: {
+            postId: postId,
+            parishId: postParishId,
+            type: "comment",
+            commentId: commentId,
+          },
+        };
+
+        const response = await messaging.send(message);
+        logger.info(
+          `✅ 댓글 알림 전송 완료: 게시글 ${postId}, ` +
+          `댓글 ${commentId}, 메시지 ID: ${response}`,
+        );
+      } catch (error) {
+        logger.error(
+          `댓글 알림 전송 중 오류 발생: ${error}`,
+        );
+      }
+    } catch (error) {
+      logger.error(`댓글 알림 전송 중 오류 발생: ${error}`);
     }
   },
 );
