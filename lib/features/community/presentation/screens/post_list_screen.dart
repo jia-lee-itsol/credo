@@ -72,7 +72,9 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
       }
     }
 
-    // 검색 쿼리 필터링
+    // 검색 쿼리 필터링 (클라이언트 사이드 - 검색어가 짧을 때 빠른 응답을 위해)
+    // 검색어가 3자 이상일 때는 서버 사이드 검색을 사용하는 것이 좋지만,
+    // 현재는 클라이언트 사이드 필터링을 유지
     if (_searchQuery.isNotEmpty) {
       final query = _searchQuery.toLowerCase();
       filtered = filtered.where((post) {
@@ -161,6 +163,7 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
               _searchController.clear();
               setState(() => _searchQuery = '');
             },
+            parishId: widget.parishId,
           ),
 
           // 정렬 탭

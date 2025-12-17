@@ -1,6 +1,7 @@
-urls# 푸시 알림 기능 테스트 가이드
+# 푸시 알림 기능 테스트 가이드
 
 **작성일**: 2025-12-15  
+**마지막 업데이트**: 2025-12-16  
 **대상**: Firebase Cloud Functions 푸시 알림 기능
 
 ---
@@ -14,6 +15,8 @@ urls# 푸시 알림 기능 테스트 가이드
   - 계정 A: 공지글 작성자 / 게시글 작성자
   - 계정 B: 알림 수신자 (계정 A와 다른 성당 소속 또는 같은 성당 소속)
 - [ ] 테스트 기기에서 FCM 토큰이 정상적으로 생성됨
+  - **중요**: iOS 시뮬레이터에서는 FCM 토큰을 받을 수 없습니다. 실제 iOS 기기에서 테스트해야 합니다.
+  - Android 에뮬레이터는 Google Play Services가 설치된 경우에만 가능합니다.
 - [ ] 앱에서 알림 권한이 허용되어 있음
 
 ### 2. Cloud Functions 로그 확인 준비
@@ -189,6 +192,13 @@ firebase functions:log --only onCommentCreated
    # Firestore Console에서 확인
    users/{userId}/fcmToken 필드가 존재하는지 확인
    ```
+   
+   **FCM 토큰이 없는 경우**:
+   - 앱을 재시작하거나 다시 로그인하여 토큰이 자동 저장되는지 확인
+   - 클라이언트 앱에서 `PushNotificationService`가 정상적으로 초기화되었는지 확인
+   - **중요**: iOS 시뮬레이터에서는 FCM 토큰을 받을 수 없습니다. 실제 iOS 기기에서 테스트해야 합니다.
+   - Android 에뮬레이터는 Google Play Services가 설치된 경우에만 가능합니다.
+   - 로그인 시 `authStateProvider`를 통해 토큰이 자동 저장되는지 확인 (`lib/main.dart`)
 
 2. **Cloud Functions 로그 확인**:
    ```bash

@@ -26,7 +26,7 @@ class DailyMassScreen extends ConsumerStatefulWidget {
 }
 
 class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
-  DateTime? _selectedDate;
+  DateTime? _selectedDate; // 원래 코드로 되돌리기
   final TextEditingController _commentController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
@@ -157,6 +157,11 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
                       ),
                     ] else
                       _buildNoDataCard(theme, primaryColor, l10n),
+
+                    const SizedBox(height: 24),
+
+                    // 묵상 방법 안내 및 팁 섹션
+                    _buildMeditationTipsSection(theme, primaryColor, l10n),
 
                     const SizedBox(height: 24),
 
@@ -619,6 +624,91 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
         return '年間';
       default:
         return '';
+    }
+  }
+
+  /// 묵상 방법 안내 및 팁 섹션
+  Widget _buildMeditationTipsSection(
+    ThemeData theme,
+    Color primaryColor,
+    AppLocalizations l10n,
+  ) {
+    try {
+      final meditationTips = l10n.mass.prayer.meditationTips;
+      final practicalTips = l10n.mass.prayer.practicalTips;
+      final meditationJournal = l10n.mass.prayer.meditationJournal;
+      final prayerAfterMeditation = l10n.mass.prayer.prayerAfterMeditation;
+
+      // 모든 카드 리스트 생성
+      final List<Widget> cards = [];
+
+      // 묵상 방법 안내 카드
+      if (meditationTips.hasData) {
+        cards.add(
+          ExpandableContentCard(
+            title: meditationTips.title,
+            subtitle: meditationTips.subtitle,
+            icon: Icons.self_improvement,
+            primaryColor: primaryColor,
+            content: meditationTips.content,
+          ),
+        );
+      }
+
+      // 실용적인 묵상 팁 카드
+      if (practicalTips.hasData) {
+        if (cards.isNotEmpty) cards.add(const SizedBox(height: 12));
+        cards.add(
+          ExpandableContentCard(
+            title: practicalTips.title,
+            subtitle: practicalTips.subtitle,
+            icon: Icons.lightbulb_outline,
+            primaryColor: primaryColor,
+            content: practicalTips.content,
+          ),
+        );
+      }
+
+      // 묵상 일기 작성 가이드 카드
+      if (meditationJournal.hasData) {
+        if (cards.isNotEmpty) cards.add(const SizedBox(height: 12));
+        cards.add(
+          ExpandableContentCard(
+            title: meditationJournal.title,
+            subtitle: meditationJournal.subtitle,
+            icon: Icons.edit_note,
+            primaryColor: primaryColor,
+            content: meditationJournal.content,
+          ),
+        );
+      }
+
+      // 묵상 후 기도 카드
+      if (prayerAfterMeditation.hasData) {
+        if (cards.isNotEmpty) cards.add(const SizedBox(height: 12));
+        cards.add(
+          ExpandableContentCard(
+            title: prayerAfterMeditation.title,
+            subtitle: prayerAfterMeditation.subtitle,
+            icon: Icons.favorite_outline,
+            primaryColor: primaryColor,
+            content: prayerAfterMeditation.content,
+          ),
+        );
+      }
+
+      // 카드가 없으면 빈 위젯 반환
+      if (cards.isEmpty) {
+        return const SizedBox.shrink();
+      }
+
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: cards,
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error('[DailyMassScreen] 묵상 팁 섹션 로드 실패', e, stackTrace);
+      return const SizedBox.shrink();
     }
   }
 

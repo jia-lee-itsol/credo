@@ -13,7 +13,7 @@ class PasswordField extends StatefulWidget {
   const PasswordField({
     super.key,
     required this.controller,
-    this.labelText = 'パスワード',
+    required this.labelText,
     this.helperText,
     this.validator,
     this.textInputAction = TextInputAction.done,
@@ -55,4 +55,3 @@ class _PasswordFieldState extends State<PasswordField> {
     );
   }
 }
-

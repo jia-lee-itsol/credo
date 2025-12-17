@@ -4,8 +4,8 @@
 
 이 문서는 `/lib` 디렉토리에 대한 종합 분석을 기반으로 Credo 코드베이스의 리팩토링 우선순위와 권장사항을 설명합니다.
 
-**마지막 업데이트**: 2025-12-15 (성당 좌표 데이터 추가, 거리순 필터 개선)
-**전체 코드베이스**: 약 27,000줄의 Dart 코드, 135개 파일
+**마지막 업데이트**: 2025-12-16 (lib 전체 분석 완료)
+**전체 코드베이스**: 약 27,000줄의 Dart 코드, 169개 파일 (자동 생성 파일 제외)
 
 ---
 
@@ -153,11 +153,16 @@ Credo 코드베이스는 **기능 기반 모듈식 설계와 함께 Clean Archit
 
 | 파일 | 줄 수 | 권장사항 | 상태 |
 |------|-------|----------------|------|
+| `parish_detail_screen.dart` | 1,225 | 여러 섹션을 위젯으로 분할 | ❌ 미완료 |
+| `sign_up_screen.dart` | 1,043 | 폼 섹션을 위젯으로 분할 | ❌ 미완료 |
+| `daily_mass_screen.dart` | 1,037 | 독서 섹션, 댓글 섹션 분할 | ❌ 미완료 |
+| `meditation_guide_provider.dart` | 877 | Provider 로직 분리 | ❌ 미완료 |
+| `my_page_screen.dart` | 617 | 설정 섹션을 위젯으로 분할 | ❌ 미완료 |
 | `edit_profile_screen.dart` | 1,106 → 457 | 3-4개 위젯으로 분할 | ✅ 완료 (649줄 감소, 59% 감소, 총 8개 위젯으로 분리) |
 | `post_detail_screen.dart` | 959 → 304 | 댓글, 이미지 갤러리 추출 | ✅ 완료 (655줄 감소, 8개 위젯으로 분리) |
 | `parish_list_screen.dart` | 739 → 336 | 필터 다이얼로그, 리스트 아이템 추출 | ✅ 완료 (403줄 감소, 4개 위젯으로 분리) |
-| `post_list_screen.dart` | 543 | 게시글 카드 위젯 추출 | - |
-| `post_create_screen.dart` | 516 | 폼 컴포넌트 추출 | - |
+| `post_list_screen.dart` | 543 → 332 | 게시글 카드 위젯 추출 | ✅ 완료 (3개 위젯으로 분리) |
+| `post_create_screen.dart` | 516 → 244 | 폼 컴포넌트 추출 | ✅ 완료 (4개 위젯으로 분리) |
 
 **리팩토링 예시** (`edit_profile_screen.dart`):
 
@@ -359,7 +364,7 @@ lib/core/data/services/image_upload_service.dart
 | 원시 예외 던지기 | 높음 | 6개 (정상) | transaction 내부, presentation layer | ✅ 주요 서비스 완료 |
 | 과도한 로깅 | 중간 | 0개 | - | ✅ 모든 print 문 AppLogger로 교체 완료 |
 | 중복 정렬 | 중간 | 0 | - | ✅ Extension 추출 완료 |
-| 큰 파일 | 중간 | 0개 | - | ✅ 모든 큰 파일 분할 완료 |
+| 큰 파일 (>500줄) | 중간 | 11개 | parish_detail_screen.dart, sign_up_screen.dart, daily_mass_screen.dart 등 | ⚠️ 3개 파일 즉시 분할 필요 |
 | Late 변수 위험 | 중간 | 7개 이상 | Screen widgets | - |
 | 불일치 모델 | 중간 | 0개 | - | ✅ 모든 커뮤니티 모델 Freezed로 마이그레이션 완료 |
 | 컴파일 에러 | 높음 | 0개 | - | ✅ 모든 심각한 에러(severity 1) 수정 완료 |
@@ -389,7 +394,60 @@ lib/core/data/services/image_upload_service.dart
 - [x] `notification.dart`를 Freezed로 마이그레이션 ✅
 - [x] `app_user.dart`를 Freezed로 마이그레이션 ✅
 
-### Phase 3: 중간 우선순위 (3주차+)
+### Phase 3: 새로운 큰 파일 분할 (우선순위 높음)
+
+#### 3-1. `parish_detail_screen.dart` 분할 ❌ 미완료
+- **현재**: 1,225줄
+- **목표**: 400줄 이하
+- **분할 계획**:
+  - `ParishDetailHeader` - 헤더 및 기본 정보
+  - `ParishDetailMassTimes` - 미사 시간 섹션
+  - `ParishDetailLocation` - 위치 정보 섹션
+  - `ParishDetailContact` - 연락처 섹션
+  - `ParishDetailActions` - 즐겨찾기, 지도 열기 버튼
+- **예상 작업량**: 4-6시간
+
+#### 3-2. `sign_up_screen.dart` 분할 ❌ 미완료
+- **현재**: 1,043줄
+- **목표**: 300줄 이하
+- **분할 계획**:
+  - `SignUpFormFields` - 기본 입력 필드
+  - `SignUpParishSelector` - 성당 선택
+  - `SignUpFeastDaySelector` - 축일 선택
+  - `SignUpTermsAgreement` - 약관 동의
+  - `SignUpSubmitButton` - 제출 버튼
+- **예상 작업량**: 4-6시간
+
+#### 3-3. `daily_mass_screen.dart` 분할 ❌ 미완료
+- **현재**: 1,037줄
+- **목표**: 400줄 이하
+- **분할 계획**:
+  - `DailyMassHeader` - 날짜 및 제목
+  - `DailyMassReadings` - 독서 섹션
+  - `DailyMassMeditation` - 묵상 가이드
+  - `DailyMassComments` - 댓글 섹션
+  - `DailyMassCommentInput` - 댓글 입력
+- **예상 작업량**: 4-6시간
+
+#### 3-4. `meditation_guide_provider.dart` 분할 ❌ 미완료
+- **현재**: 877줄
+- **목표**: 300줄 이하
+- **분할 계획**:
+  - `meditation_guide_cache.dart` - 캐시 로직
+  - `meditation_guide_formatter.dart` - 포맷팅 로직
+  - `meditation_guide_provider.dart` - Provider만 유지
+- **예상 작업량**: 2-3시간
+
+#### 3-5. `my_page_screen.dart` 분할 ❌ 미완료
+- **현재**: 617줄
+- **목표**: 300줄 이하
+- **분할 계획**:
+  - `MyPageHeader` - 프로필 헤더
+  - `MyPageSettings` - 설정 섹션
+  - `MyPageActions` - 액션 버튼들
+- **예상 작업량**: 2-3시간
+
+### Phase 4: 중간 우선순위 (3주차+)
 - [x] `push_notification_service.dart`의 debugPrint를 AppLogger로 교체 (18개) ✅
 - [x] `parish_service.dart`의 debugPrint와 throw Exception을 AppLogger/Failure로 교체 ✅
 - [x] `saint_feast_day_service.dart`의 throw Exception을 Failure로 교체 ✅
@@ -441,9 +499,46 @@ lib/core/data/services/image_upload_service.dart
    - ✅ 분할 완료 (1,106줄 → 457줄, 59% 감소)
    - 총 8개 위젯으로 분리 완료
 
-2. **`lib/features/community/presentation/screens/post_list_screen.dart`**
-   - 543줄 (분할 필요)
-   - 게시글 카드 위젯 추출 권장
+2. **`lib/features/parish/presentation/screens/parish_detail_screen.dart`** ❌ 미완료
+   - 1,225줄 (분할 필요)
+   - 권장 분할:
+     - `ParishDetailHeader` - 헤더 및 기본 정보
+     - `ParishDetailMassTimes` - 미사 시간 섹션
+     - `ParishDetailLocation` - 위치 정보 섹션
+     - `ParishDetailContact` - 연락처 섹션
+     - `ParishDetailActions` - 즐겨찾기, 지도 열기 버튼
+
+3. **`lib/features/auth/presentation/screens/sign_up_screen.dart`** ❌ 미완료
+   - 1,043줄 (분할 필요)
+   - 권장 분할:
+     - `SignUpFormFields` - 기본 입력 필드 (이메일, 비밀번호 등)
+     - `SignUpParishSelector` - 성당 선택 섹션
+     - `SignUpFeastDaySelector` - 축일 선택 섹션
+     - `SignUpTermsAgreement` - 약관 동의 섹션
+     - `SignUpSubmitButton` - 제출 버튼
+
+4. **`lib/features/mass/presentation/screens/daily_mass_screen.dart`** ❌ 미완료
+   - 1,037줄 (분할 필요)
+   - 권장 분할:
+     - `DailyMassHeader` - 날짜 및 제목
+     - `DailyMassReadings` - 독서 섹션
+     - `DailyMassMeditation` - 묵상 가이드 섹션
+     - `DailyMassComments` - 댓글 섹션
+     - `DailyMassCommentInput` - 댓글 입력
+
+5. **`lib/shared/providers/meditation_guide_provider.dart`** ❌ 미완료
+   - 877줄 (분할 필요)
+   - 권장 분할:
+     - `meditation_guide_cache.dart` - 캐시 관련 로직
+     - `meditation_guide_formatter.dart` - 포맷팅 관련 로직
+     - `meditation_guide_provider.dart` - Provider만 유지
+
+6. **`lib/features/profile/presentation/screens/my_page_screen.dart`** ❌ 미완료
+   - 617줄 (분할 고려)
+   - 권장 분할:
+     - `MyPageHeader` - 프로필 헤더
+     - `MyPageSettings` - 설정 섹션
+     - `MyPageActions` - 액션 버튼들
 
 3. **`lib/features/community/presentation/screens/post_create_screen.dart`** ✅ 완료
    - ✅ 분할 완료 (516줄 → 244줄, 4개 위젯으로 분리)
@@ -509,6 +604,84 @@ lib/core/data/services/image_upload_service.dart
 
 **작업량**: 중간 (3-4시간) ✅ 완료
 **영향**: 높음 (코드 품질 및 유지보수성 향상)
+
+---
+
+## lib 전체 분석 결과 (2025-12-16)
+
+### 전체 통계
+- **총 파일 수**: 169개 Dart 파일 (자동 생성 파일 제외)
+- **총 코드 라인**: 약 27,000줄 (자동 생성 파일 제외)
+- **클래스 수**: 94개 (Screen/Widget)
+- **큰 파일 (500줄 이상)**: 11개
+
+### 큰 파일 상세 분석
+
+#### 자동 생성 파일 (리팩토링 불필요)
+- `app_localizations.dart`: 1,360줄 - 번역 유틸리티 (자동 생성 고려 가능)
+- Freezed 생성 파일들: `*.freezed.dart`, `*.g.dart` - 자동 생성
+
+#### 리팩토링 필요 파일
+
+| 파일 | 줄 수 | 우선순위 | 권장 작업 |
+|------|-------|----------|-----------|
+| `parish_detail_screen.dart` | 1,225 | 높음 | 위젯 분할 (5-6개) |
+| `sign_up_screen.dart` | 1,043 | 높음 | 위젯 분할 (5개) |
+| `daily_mass_screen.dart` | 1,037 | 높음 | 위젯 분할 (5개) |
+| `meditation_guide_provider.dart` | 877 | 중간 | 로직 분리 (3개 파일) |
+| `my_page_screen.dart` | 617 | 중간 | 위젯 분할 (3개) |
+| `parish_list_screen.dart` | 683 | - | ✅ 완료 (336줄로 감소) |
+| `auth_repository_impl.dart` | 652 | 낮음 | 적절한 크기 (Repository) |
+| `firestore_post_repository.dart` | 644 | 낮음 | 적절한 크기 (Repository) |
+| `liturgical_reading_service.dart` | 629 | 낮음 | 적절한 크기 (서비스) |
+| `post_detail_screen.dart` | 589 | - | ✅ 완료 (304줄로 감소) |
+
+### TODO 주석 분석
+
+| 위치 | 내용 | 우선순위 | 상태 |
+|------|------|----------|------|
+| `expandable_content_card.dart:99` | 성경 읽기 화면 연결 | 낮음 | - |
+| `qr_scanner_screen.dart:110` | 메신저 기능 구현 시 사용자 추가 처리 | 낮음 | - |
+| `qr_scanner_screen.dart:150` | 메신저 기능 구현 시 "友達追加" 버튼 추가 | 낮음 | - |
+
+### 코드 품질 지표
+
+| 지표 | 값 | 상태 |
+|------|-----|------|
+| 평균 파일 크기 | ~160줄 | 양호 |
+| 최대 파일 크기 | 1,225줄 | 개선 필요 |
+| 500줄 이상 파일 | 11개 | 개선 필요 |
+| 1000줄 이상 파일 | 3개 | 즉시 개선 필요 |
+| TODO 주석 | 3개 | 낮은 우선순위 |
+
+### 권장 리팩토링 우선순위
+
+#### 우선순위 1: 높음 (즉시 진행)
+1. **`parish_detail_screen.dart` 분할** (1,225줄)
+   - 예상 작업량: 4-6시간
+   - 영향: 높음 (가독성 및 유지보수성)
+
+2. **`sign_up_screen.dart` 분할** (1,043줄)
+   - 예상 작업량: 4-6시간
+   - 영향: 높음 (가독성 및 테스트 가능성)
+
+3. **`daily_mass_screen.dart` 분할** (1,037줄)
+   - 예상 작업량: 4-6시간
+   - 영향: 높음 (가독성 및 재사용성)
+
+#### 우선순위 2: 중간 (단기간 내 진행)
+4. **`meditation_guide_provider.dart` 분할** (877줄)
+   - 예상 작업량: 2-3시간
+   - 영향: 중간 (코드 구조 개선)
+
+5. **`my_page_screen.dart` 분할** (617줄)
+   - 예상 작업량: 2-3시간
+   - 영향: 중간 (가독성 개선)
+
+#### 우선순위 3: 낮음 (장기 계획)
+6. **`app_localizations.dart` 자동 생성화**
+   - 예상 작업량: 4-6시간
+   - 영향: 낮음-중간 (유지보수성 개선)
 
 ---
 

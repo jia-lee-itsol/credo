@@ -185,3 +185,50 @@ Future<void> updateLastReadTimestamp(String parishId) async {
   final lastReadKey = 'last_read_parish_$parishId';
   await prefs.setInt(lastReadKey, DateTime.now().millisecondsSinceEpoch);
 }
+
+/// 게시글 검색 Provider
+///
+/// [query] 검색어
+/// [parishId] 성당 ID (선택사항)
+/// [category] 카테고리 (선택사항: "notice", "community")
+/// [type] 타입 (선택사항: "official", "normal")
+final searchPostsProvider = FutureProvider.autoDispose
+    .family<List<Post>, SearchPostsParams>((ref, params) async {
+      final repo = ref.watch(postRepositoryProvider);
+      final result = await repo.searchPosts(
+        query: params.query,
+        parishId: params.parishId,
+        category: params.category,
+        type: params.type,
+      );
+      return result.fold((failure) => <Post>[], (posts) => posts);
+    });
+
+/// 게시글 검색 파라미터
+class SearchPostsParams {
+  final String query;
+  final String? parishId;
+  final String? category;
+  final String? type;
+
+  SearchPostsParams({
+    required this.query,
+    this.parishId,
+    this.category,
+    this.type,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SearchPostsParams &&
+          runtimeType == other.runtimeType &&
+          query == other.query &&
+          parishId == other.parishId &&
+          category == other.category &&
+          type == other.type;
+
+  @override
+  int get hashCode =>
+      query.hashCode ^ parishId.hashCode ^ category.hashCode ^ type.hashCode;
+}

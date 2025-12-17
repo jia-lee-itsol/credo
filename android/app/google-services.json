@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "182699877294-6qcgdug0hnqdkq9j5lkkglgct39qla9f.apps.googleusercontent.com",
+          "client_id": "182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.itz.credo",
+            "certificate_hash": "61db3ecece32d921575820495a6c8a648e5c1d3a"
+          }
+        },
+        {
+          "client_id": "182699877294-cok4t52b66k9atp9u2n8es6o87d6dj5m.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

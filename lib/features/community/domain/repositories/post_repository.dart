@@ -71,4 +71,17 @@ abstract class PostRepository {
 
   /// 좋아요 상태 스트림 (실시간)
   Stream<bool> watchIsLiked({required String postId, required String userId});
+
+  /// 게시글 검색
+  ///
+  /// [query] 검색어 (제목, 내용에서 검색)
+  /// [parishId] 특정 성당으로 필터링 (선택사항)
+  /// [category] 카테고리 필터링 (선택사항: "notice", "community")
+  /// [type] 타입 필터링 (선택사항: "official", "normal")
+  Future<Either<Failure, List<Post>>> searchPosts({
+    required String query,
+    String? parishId,
+    String? category,
+    String? type,
+  });
 }

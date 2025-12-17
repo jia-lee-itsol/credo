@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/utils/validators.dart';
 import '../../../../core/utils/app_localizations.dart';
+import '../../../../core/error/failures.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../config/routes/app_routes.dart';
@@ -124,6 +125,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   // 비밀번호 입력
                   PasswordField(
                     controller: _passwordController,
+                    labelText: l10n.auth.password,
                     validator: (value) =>
                         Validators.validatePassword(value, l10n),
                     onFieldSubmitted: (_) => _signIn(),
@@ -238,9 +240,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       result.fold(
         (failure) {
           if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            final errorMessage = _getLocalizedErrorMessage(failure, l10n);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(failure.message),
+                content: Text(errorMessage),
                 backgroundColor: Colors.red,
               ),
             );
@@ -286,26 +290,33 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       result.fold(
         (failure) {
           if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            final errorMessage = _getLocalizedErrorMessage(failure, l10n);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(failure.message),
+                content: Text(errorMessage),
                 backgroundColor: Colors.red,
+                duration: const Duration(seconds: 5),
               ),
             );
           }
         },
-        (user) {
+        (user) async {
           if (mounted) {
+            // authStateProvider가 자동으로 업데이트됨
             context.go(AppRoutes.home);
           }
         },
       );
     } catch (e) {
+      // 예상치 못한 에러 로깅
       if (mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Googleログインに失敗しました'),
+          SnackBar(
+            content: Text('${l10n.auth.signInFailed}: ${e.toString()}'),
             backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
           ),
         );
       }
@@ -330,9 +341,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       result.fold(
         (failure) {
           if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            final errorMessage = _getLocalizedErrorMessage(failure, l10n);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(failure.message),
+                content: Text(errorMessage),
                 backgroundColor: Colors.red,
               ),
             );
@@ -346,9 +359,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       );
     } catch (e) {
       if (mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Appleログインに失敗しました'),
+          SnackBar(
+            content: Text(l10n.auth.appleSignInFailed),
             backgroundColor: Colors.red,
           ),
         );
@@ -384,9 +398,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       result.fold(
         (failure) {
           if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            final errorMessage = _getLocalizedErrorMessage(failure, l10n);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text(failure.message),
+                content: Text(errorMessage),
                 backgroundColor: Colors.red,
               ),
             );
@@ -415,5 +431,31 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         );
       }
     }
+  }
+
+  /// Failure 메시지를 다국어 메시지로 변환
+  String _getLocalizedErrorMessage(Failure failure, AppLocalizations l10n) {
+    // 하드코딩된 일본어 메시지를 다국어 키로 매핑
+    final message = failure.message;
+
+    if (message.contains('Googleログインがキャンセルされました')) {
+      return l10n.auth.googleSignInCanceled;
+    } else if (message.contains('Googleログインに失敗しました')) {
+      return l10n.auth.googleSignInFailed;
+    } else if (message.contains('Google認証情報の取得に失敗しました')) {
+      return l10n.auth.googleAuthInfoFailed;
+    } else if (message.contains('Googleログイン中にエラーが発生しました')) {
+      // 에러 메시지에서 실제 에러 추출
+      final errorMatch = RegExp(r': (.+)$').firstMatch(message);
+      final error = errorMatch?.group(1) ?? message;
+      return l10n.auth.googleSignInError(error);
+    } else if (message.contains('Appleログインに失敗しました')) {
+      return l10n.auth.appleSignInFailed;
+    } else if (message.contains('Appleログインがキャンセルされました')) {
+      return l10n.auth.appleSignInCanceled;
+    }
+
+    // 매핑되지 않은 메시지는 그대로 반환
+    return message;
   }
 }

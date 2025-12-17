@@ -1,6 +1,6 @@
 # Credo 백엔드 아키텍처 제안서
 
-**마지막 업데이트**: 2025-12-15 (에러 수정 완료)
+**마지막 업데이트**: 2025-12-16
 
 ## 현재 상태 분석
 
@@ -386,10 +386,15 @@ export const onCommentCreated = onDocumentCreated(
 **현재 구현 상태**:
 - ✅ 클라이언트 측 `PushNotificationService` 구현 완료 (`lib/core/data/services/push_notification_service.dart`)
 - ✅ FCM 토큰 관리 구현 완료
+  - 앱 초기화 시 토큰 자동 저장
+  - 로그인 시 `authStateProvider`를 통한 토큰 자동 저장 (`lib/main.dart`)
+  - 토큰 갱신 시 자동 저장
 - ✅ 알림 수신 및 네비게이션 구현 완료 (알림 탭 시 게시글 상세 화면으로 이동)
 - ✅ Firebase Cloud Functions를 통한 자동 알림 전송 구현 완료
+  - Firebase Admin SDK 초기화 추가 (`initializeApp()`)
   - 게시글 생성 시: 공지글인 경우 소속 성당 사용자에게 알림 전송 (작성자 제외)
   - 댓글 생성 시: 게시글 작성자에게 알림 전송 (댓글 작성자 자신 제외)
+  - 디버깅 로그 추가 (게시글/댓글 생성 이벤트, FCM 토큰 통계 등)
 
 #### 7. **교회 데이터 동기화 (선택사항)**
 ```typescript
@@ -583,7 +588,10 @@ service cloud.firestore {
   - 중복 신고 방지 로직 (5분 내 동일 대상 신고 방지)
   - Cloud Functions onCreate 트리거로 Slack 알림 전송
   - Firestore Rules에 reports 컬렉션 규칙 추가
-- [ ] 푸시 알림 서버 구현 (Firebase Cloud Functions를 통한 자동 알림 전송)
+- [x] 푸시 알림 서버 구현 완료 (Firebase Cloud Functions를 통한 자동 알림 전송)
+  - 게시글 생성 시: 공지글인 경우 소속 성당 사용자에게 알림 전송 (작성자 제외)
+  - 댓글 생성 시: 게시글 작성자에게 알림 전송 (댓글 작성자 자신 제외)
+  - Firebase Admin SDK 초기화 및 FCM 토큰 관리
 - [ ] 검색 기능 (Algolia 또는 Firestore 검색)
 - [ ] 관리자 기능
 

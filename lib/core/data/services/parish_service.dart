@@ -92,10 +92,21 @@ class ParishService {
     }
   }
 
-  /// 이름으로 교회 검색
+  /// 이름으로 교회 검색 (개선된 버전)
+  ///
+  /// 검색 범위:
+  /// - 교회 이름
+  /// - 주소 (전체 주소)
+  /// - 도도부현 (prefecture)
+  /// - 교구 (diocese)
+  /// - 지역 (deanery, city 등)
   static Future<List<Map<String, dynamic>>> searchParishes(String query) async {
     final allParishes = await loadAllParishes();
-    final queryLower = query.toLowerCase();
+    final queryLower = query.toLowerCase().trim();
+
+    if (queryLower.isEmpty) {
+      return [];
+    }
 
     final results = <Map<String, dynamic>>[];
 
@@ -105,14 +116,48 @@ class ParishService {
         final address = (parish['address'] as String? ?? '').toLowerCase();
         final prefecture = (parish['prefecture'] as String? ?? '')
             .toLowerCase();
+        final diocese = (parish['diocese'] as String? ?? '').toLowerCase();
+        final deanery = (parish['deanery'] as String? ?? '').toLowerCase();
+        final city = (parish['city'] as String? ?? '').toLowerCase();
 
+        // 검색어가 이름, 주소, 도도부현, 교구, 지역 중 하나라도 포함되면 결과에 추가
         if (name.contains(queryLower) ||
             address.contains(queryLower) ||
-            prefecture.contains(queryLower)) {
+            prefecture.contains(queryLower) ||
+            diocese.contains(queryLower) ||
+            deanery.contains(queryLower) ||
+            city.contains(queryLower)) {
           results.add(parish);
         }
       }
     }
+
+    // 검색 결과 정렬: 이름 매칭 우선, 그 다음 주소 매칭
+    results.sort((a, b) {
+      final aName = (a['name'] as String? ?? '').toLowerCase();
+      final bName = (b['name'] as String? ?? '').toLowerCase();
+      final aAddress = (a['address'] as String? ?? '').toLowerCase();
+      final bAddress = (b['address'] as String? ?? '').toLowerCase();
+
+      // 이름이 정확히 일치하거나 시작하는 경우 우선순위 높음
+      final aNameStarts = aName.startsWith(queryLower);
+      final bNameStarts = bName.startsWith(queryLower);
+      if (aNameStarts && !bNameStarts) return -1;
+      if (!aNameStarts && bNameStarts) return 1;
+
+      // 이름이 정확히 일치하는 경우 우선순위 높음
+      if (aName == queryLower && bName != queryLower) return -1;
+      if (aName != queryLower && bName == queryLower) return 1;
+
+      // 주소 매칭 우선순위
+      final aAddressContains = aAddress.contains(queryLower);
+      final bAddressContains = bAddress.contains(queryLower);
+      if (aAddressContains && !bAddressContains) return -1;
+      if (!aAddressContains && bAddressContains) return 1;
+
+      // 그 외에는 이름 순으로 정렬
+      return aName.compareTo(bName);
+    });
 
     return results;
   }

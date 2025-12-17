@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 /// 소셜 로그인 버튼 타입
-enum SocialLoginType {
-  google,
-  apple,
-}
+enum SocialLoginType { google, apple }
 
 /// 소셜 로그인 버튼 위젯
-class SocialLoginButton extends StatelessWidget {
+class SocialLoginButton extends ConsumerWidget {
   final SocialLoginType type;
   final VoidCallback? onPressed;
   final bool isLoading;
@@ -20,8 +19,9 @@ class SocialLoginButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final (icon, label) = _getIconAndLabel();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
+    final (icon, label) = _getIconAndLabel(l10n);
 
     return OutlinedButton.icon(
       onPressed: isLoading ? null : onPressed,
@@ -33,13 +33,12 @@ class SocialLoginButton extends StatelessWidget {
     );
   }
 
-  (IconData, String) _getIconAndLabel() {
+  (IconData, String) _getIconAndLabel(AppLocalizations l10n) {
     switch (type) {
       case SocialLoginType.google:
-        return (Icons.g_mobiledata, 'Googleでログイン');
+        return (Icons.g_mobiledata, 'Google ${l10n.auth.signIn}');
       case SocialLoginType.apple:
-        return (Icons.apple, 'Appleでログイン');
+        return (Icons.apple, 'Apple ${l10n.auth.signIn}');
     }
   }
 }
-

@@ -106,6 +106,36 @@
           "title": "Thời Gian Suy Niệm",
           "subtitle": "Meditation Time",
           "content": "Một khoảnh khắc để có thời gian yên tĩnh, đối thoại với Chúa và nhìn lại tấm lòng của mình. Chúng ta suy niệm Lời Chúa, tìm kiếm ý muốn của Chúa và trải qua thời gian bình an."
+        },
+        "repentance": {
+          "title": "Suy Niệm Về Sự Ăn Năn",
+          "subtitle": "Repentance",
+          "content": "Một thời gian để thừa nhận tội lỗi của mình trước Chúa và ăn năn. Cầu xin sự tha thứ, tìm kiếm ân điển của Chúa, và quyết tâm ăn năn với tấm lòng mới và sống theo ý muốn của Chúa."
+        },
+        "peace": {
+          "title": "Suy Niệm Về Sự Bình An",
+          "subtitle": "Peace",
+          "content": "Một thời gian để tìm kiếm sự bình an của Chúa và tìm được sự nghỉ ngơi cho tấm lòng. Phó thác những lo âu và băn khoăn của bạn cho Chúa, cầu nguyện để sự bình an của Chúa ngự trong lòng, và tìm được một tấm lòng bình tĩnh."
+        },
+        "forgiveness": {
+          "title": "Suy Niệm Về Sự Tha Thứ",
+          "subtitle": "Forgiveness",
+          "content": "Một thời gian để tha thứ cho người khác và được tha thứ. Phó thác tấm lòng bị tổn thương của bạn cho Chúa, cầu nguyện để có tấm lòng tha thứ, và tha thứ cho người khác như Chúa đã tha thứ cho chúng ta."
+        },
+        "love": {
+          "title": "Suy Niệm Về Tình Yêu",
+          "subtitle": "Love",
+          "content": "Một thời gian để suy niệm về tình yêu của Chúa và thực hành tình yêu. Yêu thương người lân cận như Chúa đã yêu thương chúng ta, và tìm cách thực hành tình yêu trong cuộc sống hàng ngày."
+        },
+        "patience": {
+          "title": "Suy Niệm Về Sự Nhẫn Nại",
+          "subtitle": "Patience",
+          "content": "Một thời gian để nuôi dưỡng đức tính nhẫn nại và học cách chờ đợi. Hãy nhẫn nại ngay cả trong những tình huống khó khăn, chờ đợi thời điểm của Chúa, và cầu nguyện để kết quả của sự nhẫn nại."
+        },
+        "waiting": {
+          "title": "Suy Niệm Về Sự Chờ Đợi",
+          "subtitle": "Waiting",
+          "content": "Một thời gian để chờ đợi thời điểm của Chúa và nhẫn nại. Tin cậy vào kế hoạch của Chúa thay vì của chính mình, biến thời gian chờ đợi thành thời gian gần gũi hơn với Chúa, và chờ đợi sự đáp ứng của Chúa."
         }
       },
       "meditationGuides": {
@@ -128,7 +158,27 @@
       "permissionDenied": "Không có quyền. Vui lòng kiểm tra trạng thái đăng nhập.",
       "networkError": "Đã xảy ra lỗi mạng.",
       "anonymous": "Ẩn danh",
-      "loginToShare": "Đăng nhập để chia sẻ suy niệm"
+      "loginToShare": "Đăng nhập để chia sẻ suy niệm",
+      "meditationTips": {
+        "title": "Hướng dẫn Suy niệm",
+        "subtitle": "How to Meditate",
+        "content": "1. Chọn một nơi yên tĩnh\nChọn một nơi yên tĩnh, không bị làm phiền.\n\n2. Tư thế thoải mái\nNgồi một cách thoải mái, có thể ngồi hoặc quỳ.\n\n3. Đọc Lời Chúa\nĐọc chậm rãi đoạn Kinh Thánh của ngày hôm nay.\n\n4. Suy niệm\nSuy nghĩ kỹ về ý nghĩa của đoạn Kinh Thánh và những câu hỏi bạn muốn hỏi Chúa.\n\n5. Cầu nguyện\nMở lòng với Chúa và dành thời gian trò chuyện.\n\n6. Thực hành\nÁp dụng những điều bạn học được từ suy niệm vào cuộc sống hàng ngày."
+      },
+      "practicalTips": {
+        "title": "Mẹo Suy niệm Thực tế",
+        "subtitle": "Practical Tips",
+        "content": "• Suy niệm vào cùng một thời điểm mỗi ngày sẽ rất hữu ích.\n• Kiên trì quan trọng hơn thời gian dài (10-15 phút cũng được).\n• Ghi chép những suy nghĩ và cảm xúc xuất hiện trong khi suy niệm.\n• Bạn có thể suy niệm trong khi nghe nhạc nhẹ hoặc âm thanh thiên nhiên.\n• Đọc lớn tiếng các câu Kinh Thánh cũng rất hữu ích.\n• Kết thúc suy niệm bằng một lời cầu nguyện ngắn."
+      },
+      "meditationJournal": {
+        "title": "Viết Nhật Ký Suy Niệm",
+        "subtitle": "Meditation Journal",
+        "content": "Nhật ký suy niệm là một cách tuyệt vời để ghi lại cuộc trò chuyện của bạn với Chúa.\n\n• Ghi lại đoạn Kinh Thánh bạn đã đọc hôm nay\n• Ghi chú những hiểu biết hoặc câu hỏi nảy sinh trong khi suy niệm\n• Ghi lại lời cầu nguyện của bạn với Chúa và sự đáp ứng của Ngài\n• Tổ chức những gì bạn muốn áp dụng vào cuộc sống hàng ngày\n• Viết ra những điều bạn biết ơn hoặc chủ đề cầu nguyện\n\nThông qua nhật ký, bạn có thể thấy mối quan hệ của mình với Chúa đang phát triển như thế nào."
+      },
+      "prayerAfterMeditation": {
+        "title": "Lời Cầu Nguyện Sau Suy Niệm",
+        "subtitle": "Prayer After Meditation",
+        "content": "Sau khi suy niệm, hãy cầu nguyện như thế này:\n\n\"Lạy Chúa, cảm ơn Chúa vì sự dạy dỗ mà Chúa đã ban cho con qua Lời hôm nay. Xin giúp con áp dụng sự hiểu biết này vào cuộc sống hàng ngày. Xin dẫn dắt con sống theo ý muốn của Chúa. Nguyện ngày hôm nay con được sống trong tình yêu của Chúa và giúp con chia sẻ tình yêu đó với người khác. A-men.\""
+      }
     }
   },
   "navigation": {
@@ -173,7 +223,14 @@
     "selectFeastDayTitle": "Chọn ngày lễ thánh bổn mạng",
     "createAccount": "Tạo tài khoản",
     "termsRequired": "Vui lòng đồng ý với điều khoản dịch vụ và chính sách bảo mật",
-    "subtitle": "Kết nối bằng đức tin"
+    "subtitle": "Kết nối bằng đức tin",
+    "googleSignInCanceled": "Đăng nhập Google đã bị hủy.",
+    "googleSignInFailed": "Đăng nhập Google thất bại.",
+    "googleAuthInfoFailed": "Không thể lấy thông tin xác thực Google.",
+    "googleSignInError": "Đã xảy ra lỗi trong quá trình đăng nhập Google: {error}",
+    "googleSignInError@error": "Thông báo lỗi",
+    "appleSignInFailed": "Đăng nhập Apple thất bại.",
+    "appleSignInCanceled": "Đăng nhập Apple đã bị hủy."
   },
   "validation": {
     "emailRequired": "Vui lòng nhập địa chỉ email của bạn",

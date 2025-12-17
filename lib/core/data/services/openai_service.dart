@@ -37,7 +37,7 @@ class OpenAIService {
       final prompt =
           '''당신은 가톨릭 신앙의 묵상 가이드를 작성하는 전문가입니다.
 
-오늘의 ${readingTypeName}는 "${reference}"입니다.
+오늘의 $readingTypeName는 "$reference"입니다.
 ${title != null ? '제목: $title' : ''}
 
 다음 형식으로 묵상 가이드를 작성해주세요. 성경 본문을 직접 인용하지 말고, 그 의미와 메시지를 바탕으로 묵상 가이드를 작성해주세요.
@@ -53,7 +53,7 @@ ${language == 'ja'
 - 성경 본문을 직접 인용하지 마세요
 - 성경 구절의 의미와 메시지를 바탕으로 묵상 가이드를 작성하세요
 - 실용적이고 개인적인 묵상을 도울 수 있는 내용으로 작성하세요
-- ${languageName}로 작성하세요
+- $languageName로 작성하세요
 - 간결하고 명확하게 작성하세요''';
 
       final response = await _dio.post(
@@ -284,7 +284,7 @@ $languageName 이름:''';
       final year = date.year;
 
       final prompt =
-          '''${year}년 ${month}월 ${day}일 가톨릭 성인 축일을 검색해주세요.
+          '''$year년 $month월 $day일 가톨릭 성인 축일을 검색해주세요.
 
 요구사항:
 - 해당 날짜에 기념되는 모든 가톨릭 성인을 찾아주세요
@@ -363,7 +363,7 @@ $languageName 이름:''';
       final day = date.day;
       final year = date.year;
 
-      final prompt = '''${year}년 ${month}월 ${day}일 가톨릭 전례력을 확인해주세요.
+      final prompt = '''$year년 $month월 $day일 가톨릭 전례력을 확인해주세요.
 
 요구사항:
 - 해당 날짜의 전례 시즌을 확인해주세요 (ordinary, advent, christmas, lent, easter, pentecost)

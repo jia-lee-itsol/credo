@@ -102,6 +102,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   // 비밀번호 입력
                   PasswordField(
                     controller: _passwordController,
+                    labelText: l10n.auth.password,
                     helperText: l10n.validation.passwordMinLength,
                     validator: (value) =>
                         Validators.validatePassword(value, l10n),

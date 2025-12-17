@@ -10,6 +10,7 @@ import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/font_scale_provider.dart';
+import '../../../../shared/providers/locale_provider.dart';
 import '../../../../shared/widgets/settings_list_tile.dart';
 import '../../../../shared/widgets/badge_chip.dart';
 import '../widgets/qr_code_dialog.dart';
@@ -147,9 +148,7 @@ class MyPageScreen extends ConsumerWidget {
               title: l10n.profile.languageSettings,
               subtitle: _getLanguageDisplayName(
                 ref,
-                currentUser?.preferredLanguages.isNotEmpty == true
-                    ? currentUser!.preferredLanguages.first
-                    : 'ja',
+                ref.watch(localeProvider).languageCode,
               ),
               primaryColor: primaryColor,
               onTap: () {

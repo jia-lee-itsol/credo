@@ -2,7 +2,7 @@
 
 이 문서는 코드베이스에서 발견된 모든 TODO 주석과 보류 중인 기능 구현을 추적합니다.
 
-**마지막 업데이트**: 2025-01-XX (fukuoka.json 데이터 구조 개선 및 검증 완료)
+**마지막 업데이트**: 2025-12-16 (구글 로그인 문제 추가)
 **전체 코드베이스**: 약 27,000줄의 Dart 코드, 135개 파일
 
 ---
@@ -32,7 +32,20 @@
 
 ### 높은 우선순위
 
-#### 1. 푸시 알림 네비게이션 ✅ 완료
+#### 1. 구글 로그인 문제 해결 ✅ 완료 (2025-12-16)
+- **문제**: 구글 로그인이 작동하지 않음 (`ApiException: 10` 발생)
+- **원인**: `google-services.json`에 Android OAuth Client ID (`client_type: 1`) 누락
+- **해결 방법**:
+  1. Firebase Console에서 SHA-1 인증서 추가: `61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A`
+  2. Firebase가 자동으로 Android OAuth Client 생성
+  3. `google-services.json` 다시 다운로드 및 적용
+- **최종 설정**:
+  - Android OAuth Client ID: `182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com`
+  - Package name: `com.itz.credo`
+  - SHA-1: `61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A`
+- **결과**: ✅ Google Sign-In 정상 작동 확인
+
+#### 2. 푸시 알림 네비게이션 ✅ 완료
 - **문제**: 알림 탭 시 게시글 상세 화면으로 이동하지 않음
 - **파일**: `push_notification_service.dart:124`
 - **완료된 작업**:
@@ -40,14 +53,14 @@
   - `main.dart`에서 router 설정
   - `_handleMessageOpenedApp`에서 `postId`와 `parishId`를 받아 `AppRoutes.postDetailPath`로 네비게이션 구현
 
-#### 2. 공지/커뮤니티 목록에서 네비게이션 ✅ 완료
+#### 3. 공지/커뮤니티 목록에서 네비게이션 ✅ 완료
 - **문제**: 목록 항목이 상세 화면으로 이동하지 않음
 - **파일**: `notice_list_page.dart:45`, `community_list_page.dart:50`
 - **완료된 작업**: 
   - `GoRouter` import 추가
   - `ListTile`의 `onTap`에 `context.push(AppRoutes.postDetailPath(...))` 구현
 
-#### 3. 위치 기반 거리 계산 기능 ✅ 완료
+#### 4. 위치 기반 거리 계산 기능 ✅ 완료
 - **문제**: 교회 목록에서 거리가 하드코딩되어 있음 (`'1.2km'`)
 - **파일**: `parish_card.dart`, `parish_list_screen.dart`
 - **완료된 작업**:
@@ -61,7 +74,7 @@
 
 ### 중간 우선순위
 
-#### 4. 신고 기능 ✅ 완료
+#### 5. 신고 기능 ✅ 완료
 - **문제**: 게시글/댓글 신고 기능이 없음
 - **완료된 작업**:
   1. ✅ 신고 모델 및 리포지토리 생성 (`Report`, `ReportRepository`)
@@ -73,7 +86,7 @@
   7. ✅ Slack webhook URL을 dotenv로 처리 (`functions/.env` 파일, dotenv 패키지 추가)
   8. ✅ 게시글 자동 숨김 기능: 신고 3개 이상 시 자동으로 `status`를 "hidden"으로 변경 (Cloud Functions에서 처리)
 
-#### 5. 댓글 수 표시 ✅ 완료
+#### 6. 댓글 수 표시 ✅ 완료
 - **문제**: 게시글 목록에 하드코딩된 `commentCount: 0` 표시
 - **파일**: `post_list_screen.dart:47`
 - **완료된 작업**:
@@ -81,7 +94,7 @@
   2. ✅ 댓글 생성 시 Firestore transaction으로 `commentCount` 자동 증가
   3. ✅ `post_list_screen.dart`에서 실제 `commentCount` 사용
 
-#### 6. 게시글 수 및 새 게시글 표시기 ✅ 완료
+#### 7. 게시글 수 및 새 게시글 표시기 ✅ 완료
 - **문제**: 커뮤니티 홈에 하드코딩된 값 표시
 - **파일**: `community_home_screen.dart:70-71`
 - **완료된 작업**:
@@ -90,7 +103,7 @@
   3. ✅ SharedPreferences를 사용한 마지막 읽은 타임스탬프 추적
   4. ✅ `community_home_screen.dart`에 실제 데이터 연동
 
-#### 7. Admin 게시글 비표시 기능 ✅ 완료
+#### 8. Admin 게시글 비표시 기능 ✅ 완료
 - **문제**: Admin이 게시글을 비표시할 수 있는 기능이 없음
 - **완료된 작업**:
   1. ✅ `UserEntity.isAdmin` getter 추가
@@ -99,7 +112,7 @@
   4. ✅ UI에서 소속 교회 체크 및 비표시/표시 옵션 표시
   5. ✅ 권한 없는 경우 명확한 에러 메시지 표시
 
-#### 8. 글씨 크기 설정 기능 ✅ 완료
+#### 9. 글씨 크기 설정 기능 ✅ 완료
 - **문제**: 노인 사용자가 글씨를 크게 볼 수 있는 기능이 없음
 - **완료된 작업**:
   1. ✅ `font_scale_provider.dart` 생성 - 글씨 크기 배율 관리 (0.85 ~ 1.4)
@@ -108,7 +121,7 @@
   4. ✅ SharedPreferences를 사용하여 설정 영속화
   5. ✅ 실시간 미리보기 기능 추가 ("サンプルテキスト")
 
-#### 9. 언어 설정 구현 ✅ 완료
+#### 10. 언어 설정 구현 ✅ 완료
 - **문제**: 언어 변경 로직이 구현되지 않음
 - **파일**: `language_settings_screen.dart:83`
 - **완료된 작업**:
@@ -116,6 +129,30 @@
   2. ✅ 선택 시 앱 로케일 업데이트 - `setLocaleByLanguageCode` 메서드 사용
   3. ✅ 날짜 포맷 로케일 동적 업데이트 - `locale_provider.dart`에 `initializeDateFormatting` 추가
   4. ✅ 번역 데이터 자동 재로드 - `appLocalizationsProvider` invalidate 추가
+
+#### 11. 검색 기능 구현 ✅ 완료 (2025-12-16)
+- **문제**: 게시글 및 성당 검색 기능이 제한적이거나 미구현
+- **완료된 작업**:
+  1. ✅ 게시글 검색 기능 구현
+     - `PostRepository`에 `searchPosts` 메서드 추가
+     - `FirestorePostRepository`에 검색 로직 구현 (Firestore 쿼리 + 클라이언트 사이드 필터링)
+     - 제목, 내용, 작성자 이름으로 검색 가능
+     - `parishId`, `category`, `type` 필터링 지원
+  2. ✅ 게시글 검색 Provider 추가
+     - `searchPostsProvider` 생성
+     - `SearchPostsParams` 클래스로 검색 파라미터 관리
+  3. ✅ 성당 검색 개선
+     - 이름, 주소, 도도부현, 교구, 지역(시/구)로 검색 확장
+     - 검색 결과 정렬 개선 (이름 매칭 우선, 주소 매칭 다음)
+     - `ParishService.searchParishes` 메서드 개선
+  4. ✅ 검색 UI 개선 (검색 히스토리 및 자동완성)
+     - `SearchHistoryService` 생성 (SharedPreferences 기반)
+     - 게시글 및 성당 검색 히스토리 저장/조회 기능
+     - 검색 히스토리 Provider 추가 (`postSearchHistoryProvider`, `parishSearchHistoryProvider`)
+     - `PostListSearchBar` 개선: 히스토리 표시, 자동완성 (게시글 제목 기반)
+     - `ParishSearchBar` 개선: 히스토리 표시, 자동완성 (성당 이름 기반)
+     - 검색어 입력 시 실시간 자동완성 제안 표시
+     - 히스토리 항목 개별 삭제 기능
 
 ### 낮은 우선순위
 
@@ -247,8 +284,10 @@
 | 2025-12-15 | 거리순 필터칩 UI 개선 - `ParishFilterChip`에서 `isSelected` 상태에 따른 체크 아이콘 및 배경색 변경 | cfc4ab29 |
 | 2025-12-15 | 외국어 미사 데이터 수정 - 末吉町教会 등 13개 성당의 `foreignMassTimes` 데이터를 `massTime` 텍스트 기반으로 수정, `scripts/fix_foreign_mass_times.py` 및 `scripts/auto_fix_foreign_mass.py` 생성 | cfc4ab29 |
 | 2025-12-15 | 미사 시간 데이터 일관성 검증 및 수정 - kagoshima.json의 志布志教会, 阿久根教会 `massTimes` 데이터를 `massTime` 텍스트와 일치하도록 수정, kyoto.json의 上野教会 `massTimes`에 토요일 19:30 및 일요일 09:00, 10:30, 17:00 추가, `foreignMassTimes`에 타갈로그어 미사 추가 | bad05ad |
-| 2025-12-15 | 성인 축일 데이터 업데이트 - ChatGPT API를 사용하여 전체 월별 누락된 성인 추가: 12,1,2월 95명, 3,4,5월 112명, 6,7,8월 82명, 9,10,11월 95명 추가 (총 384명), `scripts/check_and_fix_missing_saints.py` 스크립트 사용 | - |
-| 2025-12-15 | 다국어 지원 완료 - 모든 언어 파일의 일본어 텍스트를 각 언어로 번역 완료: 영어 76개, 스페인어 289개, 포르투갈어 289개, 베트남어 289개, 중국어 번역 완료, 모든 언어 파일에서 일본어 문자(히라가나/가타카나) 제거 완료 | - |
+| 2025-12-16 | 성인 축일 데이터 업데이트 - ChatGPT API를 사용하여 전체 월별 누락된 성인 추가: 12,1,2월 95명, 3,4,5월 112명, 6,7,8월 82명, 9,10,11월 95명 추가 (총 384명), `scripts/check_and_fix_missing_saints.py` 스크립트 사용 | - |
+| 2025-12-16 | 다국어 지원 완료 - 모든 언어 파일의 일본어 텍스트를 각 언어로 번역 완료: 영어 76개, 스페인어 289개, 포르투갈어 289개, 베트남어 289개, 중국어 번역 완료, 모든 언어 파일에서 일본어 문자(히라가나/가타카나) 제거 완료 | - |
+| 2025-12-16 | Google 로그인 문제 해결 - ApiException: 10 (DEVELOPER_ERROR) 오류 해결, Firebase Console에서 SHA-1 인증서 추가 (61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A), Android OAuth Client ID 자동 생성 확인 (182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com), google-services.json 업데이트 (client_type: 1 추가), Google Sign-In 정상 작동 확인 | - |
+| 2025-12-16 | 검색 기능 구현 - 게시글 검색 기능 구현 (PostRepository.searchPosts 메서드 추가, Firestore 쿼리 + 클라이언트 사이드 필터링), 성당 검색 개선 (이름, 주소, 도도부현, 교구, 지역 검색 확장, 검색 결과 정렬 개선), searchPostsProvider 추가, 검색 UI 개선 (검색 히스토리 서비스, 자동완성 기능, PostListSearchBar 및 ParishSearchBar 개선) | - |
 
 ---
 
@@ -296,7 +335,7 @@
 
 このドキュメントは、コードベースで発見されたすべてのTODOコメントと保留中の機能実装を追跡します。
 
-**最終更新**: 2025-12-15 (多言語サポート完了 - すべての言語ファイル翻訳完了)
+**最終更新**: 2025-12-16
 **コードベース全体**: 約27,000行のDartコード、135ファイル
 
 ---
@@ -326,7 +365,23 @@
 
 ### 高優先度
 
-#### 1. プッシュ通知ナビゲーション ✅ 完了
+#### 1. Googleログイン問題解決 ✅ 完了 (2025-12-16)
+- **問題**: Googleログインが動作しない（`ApiException: 10`発生）
+- **原因**: `google-services.json`にAndroid OAuth Client ID（`client_type: 1`）が欠落
+- **解決方法**:
+  1. Firebase ConsoleでSHA-1証明書追加: `61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A`
+  2. Firebaseが自動的にAndroid OAuth Clientを生成
+  3. `google-services.json`を再ダウンロードして適用
+- **最終設定**:
+  - Android OAuth Client ID: `182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com`
+  - Package name: `com.itz.credo`
+  - SHA-1: `61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A`
+- **結果**: ✅ Google Sign-In正常動作確認
+- **参考ドキュメント**: 
+  - `docs/GOOGLE_SIGNIN_RESOLVED.md` - 解決完了レポート
+  - `docs/ANDROID_OAUTH_CLIENT_FIX.md` - 問題解決ガイド
+
+#### 2. プッシュ通知ナビゲーション ✅ 完了
 - **問題**: 通知タップ時に投稿詳細画面に移動しない
 - **ファイル**: `push_notification_service.dart:124`
 - **完了した作業**:
@@ -334,14 +389,14 @@
   - `main.dart`でルーター設定
   - `_handleMessageOpenedApp`で`postId`と`parishId`を受け取り`AppRoutes.postDetailPath`でナビゲーション実装
 
-#### 2. お知らせ/コミュニティリストからのナビゲーション ✅ 完了
+#### 3. お知らせ/コミュニティリストからのナビゲーション ✅ 完了
 - **問題**: リスト項目が詳細画面に移動しない
 - **ファイル**: `notice_list_page.dart:45`, `community_list_page.dart:50`
 - **完了した作業**: 
   - `GoRouter` import追加
   - `ListTile`の`onTap`に`context.push(AppRoutes.postDetailPath(...))`実装
 
-#### 3. 位置ベース距離計算機能 ✅ 完了
+#### 4. 位置ベース距離計算機能 ✅ 完了
 - **問題**: 教会リストで距離がハードコードされている (`'1.2km'`)
 - **ファイル**: `parish_card.dart`, `parish_list_screen.dart`
 - **完了した作業**:
@@ -540,8 +595,10 @@
 | 2025-12-15 | 距離順フィルターチップUI改善 - `ParishFilterChip`で`isSelected`状態によるチェックアイコンおよび背景色変更 | cfc4ab29 |
 | 2025-12-15 | 外国語ミサデータ修正 - 末吉町教会など13個の聖堂の`foreignMassTimes`データを`massTime`テキストベースで修正、`scripts/fix_foreign_mass_times.py`および`scripts/auto_fix_foreign_mass.py`生成 | cfc4ab29 |
 | 2025-12-15 | ミサ時間データ一貫性検証および修正 - kagoshima.jsonの志布志教会、阿久根教会`massTimes`データを`massTime`テキストと一致するように修正、kyoto.jsonの上野教会`massTimes`に土曜日19:30および日曜日09:00、10:30、17:00追加、`foreignMassTimes`にタガログ語ミサ追加 | bad05ad |
-| 2025-12-15 | 聖人祝日データ更新 - ChatGPT APIを使用して全体月別欠落聖人追加: 12,1,2月 95名、3,4,5月 112名、6,7,8月 82名、9,10,11月 95名追加 (合計 384名)、`scripts/check_and_fix_missing_saints.py`スクリプト使用 | - |
-| 2025-12-15 | 多言語サポート完了 - すべての言語ファイルの日本語テキストを各言語に翻訳完了: 英語 76個、スペイン語 289個、ポルトガル語 289個、ベトナム語 289個、中国語翻訳完了、すべての言語ファイルから日本語文字(ひらがな/カタカナ)削除完了 | - |
+| 2025-12-16 | 聖人祝日データ更新 - ChatGPT APIを使用して全体月別欠落聖人追加: 12,1,2月 95名、3,4,5月 112名、6,7,8月 82名、9,10,11月 95名追加 (合計 384名)、`scripts/check_and_fix_missing_saints.py`スクリプト使用 | - |
+| 2025-12-16 | 多言語サポート完了 - すべての言語ファイルの日本語テキストを各言語に翻訳完了: 英語 76個、スペイン語 289個、ポルトガル語 289個、ベトナム語 289個、中国語翻訳完了、すべての言語ファイルから日本語文字(ひらがな/カタカナ)削除完了 | - |
+| 2025-12-16 | Googleログイン問題解決 - ApiException: 10 (DEVELOPER_ERROR)エラー解決、Firebase ConsoleでSHA-1証明書追加 (61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A)、Android OAuth Client ID自動生成確認 (182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com)、google-services.json更新 (client_type: 1追加)、Google Sign-In正常動作確認 | - |
+| 2025-12-16 | 検索機能実装 - 投稿検索機能実装 (PostRepository.searchPostsメソッド追加、Firestoreクエリ + クライアントサイドフィルタリング)、聖堂検索改善 (名前、住所、都道府県、教区、地域検索拡張、検索結果ソート改善)、searchPostsProvider追加、検索UI改善 (検索履歴サービス、自動補完機能、PostListSearchBarおよびParishSearchBar改善) | - |
 
 ---
 

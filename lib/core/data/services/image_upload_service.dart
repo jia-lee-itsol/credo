@@ -149,7 +149,7 @@ class ImageUploadService {
           (!nonRetryableCodes.contains(e.code) || e.code == 'unknown')) {
         final delaySeconds = 2 * (retryCount + 1); // 더 긴 딜레이
         AppLogger.image(
-          '🔄 재시도 중... (${retryCount + 2}/$maxRetries, ${delaySeconds}초 후)',
+          '🔄 재시도 중... (${retryCount + 2}/$maxRetries, $delaySeconds초 후)',
         );
         await Future.delayed(Duration(seconds: delaySeconds));
         return uploadImage(
@@ -178,7 +178,7 @@ class ImageUploadService {
       if (retryCount < maxRetries - 1) {
         final delaySeconds = 3 * (retryCount + 1);
         AppLogger.image(
-          '🔄 재시도 중... (${retryCount + 2}/$maxRetries, ${delaySeconds}초 후)',
+          '🔄 재시도 중... (${retryCount + 2}/$maxRetries, $delaySeconds초 후)',
         );
         await Future.delayed(Duration(seconds: delaySeconds));
         return uploadImage(
@@ -201,7 +201,7 @@ class ImageUploadService {
       if (retryCount < maxRetries - 1) {
         final delaySeconds = 2 * (retryCount + 1);
         AppLogger.image(
-          '🔄 재시도 중... (${retryCount + 2}/$maxRetries, ${delaySeconds}초 후)',
+          '🔄 재시도 중... (${retryCount + 2}/$maxRetries, $delaySeconds초 후)',
         );
         await Future.delayed(Duration(seconds: delaySeconds));
         return uploadImage(

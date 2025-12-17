@@ -152,18 +152,14 @@ class FirestorePostRepository implements PostRepository {
             return;
           }
           changedFields[key] = value;
-          AppLogger.community(
-            '변경된 필드 (새 필드): $key = $value',
-          );
+          AppLogger.community('변경된 필드 (새 필드): $key = $value');
           return;
         }
 
         // 일반 값 비교
         if (currentValue != value) {
           changedFields[key] = value;
-          AppLogger.community(
-            '변경된 필드: $key = $value (이전: $currentValue)',
-          );
+          AppLogger.community('변경된 필드: $key = $value (이전: $currentValue)');
         }
       });
 
@@ -640,5 +636,92 @@ class FirestorePostRepository implements PostRepository {
       if (a[i] != b[i]) return false;
     }
     return true;
+  }
+
+  @override
+  Future<Either<Failure, List<Post>>> searchPosts({
+    required String query,
+    String? parishId,
+    String? category,
+    String? type,
+  }) async {
+    try {
+      AppLogger.community('===== searchPosts() 호출됨 =====');
+      AppLogger.community('검색어: $query');
+      AppLogger.community('parishId: $parishId');
+      AppLogger.community('category: $category');
+      AppLogger.community('type: $type');
+
+      // 기본 쿼리: status == "published"
+      Query firestoreQuery = _firestore
+          .collection('posts')
+          .where('status', isEqualTo: 'published');
+
+      // parishId 필터링
+      if (parishId != null && parishId.isNotEmpty) {
+        firestoreQuery = firestoreQuery.where('parishId', isEqualTo: parishId);
+      }
+
+      // category 필터링
+      if (category != null && category.isNotEmpty) {
+        firestoreQuery = firestoreQuery.where('category', isEqualTo: category);
+      }
+
+      // type 필터링
+      if (type != null && type.isNotEmpty) {
+        firestoreQuery = firestoreQuery.where('type', isEqualTo: type);
+      }
+
+      // 최신순 정렬
+      firestoreQuery = firestoreQuery.orderBy('createdAt', descending: true);
+
+      AppLogger.community('Firestore 쿼리 실행 중...');
+
+      // 쿼리 실행
+      final snapshot = await firestoreQuery.get();
+
+      AppLogger.community('쿼리 결과: ${snapshot.docs.length}개 문서');
+
+      // Post로 변환
+      final allPosts = snapshot.docs
+          .map((doc) {
+            try {
+              return Post.fromFirestore(doc);
+            } catch (e) {
+              AppLogger.error('Post 파싱 에러 (docId: ${doc.id}): $e', e);
+              return null;
+            }
+          })
+          .whereType<Post>()
+          .toList();
+
+      // 클라이언트 사이드에서 검색어로 필터링
+      final queryLower = query.toLowerCase().trim();
+      final filteredPosts = allPosts.where((post) {
+        final title = post.title.toLowerCase();
+        final body = post.body.toLowerCase();
+        final authorName = post.authorName.toLowerCase();
+
+        // 제목, 내용, 작성자 이름에서 검색
+        return title.contains(queryLower) ||
+            body.contains(queryLower) ||
+            authorName.contains(queryLower);
+      }).toList();
+
+      AppLogger.community('검색 결과: ${filteredPosts.length}개 게시글');
+
+      // 핀 고정된 게시글을 상단에 표시
+      final sortedPosts = filteredPosts.sortByPinnedAndDate();
+
+      return Right(sortedPosts);
+    } on FirebaseException catch (e, stackTrace) {
+      AppLogger.error('게시글 검색 실패: ${e.message}', e, stackTrace);
+      return Left(
+        FirebaseFailure(message: e.message ?? '게시글 검색 실패', code: e.code),
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error('게시글 검색 예외 발생: $e', e, stackTrace);
+      return Left(ServerFailure(message: '게시글 검색 중 오류가 발생했습니다: $e'));
+    }
   }
 }

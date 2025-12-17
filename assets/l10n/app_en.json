@@ -100,7 +100,14 @@
     "selectFeastDayTitle": "Select Patron Saint's Feast Day",
     "createAccount": "Create Account",
     "termsRequired": "Please agree to the Terms of Service and Privacy Policy",
-    "subtitle": "Connected by Faith"
+    "subtitle": "Connected by Faith",
+    "googleSignInCanceled": "Google sign in was canceled.",
+    "googleSignInFailed": "Google sign in failed.",
+    "googleAuthInfoFailed": "Failed to retrieve Google authentication information.",
+    "googleSignInError": "An error occurred during Google sign in: {error}",
+    "googleSignInError@error": "Error message",
+    "appleSignInFailed": "Apple sign in failed.",
+    "appleSignInCanceled": "Apple sign in was canceled."
   },
   "validation": {
     "emailRequired": "Please enter your email address",
@@ -395,6 +402,36 @@
           "title": "Meditation Time",
           "subtitle": "Meditation Time",
           "content": "A time to have quiet time, dialogue with God, and reflect on your heart. Meditate on the Word and spend peaceful time seeking God's will."
+        },
+        "repentance": {
+          "title": "Repentance Meditation",
+          "subtitle": "Repentance",
+          "content": "A time to acknowledge your sins before God and repent. Ask for forgiveness, seek God's grace, and resolve to repent with a new heart and live according to God's will."
+        },
+        "peace": {
+          "title": "Peace Meditation",
+          "subtitle": "Peace",
+          "content": "A time to seek God's peace and find rest for your heart. Entrust your worries and anxieties to God, pray that the Lord's peace may dwell in your heart, and find a calm mind."
+        },
+        "forgiveness": {
+          "title": "Forgiveness Meditation",
+          "subtitle": "Forgiveness",
+          "content": "A time to forgive others and be forgiven. Entrust your wounded heart to God, pray to have a forgiving heart, and forgive others as God has forgiven us."
+        },
+        "love": {
+          "title": "Love Meditation",
+          "subtitle": "Love",
+          "content": "A time to meditate on God's love and practice love. Love your neighbor as God has loved us, and find ways to practice love in daily life."
+        },
+        "patience": {
+          "title": "Patience Meditation",
+          "subtitle": "Patience",
+          "content": "A time to cultivate the virtue of patience and learn to wait. Be patient even in difficult situations, wait for God's timing, and pray to bear the fruit of patience."
+        },
+        "waiting": {
+          "title": "Waiting Meditation",
+          "subtitle": "Waiting",
+          "content": "A time to wait for God's timing and be patient. Trust in God's plans rather than your own, make waiting time a time to draw closer to God, and wait for God's response."
         }
       },
       "meditationGuides": {
@@ -417,7 +454,27 @@
       "permissionDenied": "Permission denied. Please check your login status.",
       "networkError": "A network error occurred.",
       "anonymous": "Anonymous",
-      "loginToShare": "Login to share meditation"
+      "loginToShare": "Login to share meditation",
+      "meditationTips": {
+        "title": "How to Meditate",
+        "subtitle": "Meditation Guide",
+        "content": "1. Choose a Quiet Place\nSelect a quiet place where you won't be disturbed.\n\n2. Comfortable Posture\nSit comfortably, either in a chair or kneeling position.\n\n3. Read Scripture\nSlowly read today's Bible passage.\n\n4. Meditate\nReflect on the meaning of the passage and consider questions you'd like to ask God.\n\n5. Pray\nOpen your heart to God and spend time in conversation.\n\n6. Act\nApply what you've learned from meditation to your daily life."
+      },
+      "practicalTips": {
+        "title": "Practical Meditation Tips",
+        "subtitle": "Helpful Tips",
+        "content": "• Meditating at the same time each day is helpful.\n• Consistency is more important than duration (10-15 minutes is fine).\n• Write down thoughts and feelings that arise during meditation.\n• You can meditate while listening to quiet music or nature sounds.\n• Reading Bible verses aloud can also be beneficial.\n• End your meditation with a brief prayer."
+      },
+      "meditationJournal": {
+        "title": "Keeping a Meditation Journal",
+        "subtitle": "Meditation Journal",
+        "content": "A meditation journal is a great way to record your conversations with God.\n\n• Write down the Bible passage you read today\n• Note any insights or questions that came to mind during meditation\n• Record your prayers to God and His responses\n• Organize what you want to apply to your daily life\n• Write down things you're grateful for or prayer topics\n\nThrough your journal, you can see how your relationship with God is growing."
+      },
+      "prayerAfterMeditation": {
+        "title": "Prayer After Meditation",
+        "subtitle": "Closing Prayer",
+        "content": "After meditation, pray like this:\n\n\"Lord, thank you for the teaching you gave me through today's word. Help me to put this insight into practice in my daily life. Guide me to live according to your will. May I live this day protected in your love, and help me to share that love with others. Amen.\""
+      }
     }
   },
   "qr": {

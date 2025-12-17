@@ -100,7 +100,14 @@
     "selectFeastDayTitle": "수호성인 축일 선택",
     "createAccount": "계정 만들기",
     "termsRequired": "이용약관 및 개인정보처리방침에 동의해주세요",
-    "subtitle": "신앙으로 연결되는"
+    "subtitle": "신앙으로 연결되는",
+    "googleSignInCanceled": "Google 로그인이 취소되었습니다.",
+    "googleSignInFailed": "Google 로그인에 실패했습니다.",
+    "googleAuthInfoFailed": "Google 인증 정보를 가져오는데 실패했습니다.",
+    "googleSignInError": "Google 로그인 중 오류가 발생했습니다: {error}",
+    "googleSignInError@error": "오류 메시지",
+    "appleSignInFailed": "Apple 로그인에 실패했습니다.",
+    "appleSignInCanceled": "Apple 로그인이 취소되었습니다."
   },
   "validation": {
     "emailRequired": "이메일 주소를 입력하세요",
@@ -395,6 +402,36 @@
           "title": "묵상의 시간",
           "subtitle": "Meditation Time",
           "content": "고요한 시간을 가지고 하나님과 대화하며 자신의 마음을 돌아보는 시간입니다. 말씀을 묵상하고 하나님의 뜻을 구하며 평화로운 시간을 보냅니다."
+        },
+        "repentance": {
+          "title": "회개 묵상",
+          "subtitle": "Repentance",
+          "content": "하나님 앞에서 자신의 죄를 인정하고 회개하는 시간입니다. 용서를 구하며 하나님의 은혜를 구하고, 새로운 마음으로 회개하여 하느님의 뜻에 따라 살아가기로 결심하는 시간입니다."
+        },
+        "peace": {
+          "title": "평화 묵상",
+          "subtitle": "Peace",
+          "content": "하느님의 평화를 구하며 마음의 안식을 얻는 시간입니다. 불안과 걱정을 하느님께 맡기고, 주님의 평화가 마음에 깃들도록 기도하며 평온한 마음을 찾는 시간입니다."
+        },
+        "forgiveness": {
+          "title": "용서 묵상",
+          "subtitle": "Forgiveness",
+          "content": "다른 사람을 용서하고 자신도 용서받는 시간입니다. 상처받은 마음을 하느님께 맡기고, 용서의 마음을 갖도록 기도하며, 하느님께서 우리를 용서하신 것처럼 우리도 다른 이를 용서하는 시간입니다."
+        },
+        "love": {
+          "title": "사랑 묵상",
+          "subtitle": "Love",
+          "content": "하느님의 사랑을 묵상하고 사랑을 실천하는 시간입니다. 하느님께서 우리를 사랑하신 것처럼 이웃을 사랑하며, 일상생활에서 사랑을 실천하는 방법을 찾는 시간입니다."
+        },
+        "patience": {
+          "title": "인내 묵상",
+          "subtitle": "Patience",
+          "content": "인내의 덕을 키우며 기다림을 배우는 시간입니다. 어려운 상황 속에서도 인내하며, 하느님의 때를 기다리며, 인내의 열매를 맺도록 기도하는 시간입니다."
+        },
+        "waiting": {
+          "title": "기다림의 묵상",
+          "subtitle": "Waiting",
+          "content": "하느님의 때를 기다리며 인내하는 시간입니다. 자신의 계획보다 하느님의 계획을 신뢰하고, 기다림의 시간을 하느님과 더 가까워지는 시간으로 만들며, 하느님의 응답을 기다리는 시간입니다."
         }
       },
       "meditationGuides": {
@@ -417,7 +454,27 @@
       "permissionDenied": "권한이 없습니다. 로그인 상태를 확인하세요.",
       "networkError": "네트워크 오류가 발생했습니다.",
       "anonymous": "익명",
-      "loginToShare": "로그인하여 묵상을 공유해보세요"
+      "loginToShare": "로그인하여 묵상을 공유해보세요",
+      "meditationTips": {
+        "title": "묵상 방법 안내",
+        "subtitle": "How to Meditate",
+        "content": "1. 고요한 장소 선택\n조용하고 방해받지 않는 곳을 선택하세요.\n\n2. 편안한 자세\n앉거나 무릎을 꿇은 자세로 편안하게 앉으세요.\n\n3. 말씀 읽기\n오늘의 성경 말씀을 천천히 읽어보세요.\n\n4. 묵상하기\n말씀의 의미를 곰곰이 생각하고 하느님께 묻고 싶은 질문들을 떠올려보세요.\n\n5. 기도하기\n하느님께 마음을 열고 대화하는 시간을 가지세요.\n\n6. 실행하기\n묵상을 통해 깨달은 것을 일상생활에 적용해보세요."
+      },
+      "practicalTips": {
+        "title": "실용적인 묵상 팁",
+        "subtitle": "Practical Tips",
+        "content": "• 매일 같은 시간에 묵상하는 것이 도움이 됩니다.\n• 짧은 시간(10-15분)이라도 꾸준히 하는 것이 중요합니다.\n• 묵상 중 떠오르는 생각이나 감정을 기록해보세요.\n• 조용한 음악이나 자연 소리를 들으며 묵상할 수 있습니다.\n• 성경 구절을 소리 내어 읽어보는 것도 좋습니다.\n• 묵상 후 간단한 기도로 마무리하세요."
+      },
+      "meditationJournal": {
+        "title": "묵상 일기 작성하기",
+        "subtitle": "Meditation Journal",
+        "content": "묵상 일기는 하느님과의 대화를 기록하는 좋은 방법입니다.\n\n• 오늘 읽은 성경 구절을 기록하세요\n• 묵상 중 떠오른 깨달음이나 질문을 적어보세요\n• 하느님께 드린 기도와 그 응답을 기록하세요\n• 일상생활에 적용하고 싶은 것을 정리해보세요\n• 감사한 일이나 기도 제목을 기록하세요\n\n일기를 통해 하느님과의 관계가 어떻게 성장하는지 볼 수 있습니다."
+      },
+      "prayerAfterMeditation": {
+        "title": "묵상 후 기도",
+        "subtitle": "Prayer After Meditation",
+        "content": "묵상 후 이렇게 기도하세요:\n\n\"주님, 오늘 말씀을 통해 제게 주신 가르침에 감사드립니다. 이 깨달음을 일상생활에서 실천할 수 있도록 도와주시고, 주님의 뜻대로 살아갈 수 있도록 이끌어 주세요. 오늘 하루도 주님의 사랑 안에서 보호받으며 살아가게 하시고, 다른 이들에게도 그 사랑을 나눌 수 있도록 해주세요. 아멘.\""
+      }
     }
   },
   "qr": {

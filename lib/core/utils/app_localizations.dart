@@ -229,6 +229,22 @@ class AuthTranslations {
   String get termsRequired =>
       _getString('termsRequired') ?? '利用規約とプライバシーポリシーに同意してください';
   String get subtitle => _getString('subtitle') ?? '信仰でつながる';
+  String get googleSignInCanceled =>
+      _getString('googleSignInCanceled') ?? 'Googleログインがキャンセルされました。';
+  String get googleSignInFailed =>
+      _getString('googleSignInFailed') ?? 'Googleログインに失敗しました。';
+  String get googleAuthInfoFailed =>
+      _getString('googleAuthInfoFailed') ?? 'Google認証情報の取得に失敗しました。';
+  String googleSignInError(String error) {
+    final template =
+        _getString('googleSignInError') ?? 'Googleログイン中にエラーが発生しました: {error}';
+    return template.replaceAll('{error}', error);
+  }
+
+  String get appleSignInFailed =>
+      _getString('appleSignInFailed') ?? 'Appleログインに失敗しました。';
+  String get appleSignInCanceled =>
+      _getString('appleSignInCanceled') ?? 'Appleログインがキャンセルされました。';
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -1005,6 +1021,86 @@ class PrayerTranslations {
     final guides = _getValue('guides');
     if (guides is Map<String, dynamic> && guides.containsKey('meditation')) {
       return PrayerGuideTranslations(guides['meditation']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get repentance {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('repentance')) {
+      return PrayerGuideTranslations(guides['repentance']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get peace {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('peace')) {
+      return PrayerGuideTranslations(guides['peace']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get forgiveness {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('forgiveness')) {
+      return PrayerGuideTranslations(guides['forgiveness']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get love {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('love')) {
+      return PrayerGuideTranslations(guides['love']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get patience {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('patience')) {
+      return PrayerGuideTranslations(guides['patience']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get waiting {
+    final guides = _getValue('guides');
+    if (guides is Map<String, dynamic> && guides.containsKey('waiting')) {
+      return PrayerGuideTranslations(guides['waiting']);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get meditationTips {
+    final tips = _getValue('meditationTips');
+    if (tips is Map<String, dynamic>) {
+      return PrayerGuideTranslations(tips);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get practicalTips {
+    final tips = _getValue('practicalTips');
+    if (tips is Map<String, dynamic>) {
+      return PrayerGuideTranslations(tips);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get meditationJournal {
+    final journal = _getValue('meditationJournal');
+    if (journal is Map<String, dynamic>) {
+      return PrayerGuideTranslations(journal);
+    }
+    return PrayerGuideTranslations(null);
+  }
+
+  PrayerGuideTranslations get prayerAfterMeditation {
+    final prayer = _getValue('prayerAfterMeditation');
+    if (prayer is Map<String, dynamic>) {
+      return PrayerGuideTranslations(prayer);
     }
     return PrayerGuideTranslations(null);
   }

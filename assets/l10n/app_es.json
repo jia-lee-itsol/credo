@@ -106,6 +106,36 @@
           "title": "Tiempo de Meditación",
           "subtitle": "Meditation Time",
           "content": "Un momento para tener tiempo tranquilo, dialogar con Dios y reflexionar sobre el propio corazón. Meditamos en la Palabra, buscamos la voluntad de Dios y pasamos tiempo en paz."
+        },
+        "repentance": {
+          "title": "Meditación de Arrepentimiento",
+          "subtitle": "Repentance",
+          "content": "Un tiempo para reconocer nuestros pecados ante Dios y arrepentirse. Pedir perdón, buscar la gracia de Dios, y decidirse a arrepentirse con un corazón nuevo y vivir según la voluntad de Dios."
+        },
+        "peace": {
+          "title": "Meditación de Paz",
+          "subtitle": "Peace",
+          "content": "Un tiempo para buscar la paz de Dios y encontrar descanso para el corazón. Entregar las preocupaciones y ansiedades a Dios, orar para que la paz del Señor habite en el corazón, y encontrar una mente tranquila."
+        },
+        "forgiveness": {
+          "title": "Meditación de Perdón",
+          "subtitle": "Forgiveness",
+          "content": "Un tiempo para perdonar a otros y ser perdonado. Entregar el corazón herido a Dios, orar para tener un corazón perdonador, y perdonar a otros como Dios nos ha perdonado."
+        },
+        "love": {
+          "title": "Meditación de Amor",
+          "subtitle": "Love",
+          "content": "Un tiempo para meditar en el amor de Dios y practicar el amor. Amar al prójimo como Dios nos ha amado, y encontrar formas de practicar el amor en la vida diaria."
+        },
+        "patience": {
+          "title": "Meditación de Paciencia",
+          "subtitle": "Patience",
+          "content": "Un tiempo para cultivar la virtud de la paciencia y aprender a esperar. Ser paciente incluso en situaciones difíciles, esperar el tiempo de Dios, y orar para dar fruto de paciencia."
+        },
+        "waiting": {
+          "title": "Meditación de Espera",
+          "subtitle": "Waiting",
+          "content": "Un tiempo para esperar el tiempo de Dios y ser paciente. Confiar en los planes de Dios más que en los propios, hacer del tiempo de espera un tiempo para acercarse más a Dios, y esperar la respuesta de Dios."
         }
       },
       "meditationGuides": {
@@ -128,7 +158,27 @@
       "permissionDenied": "Permiso denegado. Por favor, verifique su estado de inicio de sesión.",
       "networkError": "Ocurrió un error de red.",
       "anonymous": "Anónimo",
-      "loginToShare": "Inicie sesión para compartir meditación"
+      "loginToShare": "Inicie sesión para compartir meditación",
+      "meditationTips": {
+        "title": "Guía de Meditación",
+        "subtitle": "How to Meditate",
+        "content": "1. Elige un lugar tranquilo\nSelecciona un lugar tranquilo donde no te molesten.\n\n2. Postura cómoda\nSiéntate cómodamente, ya sea en una silla o arrodillado.\n\n3. Lee la Escritura\nLee lentamente el pasaje bíblico de hoy.\n\n4. Medita\nReflexiona sobre el significado del pasaje y considera las preguntas que te gustaría hacer a Dios.\n\n5. Ora\nAbre tu corazón a Dios y pasa tiempo en conversación.\n\n6. Actúa\nAplica lo que has aprendido de la meditación a tu vida diaria."
+      },
+      "practicalTips": {
+        "title": "Consejos Prácticos de Meditación",
+        "subtitle": "Practical Tips",
+        "content": "• Meditar a la misma hora cada día es útil.\n• La consistencia es más importante que la duración (10-15 minutos está bien).\n• Anota los pensamientos y sentimientos que surjan durante la meditación.\n• Puedes meditar mientras escuchas música tranquila o sonidos de la naturaleza.\n• Leer versículos bíblicos en voz alta también puede ser beneficioso.\n• Termina tu meditación con una breve oración."
+      },
+      "meditationJournal": {
+        "title": "Llevar un Diario de Meditación",
+        "subtitle": "Meditation Journal",
+        "content": "Un diario de meditación es una excelente manera de registrar tus conversaciones con Dios.\n\n• Escribe el pasaje bíblico que leíste hoy\n• Anota cualquier percepción o pregunta que surja durante la meditación\n• Registra tus oraciones a Dios y Sus respuestas\n• Organiza lo que quieres aplicar a tu vida diaria\n• Escribe cosas por las que estás agradecido o temas de oración\n\nA través de tu diario, puedes ver cómo está creciendo tu relación con Dios."
+      },
+      "prayerAfterMeditation": {
+        "title": "Oración Después de la Meditación",
+        "subtitle": "Prayer After Meditation",
+        "content": "Después de la meditación, ora así:\n\n\"Señor, gracias por la enseñanza que me diste a través de la palabra de hoy. Ayúdame a poner esta percepción en práctica en mi vida diaria. Guíame para vivir según tu voluntad. Que este día viva protegido en tu amor, y ayúdame a compartir ese amor con otros. Amén.\""
+      }
     }
   },
   "navigation": {
@@ -173,7 +223,14 @@
     "selectFeastDayTitle": "Seleccionar fiesta del santo patrón",
     "createAccount": "Crear cuenta",
     "termsRequired": "Por favor, acepte los términos de servicio y la política de privacidad",
-    "subtitle": "Conectados por la fe"
+    "subtitle": "Conectados por la fe",
+    "googleSignInCanceled": "Se canceló el inicio de sesión con Google.",
+    "googleSignInFailed": "Falló el inicio de sesión con Google.",
+    "googleAuthInfoFailed": "No se pudo obtener la información de autenticación de Google.",
+    "googleSignInError": "Ocurrió un error durante el inicio de sesión con Google: {error}",
+    "googleSignInError@error": "Mensaje de error",
+    "appleSignInFailed": "Falló el inicio de sesión con Apple.",
+    "appleSignInCanceled": "Se canceló el inicio de sesión con Apple."
   },
   "validation": {
     "emailRequired": "Por favor, ingrese su dirección de correo electrónico",

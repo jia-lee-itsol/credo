@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../../../core/data/services/push_notification_service.dart';
@@ -24,7 +25,15 @@ class AuthRepositoryImpl implements AuthRepository {
     GoogleSignIn? googleSignIn,
   }) : _auth = auth ?? FirebaseAuth.instance,
        _firestore = firestore ?? FirebaseFirestore.instance,
-       _googleSignIn = googleSignIn ?? GoogleSignIn();
+       _googleSignIn =
+           googleSignIn ??
+           GoogleSignIn(
+             scopes: ['email', 'profile'],
+             // Web client ID를 serverClientId로 설정
+             // google-services.json의 oauth_client에서 client_type: 3인 client_id 사용
+             serverClientId:
+                 '182699877294-6qcgdug0hnqdkq9j5lkkglgct39qla9f.apps.googleusercontent.com',
+           );
 
   @override
   Future<Either<Failure, UserEntity?>> getCurrentUser() async {
@@ -228,32 +237,58 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, UserEntity>> signInWithGoogle() async {
     try {
+      AppLogger.auth('signInWithGoogle() 시작');
+
       // Google 로그인 플로우 시작
+      AppLogger.auth('GoogleSignIn.signIn() 호출');
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
       if (googleUser == null) {
-        // 사용자가 로그인을 취소함
+        AppLogger.auth('사용자가 Google 로그인을 취소함');
         return const Left(AuthFailure(message: 'Googleログインがキャンセルされました。'));
       }
 
+      AppLogger.auth(
+        'GoogleSignIn 성공: email=${googleUser.email}, id=${googleUser.id}',
+      );
+
       // Google 인증 정보 가져오기
+      AppLogger.auth('GoogleSignInAuthentication 가져오기 시작');
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
 
+      if (googleAuth.idToken == null) {
+        AppLogger.error('Google 인증 idToken이 null입니다');
+        return const Left(AuthFailure(message: 'Google認証情報の取得に失敗しました。'));
+      }
+
+      AppLogger.auth(
+        'Google 인증 정보 획득 완료: accessToken=${googleAuth.accessToken != null ? "있음" : "없음"}, idToken=${googleAuth.idToken != null ? "있음" : "없음"}',
+      );
+
       // Firebase에 인증 정보 전달
+      AppLogger.auth('GoogleAuthProvider.credential 생성');
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
       // Firebase Auth에 로그인
+      AppLogger.auth('Firebase Auth signInWithCredential 시작');
       final userCredential = await _auth.signInWithCredential(credential);
       final firebaseUser = userCredential.user;
 
       if (firebaseUser == null) {
+        AppLogger.error('Firebase Auth userCredential.user가 null입니다');
         return const Left(AuthFailure(message: 'Googleログインに失敗しました。'));
       }
 
+      AppLogger.auth(
+        'Firebase Auth 로그인 성공: uid=${firebaseUser.uid}, email=${firebaseUser.email}',
+      );
+
       // Firestore에서 사용자 데이터 확인
+      AppLogger.auth('Firestore에서 사용자 데이터 확인: ${firebaseUser.uid}');
       final userDoc = await _firestore
           .collection('users')
           .doc(firebaseUser.uid)
@@ -262,6 +297,7 @@ class AuthRepositoryImpl implements AuthRepository {
       UserEntity user;
       if (!userDoc.exists) {
         // 새 사용자: Firestore에 사용자 데이터 생성
+        AppLogger.auth('새 사용자 - Firestore에 사용자 데이터 생성');
         user = UserEntity(
           userId: firebaseUser.uid,
           nickname:
@@ -270,25 +306,85 @@ class AuthRepositoryImpl implements AuthRepository {
           createdAt: DateTime.now(),
           updatedAt: DateTime.now(),
         );
+        AppLogger.auth(
+          'UserEntity 생성 완료: userId=${user.userId}, nickname=${user.nickname}, email=${user.email}',
+        );
+
+        AppLogger.auth('Firestore에 사용자 데이터 저장 시작');
         await _firestore
             .collection('users')
             .doc(firebaseUser.uid)
             .set(UserModel.fromEntity(user).toFirestore());
+        AppLogger.auth('Firestore에 사용자 데이터 저장 완료');
       } else {
         // 기존 사용자: Firestore에서 데이터 가져오기
+        AppLogger.auth('기존 사용자 - Firestore에서 데이터 가져오기');
         final userModel = UserModel.fromFirestore(userDoc);
         user = userModel.toEntity();
+        AppLogger.auth(
+          '사용자 데이터 로드 완료: userId=${user.userId}, nickname=${user.nickname}',
+        );
       }
 
+      AppLogger.auth('signInWithGoogle() 성공 완료');
       return Right(user);
-    } on FirebaseAuthException catch (e) {
+    } on PlatformException catch (e, stackTrace) {
+      AppLogger.error(
+        'PlatformException: ${e.code} - ${e.message}',
+        e,
+        stackTrace,
+      );
+
+      // Google Sign-In 관련 PlatformException 처리
+      if (e.code == 'sign_in_failed') {
+        // ApiException: 10은 DEVELOPER_ERROR (설정 오류)
+        // 이는 보통 SHA 인증서 미등록 또는 google-services.json 설정 오류
+        if (e.message?.contains('ApiException: 10') == true) {
+          AppLogger.error(
+            'Google Sign-In DEVELOPER_ERROR (ApiException: 10) - SHA 인증서 또는 설정 확인 필요',
+            e,
+            stackTrace,
+          );
+          return const Left(
+            AuthFailure(message: 'Googleログインに失敗しました。', code: 'developer_error'),
+          );
+        }
+        // 기타 sign_in_failed 에러
+        return Left(AuthFailure(message: 'Googleログインに失敗しました。', code: e.code));
+      }
+
+      // 기타 PlatformException
+      return Left(
+        AuthFailure(
+          message: 'Googleログイン中にエラーが発生しました: ${e.message ?? e.code}',
+          code: e.code,
+        ),
+      );
+    } on FirebaseAuthException catch (e, stackTrace) {
+      AppLogger.error(
+        'FirebaseAuthException: ${e.code} - ${e.message}',
+        e,
+        stackTrace,
+      );
       return Left(_handleAuthException(e));
-    } on FirebaseException catch (e) {
+    } on FirebaseException catch (e, stackTrace) {
+      AppLogger.error(
+        'FirebaseException: ${e.code} - ${e.message}',
+        e,
+        stackTrace,
+      );
       return Left(
         FirebaseFailure(message: e.message ?? 'Firebaseエラー', code: e.code),
       );
-    } catch (e) {
-      return Left(UnknownFailure(message: e.toString()));
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'signInWithGoogle() 예외 발생: ${e.runtimeType} - $e',
+        e,
+        stackTrace,
+      );
+      return Left(
+        UnknownFailure(message: 'Googleログイン中にエラーが発生しました: ${e.toString()}'),
+      );
     }
   }
 

@@ -55,5 +55,16 @@
 	<string>投稿に写真を添付するためにフォトライブラリへのアクセスが必要です。</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>投稿に写真を添付するためにフォトライブラリへのアクセスが必要です。</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.182699877294-ojnm1po2ughbv93cnvdj4nltdi2n2lnu</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

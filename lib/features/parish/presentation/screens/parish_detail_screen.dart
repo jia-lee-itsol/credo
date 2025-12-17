@@ -98,14 +98,20 @@ class ParishDetailScreen extends ConsumerWidget {
     Color primaryColor,
     bool isFavorite,
   ) {
+    final parishName = parish['name'] as String? ?? '';
+
     return SliverAppBar(
       expandedHeight: 200,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
+        centerTitle: true,
         title: Text(
-          parish['name'] as String? ?? '',
+          parishName,
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
+        titlePadding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
         background: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -1205,7 +1211,13 @@ class ParishDetailScreen extends ConsumerWidget {
   }
 
   Future<void> _launchUrl(String url) async {
-    final uri = Uri.parse(url);
+    // URL에 프로토콜이 없으면 https:// 추가
+    String urlWithProtocol = url;
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      urlWithProtocol = 'https://$url';
+    }
+
+    final uri = Uri.parse(urlWithProtocol);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     }

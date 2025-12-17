@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../shared/providers/location_provider.dart';
+import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../core/utils/location_utils.dart';
 import '../constants/parish_colors.dart';
 import 'parish_tag.dart';
@@ -24,6 +25,9 @@ class ParishCard extends ConsumerWidget {
     final distance = distanceKm != null
         ? LocationUtils.formatDistance(distanceKm)
         : null;
+
+    // 전례 시기에 맞는 색상 가져오기
+    final primaryColor = ref.watch(liturgyPrimaryColorProvider);
 
     // 지원 언어 추출
     final languages = _getSupportedLanguages(massTime);
@@ -102,8 +106,10 @@ class ParishCard extends ConsumerWidget {
                           if (distance != null) ...[
                             ParishTag(
                               text: distance,
-                              backgroundColor: ParishColors.purple100,
-                              textColor: ParishColors.purple600,
+                              backgroundColor: primaryColor.withValues(
+                                alpha: 0.1,
+                              ),
+                              textColor: primaryColor,
                             ),
                             const SizedBox(width: 8),
                           ],

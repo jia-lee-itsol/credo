@@ -17,7 +17,7 @@ class BadgeChip extends ConsumerWidget {
   final IconData? customIcon;
   final Color? customColor;
 
-  BadgeChip({
+  const BadgeChip({
     super.key,
     required this.type,
     this.customLabel,

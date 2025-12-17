@@ -27,6 +27,12 @@ class PrayerScreen extends ConsumerWidget {
         final difficultGuide = l10n.mass.prayer.difficult;
         final thanksgivingGuide = l10n.mass.prayer.thanksgiving;
         final meditationGuide = l10n.mass.prayer.meditation;
+        final repentanceGuide = l10n.mass.prayer.repentance;
+        final peaceGuide = l10n.mass.prayer.peace;
+        final forgivenessGuide = l10n.mass.prayer.forgiveness;
+        final loveGuide = l10n.mass.prayer.love;
+        final patienceGuide = l10n.mass.prayer.patience;
+        final waitingGuide = l10n.mass.prayer.waiting;
 
         final prayerGuides = [
           _PrayerGuide(
@@ -64,6 +70,42 @@ class PrayerScreen extends ConsumerWidget {
             subtitle: meditationGuide.subtitle,
             icon: Icons.self_improvement,
             content: meditationGuide.content,
+          ),
+          _PrayerGuide(
+            title: repentanceGuide.title,
+            subtitle: repentanceGuide.subtitle,
+            icon: Icons.refresh,
+            content: repentanceGuide.content,
+          ),
+          _PrayerGuide(
+            title: peaceGuide.title,
+            subtitle: peaceGuide.subtitle,
+            icon: Icons.spa,
+            content: peaceGuide.content,
+          ),
+          _PrayerGuide(
+            title: forgivenessGuide.title,
+            subtitle: forgivenessGuide.subtitle,
+            icon: Icons.favorite_outline,
+            content: forgivenessGuide.content,
+          ),
+          _PrayerGuide(
+            title: loveGuide.title,
+            subtitle: loveGuide.subtitle,
+            icon: Icons.favorite,
+            content: loveGuide.content,
+          ),
+          _PrayerGuide(
+            title: patienceGuide.title,
+            subtitle: patienceGuide.subtitle,
+            icon: Icons.timer_outlined,
+            content: patienceGuide.content,
+          ),
+          _PrayerGuide(
+            title: waitingGuide.title,
+            subtitle: waitingGuide.subtitle,
+            icon: Icons.hourglass_empty,
+            content: waitingGuide.content,
           ),
         ];
 
