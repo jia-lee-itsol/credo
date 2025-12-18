@@ -5,6 +5,7 @@
   },
   "common": {
     "ok": "确定",
+    "confirm": "确认",
     "cancel": "取消",
     "save": "保存",
     "delete": "删除",
@@ -62,6 +63,7 @@
     "noDataToday": "今天没有默想信息",
     "noDataWeekday": "平日默想信息正在准备中",
     "bibleNotice": "※请在教堂聆听圣经文本或阅读官方圣经。",
+    "contentDisclaimer": "本内容不替代正式弥撒礼仪文，仅作为帮助信仰生活的指导和默想材料。",
     "title": "每日默想",
     "liturgicalDays": {
       "sunday": "主日",
@@ -310,16 +312,35 @@
       "parishNotSet": "未设置所属教会",
       "parishLoadFailed": "无法加载所属教会信息",
       "searchOtherParishes": "搜索其他教会社区",
-      "todayMass": "今日弥撒",
+      "todayMass": "今日的话语",
       "todayBibleReadingAndPrayer": "今日的圣经诵读和祈祷",
       "recentNotices": "最近通知",
-      "noNotices": "没有通知"
+      "noNotices": "没有通知",
+      "postAdded": "已添加帖子",
+      "commentAdded": "已添加评论",
+      "noticeAdded": "通知已发布",
+      "newPostAdded": "新帖子已发布",
+      "commentOnMyPost": "我的帖子有评论"
     },
     "notificationLabels": {
       "mention": "提及",
       "notice": "通知",
-      "comment": "评论"
-    }
+      "comment": "评论",
+      "post": "帖子"
+    },
+    "addButton": "添加",
+    "addFile": "添加文件",
+    "attachments": "附件",
+    "attachmentsDescription": "最多可附加3张图片和2个PDF文件（总计5个）",
+    "maxImagesReached": "最多可附加{max}张图片",
+    "maxImagesReached@max": "最大图片数",
+    "maxPdfsReached": "最多可附加{max}个PDF文件",
+    "maxPdfsReached@max": "最大PDF数",
+    "pdfFileTooLarge": "PDF文件大小不能超过10MB",
+    "pdfFiles": "PDF文件",
+    "pdfOpenFailed": "无法打开PDF文件",
+    "pdfSelectFailed": "选择PDF文件失败",
+    "tapToOpen": "点击打开"
   },
   "report": {
     "title": "举报",
@@ -366,6 +387,24 @@
       "registeredCount": "{count} 个已注册",
       "registeredCount@count": "已注册数量"
     },
+    "notifications": {
+      "enabled": "启用通知",
+      "enabledDescription": "开启或关闭所有通知",
+      "categories": "通知类别",
+      "notices": "公告",
+      "noticesDescription": "接收教堂公告",
+      "comments": "评论",
+      "commentsDescription": "接收帖子评论",
+      "likes": "点赞",
+      "likesDescription": "接收帖子点赞",
+      "dailyMass": "每日弥撒",
+      "dailyMassDescription": "接收每日弥撒阅读通知",
+      "quietHours": "安静时间",
+      "quietHoursDescription": "在指定时间段内不接收通知",
+      "quietHoursStart": "开始时间",
+      "quietHoursEnd": "结束时间",
+      "saved": "通知设置已保存"
+    },
     "notificationSettings": "通知设置",
     "notificationSettingsComingSoon": "通知设置正在准备中",
     "languageSettings": "语言设置",
@@ -385,6 +424,9 @@
     "directInputDialogTitle": "输入圣名和节日",
     "month": "月",
     "day": "日",
+    "clearCache": "清除缓存",
+    "clearCacheDescription": "清除圣人数据和图片缓存",
+    "clearCacheConfirm": "确定要清除缓存吗？圣人数据将重新加载。",
     "godparent": {
       "add": "添加",
       "remove": "删除",
@@ -505,5 +547,24 @@
     "notificationSettings": "通知设置正在准备中",
     "termsOfService": "服务条款正在准备中",
     "privacyPolicy": "隐私政策正在准备中"
+  },
+  "saints": {
+    "feastDay": "节日",
+    "yourBaptismalName": "这是您圣名的节日",
+    "solemnity": "大瞻礼日",
+    "feast": "瞻礼日",
+    "memorial": "纪念日",
+    "todaySaints": "今日圣人",
+    "todaySaintsSubtitle": "今日的圣人们",
+    "andMore": "其他{count}位",
+    "biography": "生平",
+    "achievements": "主要成就",
+    "patronage": "主保",
+    "prayer": "祈祷",
+    "howToHonor": "如何敬拜圣人",
+    "detailLoadFailed": "加载详细信息失败",
+    "noSaintsToday": "今日没有纪念的圣人",
+    "loadFailed": "加载失败",
+    "sourceNote": "📖 根据罗马殉道录和教会传统，今日纪念的圣人。"
   }
 }

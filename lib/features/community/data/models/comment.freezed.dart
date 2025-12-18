@@ -26,6 +26,10 @@ mixin _$Comment {
   String get authorId => throw _privateConstructorUsedError;
   String get authorName => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
+  List<String> get imageUrls =>
+      throw _privateConstructorUsedError; // 댓글에 첨부된 이미지 URL 리스트
+  List<String> get pdfUrls =>
+      throw _privateConstructorUsedError; // 댓글에 첨부된 PDF 파일 URL 리스트
   DateTime get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this Comment to a JSON map.
@@ -48,6 +52,8 @@ abstract class $CommentCopyWith<$Res> {
     String authorId,
     String authorName,
     String content,
+    List<String> imageUrls,
+    List<String> pdfUrls,
     DateTime createdAt,
   });
 }
@@ -72,6 +78,8 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
     Object? authorId = null,
     Object? authorName = null,
     Object? content = null,
+    Object? imageUrls = null,
+    Object? pdfUrls = null,
     Object? createdAt = null,
   }) {
     return _then(
@@ -96,6 +104,14 @@ class _$CommentCopyWithImpl<$Res, $Val extends Comment>
                 ? _value.content
                 : content // ignore: cast_nullable_to_non_nullable
                       as String,
+            imageUrls: null == imageUrls
+                ? _value.imageUrls
+                : imageUrls // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            pdfUrls: null == pdfUrls
+                ? _value.pdfUrls
+                : pdfUrls // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
             createdAt: null == createdAt
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
@@ -120,6 +136,8 @@ abstract class _$$CommentImplCopyWith<$Res> implements $CommentCopyWith<$Res> {
     String authorId,
     String authorName,
     String content,
+    List<String> imageUrls,
+    List<String> pdfUrls,
     DateTime createdAt,
   });
 }
@@ -143,6 +161,8 @@ class __$$CommentImplCopyWithImpl<$Res>
     Object? authorId = null,
     Object? authorName = null,
     Object? content = null,
+    Object? imageUrls = null,
+    Object? pdfUrls = null,
     Object? createdAt = null,
   }) {
     return _then(
@@ -167,6 +187,14 @@ class __$$CommentImplCopyWithImpl<$Res>
             ? _value.content
             : content // ignore: cast_nullable_to_non_nullable
                   as String,
+        imageUrls: null == imageUrls
+            ? _value._imageUrls
+            : imageUrls // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        pdfUrls: null == pdfUrls
+            ? _value._pdfUrls
+            : pdfUrls // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
         createdAt: null == createdAt
             ? _value.createdAt
             : createdAt // ignore: cast_nullable_to_non_nullable
@@ -185,8 +213,12 @@ class _$CommentImpl extends _Comment {
     required this.authorId,
     required this.authorName,
     required this.content,
+    final List<String> imageUrls = const [],
+    final List<String> pdfUrls = const [],
     required this.createdAt,
-  }) : super._();
+  }) : _imageUrls = imageUrls,
+       _pdfUrls = pdfUrls,
+       super._();
 
   factory _$CommentImpl.fromJson(Map<String, dynamic> json) =>
       _$$CommentImplFromJson(json);
@@ -201,12 +233,33 @@ class _$CommentImpl extends _Comment {
   final String authorName;
   @override
   final String content;
+  final List<String> _imageUrls;
+  @override
+  @JsonKey()
+  List<String> get imageUrls {
+    if (_imageUrls is EqualUnmodifiableListView) return _imageUrls;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_imageUrls);
+  }
+
+  // 댓글에 첨부된 이미지 URL 리스트
+  final List<String> _pdfUrls;
+  // 댓글에 첨부된 이미지 URL 리스트
+  @override
+  @JsonKey()
+  List<String> get pdfUrls {
+    if (_pdfUrls is EqualUnmodifiableListView) return _pdfUrls;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_pdfUrls);
+  }
+
+  // 댓글에 첨부된 PDF 파일 URL 리스트
   @override
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'Comment(commentId: $commentId, postId: $postId, authorId: $authorId, authorName: $authorName, content: $content, createdAt: $createdAt)';
+    return 'Comment(commentId: $commentId, postId: $postId, authorId: $authorId, authorName: $authorName, content: $content, imageUrls: $imageUrls, pdfUrls: $pdfUrls, createdAt: $createdAt)';
   }
 
   @override
@@ -222,6 +275,11 @@ class _$CommentImpl extends _Comment {
             (identical(other.authorName, authorName) ||
                 other.authorName == authorName) &&
             (identical(other.content, content) || other.content == content) &&
+            const DeepCollectionEquality().equals(
+              other._imageUrls,
+              _imageUrls,
+            ) &&
+            const DeepCollectionEquality().equals(other._pdfUrls, _pdfUrls) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
@@ -235,6 +293,8 @@ class _$CommentImpl extends _Comment {
     authorId,
     authorName,
     content,
+    const DeepCollectionEquality().hash(_imageUrls),
+    const DeepCollectionEquality().hash(_pdfUrls),
     createdAt,
   );
 
@@ -259,6 +319,8 @@ abstract class _Comment extends Comment {
     required final String authorId,
     required final String authorName,
     required final String content,
+    final List<String> imageUrls,
+    final List<String> pdfUrls,
     required final DateTime createdAt,
   }) = _$CommentImpl;
   const _Comment._() : super._();
@@ -275,6 +337,10 @@ abstract class _Comment extends Comment {
   String get authorName;
   @override
   String get content;
+  @override
+  List<String> get imageUrls; // 댓글에 첨부된 이미지 URL 리스트
+  @override
+  List<String> get pdfUrls; // 댓글에 첨부된 PDF 파일 URL 리스트
   @override
   DateTime get createdAt;
 

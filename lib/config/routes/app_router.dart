@@ -13,6 +13,8 @@ import '../../features/onboarding/presentation/screens/language_selection_screen
 import '../../features/onboarding/presentation/screens/location_permission_screen.dart';
 import '../../features/prayer/presentation/screens/prayer_screen.dart';
 import '../../features/mass/presentation/screens/daily_mass_screen.dart';
+import '../../features/saints/presentation/screens/today_saints_screen.dart';
+import '../../features/saints/presentation/screens/saint_detail_screen.dart';
 import '../../features/parish/presentation/screens/parish_list_screen.dart';
 import '../../features/parish/presentation/screens/parish_detail_screen.dart';
 import '../../features/community/presentation/screens/community_home_screen.dart';
@@ -24,6 +26,7 @@ import '../../features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../features/profile/presentation/screens/favorite_parishes_screen.dart';
 import '../../features/profile/presentation/screens/qr_scanner_screen.dart';
 import '../../features/profile/presentation/screens/language_settings_screen.dart';
+import '../../features/profile/presentation/screens/notification_settings_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../shared/widgets/main_scaffold.dart';
 import 'app_routes.dart';
@@ -56,14 +59,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       return null;
     },
     routes: [
-      // Splash Route
+      // 스플래시 화면
       GoRoute(
         path: AppRoutes.splash,
         name: 'splash',
         builder: (context, state) => const SplashScreen(),
       ),
 
-      // Onboarding Routes
+      // 온보딩 화면
       GoRoute(
         path: AppRoutes.onboardingLanguage,
         name: 'onboardingLanguage',
@@ -75,7 +78,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const LocationPermissionScreen(),
       ),
 
-      // Auth Routes
+      // 인증 화면
       GoRoute(
         path: AppRoutes.signIn,
         name: 'signIn',
@@ -87,13 +90,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const SignUpScreen(),
       ),
 
-      // Main Shell Route with Bottom Navigation
+      // 메인 셸 라우트 (하단 네비게이션 포함)
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return MainScaffold(navigationShell: navigationShell);
         },
         branches: [
-          // Home Branch
+          // 홈 브랜치
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -101,10 +104,25 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 name: 'home',
                 builder: (context, state) => const HomeScreen(),
               ),
+              GoRoute(
+                path: AppRoutes.todaySaints,
+                name: 'todaySaints',
+                builder: (context, state) => const TodaySaintsScreen(),
+                routes: [
+                  GoRoute(
+                    path: ':saintId',
+                    name: 'saintDetail',
+                    builder: (context, state) {
+                      final saintId = state.pathParameters['saintId']!;
+                      return SaintDetailScreen(saintId: saintId);
+                    },
+                  ),
+                ],
+              ),
             ],
           ),
 
-          // Prayer Branch
+          // 묵상 브랜치
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -115,7 +133,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
 
-          // Daily Mass Branch
+          // 일일 미사 브랜치
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -126,7 +144,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
 
-          // Parish Branch
+          // 성당 브랜치
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -152,7 +170,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
 
-          // Community Branch
+          // 커뮤니티 브랜치
           StatefulShellBranch(
             routes: [
               GoRoute(
@@ -197,7 +215,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         ],
       ),
 
-      // My Page Route (outside shell - with bottom navigation)
+      // 마이페이지 라우트 (셸 외부 - 하단 네비게이션 포함)
       GoRoute(
         path: AppRoutes.myPage,
         name: 'myPage',
@@ -238,6 +256,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: 'language-settings',
             name: 'languageSettings',
             builder: (context, state) => const LanguageSettingsScreen(),
+          ),
+          GoRoute(
+            path: 'notification-settings',
+            name: 'notificationSettings',
+            builder: (context, state) => const NotificationSettingsScreen(),
           ),
         ],
       ),

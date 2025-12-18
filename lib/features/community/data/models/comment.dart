@@ -13,6 +13,8 @@ class Comment with _$Comment {
     required String authorId,
     required String authorName,
     required String content,
+    @Default([]) List<String> imageUrls, // 댓글에 첨부된 이미지 URL 리스트
+    @Default([]) List<String> pdfUrls, // 댓글에 첨부된 PDF 파일 URL 리스트
     required DateTime createdAt,
   }) = _Comment;
 

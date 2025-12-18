@@ -7,7 +7,7 @@ import '../../data/models/post.dart';
 import '../providers/community_presentation_providers.dart';
 import '../notifiers/post_form_notifier.dart';
 import '../widgets/post_form_fields.dart';
-import '../widgets/post_image_picker.dart';
+import '../widgets/post_file_picker.dart';
 import '../widgets/post_official_settings.dart';
 
 /// 게시글 작성/수정 화면
@@ -130,16 +130,11 @@ class _PostEditScreenState extends ConsumerState<PostEditScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // 이미지 선택 섹션
-                PostImagePicker(
+                // 파일 선택 섹션 (이미지 + PDF)
+                PostFilePicker(
                   formState: formState,
                   notifier: notifier,
-                  onImagePickerTap: () => _showImagePicker(
-                    context,
-                    notifier,
-                    formState.selectedImages.length +
-                        formState.imageUrls.length,
-                  ),
+                  onFilePickerTap: () {},
                 ),
 
                 // 공식 계정인 경우 공지/핀 옵션 표시
@@ -263,16 +258,4 @@ class _PostEditScreenState extends ConsumerState<PostEditScreen> {
     }
   }
 
-  Future<void> _showImagePicker(
-    BuildContext context,
-    PostFormNotifier notifier,
-    int currentImageCount,
-  ) async {
-    await PostImagePickerHelper.showImagePicker(
-      context,
-      notifier,
-      currentImageCount,
-      3,
-    );
-  }
 }

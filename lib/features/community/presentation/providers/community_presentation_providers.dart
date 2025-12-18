@@ -8,7 +8,7 @@ import '../../data/models/notification.dart' as models;
 import '../../data/models/post.dart';
 import '../notifiers/post_form_notifier.dart';
 
-// Repository Providers re-export (하위 호환성을 위해)
+// Repository Providers 재내보내기 (하위 호환성을 위해)
 export '../../data/providers/community_repository_providers.dart';
 
 /// 공식 공지사항 스트림 Provider (parishId 파라미터 지원)
@@ -16,6 +16,20 @@ final officialNoticesProvider = StreamProvider.autoDispose
     .family<List<Post>, String?>((ref, String? parishId) {
       final repo = ref.watch(postRepositoryProvider);
       return repo.watchOfficialNotices(parishId: parishId);
+    });
+
+/// 여러 교회의 공식 공지사항 스트림 Provider (parishIds 파라미터 지원)
+///
+/// 주의: 리스트를 쉼표로 구분된 문자열로 전달해야 합니다.
+/// 예: "parish1,parish2,parish3"
+/// 리스트를 직접 전달하면 매번 새 인스턴스로 인식되어 provider가 재생성됩니다.
+final officialNoticesByParishesProvider = StreamProvider.autoDispose
+    .family<List<Post>, String>((ref, String parishIdsKey) {
+      final parishIds = parishIdsKey.isEmpty
+          ? <String>[]
+          : parishIdsKey.split(',');
+      final repo = ref.watch(postRepositoryProvider);
+      return repo.watchOfficialNoticesByParishes(parishIds: parishIds);
     });
 
 /// 커뮤니티 게시글 스트림 Provider (parishId 파라미터 지원)
@@ -32,6 +46,20 @@ final allPostsProvider = StreamProvider.autoDispose.family<List<Post>, String?>(
     return repo.watchAllPosts(parishId: parishId);
   },
 );
+
+/// 여러 교회의 모든 게시글 스트림 Provider (공지 + 커뮤니티, parishIds 파라미터 지원)
+///
+/// 주의: 리스트를 쉼표로 구분된 문자열로 전달해야 합니다.
+/// 예: "parish1,parish2,parish3"
+/// 리스트를 직접 전달하면 매번 새 인스턴스로 인식되어 provider가 재생성됩니다.
+final allPostsByParishesProvider = StreamProvider.autoDispose
+    .family<List<Post>, String>((ref, String parishIdsKey) {
+      final parishIds = parishIdsKey.isEmpty
+          ? <String>[]
+          : parishIdsKey.split(',');
+      final repo = ref.watch(postRepositoryProvider);
+      return repo.watchAllPostsByParishes(parishIds: parishIds);
+    });
 
 /// 사용자 스트림 Provider (uid 파라미터)
 final userStreamProvider = StreamProvider.autoDispose.family<AppUser?, String>((

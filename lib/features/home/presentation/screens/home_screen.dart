@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/liturgy_constants.dart';
 import '../../../../core/services/logger_service.dart';
 import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
+import '../../../auth/domain/entities/user_entity.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/locale_provider.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../community/presentation/providers/community_presentation_providers.dart';
+import '../../../community/data/models/post.dart';
+import '../../../saints/presentation/providers/saint_feast_day_providers.dart';
+import '../../../saints/presentation/widgets/saint_feast_day_modal.dart';
+import '../../../../core/data/services/parish_service.dart';
 import '../widgets/home_header.dart';
 import '../widgets/home_action_button.dart';
+import '../widgets/today_saints_card.dart';
 
 /// 홈 화면
 class HomeScreen extends ConsumerStatefulWidget {
@@ -24,6 +31,55 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   // 삭제된 게시글 ID를 추적하는 Set
   final Set<String> _dismissedPostIds = {};
+  bool _hasShownSaintModal = false;
+  // 성당별 아코디언 상태 (기본값: false = 접힘)
+  final Map<String?, bool> _parishExpandedState = {};
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Future<void> _checkAndShowSaintModal() async {
+    if (_hasShownSaintModal || !mounted) return;
+
+    // SharedPreferences에서 오늘 날짜 확인
+    final prefs = await SharedPreferences.getInstance();
+    final today = DateTime.now();
+    final todayKey =
+        'saint_modal_shown_${today.year}_${today.month}_${today.day}';
+    final hasShownToday = prefs.getBool(todayKey) ?? false;
+
+    if (hasShownToday) {
+      _hasShownSaintModal = true;
+      return;
+    }
+
+    // FutureProvider를 watch하여 데이터가 로드되면 모달 표시
+    final userBaptismalSaintAsync = ref.watch(userBaptismalSaintProvider);
+    userBaptismalSaintAsync.whenData((saint) async {
+      if (saint != null && mounted && !_hasShownSaintModal) {
+        _hasShownSaintModal = true;
+
+        // 오늘 날짜로 표시 여부 저장
+        await prefs.setBool(todayKey, true);
+
+        final currentUser = ref.read(currentUserProvider);
+        Future.microtask(() {
+          if (mounted) {
+            showDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (context) => SaintFeastDayModal(
+                saint: saint,
+                userBaptismalName: currentUser?.baptismalName,
+              ),
+            );
+          }
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +98,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final backgroundColor = ref.watch(liturgyBackgroundColorProvider);
     final currentUser = ref.watch(currentUserProvider);
+
+    // 성인 축일 모달 확인
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkAndShowSaintModal();
+    });
 
     return l10nAsync.when(
       data: (l10n) => Scaffold(
@@ -65,10 +126,49 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
 
-              // 근처 교회 찾기 버튼
+              // 테스트: 성인 축일 모달 표시 버튼 (임시)
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                  child: ElevatedButton.icon(
+                    onPressed: () async {
+                      final todaySaintsAsync = ref.read(todaySaintsProvider);
+                      todaySaintsAsync.whenData((saints) {
+                        if (saints.isNotEmpty && mounted) {
+                          final currentUser = ref.read(currentUserProvider);
+                          showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (context) => SaintFeastDayModal(
+                              saint: saints.first,
+                              userBaptismalName: currentUser?.baptismalName,
+                            ),
+                          );
+                        } else if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('오늘의 성인 축일이 없습니다.')),
+                          );
+                        }
+                      });
+                    },
+                    icon: const Icon(Icons.celebration),
+                    label: const Text('성인 축일 모달 테스트'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // 근처 교회 찾기 버튼
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                   child: HomeActionButton(
                     icon: Icons.location_on_outlined,
                     title: l10n.parish.search,
@@ -83,7 +183,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               // 오늘의 미사 버튼
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                   child: HomeActionButton(
                     icon: Icons.auto_stories,
                     title: l10n.community.home.todayMass,
@@ -94,6 +194,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ),
+
+              // 오늘의 성인 카드
+              const SliverToBoxAdapter(child: TodaySaintsCard()),
 
               // 섹션 타이틀
               SliverToBoxAdapter(
@@ -111,7 +214,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   theme,
                   primaryColor,
                   l10n,
-                  currentUser?.mainParishId,
+                  currentUser,
                 ),
               ),
 
@@ -147,38 +250,208 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ThemeData theme,
     Color primaryColor,
     AppLocalizations l10n,
-    String? parishId,
+    UserEntity? currentUser,
   ) {
-    if (parishId == null) {
+    // 소속 교회와 자주 가는 교회 목록 생성
+    final parishIds = <String>[];
+    if (currentUser?.mainParishId != null) {
+      parishIds.add(currentUser!.mainParishId!);
+    }
+    if (currentUser?.favoriteParishIds != null) {
+      parishIds.addAll(currentUser!.favoriteParishIds);
+    }
+    // 중복 제거
+    final uniqueParishIds = parishIds.toSet().toList();
+
+    if (uniqueParishIds.isEmpty) {
       return _buildNoticesPlaceholder(context, theme, l10n);
     }
 
-    final noticesAsync = ref.watch(officialNoticesProvider(parishId));
+    // 리스트를 쉼표로 구분된 문자열로 변환 (provider 키 안정화)
+    final parishIdsKey = uniqueParishIds.join(',');
 
-    return noticesAsync.when(
-      data: (notices) {
-        if (notices.isEmpty) {
+    final postsAsync = ref.watch(allPostsByParishesProvider(parishIdsKey));
+
+    return postsAsync.when(
+      data: (posts) {
+        if (posts.isEmpty) {
           return _buildNoticesPlaceholder(context, theme, l10n);
         }
 
         // 삭제된 게시글 제외
-        final filteredNotices = notices
+        final filteredPosts = posts
             .where((post) => !_dismissedPostIds.contains(post.postId))
-            .take(5)
             .toList();
 
-        if (filteredNotices.isEmpty) {
+        if (filteredPosts.isEmpty) {
           return _buildNoticesPlaceholder(context, theme, l10n);
         }
+
+        // 성당별로 그룹화
+        final Map<String?, List<Post>> postsByParish = {};
+        for (final post in filteredPosts) {
+          final parishId = post.parishId;
+          if (!postsByParish.containsKey(parishId)) {
+            postsByParish[parishId] = [];
+          }
+          postsByParish[parishId]!.add(post);
+        }
+
+        // 각 성당별로 최대 5개까지만 표시
+        final limitedPostsByParish = <String?, List<Post>>{};
+        for (final entry in postsByParish.entries) {
+          limitedPostsByParish[entry.key] = entry.value.take(5).toList();
+        }
+
+        final currentUserId = currentUser?.userId;
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
-            children: filteredNotices.map((post) {
+            children: limitedPostsByParish.entries.map((entry) {
+              final parishId = entry.key;
+              final parishPosts = entry.value;
+
+              return _buildParishNotificationCard(
+                context,
+                ref,
+                theme,
+                primaryColor,
+                l10n,
+                currentUserId,
+                parishId,
+                parishPosts,
+              );
+            }).toList(),
+          ),
+        );
+      },
+      loading: () {
+        return const Padding(
+          padding: EdgeInsets.all(16),
+          child: Center(child: CircularProgressIndicator()),
+        );
+      },
+      error: (error, stack) {
+        AppLogger.error('공지사항 조회 에러: $error', error, stack);
+        return _buildNoticesPlaceholder(context, theme, l10n);
+      },
+    );
+  }
+
+  /// 성당별 알림 카드 빌드
+  Widget _buildParishNotificationCard(
+    BuildContext context,
+    WidgetRef ref,
+    ThemeData theme,
+    Color primaryColor,
+    AppLocalizations l10n,
+    String? currentUserId,
+    String? parishId,
+    List<Post> posts,
+  ) {
+    // 성당 정보 가져오기
+    final parishAsync = parishId != null
+        ? ref.watch(parishByIdProvider(parishId))
+        : null;
+
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 성당 이름 헤더 (아코디언 토글)
+          InkWell(
+            onTap: () {
+              setState(() {
+                _parishExpandedState[parishId] =
+                    !(_parishExpandedState[parishId] ?? false);
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: primaryColor.withValues(alpha: 0.1),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(12),
+                  topRight: Radius.circular(12),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.church, color: primaryColor, size: 20),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: parishAsync != null
+                        ? parishAsync.when(
+                            data: (parishData) => Text(
+                              parishData?['name'] as String? ?? '알 수 없는 성당',
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                              ),
+                            ),
+                            loading: () => Text(
+                              '알 수 없는 성당',
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                              ),
+                            ),
+                            error: (error, stack) => Text(
+                              '알 수 없는 성당',
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: primaryColor,
+                              ),
+                            ),
+                          )
+                        : Text(
+                            '알 수 없는 성당',
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: primaryColor,
+                            ),
+                          ),
+                  ),
+                  Icon(
+                    (_parishExpandedState[parishId] ?? false)
+                        ? Icons.expand_less
+                        : Icons.expand_more,
+                    color: primaryColor,
+                    size: 24,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // 알림 목록 (아코디언)
+          if (_parishExpandedState[parishId] ?? false)
+            ...posts.map((post) {
               // 게시글을 알림 형태로 변환
-              final notificationType = 'notice'; // 공지글은 항상 notice 타입
-              final notificationTitle = post.title;
-              final notificationBody = post.body.split('\n').first;
+              final isMyPost =
+                  currentUserId != null && post.authorId == currentUserId;
+              final hasComments = post.commentCount > 0;
+
+              // 표시 형식 결정
+              String notificationBody;
+              String notificationType;
+
+              if (post.isNotice) {
+                // 공지글 등록
+                notificationBody = l10n.community.home.noticeAdded;
+                notificationType = 'notice';
+              } else if (isMyPost && hasComments) {
+                // 내 글에 댓글이 달린 경우
+                notificationBody = l10n.community.home.commentOnMyPost;
+                notificationType = 'comment';
+              } else {
+                // 새글 등록
+                notificationBody = l10n.community.home.newPostAdded;
+                notificationType = 'post';
+              }
 
               return Dismissible(
                 key: Key(post.postId),
@@ -199,9 +472,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     _dismissedPostIds.add(post.postId);
                   });
                 },
-                child: Card(
-                  margin: const EdgeInsets.only(bottom: 8),
+                child: Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
                     leading: CircleAvatar(
                       backgroundColor: _getNotificationColor(
                         notificationType,
@@ -236,24 +516,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         const SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            notificationTitle,
+                            notificationBody,
                             style: theme.textTheme.bodyMedium?.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
-                            maxLines: 1,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
-                    ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: Text(
-                        notificationBody,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.bodySmall,
-                      ),
                     ),
                     trailing: Container(
                       width: 10,
@@ -273,20 +544,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               );
-            }).toList(),
-          ),
-        );
-      },
-      loading: () {
-        return const Padding(
-          padding: EdgeInsets.all(16),
-          child: Center(child: CircularProgressIndicator()),
-        );
-      },
-      error: (error, stack) {
-        AppLogger.error('공지사항 조회 에러: $error', error, stack);
-        return _buildNoticesPlaceholder(context, theme, l10n);
-      },
+            }),
+        ],
+      ),
     );
   }
 
@@ -326,6 +586,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return Colors.blue;
       case 'notice':
         return Colors.orange;
+      case 'post':
+        return Colors.green;
       case 'comment':
       default:
         return const Color(0xFF722F37); // primaryColor
@@ -339,6 +601,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return Icons.alternate_email;
       case 'notice':
         return Icons.campaign;
+      case 'post':
+        return Icons.article;
       case 'comment':
       default:
         return Icons.chat_bubble_outline;
@@ -352,6 +616,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         return l10n.community.notificationLabels.mention;
       case 'notice':
         return l10n.community.notificationLabels.notice;
+      case 'post':
+        return l10n.community.notificationLabels.post;
       case 'comment':
       default:
         return l10n.community.notificationLabels.comment;

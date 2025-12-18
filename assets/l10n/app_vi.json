@@ -5,6 +5,7 @@
   },
   "common": {
     "ok": "OK",
+    "confirm": "Xác nhận",
     "cancel": "Hủy",
     "save": "Lưu",
     "delete": "Xóa",
@@ -62,6 +63,7 @@
     "noDataToday": "Không có thông tin suy niệm cho hôm nay",
     "noDataWeekday": "Thông tin suy niệm ngày thường đang được chuẩn bị",
     "bibleNotice": "※Vui lòng nghe văn bản Kinh Thánh tại nhà thờ hoặc đọc Kinh Thánh chính thức.",
+    "contentDisclaimer": "Nội dung này không thay thế nghi thức Thánh lễ chính thức và được cung cấp như tài liệu hướng dẫn và suy niệm để hỗ trợ đời sống đức tin của bạn.",
     "title": "Suy Niệm Hàng Ngày",
     "liturgicalDays": {
       "sunday": "Chúa Nhật",
@@ -310,7 +312,7 @@
       "parishNotSet": "Chưa đặt giáo xứ",
       "parishLoadFailed": "Không thể tải thông tin giáo xứ",
       "searchOtherParishes": "Tìm cộng đồng giáo xứ khác",
-      "todayMass": "Thánh lễ hôm nay",
+      "todayMass": "Lời Chúa hôm nay",
       "todayBibleReadingAndPrayer": "Đọc Kinh Thánh và cầu nguyện hôm nay",
       "recentNotices": "Thông báo gần đây",
       "noNotices": "Không có thông báo"
@@ -318,8 +320,22 @@
     "notificationLabels": {
       "mention": "Đề cập",
       "notice": "Thông báo",
-      "comment": "Bình luận"
-    }
+      "comment": "Bình luận",
+      "post": "Bài đăng"
+    },
+    "addButton": "Thêm",
+    "addFile": "Thêm tệp",
+    "attachments": "Tệp đính kèm",
+    "attachmentsDescription": "Bạn có thể đính kèm tối đa 3 hình ảnh và 2 tệp PDF (tối đa 5 tệp)",
+    "maxImagesReached": "Bạn có thể đính kèm tối đa {max} hình ảnh",
+    "maxImagesReached@max": "Số lượng hình ảnh tối đa",
+    "maxPdfsReached": "Bạn có thể đính kèm tối đa {max} tệp PDF",
+    "maxPdfsReached@max": "Số lượng PDF tối đa",
+    "pdfFileTooLarge": "Kích thước tệp PDF không được vượt quá 10MB",
+    "pdfFiles": "Tệp PDF",
+    "pdfOpenFailed": "Không thể mở tệp PDF",
+    "pdfSelectFailed": "Lỗi khi chọn tệp PDF",
+    "tapToOpen": "Chạm để mở"
   },
   "report": {
     "title": "Báo Cáo",
@@ -366,6 +382,24 @@
       "registeredCount": "{count} đã đăng ký",
       "registeredCount@count": "Số đã đăng ký"
     },
+    "notifications": {
+      "enabled": "Bật thông báo",
+      "enabledDescription": "Bật hoặc tắt tất cả thông báo",
+      "categories": "Danh mục thông báo",
+      "notices": "Thông báo",
+      "noticesDescription": "Nhận thông báo từ nhà thờ",
+      "comments": "Bình luận",
+      "commentsDescription": "Nhận bình luận trên bài đăng",
+      "likes": "Thích",
+      "likesDescription": "Nhận lượt thích trên bài đăng",
+      "dailyMass": "Thánh lễ hàng ngày",
+      "dailyMassDescription": "Nhận thông báo đọc sách thánh lễ hàng ngày",
+      "quietHours": "Giờ yên tĩnh",
+      "quietHoursDescription": "Không nhận thông báo trong giờ đã chỉ định",
+      "quietHoursStart": "Giờ bắt đầu",
+      "quietHoursEnd": "Giờ kết thúc",
+      "saved": "Đã lưu cài đặt thông báo"
+    },
     "notificationSettings": "Cài Đặt Thông Báo",
     "notificationSettingsComingSoon": "Cài đặt thông báo đang được chuẩn bị",
     "languageSettings": "Cài Đặt Ngôn Ngữ",
@@ -385,6 +419,9 @@
     "directInputDialogTitle": "Nhập tên thánh và ngày lễ",
     "month": "Tháng",
     "day": "Ngày",
+    "clearCache": "Xóa bộ nhớ đệm",
+    "clearCacheDescription": "Xóa dữ liệu và hình ảnh các thánh",
+    "clearCacheConfirm": "Xóa bộ nhớ đệm? Dữ liệu các thánh sẽ được tải lại.",
     "godparent": {
       "add": "Thêm",
       "remove": "Xóa",
@@ -505,5 +542,24 @@
     "notificationSettings": "Cài đặt thông báo đang được chuẩn bị",
     "termsOfService": "Điều khoản dịch vụ đang được chuẩn bị",
     "privacyPolicy": "Chính sách bảo mật đang được chuẩn bị"
+  },
+  "saints": {
+    "feastDay": "Ngày lễ",
+    "yourBaptismalName": "Đây là ngày lễ của tên thánh của bạn",
+    "solemnity": "Đại lễ",
+    "feast": "Lễ",
+    "memorial": "Lễ nhớ",
+    "todaySaints": "Các thánh hôm nay",
+    "todaySaintsSubtitle": "Các thánh hôm nay",
+    "andMore": "Thêm {count} vị",
+    "biography": "Tiểu sử",
+    "achievements": "Thành tựu chính",
+    "patronage": "Bổn mạng",
+    "prayer": "Lời cầu nguyện",
+    "howToHonor": "Cách tôn kính các thánh",
+    "detailLoadFailed": "Lỗi khi tải thông tin chi tiết",
+    "noSaintsToday": "Không có thánh nào được tưởng nhớ hôm nay",
+    "loadFailed": "Lỗi khi tải",
+    "sourceNote": "📖 Các thánh được tưởng nhớ hôm nay theo Sách Tử Đạo Rôma và truyền thống Giáo hội."
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/utils/app_localizations.dart';
+import 'pdf_viewer_screen.dart';
 import '../../../../core/utils/date_utils.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../core/utils/mention_parser.dart';
@@ -14,6 +16,8 @@ class CommentItem extends ConsumerWidget {
   final String author;
   final String authorId;
   final String content;
+  final List<String> imageUrls;
+  final List<String> pdfUrls;
   final DateTime createdAt;
   final Color primaryColor;
   final void Function(String authorName, String authorId)? onAuthorTap;
@@ -24,6 +28,8 @@ class CommentItem extends ConsumerWidget {
     required this.author,
     required this.authorId,
     required this.content,
+    this.imageUrls = const [],
+    this.pdfUrls = const [],
     required this.createdAt,
     required this.primaryColor,
     this.onAuthorTap,
@@ -95,11 +101,115 @@ class CommentItem extends ConsumerWidget {
                 const SizedBox(height: 4),
                 // 멘션 포함 텍스트 렌더링
                 _buildContentWithMentions(context, ref, theme, parts),
+                
+                // 이미지 표시
+                if (imageUrls.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  _buildImages(context, theme),
+                ],
+                
+                // PDF 표시
+                if (pdfUrls.isNotEmpty) ...[
+                  const SizedBox(height: 8),
+                  _buildPdfs(context, ref, theme),
+                ],
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildImages(BuildContext context, ThemeData theme) {
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: imageUrls.map((imageUrl) {
+        return GestureDetector(
+          onTap: () {
+            // 이미지 전체 화면 보기 (간단한 버전)
+            showDialog(
+              context: context,
+              builder: (context) => Dialog(
+                child: CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            );
+          },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: CachedNetworkImage(
+              imageUrl: imageUrl,
+              width: 100,
+              height: 100,
+              fit: BoxFit.contain,
+              placeholder: (context, url) => Container(
+                width: 100,
+                height: 100,
+                color: Colors.grey.shade200,
+                child: const Center(child: CircularProgressIndicator()),
+              ),
+              errorWidget: (context, url, error) => Container(
+                width: 100,
+                height: 100,
+                color: Colors.grey.shade200,
+                child: const Icon(Icons.broken_image),
+              ),
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildPdfs(BuildContext context, WidgetRef ref, ThemeData theme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: pdfUrls.map((pdfUrl) {
+        final fileName = pdfUrl.split('/').last.split('?').first;
+        return Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          child: InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => PdfViewerScreen(
+                    pdfUrl: pdfUrl,
+                    fileName: fileName,
+                  ),
+                ),
+              );
+            },
+            borderRadius: BorderRadius.circular(8),
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.shade300),
+                color: Colors.grey.shade50,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.picture_as_pdf, color: Colors.red, size: 20),
+                  const SizedBox(width: 8),
+                  Text(
+                    fileName,
+                    style: theme.textTheme.bodySmall,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(width: 4),
+                  const Icon(Icons.open_in_new, size: 16, color: Colors.grey),
+                ],
+              ),
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 

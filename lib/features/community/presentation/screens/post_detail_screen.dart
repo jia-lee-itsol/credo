@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/services/logger_service.dart';
 import '../../../../core/utils/app_localizations.dart';
+import '../../../../core/utils/share_utils.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../data/models/post.dart';
 import '../providers/community_presentation_providers.dart';
@@ -14,6 +15,7 @@ import '../widgets/post_detail_comment_input.dart'
 import '../widgets/post_detail_comments_section.dart';
 import '../widgets/post_detail_header.dart';
 import '../widgets/post_detail_images.dart';
+import '../widgets/post_detail_pdfs.dart';
 import '../widgets/post_detail_like_button.dart';
 import '../widgets/report_dialog.dart';
 
@@ -106,6 +108,8 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                     _navigateToEdit(context, post);
                   } else if (value == 'delete') {
                     _showDeleteConfirmDialog(context, post);
+                  } else if (value == 'share') {
+                    _sharePost(context, post);
                   } else if (value == 'report') {
                     ReportDialog.showForPost(context, post.postId);
                   } else if (value == 'hide') {
@@ -187,6 +191,20 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                     ]);
                   }
 
+                  // 공유 옵션 (모든 사용자)
+                  items.add(
+                    PopupMenuItem(
+                      value: 'share',
+                      child: Row(
+                        children: [
+                          const Icon(Icons.share_outlined, size: 20),
+                          const SizedBox(width: 8),
+                          Text(l10n.community.sharePost ?? 'シェア'),
+                        ],
+                      ),
+                    ),
+                  );
+
                   // 신고 옵션 (작성자가 아닌 경우에만 표시)
                   if (!isAuthor && !isAdmin) {
                     items.add(
@@ -248,6 +266,11 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                       if (post.imageUrls.isNotEmpty)
                         PostDetailImages(imageUrls: post.imageUrls),
                       if (post.imageUrls.isNotEmpty) const SizedBox(height: 24),
+
+                      // PDF 파일
+                      if (post.pdfUrls.isNotEmpty)
+                        PostDetailPdfs(pdfUrls: post.pdfUrls),
+                      if (post.pdfUrls.isNotEmpty) const SizedBox(height: 24),
 
                       // 좋아요 버튼
                       PostDetailLikeButton(
@@ -322,6 +345,28 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _sharePost(BuildContext context, Post post) async {
+    try {
+      final l10n = ref.read(appLocalizationsSyncProvider);
+      await ShareUtils.sharePost(
+        postTitle: post.title,
+        parishId: post.parishId ?? '',
+        postId: post.postId,
+        l10n: l10n,
+      );
+    } catch (e) {
+      if (context.mounted) {
+        final l10n = ref.read(appLocalizationsSyncProvider);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${l10n.common.error}: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 
   Future<void> _deletePost(Post post) async {

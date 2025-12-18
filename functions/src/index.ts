@@ -265,8 +265,57 @@ export const onPostCreated = onDocumentCreated(
           continue;
         }
 
-        // FCM 토큰이 있는 사용자만 추가
-        if (fcmToken && typeof fcmToken === "string") {
+        // 알림 설정 확인
+        let shouldSendNotification = true;
+        try {
+          const settingsDoc = await db
+            .collection("users")
+            .doc(userId)
+            .collection("notificationSettings")
+            .doc("settings")
+            .get();
+
+          if (settingsDoc.exists) {
+            const settings = settingsDoc.data();
+            // 전체 알림이 꺼져 있으면 전송하지 않음
+            if (settings?.enabled === false) {
+              shouldSendNotification = false;
+            }
+            // 공지사항 알림이 꺼져 있으면 전송하지 않음
+            else if (settings?.notices === false) {
+              shouldSendNotification = false;
+            }
+            // 조용한 시간 확인 (현재 시간이 조용한 시간대인지 확인)
+            else if (settings?.quietHoursStart !== undefined &&
+                     settings?.quietHoursEnd !== undefined) {
+              const now = new Date();
+              const currentHour = now.getHours();
+              const quietStart = settings.quietHoursStart as number;
+              const quietEnd = settings.quietHoursEnd as number;
+
+              // 조용한 시간대 체크 (예: 22시 ~ 7시)
+              if (quietStart > quietEnd) {
+                // 자정을 넘어가는 경우 (예: 22시 ~ 7시)
+                if (currentHour >= quietStart || currentHour < quietEnd) {
+                  shouldSendNotification = false;
+                }
+              } else {
+                // 같은 날 범위 (예: 10시 ~ 22시)
+                if (currentHour >= quietStart && currentHour < quietEnd) {
+                  shouldSendNotification = false;
+                }
+              }
+            }
+          }
+        } catch (error) {
+          logger.warn(
+            `사용자 ${userId}의 알림 설정 확인 실패: ${error}`,
+          );
+          // 설정 확인 실패 시 기본적으로 알림 전송 (기존 동작 유지)
+        }
+
+        // FCM 토큰이 있고 알림 설정이 허용된 사용자만 추가
+        if (fcmToken && typeof fcmToken === "string" && shouldSendNotification) {
           usersWithToken++;
           messages.push({
             token: fcmToken,
@@ -374,6 +423,14 @@ export const onCommentCreated = onDocumentCreated(
       const postAuthorId = postData.authorId;
       const postParishId = postData.parishId || "";
 
+      // 댓글 작성자는 알림에서 제외
+      if (postAuthorId === commentAuthorId) {
+        logger.info(
+          `댓글 작성자(${commentAuthorId})가 게시글 작성자와 동일합니다. 알림을 전송하지 않습니다.`,
+        );
+        return;
+      }
+
       logger.info(
         `게시글 정보: postId=${postId}, postAuthorId=${postAuthorId}, ` +
         `postParishId=${postParishId}`,
@@ -411,6 +468,63 @@ export const onCommentCreated = onDocumentCreated(
         logger.warn(
           `게시글 작성자 ${postAuthorId}의 FCM 토큰이 없습니다. ` +
           "알림을 전송할 수 없습니다.",
+        );
+        return;
+      }
+
+      // 알림 설정 확인
+      let shouldSendNotification = true;
+      try {
+        const settingsDoc = await db
+          .collection("users")
+          .doc(postAuthorId)
+          .collection("notificationSettings")
+          .doc("settings")
+          .get();
+
+        if (settingsDoc.exists) {
+          const settings = settingsDoc.data();
+          // 전체 알림이 꺼져 있으면 전송하지 않음
+          if (settings?.enabled === false) {
+            shouldSendNotification = false;
+          }
+          // 댓글 알림이 꺼져 있으면 전송하지 않음
+          else if (settings?.comments === false) {
+            shouldSendNotification = false;
+          }
+          // 조용한 시간 확인
+          else if (settings?.quietHoursStart !== undefined &&
+                   settings?.quietHoursEnd !== undefined) {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const quietStart = settings.quietHoursStart as number;
+            const quietEnd = settings.quietHoursEnd as number;
+
+            // 조용한 시간대 체크
+            if (quietStart > quietEnd) {
+              // 자정을 넘어가는 경우
+              if (currentHour >= quietStart || currentHour < quietEnd) {
+                shouldSendNotification = false;
+              }
+            } else {
+              // 같은 날 범위
+              if (currentHour >= quietStart && currentHour < quietEnd) {
+                shouldSendNotification = false;
+              }
+            }
+          }
+        }
+      } catch (error) {
+        logger.warn(
+          `게시글 작성자 ${postAuthorId}의 알림 설정 확인 실패: ${error}`,
+        );
+        // 설정 확인 실패 시 기본적으로 알림 전송 (기존 동작 유지)
+      }
+
+      // 알림 설정이 허용되지 않으면 전송하지 않음
+      if (!shouldSendNotification) {
+        logger.info(
+          `게시글 작성자 ${postAuthorId}의 알림 설정에 의해 알림 전송이 차단되었습니다.`,
         );
         return;
       }

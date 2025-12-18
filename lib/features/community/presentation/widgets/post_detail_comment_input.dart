@@ -9,6 +9,8 @@ import '../../../../shared/widgets/login_required_dialog.dart';
 import '../../data/models/post.dart';
 import '../providers/community_presentation_providers.dart';
 import 'post_comment_submitter.dart';
+import 'comment_file_picker.dart';
+import '../../../../core/data/services/image_upload_service.dart';
 
 /// 게시글 댓글 입력 위젯
 class PostDetailCommentInput extends ConsumerStatefulWidget {
@@ -25,6 +27,7 @@ class PostDetailCommentInput extends ConsumerStatefulWidget {
 class PostDetailCommentInputState
     extends ConsumerState<PostDetailCommentInput> {
   final TextEditingController _commentController = TextEditingController();
+  CommentFileState _fileState = const CommentFileState();
 
   @override
   void dispose() {
@@ -90,18 +93,72 @@ class PostDetailCommentInputState
     final content = _commentController.text.trim();
     AppLogger.community('content: "$content"');
 
-    if (content.isEmpty) {
-      AppLogger.community('content가 비어있으므로 종료');
+    if (content.isEmpty && _fileState.totalFileCount == 0) {
+      AppLogger.community('content와 파일이 모두 비어있으므로 종료');
       return;
     }
 
     try {
+      // 파일 업로드
+      List<String> uploadedImageUrls = [];
+      List<String> uploadedPdfUrls = [];
+
+      final imageUploadService = ImageUploadService();
+
+      if (_fileState.selectedImages.isNotEmpty) {
+        AppLogger.community(
+          '댓글 이미지 업로드 시작: ${_fileState.selectedImages.length}개',
+        );
+        try {
+          uploadedImageUrls = await imageUploadService.uploadImages(
+            imageFiles: _fileState.selectedImages,
+            userId: currentUser.uid,
+            postId: widget.post.postId,
+          );
+          AppLogger.community('댓글 이미지 업로드 완료: ${uploadedImageUrls.length}개');
+        } catch (e) {
+          AppLogger.error('댓글 이미지 업로드 실패: $e', e);
+          if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('${l10n.image.selectFailed}: $e')),
+            );
+          }
+          return;
+        }
+      }
+
+      if (_fileState.selectedPdfs.isNotEmpty) {
+        AppLogger.community(
+          '댓글 PDF 업로드 시작: ${_fileState.selectedPdfs.length}개',
+        );
+        try {
+          uploadedPdfUrls = await imageUploadService.uploadPdfs(
+            pdfFiles: _fileState.selectedPdfs,
+            userId: currentUser.uid,
+            postId: widget.post.postId,
+          );
+          AppLogger.community('댓글 PDF 업로드 완료: ${uploadedPdfUrls.length}개');
+        } catch (e) {
+          AppLogger.error('댓글 PDF 업로드 실패: $e', e);
+          if (mounted) {
+            final l10n = ref.read(appLocalizationsSyncProvider);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('${l10n.community.pdfSelectFailed}: $e')),
+            );
+          }
+          return;
+        }
+      }
+
       AppLogger.community('PostCommentSubmitter 생성 및 submitComment 호출');
       final submitter = PostCommentSubmitter(ref: ref);
       final success = await submitter.submitComment(
         post: widget.post,
         currentUser: currentUser,
         content: content,
+        imageUrls: uploadedImageUrls,
+        pdfUrls: uploadedPdfUrls,
       );
       AppLogger.community('submitComment 결과: $success');
 
@@ -112,6 +169,9 @@ class PostDetailCommentInputState
             context,
           ).showSnackBar(SnackBar(content: Text(l10n.community.commentPosted)));
           _commentController.clear();
+          setState(() {
+            _fileState = const CommentFileState();
+          });
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(l10n.community.commentPostFailed)),
@@ -153,25 +213,40 @@ class PostDetailCommentInputState
           top: BorderSide(color: theme.colorScheme.outlineVariant),
         ),
       ),
-      child: Row(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-            child: TextField(
-              controller: _commentController,
-              decoration: InputDecoration(
-                hintText: l10n.common.commentHint,
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
+          // 파일 선택 UI
+          CommentFilePicker(
+            fileState: _fileState,
+            onFileStateChanged: (newState) {
+              setState(() {
+                _fileState = newState;
+              });
+            },
+          ),
+          // 댓글 입력 필드
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _commentController,
+                  decoration: InputDecoration(
+                    hintText: l10n.common.commentHint,
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
+                  ),
+                  maxLines: null,
                 ),
               ),
-              maxLines: null,
-            ),
-          ),
-          IconButton(
-            onPressed: _handleSubmit,
-            icon: Icon(Icons.send, color: primaryColor),
+              IconButton(
+                onPressed: _handleSubmit,
+                icon: Icon(Icons.send, color: primaryColor),
+              ),
+            ],
           ),
         ],
       ),

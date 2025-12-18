@@ -5,6 +5,7 @@
   },
   "common": {
     "ok": "OK",
+    "confirm": "Confirm",
     "cancel": "Cancel",
     "save": "Save",
     "delete": "Delete",
@@ -187,16 +188,37 @@
       "parishNotSet": "Parish not set",
       "parishLoadFailed": "Failed to load parish information",
       "searchOtherParishes": "Search other parish communities",
-      "todayMass": "Today's Mass",
+      "todayMass": "Today's Word",
       "todayBibleReadingAndPrayer": "Today's Bible readings and prayers",
       "recentNotices": "Recent Notices",
-      "noNotices": "No notices"
+      "noNotices": "No notices",
+      "postAdded": "A post was added",
+      "commentAdded": "A comment was added",
+      "noticeAdded": "Notice posted",
+      "newPostAdded": "New post posted",
+      "commentOnMyPost": "Comment on my post"
     },
     "notificationLabels": {
       "mention": "Mention",
       "notice": "Notice",
-      "comment": "Comment"
-    }
+      "comment": "Comment",
+      "post": "Post"
+    },
+    "postsCount": "{count} posts",
+    "postsCount@count": "Number of posts",
+    "attachments": "Attachments",
+    "attachmentsDescription": "You can attach up to 3 images and 2 PDFs (5 files total)",
+    "pdfFiles": "PDF Files",
+    "addFile": "Add File",
+    "addButton": "Add",
+    "maxImagesReached": "You can attach up to {max} images",
+    "maxImagesReached@max": "Maximum number of images",
+    "maxPdfsReached": "You can attach up to {max} PDFs",
+    "maxPdfsReached@max": "Maximum number of PDFs",
+    "pdfFileTooLarge": "PDF file size cannot exceed 10MB",
+    "pdfSelectFailed": "Failed to select PDF file",
+    "pdfOpenFailed": "Failed to open PDF file",
+    "tapToOpen": "Tap to open"
   },
   "report": {
     "title": "Report",
@@ -243,6 +265,24 @@
       "registeredCount": "{count} registered",
       "registeredCount@count": "Number of registered items"
     },
+    "notifications": {
+      "enabled": "Enable Notifications",
+      "enabledDescription": "Turn all notifications on or off",
+      "categories": "Notification Categories",
+      "notices": "Notices",
+      "noticesDescription": "Receive church notices",
+      "comments": "Comments",
+      "commentsDescription": "Receive comments on posts",
+      "likes": "Likes",
+      "likesDescription": "Receive likes on posts",
+      "dailyMass": "Daily Mass",
+      "dailyMassDescription": "Receive daily mass reading notifications",
+      "quietHours": "Quiet Hours",
+      "quietHoursDescription": "Do not receive notifications during specified hours",
+      "quietHoursStart": "Start Time",
+      "quietHoursEnd": "End Time",
+      "saved": "Notification settings saved"
+    },
     "notificationSettings": "Notification Settings",
     "notificationSettingsComingSoon": "Notification settings coming soon",
     "languageSettings": "Language Settings",
@@ -262,6 +302,9 @@
     "directInputDialogTitle": "Enter Baptismal Name and Feast Day",
     "month": "Month",
     "day": "Day",
+    "clearCache": "Clear Cache",
+    "clearCacheDescription": "Clear saint data and image cache",
+    "clearCacheConfirm": "Clear cache? Saint data will be reloaded.",
     "godparent": {
       "add": "Add",
       "remove": "Remove",
@@ -359,6 +402,7 @@
     "noDataToday": "No meditation information for today",
     "noDataWeekday": "Weekday meditation information is currently being prepared",
     "bibleNotice": "※Please listen to the Bible text at church or read an official Bible.",
+    "contentDisclaimer": "This content does not replace the official Mass liturgy and is provided as guidance and meditation material to support your faith life.",
     "liturgicalDays": {
       "sunday": "Sunday",
       "solemnity": "Solemnity",
@@ -505,5 +549,24 @@
     "notificationSettings": "Notification settings coming soon",
     "termsOfService": "Terms of Service coming soon",
     "privacyPolicy": "Privacy Policy coming soon"
+  },
+  "saints": {
+    "feastDay": "Feast Day",
+    "yourBaptismalName": "Your baptismal name feast day",
+    "solemnity": "Solemnity",
+    "feast": "Feast",
+    "memorial": "Memorial",
+    "todaySaints": "Today's Saints",
+    "todaySaintsSubtitle": "Today's Saints",
+    "andMore": "and {count} more",
+    "biography": "Biography",
+    "achievements": "Achievements",
+    "patronage": "Patronage",
+    "prayer": "Prayer",
+    "howToHonor": "How to Honor",
+    "detailLoadFailed": "Failed to load details",
+    "noSaintsToday": "No saints commemorated today",
+    "loadFailed": "Failed to load",
+    "sourceNote": "📖 Saints commemorated today according to the Roman Martyrology and Church tradition."
   }
 }

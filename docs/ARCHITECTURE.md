@@ -4,8 +4,8 @@
 
 Credo는 가톨릭 커뮤니티 참여를 위한 Flutter 모바일 애플리케이션입니다. 이 앱은 **기능 기반 모듈 구조**와 함께 **Clean Architecture**를 구현합니다.
 
-**마지막 업데이트**: 2025-12-16
-**전체 코드베이스**: 약 27,000줄의 Dart 코드, 135개 파일
+**마지막 업데이트**: 2025-12-18 (주석 언어 표준화, 리팩토링 완료)
+**전체 코드베이스**: 약 33,275줄의 Dart 코드, 194개 파일 (자동 생성 파일 제외)
 
 ---
 
@@ -54,6 +54,7 @@ lib/
 │   ├── parish/                # 성당 디렉토리
 │   ├── prayer/                # 기도 기능
 │   ├── profile/               # 사용자 프로필
+│   ├── saints/                # 성인 축일
 │   └── splash/                # 스플래시 화면
 │
 ├── shared/                    # 공유 컴포넌트
@@ -371,10 +372,22 @@ Future<Either<Failure, Post>> createPost(Post post) async {
 - 좋아요 기능
 - 신고 기능 (게시글/댓글 신고, Slack 알림, 자동 숨김 처리)
 - 푸시 알림
+- 알림 타입 구분 (새 글, 코멘트, 공지사항)
 - 공식 공지 vs 커뮤니티 게시글
 - 게시글 정렬 (핀 고정 우선, 시간순/인기순)
 - Admin 게시글 비표시 기능 (소속 교회 게시글만)
 - 두 손가락 줌 기능 (InteractiveViewer)
+
+### Home 기능
+
+**기능**:
+- 일일 미사 독서 및 기도 가이드
+- 성인 축일 모달 (GPT 축하 메시지, 하루에 한번 표시)
+- 성당별 알림 그룹화 및 아코디언 기능
+  - 성당별로 알림 카드 그룹화
+  - 성당 이름 헤더에 접기/펼치기 아이콘
+  - 기본적으로 접힘 상태 (데이터가 많을 때 효율적)
+- 최근 공지사항 표시
 
 **주요 파일**:
 - `lib/features/community/data/repositories/firestore_post_repository.dart`
@@ -419,6 +432,36 @@ Future<Either<Failure, Post>> createPost(Post post) async {
 **주요 파일**:
 - `lib/features/profile/presentation/screens/edit_profile_screen.dart`
 - `lib/features/profile/presentation/screens/my_page_screen.dart`
+
+### Saints 기능
+
+**기능**:
+- 성인 축일 모달 표시
+- GPT를 통한 축하 메시지 생성
+- 하루에 한번만 모달 표시 (SharedPreferences 기반)
+- 세례명 일치 시 개인화된 축하 메시지
+- 성인 이미지 표시 (없으면 Credo 로고)
+
+**주요 파일**:
+- `lib/features/saints/presentation/widgets/saint_feast_day_modal.dart`
+- `lib/core/data/services/openai_service.dart` - GPT 축하 메시지 생성
+- `lib/features/home/presentation/screens/home_screen.dart` - 모달 표시 로직
+
+### Home 기능
+
+**기능**:
+- 일일 미사 독서 및 기도 가이드
+- 성인 축일 모달 표시
+- 성당별 알림 그룹화 및 아코디언 기능
+  - 성당별로 알림 카드 그룹화
+  - 성당 이름 헤더에 접기/펼치기 아이콘
+  - 기본적으로 접힘 상태 (데이터가 많을 때 효율적)
+  - 성당별로 최대 5개 알림 표시
+- 최근 공지사항 표시
+
+**주요 파일**:
+- `lib/features/home/presentation/screens/home_screen.dart` - 홈 화면 및 성당별 알림 그룹화
+- `lib/core/data/services/parish_service.dart` - 성당 정보 조회
 
 ### Admin 기능
 
@@ -478,6 +521,12 @@ Future<Either<Failure, Post>> createPost(Post post) async {
 | `cached_network_image` | 이미지 캐싱 |
 | `image_picker` | 이미지 선택 |
 | `flutter_svg` | SVG 지원 |
+
+### AI 서비스
+
+| 서비스 | 목적 |
+|---------|---------|
+| OpenAI GPT API | 묵상 가이드 생성, 성인 이름 번역, 성인 축일 축하 메시지 생성 |
 
 **접근성 기능**:
 - 글씨 크기 설정: `MediaQuery.textScaler`를 통해 앱 전체 텍스트 크기 조절 지원

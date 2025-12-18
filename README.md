@@ -11,9 +11,23 @@ Credo is a Flutter mobile application that connects Catholic churches and believ
 - **Daily Meditations**: Access daily Bible readings and prayer guides
 - **Parish Directory**: Search and find Catholic churches across Japan with mass schedules
 - **Community**: Connect with other believers through posts and comments
+  - Create posts with images (up to 3) and PDF files (up to 2)
+  - Add comments with images (up to 2) and PDF files (up to 1)
+  - In-app PDF viewer with zoom and text selection
+  - Full image display with proper aspect ratio
+  - Notification type distinction (new posts, comments, notices)
 - **Multilingual Support**: Available in 7 languages (Japanese, English, Korean, Chinese, Vietnamese, Spanish, Portuguese)
 - **Location-based Services**: Find nearby churches and view distances
 - **User Profiles**: Manage your profile, favorite parishes, and settings
+- **Saint Feast Days**: Daily saint feast day modal with AI-generated celebration messages
+  - Personalized messages when your baptismal name matches the saint
+  - Shown once per day (first app launch)
+  - Displays saint images (or Credo logo if unavailable)
+- **Grouped Notifications**: Parish-based notification grouping with accordion
+  - Notifications grouped by parish
+  - Parish name header with expand/collapse icon
+  - Collapsed by default for better space efficiency
+  - Up to 5 notifications per parish
 
 ## Internationalization
 

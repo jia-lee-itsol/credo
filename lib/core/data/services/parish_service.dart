@@ -67,7 +67,7 @@ class ParishService {
   }
 
   /// parishId로 교회 찾기
-  /// parishId 형식: "diocese-name" (예: "sapporo-札幌カテドラル")
+  /// parishId 형식: "diocese-name" (예: "sapporo-삿포로대성당")
   static Future<Map<String, dynamic>?> getParishById(String parishId) async {
     try {
       // parishId에서 diocese와 name 추출

@@ -7,7 +7,7 @@ class SettingsListTile extends StatelessWidget {
   final String title;
   final String? subtitle;
   final Color primaryColor;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final Widget? trailing;
 
   const SettingsListTile({
@@ -16,7 +16,7 @@ class SettingsListTile extends StatelessWidget {
     required this.title,
     this.subtitle,
     required this.primaryColor,
-    required this.onTap,
+    this.onTap,
     this.trailing,
   });
 

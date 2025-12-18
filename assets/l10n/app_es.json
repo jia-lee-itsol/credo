@@ -5,6 +5,7 @@
   },
   "common": {
     "ok": "OK",
+    "confirm": "Confirmar",
     "cancel": "Cancelar",
     "save": "Guardar",
     "delete": "Eliminar",
@@ -62,6 +63,7 @@
     "noDataToday": "No hay información de meditación para hoy",
     "noDataWeekday": "La información de meditación de días laborables se está preparando",
     "bibleNotice": "※Por favor escuche el texto de la Biblia en la iglesia o lea una Biblia oficial.",
+    "contentDisclaimer": "Este contenido no reemplaza la liturgia oficial de la Misa y se proporciona como material de orientación y meditación para apoyar su vida de fe.",
     "title": "Meditación Diaria",
     "liturgicalDays": {
       "sunday": "Domingo",
@@ -310,7 +312,7 @@
       "parishNotSet": "Parroquia no configurada",
       "parishLoadFailed": "No se pudo cargar la información de la parroquia",
       "searchOtherParishes": "Buscar otras comunidades parroquiales",
-      "todayMass": "Misa de hoy",
+      "todayMass": "Palabra de hoy",
       "todayBibleReadingAndPrayer": "Lecturas bíblicas y oraciones de hoy",
       "recentNotices": "Avisos recientes",
       "noNotices": "No hay avisos"
@@ -318,8 +320,22 @@
     "notificationLabels": {
       "mention": "Mención",
       "notice": "Aviso",
-      "comment": "Comentario"
-    }
+      "comment": "Comentario",
+      "post": "Publicación"
+    },
+    "addButton": "Agregar",
+    "addFile": "Agregar archivo",
+    "attachments": "Archivos adjuntos",
+    "attachmentsDescription": "Se pueden adjuntar hasta 3 imágenes y 2 archivos PDF (máximo 5 en total)",
+    "maxImagesReached": "Se pueden adjuntar hasta {max} imágenes",
+    "maxImagesReached@max": "Número máximo de imágenes",
+    "maxPdfsReached": "Se pueden adjuntar hasta {max} archivos PDF",
+    "maxPdfsReached@max": "Número máximo de PDF",
+    "pdfFileTooLarge": "El tamaño del archivo PDF no puede exceder 10MB",
+    "pdfFiles": "Archivos PDF",
+    "pdfOpenFailed": "No se pudo abrir el archivo PDF",
+    "pdfSelectFailed": "Error al seleccionar el archivo PDF",
+    "tapToOpen": "Toca para abrir"
   },
   "report": {
     "title": "Reportar",
@@ -366,6 +382,24 @@
       "registeredCount": "{count} registradas",
       "registeredCount@count": "Número de registradas"
     },
+    "notifications": {
+      "enabled": "Activar notificaciones",
+      "enabledDescription": "Activar o desactivar todas las notificaciones",
+      "categories": "Categorías de notificaciones",
+      "notices": "Avisos",
+      "noticesDescription": "Recibir avisos de la iglesia",
+      "comments": "Comentarios",
+      "commentsDescription": "Recibir comentarios en publicaciones",
+      "likes": "Me gusta",
+      "likesDescription": "Recibir me gusta en publicaciones",
+      "dailyMass": "Misa diaria",
+      "dailyMassDescription": "Recibir notificaciones de lecturas de misa diaria",
+      "quietHours": "Horas silenciosas",
+      "quietHoursDescription": "No recibir notificaciones durante las horas especificadas",
+      "quietHoursStart": "Hora de inicio",
+      "quietHoursEnd": "Hora de fin",
+      "saved": "Configuración de notificaciones guardada"
+    },
     "notificationSettings": "Configuración de Notificaciones",
     "notificationSettingsComingSoon": "La configuración de notificaciones está en preparación",
     "languageSettings": "Configuración de Idioma",
@@ -385,6 +419,9 @@
     "directInputDialogTitle": "Ingresar nombre de bautismo y fiesta",
     "month": "Mes",
     "day": "Día",
+    "clearCache": "Borrar caché",
+    "clearCacheDescription": "Borrar datos e imágenes de santos",
+    "clearCacheConfirm": "¿Borrar caché? Los datos de santos se recargarán.",
     "godparent": {
       "add": "Agregar",
       "remove": "Eliminar",
@@ -505,5 +542,24 @@
     "notificationSettings": "La configuración de notificaciones está en preparación",
     "termsOfService": "Los términos de servicio están en preparación",
     "privacyPolicy": "La política de privacidad está en preparación"
+  },
+  "saints": {
+    "feastDay": "Día de fiesta",
+    "yourBaptismalName": "Es el día de fiesta de tu nombre bautismal",
+    "solemnity": "Solemnidad",
+    "feast": "Fiesta",
+    "memorial": "Memoria",
+    "todaySaints": "Santos de hoy",
+    "todaySaintsSubtitle": "Santos de hoy",
+    "andMore": "Otros {count}",
+    "biography": "Biografía",
+    "achievements": "Logros principales",
+    "patronage": "Patronazgo",
+    "prayer": "Oración",
+    "howToHonor": "Cómo honrar a los santos",
+    "detailLoadFailed": "Error al cargar la información detallada",
+    "noSaintsToday": "No hay santos conmemorados hoy",
+    "loadFailed": "Error al cargar",
+    "sourceNote": "📖 Santos conmemorados hoy según el Martirologio Romano y la tradición de la Iglesia."
   }
 }

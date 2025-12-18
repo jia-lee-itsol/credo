@@ -5,6 +5,7 @@
   },
   "common": {
     "ok": "OK",
+    "confirm": "確認",
     "cancel": "キャンセル",
     "save": "保存",
     "delete": "削除",
@@ -39,7 +40,10 @@
     "noMassTimeInfo": "ミサ時間情報がありません",
     "favoriteAdded": "お気に入りに追加しました",
     "favoriteRemoved": "お気に入りから削除しました",
-    "commentHint": "コメントを入力..."
+    "commentHint": "コメントを入力...",
+    "offlineMode": "オフラインモード",
+    "shareLink": "リンク",
+    "shareAppLink": "アプリリンク"
   },
   "navigation": {
     "home": "ホーム",
@@ -159,6 +163,7 @@
     "commentPostFailed": "コメント投稿に失敗しました",
     "likeFailed": "いいね処理に失敗しました",
     "shareMeditation": "黙想を共有しました",
+    "sharePost": "この投稿をシェア",
     "noSearchResults": "検索結果がありません",
     "errorOccurred": "エラーが発生しました",
     "swipeToRefresh": "下にスワイプして再読み込み",
@@ -185,18 +190,37 @@
       "parishNotSet": "所属教会が設定されていません",
       "parishLoadFailed": "所属教会の情報を読み込めませんでした",
       "searchOtherParishes": "他の教会のコミュニティを探す",
-      "todayMass": "今日のミサ",
+      "todayMass": "今日の御言葉",
       "todayBibleReadingAndPrayer": "今日の聖書朗読と祈り",
       "recentNotices": "最近のお知らせ",
-      "noNotices": "お知らせはありません"
+      "noNotices": "お知らせはありません",
+      "postAdded": "投稿が追加されました",
+      "commentAdded": "コメントがつきました",
+      "noticeAdded": "お知らせが投稿されました",
+      "newPostAdded": "新規投稿が投稿されました",
+      "commentOnMyPost": "自分の投稿にコメントがつきました"
     },
     "notificationLabels": {
       "mention": "メンション",
       "notice": "お知らせ",
-      "comment": "コメント"
+      "comment": "コメント",
+      "post": "投稿"
     },
     "postsCount": "{count}件の投稿",
-    "postsCount@count": "投稿数"
+    "postsCount@count": "投稿数",
+    "attachments": "添付ファイル",
+    "attachmentsDescription": "画像は最大3枚、PDFは最大2個まで添付できます（合計5個まで）",
+    "pdfFiles": "PDFファイル",
+    "addFile": "ファイルを追加",
+    "addButton": "追加",
+    "maxImagesReached": "画像は最大{max}枚まで添付できます",
+    "maxImagesReached@max": "最大画像数",
+    "maxPdfsReached": "PDFは最大{max}個まで添付できます",
+    "maxPdfsReached@max": "最大PDF数",
+    "pdfFileTooLarge": "PDFファイルのサイズは10MBを超えることはできません",
+    "pdfSelectFailed": "PDFファイルの選択に失敗しました",
+    "pdfOpenFailed": "PDFファイルを開くことができませんでした",
+    "tapToOpen": "タップして開く"
   },
   "report": {
     "title": "通報する",
@@ -251,6 +275,9 @@
     "directInputDialogTitle": "洗礼名と祝日を入力",
     "month": "月",
     "day": "日",
+    "clearCache": "キャッシュを削除",
+    "clearCacheDescription": "聖人データや画像のキャッシュを削除します",
+    "clearCacheConfirm": "キャッシュを削除しますか？聖人データが再読み込みされます。",
     "godparent": {
       "add": "追加",
       "remove": "削除",
@@ -271,11 +298,30 @@
       "deleteTitle": "削除",
       "registeredCount": "{count}件登録済み",
       "registeredCount@count": "등록된 개수"
+    },
+    "notifications": {
+      "enabled": "通知を有効にする",
+      "enabledDescription": "すべての通知をオン/オフにします",
+      "categories": "通知カテゴリ",
+      "notices": "お知らせ",
+      "noticesDescription": "教会からのお知らせを受け取ります",
+      "comments": "コメント",
+      "commentsDescription": "投稿へのコメントを受け取ります",
+      "likes": "いいね",
+      "likesDescription": "投稿へのいいねを受け取ります",
+      "dailyMass": "毎日のミサ",
+      "dailyMassDescription": "毎日のミサの読み物の通知を受け取ります",
+      "quietHours": "おやすみモード",
+      "quietHoursDescription": "指定した時間帯は通知を受け取りません",
+      "quietHoursStart": "開始時刻",
+      "quietHoursEnd": "終了時刻",
+      "saved": "通知設定を保存しました"
     }
   },
   "parish": {
     "detail": "教会詳細",
     "notFound": "教会情報が見つかりませんでした",
+    "shareParish": "この教会をシェア",
     "favoriteAdded": "お気に入りに追加しました",
     "favoriteRemoved": "お気に入りから削除しました",
     "cannotRemoveParish": "所属教会はお気に入りから削除できません",
@@ -359,6 +405,8 @@
     "noDataToday": "本日の黙想情報がありません",
     "noDataWeekday": "平日の黙想情報は現在準備中です",
     "bibleNotice": "※聖書の本文は、教会でお聞きになるか、公式の聖書をお読みください。",
+    "contentDisclaimer": "本コンテンツは公式ミサ典礼文を代替するものではなく、信仰生活を助けるための案内および黙想用資料です。",
+    "shareReading": "今日のミサの読書をシェア",
     "liturgicalDays": {
       "sunday": "主日",
       "solemnity": "大祝日",
@@ -505,5 +553,25 @@
     "notificationSettings": "通知設定は準備中です",
     "termsOfService": "利用規約は準備中です",
     "privacyPolicy": "プライバシーポリシーは準備中です"
+  },
+  "saints": {
+    "feastDay": "祝日",
+    "yourBaptismalName": "あなたの洗礼名の祝日です",
+    "solemnity": "大祝日",
+    "feast": "祝日",
+    "memorial": "記念日",
+    "todaySaints": "今日の聖人",
+    "todaySaintsSubtitle": "今日の聖人たち",
+    "andMore": "他{count}人",
+    "biography": "生涯",
+    "achievements": "主な業績",
+    "patronage": "守護",
+    "prayer": "祈り",
+    "howToHonor": "聖人を敬う方法",
+    "detailLoadFailed": "詳細情報の読み込みに失敗しました",
+    "noSaintsToday": "今日記念される聖人はいません",
+    "generatingMessage": "お祝いメッセージを生成しています...",
+    "loadFailed": "読み込みに失敗しました",
+    "sourceNote": "📖 ローマ殉教録と教会の伝統に基づき、今日記念される聖人です。"
   }
 }

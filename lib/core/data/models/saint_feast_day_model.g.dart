@@ -21,6 +21,7 @@ SaintFeastDayModel _$SaintFeastDayModelFromJson(Map<String, dynamic> json) =>
       isJapanese: json['isJapanese'] as bool,
       greeting: json['greeting'] as String,
       description: json['description'] as String?,
+      imageUrl: json['imageUrl'] as String?,
     );
 
 Map<String, dynamic> _$SaintFeastDayModelToJson(SaintFeastDayModel instance) =>
@@ -38,6 +39,7 @@ Map<String, dynamic> _$SaintFeastDayModelToJson(SaintFeastDayModel instance) =>
       'isJapanese': instance.isJapanese,
       'greeting': instance.greeting,
       'description': instance.description,
+      'imageUrl': instance.imageUrl,
     };
 
 SaintsFeastDaysModel _$SaintsFeastDaysModelFromJson(

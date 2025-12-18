@@ -39,6 +39,8 @@ mixin _$Post {
   String get body => throw _privateConstructorUsedError;
   List<String> get imageUrls =>
       throw _privateConstructorUsedError; // 게시글에 첨부된 이미지 URL 리스트
+  List<String> get pdfUrls =>
+      throw _privateConstructorUsedError; // 게시글에 첨부된 PDF 파일 URL 리스트
   int get likeCount => throw _privateConstructorUsedError; // 좋아요 수
   int get commentCount => throw _privateConstructorUsedError; // 댓글 수
   bool get isPinned => throw _privateConstructorUsedError; // 상단 고정 여부
@@ -72,6 +74,7 @@ abstract class $PostCopyWith<$Res> {
     String title,
     String body,
     List<String> imageUrls,
+    List<String> pdfUrls,
     int likeCount,
     int commentCount,
     bool isPinned,
@@ -107,6 +110,7 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
     Object? title = null,
     Object? body = null,
     Object? imageUrls = null,
+    Object? pdfUrls = null,
     Object? likeCount = null,
     Object? commentCount = null,
     Object? isPinned = null,
@@ -160,6 +164,10 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
                 ? _value.imageUrls
                 : imageUrls // ignore: cast_nullable_to_non_nullable
                       as List<String>,
+            pdfUrls: null == pdfUrls
+                ? _value.pdfUrls
+                : pdfUrls // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
             likeCount: null == likeCount
                 ? _value.likeCount
                 : likeCount // ignore: cast_nullable_to_non_nullable
@@ -210,6 +218,7 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
     String title,
     String body,
     List<String> imageUrls,
+    List<String> pdfUrls,
     int likeCount,
     int commentCount,
     bool isPinned,
@@ -242,6 +251,7 @@ class __$$PostImplCopyWithImpl<$Res>
     Object? title = null,
     Object? body = null,
     Object? imageUrls = null,
+    Object? pdfUrls = null,
     Object? likeCount = null,
     Object? commentCount = null,
     Object? isPinned = null,
@@ -295,6 +305,10 @@ class __$$PostImplCopyWithImpl<$Res>
             ? _value._imageUrls
             : imageUrls // ignore: cast_nullable_to_non_nullable
                   as List<String>,
+        pdfUrls: null == pdfUrls
+            ? _value._pdfUrls
+            : pdfUrls // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
         likeCount: null == likeCount
             ? _value.likeCount
             : likeCount // ignore: cast_nullable_to_non_nullable
@@ -339,6 +353,7 @@ class _$PostImpl extends _Post {
     required this.title,
     required this.body,
     final List<String> imageUrls = const [],
+    final List<String> pdfUrls = const [],
     this.likeCount = 0,
     this.commentCount = 0,
     this.isPinned = false,
@@ -346,6 +361,7 @@ class _$PostImpl extends _Post {
     required this.updatedAt,
     this.status = 'published',
   }) : _imageUrls = imageUrls,
+       _pdfUrls = pdfUrls,
        super._();
 
   factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
@@ -392,6 +408,17 @@ class _$PostImpl extends _Post {
   }
 
   // 게시글에 첨부된 이미지 URL 리스트
+  final List<String> _pdfUrls;
+  // 게시글에 첨부된 이미지 URL 리스트
+  @override
+  @JsonKey()
+  List<String> get pdfUrls {
+    if (_pdfUrls is EqualUnmodifiableListView) return _pdfUrls;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_pdfUrls);
+  }
+
+  // 게시글에 첨부된 PDF 파일 URL 리스트
   @override
   @JsonKey()
   final int likeCount;
@@ -414,7 +441,7 @@ class _$PostImpl extends _Post {
 
   @override
   String toString() {
-    return 'Post(postId: $postId, authorId: $authorId, authorName: $authorName, authorRole: $authorRole, authorIsVerified: $authorIsVerified, category: $category, type: $type, parishId: $parishId, title: $title, body: $body, imageUrls: $imageUrls, likeCount: $likeCount, commentCount: $commentCount, isPinned: $isPinned, createdAt: $createdAt, updatedAt: $updatedAt, status: $status)';
+    return 'Post(postId: $postId, authorId: $authorId, authorName: $authorName, authorRole: $authorRole, authorIsVerified: $authorIsVerified, category: $category, type: $type, parishId: $parishId, title: $title, body: $body, imageUrls: $imageUrls, pdfUrls: $pdfUrls, likeCount: $likeCount, commentCount: $commentCount, isPinned: $isPinned, createdAt: $createdAt, updatedAt: $updatedAt, status: $status)';
   }
 
   @override
@@ -442,6 +469,7 @@ class _$PostImpl extends _Post {
               other._imageUrls,
               _imageUrls,
             ) &&
+            const DeepCollectionEquality().equals(other._pdfUrls, _pdfUrls) &&
             (identical(other.likeCount, likeCount) ||
                 other.likeCount == likeCount) &&
             (identical(other.commentCount, commentCount) ||
@@ -470,6 +498,7 @@ class _$PostImpl extends _Post {
     title,
     body,
     const DeepCollectionEquality().hash(_imageUrls),
+    const DeepCollectionEquality().hash(_pdfUrls),
     likeCount,
     commentCount,
     isPinned,
@@ -505,6 +534,7 @@ abstract class _Post extends Post {
     required final String title,
     required final String body,
     final List<String> imageUrls,
+    final List<String> pdfUrls,
     final int likeCount,
     final int commentCount,
     final bool isPinned,
@@ -538,6 +568,8 @@ abstract class _Post extends Post {
   String get body;
   @override
   List<String> get imageUrls; // 게시글에 첨부된 이미지 URL 리스트
+  @override
+  List<String> get pdfUrls; // 게시글에 첨부된 PDF 파일 URL 리스트
   @override
   int get likeCount; // 좋아요 수
   @override

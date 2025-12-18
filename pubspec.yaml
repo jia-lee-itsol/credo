@@ -33,6 +33,7 @@ dependencies:
 
   # Network
   dio: ^5.5.0+1
+  connectivity_plus: ^6.0.5
 
   # Local Storage
   shared_preferences: ^2.2.3
@@ -51,6 +52,9 @@ dependencies:
   cached_network_image: ^3.3.1
   shimmer: ^3.0.0
   image_picker: ^1.1.2
+  file_picker: ^8.1.4
+  open_filex: ^4.5.0
+  syncfusion_flutter_pdfviewer: ^28.1.5
 
   # Utils
   freezed_annotation: ^2.4.1
@@ -65,10 +69,16 @@ dependencies:
   qr_flutter: ^4.1.0
   simple_barcode_scanner: ^0.4.0
 
+  # Share
+  share_plus: ^10.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+
+  # Testing
+  mocktail: ^1.0.0
 
   # Code Generation
   build_runner: ^2.4.11

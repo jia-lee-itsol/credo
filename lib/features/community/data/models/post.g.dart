@@ -20,6 +20,9 @@ _$PostImpl _$$PostImplFromJson(Map<String, dynamic> json) => _$PostImpl(
   imageUrls:
       (json['imageUrls'] as List<dynamic>?)?.map((e) => e as String).toList() ??
       const [],
+  pdfUrls:
+      (json['pdfUrls'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const [],
   likeCount: (json['likeCount'] as num?)?.toInt() ?? 0,
   commentCount: (json['commentCount'] as num?)?.toInt() ?? 0,
   isPinned: json['isPinned'] as bool? ?? false,
@@ -41,6 +44,7 @@ Map<String, dynamic> _$$PostImplToJson(_$PostImpl instance) =>
       'title': instance.title,
       'body': instance.body,
       'imageUrls': instance.imageUrls,
+      'pdfUrls': instance.pdfUrls,
       'likeCount': instance.likeCount,
       'commentCount': instance.commentCount,
       'isPinned': instance.isPinned,

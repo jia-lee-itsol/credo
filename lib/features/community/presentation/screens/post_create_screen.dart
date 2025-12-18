@@ -10,7 +10,7 @@ import '../../../../config/routes/app_routes.dart';
 import '../providers/community_presentation_providers.dart';
 import '../notifiers/post_form_notifier.dart';
 import '../widgets/post_form_fields.dart';
-import '../widgets/post_image_picker.dart';
+import '../widgets/post_file_picker.dart';
 import '../widgets/post_official_settings.dart';
 import '../widgets/post_form_submit_button.dart';
 
@@ -124,15 +124,11 @@ class _PostCreateScreenState extends ConsumerState<PostCreateScreen> {
                       ),
                       const SizedBox(height: 16),
 
-                      // 이미지 선택 섹션
-                      PostImagePicker(
+                      // 파일 선택 섹션 (이미지 + PDF)
+                      PostFilePicker(
                         formState: formState,
                         notifier: notifier,
-                        onImagePickerTap: () => _showImagePicker(
-                          context,
-                          notifier,
-                          formState.selectedImages.length,
-                        ),
+                        onFilePickerTap: () {},
                       ),
                       const SizedBox(height: 8),
 
@@ -195,18 +191,6 @@ class _PostCreateScreenState extends ConsumerState<PostCreateScreen> {
     );
   }
 
-  Future<void> _showImagePicker(
-    BuildContext context,
-    PostFormNotifier notifier,
-    int currentImageCount,
-  ) async {
-    await PostImagePickerHelper.showImagePicker(
-      context,
-      notifier,
-      currentImageCount,
-      3,
-    );
-  }
 
   Future<void> _submit(PostFormNotifier notifier) async {
     AppLogger.community('===== _submit() 호출됨 =====');

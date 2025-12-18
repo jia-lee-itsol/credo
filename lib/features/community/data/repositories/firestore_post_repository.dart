@@ -286,6 +286,129 @@ class FirestorePostRepository implements PostRepository {
   }
 
   @override
+  Stream<List<Post>> watchOfficialNoticesByParishes({
+    required List<String> parishIds,
+  }) {
+    try {
+      if (parishIds.isEmpty) {
+        return Stream.value(<Post>[]);
+      }
+
+      // Firestore의 whereIn은 최대 10개까지만 지원
+      // 10개를 초과하면 여러 번 쿼리해야 함
+      if (parishIds.length <= 10) {
+        // 공식 공지사항 쿼리: category == "notice", type == "official", status == "published"
+        Query query = _firestore
+            .collection('posts')
+            .where('category', isEqualTo: 'notice')
+            .where('type', isEqualTo: 'official')
+            .where('status', isEqualTo: 'published')
+            .where('parishId', whereIn: parishIds);
+
+        // 최신순 정렬
+        query = query.orderBy('createdAt', descending: true);
+
+        AppLogger.community(
+          'watchOfficialNoticesByParishes 쿼리 실행: parishIds=$parishIds',
+        );
+
+        var isFirstEmission = true;
+
+        return query
+            .snapshots()
+            .map((snapshot) {
+              if (isFirstEmission) {
+                AppLogger.community(
+                  'watchOfficialNoticesByParishes 결과: ${snapshot.docs.length}개 문서',
+                );
+                isFirstEmission = false;
+              }
+              final posts = snapshot.docs
+                  .map((doc) {
+                    try {
+                      return Post.fromFirestore(doc);
+                    } catch (e) {
+                      AppLogger.error('Post 파싱 에러 (docId: ${doc.id}): $e', e);
+                      return null;
+                    }
+                  })
+                  .whereType<Post>()
+                  .toList();
+              // 핀 고정된 게시글을 상단에 표시
+              return posts.sortByPinnedAndDate();
+            })
+            .handleError((error, stackTrace) {
+              AppLogger.error(
+                'watchOfficialNoticesByParishes 스트림 에러: $error',
+                error,
+                stackTrace,
+              );
+              throw error;
+            });
+      } else {
+        // 10개를 초과하면 처음 10개만 사용 (실제로는 10개 이상의 교회를 설정하는 경우가 드뭄)
+        AppLogger.warning(
+          'watchOfficialNoticesByParishes: 10개를 초과하는 교회는 처음 10개만 조회합니다.',
+        );
+        final limitedParishIds = parishIds.take(10).toList();
+        Query query = _firestore
+            .collection('posts')
+            .where('category', isEqualTo: 'notice')
+            .where('type', isEqualTo: 'official')
+            .where('status', isEqualTo: 'published')
+            .where('parishId', whereIn: limitedParishIds);
+
+        query = query.orderBy('createdAt', descending: true);
+
+        AppLogger.community(
+          'watchOfficialNoticesByParishes 쿼리 실행: parishIds=$limitedParishIds',
+        );
+
+        var isFirstEmission = true;
+
+        return query
+            .snapshots()
+            .map((snapshot) {
+              if (isFirstEmission) {
+                AppLogger.community(
+                  'watchOfficialNoticesByParishes 결과: ${snapshot.docs.length}개 문서',
+                );
+                isFirstEmission = false;
+              }
+              final posts = snapshot.docs
+                  .map((doc) {
+                    try {
+                      return Post.fromFirestore(doc);
+                    } catch (e) {
+                      AppLogger.error('Post 파싱 에러 (docId: ${doc.id}): $e', e);
+                      return null;
+                    }
+                  })
+                  .whereType<Post>()
+                  .toList();
+              // 핀 고정된 게시글을 상단에 표시
+              return posts.sortByPinnedAndDate();
+            })
+            .handleError((error, stackTrace) {
+              AppLogger.error(
+                'watchOfficialNoticesByParishes 스트림 에러: $error',
+                error,
+                stackTrace,
+              );
+              throw error;
+            });
+      }
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        'watchOfficialNoticesByParishes 초기화 에러: $e',
+        e,
+        stackTrace,
+      );
+      return Stream.value(<Post>[]);
+    }
+  }
+
+  @override
   Stream<List<Post>> watchCommunityPosts({String? parishId}) {
     try {
       // 커뮤니티 게시글 쿼리: category == "community", type == "normal", status == "published"
@@ -421,6 +544,119 @@ class FirestorePostRepository implements PostRepository {
   }
 
   @override
+  Stream<List<Post>> watchAllPostsByParishes({
+    required List<String> parishIds,
+  }) {
+    try {
+      if (parishIds.isEmpty) {
+        return Stream.value(<Post>[]);
+      }
+
+      // Firestore의 whereIn은 최대 10개까지만 지원
+      if (parishIds.length <= 10) {
+        // 모든 게시글 쿼리: status == "published"
+        Query query = _firestore
+            .collection('posts')
+            .where('status', isEqualTo: 'published')
+            .where('parishId', whereIn: parishIds);
+
+        query = query.orderBy('createdAt', descending: true);
+
+        AppLogger.community(
+          'watchAllPostsByParishes 쿼리 실행: parishIds=$parishIds',
+        );
+
+        var isFirstEmission = true;
+
+        return query
+            .snapshots()
+            .map((snapshot) {
+              if (isFirstEmission) {
+                AppLogger.community(
+                  'watchAllPostsByParishes 결과: ${snapshot.docs.length}개 문서',
+                );
+                isFirstEmission = false;
+              }
+              final posts = snapshot.docs
+                  .map((doc) {
+                    try {
+                      return Post.fromFirestore(doc);
+                    } catch (e) {
+                      AppLogger.error('Post 파싱 에러 (docId: ${doc.id}): $e', e);
+                      return null;
+                    }
+                  })
+                  .whereType<Post>()
+                  .toList();
+              // 핀 고정된 게시글을 상단에 표시
+              return posts.sortByPinnedAndDate();
+            })
+            .handleError((error, stackTrace) {
+              AppLogger.error(
+                'watchAllPostsByParishes 스트림 에러: $error',
+                error,
+                stackTrace,
+              );
+              throw error;
+            });
+      } else {
+        // 10개를 초과하면 처음 10개만 사용
+        AppLogger.warning(
+          'watchAllPostsByParishes: 10개를 초과하는 교회는 처음 10개만 조회합니다.',
+        );
+        final limitedParishIds = parishIds.take(10).toList();
+        Query query = _firestore
+            .collection('posts')
+            .where('status', isEqualTo: 'published')
+            .where('parishId', whereIn: limitedParishIds);
+
+        query = query.orderBy('createdAt', descending: true);
+
+        AppLogger.community(
+          'watchAllPostsByParishes 쿼리 실행: parishIds=$limitedParishIds',
+        );
+
+        var isFirstEmission = true;
+
+        return query
+            .snapshots()
+            .map((snapshot) {
+              if (isFirstEmission) {
+                AppLogger.community(
+                  'watchAllPostsByParishes 결과: ${snapshot.docs.length}개 문서',
+                );
+                isFirstEmission = false;
+              }
+              final posts = snapshot.docs
+                  .map((doc) {
+                    try {
+                      return Post.fromFirestore(doc);
+                    } catch (e) {
+                      AppLogger.error('Post 파싱 에러 (docId: ${doc.id}): $e', e);
+                      return null;
+                    }
+                  })
+                  .whereType<Post>()
+                  .toList();
+              // 핀 고정된 게시글을 상단에 표시
+              return posts.sortByPinnedAndDate();
+            })
+            .handleError((error, stackTrace) {
+              AppLogger.error(
+                'watchAllPostsByParishes 스트림 에러: $error',
+                error,
+                stackTrace,
+              );
+              throw error;
+            });
+      }
+    } catch (e, stackTrace) {
+      AppLogger.error('watchAllPostsByParishes 초기화 에러: $e', e, stackTrace);
+      return Stream.value(<Post>[]);
+    }
+  }
+
+  @override
   Future<Either<Failure, Post?>> getPostById(String postId) async {
     try {
       AppLogger.community('getPostById 호출: postId=$postId');
@@ -450,6 +686,8 @@ class FirestorePostRepository implements PostRepository {
     required String authorId,
     required String authorName,
     required String content,
+    List<String> imageUrls = const [],
+    List<String> pdfUrls = const [],
   }) async {
     try {
       AppLogger.community('댓글 생성: postId=$postId, authorId=$authorId');
@@ -477,6 +715,8 @@ class FirestorePostRepository implements PostRepository {
           authorId: authorId,
           authorName: authorName,
           content: content,
+          imageUrls: imageUrls,
+          pdfUrls: pdfUrls,
           createdAt: DateTime.now(),
         );
         transaction.set(commentRef, comment.toFirestore());

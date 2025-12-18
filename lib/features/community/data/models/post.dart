@@ -21,6 +21,7 @@ class Post with _$Post {
     required String title,
     required String body,
     @Default([]) List<String> imageUrls, // 게시글에 첨부된 이미지 URL 리스트
+    @Default([]) List<String> pdfUrls, // 게시글에 첨부된 PDF 파일 URL 리스트
     @Default(0) int likeCount, // 좋아요 수
     @Default(0) int commentCount, // 댓글 수
     @Default(false) bool isPinned, // 상단 고정 여부

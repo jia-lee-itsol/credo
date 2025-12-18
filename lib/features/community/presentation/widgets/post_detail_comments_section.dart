@@ -56,6 +56,8 @@ class PostDetailCommentsSection extends ConsumerWidget {
                   author: comment.authorName,
                   authorId: comment.authorId,
                   content: comment.content,
+                  imageUrls: comment.imageUrls,
+                  pdfUrls: comment.pdfUrls,
                   createdAt: comment.createdAt,
                   primaryColor: primaryColor,
                   onAuthorTap: onAuthorTap,

@@ -38,6 +38,20 @@ service cloud.firestore {
       
       allow delete: if request.auth != null 
         && request.auth.uid == userId;
+      
+      // 알림 설정 서브컬렉션
+      match /notificationSettings/{settingsId} {
+        // 읽기: 자신의 알림 설정만 읽기 가능
+        allow read: if request.auth != null 
+          && request.auth.uid == userId;
+        
+        // 쓰기: 자신의 알림 설정만 생성/수정 가능
+        allow create, update: if request.auth != null 
+          && request.auth.uid == userId;
+        
+        // 삭제: 알림 설정은 삭제 불가 (기본값으로 리셋)
+        allow delete: if false;
+      }
     }
     
     // Posts Collection (향후 구현)

@@ -26,6 +26,8 @@ class SaintFeastDayModel {
   final bool isJapanese;
   final String greeting;
   final String? description;
+  @JsonKey(name: 'imageUrl')
+  final String? imageUrl; // 성인 이미지 URL
 
   const SaintFeastDayModel({
     required this.month,
@@ -41,6 +43,7 @@ class SaintFeastDayModel {
     required this.isJapanese,
     required this.greeting,
     this.description,
+    this.imageUrl,
   });
 
   /// 현재 로케일에 맞는 이름 반환

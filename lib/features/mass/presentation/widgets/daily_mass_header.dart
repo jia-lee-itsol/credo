@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+
+/// 매일미사 날짜 헤더 위젯
+class DailyMassHeader extends StatelessWidget {
+  final String date;
+  final Color primaryColor;
+  final VoidCallback onDateTap;
+
+  const DailyMassHeader({
+    super.key,
+    required this.date,
+    required this.primaryColor,
+    required this.onDateTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: primaryColor.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: primaryColor.withValues(alpha: 0.3)),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.calendar_today, color: primaryColor),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              date,
+              style: theme.textTheme.titleMedium?.copyWith(
+                color: primaryColor,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.calendar_month, color: primaryColor),
+            onPressed: onDateTap,
+            tooltip: '날짜 선택',
+          ),
+        ],
+      ),
+    );
+  }
+}
+

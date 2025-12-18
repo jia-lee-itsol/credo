@@ -25,7 +25,11 @@ class SaintFeastDayRepositoryImpl implements SaintFeastDayRepository {
     DateTime date,
   ) async {
     try {
-      final saints = await SaintFeastDayService.getSaintsForDateFromJson(date);
+      // GPT를 사용하여 성인 검색 (기본 언어: 일본어)
+      final saints = await SaintFeastDayService.getSaintsForDateFromChatGPT(
+        date,
+        'ja',
+      );
       final entities = saints.map((saint) => saint.toEntity()).toList();
       return Right(entities);
     } catch (e) {
@@ -36,7 +40,8 @@ class SaintFeastDayRepositoryImpl implements SaintFeastDayRepository {
   @override
   Future<Either<Failure, List<SaintFeastDayEntity>>> getTodaySaints() async {
     try {
-      final saints = await SaintFeastDayService.getTodaySaints();
+      // GPT를 사용하여 오늘의 성인 검색 (기본 언어: 일본어)
+      final saints = await SaintFeastDayService.getTodaySaints(languageCode: 'ja');
       final entities = saints.map((saint) => saint.toEntity()).toList();
       return Right(entities);
     } catch (e) {

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/services/logger_service.dart';
-import '../../../../core/utils/validators.dart';
 import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../config/routes/app_routes.dart';
-import '../widgets/password_field.dart';
 import '../widgets/loading_button.dart';
 import '../widgets/terms_agreement_checkbox.dart';
-import '../../../../core/data/services/parish_service.dart' as core;
+import '../widgets/sign_up_form_fields.dart';
+import '../widgets/sign_up_parish_selector.dart';
+import '../widgets/sign_up_feast_day_selector.dart';
+import '../widgets/parish_search_sheet.dart';
+import '../widgets/feast_day_search_sheet.dart';
 import '../../../../core/data/models/saint_feast_day_model.dart';
-import '../../../profile/data/providers/saint_feast_day_providers.dart';
 
 /// 회원가입 화면
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -73,123 +73,37 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // 닉네임 입력
-                  TextFormField(
-                    controller: _nicknameController,
-                    decoration: InputDecoration(
-                      labelText: l10n.auth.nickname,
-                      prefixIcon: const Icon(Icons.person_outlined),
-                    ),
-                    validator: (value) =>
-                        Validators.validateNickname(value, l10n),
-                    textInputAction: TextInputAction.next,
-                  ),
-                  const SizedBox(height: 16),
-
-                  // 이메일 입력
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      labelText: l10n.auth.email,
-                      prefixIcon: const Icon(Icons.email_outlined),
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) => Validators.validateEmail(value, l10n),
-                    textInputAction: TextInputAction.next,
-                  ),
-                  const SizedBox(height: 16),
-
-                  // 비밀번호 입력
-                  PasswordField(
-                    controller: _passwordController,
-                    labelText: l10n.auth.password,
-                    helperText: l10n.validation.passwordMinLength,
-                    validator: (value) =>
-                        Validators.validatePassword(value, l10n),
-                    textInputAction: TextInputAction.next,
-                  ),
-                  const SizedBox(height: 16),
-
-                  // 비밀번호 확인
-                  PasswordField(
-                    controller: _confirmPasswordController,
-                    labelText: l10n.auth.passwordConfirm,
-                    validator: (value) {
-                      if (value != _passwordController.text) {
-                        return l10n.auth.passwordMismatch;
-                      }
-                      return null;
-                    },
-                    textInputAction: TextInputAction.next,
+                  // 기본 입력 필드
+                  SignUpFormFields(
+                    nicknameController: _nicknameController,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                    confirmPasswordController: _confirmPasswordController,
+                    baptismalNameController: _baptismalNameController,
+                    l10n: l10n,
                   ),
                   const SizedBox(height: 16),
 
                   // 소속 성당 선택
-                  InkWell(
+                  SignUpParishSelector(
+                    selectedParishName: _selectedParishName,
                     onTap: () => _showParishSearchBottomSheet(
                       context,
                       ref,
                       primaryColor,
                     ),
-                    child: InputDecorator(
-                      decoration: InputDecoration(
-                        labelText: l10n.auth.parish,
-                        suffixIcon: const Icon(Icons.chevron_right),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      child: Text(
-                        _selectedParishName ?? l10n.auth.selectParish,
-                        style: TextStyle(
-                          color: _selectedParishName != null
-                              ? theme.colorScheme.onSurface
-                              : theme.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-
-                  // 세례명 입력
-                  TextFormField(
-                    controller: _baptismalNameController,
-                    decoration: InputDecoration(
-                      labelText: l10n.auth.baptismName,
-                      prefixIcon: const Icon(Icons.badge_outlined),
-                      hintText: l10n.auth.baptismNameHint,
-                    ),
-                    textInputAction: TextInputAction.next,
+                    l10n: l10n,
                   ),
                   const SizedBox(height: 16),
 
                   // 축일 선택
-                  InkWell(
-                    onTap: () =>
-                        _showFeastDayBottomSheet(context, ref, primaryColor),
-                    child: InputDecorator(
-                      decoration: InputDecoration(
-                        labelText: '守護聖人の祝日（任意）',
-                        suffixIcon: const Icon(Icons.chevron_right),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      child: Text(
-                        _selectedFeastDay != null
-                            ? '${_selectedFeastDay?.name ?? ''} (${_selectedFeastDay?.month ?? 0}${l10n.profile.month}${_selectedFeastDay?.day ?? 0}${l10n.profile.day})'
-                            : _customBaptismalName != null &&
-                                  _customFeastMonth != null &&
-                                  _customFeastDay != null
-                            ? '$_customBaptismalName ($_customFeastMonth${l10n.profile.month}$_customFeastDay${l10n.profile.day})'
-                            : l10n.auth.selectFeastDay,
-                        style: TextStyle(
-                          color: _selectedFeastDay != null
-                              ? theme.colorScheme.onSurface
-                              : theme.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
+                  SignUpFeastDaySelector(
+                    selectedFeastDay: _selectedFeastDay,
+                    customBaptismalName: _customBaptismalName,
+                    customFeastMonth: _customFeastMonth,
+                    customFeastDay: _customFeastDay,
+                    onTap: () => _showFeastDayBottomSheet(context, ref, primaryColor),
+                    l10n: l10n,
                   ),
                   const SizedBox(height: 24),
 
@@ -408,7 +322,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           minChildSize: 0.5,
           expand: false,
           builder: (context, scrollController) {
-            return _ParishSearchSheet(
+            return ParishSearchSheet(
               scrollController: scrollController,
               primaryColor: primaryColor,
               selectedParishId: _selectedParishId,
@@ -438,7 +352,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) {
-        return _FeastDaySearchSheet(
+        return FeastDaySearchSheet(
           primaryColor: primaryColor,
           selectedFeastDayId: _selectedFeastDayId,
           customBaptismalName: _customBaptismalName,
@@ -469,576 +383,3 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     );
   }
 }
-
-/// 교회 검색 시트
-class _ParishSearchSheet extends ConsumerStatefulWidget {
-  final ScrollController scrollController;
-  final Color primaryColor;
-  final String? selectedParishId;
-  final void Function(String parishId, String parishName) onParishSelected;
-
-  const _ParishSearchSheet({
-    required this.scrollController,
-    required this.primaryColor,
-    this.selectedParishId,
-    required this.onParishSelected,
-  });
-
-  @override
-  ConsumerState<_ParishSearchSheet> createState() => _ParishSearchSheetState();
-}
-
-class _ParishSearchSheetState extends ConsumerState<_ParishSearchSheet> {
-  final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final l10n = ref.watch(appLocalizationsSyncProvider);
-    final allParishesAsync = ref.watch(core.allParishesProvider);
-
-    return Column(
-      children: [
-        // 핸들
-        Container(
-          margin: const EdgeInsets.only(top: 12),
-          width: 40,
-          height: 4,
-          decoration: BoxDecoration(
-            color: theme.colorScheme.outlineVariant,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        const SizedBox(height: 8),
-
-        // 타이틀
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            l10n.auth.selectParishTitle,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-
-        // 검색바
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              hintText: l10n.search.parishSearchHint,
-              hintStyle: TextStyle(color: Colors.grey.shade500),
-              prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
-              suffixIcon: _searchQuery.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {
-                        _searchController.clear();
-                        setState(() => _searchQuery = '');
-                      },
-                    )
-                  : null,
-              filled: true,
-              fillColor: Colors.grey.shade100,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
-              ),
-            ),
-            onChanged: (value) => setState(() => _searchQuery = value),
-          ),
-        ),
-
-        const SizedBox(height: 16),
-
-        // 교회 목록
-        Expanded(
-          child: allParishesAsync.when(
-            data: (allParishesMap) {
-              final allParishes = <Map<String, dynamic>>[];
-              allParishesMap.forEach((dioceseId, parishes) {
-                for (final parish in parishes) {
-                  final parishId = '$dioceseId-${parish['name']}';
-                  allParishes.add({...parish, 'parishId': parishId});
-                }
-              });
-
-              // 검색 필터링
-              final filteredParishes = _searchQuery.isEmpty
-                  ? allParishes
-                  : allParishes.where((parish) {
-                      final name = (parish['name'] as String? ?? '')
-                          .toLowerCase();
-                      final address = (parish['address'] as String? ?? '')
-                          .toLowerCase();
-                      final query = _searchQuery.toLowerCase();
-                      return name.contains(query) || address.contains(query);
-                    }).toList();
-
-              if (filteredParishes.isEmpty) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search_off,
-                        size: 48,
-                        color: Colors.grey.shade400,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        l10n.search.noResults,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-              return ListView.builder(
-                controller: widget.scrollController,
-                itemCount: filteredParishes.length,
-                itemBuilder: (context, index) {
-                  final parish = filteredParishes[index];
-                  final name = parish['name'] as String? ?? '';
-                  final address = parish['address'] as String? ?? '';
-                  final parishId = parish['parishId'] as String? ?? '';
-                  final isSelected = widget.selectedParishId == parishId;
-
-                  return ListTile(
-                    key: ValueKey(parishId),
-                    leading: CircleAvatar(
-                      backgroundColor: widget.primaryColor.withValues(
-                        alpha: 0.1,
-                      ),
-                      child: Icon(
-                        Icons.church,
-                        color: widget.primaryColor,
-                        size: 20,
-                      ),
-                    ),
-                    title: Text(
-                      name,
-                      style: TextStyle(
-                        fontWeight: isSelected
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                      ),
-                    ),
-                    subtitle: Text(
-                      address,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    trailing: isSelected
-                        ? Icon(Icons.check, color: widget.primaryColor)
-                        : Icon(
-                            Icons.chevron_right,
-                            color: Colors.grey.shade400,
-                          ),
-                    onTap: () => widget.onParishSelected(parishId, name),
-                  );
-                },
-              );
-            },
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) {
-              final l10n = ref.read(appLocalizationsSyncProvider);
-              return Center(child: Text('${l10n.common.error}: $error'));
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-/// 축일 검색 시트
-class _FeastDaySearchSheet extends ConsumerStatefulWidget {
-  final Color primaryColor;
-  final String? selectedFeastDayId;
-  final String? customBaptismalName;
-  final int? customFeastMonth;
-  final int? customFeastDay;
-  final void Function(SaintFeastDayModel saint) onFeastDaySelected;
-  final void Function(String baptismalName, int month, int day) onCustomInput;
-
-  const _FeastDaySearchSheet({
-    required this.primaryColor,
-    this.selectedFeastDayId,
-    this.customBaptismalName,
-    this.customFeastMonth,
-    this.customFeastDay,
-    required this.onFeastDaySelected,
-    required this.onCustomInput,
-  });
-
-  @override
-  ConsumerState<_FeastDaySearchSheet> createState() =>
-      _FeastDaySearchSheetState();
-}
-
-class _FeastDaySearchSheetState extends ConsumerState<_FeastDaySearchSheet> {
-  final TextEditingController _searchController = TextEditingController();
-  String _searchQuery = '';
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final l10n = ref.watch(appLocalizationsSyncProvider);
-    final allSaintsAsync = ref.watch(_allSaintsProvider);
-
-    return Column(
-      children: [
-        // 핸들
-        Container(
-          margin: const EdgeInsets.only(top: 12),
-          width: 40,
-          height: 4,
-          decoration: BoxDecoration(
-            color: theme.colorScheme.outlineVariant,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ),
-        const SizedBox(height: 8),
-
-        // 타이틀
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            l10n.auth.selectFeastDayTitle,
-            style: theme.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-
-        // 검색바
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: TextField(
-            controller: _searchController,
-            decoration: InputDecoration(
-              hintText: l10n.search.saintSearchHint,
-              hintStyle: TextStyle(color: Colors.grey.shade500),
-              prefixIcon: Icon(Icons.search, color: Colors.grey.shade500),
-              suffixIcon: _searchQuery.isNotEmpty
-                  ? IconButton(
-                      icon: const Icon(Icons.clear),
-                      onPressed: () {
-                        _searchController.clear();
-                        setState(() => _searchQuery = '');
-                      },
-                    )
-                  : null,
-              filled: true,
-              fillColor: Colors.grey.shade100,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
-              ),
-            ),
-            onChanged: (value) => setState(() => _searchQuery = value),
-          ),
-        ),
-
-        const SizedBox(height: 16),
-
-        // 성인 목록
-        Expanded(
-          child: allSaintsAsync.when(
-            data: (allSaints) {
-              // 검색 필터링
-              final filteredSaints = _searchQuery.isEmpty
-                  ? allSaints
-                  : allSaints.where((saint) {
-                      final name = saint.name.toLowerCase();
-                      final nameEn = saint.nameEn?.toLowerCase() ?? '';
-                      final query = _searchQuery.toLowerCase();
-                      return name.contains(query) || nameEn.contains(query);
-                    }).toList();
-
-              if (filteredSaints.isEmpty) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.search_off,
-                        size: 48,
-                        color: Colors.grey.shade400,
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        l10n.search.noResults,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: Colors.grey.shade600,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-
-              final isCustomSelected =
-                  widget.customBaptismalName != null &&
-                  widget.customFeastMonth != null &&
-                  widget.customFeastDay != null;
-
-              return ListView(
-                children: [
-                  // 기타 옵션
-                  ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: widget.primaryColor.withValues(
-                        alpha: 0.1,
-                      ),
-                      child: Icon(
-                        Icons.edit,
-                        color: widget.primaryColor,
-                        size: 20,
-                      ),
-                    ),
-                    title: Text(
-                      'その他（直接入力）',
-                      style: TextStyle(
-                        fontWeight: isCustomSelected
-                            ? FontWeight.bold
-                            : FontWeight.normal,
-                      ),
-                    ),
-                    subtitle: isCustomSelected
-                        ? Text(
-                            '${widget.customBaptismalName} (${widget.customFeastMonth}${l10n.profile.month}${widget.customFeastDay}${l10n.profile.day})',
-                            style: theme.textTheme.bodySmall,
-                          )
-                        : Text(l10n.profile.directInputTitle),
-                    trailing: isCustomSelected
-                        ? Icon(Icons.check, color: widget.primaryColor)
-                        : Icon(
-                            Icons.chevron_right,
-                            color: Colors.grey.shade400,
-                          ),
-                    onTap: () => _showCustomInputDialog(context, theme),
-                  ),
-                  const Divider(),
-                  // 성인 목록
-                  ...filteredSaints.map((saint) {
-                    final feastDayId = '${saint.month}-${saint.day}';
-                    final isSelected = widget.selectedFeastDayId == feastDayId;
-
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: widget.primaryColor.withValues(
-                          alpha: 0.1,
-                        ),
-                        child: Icon(
-                          Icons.celebration,
-                          color: widget.primaryColor,
-                          size: 20,
-                        ),
-                      ),
-                      title: Text(
-                        saint.name,
-                        style: TextStyle(
-                          fontWeight: isSelected
-                              ? FontWeight.bold
-                              : FontWeight.normal,
-                        ),
-                      ),
-                      subtitle: Text(
-                        '${saint.month}${l10n.profile.month}${saint.day}${l10n.profile.day}',
-                        style: theme.textTheme.bodySmall,
-                      ),
-                      trailing: isSelected
-                          ? Icon(Icons.check, color: widget.primaryColor)
-                          : null,
-                      onTap: () => widget.onFeastDaySelected(saint),
-                    );
-                  }),
-                ],
-              );
-            },
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (error, _) {
-              final l10n = ref.read(appLocalizationsSyncProvider);
-              return Center(child: Text('${l10n.common.error}: $error'));
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  void _showCustomInputDialog(BuildContext context, ThemeData theme) {
-    final baptismalNameController = TextEditingController(
-      text: widget.customBaptismalName ?? '',
-    );
-    final monthController = TextEditingController(
-      text: widget.customFeastMonth?.toString() ?? '',
-    );
-    final dayController = TextEditingController(
-      text: widget.customFeastDay?.toString() ?? '',
-    );
-
-    showDialog(
-      context: context,
-      builder: (dialogContext) {
-        final dialogL10n = AppLocalizations.of(dialogContext);
-        return AlertDialog(
-          title: Text(dialogL10n.profile.directInputDialogTitle),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: baptismalNameController,
-                  decoration: InputDecoration(
-                    labelText: dialogL10n.auth.baptismName,
-                    hintText: dialogL10n.auth.baptismNameHint,
-                    border: const OutlineInputBorder(),
-                  ),
-                  textCapitalization: TextCapitalization.words,
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: monthController,
-                        decoration: InputDecoration(
-                          labelText: dialogL10n.profile.month,
-                          hintText: '1-12',
-                          border: const OutlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: TextField(
-                        controller: dayController,
-                        decoration: InputDecoration(
-                          labelText: dialogL10n.profile.day,
-                          hintText: '1-31',
-                          border: const OutlineInputBorder(),
-                        ),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(dialogContext),
-              child: Text(dialogL10n.common.cancel),
-            ),
-            TextButton(
-              onPressed: () {
-                final baptismalName = baptismalNameController.text.trim();
-                final monthStr = monthController.text.trim();
-                final dayStr = dayController.text.trim();
-
-                if (baptismalName.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(dialogL10n.validation.baptismNameRequired),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                  return;
-                }
-
-                final month = int.tryParse(monthStr);
-                final day = int.tryParse(dayStr);
-
-                if (month == null || month < 1 || month > 12) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(dialogL10n.validation.monthInvalid),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                  return;
-                }
-
-                if (day == null || day < 1 || day > 31) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(dialogL10n.validation.dayInvalid),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                  return;
-                }
-
-                widget.onCustomInput(baptismalName, month, day);
-                Navigator.pop(dialogContext);
-              },
-              child: Text(dialogL10n.common.save),
-            ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-/// 모든 성인 목록 Provider
-final _allSaintsProvider = FutureProvider<List<SaintFeastDayModel>>((
-  ref,
-) async {
-  final repository = ref.read(saintFeastDayRepositoryProvider);
-  final result = await repository.loadSaintsFeastDays();
-  return result.fold(
-    (_) => <SaintFeastDayModel>[],
-    (saints) => saints
-        .map(
-          (saint) => SaintFeastDayModel(
-            month: saint.month,
-            day: saint.day,
-            name: saint.name,
-            nameEn: saint.nameEnglish,
-            type: saint.type,
-            isJapanese: saint.isJapanese,
-            greeting: saint.greeting,
-            description: saint.description,
-          ),
-        )
-        .toList(),
-  );
-});

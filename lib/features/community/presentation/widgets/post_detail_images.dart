@@ -35,7 +35,7 @@ class PostDetailImages extends StatelessWidget {
           children: [
             CachedNetworkImage(
               imageUrl: imageUrls[index],
-              fit: BoxFit.cover,
+              fit: BoxFit.contain,
               width: double.infinity,
               height: double.infinity,
               placeholder: (context, url) => Container(
@@ -87,7 +87,7 @@ class PostDetailImages extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               child: CachedNetworkImage(
                 imageUrl: imageUrls[0],
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 width: double.infinity,
                 height: 200,
                 placeholder: (context, url) => Container(

@@ -26,6 +26,17 @@ abstract class PostRepository {
   /// - parishId가 제공된 경우 parishId로 추가 필터링
   Stream<List<Post>> watchOfficialNotices({String? parishId});
 
+  /// 여러 교회의 공식 공지사항 스트림 조회
+  ///
+  /// 필터 조건:
+  /// - category == "notice"
+  /// - type == "official"
+  /// - status == "published"
+  /// - parishIds에 포함된 교회의 공지사항만 조회
+  Stream<List<Post>> watchOfficialNoticesByParishes({
+    required List<String> parishIds,
+  });
+
   /// 커뮤니티 게시글 스트림 조회
   ///
   /// 필터 조건:
@@ -42,6 +53,13 @@ abstract class PostRepository {
   /// - parishId가 제공된 경우 parishId로 추가 필터링
   Stream<List<Post>> watchAllPosts({String? parishId});
 
+  /// 여러 교회의 모든 게시글 스트림 조회 (공지 + 커뮤니티)
+  ///
+  /// 필터 조건:
+  /// - status == "published"
+  /// - parishIds에 포함된 교회의 게시글만 조회
+  Stream<List<Post>> watchAllPostsByParishes({required List<String> parishIds});
+
   /// 게시글 ID로 조회
   Future<Either<Failure, Post?>> getPostById(String postId);
 
@@ -51,6 +69,8 @@ abstract class PostRepository {
     required String authorId,
     required String authorName,
     required String content,
+    List<String> imageUrls = const [],
+    List<String> pdfUrls = const [],
   });
 
   /// 게시글의 댓글 목록 조회 (스트림)

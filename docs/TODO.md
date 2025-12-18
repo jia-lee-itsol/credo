@@ -2,7 +2,7 @@
 
 이 문서는 코드베이스에서 발견된 모든 TODO 주석과 보류 중인 기능 구현을 추적합니다.
 
-**마지막 업데이트**: 2025-12-16 (구글 로그인 문제 추가)
+**마지막 업데이트**: 2025-12-18 (단위 테스트 커버리지 확장: 총 13개 테스트 파일, 85개 테스트 케이스 완료) 
 **전체 코드베이스**: 약 27,000줄의 Dart 코드, 135개 파일
 
 ---
@@ -154,6 +154,36 @@
      - 검색어 입력 시 실시간 자동완성 제안 표시
      - 히스토리 항목 개별 삭제 기능
 
+#### 12. PDF 업로드 기능 추가 ✅ 완료 (2025-12-17)
+- **문제**: 게시글 및 댓글에 이미지만 첨부 가능, PDF 파일 첨부 불가
+- **완료된 작업**:
+  1. ✅ 패키지 추가
+     - `file_picker: ^8.1.4` - 파일 선택 기능
+     - `syncfusion_flutter_pdfviewer: ^28.1.5` - PDF 뷰어
+  2. ✅ 모델 업데이트
+     - `Post` 모델에 `pdfUrls` 필드 추가
+     - `Comment` 모델에 `imageUrls`, `pdfUrls` 필드 추가
+  3. ✅ 업로드 서비스 확장
+     - `ImageUploadService`에 `uploadPdf()`, `uploadPdfs()`, `deletePdf()` 메서드 추가
+     - PDF 파일 크기 제한: 최대 10MB
+     - Firebase Storage 경로: `posts/{postId}/` 또는 `posts/{postId}/comments/{commentId}/`
+  4. ✅ 게시글 파일 선택 UI
+     - `PostFilePicker` 위젯 생성 (이미지 + PDF 통합)
+     - 이미지 최대 3개, PDF 최대 2개 (총 5개)
+     - `PostFormState`에 `selectedPdfs`, `pdfUrls` 필드 추가
+  5. ✅ 댓글 파일 선택 UI
+     - `CommentFilePicker` 위젯 생성
+     - 이미지 최대 2개, PDF 최대 1개 (총 3개)
+     - `CommentFileState` 클래스 생성
+  6. ✅ PDF 뷰어 화면
+     - `PdfViewerScreen` 위젯 생성
+     - 앱 내에서 PDF 전체 페이지 보기
+     - 더블 탭 줌, 텍스트 선택, 스크롤 기능 지원
+  7. ✅ 이미지 표시 개선
+     - 게시글 및 댓글 이미지를 `BoxFit.contain`으로 변경하여 전체 이미지 표시
+  8. ✅ 다국어 번역 추가
+     - 일본어, 한국어, 영어 번역 추가 (PDF 관련 문자열)
+
 ### 낮은 우선순위
 
 #### 7. 메신저 / 친구 기능
@@ -196,9 +226,23 @@
 - [x] `prayer_service.dart`의 throw Exception을 Failure로 교체 ✅
 - [x] `image_upload_service.dart`의 throw Exception을 Failure로 교체 ✅
 - [x] `app_user.dart`의 throw Exception을 ValidationFailure로 교체 ✅
-- [ ] 단위 테스트 커버리지 추가
+- [x] 단위 테스트 커버리지 추가 ✅ (진행 중)
   - 우선순위: Repository 구현, State notifiers, 유틸리티 함수
-  - 예상 작업량: 8-12시간
+  - 완료된 작업: 
+    - FirestoreUserRepository 테스트 (7개 테스트 케이스)
+    - FirestoreNotificationRepository 테스트 (3개 테스트 케이스)
+    - AuthRepositoryImpl 테스트 (4개 테스트 케이스)
+    - PostFormNotifier 테스트 (10개 테스트 케이스)
+    - FirestorePostRepository 테스트 (14개 테스트 케이스: createPost, updatePost, deletePost, getPostById, isLiked)
+    - FirestoreReportRepository 테스트 (5개 테스트 케이스: createReport, 중복 신고 방지, 에러 처리)
+    - NotificationSettingsRepositoryImpl 테스트 (9개 테스트 케이스)
+    - ParishRepositoryImpl 테스트 (12개 테스트 케이스)
+    - SaintFeastDayRepositoryImpl 테스트 (3개 테스트 케이스)
+    - LiturgyThemeProvider 테스트 (4개 테스트 케이스)
+    - FontScaleProvider 테스트 (7개 테스트 케이스)
+    - LocaleProvider 테스트 (7개 테스트 케이스)
+  - 총 13개 테스트 파일, 85개 테스트 케이스 완료
+  - 남은 작업: 추가 Notifier 테스트 (점진적으로 추가 가능)
 - [x] Provider 구성 표준화 ✅
   - 현재: `features/parish/presentation/providers/`, `features/community/data/providers/`
   - 권장: `features/{feature}/data/providers/` (Repository), `features/{feature}/presentation/providers/` (UI state)
@@ -284,10 +328,12 @@
 | 2025-12-15 | 거리순 필터칩 UI 개선 - `ParishFilterChip`에서 `isSelected` 상태에 따른 체크 아이콘 및 배경색 변경 | cfc4ab29 |
 | 2025-12-15 | 외국어 미사 데이터 수정 - 末吉町教会 등 13개 성당의 `foreignMassTimes` 데이터를 `massTime` 텍스트 기반으로 수정, `scripts/fix_foreign_mass_times.py` 및 `scripts/auto_fix_foreign_mass.py` 생성 | cfc4ab29 |
 | 2025-12-15 | 미사 시간 데이터 일관성 검증 및 수정 - kagoshima.json의 志布志教会, 阿久根教会 `massTimes` 데이터를 `massTime` 텍스트와 일치하도록 수정, kyoto.json의 上野教会 `massTimes`에 토요일 19:30 및 일요일 09:00, 10:30, 17:00 추가, `foreignMassTimes`에 타갈로그어 미사 추가 | bad05ad |
-| 2025-12-16 | 성인 축일 데이터 업데이트 - ChatGPT API를 사용하여 전체 월별 누락된 성인 추가: 12,1,2월 95명, 3,4,5월 112명, 6,7,8월 82명, 9,10,11월 95명 추가 (총 384명), `scripts/check_and_fix_missing_saints.py` 스크립트 사용 | - |
-| 2025-12-16 | 다국어 지원 완료 - 모든 언어 파일의 일본어 텍스트를 각 언어로 번역 완료: 영어 76개, 스페인어 289개, 포르투갈어 289개, 베트남어 289개, 중국어 번역 완료, 모든 언어 파일에서 일본어 문자(히라가나/가타카나) 제거 완료 | - |
-| 2025-12-16 | Google 로그인 문제 해결 - ApiException: 10 (DEVELOPER_ERROR) 오류 해결, Firebase Console에서 SHA-1 인증서 추가 (61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A), Android OAuth Client ID 자동 생성 확인 (182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com), google-services.json 업데이트 (client_type: 1 추가), Google Sign-In 정상 작동 확인 | - |
-| 2025-12-16 | 검색 기능 구현 - 게시글 검색 기능 구현 (PostRepository.searchPosts 메서드 추가, Firestore 쿼리 + 클라이언트 사이드 필터링), 성당 검색 개선 (이름, 주소, 도도부현, 교구, 지역 검색 확장, 검색 결과 정렬 개선), searchPostsProvider 추가, 검색 UI 개선 (검색 히스토리 서비스, 자동완성 기능, PostListSearchBar 및 ParishSearchBar 개선) | - |
+| 2025-12-16 | 성인 축일 데이터 업데이트 - ChatGPT API를 사용하여 전체 월별 누락된 성인 추가: 12,1,2월 95명, 3,4,5월 112명, 6,7,8월 82명, 9,10,11월 95명 추가 (총 384명), `scripts/check_and_fix_missing_saints.py` 스크립트 사용 | be1fd25 |
+| 2025-12-16 | 다국어 지원 완료 - 모든 언어 파일의 일본어 텍스트를 각 언어로 번역 완료: 영어 76개, 스페인어 289개, 포르투갈어 289개, 베트남어 289개, 중국어 번역 완료, 모든 언어 파일에서 일본어 문자(히라가나/가타카나) 제거 완료 | be1fd25 |
+| 2025-12-16 | Google 로그인 문제 해결 - ApiException: 10 (DEVELOPER_ERROR) 오류 해결, Firebase Console에서 SHA-1 인증서 추가 (61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A), Android OAuth Client ID 자동 생성 확인 (182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com), google-services.json 업데이트 (client_type: 1 추가), Google Sign-In 정상 작동 확인 | be1fd25 |
+| 2025-12-17 | 검색 기능 구현 - 게시글 검색 기능 구현 (PostRepository.searchPosts 메서드 추가, Firestore 쿼리 + 클라이언트 사이드 필터링), 성당 검색 개선 (이름, 주소, 도도부현, 교구, 지역 검색 확장, 검색 결과 정렬 개선), searchPostsProvider 추가, 검색 UI 개선 (검색 히스토리 서비스, 자동완성 기능, PostListSearchBar 및 ParishSearchBar 개선) | be1fd25 |
+| 2025-12-18 | 성인 이미지 자동 검색 기능 구현 - Wikipedia API 및 GPT-4o를 통한 이미지 URL 검색, SharedPreferences 기반 캐싱, 실패한 URL 추적 및 자동 재검색 (404 에러 처리), 실패한 URL 목록을 SharedPreferences에 저장하여 영구 추적, `SaintImageService` 생성, `saintImageUrlProvider` 개선 | - |
+| 2025-12-18 | 단위 테스트 커버리지 확장 - FirestorePostRepository 테스트 추가 (8개 테스트 케이스: createPost, updatePost, deletePost, getPostById, isLiked), FirestoreReportRepository 테스트 추가 (5개 테스트 케이스: createReport, 중복 신고 방지, 에러 처리), 총 테스트 케이스 36개로 확장 | - |
 
 ---
 
@@ -301,9 +347,10 @@
    - 날짜 포맷 로케일 동적 업데이트
    - 번역 데이터 자동 재로드
 
-2. **단위 테스트 커버리지 추가** (8-12시간)
+2. **단위 테스트 커버리지 추가** ✅ 진행 중
    - 우선순위: Repository 구현, State notifiers, 유틸리티 함수
-   - 점진적으로 추가 가능
+   - 완료된 작업: 총 13개 테스트 파일, 85개 테스트 케이스 완료 (Repository, Notifier, Provider 테스트 포함)
+   - 남은 작업: 추가 Notifier 테스트 (점진적으로 추가 가능)
 
 ### 우선순위 2: 중간
 
@@ -335,7 +382,7 @@
 
 このドキュメントは、コードベースで発見されたすべてのTODOコメントと保留中の機能実装を追跡します。
 
-**最終更新**: 2025-12-16
+**最終更新**: 2025-12-18 (通知設定画面、オフラインモード、共有機能改善完了)
 **コードベース全体**: 約27,000行のDartコード、135ファイル
 
 ---
@@ -508,9 +555,10 @@
 - [x] `prayer_service.dart`のthrow ExceptionをFailureに置き換え ✅
 - [x] `image_upload_service.dart`のthrow ExceptionをFailureに置き換え ✅
 - [x] `app_user.dart`のthrow ExceptionをValidationFailureに置き換え ✅
-- [ ] 単体テストカバレッジ追加
+- [x] 単体テストカバレッジ追加 ✅ (部分完了)
   - 優先度: Repository実装、State notifiers、ユーティリティ関数
-  - 予想作業量: 8-12時間
+  - 完了した作業: FirestoreUserRepository, FirestoreNotificationRepository, AuthRepositoryImpl, PostFormNotifierテスト実装
+  - 残りの作業: 追加RepositoryおよびNotifierテスト (段階的に追加可能)
 - [x] Provider構成標準化 ✅
   - 現在: `features/parish/presentation/providers/`, `features/community/data/providers/`
   - 推奨: `features/{feature}/data/providers/` (Repository), `features/{feature}/presentation/providers/` (UI state)
@@ -595,10 +643,11 @@
 | 2025-12-15 | 距離順フィルターチップUI改善 - `ParishFilterChip`で`isSelected`状態によるチェックアイコンおよび背景色変更 | cfc4ab29 |
 | 2025-12-15 | 外国語ミサデータ修正 - 末吉町教会など13個の聖堂の`foreignMassTimes`データを`massTime`テキストベースで修正、`scripts/fix_foreign_mass_times.py`および`scripts/auto_fix_foreign_mass.py`生成 | cfc4ab29 |
 | 2025-12-15 | ミサ時間データ一貫性検証および修正 - kagoshima.jsonの志布志教会、阿久根教会`massTimes`データを`massTime`テキストと一致するように修正、kyoto.jsonの上野教会`massTimes`に土曜日19:30および日曜日09:00、10:30、17:00追加、`foreignMassTimes`にタガログ語ミサ追加 | bad05ad |
-| 2025-12-16 | 聖人祝日データ更新 - ChatGPT APIを使用して全体月別欠落聖人追加: 12,1,2月 95名、3,4,5月 112名、6,7,8月 82名、9,10,11月 95名追加 (合計 384名)、`scripts/check_and_fix_missing_saints.py`スクリプト使用 | - |
-| 2025-12-16 | 多言語サポート完了 - すべての言語ファイルの日本語テキストを各言語に翻訳完了: 英語 76個、スペイン語 289個、ポルトガル語 289個、ベトナム語 289個、中国語翻訳完了、すべての言語ファイルから日本語文字(ひらがな/カタカナ)削除完了 | - |
-| 2025-12-16 | Googleログイン問題解決 - ApiException: 10 (DEVELOPER_ERROR)エラー解決、Firebase ConsoleでSHA-1証明書追加 (61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A)、Android OAuth Client ID自動生成確認 (182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com)、google-services.json更新 (client_type: 1追加)、Google Sign-In正常動作確認 | - |
-| 2025-12-16 | 検索機能実装 - 投稿検索機能実装 (PostRepository.searchPostsメソッド追加、Firestoreクエリ + クライアントサイドフィルタリング)、聖堂検索改善 (名前、住所、都道府県、教区、地域検索拡張、検索結果ソート改善)、searchPostsProvider追加、検索UI改善 (検索履歴サービス、自動補完機能、PostListSearchBarおよびParishSearchBar改善) | - |
+| 2025-12-16 | 聖人祝日データ更新 - ChatGPT APIを使用して全体月別欠落聖人追加: 12,1,2月 95名、3,4,5月 112名、6,7,8月 82名、9,10,11月 95名追加 (合計 384名)、`scripts/check_and_fix_missing_saints.py`スクリプト使用 | be1fd25 |
+| 2025-12-16 | 多言語サポート完了 - すべての言語ファイルの日本語テキストを各言語に翻訳完了: 英語 76個、スペイン語 289個、ポルトガル語 289個、ベトナム語 289個、中国語翻訳完了、すべての言語ファイルから日本語文字(ひらがな/カタカナ)削除完了 | be1fd25 |
+| 2025-12-16 | Googleログイン問題解決 - ApiException: 10 (DEVELOPER_ERROR)エラー解決、Firebase ConsoleでSHA-1証明書追加 (61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A)、Android OAuth Client ID自動生成確認 (182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com)、google-services.json更新 (client_type: 1追加)、Google Sign-In正常動作確認 | be1fd25 |
+| 2025-12-17 | 検索機能実装 - 投稿検索機能実装 (PostRepository.searchPostsメソッド追加、Firestoreクエリ + クライアントサイドフィルタリング)、聖堂検索改善 (名前、住所、都道府県、教区、地域検索拡張、検索結果ソート改善)、searchPostsProvider追加、検索UI改善 (検索履歴サービス、自動補完機能、PostListSearchBarおよびParishSearchBar改善) | be1fd25 |
+| 2025-12-18 | 聖人画像自動検索機能実装 - Wikipedia APIおよびGPT-4oを使用した画像URL検索、SharedPreferencesベースのキャッシング、失敗したURL追跡および自動再検索 (404エラー処理)、失敗したURLリストをSharedPreferencesに保存して永続追跡、`SaintImageService`生成、`saintImageUrlProvider`改善 | - |
 
 ---
 

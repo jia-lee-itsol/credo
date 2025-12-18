@@ -86,6 +86,9 @@ class AppLocalizations {
   /// 검색 번역
   SearchTranslations get search => SearchTranslations(_getValue('search'));
 
+  /// 성인 번역
+  SaintsTranslations get saints => SaintsTranslations(_getValue('saints'));
+
   /// 앱 정보 번역
   AppTranslations get app => AppTranslations(_getValue('app'));
 }
@@ -151,6 +154,10 @@ class CommonTranslations {
   String get favoriteRemoved =>
       _getString('favoriteRemoved') ?? 'お気に入りから削除しました';
   String get commentHint => _getString('commentHint') ?? 'コメントを入力...';
+  String? get offlineMode => _getString('offlineMode');
+  String get shareLink => _getString('shareLink') ?? 'リンク';
+  String get shareAppLink => _getString('shareAppLink') ?? 'アプリリンク';
+  String get confirm => _getString('confirm') ?? '確認';
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -386,7 +393,10 @@ class MassTranslations {
   String get noDataWeekday => _getString('noDataWeekday') ?? '平日の黙想情報は現在準備中です';
   String get bibleNotice =>
       _getString('bibleNotice') ?? '※聖書の本文は、教会でお聞きになるか、公式の聖書をお読みください。';
+  String get contentDisclaimer =>
+      _getString('contentDisclaimer') ?? '本コンテンツは公式ミサ典礼文を代替するものではなく、信仰生活を助けるための案内および黙想用資料です。';
   String get title => _getString('title') ?? '日々の黙想';
+  String get shareReading => _getString('shareReading') ?? '今日のミサの読書をシェア';
 
   String liturgicalDay(String key) {
     final days = _getValue('liturgicalDays');
@@ -471,6 +481,7 @@ class CommunityTranslations {
       _getString('commentPostFailed') ?? 'コメント投稿に失敗しました';
   String get likeFailed => _getString('likeFailed') ?? 'いいね処理に失敗しました';
   String get shareMeditation => _getString('shareMeditation') ?? '黙想を共有しました';
+  String? get sharePost => _getString('sharePost');
   String get noSearchResults => _getString('noSearchResults') ?? '検索結果がありません';
   String get errorOccurred => _getString('errorOccurred') ?? 'エラーが発生しました';
   String get swipeToRefresh => _getString('swipeToRefresh') ?? '下にスワイプして再読み込み';
@@ -492,6 +503,29 @@ class CommunityTranslations {
   String get noOfficialNotices =>
       _getString('noOfficialNotices') ?? '公式お知らせがありません';
   String get createNotice => _getString('createNotice') ?? 'お知らせを作成';
+  String get attachments => _getString('attachments') ?? '添付ファイル';
+  String get attachmentsDescription =>
+      _getString('attachmentsDescription') ??
+      '画像は最大3枚、PDFは最大2個まで添付できます（合計5個まで）';
+  String get pdfFiles => _getString('pdfFiles') ?? 'PDFファイル';
+  String get addFile => _getString('addFile') ?? 'ファイルを追加';
+  String get addButton => _getString('addButton') ?? '追加';
+  String get pdfFileTooLarge =>
+      _getString('pdfFileTooLarge') ??
+      'PDFファイルのサイズは10MBを超えることはできません';
+  String get pdfSelectFailed =>
+      _getString('pdfSelectFailed') ?? 'PDFファイルの選択に失敗しました';
+  String get tapToOpen => _getString('tapToOpen') ?? 'タップして開く';
+
+  String maxImagesReached({required int max}) {
+    final template = _getString('maxImagesReached') ?? '画像は最大{max}枚まで添付できます';
+    return template.replaceAll('{max}', max.toString());
+  }
+
+  String maxPdfsReached({required int max}) {
+    final template = _getString('maxPdfsReached') ?? 'PDFは最大{max}個まで添付できます';
+    return template.replaceAll('{max}', max.toString());
+  }
 
   CommunityFilterTranslations get filter =>
       CommunityFilterTranslations(_getValue('filter'));
@@ -538,6 +572,11 @@ class CommunityHomeTranslations {
       _getString('todayBibleReadingAndPrayer') ?? '';
   String get recentNotices => _getString('recentNotices') ?? '';
   String get noNotices => _getString('noNotices') ?? '';
+  String get postAdded => _getString('postAdded') ?? '投稿が追加されました';
+  String get commentAdded => _getString('commentAdded') ?? 'コメントがつきました';
+  String get noticeAdded => _getString('noticeAdded') ?? 'お知らせが投稿されました';
+  String get newPostAdded => _getString('newPostAdded') ?? '新規投稿が投稿されました';
+  String get commentOnMyPost => _getString('commentOnMyPost') ?? '自分の投稿にコメントがつきました';
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -573,6 +612,7 @@ class NotificationLabelsTranslations {
 
   String get mention => _getString('mention') ?? 'メンション';
   String get notice => _getString('notice') ?? 'お知らせ';
+  String get post => _getString('post') ?? '投稿';
   String get comment => _getString('comment') ?? 'コメント';
 
   String? _getString(String key) {
@@ -713,11 +753,18 @@ class ProfileTranslations {
       _getString('directInputDialogTitle') ?? '洗礼名と祝日を入力';
   String get month => _getString('month') ?? '月';
   String get day => _getString('day') ?? '日';
+  String get clearCache => _getString('clearCache') ?? 'キャッシュを削除';
+  String get clearCacheDescription =>
+      _getString('clearCacheDescription') ?? '聖人データや画像のキャッシュを削除します';
+  String get clearCacheConfirm =>
+      _getString('clearCacheConfirm') ?? 'キャッシュを削除しますか？聖人データが再読み込みされます。';
 
   ProfileGodparentTranslations get godparent =>
       ProfileGodparentTranslations(_getValue('godparent'));
   ProfileFavoriteParishesTranslations get favoriteParishesSection =>
       ProfileFavoriteParishesTranslations(_getValue('favoriteParishes'));
+  ProfileNotificationsTranslations get notifications =>
+      ProfileNotificationsTranslations(_getValue('notifications'));
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -787,6 +834,44 @@ class ProfileFavoriteParishesTranslations {
   }
 }
 
+/// 프로필 알림 번역
+class ProfileNotificationsTranslations {
+  final dynamic _data;
+
+  ProfileNotificationsTranslations(this._data);
+
+  String get enabled => _getString('enabled') ?? '通知を有効にする';
+  String get enabledDescription =>
+      _getString('enabledDescription') ?? 'すべての通知をオン/オフにします';
+  String get categories => _getString('categories') ?? '通知カテゴリ';
+  String get notices => _getString('notices') ?? 'お知らせ';
+  String get noticesDescription =>
+      _getString('noticesDescription') ?? '教会からのお知らせを受け取ります';
+  String get comments => _getString('comments') ?? 'コメント';
+  String get commentsDescription =>
+      _getString('commentsDescription') ?? '投稿へのコメントを受け取ります';
+  String get likes => _getString('likes') ?? 'いいね';
+  String get likesDescription =>
+      _getString('likesDescription') ?? '投稿へのいいねを受け取ります';
+  String get dailyMass => _getString('dailyMass') ?? '毎日のミサ';
+  String get dailyMassDescription =>
+      _getString('dailyMassDescription') ?? '毎日のミサの読み物の通知を受け取ります';
+  String get quietHours => _getString('quietHours') ?? 'おやすみモード';
+  String get quietHoursDescription =>
+      _getString('quietHoursDescription') ??
+      '指定した時間帯は通知を受け取りません';
+  String get quietHoursStart => _getString('quietHoursStart') ?? '開始時刻';
+  String get quietHoursEnd => _getString('quietHoursEnd') ?? '終了時刻';
+  String get saved => _getString('saved') ?? '通知設定を保存しました';
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
 /// 교회 번역
 class ParishTranslations {
   final dynamic _data;
@@ -795,6 +880,7 @@ class ParishTranslations {
 
   String get detail => _getString('detail') ?? '教会詳細';
   String get notFound => _getString('notFound') ?? '教会情報が見つかりませんでした';
+  String? get shareParish => _getString('shareParish');
   String get favoriteAdded => _getString('favoriteAdded') ?? 'お気に入りに追加しました';
   String get favoriteRemoved =>
       _getString('favoriteRemoved') ?? 'お気に入りから削除しました';
@@ -1265,6 +1351,53 @@ class SearchTranslations {
   String get parishSearchHint => _getString('parishSearchHint') ?? '教会名で検索';
   String get saintSearchHint => _getString('saintSearchHint') ?? '聖人名で検索';
   String get noResults => _getString('noResults') ?? '検索結果がありません';
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
+/// 성인 번역
+class SaintsTranslations {
+  final dynamic _data;
+
+  SaintsTranslations(this._data);
+
+  String get feastDay => _getString('feastDay') ?? '祝日';
+  String get yourBaptismalName =>
+      _getString('yourBaptismalName') ?? 'あなたの洗礼名の祝日です';
+  String get solemnity => _getString('solemnity') ?? '大祝日';
+  String get feast => _getString('feast') ?? '祝日';
+  String get memorial => _getString('memorial') ?? '記念日';
+  String get todaySaints => _getString('todaySaints') ?? '今日の聖人';
+  String get todaySaintsSubtitle =>
+      _getString('todaySaintsSubtitle') ?? '今日記念される聖人たち';
+  String get biography => _getString('biography') ?? '生涯';
+  String get achievements => _getString('achievements') ?? '主な業績';
+  String get patronage => _getString('patronage') ?? '守護';
+  String get prayer => _getString('prayer') ?? '祈り';
+  String get howToHonor => _getString('howToHonor') ?? '聖人を敬う方法';
+  String get detailLoadFailed =>
+      _getString('detailLoadFailed') ?? '詳細情報の読み込みに失敗しました';
+  String get noSaintsToday =>
+      _getString('noSaintsToday') ?? '今日記念される聖人はいません';
+  String? get generatingMessage => _getString('generatingMessage');
+  String get loadFailed => _getString('loadFailed') ?? '読み込みに失敗しました';
+  String get sourceNote =>
+      _getString('sourceNote') ??
+      '📖 ローマ殉教録と教会の伝統に基づき、今日記念される聖人です。';
+  String get liturgyTakesPrecedence =>
+      _getString('liturgyTakesPrecedence') ??
+      '⛪ 今日は典礼が優先される日です。';
+  String get optionalMemorial => _getString('optionalMemorial') ?? '任意記念日';
+
+  String andMore({required int count}) {
+    final template = _getString('andMore') ?? '他{count}人';
+    return template.replaceAll('{count}', count.toString());
+  }
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/utils/app_localizations.dart';
+import 'offline_indicator.dart';
 
 /// 메인 네비게이션이 포함된 Scaffold
 class MainScaffold extends ConsumerWidget {
@@ -16,7 +17,14 @@ class MainScaffold extends ConsumerWidget {
     final l10n = ref.watch(appLocalizationsSyncProvider);
 
     return Scaffold(
-      body: navigationShell,
+      body: Column(
+        children: [
+          // 오프라인 상태 표시
+          const OfflineIndicator(),
+          // 메인 콘텐츠
+          Expanded(child: navigationShell),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: navigationShell.currentIndex,
         height: 72, // 네비게이션 바 높이 증가 (라벨 포함)

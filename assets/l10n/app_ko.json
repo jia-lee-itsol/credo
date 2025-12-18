@@ -5,6 +5,7 @@
   },
   "common": {
     "ok": "확인",
+    "confirm": "확인",
     "cancel": "취소",
     "save": "저장",
     "delete": "삭제",
@@ -185,18 +186,37 @@
       "parishNotSet": "소속 교회가 설정되지 않았습니다",
       "parishLoadFailed": "소속 교회 정보를 불러올 수 없습니다",
       "searchOtherParishes": "다른 교회의 커뮤니티 찾기",
-      "todayMass": "오늘의 미사",
+      "todayMass": "오늘의 말씀",
       "todayBibleReadingAndPrayer": "오늘의 성경 봉독과 기도",
       "recentNotices": "최근 공지사항",
-      "noNotices": "공지사항이 없습니다"
+      "noNotices": "공지사항이 없습니다",
+      "postAdded": "글이 추가되었습니다",
+      "commentAdded": "댓글이 달렸습니다",
+      "noticeAdded": "공지글 등록",
+      "newPostAdded": "새글 등록",
+      "commentOnMyPost": "내글에 댓글 등록"
     },
     "notificationLabels": {
       "mention": "멘션",
       "notice": "공지",
-      "comment": "댓글"
+      "comment": "댓글",
+      "post": "게시글"
     },
     "postsCount": "{count}개의 게시글",
-    "postsCount@count": "게시글 수"
+    "postsCount@count": "게시글 수",
+    "attachments": "첨부파일",
+    "attachmentsDescription": "이미지는 최대 3개, PDF는 최대 2개까지 첨부할 수 있습니다 (총 5개까지)",
+    "pdfFiles": "PDF 파일",
+    "addFile": "파일 추가",
+    "addButton": "추가",
+    "maxImagesReached": "이미지는 최대{max}개까지 첨부할 수 있습니다",
+    "maxImagesReached@max": "최대 이미지 수",
+    "maxPdfsReached": "PDF는 최대{max}개까지 첨부할 수 있습니다",
+    "maxPdfsReached@max": "최대 PDF 수",
+    "pdfFileTooLarge": "PDF 파일 크기는 10MB를 초과할 수 없습니다",
+    "pdfSelectFailed": "PDF 파일 선택에 실패했습니다",
+    "pdfOpenFailed": "PDF 파일을 열 수 없습니다",
+    "tapToOpen": "탭하여 열기"
   },
   "report": {
     "title": "신고",
@@ -251,6 +271,9 @@
     "directInputDialogTitle": "세례명과 축일 입력",
     "month": "월",
     "day": "일",
+    "clearCache": "캐시 삭제",
+    "clearCacheDescription": "성인 데이터 및 이미지 캐시를 삭제합니다",
+    "clearCacheConfirm": "캐시를 삭제하시겠습니까? 성인 데이터가 다시 로드됩니다.",
     "godparent": {
       "add": "추가",
       "remove": "삭제",
@@ -271,6 +294,24 @@
       "deleteTitle": "삭제",
       "registeredCount": "{count}개 등록됨",
       "registeredCount@count": "등록된 개수"
+    },
+    "notifications": {
+      "enabled": "알림 활성화",
+      "enabledDescription": "모든 알림을 켜거나 끕니다",
+      "categories": "알림 카테고리",
+      "notices": "공지사항",
+      "noticesDescription": "교회 공지사항을 받습니다",
+      "comments": "댓글",
+      "commentsDescription": "게시글 댓글을 받습니다",
+      "likes": "좋아요",
+      "likesDescription": "게시글 좋아요를 받습니다",
+      "dailyMass": "일일 미사",
+      "dailyMassDescription": "매일 미사 독서 알림을 받습니다",
+      "quietHours": "조용한 시간",
+      "quietHoursDescription": "지정한 시간대에는 알림을 받지 않습니다",
+      "quietHoursStart": "시작 시간",
+      "quietHoursEnd": "종료 시간",
+      "saved": "알림 설정이 저장되었습니다"
     }
   },
   "parish": {
@@ -359,6 +400,7 @@
     "noDataToday": "오늘의 묵상 정보가 없습니다",
     "noDataWeekday": "평일 묵상 정보는 현재 준비 중입니다",
     "bibleNotice": "※성경 본문은 교회에서 들으시거나 공식 성경을 읽어주세요.",
+    "contentDisclaimer": "본 콘텐츠는 공식 미사 전례문을 대체하지 않으며, 신앙 생활을 돕기 위한 안내 및 묵상용 자료입니다.",
     "liturgicalDays": {
       "sunday": "주일",
       "solemnity": "대축일",
@@ -505,5 +547,24 @@
     "notificationSettings": "알림 설정은 준비 중입니다",
     "termsOfService": "이용약관은 준비 중입니다",
     "privacyPolicy": "개인정보처리방침은 준비 중입니다"
+  },
+  "saints": {
+    "feastDay": "축일",
+    "yourBaptismalName": "당신의 세례명 축일입니다",
+    "solemnity": "대축일",
+    "feast": "축일",
+    "memorial": "기념일",
+    "todaySaints": "오늘 만날 성인",
+    "todaySaintsSubtitle": "오늘 만난 성인들",
+    "andMore": "외 {count}명",
+    "biography": "생애",
+    "achievements": "주요 업적",
+    "patronage": "수호 영역",
+    "prayer": "기도문",
+    "howToHonor": "성인을 기리는 방법",
+    "detailLoadFailed": "상세 정보를 불러오는데 실패했습니다",
+    "noSaintsToday": "오늘 기념되는 성인이 없습니다",
+    "loadFailed": "불러오는데 실패했습니다",
+    "sourceNote": "📖 로마 순교록 및 교회 전통에 따라 오늘 기념되는 성인입니다."
   }
 }

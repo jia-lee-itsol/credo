@@ -21,6 +21,8 @@ class PostFormState {
   final String? errorMessage;
   final List<File> selectedImages; // 선택된 이미지 파일들
   final List<String> imageUrls; // 업로드된 이미지 URL들
+  final List<File> selectedPdfs; // 선택된 PDF 파일들
+  final List<String> pdfUrls; // 업로드된 PDF URL들
 
   const PostFormState({
     this.title = '',
@@ -32,6 +34,8 @@ class PostFormState {
     this.errorMessage,
     this.selectedImages = const [],
     this.imageUrls = const [],
+    this.selectedPdfs = const [],
+    this.pdfUrls = const [],
   });
 
   /// 복사본 생성
@@ -45,6 +49,8 @@ class PostFormState {
     String? errorMessage,
     List<File>? selectedImages,
     List<String>? imageUrls,
+    List<File>? selectedPdfs,
+    List<String>? pdfUrls,
   }) {
     return PostFormState(
       title: title ?? this.title,
@@ -56,6 +62,8 @@ class PostFormState {
       errorMessage: errorMessage ?? this.errorMessage,
       selectedImages: selectedImages ?? this.selectedImages,
       imageUrls: imageUrls ?? this.imageUrls,
+      selectedPdfs: selectedPdfs ?? this.selectedPdfs,
+      pdfUrls: pdfUrls ?? this.pdfUrls,
     );
   }
 }
@@ -119,9 +127,10 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
            category: initialPost?.category ?? 'community',
            isOfficial: initialPost?.isOfficial ?? false,
            isPinned: initialPost?.isPinned ?? false,
-           imageUrls: initialPost?.imageUrls ?? [],
-         ),
-       );
+          imageUrls: initialPost?.imageUrls ?? [],
+          pdfUrls: initialPost?.pdfUrls ?? [],
+        ),
+      );
 
   /// 제목 설정
   void setTitle(String title) {
@@ -185,6 +194,19 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
     state = state.copyWith(selectedImages: updatedImages);
   }
 
+  /// PDF 추가
+  void addPdf(File pdfFile) {
+    final updatedPdfs = [...state.selectedPdfs, pdfFile];
+    state = state.copyWith(selectedPdfs: updatedPdfs);
+  }
+
+  /// PDF 제거
+  void removePdf(int index) {
+    final updatedPdfs = List<File>.from(state.selectedPdfs);
+    updatedPdfs.removeAt(index);
+    state = state.copyWith(selectedPdfs: updatedPdfs);
+  }
+
   /// 제출
   Future<bool> submit() async {
     AppLogger.debug('===== submit() 시작 =====');
@@ -244,6 +266,29 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
         }
       }
 
+      // PDF 업로드 (PDF가 있는 경우)
+      List<String> uploadedPdfUrls = List.from(state.pdfUrls);
+      if (state.selectedPdfs.isNotEmpty) {
+        AppLogger.image('PDF 업로드 시작: ${state.selectedPdfs.length}개');
+        try {
+          final urls = await _imageUploadService.uploadPdfs(
+            pdfFiles: state.selectedPdfs,
+            userId: _currentUser.uid,
+          );
+          uploadedPdfUrls.addAll(urls);
+          AppLogger.image('PDF 업로드 완료: ${uploadedPdfUrls.length}개');
+        } catch (e) {
+          AppLogger.error('PDF 업로드 실패: $e', e);
+          String errorMessage;
+          if (e is FirebaseFailure) {
+            errorMessage = e.message;
+          } else {
+            errorMessage = 'PDF 업로드에 실패했습니다. 네트워크 연결을 확인하고 다시 시도해주세요.';
+          }
+          throw Exception(errorMessage);
+        }
+      }
+
       if (_initialPost == null) {
         // 새 게시글 생성
         AppLogger.community('===== 게시글 작성 시작 =====');
@@ -266,6 +311,7 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
           title: trimmedTitle,
           body: trimmedBody,
           imageUrls: uploadedImageUrls,
+          pdfUrls: uploadedPdfUrls,
           isPinned: state.isPinned,
           createdAt: now,
           updatedAt: now,
@@ -333,6 +379,7 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
           title: trimmedTitle,
           body: trimmedBody,
           imageUrls: uploadedImageUrls,
+          pdfUrls: uploadedPdfUrls,
           category: state.category,
           type: state.isOfficial ? 'official' : 'normal',
           isPinned: state.isPinned,

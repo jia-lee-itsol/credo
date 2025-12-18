@@ -284,15 +284,30 @@ $languageName 이름:''';
       final year = date.year;
 
       final prompt =
-          '''$year년 $month월 $day일 가톨릭 성인 축일을 검색해주세요.
+          '''What saints are celebrated on $month/$day according to the Catholic liturgical calendar?
 
-요구사항:
-- 해당 날짜에 기념되는 모든 가톨릭 성인을 찾아주세요
-- 각 성인의 이름을 $languageName로 제공해주세요
-- JSON 형식으로 반환해주세요
-- 형식: {"saints": [{"name": "성인 이름", "nameEn": "English name", "type": "solemnity|feast|memorial"}]}
-- 여러 성인이 있으면 모두 포함해주세요
-- 설명이나 추가 텍스트 없이 JSON만 반환해주세요''';
+RULES:
+1. First, list saints from the GENERAL ROMAN CALENDAR (Universal):
+   - Solemnities (대축일/solemnity)
+   - Feasts (축일/feast)
+   - Obligatory Memorials (의무 기념일/obligatory_memorial)
+
+2. Then, also include well-known saints celebrated regionally or as Optional Memorials:
+   - Optional Memorials (선택 기념일/optional_memorial)
+   - Mark these with type "optional_memorial"
+
+3. Set "liturgyTakesPrecedence" to true if this date falls during:
+   - Advent weekdays (Dec 17-24)
+   - Christmas Octave
+   - Lent weekdays
+   - Holy Week
+   - Easter Octave
+   - Other major liturgical celebrations that supersede saint memorials
+
+Provide names in $languageName with English reference.
+
+Return ONLY valid JSON (no markdown, no explanation):
+{"saints": [{"name": "성인 이름 in $languageName", "nameEn": "English name", "type": "solemnity|feast|obligatory_memorial|optional_memorial", "imageUrl": null}], "liturgyTakesPrecedence": true|false, "liturgicalNote": "explanation if liturgy takes precedence"}''';
 
       final response = await _dio.post(
         '$_baseUrl/chat/completions',
@@ -303,17 +318,32 @@ $languageName 이름:''';
           },
         ),
         data: {
-          'model': 'gpt-4o-mini',
+          'model': 'gpt-4o',
           'messages': [
             {
               'role': 'system',
               'content':
-                  '당신은 가톨릭 성인 축일 전문가입니다. 정확한 날짜와 성인 정보를 제공합니다. JSON 형식으로만 응답합니다.',
+                  '''You are an expert in the Catholic Liturgical Calendar.
+
+Your task is to identify saints celebrated on a given date:
+
+1. UNIVERSAL celebrations (General Roman Calendar):
+   - Solemnities (대축일): Highest rank
+   - Feasts (축일): Second rank
+   - Obligatory Memorials (의무 기념일): Third rank
+
+2. OPTIONAL celebrations (also include these):
+   - Optional Memorials (선택 기념일): Can be celebrated optionally
+   - Well-known regional saints
+
+Always indicate if liturgy takes precedence on that date (Advent Dec 17-24, Lent weekdays, Holy Week, Octaves, etc.).
+
+Return only valid JSON without markdown formatting.''',
             },
             {'role': 'user', 'content': prompt},
           ],
-          'temperature': 0.3,
-          'max_tokens': 500,
+          'temperature': 0.1,
+          'max_tokens': 1000,
         },
       );
 
@@ -412,6 +442,108 @@ $languageName 이름:''';
       throw Exception('GPT 응답에서 내용을 찾을 수 없습니다.');
     } catch (e, stackTrace) {
       AppLogger.error('[OpenAIService] 전례력 확인 실패: $date', e, stackTrace);
+      rethrow;
+    }
+  }
+
+  /// 성인 축일 축하 메시지 생성
+  ///
+  /// [saintName] 성인 이름
+  /// [userBaptismalName] 사용자 세례명 (옵션)
+  /// [language] 언어 코드: 'ja', 'ko', 'en' 등
+  ///
+  /// 반환: 축하 메시지 텍스트
+  Future<String> generateFeastDayMessage({
+    required String saintName,
+    String? userBaptismalName,
+    required String language,
+  }) async {
+    try {
+      final apiKey = OpenAIApiKey.apiKey;
+      if (apiKey == null) {
+        throw Exception('OPENAI_API_KEY가 설정되지 않았습니다.');
+      }
+
+      // 언어별 프롬프트 설정
+      final languageName = _getLanguageName(language);
+
+      String prompt;
+      if (userBaptismalName != null &&
+          (saintName.toLowerCase().contains(userBaptismalName.toLowerCase()) ||
+              userBaptismalName.toLowerCase().contains(
+                saintName.toLowerCase(),
+              ))) {
+        // 세례명이 성인 이름과 일치하는 경우
+        prompt =
+            '''당신은 가톨릭 신앙의 축하 메시지를 작성하는 전문가입니다.
+
+오늘은 성인 $saintName의 축일입니다. 사용자의 세례명이 $userBaptismalName으로 이 성인과 같습니다.
+
+$languageName로 간결하고 따뜻한 축하 메시지를 작성해주세요. 
+- 2-3문장 정도로 간결하게
+- 축일을 축하하는 따뜻한 메시지
+- 성인의 삶과 가르침에서 영감을 받은 내용
+- 개인적인 축하 메시지 느낌
+- $languageName로 작성하세요''';
+      } else {
+        // 일반적인 축일 축하 메시지
+        prompt =
+            '''당신은 가톨릭 신앙의 축하 메시지를 작성하는 전문가입니다.
+
+오늘은 성인 $saintName의 축일입니다.
+
+$languageName로 간결하고 따뜻한 축하 메시지를 작성해주세요. 
+- 2-3문장 정도로 간결하게
+- 축일을 축하하는 따뜻한 메시지
+- 성인의 삶과 가르침에서 영감을 받은 내용
+- $languageName로 작성하세요''';
+      }
+
+      final response = await _dio.post(
+        '$_baseUrl/chat/completions',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $apiKey',
+            'Content-Type': 'application/json',
+          },
+        ),
+        data: {
+          'model': 'gpt-4o-mini',
+          'messages': [
+            {
+              'role': 'system',
+              'content':
+                  '당신은 가톨릭 신앙의 축하 메시지를 작성하는 전문가입니다. 간결하고 따뜻한 축하 메시지를 작성합니다.',
+            },
+            {'role': 'user', 'content': prompt},
+          ],
+          'temperature': 0.8,
+          'max_tokens': 200,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.data as Map<String, dynamic>;
+        final choices = data['choices'] as List<dynamic>?;
+        if (choices != null && choices.isNotEmpty) {
+          final message = choices.first['message'] as Map<String, dynamic>?;
+          final content = message?['content'] as String?;
+          if (content != null && content.isNotEmpty) {
+            AppLogger.debug(
+              '[OpenAIService] 축하 메시지 생성 성공: $saintName ($language)',
+            );
+            return content.trim();
+          }
+        }
+      }
+
+      throw Exception('GPT 응답에서 내용을 찾을 수 없습니다.');
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        '[OpenAIService] 축하 메시지 생성 실패: $saintName ($language)',
+        e,
+        stackTrace,
+      );
       rethrow;
     }
   }

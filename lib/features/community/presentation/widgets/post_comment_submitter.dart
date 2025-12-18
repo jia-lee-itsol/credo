@@ -17,6 +17,8 @@ class PostCommentSubmitter {
     required Post post,
     required AppUser currentUser,
     required String content,
+    List<String> imageUrls = const [],
+    List<String> pdfUrls = const [],
   }) async {
     try {
       final postRepo = ref.read(postRepositoryProvider);
@@ -29,6 +31,8 @@ class PostCommentSubmitter {
         authorId: currentUser.uid,
         authorName: currentUser.displayName,
         content: content,
+        imageUrls: imageUrls,
+        pdfUrls: pdfUrls,
       );
       final commentId = commentResult.fold((failure) {
         AppLogger.error('댓글 생성 실패: ${failure.message}', failure);

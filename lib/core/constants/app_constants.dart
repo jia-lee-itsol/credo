@@ -2,31 +2,31 @@
 class AppConstants {
   AppConstants._();
 
-  // App Info
+  // 앱 정보
   static const String appName = 'Credo';
   static const String appVersion = '1.0.0';
 
-  // Pagination
+  // 페이지네이션
   static const int defaultPageSize = 20;
   static const int maxPageSize = 50;
 
-  // Validation
+  // 유효성 검사
   static const int nicknameMinLength = 1;
   static const int nicknameMaxLength = 20;
   static const int postTitleMaxLength = 50;
   static const int postContentMaxLength = 2000;
   static const int commentMaxLength = 500;
 
-  // Cache Duration
+  // 캐시 지속 시간
   static const Duration cacheDuration = Duration(hours: 1);
   static const Duration parishCacheDuration = Duration(days: 1);
 
-  // Location
-  static const double defaultLatitude = 35.6762; // Tokyo
+  // 위치
+  static const double defaultLatitude = 35.6762; // 도쿄
   static const double defaultLongitude = 139.6503;
   static const double nearbyRadiusKm = 10.0;
 
-  // Timeouts
+  // 타임아웃
   static const Duration apiTimeout = Duration(seconds: 30);
   static const Duration connectionTimeout = Duration(seconds: 15);
 }
