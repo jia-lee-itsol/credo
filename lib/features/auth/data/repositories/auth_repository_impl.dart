@@ -635,39 +635,57 @@ class AuthRepositoryImpl implements AuthRepository {
     String? userId,
   }) async {
     try {
+      AppLogger.auth('searchUser 호출: email=$email, userId=$userId');
+      
       if (email == null && userId == null) {
+        AppLogger.auth('검색 파라미터가 없음');
         return const Left(AuthFailure(message: 'メールアドレスまたはユーザーIDを入力してください。'));
       }
 
       if (userId != null) {
         // userId로 검색 (문서 ID로 직접 조회)
+        AppLogger.auth('userId로 검색: $userId');
         final userDoc = await _firestore.collection('users').doc(userId).get();
+        AppLogger.auth('문서 존재 여부: ${userDoc.exists}');
+        
         if (!userDoc.exists) {
+          AppLogger.auth('사용자를 찾을 수 없음 (userId: $userId)');
           return const Right(null);
         }
+        
         final userModel = UserModel.fromFirestore(userDoc);
-        return Right(userModel.toEntity());
+        final userEntity = userModel.toEntity();
+        AppLogger.auth('사용자 검색 성공: ${userEntity.userId}, ${userEntity.email}');
+        return Right(userEntity);
       } else {
         // email로 검색
+        AppLogger.auth('email로 검색: $email');
         final querySnapshot = await _firestore
             .collection('users')
             .where('email', isEqualTo: email)
             .limit(1)
             .get();
 
+        AppLogger.auth('검색 결과 문서 수: ${querySnapshot.docs.length}');
+
         if (querySnapshot.docs.isEmpty) {
+          AppLogger.auth('사용자를 찾을 수 없음 (email: $email)');
           return const Right(null);
         }
 
         final userDoc = querySnapshot.docs.first;
         final userModel = UserModel.fromFirestore(userDoc);
-        return Right(userModel.toEntity());
+        final userEntity = userModel.toEntity();
+        AppLogger.auth('사용자 검색 성공: ${userEntity.userId}, ${userEntity.email}');
+        return Right(userEntity);
       }
-    } on FirebaseException catch (e) {
+    } on FirebaseException catch (e, stackTrace) {
+      AppLogger.error('Firebase 에러 발생: ${e.code}, ${e.message}', e, stackTrace);
       return Left(
         FirebaseFailure(message: e.message ?? 'Firebaseエラー', code: e.code),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
+      AppLogger.error('검색 에러 발생: $e', e, stackTrace);
       return Left(UnknownFailure(message: e.toString()));
     }
   }

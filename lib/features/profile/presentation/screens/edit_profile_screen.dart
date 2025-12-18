@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/data/models/saint_feast_day_model.dart';
 import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
+import '../../../../shared/providers/locale_provider.dart';
 import '../../../auth/domain/entities/user_entity.dart';
-import '../../data/providers/saint_feast_day_providers.dart';
-import '../../domain/usecases/get_saint_feast_days_usecase.dart';
 import '../../../parish/data/providers/parish_providers.dart';
 import '../../../parish/domain/usecases/get_parishes_usecase.dart';
 import '../widgets/profile_image_picker.dart';
@@ -16,7 +14,6 @@ import '../widgets/profile_basic_info_section.dart';
 import '../widgets/profile_parish_info_section.dart';
 import '../widgets/profile_sacrament_dates_section.dart';
 import '../widgets/profile_godparent_section.dart';
-import '../widgets/feast_day_search_sheet.dart';
 import '../widgets/user_search_sheet.dart';
 import '../widgets/parish_search_sheet.dart';
 
@@ -32,8 +29,8 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _nicknameController;
   bool _isSaving = false;
-  String? _selectedFeastDayId;
-  SaintFeastDayModel? _selectedFeastDay;
+  int? _feastDayMonth;
+  int? _feastDayDay;
   String? _selectedParishId;
   String? _selectedParishName;
   DateTime? _baptismDate;
@@ -50,13 +47,29 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     _nicknameController = TextEditingController(
       text: currentUser?.nickname ?? '',
     );
-    _selectedFeastDayId = currentUser?.feastDayId;
+    // feastDayId 형식: "이름:월-일" 또는 "월-일" (예: "ペトロ:6-29" 또는 "6-29")
+    if (currentUser?.feastDayId != null) {
+      final feastDayId = currentUser!.feastDayId!;
+      if (feastDayId.contains(':')) {
+        final colonParts = feastDayId.split(':');
+        final dateParts = colonParts[1].split('-');
+        if (dateParts.length == 2) {
+          _feastDayMonth = int.tryParse(dateParts[0]);
+          _feastDayDay = int.tryParse(dateParts[1]);
+        }
+      } else {
+        final parts = feastDayId.split('-');
+        if (parts.length == 2) {
+          _feastDayMonth = int.tryParse(parts[0]);
+          _feastDayDay = int.tryParse(parts[1]);
+        }
+      }
+    }
     _selectedParishId = currentUser?.mainParishId;
     _baptismDate = currentUser?.baptismDate;
     _confirmationDate = currentUser?.confirmationDate;
     _godchildren = List<String>.from(currentUser?.godchildren ?? []);
     _godparentId = currentUser?.godparentId;
-    _loadFeastDay();
     _loadParish();
     _loadGodchildren();
     _loadGodparent();
@@ -101,40 +114,6 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     }
   }
 
-  Future<void> _loadFeastDay() async {
-    if (_selectedFeastDayId == null) return;
-
-    final parts = _selectedFeastDayId!.split('-');
-    if (parts.length != 2) return;
-
-    final month = int.tryParse(parts[0]);
-    final day = int.tryParse(parts[1]);
-    if (month == null || day == null) return;
-
-    final repository = ref.read(saintFeastDayRepositoryProvider);
-    final useCase = GetSaintsForDateUseCase(repository);
-    final result = await useCase.call(DateTime(2024, month, day));
-
-    result.fold((_) {}, (saints) {
-      if (saints.isNotEmpty && mounted) {
-        // Entity를 Model로 변환 (기존 코드 호환성)
-        final saint = saints.first;
-        setState(() {
-          _selectedFeastDay = SaintFeastDayModel(
-            month: saint.month,
-            day: saint.day,
-            name: saint.name,
-            nameEn: saint.nameEnglish,
-            type: saint.type,
-            isJapanese: saint.isJapanese,
-            greeting: saint.greeting,
-            description: saint.description,
-          );
-        });
-      }
-    });
-  }
-
   Future<void> _loadParish() async {
     if (_selectedParishId == null) return;
 
@@ -155,6 +134,11 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   void dispose() {
     _nicknameController.dispose();
     super.dispose();
+  }
+
+  int _getDaysInMonth(int month) {
+    const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    return daysInMonth[month - 1];
   }
 
   @override
@@ -197,15 +181,31 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
               email: currentUser?.email,
               userId: currentUser?.userId,
               baptismalName: currentUser?.baptismalName,
+              feastDayMonth: _feastDayMonth,
+              feastDayDay: _feastDayDay,
+              onMonthChanged: (value) {
+                setState(() {
+                  _feastDayMonth = value;
+                  // 월이 변경되면 일수 확인
+                  if (_feastDayDay != null && value != null) {
+                    final maxDay = _getDaysInMonth(value);
+                    if (_feastDayDay! > maxDay) {
+                      _feastDayDay = maxDay;
+                    }
+                  }
+                });
+              },
+              onDayChanged: (value) {
+                setState(() {
+                  _feastDayDay = value;
+                });
+              },
             ),
             const SizedBox(height: 16),
             ProfileParishInfoSection(
               selectedParishName: _selectedParishName,
-              selectedFeastDay: _selectedFeastDay,
               onParishTap: () =>
                   _showParishSearchBottomSheet(context, ref, primaryColor),
-              onFeastDayTap: () =>
-                  _showFeastDayBottomSheet(context, ref, primaryColor),
             ),
             const SizedBox(height: 16),
             ProfileSacramentDatesSection(
@@ -236,7 +236,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
                 context,
                 ref,
                 primaryColor,
-                '代子・代女を追加',
+                l10n.profile.godparent.addGodchild,
                 (user) {
                   if (!_godchildren.contains(user.userId)) {
                     setState(() {
@@ -269,13 +269,14 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     final initialDate = isBaptism ? _baptismDate : _confirmationDate;
     final firstDate = DateTime(1900);
     final lastDate = DateTime.now();
+    final locale = ref.read(localeProvider);
 
     final pickedDate = await showDatePicker(
       context: context,
       initialDate: initialDate ?? DateTime.now(),
       firstDate: firstDate,
       lastDate: lastDate,
-      locale: const Locale('ja', 'JP'),
+      locale: locale,
     );
 
     if (pickedDate != null) {
@@ -351,33 +352,6 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     );
   }
 
-  void _showFeastDayBottomSheet(
-    BuildContext context,
-    WidgetRef ref,
-    Color primaryColor,
-  ) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return FeastDaySearchSheet(
-          primaryColor: primaryColor,
-          selectedFeastDayId: _selectedFeastDayId,
-          onFeastDaySelected: (saint) {
-            setState(() {
-              _selectedFeastDay = saint;
-              _selectedFeastDayId = '${saint.month}-${saint.day}';
-            });
-            Navigator.pop(context);
-          },
-        );
-      },
-    );
-  }
-
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -407,10 +381,16 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         }
       }
 
+      // feastDayId 생성: "월-일" 형식
+      String? feastDayId;
+      if (_feastDayMonth != null && _feastDayDay != null) {
+        feastDayId = '$_feastDayMonth-$_feastDayDay';
+      }
+
       final result = await repository.updateProfile(
         nickname: _nicknameController.text.trim(),
         mainParishId: _selectedParishId,
-        feastDayId: _selectedFeastDayId,
+        feastDayId: feastDayId,
         baptismDate: _baptismDate,
         confirmationDate: _confirmationDate,
         godchildren: _godchildren,

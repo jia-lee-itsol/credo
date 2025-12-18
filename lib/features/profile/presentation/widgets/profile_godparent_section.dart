@@ -39,7 +39,7 @@ class ProfileGodparentSection extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '代父母・代子・代女',
+              l10n.profile.godparent.title,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -50,7 +50,7 @@ class ProfileGodparentSection extends ConsumerWidget {
               onTap: onGodparentTap,
               child: InputDecorator(
                 decoration: InputDecoration(
-                  labelText: '代父母 (1名のみ)',
+                  labelText: l10n.profile.godparent.label,
                   suffixIcon: const Icon(Icons.chevron_right),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
@@ -80,9 +80,9 @@ class ProfileGodparentSection extends ConsumerWidget {
                             ClipboardData(text: godparent!.userId),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('ユーザーIDをコピーしました'),
-                              duration: Duration(seconds: 2),
+                            SnackBar(
+                              content: Text(l10n.profile.godparent.userIdCopied),
+                              duration: const Duration(seconds: 2),
                             ),
                           );
                         },
@@ -107,7 +107,7 @@ class ProfileGodparentSection extends ConsumerWidget {
               children: [
                 Expanded(
                   child: Text(
-                    '代子・代女 (${godchildren.length}人)',
+                    l10n.profile.godparent.godchildrenLabel(count: godchildren.length),
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -125,7 +125,7 @@ class ProfileGodparentSection extends ConsumerWidget {
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  '登録された代子・代女がありません',
+                  l10n.profile.godparent.noGodchildren,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
@@ -142,7 +142,7 @@ class ProfileGodparentSection extends ConsumerWidget {
                       backgroundColor: primaryColor.withValues(alpha: 0.1),
                       child: Icon(Icons.person, color: primaryColor, size: 20),
                     ),
-                    title: Text(user?.nickname ?? '不明'),
+                    title: Text(user?.nickname ?? l10n.profile.godparent.unknown),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -151,9 +151,9 @@ class ProfileGodparentSection extends ConsumerWidget {
                           onLongPress: () {
                             Clipboard.setData(ClipboardData(text: userId));
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('ユーザーIDをコピーしました'),
-                                duration: Duration(seconds: 2),
+                              SnackBar(
+                                content: Text(l10n.profile.godparent.userIdCopied),
+                                duration: const Duration(seconds: 2),
                               ),
                             );
                           },

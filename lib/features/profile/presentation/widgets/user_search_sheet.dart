@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/utils/app_localizations.dart';
+import '../../../../core/services/logger_service.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../auth/domain/entities/user_entity.dart';
 
@@ -36,9 +37,22 @@ class _UserSearchSheetState extends ConsumerState<UserSearchSheet> {
     super.dispose();
   }
 
+  /// 이메일 형식인지 확인하는 정규식
+  bool _isValidEmail(String email) {
+    final emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
+    return emailRegex.hasMatch(email);
+  }
+
   Future<void> _searchUser() async {
     final l10n = ref.read(appLocalizationsSyncProvider);
-    if (_searchQuery.trim().isEmpty) {
+    final trimmedQuery = _searchQuery.trim();
+    
+    AppLogger.profile('사용자 검색 시작: $trimmedQuery');
+    
+    if (trimmedQuery.isEmpty) {
+      AppLogger.profile('검색어가 비어있음');
       setState(() {
         _foundUser = null;
         _errorMessage = l10n.search.userSearchRequired;
@@ -54,30 +68,42 @@ class _UserSearchSheetState extends ConsumerState<UserSearchSheet> {
 
     final repository = ref.read(authRepositoryProvider);
 
-    // email 또는 userId로 검색
-    final isEmail = _searchQuery.contains('@');
+    // 이메일 형식인지 확인하여 email 또는 userId로 검색
+    final isEmail = _isValidEmail(trimmedQuery);
+    AppLogger.profile('검색 타입: ${isEmail ? "이메일" : "사용자 ID"}');
+    
     final result = isEmail
-        ? await repository.searchUser(email: _searchQuery.trim())
-        : await repository.searchUser(userId: _searchQuery.trim());
+        ? await repository.searchUser(email: trimmedQuery)
+        : await repository.searchUser(userId: trimmedQuery);
 
-    if (!mounted) return;
+    if (!mounted) {
+      AppLogger.profile('위젯이 마운트되지 않음, 검색 취소');
+      return;
+    }
 
     result.fold(
       (failure) {
+        AppLogger.profile('검색 실패: ${failure.message}');
         setState(() {
           _isSearching = false;
           _errorMessage = failure.message;
         });
       },
       (user) {
-        setState(() {
-          _isSearching = false;
-          if (user == null) {
-            _errorMessage = 'ユーザーが見つかりませんでした';
-          } else {
+        if (user == null) {
+          AppLogger.profile('사용자를 찾을 수 없음');
+          setState(() {
+            _isSearching = false;
+            _errorMessage = l10n.profile.godparent.userNotFound;
+          });
+        } else {
+          AppLogger.profile('사용자 검색 성공: ${user.userId}, ${user.email}');
+          setState(() {
+            _isSearching = false;
             _foundUser = user;
-          }
-        });
+            _errorMessage = null;
+          });
+        }
       },
     );
   }
@@ -216,9 +242,9 @@ class _UserSearchSheetState extends ConsumerState<UserSearchSheet> {
                                 ClipboardData(text: _foundUser!.userId),
                               );
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('ユーザーIDをコピーしました'),
-                                  duration: Duration(seconds: 2),
+                                SnackBar(
+                                  content: Text(l10n.profile.godparent.userIdCopied),
+                                  duration: const Duration(seconds: 2),
                                 ),
                               );
                             },

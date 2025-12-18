@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/utils/app_localizations.dart';
+import '../../../../shared/providers/locale_provider.dart';
 
 /// 프로필 성사 날짜 섹션
 class ProfileSacramentDatesSection extends ConsumerWidget {
@@ -22,6 +23,7 @@ class ProfileSacramentDatesSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = ref.watch(appLocalizationsSyncProvider);
+    final locale = ref.watch(localeProvider);
 
     return Card(
       child: Padding(
@@ -30,7 +32,7 @@ class ProfileSacramentDatesSection extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '聖事の日付',
+              l10n.profile.sacramentDates.title,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -41,7 +43,7 @@ class ProfileSacramentDatesSection extends ConsumerWidget {
               onTap: onBaptismDateTap,
               child: InputDecorator(
                 decoration: InputDecoration(
-                  labelText: '洗礼日',
+                  labelText: l10n.profile.sacramentDates.baptismDate,
                   suffixIcon: const Icon(Icons.calendar_today),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
@@ -49,7 +51,7 @@ class ProfileSacramentDatesSection extends ConsumerWidget {
                 ),
                 child: Text(
                   baptismDate != null
-                      ? DateFormat('yyyy年MM月dd日', 'ja').format(baptismDate!)
+                      ? DateFormat.yMMMd(locale.languageCode).format(baptismDate!)
                       : l10n.common.select,
                   style: TextStyle(
                     color: baptismDate != null
@@ -65,7 +67,7 @@ class ProfileSacramentDatesSection extends ConsumerWidget {
               onTap: onConfirmationDateTap,
               child: InputDecorator(
                 decoration: InputDecoration(
-                  labelText: '堅信日',
+                  labelText: l10n.profile.sacramentDates.confirmationDate,
                   suffixIcon: const Icon(Icons.calendar_today),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
@@ -73,10 +75,7 @@ class ProfileSacramentDatesSection extends ConsumerWidget {
                 ),
                 child: Text(
                   confirmationDate != null
-                      ? DateFormat(
-                          'yyyy年MM月dd日',
-                          'ja',
-                        ).format(confirmationDate!)
+                      ? DateFormat.yMMMd(locale.languageCode).format(confirmationDate!)
                       : l10n.common.select,
                   style: TextStyle(
                     color: confirmationDate != null

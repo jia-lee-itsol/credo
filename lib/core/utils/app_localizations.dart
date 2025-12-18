@@ -769,6 +769,14 @@ class ProfileTranslations {
       ProfileFavoriteParishesTranslations(_getValue('favoriteParishes'));
   ProfileNotificationsTranslations get notifications =>
       ProfileNotificationsTranslations(_getValue('notifications'));
+  ProfileBasicInfoTranslations get basicInfo =>
+      ProfileBasicInfoTranslations(_getValue('basicInfo'));
+  ProfileParishInfoTranslations get parishInfo =>
+      ProfileParishInfoTranslations(_getValue('parishInfo'));
+  ProfileSacramentDatesTranslations get sacramentDates =>
+      ProfileSacramentDatesTranslations(_getValue('sacramentDates'));
+  ProfileBaptismalNameRequiredTranslations get baptismalNameRequired =>
+      ProfileBaptismalNameRequiredTranslations(_getValue('baptismalNameRequired'));
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -800,6 +808,101 @@ class ProfileGodparentTranslations {
   String get nickname => _getString('nickname') ?? 'ニックネーム';
   String get email => _getString('email') ?? 'メール';
   String get userId => _getString('userId') ?? 'ユーザーID';
+  String get title => _getString('title') ?? '代父母・代子・代女';
+  String get label => _getString('label') ?? '代父母 (1名のみ)';
+  String get userIdCopied => _getString('userIdCopied') ?? 'ユーザーIDをコピーしました';
+  String get noGodchildren => _getString('noGodchildren') ?? '登録された代子・代女がありません';
+  String get unknown => _getString('unknown') ?? '不明';
+  String get addGodchild => _getString('addGodchild') ?? '代子・代女を追加';
+
+  String godchildrenLabel({required int count}) {
+    final template = _getString('godchildrenLabel') ?? '代子・代女 ({count}人)';
+    return template.replaceAll('{count}', count.toString());
+  }
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
+/// 프로필 기본 정보 번역
+class ProfileBasicInfoTranslations {
+  final dynamic _data;
+
+  ProfileBasicInfoTranslations(this._data);
+
+  String get title => _getString('title') ?? '基本情報';
+  String get emailCannotChange =>
+      _getString('emailCannotChange') ?? 'メールアドレスは変更できません';
+  String get userIdCannotChange =>
+      _getString('userIdCannotChange') ??
+      'ユーザーIDは変更できません（長押しでコピー）';
+  String get baptismNameCannotChange =>
+      _getString('baptismNameCannotChange') ?? '洗礼名は変更できません';
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
+/// 프로필 교회 정보 번역
+class ProfileParishInfoTranslations {
+  final dynamic _data;
+
+  ProfileParishInfoTranslations(this._data);
+
+  String get title => _getString('title') ?? '教会情報';
+  String get feastDayNameHint =>
+      _getString('feastDayNameHint') ?? 'ペトロ、マリア、ヨハネ...';
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
+/// 프로필 성사 날짜 번역
+class ProfileSacramentDatesTranslations {
+  final dynamic _data;
+
+  ProfileSacramentDatesTranslations(this._data);
+
+  String get title => _getString('title') ?? '聖事の日付';
+  String get baptismDate => _getString('baptismDate') ?? '洗礼日';
+  String get confirmationDate => _getString('confirmationDate') ?? '堅信日';
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
+/// 프로필 세례명 등록 권유 번역
+class ProfileBaptismalNameRequiredTranslations {
+  final dynamic _data;
+
+  ProfileBaptismalNameRequiredTranslations(this._data);
+
+  String get title =>
+      _getString('title') ?? '洗礼名の登録をお願いします';
+  String get message =>
+      _getString('message') ??
+      '洗礼名を登録すると、あなたの守護聖人の祝日を確認できます。';
+  String get description =>
+      _getString('description') ??
+      'プロフィール編集ページで洗礼名を登録してください。';
+  String get goToProfile =>
+      _getString('goToProfile') ?? 'プロフィール編集へ';
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {

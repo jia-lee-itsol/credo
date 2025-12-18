@@ -10,12 +10,14 @@ class FeastDaySearchSheet extends ConsumerStatefulWidget {
   final Color primaryColor;
   final String? selectedFeastDayId;
   final void Function(SaintFeastDayModel) onFeastDaySelected;
+  final void Function(String name, int month, int day)? onDirectInput;
 
   const FeastDaySearchSheet({
     super.key,
     required this.primaryColor,
     this.selectedFeastDayId,
     required this.onFeastDaySelected,
+    this.onDirectInput,
   });
 
   @override
@@ -31,6 +33,156 @@ class _FeastDaySearchSheetState extends ConsumerState<FeastDaySearchSheet> {
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  void _showDirectInputDialog(BuildContext context, AppLocalizations l10n) {
+    final nameController = TextEditingController();
+    int selectedMonth = 1;
+    int selectedDay = 1;
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) {
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return AlertDialog(
+              title: Text(l10n.profile.directInputDialogTitle),
+              content: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 세례명 입력
+                    Text(
+                      l10n.auth.selectFeastDayTitle,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        hintText: 'ペトロ、マリア、ヨハネ...',
+                        border: const OutlineInputBorder(),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 12,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    // 축일 선택
+                    Text(
+                      l10n.profile.directInputTitle,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: DropdownButtonFormField<int>(
+                            initialValue: selectedMonth,
+                            decoration: InputDecoration(
+                              labelText: l10n.profile.month,
+                              border: const OutlineInputBorder(),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                            ),
+                            items: List.generate(12, (i) => i + 1)
+                                .map((m) => DropdownMenuItem(
+                                      value: m,
+                                      child: Text('$m'),
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              setDialogState(() {
+                                selectedMonth = value ?? 1;
+                                final maxDay = _getDaysInMonth(selectedMonth);
+                                if (selectedDay > maxDay) {
+                                  selectedDay = maxDay;
+                                }
+                              });
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: DropdownButtonFormField<int>(
+                            initialValue: selectedDay,
+                            decoration: InputDecoration(
+                              labelText: l10n.profile.day,
+                              border: const OutlineInputBorder(),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
+                            ),
+                            items: List.generate(
+                                    _getDaysInMonth(selectedMonth), (i) => i + 1)
+                                .map((d) => DropdownMenuItem(
+                                      value: d,
+                                      child: Text('$d'),
+                                    ))
+                                .toList(),
+                            onChanged: (value) {
+                              setDialogState(() {
+                                selectedDay = value ?? 1;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(dialogContext),
+                  child: Text(l10n.common.cancel),
+                ),
+                TextButton(
+                  onPressed: () {
+                    final name = nameController.text.trim();
+                    if (name.isEmpty) return;
+
+                    // 직접 입력한 성인 모델 생성
+                    final saint = SaintFeastDayModel(
+                      month: selectedMonth,
+                      day: selectedDay,
+                      name: name,
+                      nameEn: name,
+                      type: 'custom',
+                      isJapanese: false,
+                      greeting: '',
+                    );
+
+                    Navigator.pop(dialogContext);
+                    widget.onFeastDaySelected(saint);
+                  },
+                  child: Text(
+                    l10n.common.confirm,
+                    style: TextStyle(color: widget.primaryColor),
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  int _getDaysInMonth(int month) {
+    const daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    return daysInMonth[month - 1];
   }
 
   @override
@@ -94,6 +246,28 @@ class _FeastDaySearchSheetState extends ConsumerState<FeastDaySearchSheet> {
               ),
             ),
             onChanged: (value) => setState(() => _searchQuery = value),
+          ),
+        ),
+
+        const SizedBox(height: 8),
+
+        // 직접 입력 버튼
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: OutlinedButton.icon(
+            onPressed: () => _showDirectInputDialog(context, l10n),
+            icon: Icon(Icons.edit, color: widget.primaryColor),
+            label: Text(
+              l10n.profile.directInput,
+              style: TextStyle(color: widget.primaryColor),
+            ),
+            style: OutlinedButton.styleFrom(
+              side: BorderSide(color: widget.primaryColor),
+              minimumSize: const Size(double.infinity, 48),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
           ),
         ),
 

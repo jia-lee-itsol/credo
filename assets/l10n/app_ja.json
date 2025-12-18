@@ -280,6 +280,12 @@
     "clearCacheConfirm": "キャッシュを削除しますか？聖人データが再読み込みされます。",
     "customerService": "お問い合わせ",
     "customerServiceDescription": "ご意見・ご要望をお聞かせください",
+    "baptismalNameRequired": {
+      "title": "洗礼名の登録をお願いします",
+      "message": "洗礼名を登録すると、あなたの守護聖人の祝日を確認できます。",
+      "description": "プロフィール編集ページで洗礼名を登録してください。",
+      "goToProfile": "プロフィール編集へ"
+    },
     "godparent": {
       "add": "追加",
       "remove": "削除",
@@ -288,7 +294,30 @@
       "userFound": "ユーザーが見つかりました",
       "nickname": "ニックネーム",
       "email": "メール",
-      "userId": "ユーザーID"
+      "userId": "ユーザーID",
+      "title": "代父母・代子・代女",
+      "label": "代父母 (1名のみ)",
+      "userIdCopied": "ユーザーIDをコピーしました",
+      "godchildrenLabel": "代子・代女 ({count}人)",
+      "godchildrenLabel@count": "代子・代女の人数",
+      "noGodchildren": "登録された代子・代女がありません",
+      "unknown": "不明",
+      "addGodchild": "代子・代女を追加"
+    },
+    "basicInfo": {
+      "title": "基本情報",
+      "emailCannotChange": "メールアドレスは変更できません",
+      "userIdCannotChange": "ユーザーIDは変更できません（長押しでコピー）",
+      "baptismNameCannotChange": "洗礼名は変更できません"
+    },
+    "parishInfo": {
+      "title": "教会情報",
+      "feastDayNameHint": "ペトロ、マリア、ヨハネ..."
+    },
+    "sacramentDates": {
+      "title": "聖事の日付",
+      "baptismDate": "洗礼日",
+      "confirmationDate": "堅信日"
     },
     "favoriteParishes": {
       "title": "よく行く教会",

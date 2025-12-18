@@ -276,6 +276,12 @@
     "clearCacheConfirm": "캐시를 삭제하시겠습니까? 성인 데이터가 다시 로드됩니다.",
     "customerService": "고객 서비스",
     "customerServiceDescription": "의견이나 요청사항을 보내주세요",
+    "baptismalNameRequired": {
+      "title": "세례명 등록 안내",
+      "message": "세례명을 등록하시면 수호성인의 축일을 확인할 수 있습니다.",
+      "description": "프로필 편집 페이지에서 세례명을 등록해주세요.",
+      "goToProfile": "프로필 편집으로"
+    },
     "godparent": {
       "add": "추가",
       "remove": "삭제",
@@ -284,7 +290,30 @@
       "userFound": "사용자를 찾았습니다",
       "nickname": "닉네임",
       "email": "이메일",
-      "userId": "사용자 ID"
+      "userId": "사용자 ID",
+      "title": "대부모・대자녀",
+      "label": "대부모 (1명만)",
+      "userIdCopied": "사용자 ID가 복사되었습니다",
+      "godchildrenLabel": "대자녀 ({count}명)",
+      "godchildrenLabel@count": "대자녀의 인원 수",
+      "noGodchildren": "등록된 대자녀가 없습니다",
+      "unknown": "알 수 없음",
+      "addGodchild": "대자녀 추가"
+    },
+    "basicInfo": {
+      "title": "기본 정보",
+      "emailCannotChange": "이메일 주소는 변경할 수 없습니다",
+      "userIdCannotChange": "사용자 ID는 변경할 수 없습니다 (길게 눌러서 복사)",
+      "baptismNameCannotChange": "세례명은 변경할 수 없습니다"
+    },
+    "parishInfo": {
+      "title": "교회 정보",
+      "feastDayNameHint": "베드로, 마리아, 요한..."
+    },
+    "sacramentDates": {
+      "title": "성사 날짜",
+      "baptismDate": "세례일",
+      "confirmationDate": "견진일"
     },
     "favoriteParishes": {
       "title": "자주 가는 교회",

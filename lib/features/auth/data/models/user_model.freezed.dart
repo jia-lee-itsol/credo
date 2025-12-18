@@ -45,6 +45,8 @@ mixin _$UserModel {
   String? get baptismalName => throw _privateConstructorUsedError;
   @JsonKey(name: 'feast_day_id')
   String? get feastDayId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'feast_day_name')
+  String? get feastDayName => throw _privateConstructorUsedError;
   @JsonKey(name: 'baptism_date')
   DateTime? get baptismDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'confirmation_date')
@@ -87,6 +89,7 @@ abstract class $UserModelCopyWith<$Res> {
     @JsonKey(name: 'verified_role') String? verifiedRole,
     @JsonKey(name: 'baptismal_name') String? baptismalName,
     @JsonKey(name: 'feast_day_id') String? feastDayId,
+    @JsonKey(name: 'feast_day_name') String? feastDayName,
     @JsonKey(name: 'baptism_date') DateTime? baptismDate,
     @JsonKey(name: 'confirmation_date') DateTime? confirmationDate,
     @JsonKey(name: 'godchildren') List<String> godchildren,
@@ -124,6 +127,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? verifiedRole = freezed,
     Object? baptismalName = freezed,
     Object? feastDayId = freezed,
+    Object? feastDayName = freezed,
     Object? baptismDate = freezed,
     Object? confirmationDate = freezed,
     Object? godchildren = null,
@@ -185,6 +189,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
                 ? _value.feastDayId
                 : feastDayId // ignore: cast_nullable_to_non_nullable
                       as String?,
+            feastDayName: freezed == feastDayName
+                ? _value.feastDayName
+                : feastDayName // ignore: cast_nullable_to_non_nullable
+                      as String?,
             baptismDate: freezed == baptismDate
                 ? _value.baptismDate
                 : baptismDate // ignore: cast_nullable_to_non_nullable
@@ -238,6 +246,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
     @JsonKey(name: 'verified_role') String? verifiedRole,
     @JsonKey(name: 'baptismal_name') String? baptismalName,
     @JsonKey(name: 'feast_day_id') String? feastDayId,
+    @JsonKey(name: 'feast_day_name') String? feastDayName,
     @JsonKey(name: 'baptism_date') DateTime? baptismDate,
     @JsonKey(name: 'confirmation_date') DateTime? confirmationDate,
     @JsonKey(name: 'godchildren') List<String> godchildren,
@@ -274,6 +283,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? verifiedRole = freezed,
     Object? baptismalName = freezed,
     Object? feastDayId = freezed,
+    Object? feastDayName = freezed,
     Object? baptismDate = freezed,
     Object? confirmationDate = freezed,
     Object? godchildren = null,
@@ -335,6 +345,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
             ? _value.feastDayId
             : feastDayId // ignore: cast_nullable_to_non_nullable
                   as String?,
+        feastDayName: freezed == feastDayName
+            ? _value.feastDayName
+            : feastDayName // ignore: cast_nullable_to_non_nullable
+                  as String?,
         baptismDate: freezed == baptismDate
             ? _value.baptismDate
             : baptismDate // ignore: cast_nullable_to_non_nullable
@@ -383,6 +397,7 @@ class _$UserModelImpl extends _UserModel {
     @JsonKey(name: 'verified_role') this.verifiedRole,
     @JsonKey(name: 'baptismal_name') this.baptismalName,
     @JsonKey(name: 'feast_day_id') this.feastDayId,
+    @JsonKey(name: 'feast_day_name') this.feastDayName,
     @JsonKey(name: 'baptism_date') this.baptismDate,
     @JsonKey(name: 'confirmation_date') this.confirmationDate,
     @JsonKey(name: 'godchildren') final List<String> godchildren = const [],
@@ -450,6 +465,9 @@ class _$UserModelImpl extends _UserModel {
   @JsonKey(name: 'feast_day_id')
   final String? feastDayId;
   @override
+  @JsonKey(name: 'feast_day_name')
+  final String? feastDayName;
+  @override
   @JsonKey(name: 'baptism_date')
   final DateTime? baptismDate;
   @override
@@ -476,7 +494,7 @@ class _$UserModelImpl extends _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(userId: $userId, nickname: $nickname, email: $email, role: $role, mainParishId: $mainParishId, preferredLanguages: $preferredLanguages, favoriteParishIds: $favoriteParishIds, profileImageUrl: $profileImageUrl, isVerified: $isVerified, verifiedParishId: $verifiedParishId, verifiedRole: $verifiedRole, baptismalName: $baptismalName, feastDayId: $feastDayId, baptismDate: $baptismDate, confirmationDate: $confirmationDate, godchildren: $godchildren, godparentId: $godparentId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserModel(userId: $userId, nickname: $nickname, email: $email, role: $role, mainParishId: $mainParishId, preferredLanguages: $preferredLanguages, favoriteParishIds: $favoriteParishIds, profileImageUrl: $profileImageUrl, isVerified: $isVerified, verifiedParishId: $verifiedParishId, verifiedRole: $verifiedRole, baptismalName: $baptismalName, feastDayId: $feastDayId, feastDayName: $feastDayName, baptismDate: $baptismDate, confirmationDate: $confirmationDate, godchildren: $godchildren, godparentId: $godparentId, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -511,6 +529,8 @@ class _$UserModelImpl extends _UserModel {
                 other.baptismalName == baptismalName) &&
             (identical(other.feastDayId, feastDayId) ||
                 other.feastDayId == feastDayId) &&
+            (identical(other.feastDayName, feastDayName) ||
+                other.feastDayName == feastDayName) &&
             (identical(other.baptismDate, baptismDate) ||
                 other.baptismDate == baptismDate) &&
             (identical(other.confirmationDate, confirmationDate) ||
@@ -544,6 +564,7 @@ class _$UserModelImpl extends _UserModel {
     verifiedRole,
     baptismalName,
     feastDayId,
+    feastDayName,
     baptismDate,
     confirmationDate,
     const DeepCollectionEquality().hash(_godchildren),
@@ -581,6 +602,7 @@ abstract class _UserModel extends UserModel {
     @JsonKey(name: 'verified_role') final String? verifiedRole,
     @JsonKey(name: 'baptismal_name') final String? baptismalName,
     @JsonKey(name: 'feast_day_id') final String? feastDayId,
+    @JsonKey(name: 'feast_day_name') final String? feastDayName,
     @JsonKey(name: 'baptism_date') final DateTime? baptismDate,
     @JsonKey(name: 'confirmation_date') final DateTime? confirmationDate,
     @JsonKey(name: 'godchildren') final List<String> godchildren,
@@ -629,6 +651,9 @@ abstract class _UserModel extends UserModel {
   @override
   @JsonKey(name: 'feast_day_id')
   String? get feastDayId;
+  @override
+  @JsonKey(name: 'feast_day_name')
+  String? get feastDayName;
   @override
   @JsonKey(name: 'baptism_date')
   DateTime? get baptismDate;

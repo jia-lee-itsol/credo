@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../core/data/models/saint_feast_day_model.dart';
 import '../../../../core/utils/app_localizations.dart';
 
 /// 프로필 교회 정보 섹션
 class ProfileParishInfoSection extends ConsumerWidget {
   final String? selectedParishName;
-  final SaintFeastDayModel? selectedFeastDay;
   final VoidCallback onParishTap;
-  final VoidCallback onFeastDayTap;
 
   const ProfileParishInfoSection({
     super.key,
     this.selectedParishName,
-    this.selectedFeastDay,
     required this.onParishTap,
-    required this.onFeastDayTap,
   });
 
   @override
@@ -30,7 +25,7 @@ class ProfileParishInfoSection extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '教会情報',
+              l10n.profile.parishInfo.title,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -51,30 +46,6 @@ class ProfileParishInfoSection extends ConsumerWidget {
                   selectedParishName ?? l10n.common.select,
                   style: TextStyle(
                     color: selectedParishName != null
-                        ? theme.colorScheme.onSurface
-                        : theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-            // 축일 선택
-            InkWell(
-              onTap: onFeastDayTap,
-              child: InputDecorator(
-                decoration: InputDecoration(
-                  labelText: l10n.auth.feastDay,
-                  suffixIcon: const Icon(Icons.chevron_right),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-                child: Text(
-                  selectedFeastDay != null
-                      ? selectedFeastDay!.name
-                      : l10n.common.select,
-                  style: TextStyle(
-                    color: selectedFeastDay != null
                         ? theme.colorScheme.onSurface
                         : theme.colorScheme.onSurfaceVariant,
                   ),

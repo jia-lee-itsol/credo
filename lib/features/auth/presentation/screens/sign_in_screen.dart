@@ -9,6 +9,7 @@ import '../../../../core/error/failures.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../config/routes/app_routes.dart';
+import '../../../profile/presentation/widgets/baptismal_name_required_dialog.dart';
 import '../widgets/password_field.dart';
 import '../widgets/loading_button.dart';
 import '../widgets/auth_logo_header.dart';
@@ -304,7 +305,13 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         (user) async {
           if (mounted) {
             // authStateProvider가 자동으로 업데이트됨
-            context.go(AppRoutes.home);
+            // 세례명이 없으면 모달 표시
+            if (user.baptismalName == null || user.baptismalName!.isEmpty) {
+              await BaptismalNameRequiredDialog.show(context);
+            }
+            if (mounted) {
+              context.go(AppRoutes.home);
+            }
           }
         },
       );
@@ -351,9 +358,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
             );
           }
         },
-        (user) {
+        (user) async {
           if (mounted) {
-            context.go(AppRoutes.home);
+            // authStateProvider가 자동으로 업데이트됨
+            // 세례명이 없으면 모달 표시
+            if (user.baptismalName == null || user.baptismalName!.isEmpty) {
+              await BaptismalNameRequiredDialog.show(context);
+            }
+            if (mounted) {
+              context.go(AppRoutes.home);
+            }
           }
         },
       );

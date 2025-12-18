@@ -29,6 +29,7 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       verifiedRole: json['verified_role'] as String?,
       baptismalName: json['baptismal_name'] as String?,
       feastDayId: json['feast_day_id'] as String?,
+      feastDayName: json['feast_day_name'] as String?,
       baptismDate: json['baptism_date'] == null
           ? null
           : DateTime.parse(json['baptism_date'] as String),
@@ -60,6 +61,7 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'verified_role': instance.verifiedRole,
       'baptismal_name': instance.baptismalName,
       'feast_day_id': instance.feastDayId,
+      'feast_day_name': instance.feastDayName,
       'baptism_date': instance.baptismDate?.toIso8601String(),
       'confirmation_date': instance.confirmationDate?.toIso8601String(),
       'godchildren': instance.godchildren,

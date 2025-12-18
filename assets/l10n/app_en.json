@@ -307,6 +307,12 @@
     "clearCacheConfirm": "Clear cache? Saint data will be reloaded.",
     "customerService": "Customer Service",
     "customerServiceDescription": "Share your feedback and requests",
+    "baptismalNameRequired": {
+      "title": "Please Register Your Baptismal Name",
+      "message": "Registering your baptismal name allows you to check your patron saint's feast day.",
+      "description": "Please register your baptismal name on the profile edit page.",
+      "goToProfile": "Go to Profile Edit"
+    },
     "godparent": {
       "add": "Add",
       "remove": "Remove",
@@ -315,7 +321,30 @@
       "userFound": "User found",
       "nickname": "Nickname",
       "email": "Email",
-      "userId": "User ID"
+      "userId": "User ID",
+      "title": "Godparent & Godchildren",
+      "label": "Godparent (1 only)",
+      "userIdCopied": "User ID copied",
+      "godchildrenLabel": "Godchildren ({count})",
+      "godchildrenLabel@count": "Number of godchildren",
+      "noGodchildren": "No registered godchildren",
+      "unknown": "Unknown",
+      "addGodchild": "Add Godchild"
+    },
+    "basicInfo": {
+      "title": "Basic Information",
+      "emailCannotChange": "Email address cannot be changed",
+      "userIdCannotChange": "User ID cannot be changed (long press to copy)",
+      "baptismNameCannotChange": "Baptismal name cannot be changed"
+    },
+    "parishInfo": {
+      "title": "Church Information",
+      "feastDayNameHint": "Peter, Mary, John..."
+    },
+    "sacramentDates": {
+      "title": "Sacrament Dates",
+      "baptismDate": "Baptism Date",
+      "confirmationDate": "Confirmation Date"
     }
   },
   "parish": {
