@@ -2,7 +2,7 @@
 
 이 문서는 코드베이스에서 발견된 모든 TODO 주석과 보류 중인 기능 구현을 추적합니다.
 
-**마지막 업데이트**: 2025-12-18 (단위 테스트 에러 수정 완료: mocktail fallback value 등록 및 verifyNever 사용으로 모든 테스트 통과) 
+**마지막 업데이트**: 2025-12-18 (단위 테스트 커버리지 확장: Service 및 유틸리티 테스트 추가, 총 22개 테스트 파일, 201개 테스트 케이스) 
 **전체 코드베이스**: 약 27,000줄의 Dart 코드, 135개 파일
 
 ---
@@ -226,27 +226,38 @@
 - [x] `prayer_service.dart`의 throw Exception을 Failure로 교체 ✅
 - [x] `image_upload_service.dart`의 throw Exception을 Failure로 교체 ✅
 - [x] `app_user.dart`의 throw Exception을 ValidationFailure로 교체 ✅
-- [x] 단위 테스트 커버리지 추가 ✅ (완료)
-  - 우선순위: Repository 구현, State notifiers, 유틸리티 함수, UseCase
+- [x] 단위 테스트 커버리지 추가 ✅ (진행 중)
+  - 우선순위: Repository 구현, State notifiers, 유틸리티 함수, UseCase, Service
   - 완료된 작업: 
-    - FirestoreUserRepository 테스트 (7개 테스트 케이스)
-    - FirestoreNotificationRepository 테스트 (3개 테스트 케이스)
-    - AuthRepositoryImpl 테스트 (4개 테스트 케이스)
-    - PostFormNotifier 테스트 (21개 테스트 케이스: 상태 변경, 유효성 검사, 파일 관리, 게시글 생성/수정, 이미지/PDF 업로드, 공지 알림 전송)
-    - FirestorePostRepository 테스트 (14개 테스트 케이스: createPost, updatePost, deletePost, getPostById, isLiked)
-    - FirestoreReportRepository 테스트 (5개 테스트 케이스: createReport, 중복 신고 방지, 에러 처리)
-    - NotificationSettingsRepositoryImpl 테스트 (9개 테스트 케이스)
-    - ParishRepositoryImpl 테스트 (12개 테스트 케이스)
-    - SaintFeastDayRepositoryImpl 테스트 (3개 테스트 케이스)
-    - LiturgyThemeProvider 테스트 (4개 테스트 케이스)
-    - FontScaleProvider 테스트 (7개 테스트 케이스)
-    - LocaleProvider 테스트 (7개 테스트 케이스)
-    - UseCase 테스트 (43개 테스트 케이스)
+    - Repository 테스트 (9개 파일, 58개 테스트 케이스)
+      - FirestoreUserRepository 테스트 (7개 테스트 케이스)
+      - FirestoreNotificationRepository 테스트 (3개 테스트 케이스)
+      - AuthRepositoryImpl 테스트 (4개 테스트 케이스)
+      - FirestorePostRepository 테스트 (14개 테스트 케이스: createPost, updatePost, deletePost, getPostById, isLiked)
+      - FirestoreReportRepository 테스트 (5개 테스트 케이스: createReport, 중복 신고 방지, 에러 처리)
+      - NotificationSettingsRepositoryImpl 테스트 (9개 테스트 케이스)
+      - ParishRepositoryImpl 테스트 (12개 테스트 케이스)
+      - SaintFeastDayRepositoryImpl 테스트 (3개 테스트 케이스)
+      - CommentRepository 테스트 (1개 테스트 케이스)
+    - Notifier 테스트 (1개 파일, 21개 테스트 케이스)
+      - PostFormNotifier 테스트 (21개 테스트 케이스: 상태 변경, 유효성 검사, 파일 관리, 게시글 생성/수정, 이미지/PDF 업로드, 공지 알림 전송)
+    - Provider 테스트 (4개 파일, 18개 테스트 케이스)
+      - LiturgyThemeProvider 테스트 (4개 테스트 케이스)
+      - FontScaleProvider 테스트 (7개 테스트 케이스)
+      - LocaleProvider 테스트 (7개 테스트 케이스)
+      - SearchHistoryProvider 테스트 (4개 테스트 케이스)
+    - UseCase 테스트 (4개 파일, 43개 테스트 케이스)
       - PostUseCases 테스트 (14개: GetPostsUseCase, GetPostByIdUseCase, CreatePostUseCase, DeletePostUseCase, ToggleLikePostUseCase, GetCommentsUseCase, CreateCommentUseCase, ReportContentUseCase)
       - SignInUseCase 테스트 (11개: SignInWithEmailUseCase, SignInWithGoogleUseCase, SignInWithAppleUseCase, SignOutUseCase, GetCurrentUserUseCase)
       - GetParishesUseCase 테스트 (11개: GetParishesUseCase, GetParishByIdUseCase, SearchParishesUseCase, GetNearbyParishesUseCase, GetFavoriteParishesUseCase)
       - GetSaintFeastDaysUseCase 테스트 (7개: GetSaintsForDateUseCase, GetTodaySaintsUseCase)
-  - 총 17개 테스트 파일, 139개 테스트 케이스 완료
+    - Service 테스트 (3개 파일, 43개 테스트 케이스)
+      - SearchHistoryService 테스트 (18개 테스트 케이스: 게시글/성당 검색 히스토리 저장/조회/삭제)
+      - GeocodingService 테스트 (10개 테스트 케이스: 주소-좌표 변환, 좌표-주소 변환)
+      - CacheService 테스트 (15개 테스트 케이스: 기본 캐시, 일일 미사 독서, 교회 정보, 게시글 캐싱)
+    - 유틸리티 테스트 (1개 파일, 15개 테스트 케이스)
+      - LocationUtils 테스트 (15개 테스트 케이스: 거리 계산, 거리 포맷팅, 좌표 유효성 검사)
+  - 총 22개 테스트 파일, 201개 테스트 케이스 완료 (기존 139개 + 신규 62개)
 - [x] Provider 구성 표준화 ✅
   - 현재: `features/parish/presentation/providers/`, `features/community/data/providers/`
   - 권장: `features/{feature}/data/providers/` (Repository), `features/{feature}/presentation/providers/` (UI state)
@@ -339,6 +350,7 @@
 | 2025-12-18 | 성인 이미지 자동 검색 기능 구현 - Wikipedia API 및 GPT-4o를 통한 이미지 URL 검색, SharedPreferences 기반 캐싱, 실패한 URL 추적 및 자동 재검색 (404 에러 처리), 실패한 URL 목록을 SharedPreferences에 저장하여 영구 추적, `SaintImageService` 생성, `saintImageUrlProvider` 개선 | 96d03b2b |
 | 2025-12-18 | 단위 테스트 커버리지 확장 - UseCase 테스트 추가 (43개 테스트 케이스: PostUseCases 14개, SignInUseCase 11개, GetParishesUseCase 11개, GetSaintFeastDaysUseCase 7개), 총 17개 테스트 파일, 139개 테스트 케이스 완료 | 96d03b2b |
 | 2025-12-18 | 단위 테스트 에러 수정 - mocktail fallback value 등록 (PostSortType, ReportReason, Post, AppNotification), verifyNever 사용으로 변경, TestWidgetsFlutterBinding.ensureInitialized() 추가, 모든 테스트 통과 (137개 테스트) | - |
+| 2025-12-18 | 단위 테스트 커버리지 확장 - Service 및 유틸리티 테스트 추가: SearchHistoryService (18개), GeocodingService (10개), CacheService (15개), LocationUtils (15개), SearchHistoryProvider (4개), 총 62개 테스트 케이스 추가, 전체 22개 테스트 파일, 201개 테스트 케이스 완료 | - |
 
 ---
 
@@ -352,13 +364,15 @@
    - 날짜 포맷 로케일 동적 업데이트
    - 번역 데이터 자동 재로드
 
-2. **단위 테스트 커버리지 추가** ✅ 완료
-   - 우선순위: Repository 구현, State notifiers, 유틸리티 함수, UseCase
-   - 완료된 작업: 총 17개 테스트 파일, 139개 테스트 케이스 완료
-     - Repository 테스트: 9개 파일 (FirestoreUserRepository, FirestoreNotificationRepository, AuthRepositoryImpl, FirestorePostRepository, FirestoreReportRepository, NotificationSettingsRepositoryImpl, ParishRepositoryImpl, SaintFeastDayRepositoryImpl)
-     - Notifier 테스트: 1개 파일 (PostFormNotifier)
-     - Provider 테스트: 3개 파일 (LiturgyThemeProvider, FontScaleProvider, LocaleProvider)
-     - UseCase 테스트: 4개 파일 (PostUseCases, SignInUseCase, GetParishesUseCase, GetSaintFeastDaysUseCase)
+2. **단위 테스트 커버리지 추가** ✅ 진행 중
+   - 우선순위: Repository 구현, State notifiers, 유틸리티 함수, UseCase, Service
+   - 완료된 작업: 총 22개 테스트 파일, 201개 테스트 케이스 완료
+     - Repository 테스트: 9개 파일, 58개 테스트 케이스
+     - Notifier 테스트: 1개 파일, 21개 테스트 케이스
+     - Provider 테스트: 4개 파일, 18개 테스트 케이스 (SearchHistoryProvider 추가)
+     - UseCase 테스트: 4개 파일, 43개 테스트 케이스
+     - Service 테스트: 3개 파일, 43개 테스트 케이스 (SearchHistoryService, GeocodingService, CacheService)
+     - 유틸리티 테스트: 1개 파일, 15개 테스트 케이스 (LocationUtils)
 
 ### 우선순위 2: 중간
 
