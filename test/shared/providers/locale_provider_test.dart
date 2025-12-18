@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:credo/shared/providers/locale_provider.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   late LocaleNotifier notifier;
   late SharedPreferences prefs;
 

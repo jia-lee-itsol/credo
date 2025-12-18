@@ -107,8 +107,9 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
               ),
             );
           } else {
-            // TODO: 메신저 기능 구현 시 여기서 사용자 추가 처리
+            // TODO: 메신저/친구 기능 구현 시 여기서 사용자 추가 처리
             // 현재는 사용자 정보를 표시만 함
+            // 메신저 기능이 구현되면 여기서 친구 추가 또는 메시지 전송 기능을 구현해야 함
             _showUserFoundDialog(user);
           }
         },
@@ -147,7 +148,9 @@ class _QrScannerScreenState extends ConsumerState<QrScannerScreen> {
             onPressed: () => Navigator.of(context).pop(),
             child: Text(l10n.common.close),
           ),
-          // TODO: 메신저 기능 구현 시 "友達追加" 버튼 추가
+          // TODO: 메신저/친구 기능 구현 시 "友達追加" 버튼 추가
+          // 메신저 기능이 구현되면 여기에 친구 추가 버튼을 추가해야 함
+          // 예: TextButton(onPressed: () => _addFriend(user), child: Text(l10n.qr.addFriend))
         ],
       ),
     );

@@ -96,7 +96,9 @@ class _ExpandableContentCardState extends State<ExpandableContentCard> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: GestureDetector(
                 onTap: () {
-                  // TODO: 추후 성경 읽기 화면으로 연결
+                  // TODO: 성경 읽기 화면 구현 후 연결
+                  // 성경 읽기 화면이 구현되면 여기서 해당 구절로 이동하는 기능을 추가해야 함
+                  // 현재는 성경 읽기 화면이 구현되지 않아 비활성화 상태
                   // Navigator.push(context, MaterialPageRoute(builder: (context) => BibleReadingScreen(reference: widget.referenceLabel)));
                 },
                 child: Container(

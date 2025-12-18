@@ -2,7 +2,7 @@
 
 이 문서는 코드베이스에서 발견된 모든 TODO 주석과 보류 중인 기능 구현을 추적합니다.
 
-**마지막 업데이트**: 2025-12-18 (단위 테스트 커버리지 확장: 총 13개 테스트 파일, 85개 테스트 케이스 완료) 
+**마지막 업데이트**: 2025-12-18 (단위 테스트 에러 수정 완료: mocktail fallback value 등록 및 verifyNever 사용으로 모든 테스트 통과) 
 **전체 코드베이스**: 약 27,000줄의 Dart 코드, 135개 파일
 
 ---
@@ -226,13 +226,13 @@
 - [x] `prayer_service.dart`의 throw Exception을 Failure로 교체 ✅
 - [x] `image_upload_service.dart`의 throw Exception을 Failure로 교체 ✅
 - [x] `app_user.dart`의 throw Exception을 ValidationFailure로 교체 ✅
-- [x] 단위 테스트 커버리지 추가 ✅ (진행 중)
-  - 우선순위: Repository 구현, State notifiers, 유틸리티 함수
+- [x] 단위 테스트 커버리지 추가 ✅ (완료)
+  - 우선순위: Repository 구현, State notifiers, 유틸리티 함수, UseCase
   - 완료된 작업: 
     - FirestoreUserRepository 테스트 (7개 테스트 케이스)
     - FirestoreNotificationRepository 테스트 (3개 테스트 케이스)
     - AuthRepositoryImpl 테스트 (4개 테스트 케이스)
-    - PostFormNotifier 테스트 (10개 테스트 케이스)
+    - PostFormNotifier 테스트 (21개 테스트 케이스: 상태 변경, 유효성 검사, 파일 관리, 게시글 생성/수정, 이미지/PDF 업로드, 공지 알림 전송)
     - FirestorePostRepository 테스트 (14개 테스트 케이스: createPost, updatePost, deletePost, getPostById, isLiked)
     - FirestoreReportRepository 테스트 (5개 테스트 케이스: createReport, 중복 신고 방지, 에러 처리)
     - NotificationSettingsRepositoryImpl 테스트 (9개 테스트 케이스)
@@ -241,8 +241,12 @@
     - LiturgyThemeProvider 테스트 (4개 테스트 케이스)
     - FontScaleProvider 테스트 (7개 테스트 케이스)
     - LocaleProvider 테스트 (7개 테스트 케이스)
-  - 총 13개 테스트 파일, 85개 테스트 케이스 완료
-  - 남은 작업: 추가 Notifier 테스트 (점진적으로 추가 가능)
+    - UseCase 테스트 (43개 테스트 케이스)
+      - PostUseCases 테스트 (14개: GetPostsUseCase, GetPostByIdUseCase, CreatePostUseCase, DeletePostUseCase, ToggleLikePostUseCase, GetCommentsUseCase, CreateCommentUseCase, ReportContentUseCase)
+      - SignInUseCase 테스트 (11개: SignInWithEmailUseCase, SignInWithGoogleUseCase, SignInWithAppleUseCase, SignOutUseCase, GetCurrentUserUseCase)
+      - GetParishesUseCase 테스트 (11개: GetParishesUseCase, GetParishByIdUseCase, SearchParishesUseCase, GetNearbyParishesUseCase, GetFavoriteParishesUseCase)
+      - GetSaintFeastDaysUseCase 테스트 (7개: GetSaintsForDateUseCase, GetTodaySaintsUseCase)
+  - 총 17개 테스트 파일, 139개 테스트 케이스 완료
 - [x] Provider 구성 표준화 ✅
   - 현재: `features/parish/presentation/providers/`, `features/community/data/providers/`
   - 권장: `features/{feature}/data/providers/` (Repository), `features/{feature}/presentation/providers/` (UI state)
@@ -332,8 +336,9 @@
 | 2025-12-16 | 다국어 지원 완료 - 모든 언어 파일의 일본어 텍스트를 각 언어로 번역 완료: 영어 76개, 스페인어 289개, 포르투갈어 289개, 베트남어 289개, 중국어 번역 완료, 모든 언어 파일에서 일본어 문자(히라가나/가타카나) 제거 완료 | be1fd25 |
 | 2025-12-16 | Google 로그인 문제 해결 - ApiException: 10 (DEVELOPER_ERROR) 오류 해결, Firebase Console에서 SHA-1 인증서 추가 (61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A), Android OAuth Client ID 자동 생성 확인 (182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com), google-services.json 업데이트 (client_type: 1 추가), Google Sign-In 정상 작동 확인 | be1fd25 |
 | 2025-12-17 | 검색 기능 구현 - 게시글 검색 기능 구현 (PostRepository.searchPosts 메서드 추가, Firestore 쿼리 + 클라이언트 사이드 필터링), 성당 검색 개선 (이름, 주소, 도도부현, 교구, 지역 검색 확장, 검색 결과 정렬 개선), searchPostsProvider 추가, 검색 UI 개선 (검색 히스토리 서비스, 자동완성 기능, PostListSearchBar 및 ParishSearchBar 개선) | be1fd25 |
-| 2025-12-18 | 성인 이미지 자동 검색 기능 구현 - Wikipedia API 및 GPT-4o를 통한 이미지 URL 검색, SharedPreferences 기반 캐싱, 실패한 URL 추적 및 자동 재검색 (404 에러 처리), 실패한 URL 목록을 SharedPreferences에 저장하여 영구 추적, `SaintImageService` 생성, `saintImageUrlProvider` 개선 | - |
-| 2025-12-18 | 단위 테스트 커버리지 확장 - FirestorePostRepository 테스트 추가 (8개 테스트 케이스: createPost, updatePost, deletePost, getPostById, isLiked), FirestoreReportRepository 테스트 추가 (5개 테스트 케이스: createReport, 중복 신고 방지, 에러 처리), 총 테스트 케이스 36개로 확장 | - |
+| 2025-12-18 | 성인 이미지 자동 검색 기능 구현 - Wikipedia API 및 GPT-4o를 통한 이미지 URL 검색, SharedPreferences 기반 캐싱, 실패한 URL 추적 및 자동 재검색 (404 에러 처리), 실패한 URL 목록을 SharedPreferences에 저장하여 영구 추적, `SaintImageService` 생성, `saintImageUrlProvider` 개선 | 96d03b2b |
+| 2025-12-18 | 단위 테스트 커버리지 확장 - UseCase 테스트 추가 (43개 테스트 케이스: PostUseCases 14개, SignInUseCase 11개, GetParishesUseCase 11개, GetSaintFeastDaysUseCase 7개), 총 17개 테스트 파일, 139개 테스트 케이스 완료 | 96d03b2b |
+| 2025-12-18 | 단위 테스트 에러 수정 - mocktail fallback value 등록 (PostSortType, ReportReason, Post, AppNotification), verifyNever 사용으로 변경, TestWidgetsFlutterBinding.ensureInitialized() 추가, 모든 테스트 통과 (137개 테스트) | - |
 
 ---
 
@@ -347,10 +352,13 @@
    - 날짜 포맷 로케일 동적 업데이트
    - 번역 데이터 자동 재로드
 
-2. **단위 테스트 커버리지 추가** ✅ 진행 중
-   - 우선순위: Repository 구현, State notifiers, 유틸리티 함수
-   - 완료된 작업: 총 13개 테스트 파일, 85개 테스트 케이스 완료 (Repository, Notifier, Provider 테스트 포함)
-   - 남은 작업: 추가 Notifier 테스트 (점진적으로 추가 가능)
+2. **단위 테스트 커버리지 추가** ✅ 완료
+   - 우선순위: Repository 구현, State notifiers, 유틸리티 함수, UseCase
+   - 완료된 작업: 총 17개 테스트 파일, 139개 테스트 케이스 완료
+     - Repository 테스트: 9개 파일 (FirestoreUserRepository, FirestoreNotificationRepository, AuthRepositoryImpl, FirestorePostRepository, FirestoreReportRepository, NotificationSettingsRepositoryImpl, ParishRepositoryImpl, SaintFeastDayRepositoryImpl)
+     - Notifier 테스트: 1개 파일 (PostFormNotifier)
+     - Provider 테스트: 3개 파일 (LiturgyThemeProvider, FontScaleProvider, LocaleProvider)
+     - UseCase 테스트: 4개 파일 (PostUseCases, SignInUseCase, GetParishesUseCase, GetSaintFeastDaysUseCase)
 
 ### 우선순위 2: 중간
 
@@ -382,7 +390,7 @@
 
 このドキュメントは、コードベースで発見されたすべてのTODOコメントと保留中の機能実装を追跡します。
 
-**最終更新**: 2025-12-18 (通知設定画面、オフラインモード、共有機能改善完了)
+**最終更新**: 2025-12-18 (単体テストエラー修正完了: mocktail fallback value登録およびverifyNever使用で全テスト通過)
 **コードベース全体**: 約27,000行のDartコード、135ファイル
 
 ---
@@ -647,7 +655,8 @@
 | 2025-12-16 | 多言語サポート完了 - すべての言語ファイルの日本語テキストを各言語に翻訳完了: 英語 76個、スペイン語 289個、ポルトガル語 289個、ベトナム語 289個、中国語翻訳完了、すべての言語ファイルから日本語文字(ひらがな/カタカナ)削除完了 | be1fd25 |
 | 2025-12-16 | Googleログイン問題解決 - ApiException: 10 (DEVELOPER_ERROR)エラー解決、Firebase ConsoleでSHA-1証明書追加 (61:DB:3E:CE:CE:32:D9:21:57:58:20:49:5A:6C:8A:64:8E:5C:1D:3A)、Android OAuth Client ID自動生成確認 (182699877294-k867euifu2i799aroak3bnpig39i49h1.apps.googleusercontent.com)、google-services.json更新 (client_type: 1追加)、Google Sign-In正常動作確認 | be1fd25 |
 | 2025-12-17 | 検索機能実装 - 投稿検索機能実装 (PostRepository.searchPostsメソッド追加、Firestoreクエリ + クライアントサイドフィルタリング)、聖堂検索改善 (名前、住所、都道府県、教区、地域検索拡張、検索結果ソート改善)、searchPostsProvider追加、検索UI改善 (検索履歴サービス、自動補完機能、PostListSearchBarおよびParishSearchBar改善) | be1fd25 |
-| 2025-12-18 | 聖人画像自動検索機能実装 - Wikipedia APIおよびGPT-4oを使用した画像URL検索、SharedPreferencesベースのキャッシング、失敗したURL追跡および自動再検索 (404エラー処理)、失敗したURLリストをSharedPreferencesに保存して永続追跡、`SaintImageService`生成、`saintImageUrlProvider`改善 | - |
+| 2025-12-18 | 聖人画像自動検索機能実装 - Wikipedia APIおよびGPT-4oを使用した画像URL検索、SharedPreferencesベースのキャッシング、失敗したURL追跡および自動再検索 (404エラー処理)、失敗したURLリストをSharedPreferencesに保存して永続追跡、`SaintImageService`生成、`saintImageUrlProvider`改善 | 96d03b2b |
+| 2025-12-18 | 単体テストエラー修正 - mocktail fallback value登録 (PostSortType, ReportReason, Post, AppNotification)、verifyNever使用に変更、TestWidgetsFlutterBinding.ensureInitialized()追加、全テスト通過 (137テスト) | - |
 
 ---
 

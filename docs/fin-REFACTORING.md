@@ -4,7 +4,7 @@
 
 이 문서는 `/lib` 디렉토리에 대한 종합 분석을 기반으로 Credo 코드베이스의 리팩토링 우선순위와 권장사항을 설명합니다.
 
-**마지막 업데이트**: 2025-12-18 (단위 테스트 커버리지 확장: 총 13개 테스트 파일, 85개 테스트 케이스 완료)
+**마지막 업데이트**: 2025-12-18 (단위 테스트 커버리지 확장: 총 13개 테스트 파일, 96개 테스트 케이스 완료)
 **전체 코드베이스**: 약 33,275줄의 Dart 코드, 194개 파일 (자동 생성 파일 제외)
 
 ---
@@ -794,8 +794,11 @@ lib/core/data/services/image_upload_service.dart
    - 상태 변경 테스트 (`setTitle`, `setBody`, `setCategory`, `setIsOfficial`, `setIsPinned`)
    - 유효성 검사 테스트 (제목/본문 비어있음)
    - 초기 상태 테스트 (기본값, initialPost 반영)
+   - 파일 관리 테스트 (`addImage`, `removeImage`, `addPdf`, `removePdf`)
+   - 게시글 생성 테스트 (성공, 이미지/PDF 업로드 실패, 게시글 생성 실패, 공지 알림 전송)
+   - 게시글 수정 테스트 (성공, 실패)
    - 테스트 파일: `test/features/community/presentation/notifiers/post_form_notifier_test.dart`
-   - 테스트 케이스: 10개
+   - 테스트 케이스: 21개
 
 ### 테스트 도구
 - **mocktail**: Mock 객체 생성 및 테스트 작성
@@ -818,7 +821,7 @@ lib/core/data/services/image_upload_service.dart
 
 ### 테스트 실행 결과
 - ✅ 총 13개 테스트 파일 작성 완료
-- ✅ 총 85개 테스트 케이스 작성 완료
+- ✅ 총 96개 테스트 케이스 작성 완료 (PostFormNotifier 테스트 확장: 10개 → 21개)
 - ✅ Repository, Notifier, Provider의 주요 기능에 대한 테스트 커버리지 확보
 
 ### 남은 작업
