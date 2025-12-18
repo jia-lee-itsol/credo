@@ -24,18 +24,12 @@ void main() {
 
       // Act
       final container = ProviderContainer();
-      final asyncValue = container.read(postSearchHistoryProvider);
+      final history = await container.read(postSearchHistoryProvider.future);
 
       // Assert
-      await asyncValue.when(
-        data: (history) {
-          expect(history, isNotEmpty);
-          expect(history, contains('test query 1'));
-          expect(history, contains('test query 2'));
-        },
-        loading: () => fail('로딩 상태가 아니어야 함'),
-        error: (error, stack) => fail('에러가 발생하지 않아야 함: $error'),
-      );
+      expect(history, isNotEmpty);
+      expect(history, contains('test query 1'));
+      expect(history, contains('test query 2'));
 
       container.dispose();
     });
@@ -43,16 +37,10 @@ void main() {
     test('히스토리가 없으면 빈 리스트를 반환해야 함', () async {
       // Act
       final container = ProviderContainer();
-      final asyncValue = container.read(postSearchHistoryProvider);
+      final history = await container.read(postSearchHistoryProvider.future);
 
       // Assert
-      await asyncValue.when(
-        data: (history) {
-          expect(history, isEmpty);
-        },
-        loading: () => fail('로딩 상태가 아니어야 함'),
-        error: (error, stack) => fail('에러가 발생하지 않아야 함: $error'),
-      );
+      expect(history, isEmpty);
 
       container.dispose();
     });
@@ -66,18 +54,12 @@ void main() {
 
       // Act
       final container = ProviderContainer();
-      final asyncValue = container.read(parishSearchHistoryProvider);
+      final history = await container.read(parishSearchHistoryProvider.future);
 
       // Assert
-      await asyncValue.when(
-        data: (history) {
-          expect(history, isNotEmpty);
-          expect(history, contains('parish query 1'));
-          expect(history, contains('parish query 2'));
-        },
-        loading: () => fail('로딩 상태가 아니어야 함'),
-        error: (error, stack) => fail('에러가 발생하지 않아야 함: $error'),
-      );
+      expect(history, isNotEmpty);
+      expect(history, contains('parish query 1'));
+      expect(history, contains('parish query 2'));
 
       container.dispose();
     });
@@ -85,16 +67,10 @@ void main() {
     test('히스토리가 없으면 빈 리스트를 반환해야 함', () async {
       // Act
       final container = ProviderContainer();
-      final asyncValue = container.read(parishSearchHistoryProvider);
+      final history = await container.read(parishSearchHistoryProvider.future);
 
       // Assert
-      await asyncValue.when(
-        data: (history) {
-          expect(history, isEmpty);
-        },
-        loading: () => fail('로딩 상태가 아니어야 함'),
-        error: (error, stack) => fail('에러가 발생하지 않아야 함: $error'),
-      );
+      expect(history, isEmpty);
 
       container.dispose();
     });
