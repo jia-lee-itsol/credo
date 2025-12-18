@@ -46,3 +46,7 @@ app.*.map.json
 
 # Environment variables
 .env
+
+# Google Services (API keys)
+**/google-services.json
+**/GoogleService-Info.plist
