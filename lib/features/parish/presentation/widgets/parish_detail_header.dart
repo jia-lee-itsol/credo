@@ -77,6 +77,7 @@ class ParishDetailHeader extends ConsumerWidget {
     try {
       final l10n = ref.read(appLocalizationsSyncProvider);
       await ShareUtils.shareParish(
+        context: context,
         parishName: parishName,
         parishId: parishId,
         address: address,

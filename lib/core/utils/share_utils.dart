@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../core/services/logger_service.dart';
 import 'app_localizations.dart';
@@ -22,12 +23,14 @@ class ShareUtils {
   }
 
   /// 게시글 공유
-  /// 
+  ///
+  /// [context] BuildContext (iPad 지원용)
   /// [postTitle] 게시글 제목
   /// [parishId] 교구 ID
   /// [postId] 게시글 ID
   /// [l10n] 번역 객체
   static Future<void> sharePost({
+    required BuildContext context,
     required String postTitle,
     required String parishId,
     required String postId,
@@ -46,9 +49,13 @@ class ShareUtils {
           '${l10n.common.shareLink}: $deepLink\n'
           '${l10n.common.shareAppLink}: $appSchemeUrl';
 
+      final box = context.findRenderObject() as RenderBox?;
       await Share.share(
         shareText,
         subject: postTitle,
+        sharePositionOrigin: box != null
+            ? box.localToGlobal(Offset.zero) & box.size
+            : null,
       );
 
       AppLogger.debug('게시글 공유 완료: $postId');
@@ -59,12 +66,14 @@ class ShareUtils {
   }
 
   /// 일일 미사 독서 공유
-  /// 
+  ///
+  /// [context] BuildContext (iPad 지원용)
   /// [date] 날짜
   /// [readingTitle] 독서 제목
   /// [readingText] 독서 본문 (선택사항)
   /// [l10n] 번역 객체
   static Future<void> shareDailyMassReading({
+    required BuildContext context,
     required DateTime date,
     String? readingTitle,
     String? readingText,
@@ -81,9 +90,13 @@ class ShareUtils {
           '${l10n.common.shareLink}: $deepLink\n'
           '${l10n.common.shareAppLink}: $appSchemeUrl';
 
+      final box = context.findRenderObject() as RenderBox?;
       await Share.share(
         shareText,
         subject: readingTitle ?? l10n.mass.shareReading,
+        sharePositionOrigin: box != null
+            ? box.localToGlobal(Offset.zero) & box.size
+            : null,
       );
 
       AppLogger.debug('일일 미사 독서 공유 완료: $dateString');
@@ -94,12 +107,14 @@ class ShareUtils {
   }
 
   /// 교회 정보 공유
-  /// 
+  ///
+  /// [context] BuildContext (iPad 지원용)
   /// [parishName] 교회 이름
   /// [parishId] 교회 ID
   /// [address] 주소 (선택사항)
   /// [l10n] 번역 객체
   static Future<void> shareParish({
+    required BuildContext context,
     required String parishName,
     required String parishId,
     String? address,
@@ -119,9 +134,13 @@ class ShareUtils {
           '${l10n.common.shareLink}: $deepLink\n'
           '${l10n.common.shareAppLink}: $appSchemeUrl';
 
+      final box = context.findRenderObject() as RenderBox?;
       await Share.share(
         shareText,
         subject: parishName,
+        sharePositionOrigin: box != null
+            ? box.localToGlobal(Offset.zero) & box.size
+            : null,
       );
 
       AppLogger.debug('교회 정보 공유 완료: $parishId');
@@ -133,11 +152,19 @@ class ShareUtils {
 
   /// 일반 텍스트 공유
   static Future<void> shareText({
+    required BuildContext context,
     required String text,
     String? subject,
   }) async {
     try {
-      await Share.share(text, subject: subject);
+      final box = context.findRenderObject() as RenderBox?;
+      await Share.share(
+        text,
+        subject: subject,
+        sharePositionOrigin: box != null
+            ? box.localToGlobal(Offset.zero) & box.size
+            : null,
+      );
       AppLogger.debug('텍스트 공유 완료');
     } catch (e, stackTrace) {
       AppLogger.error('텍스트 공유 실패', e, stackTrace);

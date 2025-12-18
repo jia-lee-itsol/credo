@@ -263,6 +263,7 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
       });
 
       await ShareUtils.shareDailyMassReading(
+        context: context,
         date: date,
         readingTitle: readingTitle,
         readingText: null,
@@ -308,6 +309,10 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
       return;
     }
 
+    // async gap 이전에 저장
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    final l10n = ref.read(appLocalizationsSyncProvider);
+
     try {
       await FirebaseFirestore.instance
           .collection('daily_meditation_comments')
@@ -321,36 +326,30 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
           });
 
       _commentController.clear();
-      if (mounted) {
-        final l10n = ref.read(appLocalizationsSyncProvider);
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(l10n.community.shareMeditation)));
-        // 댓글 섹션으로 스크롤
-        Future.delayed(const Duration(milliseconds: 100), () {
-          if (_scrollController.hasClients) {
-            _scrollController.animateTo(
-              _scrollController.position.maxScrollExtent,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeOut,
-            );
-          }
-        });
-      }
+      if (!mounted) return;
+      scaffoldMessenger.showSnackBar(
+        SnackBar(content: Text(l10n.community.shareMeditation)),
+      );
+      // 댓글 섹션으로 스크롤
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (_scrollController.hasClients) {
+          _scrollController.animateTo(
+            _scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.easeOut,
+          );
+        }
+      });
     } catch (e, stackTrace) {
       AppLogger.error('댓글 작성 실패: $e', e, stackTrace);
-      if (mounted) {
-        final l10n = ref.read(appLocalizationsSyncProvider);
-        String errorMessage = l10n.mass.prayer.errorOccurred;
-        if (e.toString().contains('permission-denied')) {
-          errorMessage = l10n.mass.prayer.permissionDenied;
-        } else if (e.toString().contains('network')) {
-          errorMessage = l10n.mass.prayer.networkError;
-        }
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(errorMessage)));
+      if (!mounted) return;
+      String errorMessage = l10n.mass.prayer.errorOccurred;
+      if (e.toString().contains('permission-denied')) {
+        errorMessage = l10n.mass.prayer.permissionDenied;
+      } else if (e.toString().contains('network')) {
+        errorMessage = l10n.mass.prayer.networkError;
       }
+      scaffoldMessenger.showSnackBar(SnackBar(content: Text(errorMessage)));
     }
   }
 }

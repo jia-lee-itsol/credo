@@ -351,6 +351,7 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
     try {
       final l10n = ref.read(appLocalizationsSyncProvider);
       await ShareUtils.sharePost(
+        context: context,
         postTitle: post.title,
         parishId: post.parishId ?? '',
         postId: post.postId,
