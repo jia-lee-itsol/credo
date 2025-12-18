@@ -274,6 +274,8 @@
     "clearCache": "캐시 삭제",
     "clearCacheDescription": "성인 데이터 및 이미지 캐시를 삭제합니다",
     "clearCacheConfirm": "캐시를 삭제하시겠습니까? 성인 데이터가 다시 로드됩니다.",
+    "customerService": "고객 서비스",
+    "customerServiceDescription": "의견이나 요청사항을 보내주세요",
     "godparent": {
       "add": "추가",
       "remove": "삭제",

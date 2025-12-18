@@ -422,6 +422,8 @@
     "clearCache": "Borrar caché",
     "clearCacheDescription": "Borrar datos e imágenes de santos",
     "clearCacheConfirm": "¿Borrar caché? Los datos de santos se recargarán.",
+    "customerService": "Servicio al Cliente",
+    "customerServiceDescription": "Comparta sus comentarios y solicitudes",
     "godparent": {
       "add": "Agregar",
       "remove": "Eliminar",

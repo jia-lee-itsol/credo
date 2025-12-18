@@ -305,6 +305,8 @@
     "clearCache": "Clear Cache",
     "clearCacheDescription": "Clear saint data and image cache",
     "clearCacheConfirm": "Clear cache? Saint data will be reloaded.",
+    "customerService": "Customer Service",
+    "customerServiceDescription": "Share your feedback and requests",
     "godparent": {
       "add": "Add",
       "remove": "Remove",

@@ -758,6 +758,10 @@ class ProfileTranslations {
       _getString('clearCacheDescription') ?? '聖人データや画像のキャッシュを削除します';
   String get clearCacheConfirm =>
       _getString('clearCacheConfirm') ?? 'キャッシュを削除しますか？聖人データが再読み込みされます。';
+  String get customerService =>
+      _getString('customerService') ?? 'お問い合わせ';
+  String get customerServiceDescription =>
+      _getString('customerServiceDescription') ?? 'ご意見・ご要望をお聞かせください';
 
   ProfileGodparentTranslations get godparent =>
       ProfileGodparentTranslations(_getValue('godparent'));

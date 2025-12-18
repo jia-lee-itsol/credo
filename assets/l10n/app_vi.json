@@ -422,6 +422,8 @@
     "clearCache": "Xóa bộ nhớ đệm",
     "clearCacheDescription": "Xóa dữ liệu và hình ảnh các thánh",
     "clearCacheConfirm": "Xóa bộ nhớ đệm? Dữ liệu các thánh sẽ được tải lại.",
+    "customerService": "Dịch vụ khách hàng",
+    "customerServiceDescription": "Chia sẻ ý kiến và yêu cầu của bạn",
     "godparent": {
       "add": "Thêm",
       "remove": "Xóa",

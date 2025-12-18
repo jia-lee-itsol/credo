@@ -422,6 +422,8 @@
     "clearCache": "Limpar cache",
     "clearCacheDescription": "Limpar dados e imagens dos santos",
     "clearCacheConfirm": "Limpar cache? Os dados dos santos serão recarregados.",
+    "customerService": "Atendimento ao Cliente",
+    "customerServiceDescription": "Compartilhe suas opiniões e solicitações",
     "godparent": {
       "add": "Adicionar",
       "remove": "Remover",

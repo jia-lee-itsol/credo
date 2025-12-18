@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/app_localizations.dart';
 import '../../../../core/data/services/saint_feast_day_service.dart';
@@ -11,6 +12,9 @@ import '../../../../shared/widgets/settings_list_tile.dart';
 import '../../../saints/presentation/providers/saint_feast_day_providers.dart';
 import 'font_scale_settings_tile.dart';
 import 'qr_code_dialog.dart';
+
+/// 고객 서비스 구글 폼 URL
+const String _customerServiceFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdFM9lVAVL2ObVTSi08XdnpOthYpWYSuTEmIeIR7tRWfUfWWA/viewform';
 
 /// 마이페이지 설정 섹션 위젯
 class MyPageSettingsSection extends ConsumerWidget {
@@ -24,6 +28,37 @@ class MyPageSettingsSection extends ConsumerWidget {
     required this.isAuthenticated,
     this.favoriteParishCount,
   });
+
+  /// 고객 서비스 폼 열기
+  Future<void> _openCustomerServiceForm(
+    BuildContext context,
+    AppLocalizations l10n,
+  ) async {
+    final uri = Uri.parse(_customerServiceFormUrl);
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(l10n.common.error),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('${l10n.common.error}: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -133,6 +168,18 @@ class MyPageSettingsSection extends ConsumerWidget {
                 SnackBar(content: Text(l10n.profile.privacyPolicyComingSoon)),
               );
             },
+          ),
+        ),
+
+        // 고객 서비스 (의견 보내기)
+        Card(
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: SettingsListTile(
+            icon: Icons.support_agent,
+            title: l10n.profile.customerService,
+            subtitle: l10n.profile.customerServiceDescription,
+            primaryColor: primaryColor,
+            onTap: () => _openCustomerServiceForm(context, l10n),
           ),
         ),
 
