@@ -139,24 +139,32 @@ class SaintImageService {
       final englishName = saint.nameEn ?? saint.name;
       if (englishName.isEmpty) return null;
 
-      // URL 인코딩
-      final encodedName = Uri.encodeComponent(englishName);
+      // 다양한 검색어 시도
+      final searchTerms = _generateSearchTerms(englishName);
 
-      // Wikipedia API로 이미지 검색
-      final response = await _dio.get(
-        'https://en.wikipedia.org/api/rest_v1/page/summary/$encodedName',
-      );
+      for (final searchTerm in searchTerms) {
+        final encodedName = Uri.encodeComponent(searchTerm);
 
-      if (response.statusCode == 200) {
-        final data = response.data as Map<String, dynamic>;
-        final thumbnail = data['thumbnail'] as Map<String, dynamic>?;
-        final imageUrl = thumbnail?['source'] as String?;
-
-        if (imageUrl != null) {
-          AppLogger.debug(
-            '[SaintImageService] Wikipedia에서 이미지 찾음: $englishName',
+        try {
+          final response = await _dio.get(
+            'https://en.wikipedia.org/api/rest_v1/page/summary/$encodedName',
           );
-          return imageUrl;
+
+          if (response.statusCode == 200) {
+            final data = response.data as Map<String, dynamic>;
+            final thumbnail = data['thumbnail'] as Map<String, dynamic>?;
+            final imageUrl = thumbnail?['source'] as String?;
+
+            if (imageUrl != null) {
+              AppLogger.debug(
+                '[SaintImageService] Wikipedia에서 이미지 찾음: $searchTerm',
+              );
+              return imageUrl;
+            }
+          }
+        } catch (e) {
+          // 다음 검색어 시도
+          continue;
         }
       }
 
@@ -169,6 +177,53 @@ class SaintImageService {
       );
       return null;
     }
+  }
+
+  /// 검색어 변형 생성
+  List<String> _generateSearchTerms(String name) {
+    final terms = <String>[];
+
+    // St. -> Saint 변환, 그리고 Saint/St. 제거 버전도 생성
+    final normalized = name
+        .replaceAll('St. ', 'Saint ')
+        .replaceAll('St ', 'Saint ');
+
+    // 원본 이름
+    terms.add(name);
+    if (normalized != name) terms.add(normalized);
+
+    // "Pope Saint X" -> "Pope X"
+    if (name.toLowerCase().contains('pope')) {
+      final withoutSaint = normalized
+          .replaceAll('Saint ', '')
+          .replaceAll('saint ', '')
+          .replaceAll('성 ', '');
+      if (!terms.contains(withoutSaint)) terms.add(withoutSaint);
+
+      // Pope_X (Wikipedia 형식)
+      final wikipediaFormat = withoutSaint.replaceAll(' ', '_');
+      if (!terms.contains(wikipediaFormat)) terms.add(wikipediaFormat);
+    }
+
+    // "Saint X" -> "X (saint)", "X"
+    if (normalized.toLowerCase().contains('saint')) {
+      final withoutSaint = normalized
+          .replaceAll('Saint ', '')
+          .replaceAll('saint ', '')
+          .replaceAll('Pope ', '')
+          .replaceAll('pope ', '');
+      final saintFormat = '$withoutSaint (saint)';
+      if (!terms.contains(saintFormat)) terms.add(saintFormat);
+      if (!terms.contains(withoutSaint)) terms.add(withoutSaint);
+    }
+
+    // 공백을 언더스코어로 변환 (Wikipedia URL 형식)
+    final underscoreFormat = name.replaceAll(' ', '_');
+    if (!terms.contains(underscoreFormat)) terms.add(underscoreFormat);
+
+    AppLogger.debug('[SaintImageService] 검색어 목록: $terms');
+
+    return terms;
   }
 
   /// 여러 Wikipedia 언어 버전에서 이미지 검색

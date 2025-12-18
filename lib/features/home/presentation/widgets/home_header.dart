@@ -63,41 +63,67 @@ class HomeHeader extends ConsumerWidget {
                       ),
                     ),
 
-                    // 오늘의 성인 축일 (리스트)
+                    // 오늘의 성인 축일 (리스트) - 탭하면 전체 목록으로 이동
                     todaySaintsAsync.when(
                       data: (saints) {
                         if (saints.isEmpty) {
                           return const SizedBox(height: 4);
                         }
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 4),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: saints.map((saint) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 2),
-                                child: Row(
-                                  children: [
-                                    const Icon(
-                                      Icons.star,
-                                      size: 14,
-                                      color: Colors.amber,
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Flexible(
-                                      child: Text(
-                                        saint.getName(
-                                          currentLocale.languageCode,
+                        return GestureDetector(
+                          onTap: () => context.go(AppRoutes.todaySaints),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ...saints.map((saint) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(bottom: 2),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.star,
+                                          size: 14,
+                                          color: Colors.amber,
                                         ),
-                                        style: theme.textTheme.bodySmall
-                                            ?.copyWith(color: Colors.white),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
+                                        const SizedBox(width: 4),
+                                        Flexible(
+                                          child: Text(
+                                            saint.getName(
+                                              currentLocale.languageCode,
+                                            ),
+                                            style: theme.textTheme.bodySmall
+                                                ?.copyWith(color: Colors.white),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              );
-                            }).toList(),
+                                  );
+                                }),
+                                // 성인이 2인 이상이면 "전체 보기" 표시
+                                if (saints.length >= 2)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 4),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.arrow_forward,
+                                          size: 12,
+                                          color: Colors.white.withValues(alpha: 0.7),
+                                        ),
+                                        const SizedBox(width: 4),
+                                        Text(
+                                          _getViewAllText(currentLocale.languageCode, saints.length),
+                                          style: theme.textTheme.labelSmall?.copyWith(
+                                            color: Colors.white.withValues(alpha: 0.7),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -164,6 +190,28 @@ class HomeHeader extends ConsumerWidget {
         return DateFormat("d 'de' MMMM, yyyy (EEE)", 'pt');
       default:
         return DateFormat('yyyy年M月d日（E）', 'ja');
+    }
+  }
+
+  /// 전체 보기 텍스트 (다국어)
+  static String _getViewAllText(String languageCode, int count) {
+    switch (languageCode) {
+      case 'ja':
+        return '全$count人の聖人を見る →';
+      case 'ko':
+        return '전체 $count명의 성인 보기 →';
+      case 'en':
+        return 'View all $count saints →';
+      case 'zh':
+        return '查看全部$count位圣人 →';
+      case 'vi':
+        return 'Xem tất cả $count vị thánh →';
+      case 'es':
+        return 'Ver todos los $count santos →';
+      case 'pt':
+        return 'Ver todos os $count santos →';
+      default:
+        return '全$count人の聖人を見る →';
     }
   }
 }

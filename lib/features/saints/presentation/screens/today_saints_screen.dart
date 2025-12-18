@@ -67,25 +67,30 @@ class TodaySaintsScreen extends ConsumerWidget {
             );
           }
 
-          return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: saints.length + 1, // +1 for header
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                // 출처 안내 문구
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Text(
-                    l10n.saints.sourceNote,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                );
-              }
-              final saint = saints[index - 1];
-              return _buildSaintCard(context, ref, theme, l10n, saint);
+          return RefreshIndicator(
+            onRefresh: () async {
+              await refreshTodaySaints(ref);
             },
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: saints.length + 1, // +1 for header
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  // 출처 안내 문구
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Text(
+                      l10n.saints.sourceNote,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  );
+                }
+                final saint = saints[index - 1];
+                return _buildSaintCard(context, ref, theme, l10n, saint);
+              },
+            ),
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),

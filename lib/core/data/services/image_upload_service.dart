@@ -264,15 +264,15 @@ class ImageUploadService {
     try {
       AppLogger.image('PDF 업로드 시작 (시도: ${retryCount + 1}/$maxRetries)');
       AppLogger.image('파일 경로: ${pdfFile.path}');
-      
+
       final fileSize = await pdfFile.length();
-      AppLogger.image('파일 크기: $fileSize bytes (${(fileSize / 1024 / 1024).toStringAsFixed(2)} MB)');
+      AppLogger.image(
+        '파일 크기: $fileSize bytes (${(fileSize / 1024 / 1024).toStringAsFixed(2)} MB)',
+      );
 
       // 파일 크기 확인
       if (fileSize > maxFileSize) {
-        throw ValidationFailure(
-          message: 'PDF 파일 크기는 10MB를 초과할 수 없습니다.',
-        );
+        throw ValidationFailure(message: 'PDF 파일 크기는 10MB를 초과할 수 없습니다.');
       }
 
       // 파일 확장자 추출

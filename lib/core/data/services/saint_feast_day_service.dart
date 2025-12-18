@@ -31,7 +31,15 @@ class SaintFeastDayService {
     // 실패한 이미지 URL 목록도 삭제
     await prefs.remove('failed_saint_image_urls');
 
-    AppLogger.debug('[SaintFeastDayService] 오늘의 성인 캐시 삭제 완료: $year-$month-$day');
+    // 이미지 캐시 삭제 (saint_image_로 시작하는 모든 키)
+    final allKeys = prefs.getKeys();
+    for (final key in allKeys) {
+      if (key.startsWith('saint_image_')) {
+        await prefs.remove(key);
+      }
+    }
+
+    AppLogger.debug('[SaintFeastDayService] 오늘의 성인 및 이미지 캐시 삭제 완료: $year-$month-$day');
   }
 
   /// JSON 문자열을 파싱하여 Map으로 변환

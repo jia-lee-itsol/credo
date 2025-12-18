@@ -16,9 +16,12 @@ import '../../../community/data/models/post.dart';
 import '../../../saints/presentation/providers/saint_feast_day_providers.dart';
 import '../../../saints/presentation/widgets/saint_feast_day_modal.dart';
 import '../../../../core/data/services/parish_service.dart';
+import '../../../../core/data/services/saint_feast_day_service.dart' as core;
 import '../widgets/home_header.dart';
 import '../widgets/home_action_button.dart';
 import '../widgets/today_saints_card.dart';
+import '../widgets/daily_reflection_card.dart';
+import '../providers/daily_reflection_provider.dart';
 
 /// 홈 화면
 class HomeScreen extends ConsumerStatefulWidget {
@@ -109,6 +112,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         backgroundColor: Colors.white,
         body: RefreshIndicator(
           onRefresh: () async {
+            // 성인 캐시 삭제 및 새로고침
+            await refreshTodaySaints(ref);
+
+            // 묵상 한마디 새로고침
+            await refreshDailyReflection(ref);
+
+            // 전례력 정보 새로고침
+            final date = testDate ?? DateTime.now();
+            ref.invalidate(liturgyInfoFromChatGPTProvider(date));
+            ref.invalidate(currentLiturgySeasonProvider);
+
+            // 성인 Provider 새로고침 (두 곳에 정의된 Provider 모두)
+            ref.invalidate(todaySaintsProvider);
+            ref.invalidate(core.todaySaintsProvider);
+
+            // 묵상 Provider 새로고침
+            ref.invalidate(dailyReflectionProvider);
+
             // 알림 provider 새로고침
             if (currentUser != null) {
               ref.invalidate(notificationsProvider(currentUser.userId));
@@ -165,20 +186,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
 
-              // 근처 교회 찾기 버튼
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  child: HomeActionButton(
-                    icon: Icons.location_on_outlined,
-                    title: l10n.parish.search,
-                    subtitle: l10n.parish.searchFromCurrentLocation,
-                    primaryColor: primaryColor,
-                    backgroundColor: primaryColor.withValues(alpha: 0.1),
-                    onTap: () => context.go(AppRoutes.parishList),
-                  ),
-                ),
-              ),
+              // 오늘의 묵상 한마디 카드
+              const SliverToBoxAdapter(child: DailyReflectionCard()),
 
               // 오늘의 미사 버튼
               SliverToBoxAdapter(

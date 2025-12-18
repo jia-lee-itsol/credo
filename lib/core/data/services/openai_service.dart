@@ -283,31 +283,27 @@ $languageName 이름:''';
       final day = date.day;
       final year = date.year;
 
+      // 월 이름 변환
+      final monthNames = [
+        '', 'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+      final monthName = monthNames[month];
+
       final prompt =
-          '''What saints are celebrated on $month/$day according to the Catholic liturgical calendar?
+          '''오늘($year년 $month월 $day일, $monthName $day)의 가톨릭 성인은 누구입니까?
 
-RULES:
-1. First, list saints from the GENERAL ROMAN CALENDAR (Universal):
-   - Solemnities (대축일/solemnity)
-   - Feasts (축일/feast)
-   - Obligatory Memorials (의무 기념일/obligatory_memorial)
+로마 순교록(Roman Martyrology)과 교회 전례력에 따라 $month월 $day일에 기념하는 성인을 알려주세요.
 
-2. Then, also include well-known saints celebrated regionally or as Optional Memorials:
-   - Optional Memorials (선택 기념일/optional_memorial)
-   - Mark these with type "optional_memorial"
+요구사항:
+- $month월 $day일에 기념하는 성인만 포함
+- 성인의 직함(교황, 주교, 순교자, 동정녀 등)을 이름에 포함
+- $languageName와 영어 이름 모두 제공
 
-3. Set "liturgyTakesPrecedence" to true if this date falls during:
-   - Advent weekdays (Dec 17-24)
-   - Christmas Octave
-   - Lent weekdays
-   - Holy Week
-   - Easter Octave
-   - Other major liturgical celebrations that supersede saint memorials
+JSON 형식으로만 응답 (마크다운 없이):
+{"saints": [{"name": "$languageName 이름", "nameEn": "English name", "type": "optional_memorial", "imageUrl": null}], "liturgyTakesPrecedence": false, "liturgicalNote": ""}''';
 
-Provide names in $languageName with English reference.
-
-Return ONLY valid JSON (no markdown, no explanation):
-{"saints": [{"name": "성인 이름 in $languageName", "nameEn": "English name", "type": "solemnity|feast|obligatory_memorial|optional_memorial", "imageUrl": null}], "liturgyTakesPrecedence": true|false, "liturgicalNote": "explanation if liturgy takes precedence"}''';
+      AppLogger.debug('[OpenAIService] 성인 검색 프롬프트: $monthName $day, $year ($languageCode)');
 
       final response = await _dio.post(
         '$_baseUrl/chat/completions',
@@ -323,22 +319,13 @@ Return ONLY valid JSON (no markdown, no explanation):
             {
               'role': 'system',
               'content':
-                  '''You are an expert in the Catholic Liturgical Calendar.
+                  '''당신은 가톨릭 전례력 전문가입니다. 로마 순교록(Roman Martyrology)에 따라 정확한 성인 정보를 제공합니다.
 
-Your task is to identify saints celebrated on a given date:
-
-1. UNIVERSAL celebrations (General Roman Calendar):
-   - Solemnities (대축일): Highest rank
-   - Feasts (축일): Second rank
-   - Obligatory Memorials (의무 기념일): Third rank
-
-2. OPTIONAL celebrations (also include these):
-   - Optional Memorials (선택 기념일): Can be celebrated optionally
-   - Well-known regional saints
-
-Always indicate if liturgy takes precedence on that date (Advent Dec 17-24, Lent weekdays, Holy Week, Octaves, etc.).
-
-Return only valid JSON without markdown formatting.''',
+중요:
+- 요청받은 정확한 날짜의 성인만 포함하세요
+- 비슷한 이름의 성인을 혼동하지 마세요 (예: Anastasius와 Anastasia는 다른 성인)
+- 각 성인의 축일을 반드시 확인하세요
+- JSON 형식으로만 응답하세요 (마크다운 없이)''',
             },
             {'role': 'user', 'content': prompt},
           ],
@@ -541,6 +528,104 @@ $languageName로 간결하고 따뜻한 축하 메시지를 작성해주세요.
     } catch (e, stackTrace) {
       AppLogger.error(
         '[OpenAIService] 축하 메시지 생성 실패: $saintName ($language)',
+        e,
+        stackTrace,
+      );
+      rethrow;
+    }
+  }
+
+  /// 오늘의 묵상 한마디 생성
+  ///
+  /// [gospelReference] 오늘의 복음 참조 (예: "마태오 1:18-24")
+  /// [gospelTitle] 오늘의 복음 제목
+  /// [saintNames] 오늘의 성인 이름 목록
+  /// [language] 언어 코드: 'ja', 'ko', 'en' 등
+  ///
+  /// 반환: 묵상 한마디 텍스트
+  Future<String> generateDailyReflection({
+    String? gospelReference,
+    String? gospelTitle,
+    List<String>? saintNames,
+    required String language,
+  }) async {
+    try {
+      final apiKey = OpenAIApiKey.apiKey;
+      if (apiKey == null) {
+        throw Exception('OPENAI_API_KEY가 설정되지 않았습니다.');
+      }
+
+      final languageName = _getLanguageName(language);
+
+      // 프롬프트 생성
+      final buffer = StringBuffer();
+      buffer.writeln('오늘의 묵상 한마디를 작성해주세요.');
+      buffer.writeln();
+
+      if (gospelReference != null && gospelReference.isNotEmpty) {
+        buffer.writeln('오늘의 복음: $gospelReference');
+        if (gospelTitle != null && gospelTitle.isNotEmpty) {
+          buffer.writeln('복음 제목: $gospelTitle');
+        }
+      }
+
+      if (saintNames != null && saintNames.isNotEmpty) {
+        buffer.writeln('오늘의 성인: ${saintNames.join(', ')}');
+      }
+
+      buffer.writeln();
+      buffer.writeln('요구사항:');
+      buffer.writeln('- $languageName로 작성하세요');
+      buffer.writeln('- 2-3문장으로 간결하게 작성하세요');
+      buffer.writeln('- 오늘 하루를 시작하며 마음에 새길 수 있는 따뜻한 메시지');
+      buffer.writeln('- 복음의 핵심 메시지나 성인의 가르침을 바탕으로 작성');
+      buffer.writeln('- 일상생활에 적용할 수 있는 실천적인 내용 포함');
+      buffer.writeln('- 묵상 한마디만 반환하세요 (제목이나 설명 없이)');
+
+      final prompt = buffer.toString();
+
+      final response = await _dio.post(
+        '$_baseUrl/chat/completions',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $apiKey',
+            'Content-Type': 'application/json',
+          },
+        ),
+        data: {
+          'model': 'gpt-4o-mini',
+          'messages': [
+            {
+              'role': 'system',
+              'content':
+                  '당신은 가톨릭 신앙의 묵상 가이드를 작성하는 전문가입니다. 하루를 시작하며 마음에 새길 수 있는 따뜻하고 영감을 주는 짧은 묵상 한마디를 작성합니다.',
+            },
+            {'role': 'user', 'content': prompt},
+          ],
+          'temperature': 0.8,
+          'max_tokens': 200,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.data as Map<String, dynamic>;
+        final choices = data['choices'] as List<dynamic>?;
+        if (choices != null && choices.isNotEmpty) {
+          final message = choices.first['message'] as Map<String, dynamic>?;
+          final content = message?['content'] as String?;
+          if (content != null && content.isNotEmpty) {
+            AppLogger.debug(
+              '[OpenAIService] 묵상 한마디 생성 성공 ($language)',
+            );
+            return content.trim();
+          }
+        }
+      }
+
+      throw Exception('GPT 응답에서 내용을 찾을 수 없습니다.');
+    } catch (e, stackTrace) {
+      AppLogger.error(
+        '[OpenAIService] 묵상 한마디 생성 실패 ($language)',
         e,
         stackTrace,
       );
