@@ -9,6 +9,7 @@
 
 import {setGlobalOptions} from "firebase-functions";
 import {onDocumentCreated} from "firebase-functions/v2/firestore";
+import {onCall, HttpsError} from "firebase-functions/v2/https";
 import * as logger from "firebase-functions/logger";
 import {initializeApp} from "firebase-admin/app";
 import {getFirestore} from "firebase-admin/firestore";
@@ -280,14 +281,14 @@ export const onPostCreated = onDocumentCreated(
             // 전체 알림이 꺼져 있으면 전송하지 않음
             if (settings?.enabled === false) {
               shouldSendNotification = false;
-            }
-            // 공지사항 알림이 꺼져 있으면 전송하지 않음
-            else if (settings?.notices === false) {
+            } else if (settings?.notices === false) {
+              // 공지사항 알림이 꺼져 있으면 전송하지 않음
               shouldSendNotification = false;
-            }
-            // 조용한 시간 확인 (현재 시간이 조용한 시간대인지 확인)
-            else if (settings?.quietHoursStart !== undefined &&
-                     settings?.quietHoursEnd !== undefined) {
+            } else if (
+              settings?.quietHoursStart !== undefined &&
+              settings?.quietHoursEnd !== undefined
+            ) {
+              // 조용한 시간 확인 (현재 시간이 조용한 시간대인지 확인)
               const now = new Date();
               const currentHour = now.getHours();
               const quietStart = settings.quietHoursStart as number;
@@ -315,7 +316,11 @@ export const onPostCreated = onDocumentCreated(
         }
 
         // FCM 토큰이 있고 알림 설정이 허용된 사용자만 추가
-        if (fcmToken && typeof fcmToken === "string" && shouldSendNotification) {
+        if (
+          fcmToken &&
+          typeof fcmToken === "string" &&
+          shouldSendNotification
+        ) {
           usersWithToken++;
           messages.push({
             token: fcmToken,
@@ -487,14 +492,14 @@ export const onCommentCreated = onDocumentCreated(
           // 전체 알림이 꺼져 있으면 전송하지 않음
           if (settings?.enabled === false) {
             shouldSendNotification = false;
-          }
-          // 댓글 알림이 꺼져 있으면 전송하지 않음
-          else if (settings?.comments === false) {
+          } else if (settings?.comments === false) {
+            // 댓글 알림이 꺼져 있으면 전송하지 않음
             shouldSendNotification = false;
-          }
-          // 조용한 시간 확인
-          else if (settings?.quietHoursStart !== undefined &&
-                   settings?.quietHoursEnd !== undefined) {
+          } else if (
+            settings?.quietHoursStart !== undefined &&
+            settings?.quietHoursEnd !== undefined
+          ) {
+            // 조용한 시간 확인
             const now = new Date();
             const currentHour = now.getHours();
             const quietStart = settings.quietHoursStart as number;
@@ -563,6 +568,81 @@ export const onCommentCreated = onDocumentCreated(
       }
     } catch (error) {
       logger.error(`댓글 알림 전송 중 오류 발생: ${error}`);
+    }
+  },
+);
+
+/**
+ * FCM 테스트 알림 전송 (HTTP 호출 가능)
+ * 클라이언트에서 자신에게 테스트 알림을 보낼 수 있음
+ */
+export const sendTestNotification = onCall(
+  {
+    cors: true,
+  },
+  async (request) => {
+    const userId = request.auth?.uid;
+    if (!userId) {
+      throw new HttpsError("unauthenticated", "인증이 필요합니다.");
+    }
+
+    logger.info(`FCM 테스트 알림 요청: userId=${userId}`);
+
+    try {
+      const db = getFirestore();
+      const messaging = getMessaging();
+
+      // 사용자 정보 가져오기
+      const userDoc = await db.collection("users").doc(userId).get();
+      if (!userDoc.exists) {
+        throw new HttpsError("not-found", "사용자를 찾을 수 없습니다.");
+      }
+
+      const userData = userDoc.data();
+      const fcmToken = userData?.fcmToken;
+
+      if (!fcmToken) {
+        throw new HttpsError(
+          "failed-precondition",
+          "FCM 토큰이 없습니다. 알림 권한을 확인해주세요.",
+        );
+      }
+
+      // 테스트 알림 메시지 생성
+      const message = {
+        token: fcmToken,
+        notification: {
+          title: "테스트 알림",
+          body: "FCM 알림이 정상적으로 작동합니다!",
+        },
+        data: {
+          type: "test",
+          timestamp: new Date().toISOString(),
+        },
+      };
+
+      const response = await messaging.send(message);
+      logger.info(`✅ 테스트 알림 전송 완료: userId=${userId}, messageId=${response}`);
+
+      return {
+        success: true,
+        messageId: response,
+        message: "테스트 알림이 전송되었습니다.",
+      };
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      logger.error(`테스트 알림 전송 실패: ${error}`);
+      logger.error(`에러 타입: ${typeof error}`);
+      logger.error(`에러 스택: ${error instanceof Error ? error.stack : "N/A"}`);
+
+      // HttpsError가 이미 던져진 경우 그대로 전달
+      if (error instanceof HttpsError) {
+        throw error;
+      }
+
+      // 그 외의 경우 INTERNAL 에러로 변환
+      throw new HttpsError("internal", `테스트 알림 전송 실패: ${errorMessage}`);
     }
   },
 );

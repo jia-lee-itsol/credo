@@ -28,6 +28,7 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _nicknameController;
+  late TextEditingController? _baptismalNameController;
   bool _isSaving = false;
   int? _feastDayMonth;
   int? _feastDayDay;
@@ -46,6 +47,10 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     final currentUser = ref.read(currentUserProvider);
     _nicknameController = TextEditingController(
       text: currentUser?.nickname ?? '',
+    );
+    // 세례명 컨트롤러: 항상 생성 (미설정일 때만 입력 가능하지만, 설정되어 있어도 표시)
+    _baptismalNameController = TextEditingController(
+      text: currentUser?.baptismalName ?? '',
     );
     // feastDayId 형식: "이름:월-일" 또는 "월-일" (예: "ペトロ:6-29" 또는 "6-29")
     if (currentUser?.feastDayId != null) {
@@ -133,6 +138,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   @override
   void dispose() {
     _nicknameController.dispose();
+    _baptismalNameController?.dispose();
     super.dispose();
   }
 
@@ -181,6 +187,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
               email: currentUser?.email,
               userId: currentUser?.userId,
               baptismalName: currentUser?.baptismalName,
+              baptismalNameController: _baptismalNameController,
               feastDayMonth: _feastDayMonth,
               feastDayDay: _feastDayDay,
               onMonthChanged: (value) {
@@ -316,6 +323,99 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     );
   }
 
+  /// 세례명 처음 저장 시 확인 모달
+  Future<bool> _showBaptismalNameConfirmDialog(
+    BuildContext context,
+    WidgetRef ref,
+    String baptismalName,
+  ) async {
+    final l10n = ref.read(appLocalizationsSyncProvider);
+    final primaryColor = ref.read(liturgyPrimaryColorProvider);
+    final theme = Theme.of(context);
+
+    final result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Row(
+          children: [
+            Icon(
+              Icons.info_outline,
+              color: primaryColor,
+              size: 28,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                l10n.profile.baptismalNameChange.title,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 입력한 세례명 표시
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: primaryColor.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                baptismalName,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: primaryColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              l10n.profile.baptismalNameChange.message,
+              style: theme.textTheme.bodyMedium,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              l10n.profile.baptismalNameChange.description,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: Text(
+              l10n.common.cancel,
+              style: TextStyle(color: theme.colorScheme.onSurfaceVariant),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: primaryColor,
+              foregroundColor: Colors.white,
+            ),
+            child: Text(l10n.common.confirm),
+          ),
+        ],
+      ),
+    );
+
+    return result == true;
+  }
+
   void _showParishSearchBottomSheet(
     BuildContext context,
     WidgetRef ref,
@@ -355,14 +455,37 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
 
+    final l10n = ref.read(appLocalizationsSyncProvider);
+    final currentUser = ref.read(currentUserProvider);
+
+    // 세례명 처리: 새로 입력하는 경우 확인 모달 표시
+    String? baptismalName;
+    final trimmedName = _baptismalNameController?.text.trim() ?? '';
+
+    if (trimmedName.isNotEmpty) {
+      // 기존 세례명이 없고 새로 입력하는 경우
+      if (currentUser?.baptismalName == null ||
+          currentUser!.baptismalName!.isEmpty) {
+        // 확인 모달 표시
+        final confirmed = await _showBaptismalNameConfirmDialog(
+          context,
+          ref,
+          trimmedName,
+        );
+        if (!confirmed) {
+          // 취소하면 저장하지 않고 리턴
+          return;
+        }
+        baptismalName = trimmedName;
+      }
+    }
+
     setState(() {
       _isSaving = true;
     });
 
-    final l10n = ref.read(appLocalizationsSyncProvider);
     try {
       final repository = ref.read(authRepositoryProvider);
-      final currentUser = ref.read(currentUserProvider);
 
       // mainParishId가 변경되면 favoriteParishIds도 업데이트
       List<String>? updatedFavorites;
@@ -391,6 +514,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         nickname: _nicknameController.text.trim(),
         mainParishId: _selectedParishId,
         feastDayId: feastDayId,
+        baptismalName: baptismalName,
         baptismDate: _baptismDate,
         confirmationDate: _confirmationDate,
         godchildren: _godchildren,

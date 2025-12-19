@@ -777,6 +777,8 @@ class ProfileTranslations {
       ProfileSacramentDatesTranslations(_getValue('sacramentDates'));
   ProfileBaptismalNameRequiredTranslations get baptismalNameRequired =>
       ProfileBaptismalNameRequiredTranslations(_getValue('baptismalNameRequired'));
+  ProfileBaptismalNameChangeTranslations get baptismalNameChange =>
+      ProfileBaptismalNameChangeTranslations(_getValue('baptismalNameChange'));
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -842,6 +844,8 @@ class ProfileBasicInfoTranslations {
       'ユーザーIDは変更できません（長押しでコピー）';
   String get baptismNameCannotChange =>
       _getString('baptismNameCannotChange') ?? '洗礼名は変更できません';
+  String get baptismNameHint =>
+      _getString('baptismNameHint') ?? '洗礼名を入力してください';
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -912,6 +916,27 @@ class ProfileBaptismalNameRequiredTranslations {
   }
 }
 
+/// 프로필 세례명 변경 확인 번역
+class ProfileBaptismalNameChangeTranslations {
+  final dynamic _data;
+
+  ProfileBaptismalNameChangeTranslations(this._data);
+
+  String get title => _getString('title') ?? '洗礼名の変更';
+  String get message =>
+      _getString('message') ?? '洗礼名は一度設定すると変更できません。';
+  String get description =>
+      _getString('description') ??
+      '本当に変更しますか？この操作は取り消せません。';
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
 /// 프로필 즐겨찾기 교회 번역
 class ProfileFavoriteParishesTranslations {
   final dynamic _data;
@@ -970,6 +995,13 @@ class ProfileNotificationsTranslations {
   String get quietHoursStart => _getString('quietHoursStart') ?? '開始時刻';
   String get quietHoursEnd => _getString('quietHoursEnd') ?? '終了時刻';
   String get saved => _getString('saved') ?? '通知設定を保存しました';
+  String get testNotification =>
+      _getString('testNotification') ?? 'テスト通知を送信';
+  String get testNotificationDescription =>
+      _getString('testNotificationDescription') ??
+      'FCM通知が正常に動作するかテストします';
+  String get testNotificationSent =>
+      _getString('testNotificationSent') ?? 'テスト通知が送信されました';
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../core/services/logger_service.dart';
@@ -8,7 +10,7 @@ import '../../config/routes/app_routes.dart';
 class ShareUtils {
   // 앱 기본 URL (딥링크용)
   static const String _appBaseUrl = 'https://credo.app';
-  
+
   // 앱 스킴 (앱이 설치되어 있을 때 사용)
   static const String _appScheme = 'credo://';
 
@@ -44,21 +46,32 @@ class ShareUtils {
         AppRoutes.postDetailPath(parishId, postId),
       );
 
-      final shareText = '${l10n.community.sharePost}\n\n'
+      final shareText =
+          '${l10n.community.sharePost}\n\n'
           '$postTitle\n\n'
           '${l10n.common.shareLink}: $deepLink\n'
           '${l10n.common.shareAppLink}: $appSchemeUrl';
 
-      final box = context.findRenderObject() as RenderBox?;
-      await Share.share(
-        shareText,
-        subject: postTitle,
-        sharePositionOrigin: box != null
-            ? box.localToGlobal(Offset.zero) & box.size
-            : null,
+      // iPad 지원: sharePositionOrigin은 Android에서만 사용
+      Rect? sharePositionOrigin;
+      if (Platform.isAndroid) {
+        final box = context.findRenderObject() as RenderBox?;
+        if (box != null && box.hasSize) {
+          sharePositionOrigin = box.localToGlobal(Offset.zero) & box.size;
+        }
+      }
+
+      AppLogger.debug(
+        '게시글 공유 시작: postId=$postId, shareText 길이=${shareText.length}',
       );
 
-      AppLogger.debug('게시글 공유 완료: $postId');
+      final result = await Share.share(
+        shareText,
+        subject: postTitle,
+        sharePositionOrigin: sharePositionOrigin,
+      );
+
+      AppLogger.debug('게시글 공유 완료: postId=$postId, status=${result.status}');
     } catch (e, stackTrace) {
       AppLogger.error('게시글 공유 실패', e, stackTrace);
       rethrow;
@@ -80,26 +93,48 @@ class ShareUtils {
     required AppLocalizations l10n,
   }) async {
     try {
-      final dateString = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-      final deepLink = _createDeepLink('${AppRoutes.dailyMass}?date=$dateString');
-      final appSchemeUrl = _createAppSchemeUrl('${AppRoutes.dailyMass}?date=$dateString');
+      final dateString =
+          '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+      final deepLink = _createDeepLink(
+        '${AppRoutes.dailyMass}?date=$dateString',
+      );
+      final appSchemeUrl = _createAppSchemeUrl(
+        '${AppRoutes.dailyMass}?date=$dateString',
+      );
 
-      final shareText = '${l10n.mass.shareReading}\n\n'
+      final shareText =
+          '${l10n.mass.shareReading}\n\n'
           '${readingTitle != null ? '$readingTitle\n\n' : ''}'
-          '${readingText != null && readingText.length > 200 ? '${readingText.substring(0, 200)}...\n\n' : readingText != null ? '$readingText\n\n' : ''}'
+          '${readingText != null && readingText.length > 200
+              ? '${readingText.substring(0, 200)}...\n\n'
+              : readingText != null
+              ? '$readingText\n\n'
+              : ''}'
           '${l10n.common.shareLink}: $deepLink\n'
           '${l10n.common.shareAppLink}: $appSchemeUrl';
 
-      final box = context.findRenderObject() as RenderBox?;
-      await Share.share(
-        shareText,
-        subject: readingTitle ?? l10n.mass.shareReading,
-        sharePositionOrigin: box != null
-            ? box.localToGlobal(Offset.zero) & box.size
-            : null,
+      // iPad 지원: sharePositionOrigin은 Android에서만 사용
+      Rect? sharePositionOrigin;
+      if (Platform.isAndroid) {
+        final box = context.findRenderObject() as RenderBox?;
+        if (box != null && box.hasSize) {
+          sharePositionOrigin = box.localToGlobal(Offset.zero) & box.size;
+        }
+      }
+
+      AppLogger.debug(
+        '일일 미사 독서 공유 시작: date=$dateString, shareText 길이=${shareText.length}',
       );
 
-      AppLogger.debug('일일 미사 독서 공유 완료: $dateString');
+      final result = await Share.share(
+        shareText,
+        subject: readingTitle ?? l10n.mass.shareReading,
+        sharePositionOrigin: sharePositionOrigin,
+      );
+
+      AppLogger.debug(
+        '일일 미사 독서 공유 완료: date=$dateString, status=${result.status}',
+      );
     } catch (e, stackTrace) {
       AppLogger.error('일일 미사 독서 공유 실패', e, stackTrace);
       rethrow;
@@ -121,29 +156,40 @@ class ShareUtils {
     required AppLocalizations l10n,
   }) async {
     try {
-      final deepLink = _createDeepLink(
-        AppRoutes.parishDetailPath(parishId),
-      );
+      final deepLink = _createDeepLink(AppRoutes.parishDetailPath(parishId));
       final appSchemeUrl = _createAppSchemeUrl(
         AppRoutes.parishDetailPath(parishId),
       );
 
-      final shareText = '${l10n.parish.shareParish ?? 'この教会をシェア'}\n\n'
+      final shareText =
+          '${l10n.parish.shareParish ?? 'この教会をシェア'}\n\n'
           '$parishName\n'
           '${address != null ? '$address\n' : ''}'
           '${l10n.common.shareLink}: $deepLink\n'
           '${l10n.common.shareAppLink}: $appSchemeUrl';
 
-      final box = context.findRenderObject() as RenderBox?;
-      await Share.share(
-        shareText,
-        subject: parishName,
-        sharePositionOrigin: box != null
-            ? box.localToGlobal(Offset.zero) & box.size
-            : null,
+      // iPad 지원: sharePositionOrigin은 Android에서만 사용
+      Rect? sharePositionOrigin;
+      if (Platform.isAndroid) {
+        final box = context.findRenderObject() as RenderBox?;
+        if (box != null && box.hasSize) {
+          sharePositionOrigin = box.localToGlobal(Offset.zero) & box.size;
+        }
+      }
+
+      AppLogger.debug(
+        '교회 정보 공유 시작: parishId=$parishId, shareText 길이=${shareText.length}',
       );
 
-      AppLogger.debug('교회 정보 공유 완료: $parishId');
+      final result = await Share.share(
+        shareText,
+        subject: parishName,
+        sharePositionOrigin: sharePositionOrigin,
+      );
+
+      AppLogger.debug(
+        '교회 정보 공유 완료: parishId=$parishId, status=${result.status}',
+      );
     } catch (e, stackTrace) {
       AppLogger.error('교회 정보 공유 실패', e, stackTrace);
       rethrow;
@@ -157,15 +203,24 @@ class ShareUtils {
     String? subject,
   }) async {
     try {
-      final box = context.findRenderObject() as RenderBox?;
-      await Share.share(
+      // iPad 지원: sharePositionOrigin은 Android에서만 사용
+      Rect? sharePositionOrigin;
+      if (Platform.isAndroid) {
+        final box = context.findRenderObject() as RenderBox?;
+        if (box != null && box.hasSize) {
+          sharePositionOrigin = box.localToGlobal(Offset.zero) & box.size;
+        }
+      }
+
+      AppLogger.debug('텍스트 공유 시작: text 길이=${text.length}');
+
+      final result = await Share.share(
         text,
         subject: subject,
-        sharePositionOrigin: box != null
-            ? box.localToGlobal(Offset.zero) & box.size
-            : null,
+        sharePositionOrigin: sharePositionOrigin,
       );
-      AppLogger.debug('텍스트 공유 완료');
+
+      AppLogger.debug('텍스트 공유 완료: status=${result.status}');
     } catch (e, stackTrace) {
       AppLogger.error('텍스트 공유 실패', e, stackTrace);
       rethrow;
@@ -182,8 +237,8 @@ class ShareUtils {
   }
 
   static String getDailyMassDeepLink(DateTime date) {
-    final dateString = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+    final dateString =
+        '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
     return _createDeepLink('${AppRoutes.dailyMass}?date=$dateString');
   }
 }
-

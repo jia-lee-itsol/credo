@@ -32,8 +32,6 @@ mixin _$UserEntity {
   String? get baptismalName => throw _privateConstructorUsedError;
   String? get feastDayId =>
       throw _privateConstructorUsedError; // "month-day" 형식 (예: "1-1")
-  String? get feastDayName =>
-      throw _privateConstructorUsedError; // 축일 성인 이름 (직접 입력)
   DateTime? get baptismDate => throw _privateConstructorUsedError; // 세례 날짜
   DateTime? get confirmationDate => throw _privateConstructorUsedError; // 견진 날짜
   List<String> get godchildren =>
@@ -71,7 +69,6 @@ abstract class $UserEntityCopyWith<$Res> {
     String? verifiedRole,
     String? baptismalName,
     String? feastDayId,
-    String? feastDayName,
     DateTime? baptismDate,
     DateTime? confirmationDate,
     List<String> godchildren,
@@ -109,7 +106,6 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? verifiedRole = freezed,
     Object? baptismalName = freezed,
     Object? feastDayId = freezed,
-    Object? feastDayName = freezed,
     Object? baptismDate = freezed,
     Object? confirmationDate = freezed,
     Object? godchildren = null,
@@ -171,10 +167,6 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
                 ? _value.feastDayId
                 : feastDayId // ignore: cast_nullable_to_non_nullable
                       as String?,
-            feastDayName: freezed == feastDayName
-                ? _value.feastDayName
-                : feastDayName // ignore: cast_nullable_to_non_nullable
-                      as String?,
             baptismDate: freezed == baptismDate
                 ? _value.baptismDate
                 : baptismDate // ignore: cast_nullable_to_non_nullable
@@ -228,7 +220,6 @@ abstract class _$$UserEntityImplCopyWith<$Res>
     String? verifiedRole,
     String? baptismalName,
     String? feastDayId,
-    String? feastDayName,
     DateTime? baptismDate,
     DateTime? confirmationDate,
     List<String> godchildren,
@@ -265,7 +256,6 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? verifiedRole = freezed,
     Object? baptismalName = freezed,
     Object? feastDayId = freezed,
-    Object? feastDayName = freezed,
     Object? baptismDate = freezed,
     Object? confirmationDate = freezed,
     Object? godchildren = null,
@@ -327,10 +317,6 @@ class __$$UserEntityImplCopyWithImpl<$Res>
             ? _value.feastDayId
             : feastDayId // ignore: cast_nullable_to_non_nullable
                   as String?,
-        feastDayName: freezed == feastDayName
-            ? _value.feastDayName
-            : feastDayName // ignore: cast_nullable_to_non_nullable
-                  as String?,
         baptismDate: freezed == baptismDate
             ? _value.baptismDate
             : baptismDate // ignore: cast_nullable_to_non_nullable
@@ -377,7 +363,6 @@ class _$UserEntityImpl extends _UserEntity {
     this.verifiedRole,
     this.baptismalName,
     this.feastDayId,
-    this.feastDayName,
     this.baptismDate,
     this.confirmationDate,
     final List<String> godchildren = const [],
@@ -436,9 +421,6 @@ class _$UserEntityImpl extends _UserEntity {
   final String? feastDayId;
   // "month-day" 형식 (예: "1-1")
   @override
-  final String? feastDayName;
-  // 축일 성인 이름 (직접 입력)
-  @override
   final DateTime? baptismDate;
   // 세례 날짜
   @override
@@ -465,7 +447,7 @@ class _$UserEntityImpl extends _UserEntity {
 
   @override
   String toString() {
-    return 'UserEntity(userId: $userId, nickname: $nickname, email: $email, role: $role, mainParishId: $mainParishId, preferredLanguages: $preferredLanguages, favoriteParishIds: $favoriteParishIds, profileImageUrl: $profileImageUrl, isVerified: $isVerified, verifiedParishId: $verifiedParishId, verifiedRole: $verifiedRole, baptismalName: $baptismalName, feastDayId: $feastDayId, feastDayName: $feastDayName, baptismDate: $baptismDate, confirmationDate: $confirmationDate, godchildren: $godchildren, godparentId: $godparentId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserEntity(userId: $userId, nickname: $nickname, email: $email, role: $role, mainParishId: $mainParishId, preferredLanguages: $preferredLanguages, favoriteParishIds: $favoriteParishIds, profileImageUrl: $profileImageUrl, isVerified: $isVerified, verifiedParishId: $verifiedParishId, verifiedRole: $verifiedRole, baptismalName: $baptismalName, feastDayId: $feastDayId, baptismDate: $baptismDate, confirmationDate: $confirmationDate, godchildren: $godchildren, godparentId: $godparentId, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -500,8 +482,6 @@ class _$UserEntityImpl extends _UserEntity {
                 other.baptismalName == baptismalName) &&
             (identical(other.feastDayId, feastDayId) ||
                 other.feastDayId == feastDayId) &&
-            (identical(other.feastDayName, feastDayName) ||
-                other.feastDayName == feastDayName) &&
             (identical(other.baptismDate, baptismDate) ||
                 other.baptismDate == baptismDate) &&
             (identical(other.confirmationDate, confirmationDate) ||
@@ -534,7 +514,6 @@ class _$UserEntityImpl extends _UserEntity {
     verifiedRole,
     baptismalName,
     feastDayId,
-    feastDayName,
     baptismDate,
     confirmationDate,
     const DeepCollectionEquality().hash(_godchildren),
@@ -567,7 +546,6 @@ abstract class _UserEntity extends UserEntity {
     final String? verifiedRole,
     final String? baptismalName,
     final String? feastDayId,
-    final String? feastDayName,
     final DateTime? baptismDate,
     final DateTime? confirmationDate,
     final List<String> godchildren,
@@ -603,8 +581,6 @@ abstract class _UserEntity extends UserEntity {
   String? get baptismalName;
   @override
   String? get feastDayId; // "month-day" 형식 (예: "1-1")
-  @override
-  String? get feastDayName; // 축일 성인 이름 (직접 입력)
   @override
   DateTime? get baptismDate; // 세례 날짜
   @override

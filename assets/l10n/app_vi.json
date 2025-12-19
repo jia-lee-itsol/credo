@@ -398,7 +398,10 @@
       "quietHoursDescription": "Không nhận thông báo trong giờ đã chỉ định",
       "quietHoursStart": "Giờ bắt đầu",
       "quietHoursEnd": "Giờ kết thúc",
-      "saved": "Đã lưu cài đặt thông báo"
+      "saved": "Đã lưu cài đặt thông báo",
+      "testNotification": "Gửi Thông Báo Thử Nghiệm",
+      "testNotificationDescription": "Kiểm tra xem thông báo FCM có hoạt động bình thường không",
+      "testNotificationSent": "Đã gửi thông báo thử nghiệm"
     },
     "notificationSettings": "Cài Đặt Thông Báo",
     "notificationSettingsComingSoon": "Cài đặt thông báo đang được chuẩn bị",
@@ -424,6 +427,18 @@
     "clearCacheConfirm": "Xóa bộ nhớ đệm? Dữ liệu các thánh sẽ được tải lại.",
     "customerService": "Dịch vụ khách hàng",
     "customerServiceDescription": "Chia sẻ ý kiến và yêu cầu của bạn",
+    "basicInfo": {
+      "title": "Thông Tin Cơ Bản",
+      "emailCannotChange": "Địa chỉ email không thể thay đổi",
+      "userIdCannotChange": "ID người dùng không thể thay đổi (nhấn giữ để sao chép)",
+      "baptismNameCannotChange": "Tên thánh không thể thay đổi",
+      "baptismNameHint": "Nhập tên thánh của bạn"
+    },
+    "baptismalNameChange": {
+      "title": "Thay Đổi Tên Thánh",
+      "message": "Tên thánh không thể thay đổi sau khi đã được thiết lập.",
+      "description": "Bạn có chắc chắn muốn thay đổi không? Hành động này không thể hoàn tác."
+    },
     "godparent": {
       "add": "Thêm",
       "remove": "Xóa",

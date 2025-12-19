@@ -304,7 +304,13 @@
       "title": "기본 정보",
       "emailCannotChange": "이메일 주소는 변경할 수 없습니다",
       "userIdCannotChange": "사용자 ID는 변경할 수 없습니다 (길게 눌러서 복사)",
-      "baptismNameCannotChange": "세례명은 변경할 수 없습니다"
+      "baptismNameCannotChange": "세례명은 변경할 수 없습니다",
+      "baptismNameHint": "세례명을 입력하세요"
+    },
+    "baptismalNameChange": {
+      "title": "세례명 변경",
+      "message": "세례명은 한 번 설정하면 변경할 수 없습니다.",
+      "description": "정말 변경하시겠습니까? 이 작업은 취소할 수 없습니다."
     },
     "parishInfo": {
       "title": "교회 정보",
@@ -342,7 +348,10 @@
       "quietHoursDescription": "지정한 시간대에는 알림을 받지 않습니다",
       "quietHoursStart": "시작 시간",
       "quietHoursEnd": "종료 시간",
-      "saved": "알림 설정이 저장되었습니다"
+      "saved": "알림 설정이 저장되었습니다",
+      "testNotification": "테스트 알림 보내기",
+      "testNotificationDescription": "FCM 알림이 정상적으로 작동하는지 테스트합니다",
+      "testNotificationSent": "테스트 알림이 전송되었습니다"
     }
   },
   "parish": {

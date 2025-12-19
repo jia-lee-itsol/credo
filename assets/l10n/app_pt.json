@@ -398,7 +398,10 @@
       "quietHoursDescription": "Não receber notificações durante as horas especificadas",
       "quietHoursStart": "Hora de início",
       "quietHoursEnd": "Hora de término",
-      "saved": "Configurações de notificações salvas"
+      "saved": "Configurações de notificações salvas",
+      "testNotification": "Enviar Notificação de Teste",
+      "testNotificationDescription": "Testa se as notificações FCM estão funcionando corretamente",
+      "testNotificationSent": "Notificação de teste enviada"
     },
     "notificationSettings": "Configurações de Notificações",
     "notificationSettingsComingSoon": "As configurações de notificações estão em preparação",
@@ -424,6 +427,18 @@
     "clearCacheConfirm": "Limpar cache? Os dados dos santos serão recarregados.",
     "customerService": "Atendimento ao Cliente",
     "customerServiceDescription": "Compartilhe suas opiniões e solicitações",
+    "basicInfo": {
+      "title": "Informações Básicas",
+      "emailCannotChange": "O endereço de e-mail não pode ser alterado",
+      "userIdCannotChange": "O ID do usuário não pode ser alterado (pressione e segure para copiar)",
+      "baptismNameCannotChange": "O nome de batismo não pode ser alterado",
+      "baptismNameHint": "Digite seu nome de batismo"
+    },
+    "baptismalNameChange": {
+      "title": "Alterar Nome de Batismo",
+      "message": "O nome de batismo não pode ser alterado uma vez definido.",
+      "description": "Tem certeza de que deseja alterá-lo? Esta ação não pode ser desfeita."
+    },
     "godparent": {
       "add": "Adicionar",
       "remove": "Remover",

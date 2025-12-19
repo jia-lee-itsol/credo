@@ -14,6 +14,7 @@ _$NotificationSettingsImpl _$$NotificationSettingsImplFromJson(
   comments: json['comments'] as bool? ?? true,
   likes: json['likes'] as bool? ?? false,
   dailyMass: json['dailyMass'] as bool? ?? false,
+  quietHoursEnabled: json['quietHoursEnabled'] as bool? ?? false,
   quietHoursStart: (json['quietHoursStart'] as num?)?.toInt() ?? 22,
   quietHoursEnd: (json['quietHoursEnd'] as num?)?.toInt() ?? 7,
   updatedAt: json['updatedAt'] == null
@@ -29,6 +30,7 @@ Map<String, dynamic> _$$NotificationSettingsImplToJson(
   'comments': instance.comments,
   'likes': instance.likes,
   'dailyMass': instance.dailyMass,
+  'quietHoursEnabled': instance.quietHoursEnabled,
   'quietHoursStart': instance.quietHoursStart,
   'quietHoursEnd': instance.quietHoursEnd,
   'updatedAt': instance.updatedAt?.toIso8601String(),

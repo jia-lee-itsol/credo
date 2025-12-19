@@ -281,7 +281,10 @@
       "quietHoursDescription": "Do not receive notifications during specified hours",
       "quietHoursStart": "Start Time",
       "quietHoursEnd": "End Time",
-      "saved": "Notification settings saved"
+      "saved": "Notification settings saved",
+      "testNotification": "Send Test Notification",
+      "testNotificationDescription": "Test if FCM notifications are working properly",
+      "testNotificationSent": "Test notification sent"
     },
     "notificationSettings": "Notification Settings",
     "notificationSettingsComingSoon": "Notification settings coming soon",
@@ -335,7 +338,13 @@
       "title": "Basic Information",
       "emailCannotChange": "Email address cannot be changed",
       "userIdCannotChange": "User ID cannot be changed (long press to copy)",
-      "baptismNameCannotChange": "Baptismal name cannot be changed"
+      "baptismNameCannotChange": "Baptismal name cannot be changed",
+      "baptismNameHint": "Enter your baptismal name"
+    },
+    "baptismalNameChange": {
+      "title": "Change Baptismal Name",
+      "message": "Baptismal name cannot be changed once set.",
+      "description": "Are you sure you want to change it? This action cannot be undone."
     },
     "parishInfo": {
       "title": "Church Information",

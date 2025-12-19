@@ -506,6 +506,7 @@ class AuthRepositoryImpl implements AuthRepository {
     List<String>? preferredLanguages,
     List<String>? favoriteParishIds,
     String? feastDayId,
+    String? baptismalName,
     DateTime? baptismDate,
     DateTime? confirmationDate,
     List<String>? godchildren,
@@ -528,6 +529,26 @@ class AuthRepositoryImpl implements AuthRepository {
       }
 
       final currentUserModel = UserModel.fromFirestore(userDoc);
+      
+      // 세례명 업데이트: null이 아니고 비어있지 않을 때만 업데이트
+      // 기존 값이 없을 때만 설정 가능하거나, 확인 모달에서 yes를 눌렀을 때만 변경 가능
+      String? finalBaptismalName;
+      if (baptismalName != null && baptismalName.isNotEmpty) {
+        // 기존 세례명이 없으면 설정 가능
+        if (currentUserModel.baptismalName == null || 
+            currentUserModel.baptismalName!.isEmpty) {
+          finalBaptismalName = baptismalName;
+        } else if (baptismalName != currentUserModel.baptismalName) {
+          // 기존 세례명이 있고 변경된 경우 (확인 모달에서 yes를 눌렀을 때만)
+          finalBaptismalName = baptismalName;
+        } else {
+          // 변경 없음
+          finalBaptismalName = currentUserModel.baptismalName;
+        }
+      } else {
+        finalBaptismalName = currentUserModel.baptismalName;
+      }
+      
       final updatedUser = currentUserModel.copyWith(
         nickname: nickname ?? currentUserModel.nickname,
         mainParishId: mainParishId ?? currentUserModel.mainParishId,
@@ -536,6 +557,7 @@ class AuthRepositoryImpl implements AuthRepository {
         favoriteParishIds:
             favoriteParishIds ?? currentUserModel.favoriteParishIds,
         feastDayId: feastDayId ?? currentUserModel.feastDayId,
+        baptismalName: finalBaptismalName,
         baptismDate: baptismDate ?? currentUserModel.baptismDate,
         confirmationDate: confirmationDate ?? currentUserModel.confirmationDate,
         godchildren: godchildren ?? currentUserModel.godchildren,

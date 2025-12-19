@@ -403,7 +403,10 @@
       "quietHoursDescription": "在指定时间段内不接收通知",
       "quietHoursStart": "开始时间",
       "quietHoursEnd": "结束时间",
-      "saved": "通知设置已保存"
+      "saved": "通知设置已保存",
+      "testNotification": "发送测试通知",
+      "testNotificationDescription": "测试FCM通知是否正常工作",
+      "testNotificationSent": "测试通知已发送"
     },
     "notificationSettings": "通知设置",
     "notificationSettingsComingSoon": "通知设置正在准备中",
@@ -429,6 +432,18 @@
     "clearCacheConfirm": "确定要清除缓存吗？圣人数据将重新加载。",
     "customerService": "客户服务",
     "customerServiceDescription": "请分享您的意见和建议",
+    "basicInfo": {
+      "title": "基本信息",
+      "emailCannotChange": "电子邮件地址无法更改",
+      "userIdCannotChange": "用户ID无法更改（长按复制）",
+      "baptismNameCannotChange": "圣名无法更改",
+      "baptismNameHint": "请输入您的圣名"
+    },
+    "baptismalNameChange": {
+      "title": "更改圣名",
+      "message": "圣名一旦设置就无法更改。",
+      "description": "您确定要更改吗？此操作无法撤销。"
+    },
     "godparent": {
       "add": "添加",
       "remove": "删除",

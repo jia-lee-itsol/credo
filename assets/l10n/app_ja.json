@@ -308,7 +308,13 @@
       "title": "基本情報",
       "emailCannotChange": "メールアドレスは変更できません",
       "userIdCannotChange": "ユーザーIDは変更できません（長押しでコピー）",
-      "baptismNameCannotChange": "洗礼名は変更できません"
+      "baptismNameCannotChange": "洗礼名は変更できません",
+      "baptismNameHint": "洗礼名を入力してください"
+    },
+    "baptismalNameChange": {
+      "title": "洗礼名の変更",
+      "message": "洗礼名は一度設定すると変更できません。",
+      "description": "本当に変更しますか？この操作は取り消せません。"
     },
     "parishInfo": {
       "title": "教会情報",
@@ -346,7 +352,10 @@
       "quietHoursDescription": "指定した時間帯は通知を受け取りません",
       "quietHoursStart": "開始時刻",
       "quietHoursEnd": "終了時刻",
-      "saved": "通知設定を保存しました"
+      "saved": "通知設定を保存しました",
+      "testNotification": "テスト通知を送信",
+      "testNotificationDescription": "FCM通知が正常に動作するかテストします",
+      "testNotificationSent": "テスト通知が送信されました"
     }
   },
   "parish": {

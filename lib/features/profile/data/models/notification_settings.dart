@@ -10,25 +10,28 @@ class NotificationSettings with _$NotificationSettings {
   const factory NotificationSettings({
     /// 전체 알림 ON/OFF
     @Default(true) bool enabled,
-    
+
     /// 공지사항 알림
     @Default(true) bool notices,
-    
+
     /// 댓글 알림
     @Default(true) bool comments,
-    
+
     /// 좋아요 알림 (선택사항)
     @Default(false) bool likes,
-    
+
     /// 일일 미사 독서 알림 (선택사항)
     @Default(false) bool dailyMass,
-    
+
+    /// 조용한 시간 활성화 여부
+    @Default(false) bool quietHoursEnabled,
+
     /// 조용한 시간 시작 (24시간 형식, 0-23)
     @Default(22) int quietHoursStart,
-    
+
     /// 조용한 시간 종료 (24시간 형식, 0-23)
     @Default(7) int quietHoursEnd,
-    
+
     /// 업데이트 시간
     @Default(null) DateTime? updatedAt,
   }) = _NotificationSettings;
@@ -51,6 +54,7 @@ class NotificationSettings with _$NotificationSettings {
       comments: data['comments'] as bool? ?? true,
       likes: data['likes'] as bool? ?? false,
       dailyMass: data['dailyMass'] as bool? ?? false,
+      quietHoursEnabled: data['quietHoursEnabled'] as bool? ?? false,
       quietHoursStart: data['quietHoursStart'] as int? ?? 22,
       quietHoursEnd: data['quietHoursEnd'] as int? ?? 7,
       updatedAt: (data['updatedAt'] as Timestamp?)?.toDate(),
@@ -65,6 +69,7 @@ class NotificationSettings with _$NotificationSettings {
       'comments': comments,
       'likes': likes,
       'dailyMass': dailyMass,
+      'quietHoursEnabled': quietHoursEnabled,
       'quietHoursStart': quietHoursStart,
       'quietHoursEnd': quietHoursEnd,
     };

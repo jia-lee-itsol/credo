@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/utils/app_localizations.dart';
+import '../../../../core/data/services/push_notification_service.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../data/models/notification_settings.dart';
@@ -18,6 +19,7 @@ class NotificationSettingsScreen extends ConsumerStatefulWidget {
 class _NotificationSettingsScreenState
     extends ConsumerState<NotificationSettingsScreen> {
   bool _isSaving = false;
+  bool _isTesting = false;
 
   @override
   Widget build(BuildContext context) {
@@ -167,60 +169,91 @@ class _NotificationSettingsScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ListTile(
-                  leading: Icon(Icons.bedtime, color: primaryColor),
+                SwitchListTile(
+                  secondary: Icon(Icons.bedtime, color: primaryColor),
                   title: Text(l10n.profile.notifications.quietHours),
                   subtitle: Text(
                     l10n.profile.notifications.quietHoursDescription,
                   ),
+                  value: settings.quietHoursEnabled,
+                  activeThumbColor: primaryColor,
+                  onChanged: _isSaving
+                      ? null
+                      : (value) {
+                          _updateSettings(
+                            userId,
+                            settings.copyWith(quietHoursEnabled: value),
+                          );
+                        },
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: _buildTimePicker(
-                          context,
-                          theme,
-                          primaryColor,
-                          l10n,
-                          l10n.profile.notifications.quietHoursStart,
-                          settings.quietHoursStart,
-                          (hour) {
-                            _updateSettings(
-                              userId,
-                              settings.copyWith(quietHoursStart: hour),
-                            );
-                          },
+                if (settings.quietHoursEnabled) ...[
+                  const Divider(height: 1),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: _buildTimePicker(
+                            context,
+                            theme,
+                            primaryColor,
+                            l10n,
+                            l10n.profile.notifications.quietHoursStart,
+                            settings.quietHoursStart,
+                            (hour) {
+                              _updateSettings(
+                                userId,
+                                settings.copyWith(quietHoursStart: hour),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 16),
-                      Text('〜', style: theme.textTheme.titleLarge),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: _buildTimePicker(
-                          context,
-                          theme,
-                          primaryColor,
-                          l10n,
-                          l10n.profile.notifications.quietHoursEnd,
-                          settings.quietHoursEnd,
-                          (hour) {
-                            _updateSettings(
-                              userId,
-                              settings.copyWith(quietHoursEnd: hour),
-                            );
-                          },
+                        const SizedBox(width: 16),
+                        Text('〜', style: theme.textTheme.titleLarge),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: _buildTimePicker(
+                            context,
+                            theme,
+                            primaryColor,
+                            l10n,
+                            l10n.profile.notifications.quietHoursEnd,
+                            settings.quietHoursEnd,
+                            (hour) {
+                              _updateSettings(
+                                userId,
+                                settings.copyWith(quietHoursEnd: hour),
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
+                ],
               ],
             ),
           ),
         ],
+
+        const SizedBox(height: 32),
+
+        // FCM 테스트 버튼
+        Card(
+          child: ListTile(
+            leading: Icon(Icons.send, color: primaryColor),
+            title: Text(l10n.profile.notifications.testNotification),
+            subtitle: Text(l10n.profile.notifications.testNotificationDescription),
+            trailing: _isTesting
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : Icon(Icons.arrow_forward_ios, size: 16, color: theme.colorScheme.onSurfaceVariant),
+            onTap: _isTesting ? null : _sendTestNotification,
+          ),
+        ),
 
         const SizedBox(height: 32),
       ],
@@ -327,6 +360,61 @@ class _NotificationSettingsScreenState
           ),
         );
       },
+    );
+  }
+
+  Future<void> _sendTestNotification() async {
+    if (_isTesting) return;
+
+    final currentUser = ref.read(currentUserProvider);
+    if (currentUser == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('로그인이 필요합니다.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      _isTesting = true;
+    });
+
+    final l10n = ref.read(appLocalizationsSyncProvider);
+    final service = PushNotificationService();
+
+    // 테스트 알림 전에 FCM 토큰 갱신 및 저장 시도
+    final tokenRefreshed = await service.refreshAndSaveToken(currentUser.userId);
+    if (!tokenRefreshed) {
+      if (!mounted) return;
+      setState(() {
+        _isTesting = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('FCM 토큰을 가져올 수 없습니다. 알림 권한을 확인하고 앱을 재시작해주세요.'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 3),
+        ),
+      );
+      return;
+    }
+
+    final result = await service.sendTestNotification();
+
+    if (!mounted) return;
+
+    setState(() {
+      _isTesting = false;
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(result['message'] ?? l10n.profile.notifications.testNotificationSent),
+        backgroundColor: result['success'] == true ? Colors.green : Colors.red,
+        duration: const Duration(seconds: 3),
+      ),
     );
   }
 }

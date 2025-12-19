@@ -305,12 +305,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         (user) async {
           if (mounted) {
             // authStateProvider가 자동으로 업데이트됨
-            // 세례명이 없으면 모달 표시
+            // 세례명이 없으면 모달 표시 후 프로필 편집 페이지로 이동
             if (user.baptismalName == null || user.baptismalName!.isEmpty) {
               await BaptismalNameRequiredDialog.show(context);
-            }
-            if (mounted) {
-              context.go(AppRoutes.home);
+              if (mounted) {
+                context.push(AppRoutes.editProfile);
+              }
+            } else {
+              if (mounted) {
+                context.go(AppRoutes.home);
+              }
             }
           }
         },
@@ -361,12 +365,16 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
         (user) async {
           if (mounted) {
             // authStateProvider가 자동으로 업데이트됨
-            // 세례명이 없으면 모달 표시
+            // 세례명이 없으면 모달 표시 후 프로필 편집 페이지로 이동
             if (user.baptismalName == null || user.baptismalName!.isEmpty) {
               await BaptismalNameRequiredDialog.show(context);
-            }
-            if (mounted) {
-              context.go(AppRoutes.home);
+              if (mounted) {
+                context.push(AppRoutes.editProfile);
+              }
+            } else {
+              if (mounted) {
+                context.go(AppRoutes.home);
+              }
             }
           }
         },

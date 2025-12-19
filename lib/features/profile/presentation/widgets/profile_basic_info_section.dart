@@ -10,6 +10,7 @@ class ProfileBasicInfoSection extends ConsumerWidget {
   final String? email;
   final String? userId;
   final String? baptismalName;
+  final TextEditingController? baptismalNameController;
   final int? feastDayMonth;
   final int? feastDayDay;
   final void Function(int?) onMonthChanged;
@@ -21,6 +22,7 @@ class ProfileBasicInfoSection extends ConsumerWidget {
     this.email,
     this.userId,
     this.baptismalName,
+    this.baptismalNameController,
     this.feastDayMonth,
     this.feastDayDay,
     required this.onMonthChanged,
@@ -102,20 +104,47 @@ class ProfileBasicInfoSection extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 16),
-            // 세례명 (읽기 전용)
-            TextFormField(
-              initialValue: baptismalName ?? l10n.common.notSet,
-              decoration: InputDecoration(labelText: l10n.auth.baptismName),
-              enabled: false,
+            // 세례명: 미설정일 때만 입력 가능, 설정되어 있으면 읽기 전용
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (baptismalName == null || baptismalName!.isEmpty)
+                  // 세례명 미설정: 입력 가능
+                  TextFormField(
+                    controller: baptismalNameController,
+                    decoration: InputDecoration(
+                      labelText: l10n.auth.baptismName,
+                      hintText: l10n.profile.basicInfo.baptismNameHint,
+                    ),
+                    maxLength: 50,
+                  )
+                else
+                  // 세례명 설정됨: 읽기 전용
+                  TextFormField(
+                    initialValue: baptismalName,
+                    decoration: InputDecoration(labelText: l10n.auth.baptismName),
+                    enabled: false,
+                  ),
+                const SizedBox(height: 8),
+                Text(
+                  baptismalName == null || baptismalName!.isEmpty
+                      ? l10n.profile.basicInfo.baptismNameHint
+                      : l10n.profile.basicInfo.baptismNameCannotChange,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 16),
+            // 축일 라벨
             Text(
-              l10n.profile.basicInfo.baptismNameCannotChange,
-              style: theme.textTheme.bodySmall?.copyWith(
+              l10n.auth.feastDay,
+              style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             // 축일 - 월/일 선택
             Row(
               children: [
