@@ -48,15 +48,33 @@ class DailyMassCommentInput extends StatelessWidget {
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
-                  vertical: 12,
+                  vertical: 16,
                 ),
               ),
               maxLines: null,
+              minLines: 1,
             ),
           ),
-          IconButton(
-            onPressed: onSubmit,
-            icon: Icon(Icons.send, color: primaryColor),
+          const SizedBox(width: 8),
+          // 터치 영역을 확대한 공유 버튼
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onSubmit,
+              borderRadius: BorderRadius.circular(24),
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: primaryColor.withValues(alpha: 0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.send,
+                  color: primaryColor,
+                  size: 24,
+                ),
+              ),
+            ),
           ),
         ],
       ),

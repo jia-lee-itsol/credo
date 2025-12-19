@@ -52,24 +52,33 @@ class ShareUtils {
           '${l10n.common.shareLink}: $deepLink\n'
           '${l10n.common.shareAppLink}: $appSchemeUrl';
 
-      // iPad 지원: sharePositionOrigin은 Android에서만 사용
-      Rect? sharePositionOrigin;
-      if (Platform.isAndroid) {
-        final box = context.findRenderObject() as RenderBox?;
-        if (box != null && box.hasSize) {
-          sharePositionOrigin = box.localToGlobal(Offset.zero) & box.size;
-        }
-      }
-
       AppLogger.debug(
         '게시글 공유 시작: postId=$postId, shareText 길이=${shareText.length}',
       );
 
-      final result = await Share.share(
-        shareText,
-        subject: postTitle,
-        sharePositionOrigin: sharePositionOrigin,
-      );
+      // iOS/iPad에서 sharePositionOrigin 문제 해결
+      ShareResult result;
+      if (Platform.isIOS) {
+        // iOS에서는 화면 하단 중앙에 공유 시트 표시
+        final screenSize = MediaQuery.of(context).size;
+        final bottomPadding = MediaQuery.of(context).padding.bottom;
+        final buttonSize = 60.0;
+        final sharePositionOrigin = Rect.fromLTWH(
+          (screenSize.width - buttonSize) / 2, // 화면 중앙
+          screenSize.height - bottomPadding - buttonSize - 20, // 하단에서 약간 위
+          buttonSize,
+          buttonSize,
+        );
+
+        result = await Share.share(
+          shareText,
+          subject: postTitle,
+          sharePositionOrigin: sharePositionOrigin,
+        );
+      } else {
+        // Android에서는 subject 포함하여 공유
+        result = await Share.share(shareText, subject: postTitle);
+      }
 
       AppLogger.debug('게시글 공유 완료: postId=$postId, status=${result.status}');
     } catch (e, stackTrace) {
@@ -113,24 +122,36 @@ class ShareUtils {
           '${l10n.common.shareLink}: $deepLink\n'
           '${l10n.common.shareAppLink}: $appSchemeUrl';
 
-      // iPad 지원: sharePositionOrigin은 Android에서만 사용
-      Rect? sharePositionOrigin;
-      if (Platform.isAndroid) {
-        final box = context.findRenderObject() as RenderBox?;
-        if (box != null && box.hasSize) {
-          sharePositionOrigin = box.localToGlobal(Offset.zero) & box.size;
-        }
-      }
-
       AppLogger.debug(
         '일일 미사 독서 공유 시작: date=$dateString, shareText 길이=${shareText.length}',
       );
 
-      final result = await Share.share(
-        shareText,
-        subject: readingTitle ?? l10n.mass.shareReading,
-        sharePositionOrigin: sharePositionOrigin,
-      );
+      // iOS/iPad에서 sharePositionOrigin 문제 해결
+      ShareResult result;
+      if (Platform.isIOS) {
+        // iOS에서는 화면 하단 중앙에 공유 시트 표시
+        final screenSize = MediaQuery.of(context).size;
+        final bottomPadding = MediaQuery.of(context).padding.bottom;
+        final buttonSize = 60.0;
+        final sharePositionOrigin = Rect.fromLTWH(
+          (screenSize.width - buttonSize) / 2, // 화면 중앙
+          screenSize.height - bottomPadding - buttonSize - 20, // 하단에서 약간 위
+          buttonSize,
+          buttonSize,
+        );
+
+        result = await Share.share(
+          shareText,
+          subject: readingTitle ?? l10n.mass.shareReading,
+          sharePositionOrigin: sharePositionOrigin,
+        );
+      } else {
+        // Android에서는 subject 포함하여 공유
+        result = await Share.share(
+          shareText,
+          subject: readingTitle ?? l10n.mass.shareReading,
+        );
+      }
 
       AppLogger.debug(
         '일일 미사 독서 공유 완료: date=$dateString, status=${result.status}',
@@ -168,24 +189,33 @@ class ShareUtils {
           '${l10n.common.shareLink}: $deepLink\n'
           '${l10n.common.shareAppLink}: $appSchemeUrl';
 
-      // iPad 지원: sharePositionOrigin은 Android에서만 사용
-      Rect? sharePositionOrigin;
-      if (Platform.isAndroid) {
-        final box = context.findRenderObject() as RenderBox?;
-        if (box != null && box.hasSize) {
-          sharePositionOrigin = box.localToGlobal(Offset.zero) & box.size;
-        }
-      }
-
       AppLogger.debug(
         '교회 정보 공유 시작: parishId=$parishId, shareText 길이=${shareText.length}',
       );
 
-      final result = await Share.share(
-        shareText,
-        subject: parishName,
-        sharePositionOrigin: sharePositionOrigin,
-      );
+      // iOS/iPad에서 sharePositionOrigin 문제 해결
+      ShareResult result;
+      if (Platform.isIOS) {
+        // iOS에서는 화면 하단 중앙에 공유 시트 표시
+        final screenSize = MediaQuery.of(context).size;
+        final bottomPadding = MediaQuery.of(context).padding.bottom;
+        final buttonSize = 60.0;
+        final sharePositionOrigin = Rect.fromLTWH(
+          (screenSize.width - buttonSize) / 2, // 화면 중앙
+          screenSize.height - bottomPadding - buttonSize - 20, // 하단에서 약간 위
+          buttonSize,
+          buttonSize,
+        );
+
+        result = await Share.share(
+          shareText,
+          subject: parishName,
+          sharePositionOrigin: sharePositionOrigin,
+        );
+      } else {
+        // Android에서는 subject 포함하여 공유
+        result = await Share.share(shareText, subject: parishName);
+      }
 
       AppLogger.debug(
         '교회 정보 공유 완료: parishId=$parishId, status=${result.status}',
@@ -203,22 +233,31 @@ class ShareUtils {
     String? subject,
   }) async {
     try {
-      // iPad 지원: sharePositionOrigin은 Android에서만 사용
-      Rect? sharePositionOrigin;
-      if (Platform.isAndroid) {
-        final box = context.findRenderObject() as RenderBox?;
-        if (box != null && box.hasSize) {
-          sharePositionOrigin = box.localToGlobal(Offset.zero) & box.size;
-        }
-      }
-
       AppLogger.debug('텍스트 공유 시작: text 길이=${text.length}');
 
-      final result = await Share.share(
-        text,
-        subject: subject,
-        sharePositionOrigin: sharePositionOrigin,
-      );
+      // iOS/iPad에서 sharePositionOrigin 문제 해결
+      ShareResult result;
+      if (Platform.isIOS) {
+        // iOS에서는 화면 하단 중앙에 공유 시트 표시
+        final screenSize = MediaQuery.of(context).size;
+        final bottomPadding = MediaQuery.of(context).padding.bottom;
+        final buttonSize = 60.0;
+        final sharePositionOrigin = Rect.fromLTWH(
+          (screenSize.width - buttonSize) / 2, // 화면 중앙
+          screenSize.height - bottomPadding - buttonSize - 20, // 하단에서 약간 위
+          buttonSize,
+          buttonSize,
+        );
+
+        result = await Share.share(
+          text,
+          subject: subject,
+          sharePositionOrigin: sharePositionOrigin,
+        );
+      } else {
+        // Android에서는 subject 포함하여 공유
+        result = await Share.share(text, subject: subject);
+      }
 
       AppLogger.debug('텍스트 공유 완료: status=${result.status}');
     } catch (e, stackTrace) {

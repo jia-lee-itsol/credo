@@ -12,3 +12,10 @@ node_modules/
 # Environment variables
 .env
 .env.local
+
+# Service account key files (보안상 중요)
+serviceAccountKey.json
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json

@@ -18,14 +18,12 @@ import {getMessaging} from "firebase-admin/messaging";
 // Firebase Admin SDK 초기화
 // Cloud Functions 환경에서는 자동으로 서비스 계정이 설정됨
 // Application Default Credentials를 사용하여 인증
+// onCall의 serviceAccount 옵션으로 지정된 서비스 계정 사용
 let adminApp: App;
 try {
   // Cloud Functions 환경에서는 자동으로 서비스 계정 인증이 설정됨
-  // GOOGLE_APPLICATION_CREDENTIALS 환경 변수나 Application Default Credentials 사용
-  adminApp = initializeApp({
-    // Cloud Functions 환경에서는 credential을 명시하지 않으면
-    // 자동으로 Application Default Credentials를 사용
-  });
+  // onCall의 serviceAccount 옵션으로 지정된 서비스 계정 사용
+  adminApp = initializeApp();
   logger.info("Firebase Admin SDK 초기화 완료");
 } catch (error) {
   logger.error(`Firebase Admin SDK 초기화 실패: ${error}`);
