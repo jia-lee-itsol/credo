@@ -7,6 +7,7 @@ import '../../../../core/data/services/liturgical_reading_service.dart';
 import '../../../../core/data/models/saint_feast_day_model.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/locale_provider.dart';
+import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../core/services/logger_service.dart';
 
 /// 오늘의 성인 축일 Provider (GPT 사용, 캐싱 포함)
@@ -19,9 +20,13 @@ final todaySaintsProvider = FutureProvider<List<SaintFeastDayModel>>((
   ref.watch(currentDateStringProvider);
   // 강제 새로고침 트리거
   ref.watch(saintsCacheRefreshTriggerProvider);
+  // 테스트 날짜 오버라이드 감지
+  final testDate = ref.watch(testDateOverrideProvider);
+  final date = testDate ?? DateTime.now();
   final locale = ref.watch(localeProvider);
-  return await SaintFeastDayService.getTodaySaints(
-    languageCode: locale.languageCode,
+  return await SaintFeastDayService.getSaintsForDateFromChatGPT(
+    date,
+    locale.languageCode,
   );
 });
 

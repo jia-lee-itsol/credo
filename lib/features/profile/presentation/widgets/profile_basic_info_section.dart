@@ -121,7 +121,7 @@ class ProfileBasicInfoSection extends ConsumerWidget {
               children: [
                 Expanded(
                   child: DropdownButtonFormField<int>(
-                    value: feastDayMonth,
+                    initialValue: feastDayMonth,
                     decoration: InputDecoration(
                       labelText: l10n.profile.month,
                       border: OutlineInputBorder(
@@ -152,7 +152,7 @@ class ProfileBasicInfoSection extends ConsumerWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: DropdownButtonFormField<int>(
-                    value: feastDayDay,
+                    initialValue: feastDayDay,
                     decoration: InputDecoration(
                       labelText: l10n.profile.day,
                       border: OutlineInputBorder(
