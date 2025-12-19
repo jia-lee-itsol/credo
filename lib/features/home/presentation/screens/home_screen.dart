@@ -13,7 +13,8 @@ import '../../../../shared/providers/locale_provider.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../community/presentation/providers/community_presentation_providers.dart';
 import '../../../community/data/models/post.dart';
-import '../../../saints/presentation/providers/saint_feast_day_providers.dart';
+import '../../../saints/presentation/providers/saint_feast_day_providers.dart'
+    show userBaptismalSaintProvider;
 import '../../../saints/presentation/widgets/saint_feast_day_modal.dart';
 import '../../../../core/data/services/parish_service.dart';
 import '../../../../core/data/services/saint_feast_day_service.dart' as core;
@@ -113,7 +114,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         body: RefreshIndicator(
           onRefresh: () async {
             // 성인 캐시 삭제 및 새로고침
-            await refreshTodaySaints(ref);
+            await core.SaintFeastDayService.clearTodaySaintsCache();
 
             // 묵상 한마디 새로고침
             await refreshDailyReflection(ref);
@@ -123,8 +124,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ref.invalidate(liturgyInfoFromChatGPTProvider(date));
             ref.invalidate(currentLiturgySeasonProvider);
 
-            // 성인 Provider 새로고침 (두 곳에 정의된 Provider 모두)
-            ref.invalidate(todaySaintsProvider);
+            // 성인 Provider 새로고침
             ref.invalidate(core.todaySaintsProvider);
 
             // 묵상 Provider 새로고침
@@ -153,7 +153,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
                   child: ElevatedButton.icon(
                     onPressed: () async {
-                      final todaySaintsAsync = ref.read(todaySaintsProvider);
+                      final todaySaintsAsync = ref.read(core.todaySaintsProvider);
                       todaySaintsAsync.whenData((saints) {
                         if (saints.isNotEmpty && mounted) {
                           final currentUser = ref.read(currentUserProvider);
