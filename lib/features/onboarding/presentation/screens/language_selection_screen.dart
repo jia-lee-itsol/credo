@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../config/routes/app_routes.dart';
+import '../../../../shared/providers/locale_provider.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 // Figma 디자인에 맞춘 색상 상수
 const _primaryColor = Color(0xFF6A1F2B);
@@ -14,26 +16,26 @@ const _neutral500 = Color(0xFF737373);
 const _neutral200 = Color(0xFFE5E5E5);
 
 /// 언어 선택 화면 (온보딩 1단계)
-class LanguageSelectionScreen extends StatefulWidget {
+class LanguageSelectionScreen extends ConsumerStatefulWidget {
   const LanguageSelectionScreen({super.key});
 
   @override
-  State<LanguageSelectionScreen> createState() =>
+  ConsumerState<LanguageSelectionScreen> createState() =>
       _LanguageSelectionScreenState();
 }
 
-class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
+class _LanguageSelectionScreenState
+    extends ConsumerState<LanguageSelectionScreen> {
   String _selectedLanguage = 'ja';
 
   final List<_LanguageOption> _languages = [
     _LanguageOption(code: 'ja', name: '日本語', subtitle: 'Japanese'),
     _LanguageOption(code: 'en', name: 'English', subtitle: 'English'),
-    _LanguageOption(code: 'tl', name: 'Tagalog', subtitle: 'Tagalog'),
-    _LanguageOption(code: 'pt', name: 'Português', subtitle: 'Portuguese'),
-    _LanguageOption(code: 'vi', name: 'Tiếng Việt', subtitle: 'Vietnamese'),
-    _LanguageOption(code: 'cn', name: '中文', subtitle: 'Chinese'),
-
     _LanguageOption(code: 'ko', name: '한국어', subtitle: 'Korean'),
+    _LanguageOption(code: 'zh', name: '中文', subtitle: 'Chinese'),
+    _LanguageOption(code: 'vi', name: 'Tiếng Việt', subtitle: 'Vietnamese'),
+    _LanguageOption(code: 'es', name: 'Español', subtitle: 'Spanish'),
+    _LanguageOption(code: 'pt', name: 'Português', subtitle: 'Portuguese'),
   ];
 
   @override
@@ -160,9 +162,23 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   }
 
   Future<void> _onNext() async {
-    // 선택한 언어 저장
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selected_language', _selectedLanguage);
+    // 언어 코드 매핑 (온보딩 화면에서 사용하는 코드를 실제 언어 코드로 변환)
+    String languageCode = _selectedLanguage;
+
+    // AppLocalizationsDelegate 및 LocalizationService 캐시 무효화 (로케일 변경 전)
+    clearAppLocalizationsCache();
+
+    // 로케일 업데이트 (즉시 UI 반영)
+    await ref
+        .read(localeProvider.notifier)
+        .setLocaleByLanguageCode(languageCode);
+
+    // 번역 데이터 Provider 무효화하여 새 로케일로 다시 로드
+    ref.invalidate(appLocalizationsProvider);
+    ref.invalidate(appLocalizationsSyncProvider);
+
+    // 번역 데이터 로드 (로케일 변경 후) - 새 로케일의 번역 데이터를 캐시에 저장
+    await ref.read(appLocalizationsProvider.future);
 
     if (mounted) {
       context.go(AppRoutes.onboardingLocation);

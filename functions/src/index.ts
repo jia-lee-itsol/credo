@@ -11,12 +11,39 @@ import {setGlobalOptions} from "firebase-functions";
 import {onDocumentCreated} from "firebase-functions/v2/firestore";
 import {onCall, HttpsError} from "firebase-functions/v2/https";
 import * as logger from "firebase-functions/logger";
-import {initializeApp} from "firebase-admin/app";
+import {initializeApp, App} from "firebase-admin/app";
 import {getFirestore} from "firebase-admin/firestore";
 import {getMessaging} from "firebase-admin/messaging";
 
 // Firebase Admin SDK 초기화
-initializeApp();
+// Cloud Functions 환경에서는 자동으로 서비스 계정이 설정됨
+// Application Default Credentials를 사용하여 인증
+let adminApp: App;
+try {
+  // Cloud Functions 환경에서는 자동으로 서비스 계정 인증이 설정됨
+  // GOOGLE_APPLICATION_CREDENTIALS 환경 변수나 Application Default Credentials 사용
+  adminApp = initializeApp({
+    // Cloud Functions 환경에서는 credential을 명시하지 않으면
+    // 자동으로 Application Default Credentials를 사용
+  });
+  logger.info("Firebase Admin SDK 초기화 완료");
+} catch (error) {
+  logger.error(`Firebase Admin SDK 초기화 실패: ${error}`);
+  // 이미 초기화된 경우 무시하고 재시도
+  try {
+    adminApp = initializeApp();
+  } catch (retryError) {
+    logger.error(`Firebase Admin SDK 재초기화 실패: ${retryError}`);
+    // 이미 초기화된 경우 기존 앱 가져오기
+    try {
+      adminApp = initializeApp();
+    } catch (finalError) {
+      logger.error(`Firebase Admin SDK 최종 초기화 실패: ${finalError}`);
+      // 최종 실패 시 기본 앱 사용
+      adminApp = initializeApp();
+    }
+  }
+}
 
 // Slack Webhook URL (환경 변수에서 로드)
 // Firebase Console 또는 .env 파일에서 SLACK_WEBHOOK_URL 설정 필요
@@ -579,6 +606,10 @@ export const onCommentCreated = onDocumentCreated(
 export const sendTestNotification = onCall(
   {
     cors: true,
+    // Firebase Admin SDK 서비스 계정 명시적 사용
+    // 이 계정에는 FCM API 관리자 역할이 있음
+    serviceAccount:
+      "firebase-adminsdk-fbsvc@credo-ceda9.iam.gserviceaccount.com",
   },
   async (request) => {
     const userId = request.auth?.uid;
@@ -590,7 +621,6 @@ export const sendTestNotification = onCall(
 
     try {
       const db = getFirestore();
-      const messaging = getMessaging();
 
       // 사용자 정보 가져오기
       const userDoc = await db.collection("users").doc(userId).get();
@@ -601,10 +631,30 @@ export const sendTestNotification = onCall(
       const userData = userDoc.data();
       const fcmToken = userData?.fcmToken;
 
-      if (!fcmToken) {
+      logger.info(`사용자 FCM 토큰 확인: ${fcmToken ? "존재함" : "없음"}`);
+
+      if (!fcmToken || typeof fcmToken !== "string" || fcmToken.trim() === "") {
         throw new HttpsError(
           "failed-precondition",
           "FCM 토큰이 없습니다. 알림 권한을 확인해주세요.",
+        );
+      }
+
+      // Firebase Admin Messaging 초기화
+      // 명시적으로 앱 인스턴스 전달
+      let messaging;
+      try {
+        messaging = getMessaging(adminApp);
+      } catch (messagingError) {
+        const messagingErrorMessage = messagingError instanceof Error ?
+          messagingError.message :
+          String(messagingError);
+        logger.error(
+          `Firebase Admin Messaging 초기화 실패: ${messagingErrorMessage}`,
+        );
+        throw new HttpsError(
+          "internal",
+          "FCM 서비스 초기화에 실패했습니다. 잠시 후 다시 시도해주세요.",
         );
       }
 
@@ -619,10 +669,77 @@ export const sendTestNotification = onCall(
           type: "test",
           timestamp: new Date().toISOString(),
         },
+        apns: {
+          payload: {
+            aps: {
+              sound: "default",
+              badge: 1,
+            },
+          },
+        },
       };
 
-      const response = await messaging.send(message);
-      logger.info(`✅ 테스트 알림 전송 완료: userId=${userId}, messageId=${response}`);
+      logger.info(
+        `FCM 메시지 전송 시도: token=${fcmToken.substring(0, 20)}...`,
+      );
+
+      let response: string;
+      try {
+        response = await messaging.send(message);
+        logger.info(
+          `✅ 테스트 알림 전송 완료: userId=${userId}, messageId=${response}`,
+        );
+      } catch (sendError) {
+        const sendErrorMessage = sendError instanceof Error ?
+          sendError.message :
+          String(sendError);
+        logger.error(`FCM 메시지 전송 실패: ${sendErrorMessage}`);
+        logger.error(`FCM 에러 타입: ${typeof sendError}`);
+        logger.error(
+          `FCM 에러 스택: ${sendError instanceof Error ? sendError.stack : "N/A"}`,
+        );
+
+        // FCM 관련 에러 처리
+        if (sendError instanceof Error) {
+          // 인증 문제 (가장 흔한 경우)
+          if (
+            sendErrorMessage.includes("authentication credential") ||
+            sendErrorMessage.includes("missing required authentication") ||
+            sendErrorMessage.includes("OAuth 2 access token")
+          ) {
+            logger.error(
+              "FCM API 인증 실패. Firebase 프로젝트 설정을 확인하세요.",
+            );
+            throw new HttpsError(
+              "internal",
+              "FCM 서비스 인증에 실패했습니다. 관리자에게 문의해주세요.",
+            );
+          }
+          // 토큰이 유효하지 않은 경우
+          if (
+            sendErrorMessage.includes("invalid") ||
+            sendErrorMessage.includes("registration-token")
+          ) {
+            throw new HttpsError(
+              "failed-precondition",
+              "FCM 토큰이 유효하지 않습니다. 앱을 재시작해주세요.",
+            );
+          }
+          // 권한 문제
+          if (
+            sendErrorMessage.includes("permission") ||
+            sendErrorMessage.includes("unauthorized")
+          ) {
+            throw new HttpsError(
+              "permission-denied",
+              "FCM 메시지 전송 권한이 없습니다.",
+            );
+          }
+        }
+
+        // 그 외의 FCM 에러는 그대로 전달
+        throw sendError;
+      }
 
       return {
         success: true,
@@ -632,7 +749,7 @@ export const sendTestNotification = onCall(
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
-      logger.error(`테스트 알림 전송 실패: ${error}`);
+      logger.error(`테스트 알림 전송 실패: ${errorMessage}`);
       logger.error(`에러 타입: ${typeof error}`);
       logger.error(`에러 스택: ${error instanceof Error ? error.stack : "N/A"}`);
 

@@ -225,11 +225,21 @@ class PushNotificationService {
     try {
       AppLogger.notification('FCM 토큰 갱신 시도...');
 
-      // iOS에서는 APNS 토큰을 먼저 확인
+      // iOS에서는 APNS 토큰을 먼저 확인 (재시도 로직 포함)
       if (Platform.isIOS) {
-        final apnsToken = await _messaging.getAPNSToken();
+        String? apnsToken;
+
+        // 실제 기기에서 APNS 토큰이 준비될 때까지 최대 3번 시도
+        for (int i = 0; i < 3; i++) {
+          apnsToken = await _messaging.getAPNSToken();
+          if (apnsToken != null) break;
+
+          AppLogger.notification('APNS 토큰 대기 중... (${i + 1}/3)');
+          await Future.delayed(const Duration(seconds: 1));
+        }
+
         if (apnsToken == null) {
-          AppLogger.warning('APNS 토큰이 아직 준비되지 않았습니다.');
+          AppLogger.warning('APNS 토큰을 가져올 수 없습니다. (시뮬레이터이거나 설정 문제)');
           return false;
         }
         AppLogger.notification('APNS 토큰 확인됨: $apnsToken');

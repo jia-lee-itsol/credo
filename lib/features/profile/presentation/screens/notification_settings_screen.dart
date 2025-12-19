@@ -391,11 +391,17 @@ class _NotificationSettingsScreenState
       setState(() {
         _isTesting = false;
       });
+
+      // iOS 시뮬레이터에서는 푸시 알림이 작동하지 않음
+      final errorMessage = Theme.of(context).platform == TargetPlatform.iOS
+          ? 'iOS 시뮬레이터에서는 푸시 알림을 테스트할 수 없습니다. 실제 기기에서 테스트해주세요.'
+          : 'FCM 토큰을 가져올 수 없습니다. 알림 권한을 확인하고 앱을 재시작해주세요.';
+
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('FCM 토큰을 가져올 수 없습니다. 알림 권한을 확인하고 앱을 재시작해주세요.'),
-          backgroundColor: Colors.red,
-          duration: Duration(seconds: 3),
+        SnackBar(
+          content: Text(errorMessage),
+          backgroundColor: Colors.orange,
+          duration: const Duration(seconds: 4),
         ),
       );
       return;
