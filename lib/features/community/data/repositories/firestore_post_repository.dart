@@ -744,6 +744,107 @@ class FirestorePostRepository implements PostRepository {
   }
 
   @override
+  Future<Either<Failure, void>> updateComment({
+    required String commentId,
+    required String content,
+    List<String>? imageUrls,
+    List<String>? pdfUrls,
+  }) async {
+    try {
+      AppLogger.community('댓글 수정: commentId=$commentId');
+
+      final commentRef = _firestore.collection('comments').doc(commentId);
+      final commentDoc = await commentRef.get();
+
+      if (!commentDoc.exists) {
+        return const Left(
+          NotFoundFailure(message: '댓글을 찾을 수 없습니다.'),
+        );
+      }
+
+      final updateData = <String, dynamic>{
+        'content': content,
+      };
+
+      if (imageUrls != null) {
+        updateData['imageUrls'] = imageUrls;
+      }
+
+      if (pdfUrls != null) {
+        updateData['pdfUrls'] = pdfUrls;
+      }
+
+      await commentRef.update(updateData);
+
+      AppLogger.community('✅ 댓글 수정 완료: $commentId');
+      return const Right(null);
+    } on FirebaseException catch (e, stackTrace) {
+      AppLogger.error('댓글 수정 실패: $e', e, stackTrace);
+      return Left(
+        FirebaseFailure(message: e.message ?? '댓글 수정 실패', code: e.code),
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error('댓글 수정 실패: $e', e, stackTrace);
+      return Left(ServerFailure(message: '댓글 수정 중 오류가 발생했습니다: $e'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteComment(String commentId) async {
+    try {
+      AppLogger.community('댓글 삭제: commentId=$commentId');
+
+      // Firestore transaction을 사용하여 댓글 삭제와 게시글 commentCount 업데이트를 원자적으로 처리
+      await _firestore.runTransaction<void>((transaction) async {
+        // 1. 먼저 읽기 수행: 댓글 문서 조회
+        final commentRef = _firestore.collection('comments').doc(commentId);
+        final commentDoc = await transaction.get(commentRef);
+
+        if (!commentDoc.exists) {
+          throw Exception('댓글을 찾을 수 없습니다: $commentId');
+        }
+
+        final commentData = commentDoc.data();
+        final postId = commentData?['postId'] as String?;
+
+        if (postId == null) {
+          throw Exception('댓글에 postId가 없습니다: $commentId');
+        }
+
+        // 2. 게시글 문서 조회
+        final postRef = _firestore.collection('posts').doc(postId);
+        final postDoc = await transaction.get(postRef);
+
+        if (!postDoc.exists) {
+          throw Exception('게시글을 찾을 수 없습니다: $postId');
+        }
+
+        final currentCount = (postDoc.data()?['commentCount'] as int?) ?? 0;
+
+        // 3. 댓글 삭제
+        transaction.delete(commentRef);
+
+        // 4. 게시글 문서의 commentCount 감소
+        transaction.update(postRef, {
+          'commentCount': currentCount > 0 ? currentCount - 1 : 0,
+          'updatedAt': FieldValue.serverTimestamp(),
+        });
+      });
+
+      AppLogger.community('✅ 댓글 삭제 완료: $commentId');
+      return const Right(null);
+    } on FirebaseException catch (e, stackTrace) {
+      AppLogger.error('댓글 삭제 실패: $e', e, stackTrace);
+      return Left(
+        FirebaseFailure(message: e.message ?? '댓글 삭제 실패', code: e.code),
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error('댓글 삭제 실패: $e', e, stackTrace);
+      return Left(ServerFailure(message: '댓글 삭제 중 오류가 발생했습니다: $e'));
+    }
+  }
+
+  @override
   Stream<List<Comment>> watchComments(String postId) {
     try {
       return _firestore

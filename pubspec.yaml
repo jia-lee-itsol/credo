@@ -72,6 +72,8 @@ dependencies:
 
   # Share
   share_plus: ^10.1.2
+  googleapis_auth: ^2.0.0
+  flutter_local_notifications: ^19.5.0
 
 dev_dependencies:
   flutter_test:

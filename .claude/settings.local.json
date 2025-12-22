@@ -22,7 +22,9 @@
       "Bash(git push:*)",
       "Bash(cat:*)",
       "Bash(git checkout:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(firebase functions:log:*)",
+      "Bash(firebase deploy:*)"
     ],
     "deny": [],
     "ask": []

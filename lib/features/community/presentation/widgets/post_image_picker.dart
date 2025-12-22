@@ -201,7 +201,9 @@ class PostImagePickerHelper {
     if (currentImageCount >= maxImages) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('이미지는 최대 $maxImages개까지 추가할 수 있습니다.')),
+          SnackBar(
+            content: Text(l10n.community.maxImagesReached(max: maxImages)),
+          ),
         );
       }
       return;

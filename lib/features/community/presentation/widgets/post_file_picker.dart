@@ -89,39 +89,44 @@ class PostFilePicker extends ConsumerWidget {
             style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
           ),
           const SizedBox(height: 4),
+          // PDF 목록 (선택된 PDF 파일들)
           if (totalPdfCount > 0)
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: totalPdfCount + (canAddMore ? 1 : 0),
+              itemCount: totalPdfCount,
               itemBuilder: (context, index) {
                 if (index < formState.selectedPdfs.length) {
-                  // 선택된 PDF (File)
                   final pdfFile = formState.selectedPdfs[index];
                   return _PdfItem(
                     pdfFile: pdfFile,
                     onRemove: () => notifier.removePdf(index),
                   );
-                } else if (index < totalPdfCount) {
-                  // 업로드된 PDF (URL) - 수정 모드에서만 표시
+                } else {
                   final urlIndex = index - formState.selectedPdfs.length;
                   final pdfUrl = formState.pdfUrls[urlIndex];
                   return _PdfItem(pdfUrl: pdfUrl);
-                } else {
-                  // PDF 추가 버튼
-                  return _AddFileButton(
-                    onTap: () =>
-                        _showPdfPicker(context, notifier, totalPdfCount),
-                    icon: Icons.picture_as_pdf,
-                  );
                 }
               },
-            )
-          else
-            _AddFileButton(
-              onTap: () => _showPdfPicker(context, notifier, totalPdfCount),
-              icon: Icons.picture_as_pdf,
-              isLarge: true,
+            ),
+          // PDF 추가 버튼 (이미지와 동일한 그리드 스타일)
+          if (canAddMore)
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+              ),
+              itemCount: 1,
+              itemBuilder: (context, index) {
+                return _AddFileButton(
+                  onTap: () =>
+                      _showPdfPicker(context, notifier, totalPdfCount),
+                  icon: Icons.picture_as_pdf,
+                );
+              },
             ),
         ],
 
@@ -280,39 +285,15 @@ class _PdfItem extends StatelessWidget {
 class _AddFileButton extends ConsumerWidget {
   final VoidCallback onTap;
   final IconData icon;
-  final bool isLarge;
 
   const _AddFileButton({
     required this.onTap,
     required this.icon,
-    this.isLarge = false,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = ref.watch(appLocalizationsSyncProvider);
-    if (isLarge) {
-      return GestureDetector(
-        onTap: onTap,
-        child: Container(
-          height: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.grey.shade300),
-            color: Colors.grey.shade100,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(icon, size: 32),
-              const SizedBox(height: 4),
-              Text(l10n.community.addFile),
-            ],
-          ),
-        ),
-      );
-    }
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -417,6 +398,7 @@ class PostFilePickerHelper {
           return;
         }
 
+        ;
         notifier.addImage(imageFile);
       }
     } on PlatformException catch (e) {

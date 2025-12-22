@@ -6,6 +6,7 @@ import '../../../../core/utils/app_localizations.dart';
 import 'pdf_viewer_screen.dart';
 import '../../../../core/utils/date_utils.dart';
 import '../../../../shared/providers/auth_provider.dart';
+import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../core/utils/mention_parser.dart';
 import '../providers/community_presentation_providers.dart';
 import 'report_dialog.dart';
@@ -82,9 +83,28 @@ class CommentItem extends ConsumerWidget {
                       AppDateUtils.formatRelativeTime(createdAt),
                       style: theme.textTheme.bodySmall,
                     ),
+                    const Spacer(),
+                    // 수정/삭제 버튼 (작성자인 경우)
+                    if (isAuthor) ...[
+                      IconButton(
+                        icon: const Icon(Icons.edit_outlined, size: 16),
+                        color: theme.colorScheme.onSurfaceVariant,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () => _showEditDialog(context, ref),
+                        tooltip: l10n.common.edit,
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete_outline, size: 16),
+                        color: Colors.red,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () => _showDeleteConfirmDialog(context, ref),
+                        tooltip: l10n.common.delete,
+                      ),
+                    ]
                     // 신고 버튼 (작성자가 아닌 경우에만 표시)
-                    if (!isAuthor && currentUser != null) ...[
-                      const Spacer(),
+                    else if (currentUser != null) ...[
                       IconButton(
                         icon: const Icon(Icons.flag_outlined, size: 16),
                         color: theme.colorScheme.onSurfaceVariant,
@@ -101,13 +121,13 @@ class CommentItem extends ConsumerWidget {
                 const SizedBox(height: 4),
                 // 멘션 포함 텍스트 렌더링
                 _buildContentWithMentions(context, ref, theme, parts),
-                
+
                 // 이미지 표시
                 if (imageUrls.isNotEmpty) ...[
                   const SizedBox(height: 8),
                   _buildImages(context, theme),
                 ],
-                
+
                 // PDF 표시
                 if (pdfUrls.isNotEmpty) ...[
                   const SizedBox(height: 8),
@@ -176,10 +196,8 @@ class CommentItem extends ConsumerWidget {
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => PdfViewerScreen(
-                    pdfUrl: pdfUrl,
-                    fileName: fileName,
-                  ),
+                  builder: (context) =>
+                      PdfViewerScreen(pdfUrl: pdfUrl, fileName: fileName),
                 ),
               );
             },
@@ -260,6 +278,137 @@ class CommentItem extends ConsumerWidget {
           }
         }).toList(),
       ),
+    );
+  }
+
+  void _showEditDialog(BuildContext context, WidgetRef ref) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
+    final primaryColor = ref.read(liturgyPrimaryColorProvider);
+    final textController = TextEditingController(text: content);
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.common.edit),
+        content: TextField(
+          controller: textController,
+          decoration: InputDecoration(
+            hintText: l10n.common.commentHint,
+            border: const OutlineInputBorder(),
+          ),
+          maxLines: 5,
+          autofocus: true,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(l10n.common.cancel),
+          ),
+          TextButton(
+            onPressed: () async {
+              final newContent = textController.text.trim();
+              if (newContent.isEmpty) {
+                ScaffoldMessenger.of(dialogContext).showSnackBar(
+                  SnackBar(content: Text(l10n.validation.commentRequired)),
+                );
+                return;
+              }
+
+              Navigator.pop(dialogContext);
+              await _updateComment(context, ref, newContent);
+            },
+            style: TextButton.styleFrom(foregroundColor: primaryColor),
+            child: Text(l10n.common.save),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showDeleteConfirmDialog(BuildContext context, WidgetRef ref) {
+    final l10n = ref.read(appLocalizationsSyncProvider);
+
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.common.delete),
+        content: Text(l10n.common.confirm),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext),
+            child: Text(l10n.common.cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(dialogContext);
+              _deleteComment(context, ref);
+            },
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: Text(l10n.common.delete),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _updateComment(
+    BuildContext context,
+    WidgetRef ref,
+    String newContent,
+  ) async {
+    final repository = ref.read(postRepositoryProvider);
+    final l10n = ref.read(appLocalizationsSyncProvider);
+
+    final result = await repository.updateComment(
+      commentId: commentId,
+      content: newContent,
+      imageUrls: imageUrls,
+      pdfUrls: pdfUrls,
+    );
+
+    if (!context.mounted) return;
+
+    result.fold(
+      (failure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              failure.message.isNotEmpty ? failure.message : l10n.common.error,
+            ),
+          ),
+        );
+      },
+      (_) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.common.success)));
+      },
+    );
+  }
+
+  Future<void> _deleteComment(BuildContext context, WidgetRef ref) async {
+    final repository = ref.read(postRepositoryProvider);
+    final l10n = ref.read(appLocalizationsSyncProvider);
+
+    final result = await repository.deleteComment(commentId);
+
+    if (!context.mounted) return;
+
+    result.fold(
+      (failure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              failure.message.isNotEmpty ? failure.message : l10n.common.error,
+            ),
+          ),
+        );
+      },
+      (_) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(l10n.common.success)));
+      },
     );
   }
 }

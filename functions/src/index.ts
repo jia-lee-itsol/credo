@@ -11,35 +11,111 @@ import {setGlobalOptions} from "firebase-functions";
 import {onDocumentCreated} from "firebase-functions/v2/firestore";
 import {onCall, HttpsError} from "firebase-functions/v2/https";
 import * as logger from "firebase-functions/logger";
-import {initializeApp, App} from "firebase-admin/app";
+import * as admin from "firebase-admin";
 import {getFirestore} from "firebase-admin/firestore";
 import {getMessaging} from "firebase-admin/messaging";
+import * as fs from "fs";
+import * as path from "path";
 
 // Firebase Admin SDK 초기화
-// Cloud Functions 환경에서는 자동으로 서비스 계정이 설정됨
-// Application Default Credentials를 사용하여 인증
-// onCall의 serviceAccount 옵션으로 지정된 서비스 계정 사용
-let adminApp: App;
+// 서비스 계정 키 파일을 안전하게 로드하고 검증
+let adminApp: admin.app.App;
+interface ServiceAccountInfo {
+  clientEmail: string;
+  projectId: string;
+  keyPath: string;
+}
+let serviceAccountInfo: ServiceAccountInfo | null = null;
+
 try {
-  // Cloud Functions 환경에서는 자동으로 서비스 계정 인증이 설정됨
-  // onCall의 serviceAccount 옵션으로 지정된 서비스 계정 사용
-  adminApp = initializeApp();
-  logger.info("Firebase Admin SDK 초기화 완료");
-} catch (error) {
-  logger.error(`Firebase Admin SDK 초기화 실패: ${error}`);
-  // 이미 초기화된 경우 무시하고 재시도
+  const serviceAccountKeyPath = path.join(
+    __dirname,
+    "..",
+    "serviceAccountKey.json"
+  );
+
+  logger.info(`서비스 계정 키 파일 경로: ${serviceAccountKeyPath}`);
+
+  // 파일 존재 여부 확인
+  if (!fs.existsSync(serviceAccountKeyPath)) {
+    logger.error(
+      `서비스 계정 키 파일이 없습니다: ${serviceAccountKeyPath}`
+    );
+    throw new Error(
+      `서비스 계정 키 파일을 찾을 수 없습니다: ${serviceAccountKeyPath}`
+    );
+  }
+
+  // 파일 읽기
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let serviceAccount: any;
   try {
-    adminApp = initializeApp();
+    const serviceAccountData = fs.readFileSync(serviceAccountKeyPath, "utf8");
+    serviceAccount = JSON.parse(serviceAccountData);
+    logger.info("서비스 계정 키 파일 로드 성공");
+  } catch (readError) {
+    logger.error(`서비스 계정 키 파일 읽기 실패: ${readError}`);
+    throw new Error(
+      `서비스 계정 키 파일을 읽을 수 없습니다: ${readError}`
+    );
+  }
+
+  // 서비스 계정 키 유효성 검증
+  if (!serviceAccount.private_key) {
+    logger.error("서비스 계정 키에 private_key가 없습니다.");
+    throw new Error("서비스 계정 키에 private_key 필드가 없습니다.");
+  }
+
+  if (!serviceAccount.client_email) {
+    logger.error("서비스 계정 키에 client_email이 없습니다.");
+    throw new Error("서비스 계정 키에 client_email 필드가 없습니다.");
+  }
+
+  if (!serviceAccount.project_id) {
+    logger.error("서비스 계정 키에 project_id가 없습니다.");
+    throw new Error("서비스 계정 키에 project_id 필드가 없습니다.");
+  }
+
+  // 서비스 계정 정보 저장 (나중에 로깅용)
+  serviceAccountInfo = {
+    clientEmail: serviceAccount.client_email,
+    projectId: serviceAccount.project_id,
+    keyPath: serviceAccountKeyPath,
+  };
+
+  logger.info(
+    "서비스 계정 키 검증 완료: " +
+    `client_email=${serviceAccount.client_email}, ` +
+    `project_id=${serviceAccount.project_id}, ` +
+    `private_key 존재=${!!serviceAccount.private_key}`
+  );
+
+  // Firebase Admin SDK 초기화
+  try {
+    adminApp = admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      projectId: "credo-ceda9",
+    });
+    logger.info("✅ Firebase Admin SDK 초기화 완료 (serviceAccountKey)");
+  } catch (initError) {
+    logger.error(`Firebase Admin SDK 초기화 실패: ${initError}`);
+    throw initError;
+  }
+} catch (error) {
+  logger.error(`❌ Firebase Admin SDK 초기화 중 치명적 에러: ${error}`);
+  logger.error(`에러 타입: ${typeof error}`);
+  const errorMsg = error instanceof Error ? error.message : String(error);
+  logger.error(`에러 메시지: ${errorMsg}`);
+  const errorStack = error instanceof Error ? error.stack : "N/A";
+  logger.error(`에러 스택: ${errorStack}`);
+
+  // 이미 초기화된 경우 재초기화 시도
+  try {
+    adminApp = admin.app();
+    logger.info("기존 Firebase Admin SDK 인스턴스 사용");
   } catch (retryError) {
-    logger.error(`Firebase Admin SDK 재초기화 실패: ${retryError}`);
-    // 이미 초기화된 경우 기존 앱 가져오기
-    try {
-      adminApp = initializeApp();
-    } catch (finalError) {
-      logger.error(`Firebase Admin SDK 최종 초기화 실패: ${finalError}`);
-      // 최종 실패 시 기본 앱 사용
-      adminApp = initializeApp();
-    }
+    logger.error(`기존 인스턴스 가져오기 실패: ${retryError}`);
+    throw error; // 원래 에러를 다시 던짐
   }
 }
 
@@ -234,8 +310,7 @@ export const onPostCreated = onDocumentCreated(
     const category = postData.category || "community";
     const parishId = postData.parishId;
     const authorId = postData.authorId;
-    const title = postData.title || "新着お知らせ";
-    const body = postData.body || "";
+    const title = postData.title || "새로운 공지";
 
     logger.info(
       `게시글 생성 이벤트: postId=${postId}, type=${type}, ` +
@@ -257,8 +332,8 @@ export const onPostCreated = onDocumentCreated(
     }
 
     try {
-      const db = getFirestore();
-      const messaging = getMessaging();
+      const db = getFirestore(adminApp);
+      const messaging = getMessaging(adminApp);
 
       // 해당 성당에 소속된 모든 사용자 조회 (main_parish_id == parishId)
       const usersSnapshot = await db
@@ -350,8 +425,8 @@ export const onPostCreated = onDocumentCreated(
           messages.push({
             token: fcmToken,
             notification: {
-              title: title,
-              body: body.length > 100 ? `${body.substring(0, 100)}...` : body,
+              title: "📢 새로운 공지",
+              body: `${title} - 새로운 공지가 등록되었습니다.`,
             },
             data: {
               postId: postId,
@@ -434,8 +509,8 @@ export const onCommentCreated = onDocumentCreated(
     }
 
     try {
-      const db = getFirestore();
-      const messaging = getMessaging();
+      const db = getFirestore(adminApp);
+      const messaging = getMessaging(adminApp);
 
       // 게시글 정보 가져오기
       const postDoc = await db.collection("posts").doc(postId).get();
@@ -604,37 +679,127 @@ export const onCommentCreated = onDocumentCreated(
 export const sendTestNotification = onCall(
   {
     cors: true,
-    // Firebase Admin SDK 서비스 계정 명시적 사용
-    // 이 계정에는 FCM API 관리자 역할이 있음
-    serviceAccount:
-      "firebase-adminsdk-fbsvc@credo-ceda9.iam.gserviceaccount.com",
   },
   async (request) => {
     const userId = request.auth?.uid;
     if (!userId) {
-      throw new HttpsError("unauthenticated", "인증이 필요합니다.");
+      const errorDetails: Record<string, unknown> = {
+        errorMessage: "인증이 필요합니다.",
+        errorType: "unauthenticated",
+        stage: "authentication_check",
+        hasAuth: !!request.auth,
+      };
+      logger.error(`에러 상세 정보: ${JSON.stringify(errorDetails)}`);
+      throw new HttpsError("unauthenticated", "인증이 필요합니다.", errorDetails);
     }
 
     logger.info(`FCM 테스트 알림 요청: userId=${userId}`);
+    logger.info(`요청 시간: ${new Date().toISOString()}`);
 
     try {
-      const db = getFirestore();
+      // adminApp 확인
+      if (!adminApp) {
+        logger.error("adminApp이 초기화되지 않았습니다.");
+        const errorDetails: Record<string, unknown> = {
+          errorMessage: "adminApp이 초기화되지 않았습니다.",
+          errorType: "initialization_error",
+          stage: "adminApp_check",
+        };
+        logger.error(`에러 상세 정보: ${JSON.stringify(errorDetails)}`);
+        throw new HttpsError(
+          "internal",
+          "FCM 서비스가 초기화되지 않았습니다. 잠시 후 다시 시도해주세요.",
+          errorDetails,
+        );
+      }
+      logger.info("adminApp 확인 완료");
+      logger.info(`adminApp 이름: ${adminApp.name}`);
+      const projectId = adminApp.options.projectId;
+      logger.info(`adminApp 옵션 projectId: ${projectId}`);
+
+      // 서비스 계정 정보 확인 (가능한 경우)
+      try {
+        const credential = adminApp.options.credential;
+        if (credential) {
+          logger.info("서비스 계정 credential 존재 확인됨");
+          // credential 타입 확인
+          logger.info(`Credential 타입: ${credential.constructor.name}`);
+        } else {
+          logger.warn(
+            "⚠️ 서비스 계정 credential이 없습니다. " +
+            "FCM API 호출이 실패할 수 있습니다."
+          );
+        }
+      } catch (credCheckError) {
+        logger.warn(
+          `서비스 계정 credential 확인 중 에러: ${credCheckError}`
+        );
+      }
+
+      // 서비스 계정 키 파일 정보 확인 (초기화 시 로드한 정보)
+      if (serviceAccountInfo) {
+        logger.info("서비스 계정 키 파일 정보:");
+        logger.info(`  - 파일 경로: ${serviceAccountInfo.keyPath}`);
+        logger.info(`  - client_email: ${serviceAccountInfo.clientEmail}`);
+        logger.info(`  - project_id: ${serviceAccountInfo.projectId}`);
+        const keyPathExists = fs.existsSync(serviceAccountInfo.keyPath);
+        logger.info(`  - 파일 존재 여부: ${keyPathExists}`);
+
+        // 프로젝트 ID 일치 확인
+        if (serviceAccountInfo.projectId !== "credo-ceda9") {
+          logger.warn(
+            `⚠️ 서비스 계정 키의 project_id(${serviceAccountInfo.projectId})가 ` +
+            "프로젝트 ID(credo-ceda9)와 일치하지 않습니다!"
+          );
+        }
+      } else {
+        logger.warn("서비스 계정 키 파일 정보를 가져올 수 없습니다.");
+      }
+
+      const db = getFirestore(adminApp);
+      logger.info("Firestore 인스턴스 가져오기 완료");
 
       // 사용자 정보 가져오기
       const userDoc = await db.collection("users").doc(userId).get();
       if (!userDoc.exists) {
-        throw new HttpsError("not-found", "사용자를 찾을 수 없습니다.");
+        logger.error(`사용자 문서가 존재하지 않음: userId=${userId}`);
+        const errorDetails: Record<string, unknown> = {
+          errorMessage: `사용자 문서가 존재하지 않음: userId=${userId}`,
+          errorType: "not_found",
+          stage: "user_document_fetch",
+          userId: userId,
+        };
+        logger.error(`에러 상세 정보: ${JSON.stringify(errorDetails)}`);
+        throw new HttpsError("not-found", "사용자를 찾을 수 없습니다.", errorDetails);
       }
 
       const userData = userDoc.data();
       const fcmToken = userData?.fcmToken;
 
       logger.info(`사용자 FCM 토큰 확인: ${fcmToken ? "존재함" : "없음"}`);
+      if (fcmToken) {
+        logger.info(
+          `FCM 토큰 길이: ${fcmToken.length}, ` +
+          `시작: ${fcmToken.substring(0, 20)}...`,
+        );
+      }
 
       if (!fcmToken || typeof fcmToken !== "string" || fcmToken.trim() === "") {
+        logger.error("FCM 토큰이 유효하지 않음");
+        const errorDetails: Record<string, unknown> = {
+          errorMessage: "FCM 토큰이 유효하지 않음",
+          errorType: "invalid_token",
+          stage: "token_validation",
+          userId: userId,
+          tokenExists: !!fcmToken,
+          tokenType: typeof fcmToken,
+          tokenLength: fcmToken ? fcmToken.length : 0,
+        };
+        logger.error(`에러 상세 정보: ${JSON.stringify(errorDetails)}`);
         throw new HttpsError(
           "failed-precondition",
           "FCM 토큰이 없습니다. 알림 권한을 확인해주세요.",
+          errorDetails,
         );
       }
 
@@ -642,17 +807,39 @@ export const sendTestNotification = onCall(
       // 명시적으로 앱 인스턴스 전달
       let messaging;
       try {
+        logger.info("Firebase Admin Messaging 초기화 시도...");
         messaging = getMessaging(adminApp);
+        logger.info("Firebase Admin Messaging 초기화 성공");
       } catch (messagingError) {
-        const messagingErrorMessage = messagingError instanceof Error ?
-          messagingError.message :
-          String(messagingError);
+        const messagingErrorMessage =
+          messagingError instanceof Error ?
+            messagingError.message :
+            String(messagingError);
         logger.error(
           `Firebase Admin Messaging 초기화 실패: ${messagingErrorMessage}`,
         );
+        logger.error(
+          `Messaging 에러 타입: ${typeof messagingError}`,
+        );
+        const errorStack = messagingError instanceof Error ?
+          messagingError.stack :
+          "N/A";
+        logger.error(`Messaging 에러 스택: ${errorStack}`);
+        const errorName = messagingError instanceof Error ?
+          messagingError.name :
+          "Unknown";
+        // errorDetails는 JSON 직렬화 가능한 값만 포함 (stack 제외)
+        const errorDetails: Record<string, unknown> = {
+          errorMessage: messagingErrorMessage,
+          errorName: errorName,
+          errorType: typeof messagingError,
+          stage: "messaging_initialization",
+        };
+        logger.error(`에러 상세 정보: ${JSON.stringify(errorDetails)}`);
         throw new HttpsError(
           "internal",
           "FCM 서비스 초기화에 실패했습니다. 잠시 후 다시 시도해주세요.",
+          errorDetails,
         );
       }
 
@@ -680,25 +867,178 @@ export const sendTestNotification = onCall(
       logger.info(
         `FCM 메시지 전송 시도: token=${fcmToken.substring(0, 20)}...`,
       );
+      logger.info(`메시지 구조: ${JSON.stringify({
+        token: fcmToken.substring(0, 20) + "...",
+        notification: message.notification,
+        hasApns: !!message.apns,
+      })}`);
 
       let response: string;
       try {
+        logger.info("messaging.send() 호출 시작...");
         response = await messaging.send(message);
         logger.info(
           `✅ 테스트 알림 전송 완료: userId=${userId}, messageId=${response}`,
         );
       } catch (sendError) {
+        logger.error("messaging.send() 호출 실패");
         const sendErrorMessage = sendError instanceof Error ?
           sendError.message :
           String(sendError);
-        logger.error(`FCM 메시지 전송 실패: ${sendErrorMessage}`);
+        logger.error(`🔴 FCM 메시지 전송 실패: ${sendErrorMessage}`);
         logger.error(`FCM 에러 타입: ${typeof sendError}`);
-        logger.error(
-          `FCM 에러 스택: ${sendError instanceof Error ? sendError.stack : "N/A"}`,
-        );
+        const sendErrorStack =
+          sendError instanceof Error ? sendError.stack : "N/A";
+        logger.error(`FCM 에러 스택: ${sendErrorStack}`);
 
         // FCM 관련 에러 처리
         if (sendError instanceof Error) {
+          // Firebase Admin SDK 에러에서 추가 정보 추출
+          // details는 JSON으로 직렬화 가능한 객체여야 하므로
+          // stack 같은 큰 문자열은 제외하고 필수 정보만 포함
+          const errorDetails: Record<string, unknown> = {
+            errorMessage: sendErrorMessage,
+            errorName: sendError.name,
+            errorType: typeof sendError,
+          };
+
+          // Firebase Admin SDK 에러 객체의 모든 속성 확인
+          const errorAny = sendError as unknown as Record<string, unknown>;
+
+          // 에러 객체의 모든 키 로깅
+          const errorKeys = Object.keys(errorAny).join(", ");
+          logger.error(`에러 객체 키 목록: ${errorKeys}`);
+
+          // code (FCM 에러 코드) - 가장 중요!
+          if (errorAny.code) {
+            const code = String(errorAny.code);
+            errorDetails.code = code;
+            logger.error(
+              `🔴 FCM 에러 코드 (code): ${code} - ` +
+              "이 코드가 원인 그 자체입니다!"
+            );
+          } else {
+            logger.warn("에러 객체에 code 속성이 없습니다.");
+          }
+
+          // httpErrorCode (HTTP 에러 코드) - 매우 중요!
+          if (errorAny.httpErrorCode) {
+            const httpErrorCode = Number(errorAny.httpErrorCode);
+            errorDetails.httpErrorCode = httpErrorCode;
+            logger.error(
+              `🔴 HTTP 에러 코드 (httpErrorCode): ${httpErrorCode} - ` +
+              "이 코드가 원인 그 자체입니다!"
+            );
+          } else {
+            logger.warn("에러 객체에 httpErrorCode 속성이 없습니다.");
+          }
+
+          // errorInfo 객체 처리 (직렬화 가능한 값만 추출)
+          if (errorAny.errorInfo && typeof errorAny.errorInfo === "object") {
+            try {
+              const errorInfo = errorAny.errorInfo as Record<string, unknown>;
+              const errorInfoDetails: Record<string, unknown> = {};
+              if (errorInfo.code && typeof errorInfo.code === "string") {
+                errorInfoDetails.code = errorInfo.code;
+              }
+              if (errorInfo.message && typeof errorInfo.message === "string") {
+                errorInfoDetails.message = errorInfo.message;
+              }
+              if (Object.keys(errorInfoDetails).length > 0) {
+                errorDetails.errorInfo = errorInfoDetails;
+              }
+            } catch {
+              // errorInfo 처리 실패 시 제외
+            }
+          }
+
+          // statusCode (HTTP 상태 코드, 다른 이름일 수 있음)
+          if (errorAny.statusCode) {
+            logger.error(`HTTP 상태 코드 (statusCode): ${errorAny.statusCode}`);
+            errorDetails.statusCode = Number(errorAny.statusCode);
+          }
+
+          // status (HTTP 상태)
+          if (errorAny.status) {
+            logger.error(`HTTP 상태 (status): ${errorAny.status}`);
+            errorDetails.status = errorAny.status;
+          }
+
+          // response (응답 객체가 있는 경우)
+          if (errorAny.response) {
+            logger.error(`응답 객체 존재: ${typeof errorAny.response}`);
+            try {
+              const responseStr = JSON.stringify(errorAny.response);
+              logger.error(
+                `응답 내용: ${responseStr.substring(0, 500)}...`
+              );
+            } catch {
+              logger.error("응답 객체 직렬화 실패");
+            }
+          }
+
+          // details는 JSON 직렬화 가능한 객체만 포함
+          if (errorAny.details && typeof errorAny.details === "object") {
+            try {
+              // 직렬화 가능한 값만 추출
+              const details = errorAny.details as Record<string, unknown>;
+              const serializableDetails: Record<string, unknown> = {};
+              for (const [key, value] of Object.entries(details)) {
+                if (
+                  typeof value === "string" ||
+                  typeof value === "number" ||
+                  typeof value === "boolean" ||
+                  value === null
+                ) {
+                  serializableDetails[key] = value;
+                } else if (typeof value === "object" && value !== null) {
+                  try {
+                    // 중첩 객체도 직렬화 시도
+                    JSON.stringify(value);
+                    serializableDetails[key] = value;
+                  } catch {
+                    // 직렬화 실패 시 제외
+                  }
+                }
+              }
+              if (Object.keys(serializableDetails).length > 0) {
+                errorDetails.originalDetails = serializableDetails;
+                const originalDetailsStr = JSON.stringify(serializableDetails);
+                logger.error(
+                  `🔴 원본 에러 상세 (originalDetails): ${originalDetailsStr} - ` +
+                  "이 정보가 원인 그 자체입니다!"
+                );
+              }
+            } catch {
+              logger.error("originalDetails 직렬화 실패");
+            }
+          } else {
+            logger.warn(
+              "에러 객체에 details 속성이 없거나 객체가 아닙니다."
+            );
+          }
+
+          // 에러 객체의 모든 속성 로깅 (디버깅용)
+          logger.error("=== 에러 객체 전체 속성 ===");
+          Object.keys(errorAny).forEach((key) => {
+            try {
+              const value = errorAny[key];
+              const isSimpleType =
+                typeof value === "string" ||
+                typeof value === "number" ||
+                typeof value === "boolean";
+              if (isSimpleType) {
+                logger.error(`  ${key}: ${value}`);
+              } else if (value === null || value === undefined) {
+                logger.error(`  ${key}: ${value}`);
+              } else {
+                logger.error(`  ${key}: [${typeof value}]`);
+              }
+            } catch {
+              logger.error(`  ${key}: [읽기 실패]`);
+            }
+          });
+
           // 인증 문제 (가장 흔한 경우)
           if (
             sendErrorMessage.includes("authentication credential") ||
@@ -708,10 +1048,32 @@ export const sendTestNotification = onCall(
             logger.error(
               "FCM API 인증 실패. Firebase 프로젝트 설정을 확인하세요.",
             );
-            throw new HttpsError(
-              "internal",
-              "FCM 서비스 인증에 실패했습니다. 관리자에게 문의해주세요.",
-            );
+            // errorDetails 직렬화 검증
+            try {
+              JSON.stringify(errorDetails);
+              logger.error(`에러 상세 정보: ${JSON.stringify(errorDetails)}`);
+              throw new HttpsError(
+                "internal",
+                "FCM 서비스 인증에 실패했습니다. 관리자에게 문의해주세요.",
+                errorDetails,
+              );
+            } catch (serializeError) {
+              // 직렬화 실패 시 최소한의 정보만 포함
+              logger.error(
+                `errorDetails 직렬화 실패: ${serializeError}, ` +
+                "최소 정보만 포함합니다."
+              );
+              const minimalDetails: Record<string, unknown> = {
+                errorMessage: sendErrorMessage,
+                code: errorDetails.code || "unknown",
+                stage: "messaging_send_auth_error",
+              };
+              throw new HttpsError(
+                "internal",
+                "FCM 서비스 인증에 실패했습니다. 관리자에게 문의해주세요.",
+                minimalDetails,
+              );
+            }
           }
           // 토큰이 유효하지 않은 경우
           if (
@@ -721,6 +1083,7 @@ export const sendTestNotification = onCall(
             throw new HttpsError(
               "failed-precondition",
               "FCM 토큰이 유효하지 않습니다. 앱을 재시작해주세요.",
+              errorDetails,
             );
           }
           // 권한 문제
@@ -731,12 +1094,33 @@ export const sendTestNotification = onCall(
             throw new HttpsError(
               "permission-denied",
               "FCM 메시지 전송 권한이 없습니다.",
+              errorDetails,
             );
           }
+
+          // 알 수 없는 에러도 details 포함
+          const errorDetailsStr = JSON.stringify(errorDetails);
+          logger.error(`FCM 알 수 없는 에러 상세 정보: ${errorDetailsStr}`);
+          throw new HttpsError(
+            "internal",
+            `FCM 메시지 전송 실패: ${sendErrorMessage}`,
+            errorDetails,
+          );
         }
 
-        // 그 외의 FCM 에러는 그대로 전달
-        throw sendError;
+        // 그 외의 FCM 에러는 errorDetails와 함께 전달
+        const fallbackErrorDetails: Record<string, unknown> = {
+          errorMessage: sendErrorMessage,
+          errorType: typeof sendError,
+          stage: "messaging_send_unknown_error",
+        };
+        const fallbackDetailsStr = JSON.stringify(fallbackErrorDetails);
+        logger.error(`FCM 알 수 없는 에러 타입 상세 정보: ${fallbackDetailsStr}`);
+        throw new HttpsError(
+          "internal",
+          `FCM 메시지 전송 실패: ${sendErrorMessage}`,
+          fallbackErrorDetails,
+        );
       }
 
       return {
@@ -747,17 +1131,351 @@ export const sendTestNotification = onCall(
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
-      logger.error(`테스트 알림 전송 실패: ${errorMessage}`);
+      logger.error(`❌ 테스트 알림 전송 실패: ${errorMessage}`);
       logger.error(`에러 타입: ${typeof error}`);
+      logger.error(`에러 이름: ${error instanceof Error ? error.name : "N/A"}`);
       logger.error(`에러 스택: ${error instanceof Error ? error.stack : "N/A"}`);
+
+      // 에러 객체의 모든 속성 로깅
+      if (error instanceof Error) {
+        const errorProps = JSON.stringify(Object.getOwnPropertyNames(error));
+        logger.error(`에러 속성: ${errorProps}`);
+      }
 
       // HttpsError가 이미 던져진 경우 그대로 전달
       if (error instanceof HttpsError) {
+        logger.info(
+          `HttpsError 재전달: code=${error.code}, ` +
+          `message=${error.message}, ` +
+          `details 존재 여부: ${error.details ? "있음" : "없음"}`,
+        );
+        // details가 없으면 추가
+        if (!error.details) {
+          logger.warn("⚠️ HttpsError에 details가 없습니다. 추가합니다.");
+          const errorDetails: Record<string, unknown> = {
+            errorMessage: error.message,
+            errorCode: error.code,
+            errorType: "HttpsError_without_details",
+            stage: "error_rethrow",
+          };
+          // 기존 HttpsError를 details와 함께 새로 던지기
+          throw new HttpsError(
+            error.code,
+            error.message,
+            errorDetails
+          );
+        }
         throw error;
       }
 
       // 그 외의 경우 INTERNAL 에러로 변환
-      throw new HttpsError("internal", `테스트 알림 전송 실패: ${errorMessage}`);
+      const internalMessage = `테스트 알림 전송 실패: ${errorMessage}`;
+      logger.error(`INTERNAL 에러로 변환: ${internalMessage}`);
+
+      // 에러 상세 정보 수집
+      // details는 JSON으로 직렬화 가능한 객체여야 하므로
+      // stack 같은 큰 문자열은 제외하고 필수 정보만 포함
+      const errorDetails: Record<string, unknown> = {
+        errorMessage: errorMessage,
+        errorType: typeof error,
+      };
+
+      if (error instanceof Error) {
+        errorDetails.errorName = error.name;
+        // stack은 너무 크므로 제외
+        const errorAny = error as unknown as Record<string, unknown>;
+        if (errorAny.code) {
+          errorDetails.code = String(errorAny.code);
+        }
+        if (errorAny.httpErrorCode) {
+          errorDetails.httpErrorCode = Number(errorAny.httpErrorCode);
+        }
+        // details는 JSON 직렬화 가능한 객체만 포함
+        if (errorAny.details && typeof errorAny.details === "object") {
+          try {
+            errorDetails.originalDetails = JSON.parse(
+              JSON.stringify(errorAny.details)
+            );
+          } catch {
+            // 직렬화 실패 시 제외
+          }
+        }
+      }
+
+      const errorDetailsStr = JSON.stringify(errorDetails);
+      logger.error(`에러 상세 정보: ${errorDetailsStr}`);
+      logger.error(
+        `🔴 최종 에러 상세 정보 (클라이언트로 전달): ${errorDetailsStr}`
+      );
+      throw new HttpsError("internal", internalMessage, errorDetails);
     }
   },
+);
+
+/**
+ * 알림 유형별 테스트 알림 전송 (실제 Firestore 문서 생성)
+ * 클라이언트에서 특정 유형의 테스트 알림을 보낼 수 있음
+ * 지원 유형: test, official_notice, comment
+ *
+ * - test: FCM 직접 전송 (기존 방식)
+ * - official_notice: 실제 공지글 생성 → onPostCreated 트리거
+ * - comment: 테스트 게시글에 댓글 생성 → onCommentCreated 트리거
+ */
+export const sendTypedTestNotification = onCall(
+  {
+    cors: true,
+  },
+  async (request) => {
+    const userId = request.auth?.uid;
+    if (!userId) {
+      throw new HttpsError("unauthenticated", "인증이 필요합니다.");
+    }
+
+    // 알림 유형 가져오기 (기본값: test)
+    const notificationType = request.data?.type || "test";
+    logger.info(
+      `알림 유형별 테스트 요청: userId=${userId}, type=${notificationType}`
+    );
+
+    // 지원되는 알림 유형 확인
+    const supportedTypes = ["test", "official_notice", "comment"];
+    if (!supportedTypes.includes(notificationType)) {
+      throw new HttpsError(
+        "invalid-argument",
+        `지원하지 않는 알림 유형입니다: ${notificationType}. ` +
+        `지원 유형: ${supportedTypes.join(", ")}`
+      );
+    }
+
+    try {
+      if (!adminApp) {
+        throw new HttpsError(
+          "internal",
+          "FCM 서비스가 초기화되지 않았습니다."
+        );
+      }
+
+      const db = getFirestore(adminApp);
+      const messaging = getMessaging(adminApp);
+
+      // 사용자 정보 가져오기
+      const userDoc = await db.collection("users").doc(userId).get();
+      if (!userDoc.exists) {
+        throw new HttpsError("not-found", "사용자를 찾을 수 없습니다.");
+      }
+
+      const userData = userDoc.data();
+      const fcmToken = userData?.fcmToken;
+      const userName = userData?.displayName || userData?.name || "사용자";
+      const parishId = userData?.main_parish_id;
+
+      if (!fcmToken || typeof fcmToken !== "string" || fcmToken.trim() === "") {
+        throw new HttpsError(
+          "failed-precondition",
+          "FCM 토큰이 없습니다. 알림 권한을 확인해주세요."
+        );
+      }
+
+      // 알림 유형별 처리
+      switch (notificationType) {
+      case "official_notice": {
+        // 공지글 테스트: 실제 공지글 생성 → onPostCreated 트리거
+        if (!parishId) {
+          throw new HttpsError(
+            "failed-precondition",
+            "소속 성당이 없습니다. 프로필에서 성당을 설정해주세요."
+          );
+        }
+
+        logger.info(`공지글 테스트 생성: parishId=${parishId}`);
+
+        // 시스템 계정으로 공지글 생성 (사용자가 알림을 받을 수 있도록)
+        const testPostRef = await db.collection("posts").add({
+          title: "[테스트] 알림 테스트 공지",
+          body: "이것은 알림 테스트를 위한 공지글입니다. " +
+            "정상적으로 알림을 받으셨다면 이 게시글은 삭제하셔도 됩니다.",
+          type: "official",
+          category: "notice",
+          parishId: parishId,
+          authorId: "system_test", // 시스템 계정으로 생성
+          authorName: "시스템 테스트",
+          status: "published",
+          isTest: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          viewCount: 0,
+          likeCount: 0,
+          commentCount: 0,
+        });
+
+        logger.info(
+          `✅ 테스트 공지글 생성 완료: postId=${testPostRef.id}, ` +
+          `parishId=${parishId}`
+        );
+
+        // 테스트 게시글 5분 후 자동 삭제 예약
+        setTimeout(async () => {
+          try {
+            await testPostRef.delete();
+            logger.info(`테스트 공지글 자동 삭제: postId=${testPostRef.id}`);
+          } catch (e) {
+            logger.warn(`테스트 공지글 삭제 실패: ${e}`);
+          }
+        }, 5 * 60 * 1000); // 5분
+
+        return {
+          success: true,
+          type: notificationType,
+          postId: testPostRef.id,
+          message: "공지글 테스트가 생성되었습니다. " +
+            "onPostCreated 트리거가 실행되어 알림이 전송됩니다. " +
+            "(5분 후 자동 삭제)",
+        };
+      }
+
+      case "comment": {
+        // 댓글 테스트: 사용자의 테스트 게시글에 댓글 생성 → onCommentCreated 트리거
+        logger.info(`댓글 테스트 생성: userId=${userId}`);
+
+        // 사용자의 테스트용 게시글 찾기 또는 생성
+        let testPostId: string;
+        const existingTestPost = await db.collection("posts")
+          .where("authorId", "==", userId)
+          .where("isTest", "==", true)
+          .where("category", "==", "test_for_comment")
+          .limit(1)
+          .get();
+
+        if (existingTestPost.empty) {
+          // 사용자 소유의 테스트 게시글 생성
+          const newTestPost = await db.collection("posts").add({
+            title: "[시스템] 댓글 알림 테스트용 게시글",
+            body: "이 게시글은 댓글 알림 테스트를 위해 자동 생성되었습니다.",
+            type: "normal",
+            category: "test_for_comment",
+            parishId: parishId || "test_parish",
+            authorId: userId, // 사용자가 작성자
+            authorName: userName,
+            status: "hidden", // 숨김 처리
+            isTest: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            viewCount: 0,
+            likeCount: 0,
+            commentCount: 0,
+          });
+          testPostId = newTestPost.id;
+          logger.info(`테스트용 게시글 생성: postId=${testPostId}`);
+        } else {
+          testPostId = existingTestPost.docs[0].id;
+          logger.info(`기존 테스트용 게시글 사용: postId=${testPostId}`);
+        }
+
+        // 시스템 계정으로 댓글 생성 (사용자가 알림을 받을 수 있도록)
+        const testCommentRef = await db.collection("comments").add({
+          postId: testPostId,
+          content: "🔔 이것은 댓글 알림 테스트입니다. " +
+            "정상적으로 알림을 받으셨다면 성공입니다!",
+          authorId: "system_test", // 시스템 계정으로 작성
+          authorName: "알림 테스트 봇",
+          isTest: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          likeCount: 0,
+        });
+
+        logger.info(
+          `✅ 테스트 댓글 생성 완료: commentId=${testCommentRef.id}, ` +
+          `postId=${testPostId}`
+        );
+
+        // 테스트 댓글 5분 후 자동 삭제 예약
+        setTimeout(async () => {
+          try {
+            await testCommentRef.delete();
+            logger.info(`테스트 댓글 자동 삭제: commentId=${testCommentRef.id}`);
+          } catch (e) {
+            logger.warn(`테스트 댓글 삭제 실패: ${e}`);
+          }
+        }, 5 * 60 * 1000); // 5분
+
+        return {
+          success: true,
+          type: notificationType,
+          postId: testPostId,
+          commentId: testCommentRef.id,
+          message: "댓글 테스트가 생성되었습니다. " +
+            "onCommentCreated 트리거가 실행되어 알림이 전송됩니다. " +
+            "(5분 후 자동 삭제)",
+        };
+      }
+
+      case "test":
+      default: {
+        // 기본 테스트: FCM 직접 전송
+        const message = {
+          token: fcmToken,
+          notification: {
+            title: "🔔 [테스트] 기본 알림",
+            body: "FCM 기본 알림이 정상적으로 작동합니다!",
+          },
+          data: {
+            type: "test",
+            timestamp: new Date().toISOString(),
+            isTest: "true",
+          },
+          apns: {
+            payload: {
+              aps: {
+                sound: "default",
+                badge: 1,
+              },
+            },
+          },
+          android: {
+            priority: "high" as const,
+            notification: {
+              sound: "default",
+              priority: "high" as const,
+            },
+          },
+        };
+
+        logger.info(
+          `FCM 직접 전송: type=${notificationType}, ` +
+          `token=${fcmToken.substring(0, 20)}...`
+        );
+
+        const response = await messaging.send(message);
+        logger.info(
+          `✅ 기본 테스트 알림 전송 완료: userId=${userId}, ` +
+          `messageId=${response}`
+        );
+
+        return {
+          success: true,
+          messageId: response,
+          type: notificationType,
+          message: "기본 테스트 알림이 전송되었습니다.",
+        };
+      }
+      }
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      logger.error(
+        `❌ 알림 유형별 테스트 전송 실패: type=${notificationType}, ` +
+        `error=${errorMessage}`
+      );
+
+      if (error instanceof HttpsError) {
+        throw error;
+      }
+
+      throw new HttpsError(
+        "internal",
+        `테스트 알림 전송 실패: ${errorMessage}`
+      );
+    }
+  }
 );

@@ -73,6 +73,17 @@ abstract class PostRepository {
     List<String> pdfUrls = const [],
   });
 
+  /// 댓글 수정
+  Future<Either<Failure, void>> updateComment({
+    required String commentId,
+    required String content,
+    List<String>? imageUrls,
+    List<String>? pdfUrls,
+  });
+
+  /// 댓글 삭제
+  Future<Either<Failure, void>> deleteComment(String commentId);
+
   /// 게시글의 댓글 목록 조회 (스트림)
   Stream<List<Comment>> watchComments(String postId);
 

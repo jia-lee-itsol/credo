@@ -51,6 +51,14 @@ abstract class CommunityRepository {
     required String content,
   });
 
+  /// 댓글 수정
+  Future<Either<Failure, void>> updateComment({
+    required String commentId,
+    required String content,
+    List<String>? imageUrls,
+    List<String>? pdfUrls,
+  });
+
   /// 댓글 삭제
   Future<Either<Failure, void>> deleteComment(String commentId);
 

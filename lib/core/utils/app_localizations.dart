@@ -440,6 +440,7 @@ class CommunityTranslations {
 
   String get title => _getString('title') ?? 'コミュニティ';
   String get newPost => _getString('newPost') ?? '新規投稿';
+  String get submit => _getString('submit') ?? '投稿する';
   String get postCreated => _getString('postCreated') ?? '投稿しました';
   String get postCreateFailed =>
       _getString('postCreateFailed') ?? '投稿に失敗しました。ネットワーク接続を確認してください。';

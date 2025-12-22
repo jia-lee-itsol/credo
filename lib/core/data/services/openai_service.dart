@@ -198,18 +198,50 @@ ${language == 'ja'
       }
 
       final languageName = _getLanguageName(targetLanguage);
+      
+      // 언어별 접두사 및 예시
+      String prefixRequirement = '';
+      String example = '';
+      switch (targetLanguage) {
+        case 'ko':
+          prefixRequirement = '- "성" 접두사를 반드시 포함하여 반환하세요 (예: "성 요한", "성 마리아")';
+          example = '성 요한, 성 마리아';
+          break;
+        case 'zh':
+          prefixRequirement = '- "聖" 접두사를 반드시 포함하여 반환하세요 (예: "聖若望", "聖瑪利亞")';
+          example = '聖若望, 聖瑪利亞';
+          break;
+        case 'vi':
+          prefixRequirement = '- "Thánh" 접두사를 반드시 포함하여 반환하세요 (예: "Thánh Gioan", "Thánh Maria")';
+          example = 'Thánh Gioan, Thánh Maria';
+          break;
+        case 'es':
+          prefixRequirement = '- "San" 또는 "Santa" 접두사를 반드시 포함하여 반환하세요 (예: "San Juan", "Santa María")';
+          example = 'San Juan, Santa María';
+          break;
+        case 'pt':
+          prefixRequirement = '- "São" 또는 "Santa" 접두사를 반드시 포함하여 반환하세요 (예: "São João", "Santa Maria")';
+          example = 'São João, Santa Maria';
+          break;
+      }
 
       final prompt =
-          '''다음 가톨릭 성인 이름을 $languageName로 번역해주세요.
+          '''다음 가톨릭 성인 이름을 $languageName로 정확하게 번역해주세요.
 
-일본어: $japaneseName
-${englishName != null ? '영어: $englishName' : ''}
+일본어 이름: $japaneseName
+${englishName != null ? '영어 이름: $englishName' : ''}
+
+중요:
+- 위에 제공된 정확한 성인 이름을 번역하세요. 다른 유사한 이름의 성인과 혼동하지 마세요.
+- 전체 이름을 정확히 번역하세요 (예: "프란치스카 사베리아 카브리니"는 "프란치스코 하비에르"와 다른 성인입니다).
+- 이름의 모든 부분(이름, 중간 이름, 성)을 정확히 번역하세요.
 
 요구사항:
 - 가톨릭 교회에서 공식적으로 사용하는 $languageName 성인 이름을 사용하세요
-- 성인 이름의 표준 번역을 사용하세요
-- "聖" (성) 같은 접두사는 $languageName 관례에 맞게 번역하세요
-- 번역된 이름만 반환하세요 (설명 없이)
+- 가톨릭 전례에서 사용하는 표준 $languageName 이름을 사용하세요
+${prefixRequirement.isNotEmpty ? '$prefixRequirement' : ''}
+${example.isNotEmpty ? '- 예시 형식: $example' : ''}
+- 번역된 이름만 반환하세요 (설명이나 추가 텍스트 없이)
 
 $languageName 이름:''';
 
@@ -227,7 +259,7 @@ $languageName 이름:''';
             {
               'role': 'system',
               'content':
-                  '당신은 가톨릭 성인 이름 번역 전문가입니다. 각 언어의 표준 가톨릭 용어를 사용하여 정확하게 번역합니다.',
+                  '당신은 가톨릭 성인 이름 번역 전문가입니다. 제공된 정확한 성인 이름을 다른 유사한 이름과 혼동하지 않고, 각 언어의 표준 가톨릭 용어를 사용하여 정확하게 번역합니다. 이름의 모든 부분을 정확히 번역합니다.',
             },
             {'role': 'user', 'content': prompt},
           ],
@@ -291,14 +323,18 @@ $languageName 이름:''';
       final monthName = monthNames[month];
 
       final prompt =
-          '''오늘($year년 $month월 $day일, $monthName $day)의 가톨릭 성인은 누구입니까?
+          '''$year년 $month월 $day일 ($monthName $day)의 가톨릭 성인을 로마 순교록(Roman Martyrology)과 교회 전례력에 따라 정확하게 알려주세요.
 
-로마 순교록(Roman Martyrology)과 교회 전례력에 따라 $month월 $day일에 기념하는 성인을 알려주세요.
+중요:
+- $month월 $day일에 실제로 기념되는 정확한 성인만 포함하세요
+- 유사한 이름의 다른 성인과 혼동하지 마세요 (예: 12월 22일은 "프란치스카 사베리아 카브리니"이며 "프란치스코 하비에르"와는 다른 성인입니다)
+- 성인의 전체 이름을 정확히 제공하세요
 
 요구사항:
 - $month월 $day일에 기념하는 성인만 포함
-- 성인의 직함(교황, 주교, 순교자, 동정녀 등)을 이름에 포함
+- 성인의 직함(교황, 주교, 순교자, 동정녀, 수녀 등)을 이름에 포함
 - $languageName와 영어 이름 모두 제공
+- 가톨릭 교회에서 공식적으로 인정하는 성인만 포함
 
 JSON 형식으로만 응답 (마크다운 없이):
 {"saints": [{"name": "$languageName 이름", "nameEn": "English name", "type": "optional_memorial", "imageUrl": null}], "liturgyTakesPrecedence": false, "liturgicalNote": ""}''';
@@ -319,12 +355,15 @@ JSON 형식으로만 응답 (마크다운 없이):
             {
               'role': 'system',
               'content':
-                  '''당신은 가톨릭 전례력 전문가입니다. 로마 순교록(Roman Martyrology)에 따라 정확한 성인 정보를 제공합니다.
+                  '''당신은 가톨릭 전례력 전문가입니다. 로마 순교록(Roman Martyrology)과 교회 전례력에 따라 정확한 성인 정보를 제공합니다.
 
 중요:
 - 요청받은 정확한 날짜의 성인만 포함하세요
-- 비슷한 이름의 성인을 혼동하지 마세요 (예: Anastasius와 Anastasia는 다른 성인)
+- 비슷한 이름의 성인을 혼동하지 마세요
+  * 예: 12월 22일은 "프란치스카 사베리아 카브리니" (Francesca Saveria Cabrini)이며, "프란치스코 하비에르" (Francis Xavier, 12월 3일)와는 완전히 다른 성인입니다
+  * 예: Anastasius와 Anastasia는 다른 성인입니다
 - 각 성인의 축일을 반드시 확인하세요
+- 성인의 전체 이름을 정확히 제공하세요 (이름, 중간 이름, 성 모두 포함)
 - JSON 형식으로만 응답하세요 (마크다운 없이)''',
             },
             {'role': 'user', 'content': prompt},

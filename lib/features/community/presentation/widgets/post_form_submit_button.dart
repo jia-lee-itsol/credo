@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/utils/app_localizations.dart';
 
 /// 게시글 폼 제출 버튼 위젯
-class PostFormSubmitButton extends StatelessWidget {
+class PostFormSubmitButton extends ConsumerWidget {
   final bool isSubmitting;
   final VoidCallback onPressed;
   final Color primaryColor;
-  final String buttonText;
+  final String? buttonText;
 
   const PostFormSubmitButton({
     super.key,
     required this.isSubmitting,
     required this.onPressed,
     required this.primaryColor,
-    this.buttonText = '投稿する',
+    this.buttonText,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
+    final displayText = buttonText ?? l10n.community.submit;
+    
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -42,7 +47,7 @@ class PostFormSubmitButton extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    buttonText,
+                    displayText,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

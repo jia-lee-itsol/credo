@@ -238,20 +238,44 @@ class _NotificationSettingsScreenState
 
         const SizedBox(height: 32),
 
-        // FCM 테스트 버튼
+        // FCM 테스트 섹션
         Card(
-          child: ListTile(
-            leading: Icon(Icons.send, color: primaryColor),
-            title: Text(l10n.profile.notifications.testNotification),
-            subtitle: Text(l10n.profile.notifications.testNotificationDescription),
-            trailing: _isTesting
-                ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : Icon(Icons.arrow_forward_ios, size: 16, color: theme.colorScheme.onSurfaceVariant),
-            onTap: _isTesting ? null : _sendTestNotification,
+          child: Column(
+            children: [
+              ListTile(
+                leading: Icon(Icons.bug_report, color: primaryColor),
+                title: const Text('알림 테스트'),
+                subtitle: const Text('알림이 정상적으로 수신되는지 테스트합니다'),
+                enabled: false,
+              ),
+              const Divider(height: 1),
+              // 기본 테스트 알림
+              ListTile(
+                leading: const Text('🔔', style: TextStyle(fontSize: 20)),
+                title: const Text('기본 테스트'),
+                subtitle: const Text('FCM 연결 상태를 확인합니다'),
+                trailing: _buildTestButton('test'),
+                onTap: _isTesting ? null : () => _sendTypedTestNotification('test'),
+              ),
+              const Divider(height: 1),
+              // 공지글 알림 테스트
+              ListTile(
+                leading: const Text('📢', style: TextStyle(fontSize: 20)),
+                title: const Text('공지글 알림'),
+                subtitle: const Text('성당 공지 알림을 테스트합니다'),
+                trailing: _buildTestButton('official_notice'),
+                onTap: _isTesting ? null : () => _sendTypedTestNotification('official_notice'),
+              ),
+              const Divider(height: 1),
+              // 댓글 알림 테스트
+              ListTile(
+                leading: const Text('💬', style: TextStyle(fontSize: 20)),
+                title: const Text('댓글 알림'),
+                subtitle: const Text('댓글 알림을 테스트합니다'),
+                trailing: _buildTestButton('comment'),
+                onTap: _isTesting ? null : () => _sendTypedTestNotification('comment'),
+              ),
+            ],
           ),
         ),
 
@@ -363,7 +387,26 @@ class _NotificationSettingsScreenState
     );
   }
 
-  Future<void> _sendTestNotification() async {
+  /// 테스트 버튼 위젯 빌드
+  Widget _buildTestButton(String type) {
+    if (_isTesting && _testingType == type) {
+      return const SizedBox(
+        width: 20,
+        height: 20,
+        child: CircularProgressIndicator(strokeWidth: 2),
+      );
+    }
+    return Icon(
+      Icons.send,
+      size: 20,
+      color: _isTesting ? Colors.grey : Theme.of(context).colorScheme.primary,
+    );
+  }
+
+  String? _testingType;
+
+  /// 알림 유형별 테스트 알림 전송
+  Future<void> _sendTypedTestNotification(String notificationType) async {
     if (_isTesting) return;
 
     final currentUser = ref.read(currentUserProvider);
@@ -379,9 +422,9 @@ class _NotificationSettingsScreenState
 
     setState(() {
       _isTesting = true;
+      _testingType = notificationType;
     });
 
-    final l10n = ref.read(appLocalizationsSyncProvider);
     final service = PushNotificationService();
 
     // 테스트 알림 전에 FCM 토큰 갱신 및 저장 시도
@@ -390,6 +433,7 @@ class _NotificationSettingsScreenState
       if (!mounted) return;
       setState(() {
         _isTesting = false;
+        _testingType = null;
       });
 
       // iOS 시뮬레이터에서는 푸시 알림이 작동하지 않음
@@ -407,17 +451,26 @@ class _NotificationSettingsScreenState
       return;
     }
 
-    final result = await service.sendTestNotification();
+    // 알림 유형별 테스트 함수 호출
+    final result = await service.sendTypedTestNotification(notificationType);
 
     if (!mounted) return;
 
     setState(() {
       _isTesting = false;
+      _testingType = null;
     });
+
+    final typeName = PushNotificationService.getNotificationTypeName(notificationType);
+    final icon = PushNotificationService.getNotificationTypeIcon(notificationType);
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(result['message'] ?? l10n.profile.notifications.testNotificationSent),
+        content: Text(
+          result['success'] == true
+              ? '$icon $typeName 테스트 알림이 전송되었습니다'
+              : result['message'] ?? '$typeName 테스트 실패',
+        ),
         backgroundColor: result['success'] == true ? Colors.green : Colors.red,
         duration: const Duration(seconds: 3),
       ),
