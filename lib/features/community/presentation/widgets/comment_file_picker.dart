@@ -97,6 +97,21 @@ class _CommentFilePickerState extends ConsumerState<CommentFilePicker> {
 
       if (pickedFile != null) {
         final imageFile = File(pickedFile.path);
+        final fileSize = await imageFile.length();
+        const maxFileSize = 10 * 1024 * 1024; // 10MB
+
+        if (fileSize > maxFileSize) {
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(l10n.community.imageFileTooLarge),
+                duration: const Duration(seconds: 3),
+              ),
+            );
+          }
+          return;
+        }
+
         widget.onFileStateChanged(
           widget.fileState.copyWith(
             selectedImages: [...widget.fileState.selectedImages, imageFile],

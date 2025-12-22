@@ -332,6 +332,7 @@
     "maxPdfsReached": "Bạn có thể đính kèm tối đa {max} tệp PDF",
     "maxPdfsReached@max": "Số lượng PDF tối đa",
     "pdfFileTooLarge": "Kích thước tệp PDF không được vượt quá 10MB",
+    "imageFileTooLarge": "Kích thước tệp hình ảnh không được vượt quá 10MB",
     "pdfFiles": "Tệp PDF",
     "pdfOpenFailed": "Không thể mở tệp PDF",
     "pdfSelectFailed": "Lỗi khi chọn tệp PDF",

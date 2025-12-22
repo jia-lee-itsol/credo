@@ -337,6 +337,7 @@
     "maxPdfsReached": "最多可附加{max}个PDF文件",
     "maxPdfsReached@max": "最大PDF数",
     "pdfFileTooLarge": "PDF文件大小不能超过10MB",
+    "imageFileTooLarge": "图片文件大小不能超过10MB",
     "pdfFiles": "PDF文件",
     "pdfOpenFailed": "无法打开PDF文件",
     "pdfSelectFailed": "选择PDF文件失败",

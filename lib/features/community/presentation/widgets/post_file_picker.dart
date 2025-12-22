@@ -39,7 +39,7 @@ class PostFilePicker extends ConsumerWidget {
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
         const SizedBox(height: 8),
-        
+
         // 이미지 섹션
         if (totalImageCount > 0 || canAddMore) ...[
           Text(
@@ -72,7 +72,8 @@ class PostFilePicker extends ConsumerWidget {
               } else {
                 // 이미지 추가 버튼
                 return _AddFileButton(
-                  onTap: () => _showImagePicker(context, notifier, totalImageCount),
+                  onTap: () =>
+                      _showImagePicker(context, notifier, totalImageCount),
                   icon: Icons.add_photo_alternate,
                 );
               }
@@ -109,7 +110,8 @@ class PostFilePicker extends ConsumerWidget {
                 } else {
                   // PDF 추가 버튼
                   return _AddFileButton(
-                    onTap: () => _showPdfPicker(context, notifier, totalPdfCount),
+                    onTap: () =>
+                        _showPdfPicker(context, notifier, totalPdfCount),
                     icon: Icons.picture_as_pdf,
                   );
                 }
@@ -228,9 +230,10 @@ class _PdfItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fileName = pdfFile?.path.split('/').last ?? 
-                     (pdfUrl != null ? pdfUrl!.split('/').last.split('?').first : 'PDF');
-    
+    final fileName =
+        pdfFile?.path.split('/').last ??
+        (pdfUrl != null ? pdfUrl!.split('/').last.split('?').first : 'PDF');
+
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
@@ -247,7 +250,11 @@ class _PdfItem extends StatelessWidget {
               color: Colors.red.shade50,
               borderRadius: BorderRadius.circular(4),
             ),
-            child: const Icon(Icons.picture_as_pdf, color: Colors.red, size: 24),
+            child: const Icon(
+              Icons.picture_as_pdf,
+              color: Colors.red,
+              size: 24,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -319,7 +326,10 @@ class _AddFileButton extends ConsumerWidget {
           children: [
             Icon(icon, size: 32),
             const SizedBox(height: 4),
-            Text(l10n.community.addButton, style: const TextStyle(fontSize: 12)),
+            Text(
+              l10n.community.addButton,
+              style: const TextStyle(fontSize: 12),
+            ),
           ],
         ),
       ),
@@ -341,7 +351,9 @@ class PostFilePickerHelper {
     if (currentImageCount >= maxImages) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(l10n.community.maxImagesReached(max: maxImages))),
+          SnackBar(
+            content: Text(l10n.community.maxImagesReached(max: maxImages)),
+          ),
         );
       }
       return;
@@ -390,6 +402,21 @@ class PostFilePickerHelper {
 
       if (pickedFile != null) {
         final imageFile = File(pickedFile.path);
+        final fileSize = await imageFile.length();
+        const maxFileSize = 10 * 1024 * 1024; // 10MB
+
+        if (fileSize > maxFileSize) {
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(l10n.community.imageFileTooLarge),
+                duration: const Duration(seconds: 3),
+              ),
+            );
+          }
+          return;
+        }
+
         notifier.addImage(imageFile);
       }
     } on PlatformException catch (e) {
@@ -512,4 +539,3 @@ class PostFilePickerHelper {
     }
   }
 }
-

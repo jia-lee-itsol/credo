@@ -218,6 +218,7 @@
     "maxPdfsReached": "PDFは最大{max}個まで添付できます",
     "maxPdfsReached@max": "最大PDF数",
     "pdfFileTooLarge": "PDFファイルのサイズは10MBを超えることはできません",
+    "imageFileTooLarge": "画像ファイルのサイズは10MBを超えることはできません",
     "pdfSelectFailed": "PDFファイルの選択に失敗しました",
     "pdfOpenFailed": "PDFファイルを開くことができませんでした",
     "tapToOpen": "タップして開く"

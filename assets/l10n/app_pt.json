@@ -332,6 +332,7 @@
     "maxPdfsReached": "Você pode anexar até {max} arquivos PDF",
     "maxPdfsReached@max": "Número máximo de PDF",
     "pdfFileTooLarge": "O tamanho do arquivo PDF não pode exceder 10MB",
+    "imageFileTooLarge": "O tamanho do arquivo de imagem não pode exceder 10MB",
     "pdfFiles": "Arquivos PDF",
     "pdfOpenFailed": "Não foi possível abrir o arquivo PDF",
     "pdfSelectFailed": "Falha ao selecionar o arquivo PDF",

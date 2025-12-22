@@ -214,6 +214,7 @@
     "maxPdfsReached": "PDF는 최대{max}개까지 첨부할 수 있습니다",
     "maxPdfsReached@max": "최대 PDF 수",
     "pdfFileTooLarge": "PDF 파일 크기는 10MB를 초과할 수 없습니다",
+    "imageFileTooLarge": "이미지 파일 크기는 10MB를 초과할 수 없습니다",
     "pdfSelectFailed": "PDF 파일 선택에 실패했습니다",
     "pdfOpenFailed": "PDF 파일을 열 수 없습니다",
     "tapToOpen": "탭하여 열기"

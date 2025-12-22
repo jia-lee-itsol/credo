@@ -23,11 +23,21 @@ class ImageUploadService {
     int retryCount = 0,
   }) async {
     const maxRetries = 3;
+    const maxFileSize = 10 * 1024 * 1024; // 10MB
 
     try {
       AppLogger.image('이미지 업로드 시작 (시도: ${retryCount + 1}/$maxRetries)');
       AppLogger.image('파일 경로: ${imageFile.path}');
-      AppLogger.image('파일 크기: ${await imageFile.length()} bytes');
+
+      final fileSize = await imageFile.length();
+      AppLogger.image(
+        '파일 크기: $fileSize bytes (${(fileSize / 1024 / 1024).toStringAsFixed(2)} MB)',
+      );
+
+      // 파일 크기 확인
+      if (fileSize > maxFileSize) {
+        throw ValidationFailure(message: '이미지 파일 크기는 10MB를 초과할 수 없습니다.');
+      }
 
       // 파일 확장자 추출
       final extension = imageFile.path.split('.').last.toLowerCase();

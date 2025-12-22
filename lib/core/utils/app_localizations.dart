@@ -513,6 +513,9 @@ class CommunityTranslations {
   String get pdfFileTooLarge =>
       _getString('pdfFileTooLarge') ??
       'PDFファイルのサイズは10MBを超えることはできません';
+  String get imageFileTooLarge =>
+      _getString('imageFileTooLarge') ??
+      '画像ファイルのサイズは10MBを超えることはできません';
   String get pdfSelectFailed =>
       _getString('pdfSelectFailed') ?? 'PDFファイルの選択に失敗しました';
   String get tapToOpen => _getString('tapToOpen') ?? 'タップして開く';

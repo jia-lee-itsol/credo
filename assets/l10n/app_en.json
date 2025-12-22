@@ -216,6 +216,7 @@
     "maxPdfsReached": "You can attach up to {max} PDFs",
     "maxPdfsReached@max": "Maximum number of PDFs",
     "pdfFileTooLarge": "PDF file size cannot exceed 10MB",
+    "imageFileTooLarge": "Image file size cannot exceed 10MB",
     "pdfSelectFailed": "Failed to select PDF file",
     "pdfOpenFailed": "Failed to open PDF file",
     "tapToOpen": "Tap to open"
