@@ -49,10 +49,17 @@ abstract class AuthRepository {
     String? godparentId,
   });
 
-  /// 이메일 또는 userId로 사용자 검색
+  /// 이메일, userId 또는 nickname으로 사용자 검색
   Future<Either<Failure, UserEntity?>> searchUser({
     String? email,
     String? userId,
+    String? nickname,
+  });
+
+  /// 닉네임 중복 체크
+  Future<Either<Failure, bool>> checkNicknameAvailable({
+    required String nickname,
+    String? excludeUserId, // 현재 사용자 ID (프로필 업데이트 시 제외)
   });
 
   /// 인증 상태 스트림

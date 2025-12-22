@@ -68,13 +68,13 @@ class _UserSearchSheetState extends ConsumerState<UserSearchSheet> {
 
     final repository = ref.read(authRepositoryProvider);
 
-    // 이메일 형식인지 확인하여 email 또는 userId로 검색
+    // 이메일 형식인지 확인하여 email, nickname 또는 userId로 검색
     final isEmail = _isValidEmail(trimmedQuery);
-    AppLogger.profile('검색 타입: ${isEmail ? "이메일" : "사용자 ID"}');
+    AppLogger.profile('검색 타입: ${isEmail ? "이메일" : "닉네임 또는 사용자 ID"}');
     
     final result = isEmail
         ? await repository.searchUser(email: trimmedQuery)
-        : await repository.searchUser(userId: trimmedQuery);
+        : await repository.searchUser(nickname: trimmedQuery);
 
     if (!mounted) {
       AppLogger.profile('위젯이 마운트되지 않음, 검색 취소');
@@ -216,54 +216,73 @@ class _UserSearchSheetState extends ConsumerState<UserSearchSheet> {
                   ),
                 )
               : _foundUser != null
-              ? Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: widget.primaryColor.withValues(
-                          alpha: 0.1,
-                        ),
-                        child: Icon(Icons.person, color: widget.primaryColor),
-                      ),
-                      title: Text(
-                        _foundUser!.nickname,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 4),
-                          Text(_foundUser!.email),
-                          const SizedBox(height: 4),
-                          GestureDetector(
-                            onLongPress: () {
-                              Clipboard.setData(
-                                ClipboardData(text: _foundUser!.userId),
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(l10n.profile.godparent.userIdCopied),
-                                  duration: const Duration(seconds: 2),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              '${l10n.profile.userId}: ${_foundUser!.userId}',
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                color: theme.colorScheme.onSurfaceVariant,
+              ? Align(
+                  alignment: Alignment.topCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: widget.primaryColor.withValues(
+                                alpha: 0.1,
+                              ),
+                              child: Icon(Icons.person, color: widget.primaryColor),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    _foundUser!.nickname,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    _foundUser!.email,
+                                    style: theme.textTheme.bodyMedium,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  GestureDetector(
+                                    onLongPress: () {
+                                      Clipboard.setData(
+                                        ClipboardData(text: _foundUser!.userId),
+                                      );
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(l10n.profile.godparent.userIdCopied),
+                                          duration: const Duration(seconds: 2),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      '${l10n.profile.userId}: ${_foundUser!.userId}',
+                                      style: theme.textTheme.bodySmall?.copyWith(
+                                        color: theme.colorScheme.onSurfaceVariant,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      trailing: ElevatedButton(
-                        onPressed: () => widget.onUserSelected(_foundUser!),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: widget.primaryColor,
-                          foregroundColor: Colors.white,
+                            const SizedBox(width: 8),
+                            ElevatedButton(
+                              onPressed: () => widget.onUserSelected(_foundUser!),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: widget.primaryColor,
+                                foregroundColor: Colors.white,
+                              ),
+                              child: Text(l10n.common.select),
+                            ),
+                          ],
                         ),
-                        child: Text(l10n.common.select),
                       ),
                     ),
                   ),

@@ -108,6 +108,20 @@ class AuthRepositoryImpl implements AuthRepository {
     String? feastDayId,
   }) async {
     try {
+      // 닉네임 중복 체크
+      AppLogger.auth('닉네임 중복 체크 시작: $nickname');
+      final nicknameCheck = await checkNicknameAvailable(nickname: nickname);
+      final isAvailable = nicknameCheck.fold(
+        (failure) => false,
+        (available) => available,
+      );
+      
+      if (!isAvailable) {
+        AppLogger.auth('닉네임 중복됨: $nickname');
+        return const Left(AuthFailure(message: 'このニックネームは既に使用されています。'));
+      }
+      AppLogger.auth('닉네임 사용 가능: $nickname');
+
       AppLogger.auth('createUserWithEmailAndPassword 시작');
       final userCredential = await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -131,7 +145,7 @@ class AuthRepositoryImpl implements AuthRepository {
       AppLogger.auth('UserEntity 생성 시작');
       final newUser = UserEntity(
         userId: firebaseUser.uid,
-        nickname: nickname,
+        nickname: nickname.trim(), // 공백 제거
         email: email,
         mainParishId: mainParishId,
         baptismalName: baptismalName,
@@ -530,6 +544,27 @@ class AuthRepositoryImpl implements AuthRepository {
 
       final currentUserModel = UserModel.fromFirestore(userDoc);
       
+      // 닉네임 변경 시 중복 체크
+      String? finalNickname = nickname ?? currentUserModel.nickname;
+      if (nickname != null && nickname.trim() != currentUserModel.nickname) {
+        AppLogger.auth('닉네임 변경 시도: ${currentUserModel.nickname} -> ${nickname.trim()}');
+        final nicknameCheck = await checkNicknameAvailable(
+          nickname: nickname,
+          excludeUserId: firebaseUser.uid,
+        );
+        final isAvailable = nicknameCheck.fold(
+          (failure) => false,
+          (available) => available,
+        );
+        
+        if (!isAvailable) {
+          AppLogger.auth('닉네임 중복됨: $nickname');
+          return const Left(AuthFailure(message: 'このニックネームは既に使用されています。'));
+        }
+        finalNickname = nickname.trim();
+        AppLogger.auth('닉네임 사용 가능: $finalNickname');
+      }
+      
       // 세례명 업데이트: null이 아니고 비어있지 않을 때만 업데이트
       // 기존 값이 없을 때만 설정 가능하거나, 확인 모달에서 yes를 눌렀을 때만 변경 가능
       String? finalBaptismalName;
@@ -550,7 +585,7 @@ class AuthRepositoryImpl implements AuthRepository {
       }
       
       final updatedUser = currentUserModel.copyWith(
-        nickname: nickname ?? currentUserModel.nickname,
+        nickname: finalNickname,
         mainParishId: mainParishId ?? currentUserModel.mainParishId,
         preferredLanguages:
             preferredLanguages ?? currentUserModel.preferredLanguages,
@@ -655,13 +690,14 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, UserEntity?>> searchUser({
     String? email,
     String? userId,
+    String? nickname,
   }) async {
     try {
-      AppLogger.auth('searchUser 호출: email=$email, userId=$userId');
+      AppLogger.auth('searchUser 호출: email=$email, userId=$userId, nickname=$nickname');
       
-      if (email == null && userId == null) {
+      if (email == null && userId == null && nickname == null) {
         AppLogger.auth('검색 파라미터가 없음');
-        return const Left(AuthFailure(message: 'メールアドレスまたはユーザーIDを入力してください。'));
+        return const Left(AuthFailure(message: 'メールアドレス、ユーザーID、またはニックネームを入力してください。'));
       }
 
       if (userId != null) {
@@ -679,7 +715,7 @@ class AuthRepositoryImpl implements AuthRepository {
         final userEntity = userModel.toEntity();
         AppLogger.auth('사용자 검색 성공: ${userEntity.userId}, ${userEntity.email}');
         return Right(userEntity);
-      } else {
+      } else if (email != null) {
         // email로 검색
         AppLogger.auth('email로 검색: $email');
         final querySnapshot = await _firestore
@@ -700,7 +736,30 @@ class AuthRepositoryImpl implements AuthRepository {
         final userEntity = userModel.toEntity();
         AppLogger.auth('사용자 검색 성공: ${userEntity.userId}, ${userEntity.email}');
         return Right(userEntity);
+      } else if (nickname != null) {
+        // nickname으로 검색 (정확히 일치)
+        AppLogger.auth('nickname으로 검색: $nickname');
+        final querySnapshot = await _firestore
+            .collection('users')
+            .where('nickname', isEqualTo: nickname.trim())
+            .limit(1)
+            .get();
+
+        AppLogger.auth('검색 결과 문서 수: ${querySnapshot.docs.length}');
+
+        if (querySnapshot.docs.isEmpty) {
+          AppLogger.auth('사용자를 찾을 수 없음 (nickname: $nickname)');
+          return const Right(null);
+        }
+
+        final userDoc = querySnapshot.docs.first;
+        final userModel = UserModel.fromFirestore(userDoc);
+        final userEntity = userModel.toEntity();
+        AppLogger.auth('사용자 검색 성공: ${userEntity.userId}, ${userEntity.nickname}');
+        return Right(userEntity);
       }
+
+      return const Right(null);
     } on FirebaseException catch (e, stackTrace) {
       AppLogger.error('Firebase 에러 발생: ${e.code}, ${e.message}', e, stackTrace);
       return Left(
@@ -708,6 +767,52 @@ class AuthRepositoryImpl implements AuthRepository {
       );
     } catch (e, stackTrace) {
       AppLogger.error('검색 에러 발생: $e', e, stackTrace);
+      return Left(UnknownFailure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> checkNicknameAvailable({
+    required String nickname,
+    String? excludeUserId,
+  }) async {
+    try {
+      AppLogger.auth('닉네임 중복 체크: $nickname (제외 userId: $excludeUserId)');
+      
+      final trimmedNickname = nickname.trim();
+      if (trimmedNickname.isEmpty) {
+        return const Left(AuthFailure(message: 'ニックネームを入力してください。'));
+      }
+
+      final querySnapshot = await _firestore
+          .collection('users')
+          .where('nickname', isEqualTo: trimmedNickname)
+          .limit(1)
+          .get();
+
+      if (querySnapshot.docs.isEmpty) {
+        AppLogger.auth('닉네임 사용 가능: $trimmedNickname');
+        return const Right(true);
+      }
+
+      // excludeUserId가 있으면 해당 사용자는 제외
+      if (excludeUserId != null) {
+        final foundUserId = querySnapshot.docs.first.id;
+        if (foundUserId == excludeUserId) {
+          AppLogger.auth('닉네임 사용 가능 (현재 사용자): $trimmedNickname');
+          return const Right(true);
+        }
+      }
+
+      AppLogger.auth('닉네임 중복됨: $trimmedNickname');
+      return const Right(false);
+    } on FirebaseException catch (e, stackTrace) {
+      AppLogger.error('Firebase 에러 발생: ${e.code}, ${e.message}', e, stackTrace);
+      return Left(
+        FirebaseFailure(message: e.message ?? 'Firebaseエラー', code: e.code),
+      );
+    } catch (e, stackTrace) {
+      AppLogger.error('닉네임 중복 체크 에러: $e', e, stackTrace);
       return Left(UnknownFailure(message: e.toString()));
     }
   }
