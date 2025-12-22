@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/services/logger_service.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../data/models/app_user.dart';
 import '../../data/models/notification.dart' as models;
 import '../../data/models/post.dart';
@@ -17,6 +18,7 @@ class PostCommentSubmitter {
     required Post post,
     required AppUser currentUser,
     required String content,
+    required AppLocalizations l10n,
     List<String> imageUrls = const [],
     List<String> pdfUrls = const [],
   }) async {
@@ -49,7 +51,7 @@ class PostCommentSubmitter {
           notificationId: '',
           userId: post.authorId,
           type: 'comment',
-          title: '${currentUser.displayName}さんがあなたの投稿にコメントしました',
+          title: l10n.community.commentOnYourPost(currentUser.displayName),
           body: content.length > 50
               ? '${content.substring(0, 50)}...'
               : content,
@@ -125,7 +127,7 @@ class PostCommentSubmitter {
               notificationId: '',
               userId: mentionedUser.uid,
               type: 'mention',
-              title: '${currentUser.displayName}さんがあなたをメンションしました',
+              title: l10n.community.mentionOnYourPost(currentUser.displayName),
               body: content.length > 50
                   ? '${content.substring(0, 50)}...'
                   : content,

@@ -40,6 +40,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   String? _godparentId;
   Map<String, UserEntity> _godchildrenMap = {}; // userId -> UserEntity
   UserEntity? _godparent;
+  String? _profileImageUrl; // 새로 업로드한 프로필 이미지 URL
 
   @override
   void initState() {
@@ -180,7 +181,15 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            ProfileImagePicker(primaryColor: primaryColor),
+            ProfileImagePicker(
+              primaryColor: primaryColor,
+              previewImageUrl: _profileImageUrl,
+              onImageSelected: (imageUrl) {
+                setState(() {
+                  _profileImageUrl = imageUrl;
+                });
+              },
+            ),
             const SizedBox(height: 32),
             ProfileBasicInfoSection(
               nicknameController: _nicknameController,
@@ -513,6 +522,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
       final result = await repository.updateProfile(
         nickname: _nicknameController.text.trim(),
         mainParishId: _selectedParishId,
+        profileImageUrl: _profileImageUrl,
         feastDayId: feastDayId,
         baptismalName: baptismalName,
         baptismDate: _baptismDate,

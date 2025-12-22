@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../data/providers/community_repository_providers.dart';
 import '../../data/models/app_user.dart';
@@ -121,6 +122,7 @@ final postFormNotifierProvider = StateNotifierProvider.autoDispose
       final postRepo = ref.watch(postRepositoryProvider);
       final userRepo = ref.watch(userRepositoryProvider);
       final notificationRepo = ref.watch(notificationRepositoryProvider);
+      final l10n = ref.watch(appLocalizationsSyncProvider);
       return PostFormNotifier(
         postRepository: postRepo,
         userRepository: userRepo,
@@ -128,6 +130,7 @@ final postFormNotifierProvider = StateNotifierProvider.autoDispose
         currentUser: params.currentUser,
         initialPost: params.initialPost,
         parishId: params.parishId,
+        l10n: l10n,
       );
     });
 

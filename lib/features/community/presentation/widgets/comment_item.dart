@@ -9,6 +9,7 @@ import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../core/utils/mention_parser.dart';
 import '../providers/community_presentation_providers.dart';
+import '../../../chat/presentation/providers/friend_providers.dart';
 import 'report_dialog.dart';
 
 /// 댓글 아이템 위젯
@@ -43,20 +44,56 @@ class CommentItem extends ConsumerWidget {
     final parts = MentionParser.parseText(content);
     final currentUser = ref.watch(currentUserProvider);
     final isAuthor = currentUser != null && currentUser.userId == authorId;
+    // 실시간 업데이트를 위해 StreamProvider 사용
+    final userAsync = ref.watch(userByIdStreamProvider(authorId));
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 16,
-            backgroundColor: Colors.grey.shade200,
-            child: Text(
-              author[0],
-              style: TextStyle(
-                color: Colors.grey.shade600,
-                fontWeight: FontWeight.bold,
+          userAsync.when(
+            data: (user) {
+              return CircleAvatar(
+                key: ValueKey(
+                  '${user?.userId}-${user?.profileImageUrl ?? 'no-image'}',
+                ),
+                radius: 16,
+                backgroundColor: Colors.grey.shade200,
+                backgroundImage: user?.profileImageUrl != null
+                    ? CachedNetworkImageProvider(user!.profileImageUrl!)
+                    : null,
+                child: user?.profileImageUrl == null
+                    ? Text(
+                        author[0],
+                        style: TextStyle(
+                          color: Colors.grey.shade600,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : null,
+              );
+            },
+            loading: () => CircleAvatar(
+              radius: 16,
+              backgroundColor: Colors.grey.shade200,
+              child: Text(
+                author[0],
+                style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            error: (_, __) => CircleAvatar(
+              radius: 16,
+              backgroundColor: Colors.grey.shade200,
+              child: Text(
+                author[0],
+                style: TextStyle(
+                  color: Colors.grey.shade600,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

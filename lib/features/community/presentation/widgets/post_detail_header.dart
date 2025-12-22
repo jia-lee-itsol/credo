@@ -47,6 +47,7 @@ class PostDetailHeader extends ConsumerWidget {
         // 작성자 & 시간
         PostDetailAuthorInfo(
           authorName: post.authorName,
+          authorId: post.authorId,
           createdAt: post.createdAt,
           primaryColor: primaryColor,
         ),

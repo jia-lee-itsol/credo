@@ -229,6 +229,7 @@ class _PostListScreenState extends ConsumerState<PostListScreen> {
                         title: post.title,
                         content: post.content,
                         author: post.author,
+                        authorId: post.authorId ?? '',
                         createdAt: post.createdAt,
                         likeCount: post.likeCount,
                         commentCount: post.commentCount,

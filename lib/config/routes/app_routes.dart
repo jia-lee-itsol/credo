@@ -27,6 +27,16 @@ class AppRoutes {
   static const String languageSettings = '/my-page/language-settings';
   static const String notificationSettings = '/my-page/notification-settings';
 
+  // 채팅
+  static const String chatList = '/chat';
+  static const String newChat = '/chat/new';
+  static String chatPath(String conversationId) => '/chat/$conversationId';
+  static String chatInfoPath(String conversationId) => '/chat/$conversationId/info';
+
+  // 친구
+  static const String friendList = '/friends';
+  static String userProfilePath(String userId) => '/user/$userId';
+
   /// 파라미터가 포함된 경로 생성
   static String parishDetailPath(String parishId) => '/parish/$parishId';
   static String parishMapPath(String parishId) => '/parish/$parishId/map';

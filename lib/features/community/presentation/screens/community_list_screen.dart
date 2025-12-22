@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/routes/app_routes.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../providers/community_presentation_providers.dart';
 import 'post_edit_screen.dart';
 
@@ -13,6 +14,7 @@ class CommunityListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final postsAsync = ref.watch(communityPostsProvider(parishId));
     final currentAppUserAsync = ref.watch(currentAppUserProvider);
 
@@ -33,10 +35,10 @@ class CommunityListScreen extends ConsumerWidget {
                 child: ListTile(
                   title: Text(post.title),
                   trailing: post.authorIsVerified
-                      ? const Chip(
-                          label: Text('公認'),
-                          labelStyle: TextStyle(fontSize: 12),
-                          padding: EdgeInsets.symmetric(
+                      ? Chip(
+                          label: Text(l10n.community.verified),
+                          labelStyle: const TextStyle(fontSize: 12),
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 8,
                             vertical: 4,
                           ),

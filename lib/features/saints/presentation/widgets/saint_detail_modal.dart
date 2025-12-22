@@ -90,33 +90,36 @@ class _SaintDetailModalState extends ConsumerState<SaintDetailModal> {
                     child: imageUrlAsync.when(
                       data: (imageUrl) {
                         if (imageUrl != null && imageUrl.isNotEmpty) {
-                          return Container(
-                            width: 150,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: theme.colorScheme.primary.withValues(alpha: 0.1),
-                              border: Border.all(
-                                color: theme.colorScheme.primary.withValues(alpha: 0.3),
-                                width: 2,
+                          return GestureDetector(
+                            onTap: () => _showFullScreenImage(context, imageUrl),
+                            child: Container(
+                              width: 150,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                                border: Border.all(
+                                  color: theme.colorScheme.primary.withValues(alpha: 0.3),
+                                  width: 2,
+                                ),
                               ),
-                            ),
-                            child: ClipOval(
-                              child: CachedNetworkImage(
-                                imageUrl: imageUrl,
-                                fit: BoxFit.cover,
-                                placeholder: (context, url) => Container(
-                                  color: theme.colorScheme.primary.withValues(alpha: 0.1),
-                                  child: Center(
-                                    child: CircularProgressIndicator(
-                                      color: theme.colorScheme.primary,
+                              child: ClipOval(
+                                child: CachedNetworkImage(
+                                  imageUrl: imageUrl,
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) => Container(
+                                    color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                                    child: Center(
+                                      child: CircularProgressIndicator(
+                                        color: theme.colorScheme.primary,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                errorWidget: (context, url, error) => Icon(
-                                  Icons.account_circle,
-                                  size: 100,
-                                  color: theme.colorScheme.primary.withValues(alpha: 0.5),
+                                  errorWidget: (context, url, error) => Icon(
+                                    Icons.account_circle,
+                                    size: 100,
+                                    color: theme.colorScheme.primary.withValues(alpha: 0.5),
+                                  ),
                                 ),
                               ),
                             ),
@@ -343,6 +346,103 @@ class _SaintDetailModalState extends ConsumerState<SaintDetailModal> {
       style: theme.textTheme.titleMedium?.copyWith(
         fontWeight: FontWeight.bold,
         color: theme.colorScheme.primary,
+      ),
+    );
+  }
+
+  /// 이미지 전체 화면 보기
+  void _showFullScreenImage(BuildContext context, String imageUrl) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        barrierDismissible: true,
+        barrierColor: Colors.black87,
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return _FullScreenImageViewer(
+            imageUrl: imageUrl,
+            animation: animation,
+          );
+        },
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+}
+
+/// 전체 화면 이미지 뷰어 위젯
+class _FullScreenImageViewer extends StatelessWidget {
+  final String imageUrl;
+  final Animation<double> animation;
+
+  const _FullScreenImageViewer({
+    required this.imageUrl,
+    required this.animation,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pop(),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Stack(
+          children: [
+            // 배경 (탭하면 닫힘)
+            Positioned.fill(
+              child: Container(color: Colors.transparent),
+            ),
+            // 이미지
+            Center(
+              child: GestureDetector(
+                onTap: () {}, // 이미지 탭 시 닫히지 않도록
+                child: Hero(
+                  tag: 'saint_modal_image_$imageUrl',
+                  child: InteractiveViewer(
+                    minScale: 0.5,
+                    maxScale: 4.0,
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      fit: BoxFit.contain,
+                      placeholder: (context, url) => const Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      ),
+                      errorWidget: (context, url, error) => const Icon(
+                        Icons.error_outline,
+                        color: Colors.white,
+                        size: 48,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // 닫기 버튼
+            Positioned(
+              top: MediaQuery.of(context).padding.top + 16,
+              right: 16,
+              child: IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.black54,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Icon(
+                    Icons.close,
+                    color: Colors.white,
+                    size: 24,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

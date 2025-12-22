@@ -152,11 +152,13 @@ class PostDetailCommentInputState
       }
 
       AppLogger.community('PostCommentSubmitter 생성 및 submitComment 호출');
+      final l10n = ref.read(appLocalizationsSyncProvider);
       final submitter = PostCommentSubmitter(ref: ref);
       final success = await submitter.submitComment(
         post: widget.post,
         currentUser: currentUser,
         content: content,
+        l10n: l10n,
         imageUrls: uploadedImageUrls,
         pdfUrls: uploadedPdfUrls,
       );

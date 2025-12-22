@@ -322,8 +322,8 @@
       "searchOtherParishes": "Tìm cộng đồng giáo xứ khác",
       "todayMass": "Lời Chúa hôm nay",
       "todayBibleReadingAndPrayer": "Đọc Kinh Thánh và cầu nguyện hôm nay",
-      "recentNotices": "Thông báo gần đây",
-      "noNotices": "Không có thông báo"
+      "recentNotifications": "Thông báo gần đây",
+      "noNotifications": "Không có thông báo"
     },
     "notificationLabels": {
       "mention": "Đề cập",

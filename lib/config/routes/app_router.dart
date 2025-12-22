@@ -21,6 +21,12 @@ import '../../features/community/presentation/screens/community_home_screen.dart
 import '../../features/community/presentation/screens/post_list_screen.dart';
 import '../../features/community/presentation/screens/post_detail_screen.dart';
 import '../../features/community/presentation/screens/post_create_screen.dart';
+import '../../features/chat/presentation/screens/chat_list_screen.dart';
+import '../../features/chat/presentation/screens/chat_screen.dart';
+import '../../features/chat/presentation/screens/chat_info_screen.dart';
+import '../../features/chat/presentation/screens/new_chat_screen.dart';
+import '../../features/chat/presentation/screens/friend_list_screen.dart';
+import '../../features/chat/presentation/screens/user_profile_screen.dart';
 import '../../features/profile/presentation/screens/my_page_screen.dart';
 import '../../features/profile/presentation/screens/edit_profile_screen.dart';
 import '../../features/profile/presentation/screens/favorite_parishes_screen.dart';
@@ -213,6 +219,55 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
         ],
+      ),
+
+      // 채팅 라우트
+      GoRoute(
+        path: AppRoutes.chatList,
+        name: 'chatList',
+        builder: (context, state) => const ChatListScreen(),
+        routes: [
+          GoRoute(
+            path: 'new',
+            name: 'newChat',
+            builder: (context, state) => const NewChatScreen(),
+          ),
+          GoRoute(
+            path: ':conversationId',
+            name: 'chat',
+            builder: (context, state) {
+              final conversationId = state.pathParameters['conversationId']!;
+              return ChatScreen(conversationId: conversationId);
+            },
+            routes: [
+              GoRoute(
+                path: 'info',
+                name: 'chatInfo',
+                builder: (context, state) {
+                  final conversationId = state.pathParameters['conversationId']!;
+                  return ChatInfoScreen(conversationId: conversationId);
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+
+      // 친구 라우트
+      GoRoute(
+        path: AppRoutes.friendList,
+        name: 'friendList',
+        builder: (context, state) => const FriendListScreen(),
+      ),
+
+      // 유저 프로필 라우트
+      GoRoute(
+        path: '/user/:userId',
+        name: 'userProfile',
+        builder: (context, state) {
+          final userId = state.pathParameters['userId']!;
+          return UserProfileScreen(userId: userId);
+        },
       ),
 
       // 마이페이지 라우트 (셸 외부 - 하단 네비게이션 포함)

@@ -322,8 +322,8 @@
       "searchOtherParishes": "Buscar outras comunidades paroquiais",
       "todayMass": "Palavra de hoje",
       "todayBibleReadingAndPrayer": "Leituras bíblicas e orações de hoje",
-      "recentNotices": "Avisos recentes",
-      "noNotices": "Não há avisos"
+      "recentNotifications": "Notificações recentes",
+      "noNotifications": "Não há notificações"
     },
     "notificationLabels": {
       "mention": "Menção",

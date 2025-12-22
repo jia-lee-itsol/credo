@@ -7,18 +7,32 @@
 
 ### 1. 핵심 기능
 - ✅ **1:1 채팅**: 두 사용자 간 개인 메시지
-- ✅ **그룹 채팅**: 여러 사용자와의 그룹 대화 (선택사항)
+- ✅ **그룹 채팅**: 여러 사용자와의 그룹 대화
 - ✅ **실시간 메시지 동기화**: Firestore Stream을 통한 실시간 업데이트
 - ✅ **읽음 상태 표시**: 메시지 읽음/안 읽음 상태 표시
-- ✅ **이미지 전송**: 채팅에서 이미지 공유
-- ✅ **푸시 알림**: 새 메시지 수신 시 알림
+- ✅ **이미지 전송**: 채팅에서 이미지 공유 (갤러리/카메라)
+- ✅ **푸시 알림**: 새 메시지 수신 시 FCM 알림
 
 ### 2. UI/UX 기능
 - ✅ **채팅 목록 화면**: 대화 목록 (최신 메시지 미리보기)
 - ✅ **채팅 화면**: 메시지 입력 및 표시
 - ✅ **사용자 검색**: 채팅 시작을 위한 사용자 검색
 - ✅ **읽음 표시**: 메시지 읽음 상태 표시
-- ✅ **타이핑 인디케이터**: 상대방이 입력 중임을 표시 (선택사항)
+- ✅ **타이핑 인디케이터**: 상대방이 입력 중임을 표시
+
+### 3. 친구 시스템 ✅
+- ✅ **친구 추가/삭제**: 친구 관계 관리
+- ✅ **친구 차단**: 특정 사용자 차단
+- ✅ **QR 코드 친구 추가**: QR 스캔으로 친구 추가
+- ✅ **친구에게만 메시지 전송**: 친구 관계가 있는 사용자만 메시지 전송 가능
+- ✅ **친구 검색**: 닉네임, 아이디, 이메일로 친구 검색
+
+### 4. 채팅방 관리 ✅
+- ✅ **채팅방 정보 화면**: 참여자 목록 및 채팅방 정보 표시
+- ✅ **멤버 초대**: 1:1 채팅에서 멤버 초대로 그룹 채팅 변환
+- ✅ **채팅방 나가기**: 시스템 메시지와 함께 채팅방 퇴장
+- ✅ **그룹 이름 변경**: 방장만 그룹 이름 변경 가능
+- ✅ **시스템 메시지**: 입장/퇴장/초대 등 시스템 이벤트 표시
 
 ## 데이터베이스 구조
 
@@ -47,38 +61,37 @@
 }
 ```
 
-#### 2. `messages/{messageId}`
-개별 메시지를 저장합니다.
+#### 2. `conversations/{conversationId}/messages/{messageId}`
+개별 메시지를 저장합니다 (서브컬렉션).
 
 ```typescript
 {
   messageId: string;                // 문서 ID
   conversationId: string;           // 대화방 ID
-  senderId: string;                 // 발신자 userId
+  senderId: string;                 // 발신자 userId ("system" for system messages)
   content: string;                  // 메시지 내용
+  type: "text" | "image" | "system"; // 메시지 타입
   imageUrls?: string[];             // 이미지 URL 배열
   readBy: {                         // 읽음 상태
     [userId: string]: Timestamp;    // userId별 읽은 시간
   };
   createdAt: Timestamp;
   updatedAt?: Timestamp;
-  // 삭제된 메시지
-  deletedAt?: Timestamp;
-  deletedBy?: string;
 }
 ```
 
-#### 3. `conversationParticipants/{participantId}`
-사용자별 대화방 목록을 빠르게 조회하기 위한 인덱스 컬렉션 (선택사항)
+#### 3. `friends/{friendId}`
+친구 관계를 저장합니다.
 
 ```typescript
 {
-  participantId: string;             // "{userId}_{conversationId}"
-  userId: string;
-  conversationId: string;
-  lastReadAt?: Timestamp;          // 마지막으로 읽은 시간
-  unreadCount: number;             // 읽지 않은 메시지 수
+  odId: string;                     // 문서 ID
+  userId: string;                   // 현재 사용자
+  friendId: string;                 // 상대방 사용자
+  status: "none" | "pending" | "accepted" | "blocked";
   createdAt: Timestamp;
+  updatedAt?: Timestamp;
+  nickname?: string;                // 친구에게 설정한 별명
 }
 ```
 
@@ -87,15 +100,16 @@
 ```javascript
 // Conversations Collection
 match /conversations/{conversationId} {
-  // 읽기: 참여자만 읽기 가능
-  allow read: if request.auth != null 
+  // 읽기: 인증된 사용자 (get은 모두 허용, list는 참여자만)
+  allow get: if request.auth != null;
+  allow list: if request.auth != null 
     && request.auth.uid in resource.data.participants;
   
   // 생성: 자신을 참여자로 포함해야 함
   allow create: if request.auth != null 
     && request.auth.uid in request.resource.data.participants;
   
-  // 수정: 참여자만 수정 가능 (lastMessage, lastMessageAt 등)
+  // 수정: 참여자만 수정 가능
   allow update: if request.auth != null 
     && request.auth.uid in resource.data.participants;
   
@@ -105,14 +119,12 @@ match /conversations/{conversationId} {
   
   // Messages 서브컬렉션
   match /messages/{messageId} {
-    // 읽기: 대화방 참여자만 읽기 가능
-    allow read: if request.auth != null 
-      && request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participants;
+    // 읽기: 인증된 사용자
+    allow read: if request.auth != null;
     
-    // 생성: 대화방 참여자만 메시지 전송 가능
+    // 생성: 발신자 ID가 본인이어야 함
     allow create: if request.auth != null 
-      && request.auth.uid == request.resource.data.senderId
-      && request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participants;
+      && request.auth.uid == request.resource.data.senderId;
     
     // 수정: 발신자만 수정 가능 (readBy 업데이트 포함)
     allow update: if request.auth != null 
@@ -124,6 +136,16 @@ match /conversations/{conversationId} {
       && resource.data.senderId == request.auth.uid;
   }
 }
+
+// Friends Collection
+match /friends/{friendId} {
+  allow read: if request.auth != null 
+    && (resource.data.userId == request.auth.uid || resource.data.friendId == request.auth.uid);
+  allow create: if request.auth != null 
+    && request.resource.data.userId == request.auth.uid;
+  allow update, delete: if request.auth != null 
+    && resource.data.userId == request.auth.uid;
+}
 ```
 
 ## 아키텍처 구조
@@ -133,25 +155,17 @@ match /conversations/{conversationId} {
 #### Entities
 ```
 lib/features/chat/domain/entities/
-  ├── conversation_entity.dart      # 대화방 엔티티
-  ├── message_entity.dart           # 메시지 엔티티
-  └── chat_user_entity.dart         # 채팅 사용자 정보 엔티티
+  ├── conversation_entity.dart      # 대화방 엔티티 ✅
+  ├── message_entity.dart           # 메시지 엔티티 ✅
+  ├── chat_user_entity.dart         # 채팅 사용자 정보 엔티티 ✅
+  └── friend_entity.dart            # 친구 관계 엔티티 ✅
 ```
 
 #### Repositories
 ```
 lib/features/chat/domain/repositories/
-  └── chat_repository.dart          # 채팅 Repository 인터페이스
-```
-
-#### Use Cases
-```
-lib/features/chat/domain/usecases/
-  ├── create_conversation_usecase.dart
-  ├── send_message_usecase.dart
-  ├── watch_conversations_usecase.dart
-  ├── watch_messages_usecase.dart
-  └── mark_message_read_usecase.dart
+  ├── chat_repository.dart          # 채팅 Repository 인터페이스 ✅
+  └── friend_repository.dart        # 친구 Repository 인터페이스 ✅
 ```
 
 ### Data Layer
@@ -159,15 +173,23 @@ lib/features/chat/domain/usecases/
 #### Models
 ```
 lib/features/chat/data/models/
-  ├── conversation_model.dart        # Freezed 모델
-  ├── message_model.dart            # Freezed 모델
-  └── chat_user_model.dart          # Freezed 모델
+  ├── conversation_model.dart        # Freezed 모델 ✅
+  ├── message_model.dart            # Freezed 모델 ✅
+  ├── chat_user_model.dart          # Freezed 모델 ✅
+  └── friend_model.dart             # Freezed 모델 ✅
 ```
 
 #### Repositories
 ```
 lib/features/chat/data/repositories/
-  └── firestore_chat_repository.dart # Firestore 구현
+  ├── firestore_chat_repository.dart   # Firestore 구현 ✅
+  └── firestore_friend_repository.dart # Firestore 구현 ✅
+```
+
+#### Providers
+```
+lib/features/chat/data/providers/
+  └── chat_repository_providers.dart   # Repository Providers ✅
 ```
 
 ### Presentation Layer
@@ -175,55 +197,66 @@ lib/features/chat/data/repositories/
 #### Screens
 ```
 lib/features/chat/presentation/screens/
-  ├── chat_list_screen.dart          # 채팅 목록
-  ├── chat_screen.dart               # 채팅 화면
-  └── new_chat_screen.dart           # 새 채팅 시작
+  ├── chat_list_screen.dart          # 채팅 목록 ✅
+  ├── chat_screen.dart               # 채팅 화면 ✅
+  ├── chat_info_screen.dart          # 채팅방 정보 ✅
+  ├── new_chat_screen.dart           # 새 채팅 시작 ✅
+  ├── friend_list_screen.dart        # 친구 목록 ✅
+  └── user_profile_screen.dart       # 유저 프로필 ✅
 ```
 
 #### Widgets
 ```
 lib/features/chat/presentation/widgets/
-  ├── chat_list_item.dart            # 채팅 목록 아이템
-  ├── message_bubble.dart            # 메시지 버블
-  ├── message_input.dart             # 메시지 입력 필드
-  └── chat_user_search.dart          # 사용자 검색
+  ├── chat_list_item.dart            # 채팅 목록 아이템 ✅
+  ├── message_bubble.dart            # 메시지 버블 ✅
+  ├── message_input.dart             # 메시지 입력 필드 ✅
+  └── chat_user_search.dart          # 사용자 검색 ✅
 ```
 
 #### Providers
 ```
 lib/features/chat/presentation/providers/
-  ├── chat_providers.dart            # Riverpod providers
-  └── chat_notifiers.dart            # State notifiers
+  ├── chat_providers.dart            # 채팅 관련 Providers ✅
+  └── friend_providers.dart          # 친구 관련 Providers ✅
 ```
 
-## 구현 단계
+## 구현 상태
 
-### Phase 1: 기본 인프라 (1주)
-- [ ] Firestore Collections 구조 설계 및 생성
-- [ ] Security Rules 작성 및 배포
-- [ ] Domain Layer 구현 (Entities, Repository 인터페이스)
-- [ ] Data Layer 구현 (Models, Firestore Repository)
+### Phase 1: 기본 인프라 ✅
+- [x] Firestore Collections 구조 설계 및 생성
+- [x] Security Rules 작성 및 배포
+- [x] Domain Layer 구현 (Entities, Repository 인터페이스)
+- [x] Data Layer 구현 (Models, Firestore Repository)
 
-### Phase 2: 1:1 채팅 기능 (2주)
-- [ ] 채팅 목록 화면 구현
-- [ ] 채팅 화면 구현 (메시지 표시, 입력)
-- [ ] 실시간 메시지 동기화
-- [ ] 사용자 검색 및 새 채팅 시작 기능
+### Phase 2: 1:1 채팅 기능 ✅
+- [x] 채팅 목록 화면 구현
+- [x] 채팅 화면 구현 (메시지 표시, 입력)
+- [x] 실시간 메시지 동기화
+- [x] 사용자 검색 및 새 채팅 시작 기능
 
-### Phase 3: 고급 기능 (1주)
-- [ ] 읽음 상태 표시
-- [ ] 이미지 전송 기능
-- [ ] 메시지 삭제 기능
-- [ ] 읽지 않은 메시지 수 표시
+### Phase 3: 고급 기능 ✅
+- [x] 읽음 상태 표시
+- [x] 이미지 전송 기능 (갤러리/카메라 선택)
+- [x] 메시지 삭제 기능
+- [x] 읽지 않은 메시지 수 표시
+- [x] 이미지 전체 화면 보기
 
-### Phase 4: 푸시 알림 (1주)
-- [ ] Cloud Functions로 새 메시지 알림 전송
-- [ ] 채팅 알림 설정 (앱 내 설정 연동)
+### Phase 4: 푸시 알림 ✅
+- [x] Cloud Functions로 새 메시지 알림 전송
+- [x] 채팅 알림 설정 (앱 내 설정 연동)
 
-### Phase 5: 그룹 채팅 (선택사항, 2주)
-- [ ] 그룹 채팅 생성
-- [ ] 그룹 멤버 관리
-- [ ] 그룹 정보 수정
+### Phase 5: 그룹 채팅 ✅
+- [x] 그룹 채팅 생성 (1:1에서 멤버 초대로 변환)
+- [x] 그룹 멤버 관리 (초대, 나가기)
+- [x] 그룹 정보 수정 (이름 변경)
+- [x] 시스템 메시지 (입장/퇴장/초대)
+
+### Phase 6: 친구 시스템 ✅
+- [x] 친구 추가/삭제/차단
+- [x] QR 코드로 친구 추가
+- [x] 친구 검색 (닉네임, 아이디, 이메일)
+- [x] 친구에게만 메시지 전송 가능
 
 ## 주요 구현 포인트
 
@@ -252,83 +285,137 @@ Stream<List<Message>> watchMessages(String conversationId) {
 }
 ```
 
-### 3. 읽음 상태 업데이트
+### 3. 멤버 초대 (그룹 채팅 변환)
 ```dart
-Future<void> markAsRead(String messageId, String userId) async {
-  await _firestore
-    .collection('messages')
-    .doc(messageId)
-    .update({
-      'readBy.$userId': FieldValue.serverTimestamp(),
-      'updatedAt': FieldValue.serverTimestamp(),
-    });
+Future<void> addMembersToConversation({
+  required String conversationId,
+  required List<String> memberIds,
+  required String addedByNickname,
+}) async {
+  // 1. 현재 참여자 가져오기
+  // 2. 새 멤버 추가
+  // 3. 1:1 → 그룹으로 타입 변경 (3명 이상)
+  // 4. 시스템 메시지 전송
 }
 ```
 
-### 4. 푸시 알림 (Cloud Functions)
-```typescript
-// functions/src/index.ts
-export const onMessageCreated = functions.firestore
-  .document('conversations/{conversationId}/messages/{messageId}')
-  .onCreate(async (snap, context) => {
-    const message = snap.data();
-    const conversationId = context.params.conversationId;
-    
-    // 대화방 정보 가져오기
-    const conversation = await admin.firestore()
-      .collection('conversations')
-      .doc(conversationId)
-      .get();
-    
-    const participants = conversation.data()?.participants || [];
-    const senderId = message.senderId;
-    
-    // 발신자를 제외한 모든 참여자에게 알림 전송
-    const recipients = participants.filter((id: string) => id !== senderId);
-    
-    // 각 수신자에게 알림 전송
-    for (const recipientId of recipients) {
-      await sendChatNotification(recipientId, message, conversation.data());
-    }
-  });
+### 4. 채팅방 나가기
+```dart
+Future<void> leaveConversation({
+  required String conversationId,
+  required String userId,
+  required String userNickname,
+}) async {
+  // 1. 참여자 목록에서 제거
+  // 2. 시스템 메시지 전송 ("{닉네임}さんがチャットを退出しました")
+  // 3. 마지막 참여자면 대화방 삭제
+}
 ```
 
-## UI/UX 디자인 제안
+### 5. 시스템 메시지 타입
+```dart
+enum MessageType {
+  text,    // 일반 텍스트 메시지
+  image,   // 이미지 메시지
+  system,  // 시스템 메시지 (입장/퇴장/초대 등)
+}
+```
 
-### 채팅 목록 화면
-- 앱 하단 네비게이션에 "채팅" 탭 추가
-- 각 채팅 항목: 상대방 프로필 이미지, 이름, 마지막 메시지 미리보기, 시간, 읽지 않은 메시지 수 배지
-- 최신 메시지가 있는 채팅이 위로 정렬
+### 6. 이미지 전송
+```dart
+Future<void> _pickAndSendImage() async {
+  // 1. 이미지 소스 선택 (갤러리/카메라)
+  final source = await showModalBottomSheet<ImageSource>(...);
+  
+  // 2. 이미지 선택
+  final pickedFile = await _imagePicker.pickImage(
+    source: source,
+    imageQuality: 70,
+    maxWidth: 1200,
+  );
+  
+  // 3. Firebase Storage 업로드
+  final imageUrl = await _imageUploadService.uploadImage(...);
+  
+  // 4. 메시지 전송
+  await sendMessage(ref, imageUrls: [imageUrl], ...);
+}
+```
 
-### 채팅 화면
-- 상단: 상대방 프로필 정보 (이름, 프로필 이미지)
-- 중간: 메시지 리스트 (자신의 메시지는 오른쪽, 상대방 메시지는 왼쪽)
-- 하단: 메시지 입력 필드 (텍스트 입력, 이미지 첨부 버튼, 전송 버튼)
-- 읽음 표시: 메시지 하단에 "읽음" 표시
+### 7. 타이핑 인디케이터
+```dart
+// Firestore 구조: conversations/{id}/typing/{userId}
+{
+  userId: string;
+  isTyping: boolean;
+  updatedAt: Timestamp;
+}
 
-## 라우팅 추가
+// 3초 타임아웃으로 자동 종료
+// 5초 이내 업데이트만 표시
+```
+
+### 8. 채팅 푸시 알림 (Cloud Functions)
+```typescript
+export const onChatMessageCreated = onDocumentCreated(
+  "conversations/{conversationId}/messages/{messageId}",
+  async (event) => {
+    // 시스템 메시지 제외
+    // 발신자 제외한 모든 참여자에게 알림
+    // 그룹 채팅: "{그룹명} - {발신자}" 형식
+    // 이미지: "📷 사진을 보냈습니다." 표시
+  }
+);
+```
+
+## 라우팅
 
 ```dart
 // app_routes.dart
 static const String chatList = '/chat';
 static String chatPath(String conversationId) => '/chat/$conversationId';
+static String chatInfoPath(String conversationId) => '/chat/$conversationId/info';
 static const String newChat = '/chat/new';
+static const String friendList = '/friends';
+static String userProfilePath(String userId) => '/user/$userId';
 
 // app_router.dart
 GoRoute(
   path: AppRoutes.chatList,
   builder: (context, state) => const ChatListScreen(),
+  routes: [
+    GoRoute(
+      path: 'new',
+      builder: (context, state) => const NewChatScreen(),
+    ),
+    GoRoute(
+      path: ':conversationId',
+      builder: (context, state) {
+        final conversationId = state.pathParameters['conversationId']!;
+        return ChatScreen(conversationId: conversationId);
+      },
+      routes: [
+        GoRoute(
+          path: 'info',
+          builder: (context, state) {
+            final conversationId = state.pathParameters['conversationId']!;
+            return ChatInfoScreen(conversationId: conversationId);
+          },
+        ),
+      ],
+    ),
+  ],
 ),
 GoRoute(
-  path: '/chat/:conversationId',
+  path: AppRoutes.friendList,
+  builder: (context, state) => const FriendListScreen(),
+),
+GoRoute(
+  path: '/user/:userId',
   builder: (context, state) {
-    final conversationId = state.pathParameters['conversationId']!;
-    return ChatScreen(conversationId: conversationId);
+    final userId = state.pathParameters['userId']!;
+    return UserProfileScreen(userId: userId);
   },
-),
-GoRoute(
-  path: AppRoutes.newChat,
-  builder: (context, state) => const NewChatScreen(),
 ),
 ```
 
@@ -354,6 +441,14 @@ GoRoute(
         { "fieldPath": "conversationId", "order": "ASCENDING" },
         { "fieldPath": "createdAt", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "friends",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" }
+      ]
     }
   ]
 }
@@ -374,9 +469,18 @@ GoRoute(
 - 채팅 목록 캐싱
 - 읽음 상태는 배치로 업데이트
 
-## 다음 단계
+## 남은 작업
 
-1. 이 제안서 검토 및 승인
-2. Phase 1부터 순차적으로 구현 시작
-3. 각 Phase 완료 후 테스트 및 피드백 수집
+### 우선순위 높음
+1. [x] ~~이미지 전송 기능 구현~~ ✅
+2. [x] ~~Cloud Functions로 채팅 알림 전송~~ ✅
+3. [x] ~~타이핑 인디케이터~~ ✅
 
+### 우선순위 중간
+1. [x] ~~메시지 검색 기능~~ ✅
+2. [ ] 채팅방 이미지 설정
+
+### 우선순위 낮음
+1. [ ] 메시지 반응 (이모지)
+2. [ ] 메시지 답장
+3. [ ] 메시지 전달

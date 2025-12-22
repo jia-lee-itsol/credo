@@ -6,12 +6,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/app_localizations.dart';
 import '../../../../core/data/services/saint_feast_day_service.dart';
-import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/locale_provider.dart';
 import '../../../../shared/widgets/settings_list_tile.dart';
 import '../../../saints/presentation/providers/saint_feast_day_providers.dart';
 import 'font_scale_settings_tile.dart';
-import 'qr_code_dialog.dart';
 
 /// 고객 서비스 구글 폼 URL
 const String _customerServiceFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdFM9lVAVL2ObVTSi08XdnpOthYpWYSuTEmIeIR7tRWfUfWWA/viewform';
@@ -66,16 +64,6 @@ class MyPageSettingsSection extends ConsumerWidget {
 
     return Column(
       children: [
-        // QR 코드 관련 카드
-        if (isAuthenticated)
-          Card(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: _QrCodeCard(
-              primaryColor: primaryColor,
-              l10n: l10n,
-            ),
-          ),
-
         // 자주 가는 교회
         Card(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -324,42 +312,6 @@ class _ClearCacheTileState extends ConsumerState<_ClearCacheTile> {
             )
           : null,
       onTap: _isClearing ? null : () => _showClearCacheDialog(context, l10n),
-    );
-  }
-}
-
-/// QR 코드 카드 위젯
-class _QrCodeCard extends ConsumerWidget {
-  final Color primaryColor;
-  final AppLocalizations l10n;
-
-  const _QrCodeCard({
-    required this.primaryColor,
-    required this.l10n,
-  });
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentUser = ref.watch(currentUserProvider);
-    return Column(
-      children: [
-        SettingsListTile(
-          icon: Icons.qr_code,
-          title: l10n.profile.shareProfileQR,
-          subtitle: l10n.profile.shareProfileQR,
-          primaryColor: primaryColor,
-          onTap: () {
-            if (currentUser != null) {
-              QrCodeBottomSheet.show(
-                context,
-                userId: currentUser.userId,
-                nickname: currentUser.nickname,
-                primaryColor: primaryColor,
-              );
-            }
-          },
-        ),
-      ],
     );
   }
 }

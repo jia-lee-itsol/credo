@@ -41,6 +41,7 @@ abstract class AuthRepository {
     String? mainParishId,
     List<String>? preferredLanguages,
     List<String>? favoriteParishIds,
+    String? profileImageUrl,
     String? feastDayId,
     String? baptismalName,
     DateTime? baptismDate,

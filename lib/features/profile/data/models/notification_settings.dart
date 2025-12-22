@@ -23,6 +23,9 @@ class NotificationSettings with _$NotificationSettings {
     /// 일일 미사 독서 알림 (선택사항)
     @Default(false) bool dailyMass,
 
+    /// 채팅 메시지 알림
+    @Default(true) bool chatMessages,
+
     /// 조용한 시간 활성화 여부
     @Default(false) bool quietHoursEnabled,
 
@@ -54,6 +57,7 @@ class NotificationSettings with _$NotificationSettings {
       comments: data['comments'] as bool? ?? true,
       likes: data['likes'] as bool? ?? false,
       dailyMass: data['dailyMass'] as bool? ?? false,
+      chatMessages: data['chatMessages'] as bool? ?? true,
       quietHoursEnabled: data['quietHoursEnabled'] as bool? ?? false,
       quietHoursStart: data['quietHoursStart'] as int? ?? 22,
       quietHoursEnd: data['quietHoursEnd'] as int? ?? 7,
@@ -69,6 +73,7 @@ class NotificationSettings with _$NotificationSettings {
       'comments': comments,
       'likes': likes,
       'dailyMass': dailyMass,
+      'chatMessages': chatMessages,
       'quietHoursEnabled': quietHoursEnabled,
       'quietHoursStart': quietHoursStart,
       'quietHoursEnd': quietHoursEnd,

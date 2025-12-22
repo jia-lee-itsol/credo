@@ -205,7 +205,7 @@ class _CommentFilePickerState extends ConsumerState<CommentFilePicker> {
                 final index = entry.key;
                 return Chip(
                   avatar: const Icon(Icons.image, size: 18),
-                  label: Text('画像 ${index + 1}'),
+                  label: Text(ref.watch(appLocalizationsSyncProvider).community.imageNumber(index)),
                   onDeleted: () {
                     final updatedImages = List<File>.from(
                       widget.fileState.selectedImages,

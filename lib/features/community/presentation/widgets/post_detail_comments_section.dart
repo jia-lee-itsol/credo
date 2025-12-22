@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../data/models/post.dart';
 import '../providers/community_presentation_providers.dart';
@@ -20,6 +21,7 @@ class PostDetailCommentsSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final commentsAsync = ref.watch(commentsProvider(post.postId));
 
@@ -29,7 +31,7 @@ class PostDetailCommentsSection extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'コメント (${comments.length})',
+              l10n.community.commentsCount(comments.length),
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -42,7 +44,7 @@ class PostDetailCommentsSection extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(vertical: 24),
                 child: Center(
                   child: Text(
-                    'コメントはありません',
+                    l10n.community.noComments,
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.colorScheme.onSurfaceVariant,
                     ),
@@ -73,7 +75,7 @@ class PostDetailCommentsSection extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'コメント (0)',
+              l10n.community.commentsCount(0),
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -83,7 +85,7 @@ class PostDetailCommentsSection extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(vertical: 24),
               child: Center(
                 child: Text(
-                  'コメントはありません',
+                  l10n.community.noComments,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
                   ),

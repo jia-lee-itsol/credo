@@ -519,6 +519,7 @@ class AuthRepositoryImpl implements AuthRepository {
     String? mainParishId,
     List<String>? preferredLanguages,
     List<String>? favoriteParishIds,
+    String? profileImageUrl,
     String? feastDayId,
     String? baptismalName,
     DateTime? baptismDate,
@@ -591,6 +592,7 @@ class AuthRepositoryImpl implements AuthRepository {
             preferredLanguages ?? currentUserModel.preferredLanguages,
         favoriteParishIds:
             favoriteParishIds ?? currentUserModel.favoriteParishIds,
+        profileImageUrl: profileImageUrl ?? currentUserModel.profileImageUrl,
         feastDayId: feastDayId ?? currentUserModel.feastDayId,
         baptismalName: finalBaptismalName,
         baptismDate: baptismDate ?? currentUserModel.baptismDate,
@@ -609,6 +611,9 @@ class AuthRepositoryImpl implements AuthRepository {
       // Firebase Auth 프로필도 업데이트
       if (nickname != null) {
         await firebaseUser.updateDisplayName(nickname);
+      }
+      if (profileImageUrl != null) {
+        await firebaseUser.updatePhotoURL(profileImageUrl);
       }
 
       return Right(updatedUser.toEntity());

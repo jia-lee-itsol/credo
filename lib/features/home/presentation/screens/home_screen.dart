@@ -211,13 +211,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               SliverToBoxAdapter(
                 child: _buildSectionTitle(
                   context,
-                  l10n.community.home.recentNotices,
+                  l10n.community.home.recentNotifications,
                 ),
               ),
 
-              // 공지사항 리스트
+              // 알림 리스트
               SliverToBoxAdapter(
-                child: _buildRecentNoticesList(
+                child: _buildRecentNotificationsList(
                   context,
                   ref,
                   theme,
@@ -252,8 +252,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  /// 최근 공지사항 리스트 빌드
-  Widget _buildRecentNoticesList(
+  /// 최근 알림 리스트 빌드
+  Widget _buildRecentNotificationsList(
     BuildContext context,
     WidgetRef ref,
     ThemeData theme,
@@ -273,7 +273,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final uniqueParishIds = parishIds.toSet().toList();
 
     if (uniqueParishIds.isEmpty) {
-      return _buildNoticesPlaceholder(context, theme, l10n);
+      return _buildNotificationsPlaceholder(context, theme, l10n);
     }
 
     // 리스트를 쉼표로 구분된 문자열로 변환 (provider 키 안정화)
@@ -284,7 +284,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return postsAsync.when(
       data: (posts) {
         if (posts.isEmpty) {
-          return _buildNoticesPlaceholder(context, theme, l10n);
+          return _buildNotificationsPlaceholder(context, theme, l10n);
         }
 
         // 삭제된 게시글 제외
@@ -293,7 +293,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             .toList();
 
         if (filteredPosts.isEmpty) {
-          return _buildNoticesPlaceholder(context, theme, l10n);
+          return _buildNotificationsPlaceholder(context, theme, l10n);
         }
 
         // 성당별로 그룹화
@@ -343,7 +343,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       },
       error: (error, stack) {
         AppLogger.error('공지사항 조회 에러: $error', error, stack);
-        return _buildNoticesPlaceholder(context, theme, l10n);
+        return _buildNotificationsPlaceholder(context, theme, l10n);
       },
     );
   }
@@ -559,7 +559,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildNoticesPlaceholder(
+  Widget _buildNotificationsPlaceholder(
     BuildContext context,
     ThemeData theme,
     AppLocalizations l10n,
@@ -577,7 +577,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              l10n.community.home.noNotices,
+              l10n.community.home.noNotifications,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),

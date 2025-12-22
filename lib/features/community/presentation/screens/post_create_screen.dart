@@ -186,7 +186,10 @@ class _PostCreateScreenState extends ConsumerState<PostCreateScreen> {
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => Center(child: Text('エラー: $error')),
+        error: (error, stack) {
+          final l10n = ref.read(appLocalizationsSyncProvider);
+          return Center(child: Text('${l10n.common.error}: $error'));
+        },
       ),
     );
   }

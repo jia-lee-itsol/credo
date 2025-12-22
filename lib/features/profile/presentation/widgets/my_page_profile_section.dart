@@ -38,9 +38,21 @@ class MyPageProfileSection extends ConsumerWidget {
               children: [
                 // 프로필 이미지
                 CircleAvatar(
+                  key: ValueKey(
+                    currentUser?.profileImageUrl ?? 'no-image',
+                  ), // 이미지 URL이 변경되면 위젯 재생성
                   radius: 36,
                   backgroundColor: primaryColor.withValues(alpha: 0.2),
-                  child: Icon(Icons.person, size: 36, color: primaryColor),
+                  backgroundImage: isAuthenticated &&
+                          currentUser != null &&
+                          currentUser.profileImageUrl != null
+                      ? NetworkImage(currentUser.profileImageUrl!)
+                      : null,
+                  child: isAuthenticated &&
+                          currentUser != null &&
+                          currentUser.profileImageUrl != null
+                      ? null
+                      : Icon(Icons.person, size: 36, color: primaryColor),
                 ),
                 const SizedBox(width: 16),
 

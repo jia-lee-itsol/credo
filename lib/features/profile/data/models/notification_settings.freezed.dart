@@ -36,6 +36,9 @@ mixin _$NotificationSettings {
   /// 일일 미사 독서 알림 (선택사항)
   bool get dailyMass => throw _privateConstructorUsedError;
 
+  /// 채팅 메시지 알림
+  bool get chatMessages => throw _privateConstructorUsedError;
+
   /// 조용한 시간 활성화 여부
   bool get quietHoursEnabled => throw _privateConstructorUsedError;
 
@@ -71,6 +74,7 @@ abstract class $NotificationSettingsCopyWith<$Res> {
     bool comments,
     bool likes,
     bool dailyMass,
+    bool chatMessages,
     bool quietHoursEnabled,
     int quietHoursStart,
     int quietHoursEnd,
@@ -101,6 +105,7 @@ class _$NotificationSettingsCopyWithImpl<
     Object? comments = null,
     Object? likes = null,
     Object? dailyMass = null,
+    Object? chatMessages = null,
     Object? quietHoursEnabled = null,
     Object? quietHoursStart = null,
     Object? quietHoursEnd = null,
@@ -127,6 +132,10 @@ class _$NotificationSettingsCopyWithImpl<
             dailyMass: null == dailyMass
                 ? _value.dailyMass
                 : dailyMass // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            chatMessages: null == chatMessages
+                ? _value.chatMessages
+                : chatMessages // ignore: cast_nullable_to_non_nullable
                       as bool,
             quietHoursEnabled: null == quietHoursEnabled
                 ? _value.quietHoursEnabled
@@ -165,6 +174,7 @@ abstract class _$$NotificationSettingsImplCopyWith<$Res>
     bool comments,
     bool likes,
     bool dailyMass,
+    bool chatMessages,
     bool quietHoursEnabled,
     int quietHoursStart,
     int quietHoursEnd,
@@ -191,6 +201,7 @@ class __$$NotificationSettingsImplCopyWithImpl<$Res>
     Object? comments = null,
     Object? likes = null,
     Object? dailyMass = null,
+    Object? chatMessages = null,
     Object? quietHoursEnabled = null,
     Object? quietHoursStart = null,
     Object? quietHoursEnd = null,
@@ -217,6 +228,10 @@ class __$$NotificationSettingsImplCopyWithImpl<$Res>
         dailyMass: null == dailyMass
             ? _value.dailyMass
             : dailyMass // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        chatMessages: null == chatMessages
+            ? _value.chatMessages
+            : chatMessages // ignore: cast_nullable_to_non_nullable
                   as bool,
         quietHoursEnabled: null == quietHoursEnabled
             ? _value.quietHoursEnabled
@@ -248,6 +263,7 @@ class _$NotificationSettingsImpl extends _NotificationSettings {
     this.comments = true,
     this.likes = false,
     this.dailyMass = false,
+    this.chatMessages = true,
     this.quietHoursEnabled = false,
     this.quietHoursStart = 22,
     this.quietHoursEnd = 7,
@@ -282,6 +298,11 @@ class _$NotificationSettingsImpl extends _NotificationSettings {
   @JsonKey()
   final bool dailyMass;
 
+  /// 채팅 메시지 알림
+  @override
+  @JsonKey()
+  final bool chatMessages;
+
   /// 조용한 시간 활성화 여부
   @override
   @JsonKey()
@@ -304,7 +325,7 @@ class _$NotificationSettingsImpl extends _NotificationSettings {
 
   @override
   String toString() {
-    return 'NotificationSettings(enabled: $enabled, notices: $notices, comments: $comments, likes: $likes, dailyMass: $dailyMass, quietHoursEnabled: $quietHoursEnabled, quietHoursStart: $quietHoursStart, quietHoursEnd: $quietHoursEnd, updatedAt: $updatedAt)';
+    return 'NotificationSettings(enabled: $enabled, notices: $notices, comments: $comments, likes: $likes, dailyMass: $dailyMass, chatMessages: $chatMessages, quietHoursEnabled: $quietHoursEnabled, quietHoursStart: $quietHoursStart, quietHoursEnd: $quietHoursEnd, updatedAt: $updatedAt)';
   }
 
   @override
@@ -319,6 +340,8 @@ class _$NotificationSettingsImpl extends _NotificationSettings {
             (identical(other.likes, likes) || other.likes == likes) &&
             (identical(other.dailyMass, dailyMass) ||
                 other.dailyMass == dailyMass) &&
+            (identical(other.chatMessages, chatMessages) ||
+                other.chatMessages == chatMessages) &&
             (identical(other.quietHoursEnabled, quietHoursEnabled) ||
                 other.quietHoursEnabled == quietHoursEnabled) &&
             (identical(other.quietHoursStart, quietHoursStart) ||
@@ -338,6 +361,7 @@ class _$NotificationSettingsImpl extends _NotificationSettings {
     comments,
     likes,
     dailyMass,
+    chatMessages,
     quietHoursEnabled,
     quietHoursStart,
     quietHoursEnd,
@@ -369,6 +393,7 @@ abstract class _NotificationSettings extends NotificationSettings {
     final bool comments,
     final bool likes,
     final bool dailyMass,
+    final bool chatMessages,
     final bool quietHoursEnabled,
     final int quietHoursStart,
     final int quietHoursEnd,
@@ -398,6 +423,10 @@ abstract class _NotificationSettings extends NotificationSettings {
   /// 일일 미사 독서 알림 (선택사항)
   @override
   bool get dailyMass;
+
+  /// 채팅 메시지 알림
+  @override
+  bool get chatMessages;
 
   /// 조용한 시간 활성화 여부
   @override

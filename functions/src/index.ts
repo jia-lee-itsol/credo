@@ -335,14 +335,32 @@ export const onPostCreated = onDocumentCreated(
       const db = getFirestore(adminApp);
       const messaging = getMessaging(adminApp);
 
-      // 해당 성당에 소속된 모든 사용자 조회 (main_parish_id == parishId)
-      const usersSnapshot = await db
+      // 해당 성당에 소속된 사용자 조회 (main_parish_id == parishId)
+      const mainParishUsersSnapshot = await db
         .collection("users")
         .where("main_parish_id", "==", parishId)
         .get();
 
+      // 자주 가는 교회에 등록한 사용자 조회 (favorite_parish_ids contains parishId)
+      const favoriteParishUsersSnapshot = await db
+        .collection("users")
+        .where("favorite_parish_ids", "array-contains", parishId)
+        .get();
+
+      // 중복 제거를 위해 Map 사용
+      const userDocsMap = new Map<string, FirebaseFirestore.DocumentSnapshot>();
+      for (const doc of mainParishUsersSnapshot.docs) {
+        userDocsMap.set(doc.id, doc);
+      }
+      for (const doc of favoriteParishUsersSnapshot.docs) {
+        if (!userDocsMap.has(doc.id)) {
+          userDocsMap.set(doc.id, doc);
+        }
+      }
+
       logger.info(
-        `성당 ${parishId}에 소속된 사용자 수: ${usersSnapshot.size}`,
+        `성당 ${parishId} 관련 사용자 수: 소속=${mainParishUsersSnapshot.size}, ` +
+        `즐겨찾기=${favoriteParishUsersSnapshot.size}, 총=${userDocsMap.size}`,
       );
 
       // FCM 토큰이 있는 사용자 수 확인
@@ -356,9 +374,10 @@ export const onPostCreated = onDocumentCreated(
         data: {postId: string; parishId: string; type: string};
       }> = [];
 
-      for (const userDoc of usersSnapshot.docs) {
+      for (const userDoc of userDocsMap.values()) {
         const userId = userDoc.id;
         const userData = userDoc.data();
+        if (!userData) continue;
         const fcmToken = userData.fcmToken;
 
         // 작성자는 알림에서 제외
@@ -1476,6 +1495,223 @@ export const sendTypedTestNotification = onCall(
         "internal",
         `테스트 알림 전송 실패: ${errorMessage}`
       );
+    }
+  }
+);
+
+/**
+ * 채팅 메시지 생성 시 알림 전송
+ * conversations/{conversationId}/messages/{messageId}
+ */
+export const onChatMessageCreated = onDocumentCreated(
+  "conversations/{conversationId}/messages/{messageId}",
+  async (event) => {
+    const snapshot = event.data;
+    if (!snapshot) {
+      logger.warn("메시지 데이터가 없습니다.");
+      return;
+    }
+
+    const messageData = snapshot.data();
+    const conversationId = event.params.conversationId;
+    const messageId = event.params.messageId;
+
+    logger.info(
+      `🔔 채팅 메시지 알림 처리 시작: conversationId=${conversationId}, ` +
+      `messageId=${messageId}`
+    );
+
+    // 시스템 메시지는 알림 전송하지 않음
+    if (messageData.senderId === "system" || messageData.type === "system") {
+      logger.info("시스템 메시지는 알림을 전송하지 않습니다.");
+      return;
+    }
+
+    const senderId = messageData.senderId;
+    const content = messageData.content || "";
+    const hasImages = messageData.imageUrls && messageData.imageUrls.length > 0;
+
+    try {
+      const firestore = getFirestore();
+      const messaging = getMessaging();
+
+      // 1. 대화방 정보 가져오기
+      const conversationDoc = await firestore
+        .collection("conversations")
+        .doc(conversationId)
+        .get();
+
+      if (!conversationDoc.exists) {
+        logger.warn(`대화방을 찾을 수 없습니다: ${conversationId}`);
+        return;
+      }
+
+      const conversationData = conversationDoc.data();
+      if (!conversationData) {
+        logger.warn("대화방 데이터가 없습니다.");
+        return;
+      }
+
+      const participants: string[] = conversationData.participants || [];
+      const conversationType = conversationData.type || "direct";
+      const groupName = conversationData.name;
+
+      // 2. 발신자 정보 가져오기
+      const senderDoc = await firestore
+        .collection("users")
+        .doc(senderId)
+        .get();
+      const senderData = senderDoc.data();
+      const senderNickname = senderData?.nickname || "알 수 없음";
+
+      // 3. 수신자 목록 (발신자 제외)
+      const recipients = participants.filter((id: string) => id !== senderId);
+      logger.info(`알림 수신자: ${recipients.length}명`);
+
+      if (recipients.length === 0) {
+        logger.info("알림 수신자가 없습니다.");
+        return;
+      }
+
+      // 4. 알림 내용 구성
+      let notificationTitle = senderNickname;
+      if (conversationType === "group" && groupName) {
+        notificationTitle = `${groupName} - ${senderNickname}`;
+      }
+
+      let notificationBody = content;
+      if (hasImages && !content) {
+        notificationBody = "📷 사진을 보냈습니다.";
+      } else if (hasImages) {
+        notificationBody = `📷 ${content}`;
+      }
+
+      // 5. 각 수신자에게 알림 전송
+      const sendPromises = recipients.map(async (recipientId: string) => {
+        try {
+          // 수신자의 FCM 토큰 가져오기
+          const recipientDoc = await firestore
+            .collection("users")
+            .doc(recipientId)
+            .get();
+
+          if (!recipientDoc.exists) {
+            logger.warn(`수신자를 찾을 수 없습니다: ${recipientId}`);
+            return;
+          }
+
+          const recipientData = recipientDoc.data();
+          const fcmToken = recipientData?.fcmToken;
+
+          if (!fcmToken) {
+            logger.warn(
+              `수신자의 FCM 토큰이 없습니다: ${recipientId}`
+            );
+            return;
+          }
+
+          // 수신자의 알림 설정 확인
+          const settingsDoc = await firestore
+            .collection("notification_settings")
+            .doc(recipientId)
+            .get();
+
+          const settingsData = settingsDoc.data();
+          // 전체 알림 비활성화 또는 채팅 알림 비활성화 시 전송하지 않음
+          if (settingsData) {
+            if (settingsData.enabled === false) {
+              logger.info(
+                `알림 비활성화 (전체): ${recipientId}`
+              );
+              return;
+            }
+            if (settingsData.chatMessages === false) {
+              logger.info(
+                `알림 비활성화 (채팅): ${recipientId}`
+              );
+              return;
+            }
+
+            // 조용한 시간 확인
+            if (settingsData.quietHoursEnabled === true) {
+              const now = new Date();
+              const currentHour = now.getHours();
+              const start = settingsData.quietHoursStart ?? 22;
+              const end = settingsData.quietHoursEnd ?? 7;
+
+              // 조용한 시간 범위 체크
+              const isQuietTime = start < end
+                ? (currentHour >= start && currentHour < end)
+                : (currentHour >= start || currentHour < end);
+
+              if (isQuietTime) {
+                logger.info(
+                  `조용한 시간 (${start}~${end}): ${recipientId}`
+                );
+                return;
+              }
+            }
+          }
+
+          // 알림 전송
+          const message = {
+            token: fcmToken,
+            notification: {
+              title: notificationTitle,
+              body: notificationBody,
+            },
+            data: {
+              type: "chat_message",
+              conversationId: conversationId,
+              messageId: messageId,
+              senderId: senderId,
+              senderNickname: senderNickname,
+            },
+            apns: {
+              payload: {
+                aps: {
+                  alert: {
+                    title: notificationTitle,
+                    body: notificationBody,
+                  },
+                  sound: "default",
+                  badge: 1,
+                },
+              },
+            },
+            android: {
+              priority: "high" as const,
+              notification: {
+                sound: "default",
+                channelId: "chat_messages",
+                priority: "high" as const,
+              },
+            },
+          };
+
+          const response = await messaging.send(message);
+          logger.info(
+            `✅ 채팅 알림 전송 완료: recipientId=${recipientId}, ` +
+            `messageId=${response}`
+          );
+        } catch (error) {
+          const errorMessage =
+            error instanceof Error ? error.message : String(error);
+          logger.error(
+            `❌ 채팅 알림 전송 실패: recipientId=${recipientId}, ` +
+            `error=${errorMessage}`
+          );
+        }
+      });
+
+      await Promise.all(sendPromises);
+      logger.info(
+        `🔔 채팅 알림 처리 완료: conversationId=${conversationId}`
+      );
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      logger.error(`채팅 알림 처리 실패: ${errorMessage}`);
     }
   }
 );

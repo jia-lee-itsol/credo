@@ -158,6 +158,21 @@ class _NotificationSettingsScreenState
                           );
                         },
                 ),
+                const Divider(height: 1),
+                SwitchListTile(
+                  title: const Text('채팅 메시지'),
+                  subtitle: const Text('새 채팅 메시지 알림'),
+                  value: settings.chatMessages,
+                  activeThumbColor: primaryColor,
+                  onChanged: _isSaving
+                      ? null
+                      : (value) {
+                          _updateSettings(
+                            userId,
+                            settings.copyWith(chatMessages: value),
+                          );
+                        },
+                ),
               ],
             ),
           ),

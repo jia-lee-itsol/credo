@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/services/logger_service.dart';
 import '../../../../core/data/services/image_upload_service.dart';
 import '../../../../core/error/failures.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../data/models/app_user.dart';
 import '../../data/models/notification.dart' as models;
 import '../../data/models/post.dart';
@@ -104,6 +105,7 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
   final Post? _initialPost;
   final String? _parishId;
   final ImageUploadService _imageUploadService;
+  final AppLocalizations _l10n;
 
   PostFormNotifier({
     required PostRepository postRepository,
@@ -113,6 +115,7 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
     Post? initialPost,
     String? parishId,
     ImageUploadService? imageUploadService,
+    required AppLocalizations l10n,
   }) : _postRepository = postRepository,
        _userRepository = userRepository,
        _notificationRepository = notificationRepository,
@@ -120,6 +123,7 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
        _initialPost = initialPost,
        _parishId = parishId,
        _imageUploadService = imageUploadService ?? ImageUploadService(),
+       _l10n = l10n,
        super(
          PostFormState(
            title: initialPost?.title ?? '',
@@ -225,13 +229,13 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
 
     if (trimmedTitle.isEmpty) {
       AppLogger.warning('제목이 비어있음');
-      state = state.copyWith(errorMessage: 'タイトルを入力してください');
+      state = state.copyWith(errorMessage: _l10n.validation.titleRequired);
       return false;
     }
 
     if (trimmedBody.isEmpty) {
       AppLogger.warning('내용이 비어있음');
-      state = state.copyWith(errorMessage: '本文を入力してください');
+      state = state.copyWith(errorMessage: _l10n.validation.contentRequired);
       return false;
     }
 
@@ -444,7 +448,7 @@ class PostFormNotifier extends StateNotifier<PostFormState> {
           notificationId: '',
           userId: member.uid,
           type: 'notice',
-          title: '新しいお知らせ',
+          title: _l10n.community.newNotice,
           body: title,
           postId: postId,
           authorId: _currentUser.uid,

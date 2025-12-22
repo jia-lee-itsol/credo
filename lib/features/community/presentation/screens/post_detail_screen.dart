@@ -199,7 +199,7 @@ class _PostDetailScreenState extends ConsumerState<PostDetailScreen> {
                         children: [
                           const Icon(Icons.share_outlined, size: 20),
                           const SizedBox(width: 8),
-                          Text(l10n.community.sharePost ?? 'シェア'),
+                          Text(l10n.community.sharePost ?? l10n.navigation.share),
                         ],
                       ),
                     ),

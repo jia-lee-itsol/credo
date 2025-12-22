@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
+import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
-import '../../../auth/domain/entities/user_entity.dart';
 
 /// QR 코드 바텀시트 (QR 보기 및 QR 스캔 탭)
 class QrCodeBottomSheet extends ConsumerStatefulWidget {
@@ -86,8 +87,15 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
 
       final rawValue = result;
 
-      // "credo:userId" 형식인지 확인
-      if (!rawValue.startsWith('credo:')) {
+      // "credo:userId" 또는 "credo://user/userId" 형식인지 확인
+      String? userId;
+      if (rawValue.startsWith('credo://user/')) {
+        userId = rawValue.replaceFirst('credo://user/', '');
+      } else if (rawValue.startsWith('credo:')) {
+        userId = rawValue.substring(6); // "credo:" 제거
+      }
+
+      if (userId == null || userId.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(l10n.qr.invalid),
@@ -99,8 +107,6 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
         });
         return;
       }
-
-      final userId = rawValue.substring(6); // "credo:" 제거
 
       // 자신의 QR 코드를 스캔한 경우
       final currentUser = ref.read(currentUserProvider);
@@ -117,40 +123,11 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
         return;
       }
 
-      // 사용자 검색
-      final repository = ref.read(authRepositoryProvider);
-      final searchResult = await repository.searchUser(userId: userId);
-
-      if (!mounted) return;
-
-      searchResult.fold(
-        (failure) {
-          setState(() {
-            _isProcessing = false;
-          });
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(failure.message),
-              backgroundColor: Colors.red,
-            ),
-          );
-        },
-        (user) {
-          setState(() {
-            _isProcessing = false;
-          });
-          if (user == null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(l10n.qr.userNotFound),
-                backgroundColor: Colors.orange,
-              ),
-            );
-          } else {
-            _showUserFoundDialog(user);
-          }
-        },
-      );
+      // 바텀시트 닫고 프로필 화면으로 이동
+      if (mounted) {
+        Navigator.of(context).pop(); // 바텀시트 닫기
+        context.push(AppRoutes.userProfilePath(userId)); // 프로필 화면으로 이동
+      }
     } catch (e) {
       if (mounted) {
         setState(() {
@@ -164,33 +141,6 @@ class _QrCodeBottomSheetState extends ConsumerState<QrCodeBottomSheet>
         );
       }
     }
-  }
-
-  void _showUserFoundDialog(UserEntity user) {
-    final l10n = ref.read(appLocalizationsSyncProvider);
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(l10n.qr.userFound),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('${l10n.profile.godparent.nickname}: ${user.nickname}'),
-            const SizedBox(height: 8),
-            Text('${l10n.profile.godparent.email}: ${user.email}'),
-            const SizedBox(height: 8),
-            Text('${l10n.profile.userId}: ${user.userId}'),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(l10n.common.close),
-          ),
-        ],
-      ),
-    );
   }
 
   @override

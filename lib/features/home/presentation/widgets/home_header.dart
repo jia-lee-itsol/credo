@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/constants/liturgy_constants.dart';
 import '../../../../core/data/services/saint_feast_day_service.dart' as core;
+import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/locale_provider.dart';
 
@@ -30,6 +31,7 @@ class HomeHeader extends ConsumerWidget {
     final currentLocale = ref.watch(localeProvider);
     final testDate = ref.watch(testDateOverrideProvider);
     final now = testDate ?? DateTime.now();
+    final currentUser = ref.watch(currentUserProvider);
 
     // 현재 로케일에 맞는 날짜 포맷 생성
     final dateFormat = HomeHeader._getDateFormatForLocale(currentLocale);
@@ -145,23 +147,27 @@ class HomeHeader extends ConsumerWidget {
                 ),
               ),
 
-              // 오른쪽: 마이페이지 아이콘
+              // 오른쪽: 마이페이지 프로필 이미지
               GestureDetector(
                 onTap: () {
                   context.push(AppRoutes.myPage);
                 },
-                child: Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.person_outline,
-                    color: Colors.white,
-                    size: 24,
-                  ),
+                child: CircleAvatar(
+                  key: ValueKey(
+                    currentUser?.profileImageUrl ?? 'no-image',
+                  ), // 이미지 URL이 변경되면 위젯 재생성
+                  radius: 22,
+                  backgroundColor: Colors.white.withValues(alpha: 0.2),
+                  backgroundImage: currentUser?.profileImageUrl != null
+                      ? NetworkImage(currentUser!.profileImageUrl!)
+                      : null,
+                  child: currentUser?.profileImageUrl == null
+                      ? const Icon(
+                          Icons.person_outline,
+                          color: Colors.white,
+                          size: 24,
+                        )
+                      : null,
                 ),
               ),
             ],
