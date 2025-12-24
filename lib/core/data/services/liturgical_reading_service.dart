@@ -615,11 +615,19 @@ final liturgicalDayProvider = FutureProvider.family<LiturgicalDay?, String>((
 
   try {
     final date = _parseDateString(dateString);
-    final result = await LiturgicalReadingService.getLiturgicalDayForDate(date);
+    final result = await LiturgicalReadingService.getLiturgicalDayForDate(date)
+        .timeout(
+      const Duration(seconds: 30),
+      onTimeout: () {
+        AppLogger.error('Timeout loading liturgical day for $dateString');
+        return null;
+      },
+    );
     return result;
-  } catch (e) {
-    AppLogger.error('ERROR for $dateString: $e', e);
-    rethrow;
+  } catch (e, stackTrace) {
+    AppLogger.error('ERROR for $dateString: $e', e, stackTrace);
+    // 에러 발생 시 null 반환하여 무한 로딩 방지
+    return null;
   }
 });
 

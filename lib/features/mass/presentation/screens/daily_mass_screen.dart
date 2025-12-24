@@ -89,6 +89,8 @@ class _DailyMassScreenState extends ConsumerState<DailyMassScreen> {
     // 날짜를 문자열로 변환하여 Provider family 키로 사용 (무한 반복 방지)
     final dateKey =
         '${displayDate.year}-${displayDate.month.toString().padLeft(2, '0')}-${displayDate.day.toString().padLeft(2, '0')}';
+    
+    // Provider를 watch하되, 에러 발생 시 재시도 가능하도록 처리
     final liturgicalDayAsync = ref.watch(liturgicalDayProvider(dateKey));
 
     final l10n = ref.watch(appLocalizationsSyncProvider);
