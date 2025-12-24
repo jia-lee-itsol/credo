@@ -247,6 +247,20 @@ class MyPageSettingsSection extends ConsumerWidget {
           ),
         ),
 
+        // 성당 FAQ
+        Card(
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: SettingsListTile(
+            icon: Icons.help_outline,
+            title: l10n.profile.churchFaq.title,
+            subtitle: l10n.profile.churchFaq.subtitle,
+            primaryColor: primaryColor,
+            onTap: () {
+              context.push(AppRoutes.churchFaq);
+            },
+          ),
+        ),
+
         // 알림 설정
         Card(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

@@ -23,6 +23,7 @@ class AppRoutes {
   // 마이페이지
   static const String editProfile = '/my-page/edit-profile';
   static const String favoriteParishes = '/my-page/favorite-parishes';
+  static const String churchFaq = '/my-page/church-faq';
   static const String qrScanner = '/my-page/qr-scanner';
   static const String languageSettings = '/my-page/language-settings';
   static const String notificationSettings = '/my-page/notification-settings';

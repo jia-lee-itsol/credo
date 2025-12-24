@@ -33,6 +33,7 @@ import '../../features/profile/presentation/screens/favorite_parishes_screen.dar
 import '../../features/profile/presentation/screens/qr_scanner_screen.dart';
 import '../../features/profile/presentation/screens/language_settings_screen.dart';
 import '../../features/profile/presentation/screens/notification_settings_screen.dart';
+import '../../features/profile/presentation/screens/church_faq_screen.dart';
 import '../../features/splash/presentation/screens/splash_screen.dart';
 import '../../shared/widgets/main_scaffold.dart';
 import 'app_routes.dart';
@@ -301,6 +302,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 },
               ),
             ],
+          ),
+          GoRoute(
+            path: 'church-faq',
+            name: 'churchFaq',
+            builder: (context, state) => const ChurchFaqScreen(),
           ),
           GoRoute(
             path: 'qr-scanner',

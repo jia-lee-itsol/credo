@@ -187,6 +187,7 @@
     "home": "Inicio",
     "meditation": "Meditación",
     "share": "Compartir",
+    "dailyMass": "Palabra",
     "church": "Iglesia",
     "community": "Comunidad"
   },
@@ -390,6 +391,84 @@
       "deleteTitle": "Eliminar",
       "registeredCount": "{count} registradas",
       "registeredCount@count": "Número de registradas"
+    },
+    "churchFaq": {
+      "title": "Preguntas Frecuentes sobre la Iglesia",
+      "subtitle": "Preguntas y Respuestas para No Católicos",
+      "items": [
+        {
+          "question": "¿Qué debo hacer cuando visito una iglesia por primera vez?",
+          "answer": "Cuando visite una iglesia por primera vez, siéntase libre de venir sin preocupaciones. Puede hacer la señal de la cruz con agua bendita en la entrada y encontrar un asiento en silencio. Los horarios de misa se pueden encontrar en el tablón de anuncios o sitio web de la iglesia."
+        },
+        {
+          "question": "¿Qué debo usar?",
+          "answer": "Como la iglesia es un espacio sagrado, se recomienda vestimenta respetuosa. Evite ropa demasiado reveladora y use ropa limpia y modesta si es posible. No se requiere vestimenta formal."
+        },
+        {
+          "question": "¿Qué debo hacer durante la Misa?",
+          "answer": "Durante la Misa, puede seguir las acciones de los fieles o simplemente observar en silencio. Pararse, sentarse y arrodillarse son opcionales. Puede seguir cómodamente o simplemente sentarse y observar."
+        },
+        {
+          "question": "¿Necesito recibir la Comunión (el pan)?",
+          "answer": "La Comunión es solo para católicos bautizados. Si no es católico, no necesita recibir la Comunión. Al recibir la Comunión, cruce los brazos sobre el pecho. Esto significa 'Me gustaría una bendición'."
+        },
+        {
+          "question": "¿Necesito hacer una ofrenda?",
+          "answer": "Las ofrendas son voluntarias y no obligatorias. Puede participar si lo desea, o no si prefiere. Los sobres de ofrenda están disponibles en la entrada, y el monto depende de su discreción."
+        },
+        {
+          "question": "¿Puedo traer niños?",
+          "answer": "Sí, los niños son bienvenidos. Sin embargo, manténgalos en silencio durante la Misa. Muchas iglesias tienen espacios separados o guarderías para niños, así que consulte si es necesario."
+        },
+        {
+          "question": "¿A quién debo preguntar si tengo preguntas?",
+          "answer": "Puede preguntar a los sacerdotes, hermanas o personal de la oficina de la iglesia en cualquier momento. La mayoría de las iglesias dan la bienvenida a los visitantes y lo guiarán amablemente con cualquier pregunta."
+        },
+        {
+          "question": "¿Puedo tomar fotos dentro de la iglesia?",
+          "answer": "Generalmente, es mejor abstenerse de tomar fotos durante la Misa. Antes o después de la Misa, la fotografía silenciosa es posible, pero tenga cuidado de no perturbar las oraciones de otros fieles."
+        },
+        {
+          "question": "¿Cuándo debo visitar la iglesia?",
+          "answer": "Las iglesias suelen estar abiertas y puede visitarlas en cualquier momento. Sin embargo, la Misa solo se celebra en horarios programados, por lo que si desea asistir a la Misa, consulte el tablón de anuncios o sitio web de la iglesia para conocer los horarios de Misa. Generalmente, la Misa se celebra los domingos y días laborables."
+        },
+        {
+          "question": "¿Puedo usar mi teléfono dentro de la iglesia?",
+          "answer": "Durante la Misa, es mejor apagar su teléfono o ponerlo en modo silencioso. Las llamadas o la revisión de mensajes deben hacerse después de que termine la Misa. Si es una emergencia, salga silenciosamente para hacer su llamada."
+        },
+        {
+          "question": "¿Puedo comer o beber dentro de la iglesia?",
+          "answer": "Es mejor abstenerse de comer o beber dentro de la iglesia. Sin embargo, puede beber agua silenciosamente. Por favor, especialmente evite comer durante la Misa."
+        },
+        {
+          "question": "¿Dónde debo sentarme dentro de la iglesia?",
+          "answer": "Puede elegir libremente cualquier asiento dentro de la iglesia. Los visitantes por primera vez pueden encontrar más fácil observar las acciones de otros fieles eligiendo asientos en la parte trasera. Los asientos delanteros también están disponibles, pero tenga en cuenta que hay movimientos frecuentes de pie y sentado durante la Misa."
+        },
+        {
+          "question": "¿Dónde están los baños en la iglesia?",
+          "answer": "La mayoría de las iglesias tienen baños disponibles. La ubicación varía según la iglesia, pero generalmente están cerca de la entrada o en un edificio adyacente. Si es necesario, puede preguntar al personal de la iglesia o a los feligreses, quienes lo guiarán amablemente."
+        },
+        {
+          "question": "¿Hay una tarifa de admisión para la iglesia?",
+          "answer": "La admisión a la iglesia es gratuita. Las ofrendas son voluntarias y no hay tarifa de admisión. Las iglesias son espacios abiertos para todos."
+        },
+        {
+          "question": "¿Cómo rezo dentro de la iglesia?",
+          "answer": "No hay un formato especial para la oración. Puede simplemente hablar con Dios desde su corazón. Puede sentarse silenciosamente y orar en su corazón, o leer textos de oración disponibles en la iglesia. Si es su primera vez, simplemente observar en silencio es suficiente."
+        },
+        {
+          "question": "¿Hay instalaciones de accesibilidad para personas con discapacidades?",
+          "answer": "La mayoría de las iglesias modernas tienen caminos de acceso para sillas de ruedas, baños accesibles y asientos para sillas de ruedas disponibles. Si es necesario, comuníquese con la iglesia con anticipación o pregunte al personal al visitar, y lo guiarán."
+        },
+        {
+          "question": "¿Puedo comprar recuerdos o libros dentro de la iglesia?",
+          "answer": "No todas las iglesias los tienen, pero algunas iglesias pueden tener una librería o tienda de regalos. Por favor, consulte en la oficina de la iglesia para ver si puede comprar varios artículos religiosos como Biblias, libros de oración, cruces, rosarios, etc."
+        },
+        {
+          "question": "¿Cómo puedo convertirme en católico?",
+          "answer": "Si desea convertirse en católico, por favor contacte la oficina de la iglesia más cercana. Cada iglesia puede tener diferentes procesos de preparación (catequesis), así que por favor consulte el programa de esa iglesia. Dependiendo de su país, también puede convertirse en católico a través de catequesis por correspondencia. Para más detalles, por favor contacte la oficina de su diócesis local o la Conferencia de Obispos Católicos en su país."
+        }
+      ]
     },
     "notifications": {
       "enabled": "Activar notificaciones",

@@ -65,9 +65,9 @@ class MyPageNavigationBar extends ConsumerWidget {
           label: l10n.navigation.meditation,
         ),
         NavigationDestination(
-          icon: const Icon(Icons.add),
-          selectedIcon: const Icon(Icons.add),
-          label: l10n.navigation.share,
+          icon: const Icon(Icons.auto_stories_outlined),
+          selectedIcon: const Icon(Icons.auto_stories),
+          label: l10n.navigation.dailyMass,
         ),
         NavigationDestination(
           icon: const Icon(Icons.church_outlined),

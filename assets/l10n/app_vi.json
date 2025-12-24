@@ -187,6 +187,7 @@
     "home": "Trang chủ",
     "meditation": "Suy niệm",
     "share": "Chia sẻ",
+    "dailyMass": "Lời Chúa",
     "church": "Nhà thờ",
     "community": "Cộng đồng"
   },
@@ -390,6 +391,84 @@
       "deleteTitle": "Xóa",
       "registeredCount": "{count} đã đăng ký",
       "registeredCount@count": "Số đã đăng ký"
+    },
+    "churchFaq": {
+      "title": "Câu Hỏi Thường Gặp về Nhà Thờ",
+      "subtitle": "Hỏi & Đáp cho Người Không Phải Tín Hữu",
+      "items": [
+        {
+          "question": "Lần đầu đến nhà thờ nên làm gì?",
+          "answer": "Khi đến nhà thờ lần đầu, bạn có thể đến một cách thoải mái, không cần lo lắng. Ở cửa vào, bạn có thể làm dấu thánh giá bằng nước thánh và tìm chỗ ngồi một cách yên lặng. Lịch thánh lễ có thể xem trên bảng thông báo hoặc trang web của nhà thờ."
+        },
+        {
+          "question": "Nên mặc gì?",
+          "answer": "Vì nhà thờ là nơi thánh thiêng, nên mặc trang phục lịch sự. Tránh mặc quần áo quá hở hang, nếu có thể hãy mặc quần áo sạch sẽ và chỉnh tề. Không cần mặc trang phục chính thức đặc biệt."
+        },
+        {
+          "question": "Trong thánh lễ nên làm gì?",
+          "answer": "Trong thánh lễ, bạn có thể làm theo các động tác của tín hữu hoặc chỉ quan sát một cách yên lặng. Đứng, ngồi, quỳ đều là tùy chọn. Bạn có thể làm theo một cách thoải mái hoặc chỉ ngồi và quan sát."
+        },
+        {
+          "question": "Có phải nhận Mình Thánh (bánh) không?",
+          "answer": "Mình Thánh chỉ dành cho những người Công giáo đã được rửa tội. Nếu bạn không phải là tín hữu, bạn không cần nhận Mình Thánh. Khi nhận Mình Thánh, hãy khoanh tay trước ngực. Điều này có nghĩa là 'Tôi muốn nhận phước lành'."
+        },
+        {
+          "question": "Có phải dâng cúng không?",
+          "answer": "Dâng cúng là tự nguyện, không bắt buộc. Nếu bạn muốn có thể tham gia, nếu không muốn thì không cần. Phong bì dâng cúng có thể lấy ở cửa vào, và số tiền tùy theo khả năng của bạn."
+        },
+        {
+          "question": "Có thể mang trẻ em theo không?",
+          "answer": "Có, bạn có thể mang trẻ em theo. Tuy nhiên, trong thánh lễ nên giữ yên lặng. Nhiều nhà thờ có không gian riêng hoặc phòng giữ trẻ cho trẻ em, vì vậy nếu cần hãy hỏi."
+        },
+        {
+          "question": "Có câu hỏi nên hỏi ai?",
+          "answer": "Bạn có thể hỏi linh mục, nữ tu, hoặc nhân viên văn phòng nhà thờ bất cứ lúc nào. Hầu hết các nhà thờ đều chào đón khách thăm và sẽ hướng dẫn bạn một cách thân thiện về những thắc mắc."
+        },
+        {
+          "question": "Có thể chụp ảnh trong nhà thờ không?",
+          "answer": "Nói chung, trong thánh lễ nên tránh chụp ảnh. Trước hoặc sau thánh lễ có thể chụp ảnh một cách yên lặng, nhưng hãy cẩn thận không làm phiền lời cầu nguyện của các tín hữu khác."
+        },
+        {
+          "question": "Nên đến nhà thờ khi nào?",
+          "answer": "Nhà thờ thường mở cửa và bạn có thể đến thăm bất cứ lúc nào. Tuy nhiên, thánh lễ chỉ được cử hành vào những giờ nhất định, vì vậy nếu bạn muốn tham dự thánh lễ, hãy kiểm tra bảng thông báo hoặc trang web của nhà thờ để biết giờ thánh lễ. Nói chung, thánh lễ được cử hành vào Chúa Nhật và các ngày trong tuần."
+        },
+        {
+          "question": "Có thể sử dụng điện thoại trong nhà thờ không?",
+          "answer": "Trong thánh lễ, tốt nhất là tắt điện thoại hoặc chuyển sang chế độ im lặng. Gọi điện hoặc kiểm tra tin nhắn nên được thực hiện sau khi thánh lễ kết thúc. Nếu là trường hợp khẩn cấp, hãy yên lặng ra ngoài để gọi điện."
+        },
+        {
+          "question": "Có thể ăn uống trong nhà thờ không?",
+          "answer": "Tốt nhất là tránh ăn uống trong nhà thờ. Tuy nhiên, bạn có thể uống nước một cách yên lặng. Đặc biệt trong thánh lễ, hãy tránh ăn uống."
+        },
+        {
+          "question": "Nên ngồi ở đâu trong nhà thờ?",
+          "answer": "Bạn có thể tự do chọn chỗ ngồi trong nhà thờ. Những người lần đầu đến thăm có thể chọn chỗ ngồi ở phía sau để dễ quan sát hành động của các tín hữu khác. Chỗ ngồi phía trước cũng có thể, nhưng lưu ý rằng trong thánh lễ có nhiều động tác đứng lên và ngồi xuống."
+        },
+        {
+          "question": "Nhà vệ sinh trong nhà thờ ở đâu?",
+          "answer": "Hầu hết các nhà thờ đều có nhà vệ sinh. Vị trí khác nhau tùy theo nhà thờ, nhưng thường ở gần lối vào hoặc trong tòa nhà liền kề. Nếu cần, bạn có thể hỏi nhân viên nhà thờ hoặc các tín hữu, họ sẽ hướng dẫn bạn một cách thân thiện."
+        },
+        {
+          "question": "Có phí vào cửa nhà thờ không?",
+          "answer": "Vào cửa nhà thờ là miễn phí. Dâng cúng là tự nguyện và không có phí vào cửa. Nhà thờ là không gian mở cho tất cả mọi người."
+        },
+        {
+          "question": "Làm thế nào để cầu nguyện trong nhà thờ?",
+          "answer": "Không có hình thức đặc biệt nào cho việc cầu nguyện. Bạn có thể nói chuyện với Chúa một cách thoải mái. Bạn có thể ngồi yên lặng và cầu nguyện trong lòng, hoặc đọc các văn bản cầu nguyện có trong nhà thờ. Nếu là lần đầu, chỉ cần quan sát yên lặng là đủ."
+        },
+        {
+          "question": "Có cơ sở tiếp cận cho người khuyết tật trong nhà thờ không?",
+          "answer": "Hầu hết các nhà thờ hiện đại đều có đường tiếp cận cho xe lăn, nhà vệ sinh cho người khuyết tật, và chỗ ngồi cho xe lăn. Nếu cần, hãy liên hệ với nhà thờ trước hoặc hỏi nhân viên khi đến thăm, họ sẽ hướng dẫn bạn."
+        },
+        {
+          "question": "Có thể mua quà lưu niệm hoặc sách trong nhà thờ không?",
+          "answer": "Không phải tất cả các nhà thờ đều có, nhưng một số nhà thờ có thể có phòng sách hoặc cửa hàng quà tặng. Vui lòng hỏi tại văn phòng nhà thờ để xem bạn có thể mua các vật phẩm tôn giáo khác nhau như Kinh Thánh, sách cầu nguyện, thánh giá, chuỗi hạt, v.v."
+        },
+        {
+          "question": "Tôi muốn trở thành tín hữu Công giáo, tôi nên làm gì?",
+          "answer": "Nếu bạn muốn trở thành tín hữu Công giáo, vui lòng liên hệ với văn phòng nhà thờ gần nhất. Mỗi nhà thờ có thể có quy trình chuẩn bị nhập đạo (giáo lý) khác nhau, vì vậy vui lòng kiểm tra chương trình của nhà thờ đó. Tùy theo từng quốc gia, bạn cũng có thể trở thành tín hữu Công giáo thông qua giáo lý qua thư. Để biết thêm chi tiết, vui lòng liên hệ với văn phòng giáo phận địa phương hoặc Hội đồng Giám mục Công giáo ở quốc gia của bạn."
+        }
+      ]
     },
     "notifications": {
       "enabled": "Bật thông báo",

@@ -46,6 +46,7 @@
     "home": "Home",
     "meditation": "Meditation",
     "share": "Share",
+    "dailyMass": "Today's Word",
     "church": "Church",
     "community": "Community"
   },
@@ -273,6 +274,84 @@
       "deleteTitle": "Delete",
       "registeredCount": "{count} registered",
       "registeredCount@count": "Number of registered items"
+    },
+    "churchFaq": {
+      "title": "Church FAQ",
+      "subtitle": "Q&A for Non-Catholics",
+      "items": [
+        {
+          "question": "What should I do when visiting a church for the first time?",
+          "answer": "When visiting a church for the first time, please feel free to come without worry. You can make the sign of the cross with holy water at the entrance and quietly find a seat. Mass schedules can be found on the church bulletin board or website."
+        },
+        {
+          "question": "What should I wear?",
+          "answer": "Since a church is a sacred space, respectful attire is recommended. Please avoid overly revealing clothing and wear clean, modest clothes if possible. Formal attire is not required."
+        },
+        {
+          "question": "What should I do during Mass?",
+          "answer": "During Mass, you can follow the actions of the faithful or simply observe quietly. Standing, sitting, and kneeling are all optional. You can follow along comfortably or just sit and observe."
+        },
+        {
+          "question": "Do I need to receive Communion (the bread)?",
+          "answer": "Communion is only for baptized Catholics. If you are not a Catholic, you do not need to receive Communion. When receiving Communion, cross your arms over your chest. This means 'I would like a blessing.'"
+        },
+        {
+          "question": "Do I need to make an offering?",
+          "answer": "Offerings are voluntary and not mandatory. You can participate if you wish, or not if you prefer. Offering envelopes are available at the entrance, and the amount is up to your discretion."
+        },
+        {
+          "question": "Can I bring children?",
+          "answer": "Yes, children are welcome. However, please keep them quiet during Mass. Many churches have separate spaces or nurseries for children, so please inquire if needed."
+        },
+        {
+          "question": "Who should I ask if I have questions?",
+          "answer": "You can ask the priests, sisters, or church office staff at any time. Most churches welcome visitors and will kindly guide you with any questions."
+        },
+        {
+          "question": "Can I take photos inside the church?",
+          "answer": "Generally, it is best to refrain from taking photos during Mass. Before or after Mass, quiet photography is possible, but please be careful not to disturb other worshippers' prayers."
+        },
+        {
+          "question": "When should I visit the church?",
+          "answer": "Churches are usually open and you can visit anytime. However, Mass is only held at scheduled times, so if you want to attend Mass, please check the church bulletin board or website for Mass times. Generally, Mass is held on Sundays and weekdays."
+        },
+        {
+          "question": "Can I use my phone inside the church?",
+          "answer": "During Mass, it is best to turn off your phone or set it to silent mode. Making calls or checking messages should be done after Mass is over. If it's an emergency, please quietly step outside to make your call."
+        },
+        {
+          "question": "Can I eat food or drink inside the church?",
+          "answer": "It is best to refrain from eating food or drinking beverages inside the church. However, you can quietly drink water. Please especially avoid eating during Mass."
+        },
+        {
+          "question": "Where should I sit inside the church?",
+          "answer": "You can freely choose any seat inside the church. First-time visitors may find it easier to observe other worshippers' actions by choosing seats in the back. Front seats are also available, but please note that there are frequent standing and sitting movements during Mass."
+        },
+        {
+          "question": "Where are the restrooms in the church?",
+          "answer": "Most churches have restrooms available. The location varies by church, but they are generally near the entrance or in an adjacent building. If needed, you can ask church staff or parishioners, who will kindly guide you."
+        },
+        {
+          "question": "Is there an admission fee for the church?",
+          "answer": "Church admission is free. Offerings are voluntary and there is no admission fee. Churches are open spaces for everyone."
+        },
+        {
+          "question": "How do I pray inside the church?",
+          "answer": "There is no special format for prayer. You can simply speak to God from your heart. You can sit quietly and pray in your heart, or read prayer texts available in the church. If it's your first time, simply observing quietly is enough."
+        },
+        {
+          "question": "Are there accessibility facilities for people with disabilities?",
+          "answer": "Most modern churches have wheelchair access paths, accessible restrooms, and wheelchair seating available. If needed, please contact the church in advance or ask staff when visiting, and they will guide you."
+        },
+        {
+          "question": "Can I purchase souvenirs or books inside the church?",
+          "answer": "Not all churches have them, but some churches may have a bookstore or gift shop. Please inquire at the church office to see if you can purchase various religious items such as Bibles, prayer books, crosses, rosaries, etc."
+        },
+        {
+          "question": "How can I become a Catholic?",
+          "answer": "If you want to become a Catholic, please contact the nearest church office. Each church may have different preparation processes (catechesis), so please check the program of that church. Depending on your country, you may also be able to become a Catholic through correspondence catechesis. For more details, please contact your local diocese office or the Catholic Bishops' Conference in your country."
+        }
+      ]
     },
     "notifications": {
       "enabled": "Enable Notifications",

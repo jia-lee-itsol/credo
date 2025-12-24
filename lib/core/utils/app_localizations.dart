@@ -272,6 +272,7 @@ class NavigationTranslations {
   String get home => _getString('home') ?? 'ホーム';
   String get meditation => _getString('meditation') ?? '黙想';
   String get share => _getString('share') ?? '共有';
+  String get dailyMass => _getString('dailyMass') ?? '今日のみ言葉';
   String get church => _getString('church') ?? '教会';
   String get community => _getString('community') ?? 'コミュニティ';
 
@@ -492,7 +493,7 @@ class MassTranslations {
   String get contentDisclaimer =>
       _getString('contentDisclaimer') ??
       '本コンテンツは公式ミサ典礼文を代替するものではなく、信仰生活を助けるための案内および黙想用資料です。';
-  String get title => _getString('title') ?? '日々の黙想';
+  String get title => _getString('title') ?? '毎日の黙想';
   String get shareReading => _getString('shareReading') ?? '今日のミサの読書をシェア';
 
   String liturgicalDay(String key) {
@@ -897,6 +898,8 @@ class ProfileTranslations {
       );
   ProfileBaptismalNameChangeTranslations get baptismalNameChange =>
       ProfileBaptismalNameChangeTranslations(_getValue('baptismalNameChange'));
+  ProfileChurchFaqTranslations get churchFaq =>
+      ProfileChurchFaqTranslations(_getValue('churchFaq'));
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -1074,6 +1077,51 @@ class ProfileFavoriteParishesTranslations {
     }
     return null;
   }
+}
+
+/// 프로필 성당 FAQ 번역
+class ProfileChurchFaqTranslations {
+  final dynamic _data;
+
+  ProfileChurchFaqTranslations(this._data);
+
+  String get title => _getString('title') ?? '성당 FAQ';
+  String get subtitle => _getString('subtitle') ?? '신자가 아닌 분들을 위한 Q&A';
+
+  List<ChurchFaqItem> get items {
+    final itemsData = _getValue('items');
+    if (itemsData is List) {
+      return itemsData
+          .map((item) => ChurchFaqItem(
+                question: item['question'] as String? ?? '',
+                answer: item['answer'] as String? ?? '',
+              ))
+          .toList();
+    }
+    return [];
+  }
+
+  dynamic _getValue(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key];
+    }
+    return null;
+  }
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
+}
+
+/// 성당 FAQ 항목
+class ChurchFaqItem {
+  final String question;
+  final String answer;
+
+  ChurchFaqItem({required this.question, required this.answer});
 }
 
 /// 프로필 알림 번역
