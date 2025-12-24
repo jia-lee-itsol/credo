@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/app_routes.dart';
+import '../../../../core/utils/app_localizations.dart';
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../data/providers/chat_repository_providers.dart';
@@ -64,33 +65,36 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final currentUser = ref.watch(currentUserProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
 
     if (_isLoading) {
       return Scaffold(
-        appBar: AppBar(title: const Text('채팅방 정보')),
+        appBar: AppBar(title: Text(l10n.chat.chatInfo)),
         body: const Center(child: CircularProgressIndicator()),
       );
     }
 
     if (_conversation == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('채팅방 정보')),
-        body: const Center(child: Text('채팅방을 찾을 수 없습니다')),
+        appBar: AppBar(title: Text(l10n.chat.chatInfo)),
+        body: Center(child: Text(l10n.chat.chatRoomNotFound)),
       );
     }
 
     final isGroup = _conversation!.type == ConversationType.group;
     final participantCount = _participants.length;
+    final isParticipant = currentUser != null &&
+        _conversation!.participants.contains(currentUser.userId);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('채팅방 정보'),
+        title: Text(l10n.chat.chatInfo),
         actions: [
-          if (isGroup && _conversation!.createdBy == currentUser?.userId)
+          if (isGroup && isParticipant)
             IconButton(
               icon: const Icon(Icons.edit),
               onPressed: _showEditGroupNameDialog,
-              tooltip: '그룹 이름 변경',
+              tooltip: l10n.chat.changeGroupName,
             ),
         ],
       ),
@@ -121,7 +125,7 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
                 // 채팅방 이름
                 Text(
                   isGroup
-                      ? (_conversation!.name ?? '그룹 채팅')
+                      ? (_conversation!.name ?? l10n.chat.groupChat)
                       : _getOtherUserName(currentUser?.userId),
                   style: theme.textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -129,7 +133,9 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  isGroup ? '그룹 채팅 · $participantCount명' : '1:1 채팅',
+                  isGroup
+                      ? l10n.chat.groupChatWithCount(participantCount)
+                      : l10n.chat.directChat,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: Colors.grey[600],
                   ),
@@ -147,7 +153,7 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '참여자 ($participantCount)',
+                  l10n.chat.participants(participantCount),
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -157,7 +163,7 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
                   onPressed: _showAddMemberDialog,
                   icon: Icon(Icons.person_add, color: primaryColor),
                   label: Text(
-                    '초대하기',
+                    l10n.chat.invite,
                     style: TextStyle(color: primaryColor),
                   ),
                 ),
@@ -183,9 +189,9 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
             child: OutlinedButton.icon(
               onPressed: _showLeaveConfirmDialog,
               icon: const Icon(Icons.exit_to_app, color: Colors.red),
-              label: const Text(
-                '채팅방 나가기',
-                style: TextStyle(color: Colors.red),
+              label: Text(
+                l10n.chat.leaveChatRoom,
+                style: const TextStyle(color: Colors.red),
               ),
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Colors.red),
@@ -201,7 +207,8 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
   }
 
   String _getOtherUserName(String? currentUserId) {
-    if (currentUserId == null) return '알 수 없음';
+    final l10n = ref.read(appLocalizationsSyncProvider);
+    if (currentUserId == null) return l10n.chat.unknown;
     final otherUser = _participants.firstWhere(
       (u) => u.userId != currentUserId,
       orElse: () => _participants.first,
@@ -217,6 +224,7 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
   }) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final isDirect = _conversation?.type == ConversationType.direct;
 
     // 1:1 채팅방인 경우 친구 관계 확인
@@ -247,9 +255,9 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: const Text(
-                '나',
-                style: TextStyle(fontSize: 10, color: Colors.grey),
+              child: Text(
+                l10n.chat.me,
+                style: const TextStyle(fontSize: 10, color: Colors.grey),
               ),
             ),
           ],
@@ -261,9 +269,9 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
                 color: Colors.amber[100],
                 borderRadius: BorderRadius.circular(4),
               ),
-              child: const Text(
-                '방장',
-                style: TextStyle(fontSize: 10, color: Colors.orange),
+              child: Text(
+                l10n.chat.creator,
+                style: const TextStyle(fontSize: 10, color: Colors.orange),
               ),
             ),
           ],
@@ -281,7 +289,7 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
                       return TextButton.icon(
                         onPressed: () => _handleUnblock(relation!),
                         icon: const Icon(Icons.block, size: 16),
-                        label: const Text('차단 해제'),
+                        label: Text(l10n.chat.unblock),
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.red,
                         ),
@@ -292,7 +300,7 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
                       return TextButton.icon(
                         onPressed: () => _handleAddFriend(user.userId),
                         icon: const Icon(Icons.person_add, size: 16),
-                        label: const Text('친구 추가'),
+                        label: Text(l10n.chat.addFriend),
                         style: TextButton.styleFrom(
                           foregroundColor: primaryColor,
                         ),
@@ -319,34 +327,36 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
   }
 
   Future<void> _handleAddFriend(String friendId) async {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     try {
       await addFriend(ref, friendId: friendId);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('친구로 추가했습니다')),
+          SnackBar(content: Text(l10n.chat.friendAdded)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('친구 추가 실패: $e')),
+          SnackBar(content: Text('${l10n.chat.addFriendFailed}: $e')),
         );
       }
     }
   }
 
   Future<void> _handleUnblock(FriendEntity relation) async {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     try {
       await unblockUser(ref, odId: relation.odId);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('차단을 해제했습니다')),
+          SnackBar(content: Text(l10n.chat.unblocked)),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('차단 해제 실패: $e')),
+          SnackBar(content: Text('${l10n.chat.unblockFailed}: $e')),
         );
       }
     }
@@ -367,24 +377,25 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
   }
 
   void _showEditGroupNameDialog() {
+    final l10n = ref.read(appLocalizationsSyncProvider);
     final controller = TextEditingController(text: _conversation?.name ?? '');
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('그룹 이름 변경'),
+        title: Text(l10n.chat.changeGroupName),
         content: TextField(
           controller: controller,
-          decoration: const InputDecoration(
-            labelText: '그룹 이름',
-            hintText: '새로운 그룹 이름을 입력하세요',
+          decoration: InputDecoration(
+            labelText: l10n.chat.groupName,
+            hintText: l10n.chat.enterNewGroupName,
           ),
           autofocus: true,
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('취소'),
+            child: Text(l10n.common.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -403,12 +414,12 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
               } catch (e) {
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('이름 변경 실패: $e')),
+                    SnackBar(content: Text('${l10n.chat.nameChangeFailed}: $e')),
                   );
                 }
               }
             },
-            child: const Text('변경'),
+            child: Text(l10n.chat.change),
           ),
         ],
       ),
@@ -417,17 +428,18 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
 
   void _showLeaveConfirmDialog() {
     final currentUser = ref.read(currentUserProvider);
+    final l10n = ref.read(appLocalizationsSyncProvider);
     if (currentUser == null) return;
 
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('채팅방 나가기'),
-        content: const Text('정말 이 채팅방을 나가시겠습니까?\n상대방에게 퇴장 메시지가 전송됩니다.'),
+        title: Text(l10n.chat.leaveChatRoom),
+        content: Text(l10n.chat.leaveChatRoomConfirm),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('취소'),
+            child: Text(l10n.common.cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -449,14 +461,14 @@ class _ChatInfoScreenState extends ConsumerState<ChatInfoScreen> {
               } catch (e) {
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('채팅방 나가기 실패: $e')),
+                    SnackBar(content: Text('${l10n.chat.leaveChatRoomFailed}: $e')),
                   );
                 }
               }
             },
-            child: const Text(
-              '나가기',
-              style: TextStyle(color: Colors.red),
+            child: Text(
+              l10n.chat.leave,
+              style: const TextStyle(color: Colors.red),
             ),
           ),
         ],
@@ -490,6 +502,7 @@ class _AddMemberBottomSheetState extends ConsumerState<_AddMemberBottomSheet> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
 
     // 친구 목록 가져오기 (이미 참여 중인 유저 제외)
     final friendsAsync = ref.watch(friendsStreamProvider);
@@ -519,9 +532,9 @@ class _AddMemberBottomSheetState extends ConsumerState<_AddMemberBottomSheet> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  '멤버 초대',
-                  style: TextStyle(
+                Text(
+                  l10n.chat.inviteMembers,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -537,7 +550,7 @@ class _AddMemberBottomSheetState extends ConsumerState<_AddMemberBottomSheet> {
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : Text(
-                          '추가 (${_selectedUsers.length})',
+                          l10n.chat.addWithCount(_selectedUsers.length),
                           style: TextStyle(
                             color: _selectedUsers.isEmpty
                                 ? Colors.grey
@@ -569,12 +582,12 @@ class _AddMemberBottomSheetState extends ConsumerState<_AddMemberBottomSheet> {
                         Icon(Icons.person_off, size: 48, color: Colors.grey[400]),
                         const SizedBox(height: 16),
                         Text(
-                          '초대할 수 있는 친구가 없습니다',
+                          l10n.chat.noFriendsToInvite,
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          '친구를 추가한 후 초대해보세요',
+                          l10n.chat.addFriendsFirst,
                           style: TextStyle(
                             color: Colors.grey[500],
                             fontSize: 12,
@@ -641,6 +654,7 @@ class _AddMemberBottomSheetState extends ConsumerState<_AddMemberBottomSheet> {
   Future<void> _addSelectedMembers() async {
     if (_selectedUsers.isEmpty) return;
 
+    final l10n = ref.read(appLocalizationsSyncProvider);
     setState(() => _isLoading = true);
 
     try {
@@ -650,7 +664,7 @@ class _AddMemberBottomSheetState extends ConsumerState<_AddMemberBottomSheet> {
       await chatRepository.addMembersToConversation(
         conversationId: widget.conversationId,
         memberIds: _selectedUsers.toList(),
-        addedByNickname: currentUser?.nickname ?? '알 수 없음',
+        addedByNickname: currentUser?.nickname ?? l10n.chat.unknown,
       );
 
       if (mounted) {
@@ -658,13 +672,13 @@ class _AddMemberBottomSheetState extends ConsumerState<_AddMemberBottomSheet> {
         widget.onMembersAdded();
 
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${_selectedUsers.length}명이 초대되었습니다')),
+          SnackBar(content: Text(l10n.chat.membersInvited(_selectedUsers.length))),
         );
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('초대 실패: $e')),
+          SnackBar(content: Text('${l10n.chat.inviteFailed}: $e')),
         );
       }
     } finally {

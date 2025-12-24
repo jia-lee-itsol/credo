@@ -51,7 +51,10 @@ class _NotificationSettingsScreenState
           settings,
         ),
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, stack) => Center(child: Text('エラー: $error')),
+        error: (error, stack) {
+          final l10n = ref.read(appLocalizationsSyncProvider);
+          return Center(child: Text('${l10n.common.error}: $error'));
+        },
       ),
     );
   }
@@ -160,8 +163,8 @@ class _NotificationSettingsScreenState
                 ),
                 const Divider(height: 1),
                 SwitchListTile(
-                  title: const Text('채팅 메시지'),
-                  subtitle: const Text('새 채팅 메시지 알림'),
+                  title: Text(l10n.profile.notifications.chatMessages),
+                  subtitle: Text(l10n.profile.notifications.chatMessagesDescription),
                   value: settings.chatMessages,
                   activeThumbColor: primaryColor,
                   onChanged: _isSaving
@@ -259,16 +262,16 @@ class _NotificationSettingsScreenState
             children: [
               ListTile(
                 leading: Icon(Icons.bug_report, color: primaryColor),
-                title: const Text('알림 테스트'),
-                subtitle: const Text('알림이 정상적으로 수신되는지 테스트합니다'),
+                title: Text(l10n.profile.notifications.testNotificationTitle),
+                subtitle: Text(l10n.profile.notifications.testNotificationSubtitle),
                 enabled: false,
               ),
               const Divider(height: 1),
               // 기본 테스트 알림
               ListTile(
                 leading: const Text('🔔', style: TextStyle(fontSize: 20)),
-                title: const Text('기본 테스트'),
-                subtitle: const Text('FCM 연결 상태를 확인합니다'),
+                title: Text(l10n.profile.notifications.basicTest),
+                subtitle: Text(l10n.profile.notifications.basicTestDescription),
                 trailing: _buildTestButton('test'),
                 onTap: _isTesting ? null : () => _sendTypedTestNotification('test'),
               ),
@@ -276,8 +279,8 @@ class _NotificationSettingsScreenState
               // 공지글 알림 테스트
               ListTile(
                 leading: const Text('📢', style: TextStyle(fontSize: 20)),
-                title: const Text('공지글 알림'),
-                subtitle: const Text('성당 공지 알림을 테스트합니다'),
+                title: Text(l10n.profile.notifications.noticeTest),
+                subtitle: Text(l10n.profile.notifications.noticeTestDescription),
                 trailing: _buildTestButton('official_notice'),
                 onTap: _isTesting ? null : () => _sendTypedTestNotification('official_notice'),
               ),
@@ -285,8 +288,8 @@ class _NotificationSettingsScreenState
               // 댓글 알림 테스트
               ListTile(
                 leading: const Text('💬', style: TextStyle(fontSize: 20)),
-                title: const Text('댓글 알림'),
-                subtitle: const Text('댓글 알림을 테스트합니다'),
+                title: Text(l10n.profile.notifications.commentTest),
+                subtitle: Text(l10n.profile.notifications.commentTestDescription),
                 trailing: _buildTestButton('comment'),
                 onTap: _isTesting ? null : () => _sendTypedTestNotification('comment'),
               ),
@@ -425,10 +428,11 @@ class _NotificationSettingsScreenState
     if (_isTesting) return;
 
     final currentUser = ref.read(currentUserProvider);
+    final l10n = ref.read(appLocalizationsSyncProvider);
     if (currentUser == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('로그인이 필요합니다.'),
+        SnackBar(
+          content: Text(l10n.profile.notifications.loginRequiredForTest),
           backgroundColor: Colors.red,
         ),
       );
@@ -453,8 +457,8 @@ class _NotificationSettingsScreenState
 
       // iOS 시뮬레이터에서는 푸시 알림이 작동하지 않음
       final errorMessage = Theme.of(context).platform == TargetPlatform.iOS
-          ? 'iOS 시뮬레이터에서는 푸시 알림을 테스트할 수 없습니다. 실제 기기에서 테스트해주세요.'
-          : 'FCM 토큰을 가져올 수 없습니다. 알림 권한을 확인하고 앱을 재시작해주세요.';
+          ? l10n.profile.notifications.iosSimulatorNotSupported
+          : l10n.profile.notifications.fcmTokenError;
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -476,15 +480,29 @@ class _NotificationSettingsScreenState
       _testingType = null;
     });
 
-    final typeName = PushNotificationService.getNotificationTypeName(notificationType);
+    // 알림 유형별 다국어 이름 가져오기
+    String typeName;
+    switch (notificationType) {
+      case 'test':
+        typeName = l10n.profile.notifications.basicTest;
+        break;
+      case 'official_notice':
+        typeName = l10n.profile.notifications.noticeTest;
+        break;
+      case 'comment':
+        typeName = l10n.profile.notifications.commentTest;
+        break;
+      default:
+        typeName = notificationType;
+    }
     final icon = PushNotificationService.getNotificationTypeIcon(notificationType);
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           result['success'] == true
-              ? '$icon $typeName 테스트 알림이 전송되었습니다'
-              : result['message'] ?? '$typeName 테스트 실패',
+              ? l10n.profile.notifications.testNotificationSentWithType(icon, typeName)
+              : result['message'] ?? l10n.profile.notifications.testNotificationFailed(typeName),
         ),
         backgroundColor: result['success'] == true ? Colors.green : Colors.red,
         duration: const Duration(seconds: 3),

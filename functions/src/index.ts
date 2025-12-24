@@ -1431,7 +1431,80 @@ export const sendTypedTestNotification = onCall(
 
       case "test":
       default: {
-        // 기본 테스트: FCM 직접 전송
+        // 기본 테스트: 실제 프로덕션 로직과 동일하게 알림 설정 확인 후 FCM 전송
+        logger.info(`기본 테스트 알림: userId=${userId}`);
+
+        // 알림 설정 확인 (실제 프로덕션 로직과 동일)
+        let shouldSendNotification = true;
+        try {
+          const settingsDoc = await db
+            .collection("users")
+            .doc(userId)
+            .collection("notificationSettings")
+            .doc("settings")
+            .get();
+
+          if (settingsDoc.exists) {
+            const settings = settingsDoc.data();
+            // 전체 알림이 꺼져 있으면 전송하지 않음
+            if (settings?.enabled === false) {
+              shouldSendNotification = false;
+              logger.info(
+                `사용자 ${userId}의 전체 알림이 꺼져 있어 테스트 알림을 전송하지 않습니다.`
+              );
+            } else if (
+              settings?.quietHoursEnabled === true &&
+              settings?.quietHoursStart !== undefined &&
+              settings?.quietHoursEnd !== undefined
+            ) {
+              // 조용한 시간 확인
+              const now = new Date();
+              const currentHour = now.getHours();
+              const quietStart = settings.quietHoursStart as number;
+              const quietEnd = settings.quietHoursEnd as number;
+
+              // 조용한 시간대 체크
+              if (quietStart > quietEnd) {
+                // 자정을 넘어가는 경우 (예: 22시 ~ 7시)
+                if (currentHour >= quietStart || currentHour < quietEnd) {
+                  shouldSendNotification = false;
+                  logger.info(
+                    `사용자 ${userId}의 조용한 시간대(${quietStart}시~${quietEnd}시)에 ` +
+                    `테스트 알림을 전송하지 않습니다. (현재: ${currentHour}시)`
+                  );
+                }
+              } else {
+                // 같은 날 범위 (예: 10시 ~ 22시)
+                if (currentHour >= quietStart && currentHour < quietEnd) {
+                  shouldSendNotification = false;
+                  logger.info(
+                    `사용자 ${userId}의 조용한 시간대(${quietStart}시~${quietEnd}시)에 ` +
+                    `테스트 알림을 전송하지 않습니다. (현재: ${currentHour}시)`
+                  );
+                }
+              }
+            }
+          }
+        } catch (error) {
+          logger.warn(
+            `사용자 ${userId}의 알림 설정 확인 실패: ${error}. ` +
+            "기본적으로 알림을 전송합니다."
+          );
+          // 설정 확인 실패 시 기본적으로 알림 전송 (테스트 목적)
+        }
+
+        // 알림 설정이 허용되지 않으면 전송하지 않음
+        if (!shouldSendNotification) {
+          return {
+            success: false,
+            type: notificationType,
+            message:
+              "알림 설정에 의해 테스트 알림 전송이 차단되었습니다. " +
+              "알림 설정에서 전체 알림을 켜거나 조용한 시간을 확인해주세요.",
+          };
+        }
+
+        // FCM 직접 전송
         const message = {
           token: fcmToken,
           notification: {
@@ -1640,9 +1713,9 @@ export const onChatMessageCreated = onDocumentCreated(
               const end = settingsData.quietHoursEnd ?? 7;
 
               // 조용한 시간 범위 체크
-              const isQuietTime = start < end
-                ? (currentHour >= start && currentHour < end)
-                : (currentHour >= start || currentHour < end);
+              const isQuietTime = start < end ?
+                (currentHour >= start && currentHour < end) :
+                (currentHour >= start || currentHour < end);
 
               if (isQuietTime) {
                 logger.info(

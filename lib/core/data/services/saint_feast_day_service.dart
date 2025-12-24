@@ -1,12 +1,8 @@
 import 'dart:convert';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/saint_feast_day_model.dart';
-import '../../../shared/providers/liturgy_theme_provider.dart';
-import '../../../shared/providers/locale_provider.dart';
 import '../../services/logger_service.dart';
 import 'openai_service.dart';
-import 'liturgical_reading_service.dart';
 import 'saint_image_service.dart';
 
 /// 성인 축일 데이터 서비스
@@ -435,25 +431,5 @@ class SaintFeastDayService {
   }
 }
 
-/// 오늘의 성인 축일 Provider (ChatGPT 검색, 각 언어별로 하루 한번 검색 후 캐싱)
-/// 날짜가 바뀌면 자동으로 새로 로드됨
-final todaySaintsProvider = FutureProvider<List<SaintFeastDayModel>>((
-  ref,
-) async {
-  // 날짜 변경 감지를 위해 currentDateStringProvider를 watch
-  ref.watch(currentDateStringProvider);
-
-  final testDate = ref.watch(testDateOverrideProvider);
-  final date = testDate ?? DateTime.now();
-  final locale = ref.watch(localeProvider);
-  final languageCode = locale.languageCode;
-
-  // ChatGPT로 성인 검색 (언어별 캐싱 포함, 하루 한번만 검색)
-  // GPT가 이미 해당 언어로 이름을 반환하므로 추가 번역 불필요
-  final saints = await SaintFeastDayService.getSaintsForDateFromChatGPT(
-    date,
-    languageCode,
-  );
-
-  return saints;
-});
+// 참고: todaySaintsProvider는 saint_feast_day_providers.dart로 통합되었습니다.
+// lib/features/saints/presentation/providers/saint_feast_day_providers.dart를 사용하세요.

@@ -5,10 +5,10 @@ import 'package:intl/intl.dart';
 
 import '../../../../config/routes/app_routes.dart';
 import '../../../../core/constants/liturgy_constants.dart';
-import '../../../../core/data/services/saint_feast_day_service.dart' as core;
 import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../shared/providers/locale_provider.dart';
+import '../../../saints/presentation/providers/saint_feast_day_providers.dart';
 
 /// 홈 화면 헤더 위젯
 class HomeHeader extends ConsumerWidget {
@@ -35,7 +35,7 @@ class HomeHeader extends ConsumerWidget {
 
     // 현재 로케일에 맞는 날짜 포맷 생성
     final dateFormat = HomeHeader._getDateFormatForLocale(currentLocale);
-    final todaySaintsAsync = ref.watch(core.todaySaintsProvider);
+    final todaySaintsAsync = ref.watch(todaySaintsProvider);
 
     return Container(
       decoration: BoxDecoration(

@@ -249,7 +249,7 @@ class TodaySaintsScreen extends ConsumerWidget {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          '${saint.month}月${saint.day}日',
+                          _formatDate(saint.month, saint.day, locale.languageCode),
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: theme.colorScheme.onSurfaceVariant,
                           ),
@@ -295,6 +295,52 @@ class TodaySaintsScreen extends ConsumerWidget {
       default:
         return l10n.saints.memorial;
     }
+  }
+
+  /// 날짜 포맷 (다국어)
+  String _formatDate(int month, int day, String languageCode) {
+    switch (languageCode) {
+      case 'ja':
+        return '$month月$day日';
+      case 'ko':
+        return '$month월 $day일';
+      case 'en':
+        return '${_getEnglishMonth(month)} $day';
+      case 'zh':
+        return '$month月$day日';
+      case 'vi':
+        return 'Ngày $day tháng $month';
+      case 'es':
+        return '$day de ${_getSpanishMonth(month)}';
+      case 'pt':
+        return '$day de ${_getPortugueseMonth(month)}';
+      default:
+        return '$month月$day日';
+    }
+  }
+
+  String _getEnglishMonth(int month) {
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+    return months[month - 1];
+  }
+
+  String _getSpanishMonth(int month) {
+    const months = [
+      'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+    ];
+    return months[month - 1];
+  }
+
+  String _getPortugueseMonth(int month) {
+    const months = [
+      'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+      'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+    ];
+    return months[month - 1];
   }
 
   /// 이미지 캐시 무효화 및 실패한 URL 저장

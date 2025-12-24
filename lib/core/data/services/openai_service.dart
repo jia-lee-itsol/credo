@@ -198,7 +198,7 @@ ${language == 'ja'
       }
 
       final languageName = _getLanguageName(targetLanguage);
-      
+
       // 언어별 접두사 및 예시
       String prefixRequirement = '';
       String example = '';
@@ -212,15 +212,18 @@ ${language == 'ja'
           example = '聖若望, 聖瑪利亞';
           break;
         case 'vi':
-          prefixRequirement = '- "Thánh" 접두사를 반드시 포함하여 반환하세요 (예: "Thánh Gioan", "Thánh Maria")';
+          prefixRequirement =
+              '- "Thánh" 접두사를 반드시 포함하여 반환하세요 (예: "Thánh Gioan", "Thánh Maria")';
           example = 'Thánh Gioan, Thánh Maria';
           break;
         case 'es':
-          prefixRequirement = '- "San" 또는 "Santa" 접두사를 반드시 포함하여 반환하세요 (예: "San Juan", "Santa María")';
+          prefixRequirement =
+              '- "San" 또는 "Santa" 접두사를 반드시 포함하여 반환하세요 (예: "San Juan", "Santa María")';
           example = 'San Juan, Santa María';
           break;
         case 'pt':
-          prefixRequirement = '- "São" 또는 "Santa" 접두사를 반드시 포함하여 반환하세요 (예: "São João", "Santa Maria")';
+          prefixRequirement =
+              '- "São" 또는 "Santa" 접두사를 반드시 포함하여 반환하세요 (예: "São João", "Santa Maria")';
           example = 'São João, Santa Maria';
           break;
       }
@@ -239,7 +242,7 @@ ${englishName != null ? '영어 이름: $englishName' : ''}
 요구사항:
 - 가톨릭 교회에서 공식적으로 사용하는 $languageName 성인 이름을 사용하세요
 - 가톨릭 전례에서 사용하는 표준 $languageName 이름을 사용하세요
-${prefixRequirement.isNotEmpty ? '$prefixRequirement' : ''}
+${prefixRequirement.isNotEmpty ? prefixRequirement : ''}
 ${example.isNotEmpty ? '- 예시 형식: $example' : ''}
 - 번역된 이름만 반환하세요 (설명이나 추가 텍스트 없이)
 
@@ -317,8 +320,19 @@ $languageName 이름:''';
 
       // 월 이름 변환
       final monthNames = [
-        '', 'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
+        '',
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
       ];
       final monthName = monthNames[month];
 
@@ -339,7 +353,9 @@ $languageName 이름:''';
 JSON 형식으로만 응답 (마크다운 없이):
 {"saints": [{"name": "$languageName 이름", "nameEn": "English name", "type": "optional_memorial", "imageUrl": null}], "liturgyTakesPrecedence": false, "liturgicalNote": ""}''';
 
-      AppLogger.debug('[OpenAIService] 성인 검색 프롬프트: $monthName $day, $year ($languageCode)');
+      AppLogger.debug(
+        '[OpenAIService] 성인 검색 프롬프트: $monthName $day, $year ($languageCode)',
+      );
 
       final response = await _dio.post(
         '$_baseUrl/chat/completions',
@@ -653,9 +669,7 @@ $languageName로 간결하고 따뜻한 축하 메시지를 작성해주세요.
           final message = choices.first['message'] as Map<String, dynamic>?;
           final content = message?['content'] as String?;
           if (content != null && content.isNotEmpty) {
-            AppLogger.debug(
-              '[OpenAIService] 묵상 한마디 생성 성공 ($language)',
-            );
+            AppLogger.debug('[OpenAIService] 묵상 한마디 생성 성공 ($language)');
             return content.trim();
           }
         }

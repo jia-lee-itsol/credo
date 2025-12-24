@@ -2,9 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/data/services/openai_service.dart';
 import '../../../../core/data/services/liturgical_reading_service.dart';
-import '../../../../core/data/services/saint_feast_day_service.dart' as core;
 import '../../../../core/services/logger_service.dart';
 import '../../../../shared/providers/locale_provider.dart';
+import '../../../saints/presentation/providers/saint_feast_day_providers.dart';
 
 /// 오늘의 묵상 한마디 Provider (하루에 한 번 생성, 캐싱)
 final dailyReflectionProvider = FutureProvider<String?>((ref) async {
@@ -50,7 +50,7 @@ final dailyReflectionProvider = FutureProvider<String?>((ref) async {
     // 오늘의 성인 정보 가져오기
     List<String>? saintNames;
     try {
-      final saints = await ref.watch(core.todaySaintsProvider.future);
+      final saints = await ref.watch(todaySaintsProvider.future);
       if (saints.isNotEmpty) {
         saintNames = saints
             .map((saint) => saint.getName(languageCode))

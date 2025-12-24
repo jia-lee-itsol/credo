@@ -140,9 +140,14 @@ class FirestoreChatRepository implements ChatRepository {
       await messageRef.set(systemMessage);
 
       // 2. 참여자 목록 업데이트 및 마지막 메시지 정보 업데이트
+      final leaveMessageContent = '$userNicknameさんがチャットを退出しました';
       await _conversationsRef.doc(conversationId).update({
         'participants': participants,
-        'lastMessage': '$userNicknameさんがチャットを退出しました',
+        'lastMessage': {
+          'content': leaveMessageContent,
+          'senderId': 'system',
+          'createdAt': FieldValue.serverTimestamp(),
+        },
         'lastMessageAt': FieldValue.serverTimestamp(),
         'updatedAt': FieldValue.serverTimestamp(),
       });
@@ -205,7 +210,11 @@ class FirestoreChatRepository implements ChatRepository {
     await _conversationsRef.doc(conversationId).update({
       'participants': participants,
       'type': newType,
-      'lastMessage': inviteMessage,
+      'lastMessage': {
+        'content': inviteMessage,
+        'senderId': 'system',
+        'createdAt': FieldValue.serverTimestamp(),
+      },
       'lastMessageAt': FieldValue.serverTimestamp(),
       'updatedAt': FieldValue.serverTimestamp(),
     });
@@ -367,6 +376,11 @@ class FirestoreChatRepository implements ChatRepository {
       });
     }
 
+    // 대화방 문서도 업데이트하여 watchConversations 스냅샷 트리거
+    batch.update(_conversationsRef.doc(conversationId), {
+      'updatedAt': now,
+    });
+
     await batch.commit();
   }
 
@@ -457,12 +471,20 @@ class FirestoreChatRepository implements ChatRepository {
     return watchConversations(userId).asyncMap((conversations) async {
       int totalUnread = 0;
       for (final conversation in conversations) {
+        // 마지막 메시지가 내가 보낸 것이면 이 대화방의 unread count는 0
+        if (conversation.lastMessage?.senderId == userId) {
+          continue;
+        }
+
         final unreadSnapshot = await _messagesRef(conversation.conversationId)
             .where('senderId', isNotEqualTo: userId)
             .get();
 
         for (final doc in unreadSnapshot.docs) {
           final data = doc.data();
+          // 시스템 메시지는 unread count에서 제외
+          if (data['senderId'] == 'system') continue;
+
           final readBy = data['readBy'] as Map<String, dynamic>? ?? {};
           if (!readBy.containsKey(userId)) {
             totalUnread++;
@@ -489,16 +511,21 @@ class FirestoreChatRepository implements ChatRepository {
       final conversationData = conversationSnapshot.data();
       if (conversationData == null) return 0;
 
-      // 마지막 메시지 정보 확인
-      final lastMessageData = conversationData['lastMessage'] as Map<String, dynamic>?;
-      final lastMessageSenderId = lastMessageData?['senderId'] as String?;
+      // 마지막 메시지 정보 확인 (Map 또는 String일 수 있음)
+      final lastMessageRaw = conversationData['lastMessage'];
+      String? lastMessageSenderId;
+
+      if (lastMessageRaw is Map<String, dynamic>) {
+        lastMessageSenderId = lastMessageRaw['senderId'] as String?;
+      }
+      // lastMessageRaw이 String인 경우 (시스템 메시지)는 senderId가 없음
 
       // 마지막 메시지가 내가 보낸 메시지인 경우, 읽지 않은 메시지가 없음
       if (lastMessageSenderId == userId) {
         return 0;
       }
 
-      // 읽지 않은 메시지 카운트
+      // 읽지 않은 메시지 카운트 (내가 보낸 메시지 제외, 시스템 메시지 제외)
       final messagesSnapshot = await _messagesRef(conversationId)
           .where('senderId', isNotEqualTo: userId)
           .get();
@@ -506,6 +533,9 @@ class FirestoreChatRepository implements ChatRepository {
       int unread = 0;
       for (final doc in messagesSnapshot.docs) {
         final data = doc.data();
+        // 시스템 메시지는 unread count에서 제외
+        if (data['senderId'] == 'system') continue;
+
         final readBy = data['readBy'] as Map<String, dynamic>? ?? {};
         if (!readBy.containsKey(userId)) {
           unread++;

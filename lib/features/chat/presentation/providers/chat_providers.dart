@@ -93,28 +93,11 @@ final conversationUnreadCountProvider =
   }
 
   final repository = ref.watch(chatRepositoryProvider);
-  final conversationAsync = ref.watch(conversationStreamProvider(conversationId));
-
-  // 대화방 정보와 메시지 스트림을 결합하여 마지막 메시지 확인
-  return conversationAsync.when(
-    data: (conversation) {
-      if (conversation == null) {
-        return Stream.value(0);
-      }
-
-      // 마지막 메시지가 내가 보낸 메시지인 경우, 읽지 않은 메시지가 없음
-      if (conversation.lastMessage?.senderId == currentUser.userId) {
-        return Stream.value(0);
-      }
-
-      // 그 외의 경우 메시지 스트림에서 읽지 않은 메시지 카운트
-      return repository.watchConversationUnreadCount(
-        conversationId: conversationId,
-        userId: currentUser.userId,
-      );
-    },
-    loading: () => Stream.value(0),
-    error: (_, __) => Stream.value(0),
+  // watchConversationUnreadCount가 모든 로직을 처리
+  // (대화방 스냅샷 감지 + lastMessage.senderId 체크)
+  return repository.watchConversationUnreadCount(
+    conversationId: conversationId,
+    userId: currentUser.userId,
   );
 });
 

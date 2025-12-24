@@ -175,52 +175,57 @@ class LiturgySeasonUtil {
     final now = date ?? DateTime.now();
     final year = now.year;
 
+    // 날짜만 비교하기 위해 시간 부분 제거
+    final nowDate = DateTime(now.year, now.month, now.day);
+
     // 부활절 계산 (Anonymous Gregorian algorithm)
     final easter = _calculateEaster(year);
+    final easterDate = DateTime(easter.year, easter.month, easter.day);
 
     // 대림절 시작: 11월 30일에 가장 가까운 일요일
     final adventStart = _calculateAdventStart(year);
+    final adventStartDate = DateTime(adventStart.year, adventStart.month, adventStart.day);
 
-    // 성탄절: 12월 25일 ~ 1월 첫째 일요일 이후
-    final christmas = DateTime(year, 12, 25);
-    final epiphany = _calculateEpiphany(year + 1);
+    // 성탄절: 12월 25일 ~ 1월 6일 (주현절)
+    final christmasDate = DateTime(year, 12, 25);
 
     // 사순절: 부활절 46일 전 (재의 수요일)
     final ashWednesday = easter.subtract(const Duration(days: 46));
+    final ashWednesdayDate = DateTime(ashWednesday.year, ashWednesday.month, ashWednesday.day);
 
     // 부활절 시즌: 부활절 ~ 성령 강림 (부활절 후 50일)
     final pentecost = easter.add(const Duration(days: 49));
+    final pentecostDate = DateTime(pentecost.year, pentecost.month, pentecost.day);
 
     // 현재 날짜 기준 전례 시즌 판별
-    // 성탄절을 먼저 체크 (12월 25일 ~ 1월 6일)
-    if ((now.isAfter(christmas.subtract(const Duration(days: 1))) &&
-            now.year == year) ||
-        (now.isBefore(epiphany.add(const Duration(days: 1))) &&
-            now.year == year + 1)) {
+    // 성탄절: 12월 25일 ~ 다음해 1월 6일
+    if (nowDate.month == 12 && nowDate.day >= 25) {
+      return LiturgySeason.christmas;
+    }
+    if (nowDate.month == 1 && nowDate.day <= 6) {
       return LiturgySeason.christmas;
     }
 
-    // 대림절 체크 (성탄절이 아닌 경우)
-    if (now.isAfter(adventStart.subtract(const Duration(days: 1))) &&
-        now.isBefore(christmas)) {
+    // 대림절: 대림절 시작일 ~ 12월 24일
+    if ((nowDate.isAtSameMomentAs(adventStartDate) || nowDate.isAfter(adventStartDate)) &&
+        nowDate.isBefore(christmasDate)) {
       return LiturgySeason.advent;
     }
 
-    if (now.isAfter(ashWednesday.subtract(const Duration(days: 1))) &&
-        now.isBefore(easter)) {
+    // 사순절: 재의 수요일 ~ 부활절 전날
+    if ((nowDate.isAtSameMomentAs(ashWednesdayDate) || nowDate.isAfter(ashWednesdayDate)) &&
+        nowDate.isBefore(easterDate)) {
       return LiturgySeason.lent;
     }
 
     // 성령 강림 (부활절 시즌보다 먼저 체크)
-    if (now.day == pentecost.day &&
-        now.month == pentecost.month &&
-        now.year == pentecost.year) {
+    if (nowDate.isAtSameMomentAs(pentecostDate)) {
       return LiturgySeason.pentecost;
     }
 
     // 부활절 시즌 (부활절 ~ 성령 강림 전날)
-    if (now.isAfter(easter.subtract(const Duration(days: 1))) &&
-        now.isBefore(pentecost)) {
+    if ((nowDate.isAtSameMomentAs(easterDate) || nowDate.isAfter(easterDate)) &&
+        nowDate.isBefore(pentecostDate)) {
       return LiturgySeason.easter;
     }
 
@@ -264,12 +269,6 @@ class LiturgySeasonUtil {
     } else {
       return nov30.add(Duration(days: 7 - weekday));
     }
-  }
-
-  /// 주현절 계산 (1월 6일 또는 가장 가까운 일요일)
-  static DateTime _calculateEpiphany(int year) {
-    // 일본에서는 1월 6일을 주현절로 사용
-    return DateTime(year, 1, 6);
   }
 
   /// 전례 시즌 이름 반환

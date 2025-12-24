@@ -122,8 +122,7 @@ class PostFilePicker extends ConsumerWidget {
               itemCount: 1,
               itemBuilder: (context, index) {
                 return _AddFileButton(
-                  onTap: () =>
-                      _showPdfPicker(context, notifier, totalPdfCount),
+                  onTap: () => _showPdfPicker(context, notifier, totalPdfCount),
                   icon: Icons.picture_as_pdf,
                 );
               },
@@ -286,10 +285,7 @@ class _AddFileButton extends ConsumerWidget {
   final VoidCallback onTap;
   final IconData icon;
 
-  const _AddFileButton({
-    required this.onTap,
-    required this.icon,
-  });
+  const _AddFileButton({required this.onTap, required this.icon});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -398,7 +394,6 @@ class PostFilePickerHelper {
           return;
         }
 
-        ;
         notifier.addImage(imageFile);
       }
     } on PlatformException catch (e) {

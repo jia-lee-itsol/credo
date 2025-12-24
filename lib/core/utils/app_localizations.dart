@@ -89,8 +89,95 @@ class AppLocalizations {
   /// 성인 번역
   SaintsTranslations get saints => SaintsTranslations(_getValue('saints'));
 
+  /// 채팅 번역
+  ChatTranslations get chat => ChatTranslations(_getValue('chat'));
+
   /// 앱 정보 번역
   AppTranslations get app => AppTranslations(_getValue('app'));
+}
+
+/// 채팅 번역
+class ChatTranslations {
+  final dynamic _data;
+
+  ChatTranslations(this._data);
+
+  String get messages => _getString('messages') ?? 'メッセージ';
+  String get sendMessage => _getString('sendMessage') ?? 'メッセージを送信';
+  String get addFriend => _getString('addFriend') ?? '友達追加';
+  String get viewFriendList => _getString('viewFriendList') ?? '友達リストを見る';
+  String get noMessages => _getString('noMessages') ?? 'まだメッセージがありません';
+  String get startConversation =>
+      _getString('startConversation') ?? '他のユーザーと会話を始めましょう';
+  String get loadFailed => _getString('loadFailed') ?? 'メッセージを読み込めませんでした';
+  String get loginRequired => _getString('loginRequired') ?? 'ログインが必要です';
+  String get loginRequiredMessage =>
+      _getString('loginRequiredMessage') ?? 'ログインするとメッセージを送受信できます';
+  String get unknown => _getString('unknown') ?? '不明';
+  String get groupChat => _getString('groupChat') ?? 'グループチャット';
+  String get chatInfo => _getString('chatInfo') ?? 'チャットルーム情報';
+  String get chatRoomNotFound =>
+      _getString('chatRoomNotFound') ?? 'チャットルームが見つかりません';
+  String get directChat => _getString('directChat') ?? '1:1チャット';
+  String groupChatWithCount(int count) {
+    final template = _getString('groupChatWithCount') ?? 'グループチャット · {count}人';
+    return template.replaceAll('{count}', count.toString());
+  }
+
+  String participants(int count) {
+    final template = _getString('participants') ?? '参加者 ({count})';
+    return template.replaceAll('{count}', count.toString());
+  }
+
+  String get invite => _getString('invite') ?? '招待';
+  String get leaveChatRoom => _getString('leaveChatRoom') ?? 'チャットルームを退出';
+  String get me => _getString('me') ?? '私';
+  String get creator => _getString('creator') ?? '管理者';
+  String get unblock => _getString('unblock') ?? 'ブロック解除';
+  String get friendAdded => _getString('friendAdded') ?? '友達に追加しました';
+  String get addFriendFailed => _getString('addFriendFailed') ?? '友達追加に失敗しました';
+  String get unblocked => _getString('unblocked') ?? 'ブロックを解除しました';
+  String get unblockFailed => _getString('unblockFailed') ?? 'ブロック解除に失敗しました';
+  String get changeGroupName => _getString('changeGroupName') ?? 'グループ名を変更';
+  String get groupName => _getString('groupName') ?? 'グループ名';
+  String get enterNewGroupName =>
+      _getString('enterNewGroupName') ?? '新しいグループ名を入力してください';
+  String get change => _getString('change') ?? '変更';
+  String get nameChangeFailed =>
+      _getString('nameChangeFailed') ?? '名前の変更に失敗しました';
+  String get leaveChatRoomConfirm =>
+      _getString('leaveChatRoomConfirm') ??
+      '本当にこのチャットルームを退出しますか？\n相手に退出メッセージが送信されます。';
+  String get leave => _getString('leave') ?? '退出';
+  String get leaveChatRoomFailed =>
+      _getString('leaveChatRoomFailed') ?? 'チャットルーム退出に失敗しました';
+  String get inviteMembers => _getString('inviteMembers') ?? 'メンバー招待';
+  String addWithCount(int count) {
+    final template = _getString('addWithCount') ?? '追加 ({count})';
+    return template.replaceAll('{count}', count.toString());
+  }
+
+  String get noFriendsToInvite =>
+      _getString('noFriendsToInvite') ?? '招待できる友達がいません';
+  String get addFriendsFirst =>
+      _getString('addFriendsFirst') ?? '友達を追加した後、招待してみてください';
+  String membersInvited(int count) {
+    final template = _getString('membersInvited') ?? '{count}人が招待されました';
+    return template.replaceAll('{count}', count.toString());
+  }
+
+  String get inviteFailed => _getString('inviteFailed') ?? '招待に失敗しました';
+  String participantsCount(int count) {
+    final template = _getString('participantsCount') ?? '{count}人';
+    return template.replaceAll('{count}', count.toString());
+  }
+
+  String? _getString(String key) {
+    if (_data is Map<String, dynamic>) {
+      return _data[key] as String?;
+    }
+    return null;
+  }
 }
 
 /// 앱 정보 번역
@@ -161,13 +248,12 @@ class CommonTranslations {
   String get justNow => _getString('justNow') ?? 'たった今';
   String minutesAgo(int minutes) =>
       _getString('minutesAgo')?.replaceAll('{minutes}', minutes.toString()) ??
-      '${minutes}分前';
+      '$minutes分前';
   String hoursAgo(int hours) =>
       _getString('hoursAgo')?.replaceAll('{hours}', hours.toString()) ??
-      '${hours}時間前';
+      '$hours時間前';
   String daysAgo(int days) =>
-      _getString('daysAgo')?.replaceAll('{days}', days.toString()) ??
-      '${days}日前';
+      _getString('daysAgo')?.replaceAll('{days}', days.toString()) ?? '$days日前';
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {
@@ -501,10 +587,10 @@ class CommunityTranslations {
   String get noSearchResults => _getString('noSearchResults') ?? '検索結果がありません';
   String commentOnYourPost(String authorName) =>
       _getString('commentOnYourPost')?.replaceAll('{authorName}', authorName) ??
-      '${authorName}さんがあなたの投稿にコメントしました';
+      '$authorNameさんがあなたの投稿にコメントしました';
   String mentionOnYourPost(String authorName) =>
       _getString('mentionOnYourPost')?.replaceAll('{authorName}', authorName) ??
-      '${authorName}さんがあなたをメンションしました';
+      '$authorNameさんがあなたをメンションしました';
   String get newNotice => _getString('newNotice') ?? '新しいお知らせ';
   String get verified => _getString('verified') ?? '公認';
   String imageNumber(int index) =>
@@ -1023,6 +1109,42 @@ class ProfileNotificationsTranslations {
       _getString('testNotificationDescription') ?? 'FCM通知が正常に動作するかテストします';
   String get testNotificationSent =>
       _getString('testNotificationSent') ?? 'テスト通知が送信されました';
+  String get chatMessages => _getString('chatMessages') ?? 'チャットメッセージ';
+  String get chatMessagesDescription =>
+      _getString('chatMessagesDescription') ?? '新しいチャットメッセージの通知';
+  String get testNotificationTitle =>
+      _getString('testNotificationTitle') ?? '通知テスト';
+  String get testNotificationSubtitle =>
+      _getString('testNotificationSubtitle') ?? '通知が正常に受信されるかテストします';
+  String get basicTest => _getString('basicTest') ?? '基本テスト';
+  String get basicTestDescription =>
+      _getString('basicTestDescription') ?? 'FCM接続状態を確認します';
+  String get noticeTest => _getString('noticeTest') ?? 'お知らせ通知';
+  String get noticeTestDescription =>
+      _getString('noticeTestDescription') ?? '教会のお知らせ通知をテストします';
+  String get commentTest => _getString('commentTest') ?? 'コメント通知';
+  String get commentTestDescription =>
+      _getString('commentTestDescription') ?? 'コメント通知をテストします';
+  String get loginRequiredForTest =>
+      _getString('loginRequiredForTest') ?? 'ログインが必要です。';
+  String get iosSimulatorNotSupported =>
+      _getString('iosSimulatorNotSupported') ??
+      'iOSシミュレーターではプッシュ通知をテストできません。実際のデバイスでテストしてください。';
+  String get fcmTokenError =>
+      _getString('fcmTokenError') ?? 'FCMトークンを取得できません。通知権限を確認し、アプリを再起動してください。';
+  String testNotificationSentWithType(String icon, String typeName) {
+    final template =
+        _getString('testNotificationSentWithType') ??
+        '{icon} {typeName}テスト通知が送信されました';
+    return template
+        .replaceAll('{icon}', icon)
+        .replaceAll('{typeName}', typeName);
+  }
+
+  String testNotificationFailed(String typeName) {
+    final template = _getString('testNotificationFailed') ?? '{typeName}テスト失敗';
+    return template.replaceAll('{typeName}', typeName);
+  }
 
   String? _getString(String key) {
     if (_data is Map<String, dynamic>) {

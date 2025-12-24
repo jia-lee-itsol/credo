@@ -216,10 +216,13 @@ service cloud.firestore {
         // 읽기: 로그인한 사용자만 (대화방 참여자 여부는 상위 레벨에서 확인됨)
         allow read: if request.auth != null;
         
-        // 생성: senderId가 현재 사용자인 경우
-        // (대화방 참여자 여부는 대화방 존재 및 생성 시점에 이미 확인됨)
+        // 생성: senderId가 현재 사용자인 경우 또는 시스템 메시지인 경우 (참여자만)
+        // 시스템 메시지(type == 'system')는 참여자가 생성 가능
+        // 일반 메시지는 senderId가 현재 사용자와 일치해야 함
         allow create: if request.auth != null 
-          && request.resource.data.senderId == request.auth.uid;
+          && (request.resource.data.senderId == request.auth.uid
+              || (request.resource.data.type == 'system' 
+                  && request.auth.uid in get(/databases/$(database)/documents/conversations/$(conversationId)).data.participants));
         
         // 수정: 로그인한 사용자가 readBy 업데이트 또는 발신자가 모든 필드 수정
         allow update: if request.auth != null 

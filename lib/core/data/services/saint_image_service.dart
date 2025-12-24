@@ -286,7 +286,10 @@ class SaintImageService {
       searchedSet.add(searchKey);
 
       // 다양한 검색어 시도
-      final searchTerms = _generateSearchTermsForLanguage(entry.name!, entry.langCode);
+      final searchTerms = _generateSearchTermsForLanguage(
+        entry.name!,
+        entry.langCode,
+      );
 
       for (final searchTerm in searchTerms) {
         try {
@@ -338,7 +341,7 @@ class SaintImageService {
         if (name.toLowerCase().contains(saintWord.toLowerCase())) {
           final withoutSaint = name
               .replaceAll(RegExp('$saintWord ', caseSensitive: false), '')
-              .replaceAll(RegExp('$saintWord', caseSensitive: false), '')
+              .replaceAll(RegExp(saintWord, caseSensitive: false), '')
               .trim();
 
           if (withoutSaint.isNotEmpty) {
@@ -471,11 +474,11 @@ class SaintImageService {
             for (final pageData in pages.values) {
               final page = pageData as Map<String, dynamic>;
               final imageInfo = page['imageinfo'] as List<dynamic>?;
-              
+
               if (imageInfo != null && imageInfo.isNotEmpty) {
                 final info = imageInfo[0] as Map<String, dynamic>;
                 final mime = info['mime'] as String?;
-                
+
                 // 이미지 파일인지 확인 (svg 제외 - 렌더링 문제)
                 if (mime != null &&
                     (mime.startsWith('image/jpeg') ||

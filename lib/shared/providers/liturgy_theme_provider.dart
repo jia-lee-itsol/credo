@@ -362,3 +362,18 @@ final liturgySeasonNotifierProvider =
     StateNotifierProvider<LiturgySeasonNotifier, LiturgySeason>((ref) {
       return LiturgySeasonNotifier();
     });
+
+/// 전례력 캐시 삭제 (강제 새로고침용)
+Future<void> clearLiturgyCache() async {
+  final prefs = await SharedPreferences.getInstance();
+  final today = DateTime.now();
+  final year = today.year;
+  final month = today.month;
+  final day = today.day;
+
+  // 오늘 날짜의 전례력 캐시 삭제
+  final cacheKey = 'liturgy_info_chatgpt_$year-$month-$day';
+  await prefs.remove(cacheKey);
+
+  AppLogger.debug('[LiturgyThemeProvider] 전례력 캐시 삭제 완료: $year-$month-$day');
+}

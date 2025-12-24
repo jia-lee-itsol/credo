@@ -197,9 +197,11 @@ class _ChatSection extends ConsumerWidget {
     final conversationsAsync = ref.watch(conversationsStreamProvider);
     final totalUnreadAsync = ref.watch(totalUnreadCountProvider);
 
+    final l10n = ref.watch(appLocalizationsSyncProvider);
+
     // 로그인하지 않은 경우
     if (currentUser == null) {
-      return _buildLoginRequiredSection(context, theme);
+      return _buildLoginRequiredSection(context, theme, l10n);
     }
 
     return Column(
@@ -212,7 +214,7 @@ class _ChatSection extends ConsumerWidget {
             Row(
               children: [
                 Text(
-                  '메시지',
+                  l10n.chat.messages,
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -247,7 +249,7 @@ class _ChatSection extends ConsumerWidget {
             ),
             TextButton(
               onPressed: () => context.push(AppRoutes.friendList),
-              child: const Text('친구리스트 보기'),
+              child: Text(l10n.chat.viewFriendList),
             ),
           ],
         ),
@@ -257,7 +259,7 @@ class _ChatSection extends ConsumerWidget {
         conversationsAsync.when(
           data: (conversations) {
             if (conversations.isEmpty) {
-              return _buildEmptyChatCard(context, primaryColor);
+              return _buildEmptyChatCard(context, primaryColor, l10n);
             }
 
             // 최근 3개만 표시
@@ -306,7 +308,7 @@ class _ChatSection extends ConsumerWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      '메시지를 불러올 수 없습니다',
+                      l10n.chat.loadFailed,
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
@@ -325,7 +327,7 @@ class _ChatSection extends ConsumerWidget {
               child: OutlinedButton.icon(
                 onPressed: () => context.push(AppRoutes.newChat),
                 icon: const Icon(Icons.chat_bubble_outline),
-                label: const Text('메시지 보내기'),
+                label: Text(l10n.chat.sendMessage),
               ),
             ),
             const SizedBox(width: 12),
@@ -333,7 +335,7 @@ class _ChatSection extends ConsumerWidget {
               child: OutlinedButton.icon(
                 onPressed: () => context.push(AppRoutes.friendList),
                 icon: const Icon(Icons.person_add_outlined),
-                label: const Text('친구 추가'),
+                label: Text(l10n.chat.addFriend),
               ),
             ),
           ],
@@ -342,12 +344,12 @@ class _ChatSection extends ConsumerWidget {
     );
   }
 
-  Widget _buildLoginRequiredSection(BuildContext context, ThemeData theme) {
+  Widget _buildLoginRequiredSection(BuildContext context, ThemeData theme, AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '메시지',
+          l10n.chat.messages,
           style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -365,7 +367,7 @@ class _ChatSection extends ConsumerWidget {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  '로그인이 필요합니다',
+                  l10n.chat.loginRequired,
                   style: TextStyle(
                     color: Colors.grey[600],
                     fontWeight: FontWeight.w500,
@@ -373,7 +375,7 @@ class _ChatSection extends ConsumerWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '로그인하면 다른 사용자와 메시지를 주고받을 수 있습니다',
+                  l10n.chat.loginRequiredMessage,
                   style: TextStyle(
                     color: Colors.grey[500],
                     fontSize: 13,
@@ -388,7 +390,7 @@ class _ChatSection extends ConsumerWidget {
     );
   }
 
-  Widget _buildEmptyChatCard(BuildContext context, Color primaryColor) {
+  Widget _buildEmptyChatCard(BuildContext context, Color primaryColor, AppLocalizations l10n) {
     return SizedBox(
       width: double.infinity,
       child: Card(
@@ -403,7 +405,7 @@ class _ChatSection extends ConsumerWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                '아직 메시지가 없습니다',
+                l10n.chat.noMessages,
                 style: TextStyle(
                   color: Colors.grey[600],
                   fontWeight: FontWeight.w500,
@@ -411,7 +413,7 @@ class _ChatSection extends ConsumerWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                '다른 사용자와 대화를 시작해보세요',
+                l10n.chat.startConversation,
                 style: TextStyle(
                   color: Colors.grey[500],
                   fontSize: 13,
@@ -440,6 +442,7 @@ class _ChatPreviewItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = ref.watch(appLocalizationsSyncProvider);
     final isDirect = conversation.type == ConversationType.direct;
 
     // 1:1 채팅인 경우 상대방 정보 가져오기
@@ -467,7 +470,7 @@ class _ChatPreviewItem extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildName(context, isDirect, partnerAsync),
+                  _buildName(context, isDirect, partnerAsync, l10n),
                   const SizedBox(height: 4),
                   Text(
                     conversation.lastMessage?.content ?? '',
@@ -575,13 +578,14 @@ class _ChatPreviewItem extends ConsumerWidget {
     BuildContext context,
     bool isDirect,
     AsyncValue<dynamic>? partnerAsync,
+    AppLocalizations l10n,
   ) {
     final theme = Theme.of(context);
 
     if (isDirect && partnerAsync != null) {
       return partnerAsync.when(
         data: (partner) => Text(
-          partner?.nickname ?? '알 수 없음',
+          partner?.nickname ?? l10n.chat.unknown,
           style: theme.textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.w600,
           ),
@@ -595,14 +599,14 @@ class _ChatPreviewItem extends ConsumerWidget {
           ),
         ),
         error: (_, __) => Text(
-          '알 수 없음',
+          l10n.chat.unknown,
           style: theme.textTheme.titleSmall,
         ),
       );
     }
 
     return Text(
-      conversation.name ?? '그룹 채팅',
+      conversation.name ?? l10n.chat.groupChat,
       style: theme.textTheme.titleSmall?.copyWith(
         fontWeight: FontWeight.w600,
       ),
