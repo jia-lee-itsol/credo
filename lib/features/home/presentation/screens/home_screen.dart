@@ -149,45 +149,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
 
-              // 테스트: 성인 축일 모달 표시 버튼 (임시)
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-                  child: ElevatedButton.icon(
-                    onPressed: () async {
-                      final todaySaintsAsync = ref.read(todaySaintsProvider);
-                      todaySaintsAsync.whenData((saints) {
-                        if (saints.isNotEmpty && mounted) {
-                          final currentUser = ref.read(currentUserProvider);
-                          showDialog(
-                            context: context,
-                            barrierDismissible: true,
-                            builder: (context) => SaintFeastDayModal(
-                              saint: saints.first,
-                              userBaptismalName: currentUser?.baptismalName,
-                            ),
-                          );
-                        } else if (mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('오늘의 성인 축일이 없습니다.')),
-                          );
-                        }
-                      });
-                    },
-                    icon: const Icon(Icons.celebration),
-                    label: const Text('성인 축일 모달 테스트'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 16,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-
               // 오늘의 묵상 한마디 카드
               const SliverToBoxAdapter(child: DailyReflectionCard()),
 
