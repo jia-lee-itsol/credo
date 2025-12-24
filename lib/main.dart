@@ -91,6 +91,7 @@ class CredoApp extends ConsumerWidget {
           GlobalCupertinoLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
+
       ),
     );
   }

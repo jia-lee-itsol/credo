@@ -47,16 +47,38 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: SizedBox(
-          width: logoWidth,
-          child: Image.asset(
-            'assets/icons/logo.png',
-            fit: BoxFit.contain,
+      body: Stack(
+        children: [
+          // 중앙에 앱 로고
+          Center(
+            child: SizedBox(
+              width: logoWidth,
+              child: Image.asset('assets/icons/logo.png', fit: BoxFit.contain),
+            ),
           ),
-        ),
+          // 하단에 회사명
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 32),
+                child: Center(
+                  child: Text(
+                    'ITSolutionZ Inc.',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-

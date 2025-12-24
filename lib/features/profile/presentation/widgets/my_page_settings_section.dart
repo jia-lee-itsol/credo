@@ -9,10 +9,12 @@ import '../../../../core/data/services/saint_feast_day_service.dart';
 import '../../../../shared/providers/locale_provider.dart';
 import '../../../../shared/widgets/settings_list_tile.dart';
 import '../../../saints/presentation/providers/saint_feast_day_providers.dart';
+import '../screens/license_screen.dart';
 import 'font_scale_settings_tile.dart';
 
 /// 고객 서비스 구글 폼 URL
-const String _customerServiceFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdFM9lVAVL2ObVTSi08XdnpOthYpWYSuTEmIeIR7tRWfUfWWA/viewform';
+const String _customerServiceFormUrl =
+    'https://docs.google.com/forms/d/e/1FAIpQLSdFM9lVAVL2ObVTSi08XdnpOthYpWYSuTEmIeIR7tRWfUfWWA/viewform';
 
 /// 마이페이지 설정 섹션 위젯
 class MyPageSettingsSection extends ConsumerWidget {
@@ -26,6 +28,160 @@ class MyPageSettingsSection extends ConsumerWidget {
     required this.isAuthenticated,
     this.favoriteParishCount,
   });
+
+  /// 커스텀 About 다이얼로그 표시 ("Powered by Flutter" 제거)
+  void _showCustomAboutDialog(BuildContext context, AppLocalizations l10n) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 400),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // 본문 내용
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  children: [
+                    // 앱 로고
+                    Image.asset(
+                      'assets/icons/logo.png',
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.contain,
+                    ),
+                    const SizedBox(height: 20),
+                    // 앱 이름
+                    Text(
+                      'Credo',
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    // 버전 정보
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: colorScheme.surfaceContainerHighest,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        'v1.0.0',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    // 앱 설명
+                    Text(
+                      l10n.app.description,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        height: 1.6,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 24),
+
+                    // 구분선
+                    Divider(color: colorScheme.outlineVariant, height: 1),
+                    const SizedBox(height: 24),
+
+                    // 저작권 정보
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.copyright,
+                          size: 16,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          '2026 ITSolutionz Inc.',
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              // 하단 버튼들
+              Container(
+                padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+                child: Column(
+                  children: [
+                    // 라이선스 버튼
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const LicenseScreen(),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.description),
+                        label: const Text('ライセンス'),
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: primaryColor,
+                          side: BorderSide(color: primaryColor),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    // 닫기 버튼
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: primaryColor,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          elevation: 0,
+                        ),
+                        child: Text(
+                          l10n.common.close,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   /// 고객 서비스 폼 열기
   Future<void> _openCustomerServiceForm(
@@ -116,9 +272,7 @@ class MyPageSettingsSection extends ConsumerWidget {
         // 언어 설정
         Card(
           margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: _LanguageSettingsTile(
-            primaryColor: primaryColor,
-          ),
+          child: _LanguageSettingsTile(primaryColor: primaryColor),
         ),
 
         // 글씨 크기 설정
@@ -136,9 +290,7 @@ class MyPageSettingsSection extends ConsumerWidget {
             primaryColor: primaryColor,
             onTap: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(l10n.profile.termsOfServiceComingSoon),
-                ),
+                SnackBar(content: Text(l10n.profile.termsOfServiceComingSoon)),
               );
             },
           ),
@@ -180,16 +332,7 @@ class MyPageSettingsSection extends ConsumerWidget {
             subtitle: 'Credo v1.0.0',
             primaryColor: primaryColor,
             onTap: () {
-              showAboutDialog(
-                context: context,
-                applicationName: 'Credo',
-                applicationVersion: '1.0.0',
-                applicationLegalese: '© 2024 Credo',
-                children: [
-                  const SizedBox(height: 16),
-                  Text(l10n.app.description),
-                ],
-              );
+              _showCustomAboutDialog(context, l10n);
             },
           ),
         ),
@@ -249,10 +392,7 @@ class _ClearCacheTileState extends ConsumerState<_ClearCacheTile> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('캐시 삭제 실패: $e'),
-            backgroundColor: Colors.red,
-          ),
+          SnackBar(content: Text('캐시 삭제 실패: $e'), backgroundColor: Colors.red),
         );
       }
     } finally {
@@ -366,4 +506,3 @@ class _LanguageSettingsTile extends ConsumerWidget {
     );
   }
 }
-
