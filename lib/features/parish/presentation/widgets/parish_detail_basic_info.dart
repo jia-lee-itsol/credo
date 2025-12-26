@@ -8,12 +8,18 @@ class ParishDetailBasicInfo extends StatelessWidget {
   final Map<String, dynamic> parish;
   final Color primaryColor;
   final AppLocalizations l10n;
+  final bool canEdit;
+  final VoidCallback? onEditAddress;
+  final VoidCallback? onEditPhone;
 
   const ParishDetailBasicInfo({
     super.key,
     required this.parish,
     required this.primaryColor,
     required this.l10n,
+    this.canEdit = false,
+    this.onEditAddress,
+    this.onEditPhone,
   });
 
   @override
@@ -31,12 +37,16 @@ class ParishDetailBasicInfo extends StatelessWidget {
         children: [
           // 주소
           if (parish['address'] != null) ...[
-            InfoRow(
-              icon: Icons.location_on,
-              title: l10n.parish.detailSection.address,
-              content:
-                  '${parish['prefecture'] as String? ?? ''} ${parish['address'] as String? ?? ''}',
-              primaryColor: primaryColor,
+            GestureDetector(
+              onLongPress: canEdit ? onEditAddress : null,
+              child: InfoRow(
+                icon: Icons.location_on,
+                title: l10n.parish.detailSection.address,
+                content:
+                    '${parish['prefecture'] as String? ?? ''} ${parish['address'] as String? ?? ''}',
+                primaryColor: primaryColor,
+                trailing: canEdit ? Icon(Icons.edit, size: 16, color: Colors.grey.shade400) : null,
+              ),
             ),
             const SizedBox(height: 16),
           ],
@@ -44,12 +54,16 @@ class ParishDetailBasicInfo extends StatelessWidget {
           // 전화번호
           if (parish['phone'] != null &&
               (parish['phone'] as String).isNotEmpty) ...[
-            InfoRow(
-              icon: Icons.phone,
-              title: l10n.parish.detailSection.phone,
-              content: parish['phone'] as String,
-              primaryColor: primaryColor,
-              onTap: () => _launchPhone(parish['phone'] as String),
+            GestureDetector(
+              onLongPress: canEdit ? onEditPhone : null,
+              child: InfoRow(
+                icon: Icons.phone,
+                title: l10n.parish.detailSection.phone,
+                content: parish['phone'] as String,
+                primaryColor: primaryColor,
+                onTap: () => _launchPhone(parish['phone'] as String),
+                trailing: canEdit ? Icon(Icons.edit, size: 16, color: Colors.grey.shade400) : null,
+              ),
             ),
             const SizedBox(height: 16),
           ],

@@ -137,19 +137,20 @@ class PrayerScreen extends ConsumerWidget {
         title: Text(l10n.mass.title),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 16),
             child: GestureDetector(
               onTap: () {
                 context.push(AppRoutes.myPage);
               },
               child: CircleAvatar(
-                radius: 18,
+                key: ValueKey(currentUser?.profileImageUrl ?? 'no-image'),
+                radius: 22,
                 backgroundColor: primaryColor.withValues(alpha: 0.2),
                 backgroundImage: currentUser?.profileImageUrl != null
                     ? NetworkImage(currentUser!.profileImageUrl!)
                     : null,
                 child: currentUser?.profileImageUrl == null
-                    ? Icon(Icons.person, size: 20, color: primaryColor)
+                    ? Icon(Icons.person, size: 24, color: primaryColor)
                     : null,
               ),
             ),

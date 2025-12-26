@@ -26,10 +26,10 @@ class DailyMassLiturgicalDayCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: liturgicalColor.withValues(alpha: 0.5)),
+        border: Border.all(color: liturgicalColor, width: 1.5),
         boxShadow: [
           BoxShadow(
-            color: liturgicalColor.withValues(alpha: 0.1),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -120,17 +120,17 @@ class DailyMassLiturgicalDayCard extends StatelessWidget {
       case 'white':
         return const Color(0xFFD4AF37); // 금색으로 표시 (흰색은 보이지 않으므로)
       case 'red':
-        return Colors.red.shade700;
+        return const Color(0xFFB85450); // 채도 낮춘 빨간색
       case 'green':
-        return Colors.green.shade700;
+        return const Color(0xFF43A047); // 채도 낮춘 초록색
       case 'purple':
-        return Colors.purple.shade700;
+        return const Color(0xFF7E57C2); // 채도 낮춘 보라색
       case 'rose':
-        return Colors.pink.shade300;
+        return const Color(0xFFD4878F); // 채도 낮춘 장미색
       case 'black':
         return Colors.black87;
       default:
-        return Colors.green.shade700;
+        return const Color(0xFF43A047);
     }
   }
 

@@ -22,6 +22,7 @@ import '../widgets/home_action_button.dart';
 import '../widgets/today_saints_card.dart';
 import '../widgets/daily_reflection_card.dart';
 import '../providers/daily_reflection_provider.dart';
+import '../../../../shared/widgets/animated_list_item.dart';
 
 /// 홈 화면
 class HomeScreen extends ConsumerStatefulWidget {
@@ -94,12 +95,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final testDate = ref.watch(testDateOverrideProvider);
     final season =
         seasonAsync.value ?? LiturgySeasonUtil.getCurrentSeasonSync(testDate);
-    final seasonName = LiturgySeasonUtil.getSeasonName(
-      season,
-      locale: currentLocale.languageCode,
-    );
+    final seasonName = ref.watch(liturgyDayNameProvider(currentLocale.languageCode));
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final backgroundColor = ref.watch(liturgyBackgroundColorProvider);
+    final gradientStartColor = ref.watch(liturgyGradientStartColorProvider);
+    final gradientEndColor = ref.watch(liturgyGradientEndColorProvider);
     final currentUser = ref.watch(currentUserProvider);
 
     // 성인 축일 모달 확인
@@ -146,47 +146,68 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   seasonName: seasonName,
                   primaryColor: primaryColor,
                   backgroundColor: backgroundColor,
+                  gradientStartColor: gradientStartColor,
+                  gradientEndColor: gradientEndColor,
                 ),
               ),
 
               // 오늘의 묵상 한마디 카드
-              const SliverToBoxAdapter(child: DailyReflectionCard()),
+              SliverToBoxAdapter(
+                child: AnimatedListItem(
+                  index: 0,
+                  child: const DailyReflectionCard(),
+                ),
+              ),
 
               // 오늘의 미사 버튼
               SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  child: HomeActionButton(
-                    icon: Icons.auto_stories,
-                    title: l10n.community.home.todayMass,
-                    subtitle: l10n.community.home.todayBibleReadingAndPrayer,
-                    primaryColor: primaryColor,
-                    backgroundColor: primaryColor.withValues(alpha: 0.1),
-                    onTap: () => context.go(AppRoutes.dailyMass),
+                child: AnimatedListItem(
+                  index: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                    child: HomeActionButton(
+                      icon: Icons.menu_book,
+                      title: l10n.community.home.todayMass,
+                      subtitle: l10n.community.home.todayBibleReadingAndPrayer,
+                      primaryColor: primaryColor,
+                      backgroundColor: primaryColor.withValues(alpha: 0.1),
+                      onTap: () => context.go(AppRoutes.dailyMass),
+                    ),
                   ),
                 ),
               ),
 
               // 오늘의 성인 카드
-              const SliverToBoxAdapter(child: TodaySaintsCard()),
+              SliverToBoxAdapter(
+                child: AnimatedListItem(
+                  index: 2,
+                  child: const TodaySaintsCard(),
+                ),
+              ),
 
               // 섹션 타이틀
               SliverToBoxAdapter(
-                child: _buildSectionTitle(
-                  context,
-                  l10n.community.home.recentNotifications,
+                child: AnimatedListItem(
+                  index: 3,
+                  child: _buildSectionTitle(
+                    context,
+                    l10n.community.home.recentNotifications,
+                  ),
                 ),
               ),
 
               // 알림 리스트
               SliverToBoxAdapter(
-                child: _buildRecentNotificationsList(
-                  context,
-                  ref,
-                  theme,
-                  primaryColor,
-                  l10n,
-                  currentUser,
+                child: AnimatedListItem(
+                  index: 4,
+                  child: _buildRecentNotificationsList(
+                    context,
+                    ref,
+                    theme,
+                    primaryColor,
+                    l10n,
+                    currentUser,
+                  ),
                 ),
               ),
 
@@ -327,10 +348,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ? ref.watch(parishByIdProvider(parishId))
         : null;
 
-    return Card(
+    return Container(
       margin: const EdgeInsets.only(bottom: 16),
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: primaryColor, width: 1.5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.08),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -342,13 +373,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     !(_parishExpandedState[parishId] ?? false);
               });
             },
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(11),
+              topRight: Radius.circular(11),
+            ),
             child: Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: primaryColor.withValues(alpha: 0.1),
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  topRight: Radius.circular(12),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(11),
+                  topRight: Radius.circular(11),
                 ),
               ),
               child: Row(

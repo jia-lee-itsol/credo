@@ -55,6 +55,18 @@ class BadgeChip extends ConsumerWidget {
     final l10n = ref.read(appLocalizationsSyncProvider);
     final (label, icon, bgColor, fgColor) = _getBadgeStyle(l10n);
 
+    // 공식 배지는 아이콘만 표시
+    if (type == BadgeType.official) {
+      return Container(
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          color: bgColor,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(icon, size: 18, color: fgColor),
+      );
+    }
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
@@ -85,8 +97,8 @@ class BadgeChip extends ConsumerWidget {
         return (
           l10n.community.official,
           Icons.verified,
-          Colors.amber.shade100,
-          Colors.amber.shade700,
+          Colors.blue.shade100,
+          Colors.blue.shade600,
         );
       case BadgeType.pinned:
         return (

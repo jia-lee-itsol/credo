@@ -187,7 +187,7 @@
     "home": "首页",
     "meditation": "默想",
     "share": "分享",
-    "dailyMass": "今日的话语",
+    "dailyMass": "话语",
     "church": "教堂",
     "community": "社区"
   },
@@ -486,7 +486,7 @@
       "likes": "点赞",
       "likesDescription": "接收帖子点赞",
       "dailyMass": "今日的话语",
-      "dailyMassDescription": "接收今日的话语通知",
+      "dailyMassDescription": "每天0点接收今日的话语通知",
       "quietHours": "安静时间",
       "quietHoursDescription": "在指定时间段内不接收通知",
       "quietHoursStart": "开始时间",

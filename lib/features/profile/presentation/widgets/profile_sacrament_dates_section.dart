@@ -44,6 +44,8 @@ class ProfileSacramentDatesSection extends ConsumerWidget {
               child: InputDecorator(
                 decoration: InputDecoration(
                   labelText: l10n.profile.sacramentDates.baptismDate,
+                  filled: true,
+                  fillColor: Colors.white,
                   suffixIcon: const Icon(Icons.calendar_today),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),
@@ -68,6 +70,8 @@ class ProfileSacramentDatesSection extends ConsumerWidget {
               child: InputDecorator(
                 decoration: InputDecoration(
                   labelText: l10n.profile.sacramentDates.confirmationDate,
+                  filled: true,
+                  fillColor: Colors.white,
                   suffixIcon: const Icon(Icons.calendar_today),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),

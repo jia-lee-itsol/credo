@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/data/services/parish_service.dart' as core;
 import '../../../../core/utils/app_localizations.dart';
+import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../constants/parish_colors.dart';
 
 /// 교회 필터 바텀시트 위젯
@@ -87,6 +88,7 @@ class _ParishFilterBottomSheetState
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final primaryColor = ref.watch(liturgyPrimaryColorProvider);
 
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
@@ -105,7 +107,7 @@ class _ParishFilterBottomSheetState
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.outlineVariant,
+                    color: Colors.grey.shade300,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -119,7 +121,7 @@ class _ParishFilterBottomSheetState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    dialogL10n.parish.filter.title,
+                    dialogL10n.parish.filter.prefecture,
                     style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -142,8 +144,6 @@ class _ParishFilterBottomSheetState
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       children: [
                         // 도도부현 필터
-                        _buildSectionTitle(dialogL10n.parish.filter.prefecture),
-                        const SizedBox(height: 12),
                         _buildPrefectureFilter(),
                         const SizedBox(height: 24),
 
@@ -151,12 +151,6 @@ class _ParishFilterBottomSheetState
                         _buildSectionTitle(dialogL10n.parish.filter.mass),
                         const SizedBox(height: 12),
                         _buildMassFilterChips(),
-                        const SizedBox(height: 24),
-
-                        // 옵션 필터
-                        _buildSectionTitle(dialogL10n.parish.filter.options),
-                        const SizedBox(height: 12),
-                        _buildOptionFilter(),
                         const SizedBox(height: 24),
                       ],
                     ),
@@ -193,7 +187,7 @@ class _ParishFilterBottomSheetState
                         onPressed: _applyFilters,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 16),
-                          backgroundColor: ParishColors.purple600,
+                          backgroundColor: primaryColor,
                           foregroundColor: Colors.white,
                         ),
                         child: Text(dialogL10n.parish.filter.apply),
@@ -220,6 +214,7 @@ class _ParishFilterBottomSheetState
   }
 
   Widget _buildPrefectureFilter() {
+    final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -229,6 +224,7 @@ class _ParishFilterBottomSheetState
         return FilterChip(
           label: Text(prefecture),
           selected: isSelected,
+          showCheckmark: true,
           onSelected: (selected) {
             setState(() {
               if (selected) {
@@ -238,12 +234,15 @@ class _ParishFilterBottomSheetState
               }
             });
           },
-          selectedColor: ParishColors.purple100,
-          checkmarkColor: ParishColors.purple600,
+          backgroundColor: Colors.white,
+          selectedColor: Colors.white,
+          checkmarkColor: primaryColor,
+          side: BorderSide(
+            color: isSelected ? primaryColor : ParishColors.neutral200,
+            width: isSelected ? 1.5 : 1,
+          ),
           labelStyle: TextStyle(
-            color: isSelected
-                ? ParishColors.purple600
-                : ParishColors.neutral700,
+            color: isSelected ? primaryColor : ParishColors.neutral700,
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
           ),
         );
@@ -253,6 +252,7 @@ class _ParishFilterBottomSheetState
 
   Widget _buildMassFilterChips() {
     final l10n = ref.watch(appLocalizationsSyncProvider);
+    final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -260,70 +260,44 @@ class _ParishFilterBottomSheetState
         FilterChip(
           label: Text(l10n.parish.filter.todayMass),
           selected: _tempOnlyTodayMass,
+          showCheckmark: true,
           onSelected: (selected) {
             setState(() {
               _tempOnlyTodayMass = selected;
             });
           },
-          selectedColor: ParishColors.purple100,
-          checkmarkColor: ParishColors.purple600,
+          backgroundColor: Colors.white,
+          selectedColor: Colors.white,
+          checkmarkColor: primaryColor,
+          side: BorderSide(
+            color: _tempOnlyTodayMass ? primaryColor : ParishColors.neutral200,
+            width: _tempOnlyTodayMass ? 1.5 : 1,
+          ),
           labelStyle: TextStyle(
-            color: _tempOnlyTodayMass
-                ? ParishColors.purple600
-                : ParishColors.neutral700,
-            fontWeight: _tempOnlyTodayMass
-                ? FontWeight.w600
-                : FontWeight.normal,
+            color: _tempOnlyTodayMass ? primaryColor : ParishColors.neutral700,
+            fontWeight: _tempOnlyTodayMass ? FontWeight.w600 : FontWeight.normal,
           ),
         ),
         FilterChip(
           label: Text(l10n.parish.filter.foreignMass),
           selected: _tempOnlyForeignLanguageMass,
+          showCheckmark: true,
           onSelected: (selected) {
             setState(() {
               _tempOnlyForeignLanguageMass = selected;
             });
           },
-          selectedColor: ParishColors.purple100,
-          checkmarkColor: ParishColors.purple600,
-          labelStyle: TextStyle(
-            color: _tempOnlyForeignLanguageMass
-                ? ParishColors.purple600
-                : ParishColors.neutral700,
-            fontWeight: _tempOnlyForeignLanguageMass
-                ? FontWeight.w600
-                : FontWeight.normal,
+          backgroundColor: Colors.white,
+          selectedColor: Colors.white,
+          checkmarkColor: primaryColor,
+          side: BorderSide(
+            color: _tempOnlyForeignLanguageMass ? primaryColor : ParishColors.neutral200,
+            width: _tempOnlyForeignLanguageMass ? 1.5 : 1,
           ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildOptionFilter() {
-    final l10n = ref.watch(appLocalizationsSyncProvider);
-    return Column(
-      children: [
-        CheckboxListTile(
-          title: Text(l10n.parish.filter.cathedralOnly),
-          subtitle: Text(l10n.parish.filter.cathedralOnlySubtitle),
-          value: _tempOnlyCathedrals,
-          onChanged: (value) {
-            setState(() {
-              _tempOnlyCathedrals = value ?? false;
-            });
-          },
-          contentPadding: EdgeInsets.zero,
-        ),
-        CheckboxListTile(
-          title: Text(l10n.parish.filter.massTimeAvailable),
-          subtitle: Text(l10n.parish.filter.massTimeAvailableSubtitle),
-          value: _tempOnlyWithMassTime,
-          onChanged: (value) {
-            setState(() {
-              _tempOnlyWithMassTime = value ?? false;
-            });
-          },
-          contentPadding: EdgeInsets.zero,
+          labelStyle: TextStyle(
+            color: _tempOnlyForeignLanguageMass ? primaryColor : ParishColors.neutral700,
+            fontWeight: _tempOnlyForeignLanguageMass ? FontWeight.w600 : FontWeight.normal,
+          ),
         ),
       ],
     );

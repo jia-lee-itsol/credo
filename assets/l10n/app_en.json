@@ -46,7 +46,7 @@
     "home": "Home",
     "meditation": "Meditation",
     "share": "Share",
-    "dailyMass": "Today's Word",
+    "dailyMass": "Word",
     "church": "Church",
     "community": "Community"
   },
@@ -364,7 +364,7 @@
       "likes": "Likes",
       "likesDescription": "Receive likes on posts",
       "dailyMass": "Today's Word",
-      "dailyMassDescription": "Receive today's word notifications",
+      "dailyMassDescription": "Receive today's word notifications daily at midnight",
       "quietHours": "Quiet Hours",
       "quietHoursDescription": "Do not receive notifications during specified hours",
       "quietHoursStart": "Start Time",

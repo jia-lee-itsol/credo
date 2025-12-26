@@ -8,6 +8,7 @@ class InfoRow extends StatelessWidget {
   final String content;
   final Color primaryColor;
   final VoidCallback? onTap;
+  final Widget? trailing;
 
   const InfoRow({
     super.key,
@@ -16,6 +17,7 @@ class InfoRow extends StatelessWidget {
     required this.content,
     required this.primaryColor,
     this.onTap,
+    this.trailing,
   });
 
   @override
@@ -52,7 +54,9 @@ class InfoRow extends StatelessWidget {
                 ],
               ),
             ),
-            if (onTap != null)
+            if (trailing != null)
+              trailing!
+            else if (onTap != null)
               Icon(
                 Icons.chevron_right,
                 color: theme.colorScheme.onSurfaceVariant,

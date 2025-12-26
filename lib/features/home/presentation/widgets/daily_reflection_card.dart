@@ -5,99 +5,149 @@ import '../../../../shared/providers/locale_provider.dart';
 import '../providers/daily_reflection_provider.dart';
 
 /// 오늘의 묵상 한마디 카드
-class DailyReflectionCard extends ConsumerWidget {
+class DailyReflectionCard extends ConsumerStatefulWidget {
   const DailyReflectionCard({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DailyReflectionCard> createState() =>
+      _DailyReflectionCardState();
+}
+
+class _DailyReflectionCardState extends ConsumerState<DailyReflectionCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _rotationController;
+  bool _isRefreshing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _rotationController = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    _rotationController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _handleRefresh() async {
+    if (_isRefreshing) return;
+
+    setState(() {
+      _isRefreshing = true;
+    });
+    _rotationController.repeat();
+
+    try {
+      // 캐시 삭제 및 트리거 증가
+      await refreshDailyReflection(ref);
+      // provider 무효화 후 새 데이터 로드 대기
+      ref.invalidate(dailyReflectionProvider);
+      await ref.read(dailyReflectionProvider.future);
+    } finally {
+      if (mounted) {
+        _rotationController.stop();
+        _rotationController.reset();
+        setState(() {
+          _isRefreshing = false;
+        });
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final reflectionAsync = ref.watch(dailyReflectionProvider);
     final locale = ref.watch(localeProvider);
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
           borderRadius: BorderRadius.circular(16),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                primaryColor.withValues(alpha: 0.1),
-                primaryColor.withValues(alpha: 0.05),
-              ],
+          border: Border.all(color: primaryColor, width: 1.5),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.08),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // 헤더
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: primaryColor.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Icon(
-                        Icons.format_quote,
-                        color: primaryColor,
-                        size: 20,
-                      ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 헤더
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: primaryColor.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    const SizedBox(width: 12),
-                    Text(
-                      _getTitle(locale.languageCode),
-                      style: theme.textTheme.titleMedium?.copyWith(
+                    child: Text(
+                      '❞',
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: primaryColor,
                       ),
                     ),
-                    const Spacer(),
-                    // 새로고침 버튼
-                    IconButton(
-                      icon: Icon(
+                  ),
+                  const SizedBox(width: 12),
+                  Text(
+                    _getTitle(locale.languageCode),
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: primaryColor,
+                    ),
+                  ),
+                  const Spacer(),
+                  // 새로고침 버튼 (회전 애니메이션)
+                  IconButton(
+                    icon: RotationTransition(
+                      turns: _rotationController,
+                      child: Icon(
                         Icons.refresh,
                         color: primaryColor.withValues(alpha: 0.6),
                         size: 20,
                       ),
-                      onPressed: () async {
-                        await refreshDailyReflection(ref);
-                      },
-                      tooltip: _getRefreshTooltip(locale.languageCode),
-                      visualDensity: VisualDensity.compact,
                     ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                // 묵상 내용
-                reflectionAsync.when(
-                  data: (reflection) {
-                    if (reflection == null || reflection.isEmpty) {
-                      return _buildPlaceholder(theme, locale.languageCode);
-                    }
-                    return Text(
-                      reflection,
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        height: 1.6,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    );
-                  },
-                  loading: () => _buildLoading(theme, locale.languageCode),
-                  error: (error, stack) => _buildPlaceholder(theme, locale.languageCode),
-                ),
-              ],
-            ),
+                    onPressed: _isRefreshing ? null : _handleRefresh,
+                    tooltip: _getRefreshTooltip(locale.languageCode),
+                    visualDensity: VisualDensity.compact,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              // 묵상 내용
+              reflectionAsync.when(
+                data: (reflection) {
+                  if (reflection == null || reflection.isEmpty) {
+                    return _buildPlaceholder(theme, locale.languageCode);
+                  }
+                  return Text(
+                    reflection,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      height: 1.6,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  );
+                },
+                loading: () => _buildLoading(theme, locale.languageCode),
+                error: (error, stack) =>
+                    _buildPlaceholder(theme, locale.languageCode),
+              ),
+            ],
           ),
         ),
       ),
@@ -105,24 +155,12 @@ class DailyReflectionCard extends ConsumerWidget {
   }
 
   Widget _buildLoading(ThemeData theme, String languageCode) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 16,
-          height: 16,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            color: theme.colorScheme.primary,
-          ),
-        ),
-        const SizedBox(width: 12),
-        Text(
-          _getLoadingText(languageCode),
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: theme.colorScheme.onSurfaceVariant,
-          ),
-        ),
-      ],
+    return Text(
+      _getLoadingText(languageCode),
+      style: theme.textTheme.bodyMedium?.copyWith(
+        color: theme.colorScheme.onSurfaceVariant,
+        fontStyle: FontStyle.italic,
+      ),
     );
   }
 

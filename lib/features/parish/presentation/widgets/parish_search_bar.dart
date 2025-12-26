@@ -143,9 +143,9 @@ class _ParishSearchBarState extends ConsumerState<ParishSearchBar> {
         Container(
           height: 49.361,
           decoration: BoxDecoration(
-            color: const Color(0xFFF5F5F5),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: const Color(0xFFE5E5E5), width: 0.69),
+            color: const Color(0xFFFFFFFF),
+            borderRadius: BorderRadius.circular(25),
+            border: Border.all(color: const Color(0xFFE0E0E0), width: 1),
           ),
           child: TextField(
             controller: widget.controller,
@@ -162,6 +162,8 @@ class _ParishSearchBarState extends ConsumerState<ParishSearchBar> {
                 fontSize: 16,
                 letterSpacing: -0.31,
               ),
+              filled: true,
+              fillColor: Colors.white,
               prefixIcon: const Padding(
                 padding: EdgeInsets.only(left: 12, right: 8),
                 child: Icon(Icons.search, size: 20, color: Color(0x800A0A0A)),

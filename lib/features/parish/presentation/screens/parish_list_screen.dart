@@ -204,19 +204,20 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
         title: Text(l10n.parish.search),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 16),
             child: GestureDetector(
               onTap: () {
                 context.push(AppRoutes.myPage);
               },
               child: CircleAvatar(
-                radius: 18,
+                key: ValueKey(currentUser?.profileImageUrl ?? 'no-image'),
+                radius: 22,
                 backgroundColor: primaryColor.withValues(alpha: 0.2),
                 backgroundImage: currentUser?.profileImageUrl != null
                     ? NetworkImage(currentUser!.profileImageUrl!)
                     : null,
                 child: currentUser?.profileImageUrl == null
-                    ? Icon(Icons.person, size: 20, color: primaryColor)
+                    ? Icon(Icons.person, size: 24, color: primaryColor)
                     : null,
               ),
             ),
@@ -240,7 +241,6 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
 
   Widget _buildHeader() {
     final l10n = ref.watch(appLocalizationsSyncProvider);
-    final primaryColor = ref.watch(liturgyPrimaryColorProvider);
 
     return Container(
       padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
@@ -261,108 +261,200 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
 
           const SizedBox(height: 16),
 
-          // 언어 검색 칩
+          // 필터 & 정렬 버튼 (수평 스크롤 가능)
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: _availableMassLanguages.map((languageCode) {
-                final isSelected = _selectedMassLanguages.contains(
-                  languageCode,
-                );
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: FilterChip(
-                    label: Text(MassLanguage.getDisplayName(languageCode)),
-                    selected: isSelected,
-                    onSelected: (selected) {
-                      setState(() {
-                        if (selected) {
-                          _selectedMassLanguages.add(languageCode);
-                        } else {
-                          _selectedMassLanguages.remove(languageCode);
-                        }
-                      });
-                    },
-                    selectedColor: primaryColor.withValues(alpha: 0.2),
-                    checkmarkColor: primaryColor,
-                    labelStyle: TextStyle(
-                      color: isSelected
-                          ? primaryColor
-                          : ParishColors.neutral700,
-                      fontWeight: isSelected
-                          ? FontWeight.w600
-                          : FontWeight.normal,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-
-          const SizedBox(height: 16),
-
-          // 필터 & 정렬 버튼
-          Row(
-            children: [
-              // 필터 버튼
-              ParishFilterChip(
-                icon: Icons.tune,
-                label: l10n.parish.filter.button,
-                isSelected: _hasActiveFilters,
-                onTap: _showFilterBottomSheet,
-              ),
-              const SizedBox(width: 8),
-              // 정렬 버튼
-              ParishFilterChip(
-                icon: Icons.swap_vert,
-                label: l10n.parish.filter.sortByDistance,
-                isSelected: _sortByDistance,
-                onTap: () async {
-                  if (!_sortByDistance) {
-                    // 거리순 정렬을 활성화하려면 위치 권한 확인
-                    final permission = await Geolocator.checkPermission();
-                    if (permission != LocationPermission.whileInUse &&
-                        permission != LocationPermission.always) {
-                      // 권한이 없으면 권한 요청 다이얼로그 표시
-                      await _showLocationPermissionDialog();
-                      return;
-                    }
-                    // 위치 정보 가져오기 시도
-                    final locationAsync = ref.read(currentLocationProvider);
-                    final cachedLocation = ref.read(cachedLocationProvider);
-                    final userPosition =
-                        cachedLocation ?? locationAsync.valueOrNull;
-
-                    if (userPosition == null) {
-                      // 위치 정보가 없으면 위치 가져오기 시도
-                      try {
-                        final position = await Geolocator.getCurrentPosition(
-                          desiredAccuracy: LocationAccuracy.high,
-                          timeLimit: const Duration(seconds: 10),
-                        );
-                        // 캐시에 저장
-                        ref.read(cachedLocationProvider.notifier).state =
-                            position;
-                      } catch (e) {
-                        // 위치 가져오기 실패 시 정렬 비활성화
-                        if (mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(l10n.parish.locationFailed)),
-                          );
-                        }
+              children: [
+                // 필터 버튼
+                ParishFilterChip(
+                  icon: Icons.tune,
+                  label: l10n.parish.filter.button,
+                  isSelected: _hasActiveFilters,
+                  onTap: _showFilterBottomSheet,
+                ),
+                const SizedBox(width: 8),
+                // 정렬 버튼
+                ParishFilterChip(
+                  icon: Icons.swap_vert,
+                  label: l10n.parish.filter.sortByDistance,
+                  isSelected: _sortByDistance,
+                  onTap: () async {
+                    if (!_sortByDistance) {
+                      // 거리순 정렬을 활성화하려면 위치 권한 확인
+                      final permission = await Geolocator.checkPermission();
+                      if (permission != LocationPermission.whileInUse &&
+                          permission != LocationPermission.always) {
+                        // 권한이 없으면 권한 요청 다이얼로그 표시
+                        await _showLocationPermissionDialog();
                         return;
                       }
+                      // 위치 정보 가져오기 시도
+                      final locationAsync = ref.read(currentLocationProvider);
+                      final cachedLocation = ref.read(cachedLocationProvider);
+                      final userPosition =
+                          cachedLocation ?? locationAsync.valueOrNull;
+
+                      if (userPosition == null) {
+                        // 위치 정보가 없으면 위치 가져오기 시도
+                        try {
+                          final position = await Geolocator.getCurrentPosition(
+                            desiredAccuracy: LocationAccuracy.high,
+                            timeLimit: const Duration(seconds: 10),
+                          );
+                          // 캐시에 저장
+                          ref.read(cachedLocationProvider.notifier).state =
+                              position;
+                        } catch (e) {
+                          // 위치 가져오기 실패 시 정렬 비활성화
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(l10n.parish.locationFailed)),
+                            );
+                          }
+                          return;
+                        }
+                      }
                     }
-                  }
-                  setState(() {
-                    _sortByDistance = !_sortByDistance;
-                  });
-                },
-              ),
-            ],
+                    setState(() {
+                      _sortByDistance = !_sortByDistance;
+                    });
+                  },
+                ),
+                const SizedBox(width: 8),
+                // 외국어 미사 필터 버튼
+                ParishFilterChip(
+                  icon: Icons.language,
+                  label: _selectedMassLanguages.isEmpty
+                      ? l10n.parish.filter.foreignMass
+                      : '${l10n.parish.filter.foreignMass} (${_selectedMassLanguages.length})',
+                  isSelected: _selectedMassLanguages.isNotEmpty,
+                  onTap: _showLanguageSelectionBottomSheet,
+                ),
+              ],
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  void _showLanguageSelectionBottomSheet() {
+    final l10n = ref.read(appLocalizationsSyncProvider);
+    final primaryColor = ref.read(liturgyPrimaryColorProvider);
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.white,
+      showDragHandle: false,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Container(
+              padding: const EdgeInsets.all(24),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Drag handle
+                  Center(
+                    child: Container(
+                      width: 40,
+                      height: 4,
+                      margin: const EdgeInsets.only(bottom: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        l10n.parish.filter.foreignMass,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setModalState(() {
+                            _selectedMassLanguages.clear();
+                          });
+                          setState(() {});
+                        },
+                        child: Text(
+                          l10n.parish.filter.reset,
+                          style: TextStyle(color: primaryColor),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: _availableMassLanguages.map((languageCode) {
+                      final isSelected = _selectedMassLanguages.contains(languageCode);
+                      return FilterChip(
+                        label: Text(MassLanguage.getDisplayName(languageCode)),
+                        selected: isSelected,
+                        showCheckmark: true,
+                        onSelected: (selected) {
+                          setModalState(() {
+                            if (selected) {
+                              _selectedMassLanguages.add(languageCode);
+                            } else {
+                              _selectedMassLanguages.remove(languageCode);
+                            }
+                          });
+                          setState(() {});
+                        },
+                        backgroundColor: Colors.white,
+                        selectedColor: Colors.white,
+                        checkmarkColor: primaryColor,
+                        side: BorderSide(
+                          color: isSelected ? primaryColor : ParishColors.neutral200,
+                          width: isSelected ? 1.5 : 1,
+                        ),
+                        labelStyle: TextStyle(
+                          color: isSelected ? primaryColor : ParishColors.neutral700,
+                          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      style: FilledButton.styleFrom(
+                        backgroundColor: primaryColor,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(l10n.parish.filter.apply),
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).padding.bottom),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -550,6 +642,8 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      backgroundColor: Colors.white,
+      showDragHandle: false,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),

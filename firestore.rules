@@ -189,6 +189,18 @@ service cloud.firestore {
         && resource.data.userId == request.auth.uid;
     }
 
+    // Parishes Collection (성당 정보)
+    match /parishes/{parishId} {
+      // 읽기: 모든 사용자가 읽기 가능
+      allow read: if true;
+
+      // 쓰기: 인증된 사용자만 가능 (is_verified 체크는 앱에서 처리)
+      allow create, update: if request.auth != null;
+
+      // 삭제: 관리자만 가능
+      allow delete: if isAdmin();
+    }
+
     // Conversations Collection (채팅 대화방)
     match /conversations/{conversationId} {
       // 단일 문서 조회 (get): 로그인한 사용자 허용 (문서 존재 여부 확인용)

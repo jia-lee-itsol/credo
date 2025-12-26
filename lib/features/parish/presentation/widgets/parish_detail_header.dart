@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/utils/app_localizations.dart';
 import '../../../../core/utils/share_utils.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
@@ -9,16 +10,22 @@ class ParishDetailHeader extends ConsumerWidget {
   final String parishName;
   final String parishId;
   final String? address;
+  final String? imageUrl;
   final bool isFavorite;
+  final bool canEditImage;
   final VoidCallback onFavoriteToggle;
+  final VoidCallback? onEditImage;
 
   const ParishDetailHeader({
     super.key,
     required this.parishName,
     required this.parishId,
     this.address,
+    this.imageUrl,
     required this.isFavorite,
+    this.canEditImage = false,
     required this.onFavoriteToggle,
+    this.onEditImage,
   });
 
   @override
@@ -32,29 +39,24 @@ class ParishDetailHeader extends ConsumerWidget {
         centerTitle: true,
         title: Text(
           parishName,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                offset: Offset(0, 1),
+                blurRadius: 3,
+                color: Colors.black54,
+              ),
+            ],
+          ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
         titlePadding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
-        background: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                primaryColor.withValues(alpha: 0.3),
-                primaryColor.withValues(alpha: 0.1),
-              ],
-            ),
-          ),
-          child: Center(
-            child: Icon(
-              Icons.church,
-              size: 80,
-              color: primaryColor.withValues(alpha: 0.5),
-            ),
-          ),
+        background: GestureDetector(
+          onLongPress: canEditImage ? onEditImage : null,
+          child: _buildBackground(primaryColor),
         ),
       ),
       actions: [
@@ -70,6 +72,61 @@ class ParishDetailHeader extends ConsumerWidget {
           onPressed: onFavoriteToggle,
         ),
       ],
+    );
+  }
+
+  Widget _buildBackground(Color primaryColor) {
+    // 이미지 URL이 있으면 이미지 표시
+    if (imageUrl != null && imageUrl!.isNotEmpty) {
+      return Stack(
+        fit: StackFit.expand,
+        children: [
+          CachedNetworkImage(
+            imageUrl: imageUrl!,
+            fit: BoxFit.cover,
+            placeholder: (context, url) => _buildPlaceholder(primaryColor),
+            errorWidget: (context, url, error) => _buildPlaceholder(primaryColor),
+          ),
+          // 그라데이션 오버레이 (텍스트 가독성)
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.transparent,
+                  Colors.black.withValues(alpha: 0.5),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+
+    // 이미지가 없으면 기본 플레이스홀더
+    return _buildPlaceholder(primaryColor);
+  }
+
+  Widget _buildPlaceholder(Color primaryColor) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            primaryColor.withValues(alpha: 0.3),
+            primaryColor.withValues(alpha: 0.1),
+          ],
+        ),
+      ),
+      child: Center(
+        child: Icon(
+          Icons.church,
+          size: 80,
+          color: primaryColor.withValues(alpha: 0.5),
+        ),
+      ),
     );
   }
 
@@ -96,4 +153,3 @@ class ParishDetailHeader extends ConsumerWidget {
     }
   }
 }
-

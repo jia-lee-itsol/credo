@@ -38,11 +38,37 @@ void main() async {
 }
 
 /// Credo 앱 루트 위젯
-class CredoApp extends ConsumerWidget {
+class CredoApp extends ConsumerStatefulWidget {
   const CredoApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CredoApp> createState() => _CredoAppState();
+}
+
+class _CredoAppState extends ConsumerState<CredoApp> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    // 앱이 포그라운드로 돌아올 때 뱃지 초기화
+    if (state == AppLifecycleState.resumed) {
+      PushNotificationService.clearBadge();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final router = ref.watch(appRouterProvider);
     final theme = ref.watch(appThemeProvider);
 

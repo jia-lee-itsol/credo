@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -229,6 +230,9 @@ class PushNotificationService {
           AppLogger.debug('에러 타입: ${e.runtimeType}');
           AppLogger.debug('에러 메시지: ${e.toString()}');
         }
+
+        // 앱 시작 시 뱃지 초기화
+        await clearBadge();
 
         // iOS 포그라운드 알림 표시 설정
         if (Platform.isIOS) {
@@ -675,6 +679,9 @@ class PushNotificationService {
   void _handleMessageOpenedApp(RemoteMessage message) {
     AppLogger.debug('=== 알림 탭으로 앱 열림 ===');
     AppLogger.notification('알림 탭으로 앱 열림');
+
+    // 알림 탭 시 뱃지 초기화
+    clearBadge();
     AppLogger.debug('메시지 ID: ${message.messageId}');
     AppLogger.debug('발신 시간: ${message.sentTime}');
     AppLogger.debug('발신자: ${message.from}');
@@ -1223,4 +1230,17 @@ class PushNotificationService {
     'official_notice',
     'comment',
   ];
+
+  /// 앱 뱃지 초기화 (앱 열었을 때 호출)
+  static Future<void> clearBadge() async {
+    try {
+      final isSupported = await FlutterAppBadger.isAppBadgeSupported();
+      if (isSupported) {
+        await FlutterAppBadger.removeBadge();
+        AppLogger.debug('[PushNotificationService] 앱 뱃지 삭제 완료');
+      }
+    } catch (e) {
+      AppLogger.debug('[PushNotificationService] 앱 뱃지 삭제 실패: $e');
+    }
+  }
 }

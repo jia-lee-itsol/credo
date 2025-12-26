@@ -37,6 +37,8 @@ class ProfileParishInfoSection extends ConsumerWidget {
               child: InputDecorator(
                 decoration: InputDecoration(
                   labelText: l10n.auth.parish,
+                  filled: true,
+                  fillColor: Colors.white,
                   suffixIcon: const Icon(Icons.chevron_right),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),

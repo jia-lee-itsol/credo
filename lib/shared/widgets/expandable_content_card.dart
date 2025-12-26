@@ -33,16 +33,22 @@ class _ExpandableContentCardState extends State<ExpandableContentCard> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Card(
+    return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      elevation: 0,
-      shape: RoundedRectangleBorder(
+      decoration: BoxDecoration(
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        side: BorderSide(
-          color: _isExpanded
-              ? widget.primaryColor.withValues(alpha: 0.5)
-              : theme.colorScheme.outlineVariant,
+        border: Border.all(
+          color: widget.primaryColor.withValues(alpha: 0.4),
+          width: 1.5,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
         children: [

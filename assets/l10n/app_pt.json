@@ -481,7 +481,7 @@
       "likes": "Curtidas",
       "likesDescription": "Receber curtidas em publicações",
       "dailyMass": "Palavra de hoje",
-      "dailyMassDescription": "Receber notificações da palavra de hoje",
+      "dailyMassDescription": "Receber notificações da palavra de hoje diariamente à meia-noite",
       "quietHours": "Horário silencioso",
       "quietHoursDescription": "Não receber notificações durante as horas especificadas",
       "quietHoursStart": "Hora de início",

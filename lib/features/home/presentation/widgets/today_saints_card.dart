@@ -18,7 +18,7 @@ class TodaySaintsCard extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
       child: HomeActionButton(
-        icon: Icons.star,
+        icon: Icons.star_border,
         title: l10n.saints.todaySaints,
         subtitle: l10n.saints.todaySaintsSubtitle,
         primaryColor: primaryColor,

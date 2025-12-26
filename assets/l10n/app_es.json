@@ -481,7 +481,7 @@
       "likes": "Me gusta",
       "likesDescription": "Recibir me gusta en publicaciones",
       "dailyMass": "Palabra de hoy",
-      "dailyMassDescription": "Recibir notificaciones de la palabra de hoy",
+      "dailyMassDescription": "Recibir notificaciones de la palabra de hoy diariamente a medianoche",
       "quietHours": "Horas silenciosas",
       "quietHoursDescription": "No recibir notificaciones durante las horas especificadas",
       "quietHoursStart": "Hora de inicio",

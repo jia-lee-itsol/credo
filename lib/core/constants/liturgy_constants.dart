@@ -51,23 +51,85 @@ class LiturgyColors {
   static const Color easterDark = Color(0xFFB8860B);
   static const Color easterBackground = Color(0xFFFFFBFE);
 
-  // 성령 강림(오순절) - 붉은색 (성령, 순교)
-  static const Color pentecostPrimary = Color(0xFFC62828);
-  static const Color pentecostLight = Color(0xFFFF5F52);
-  static const Color pentecostDark = Color(0xFF8E0000);
-  static const Color pentecostBackground = Color(0xFFFFEBEE);
+  // 성령 강림(오순절) - 붉은색 (성령, 순교) - 채도 낮춤
+  static const Color pentecostPrimary = Color(0xFFB85450);
+  static const Color pentecostLight = Color(0xFFD4817E);
+  static const Color pentecostDark = Color(0xFF8B3A36);
+  static const Color pentecostBackground = Color(0xFFFFF5F5);
 
-  // 순교자 축일 - 붉은색 (피흘림)
-  static const Color martyrPrimary = Color(0xFFC62828);
-  static const Color martyrLight = Color(0xFFFF5F52);
-  static const Color martyrDark = Color(0xFF8E0000);
-  static const Color martyrBackground = Color(0xFFFFEBEE);
+  // 순교자 축일 - 붉은색 (피흘림) - 채도 낮춤
+  static const Color martyrPrimary = Color(0xFFB85450);
+  static const Color martyrLight = Color(0xFFD4817E);
+  static const Color martyrDark = Color(0xFF8B3A36);
+  static const Color martyrBackground = Color(0xFFFFF5F5);
 
   // 성모 마리아 축일/성인 축일 - 흰색 배경 + 골드 포인트 (기쁨, 성덕)
   static const Color saintPrimary = Color(0xFFD4AF37); // 클래식 골드 (채도 낮음)
   static const Color saintLight = Color(0xFFFFFFFF);
   static const Color saintDark = Color(0xFFB8860B);
   static const Color saintBackground = Color(0xFFFFFBFE);
+
+  // ===== 그라데이션 색상 (헤더용) =====
+
+  // 연중 시기 그라데이션 - 초록색
+  static const Color ordinaryGradientStart = Color(0xFF43A047);
+  static const Color ordinaryGradientEnd = Color(0xFF2E7D32);
+
+  // 대림절 그라데이션 - 보라색
+  static const Color adventGradientStart = Color(0xFF9C27B0);
+  static const Color adventGradientEnd = Color(0xFF7B1FA2);
+
+  // 사순절 그라데이션 - 보라색
+  static const Color lentGradientStart = Color(0xFF9C27B0);
+  static const Color lentGradientEnd = Color(0xFF7B1FA2);
+
+  // 성탄절 그라데이션 - 골드
+  static const Color christmasGradientStart = Color(0xFFE6C650);
+  static const Color christmasGradientEnd = Color(0xFFD4AF37);
+
+  // 부활절 그라데이션 - 골드
+  static const Color easterGradientStart = Color(0xFFE6C650);
+  static const Color easterGradientEnd = Color(0xFFD4AF37);
+
+  // 성령 강림 그라데이션 - 붉은색 (채도 낮춤)
+  static const Color pentecostGradientStart = Color(0xFFC46B67);
+  static const Color pentecostGradientEnd = Color(0xFFB85450);
+
+  /// 전례 시즌에 따른 그라데이션 시작 색상 반환
+  static Color getGradientStartColor(LiturgySeason season) {
+    switch (season) {
+      case LiturgySeason.ordinary:
+        return ordinaryGradientStart;
+      case LiturgySeason.advent:
+        return adventGradientStart;
+      case LiturgySeason.lent:
+        return lentGradientStart;
+      case LiturgySeason.christmas:
+        return christmasGradientStart;
+      case LiturgySeason.easter:
+        return easterGradientStart;
+      case LiturgySeason.pentecost:
+        return pentecostGradientStart;
+    }
+  }
+
+  /// 전례 시즌에 따른 그라데이션 끝 색상 반환
+  static Color getGradientEndColor(LiturgySeason season) {
+    switch (season) {
+      case LiturgySeason.ordinary:
+        return ordinaryGradientEnd;
+      case LiturgySeason.advent:
+        return adventGradientEnd;
+      case LiturgySeason.lent:
+        return lentGradientEnd;
+      case LiturgySeason.christmas:
+        return christmasGradientEnd;
+      case LiturgySeason.easter:
+        return easterGradientEnd;
+      case LiturgySeason.pentecost:
+        return pentecostGradientEnd;
+    }
+  }
 
   /// 전례 시즌에 따른 기본 색상 반환
   static Color getPrimaryColor(LiturgySeason season) {

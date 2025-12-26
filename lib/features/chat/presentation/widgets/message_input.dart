@@ -121,21 +121,33 @@ class _MessageInputState extends State<MessageInput> {
             Expanded(
               child: Container(
                 constraints: const BoxConstraints(maxHeight: 120),
-                decoration: BoxDecoration(
-                  color: theme.colorScheme.surfaceContainerHighest,
-                  borderRadius: BorderRadius.circular(24),
-                ),
                 child: TextField(
                   controller: _controller,
                   focusNode: _focusNode,
                   maxLines: null,
                   textInputAction: TextInputAction.newline,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: '메시지를 입력하세요',
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 10,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: BorderSide(color: Colors.grey.shade300),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: BorderSide(
+                        color: theme.colorScheme.primary,
+                        width: 2,
+                      ),
                     ),
                   ),
                   enabled: !widget.isLoading,

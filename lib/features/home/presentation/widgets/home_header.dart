@@ -16,6 +16,8 @@ class HomeHeader extends ConsumerWidget {
   final String seasonName;
   final Color primaryColor;
   final Color backgroundColor;
+  final Color gradientStartColor;
+  final Color gradientEndColor;
 
   const HomeHeader({
     super.key,
@@ -23,6 +25,8 @@ class HomeHeader extends ConsumerWidget {
     required this.seasonName,
     required this.primaryColor,
     required this.backgroundColor,
+    required this.gradientStartColor,
+    required this.gradientEndColor,
   });
 
   @override
@@ -40,9 +44,9 @@ class HomeHeader extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [primaryColor, primaryColor.withValues(alpha: 0.85)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [gradientStartColor, gradientEndColor],
         ),
       ),
       child: SafeArea(

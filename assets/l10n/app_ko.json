@@ -431,7 +431,7 @@
       "likes": "좋아요",
       "likesDescription": "게시글 좋아요를 받습니다",
       "dailyMass": "오늘의 말씀",
-      "dailyMassDescription": "오늘의 말씀 알림을 받습니다",
+      "dailyMassDescription": "매일 0시에 오늘의 말씀 알림을 받습니다",
       "quietHours": "조용한 시간",
       "quietHoursDescription": "지정한 시간대에는 알림을 받지 않습니다",
       "quietHoursStart": "시작 시간",

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/utils/app_localizations.dart';
+import '../../shared/utils/page_transitions.dart';
 
 import '../../features/auth/presentation/screens/sign_in_screen.dart';
 import '../../features/auth/presentation/screens/sign_up_screen.dart';
@@ -89,12 +90,18 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.signIn,
         name: 'signIn',
-        builder: (context, state) => const SignInScreen(),
+        pageBuilder: (context, state) => BottomSlideTransitionPage(
+          key: state.pageKey,
+          child: const SignInScreen(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.signUp,
         name: 'signUp',
-        builder: (context, state) => const SignUpScreen(),
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          child: const SignUpScreen(),
+        ),
       ),
 
       // 메인 셸 라우트 (하단 네비게이션 포함)
@@ -114,14 +121,20 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 path: AppRoutes.todaySaints,
                 name: 'todaySaints',
-                builder: (context, state) => const TodaySaintsScreen(),
+                pageBuilder: (context, state) => SlideTransitionPage(
+                  key: state.pageKey,
+                  child: const TodaySaintsScreen(),
+                ),
                 routes: [
                   GoRoute(
                     path: ':saintId',
                     name: 'saintDetail',
-                    builder: (context, state) {
+                    pageBuilder: (context, state) {
                       final saintId = state.pathParameters['saintId']!;
-                      return SaintDetailScreen(saintId: saintId);
+                      return SlideTransitionPage(
+                        key: state.pageKey,
+                        child: SaintDetailScreen(saintId: saintId),
+                      );
                     },
                   ),
                 ],
@@ -162,13 +175,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: ':parishId',
                     name: 'parishDetail',
-                    builder: (context, state) {
+                    pageBuilder: (context, state) {
                       final parishId = state.pathParameters['parishId']!;
-                      // 전체 경로를 포함하여 더 고유한 key 생성
                       final uniqueKey = ValueKey('parishDetail_${state.uri}');
-                      return ParishDetailScreen(
-                        key: uniqueKey,
-                        parishId: parishId,
+                      return SlideTransitionPage(
+                        key: state.pageKey,
+                        child: ParishDetailScreen(
+                          key: uniqueKey,
+                          parishId: parishId,
+                        ),
                       );
                     },
                   ),
@@ -188,28 +203,37 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: ':parishId',
                     name: 'communityParish',
-                    builder: (context, state) {
+                    pageBuilder: (context, state) {
                       final parishId = state.pathParameters['parishId']!;
-                      return PostListScreen(parishId: parishId);
+                      return SlideTransitionPage(
+                        key: state.pageKey,
+                        child: PostListScreen(parishId: parishId),
+                      );
                     },
                     routes: [
                       GoRoute(
                         path: 'post/create',
                         name: 'postCreate',
-                        builder: (context, state) {
+                        pageBuilder: (context, state) {
                           final parishId = state.pathParameters['parishId']!;
-                          return PostCreateScreen(parishId: parishId);
+                          return BottomSlideTransitionPage(
+                            key: state.pageKey,
+                            child: PostCreateScreen(parishId: parishId),
+                          );
                         },
                       ),
                       GoRoute(
                         path: 'post/:postId',
                         name: 'postDetail',
-                        builder: (context, state) {
+                        pageBuilder: (context, state) {
                           final parishId = state.pathParameters['parishId']!;
                           final postId = state.pathParameters['postId']!;
-                          return PostDetailScreen(
-                            parishId: parishId,
-                            postId: postId,
+                          return SlideTransitionPage(
+                            key: state.pageKey,
+                            child: PostDetailScreen(
+                              parishId: parishId,
+                              postId: postId,
+                            ),
                           );
                         },
                       ),
@@ -226,27 +250,39 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.chatList,
         name: 'chatList',
-        builder: (context, state) => const ChatListScreen(),
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          child: const ChatListScreen(),
+        ),
         routes: [
           GoRoute(
             path: 'new',
             name: 'newChat',
-            builder: (context, state) => const NewChatScreen(),
+            pageBuilder: (context, state) => BottomSlideTransitionPage(
+              key: state.pageKey,
+              child: const NewChatScreen(),
+            ),
           ),
           GoRoute(
             path: ':conversationId',
             name: 'chat',
-            builder: (context, state) {
+            pageBuilder: (context, state) {
               final conversationId = state.pathParameters['conversationId']!;
-              return ChatScreen(conversationId: conversationId);
+              return SlideTransitionPage(
+                key: state.pageKey,
+                child: ChatScreen(conversationId: conversationId),
+              );
             },
             routes: [
               GoRoute(
                 path: 'info',
                 name: 'chatInfo',
-                builder: (context, state) {
+                pageBuilder: (context, state) {
                   final conversationId = state.pathParameters['conversationId']!;
-                  return ChatInfoScreen(conversationId: conversationId);
+                  return SlideTransitionPage(
+                    key: state.pageKey,
+                    child: ChatInfoScreen(conversationId: conversationId),
+                  );
                 },
               ),
             ],
@@ -258,16 +294,22 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.friendList,
         name: 'friendList',
-        builder: (context, state) => const FriendListScreen(),
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          child: const FriendListScreen(),
+        ),
       ),
 
       // 유저 프로필 라우트
       GoRoute(
         path: '/user/:userId',
         name: 'userProfile',
-        builder: (context, state) {
+        pageBuilder: (context, state) {
           final userId = state.pathParameters['userId']!;
-          return UserProfileScreen(userId: userId);
+          return SlideTransitionPage(
+            key: state.pageKey,
+            child: UserProfileScreen(userId: userId),
+          );
         },
       ),
 
@@ -275,30 +317,41 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.myPage,
         name: 'myPage',
-        builder: (context, state) => const MyPageScreen(),
+        pageBuilder: (context, state) => SlideTransitionPage(
+          key: state.pageKey,
+          child: const MyPageScreen(),
+        ),
         routes: [
           GoRoute(
             path: 'edit-profile',
             name: 'editProfile',
-            builder: (context, state) => const EditProfileScreen(),
+            pageBuilder: (context, state) => SlideTransitionPage(
+              key: state.pageKey,
+              child: const EditProfileScreen(),
+            ),
           ),
           GoRoute(
             path: 'favorite-parishes',
             name: 'favoriteParishes',
-            builder: (context, state) => const FavoriteParishesScreen(
-              key: ValueKey('favoriteParishesScreen'),
+            pageBuilder: (context, state) => SlideTransitionPage(
+              key: state.pageKey,
+              child: const FavoriteParishesScreen(
+                key: ValueKey('favoriteParishesScreen'),
+              ),
             ),
             routes: [
-              // 자주 가는 교회에서 교회 상세로 이동할 수 있도록 중첩 라우트 추가
               GoRoute(
                 path: 'parish/:parishId',
                 name: 'favoriteParishDetail',
-                builder: (context, state) {
+                pageBuilder: (context, state) {
                   final parishId = state.pathParameters['parishId']!;
                   final uniqueKey = ValueKey(
                     'favoriteParishDetail_${state.uri}',
                   );
-                  return ParishDetailScreen(key: uniqueKey, parishId: parishId);
+                  return SlideTransitionPage(
+                    key: state.pageKey,
+                    child: ParishDetailScreen(key: uniqueKey, parishId: parishId),
+                  );
                 },
               ),
             ],
@@ -306,22 +359,34 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: 'church-faq',
             name: 'churchFaq',
-            builder: (context, state) => const ChurchFaqScreen(),
+            pageBuilder: (context, state) => SlideTransitionPage(
+              key: state.pageKey,
+              child: const ChurchFaqScreen(),
+            ),
           ),
           GoRoute(
             path: 'qr-scanner',
             name: 'qrScanner',
-            builder: (context, state) => const QrScannerScreen(),
+            pageBuilder: (context, state) => BottomSlideTransitionPage(
+              key: state.pageKey,
+              child: const QrScannerScreen(),
+            ),
           ),
           GoRoute(
             path: 'language-settings',
             name: 'languageSettings',
-            builder: (context, state) => const LanguageSettingsScreen(),
+            pageBuilder: (context, state) => SlideTransitionPage(
+              key: state.pageKey,
+              child: const LanguageSettingsScreen(),
+            ),
           ),
           GoRoute(
             path: 'notification-settings',
             name: 'notificationSettings',
-            builder: (context, state) => const NotificationSettingsScreen(),
+            pageBuilder: (context, state) => SlideTransitionPage(
+              key: state.pageKey,
+              child: const NotificationSettingsScreen(),
+            ),
           ),
         ],
       ),

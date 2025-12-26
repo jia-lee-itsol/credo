@@ -49,7 +49,7 @@
     "home": "ホーム",
     "meditation": "黙想",
     "share": "共有",
-    "dailyMass": "今日のみ言葉",
+    "dailyMass": "み言葉",
     "church": "教会",
     "community": "コミュニティ"
   },
@@ -435,7 +435,7 @@
       "likes": "いいね",
       "likesDescription": "投稿へのいいねを受け取ります",
       "dailyMass": "今日のみ言葉",
-      "dailyMassDescription": "今日のみ言葉の通知を受け取ります",
+      "dailyMassDescription": "毎日0時に今日のみ言葉の通知を受け取ります",
       "quietHours": "おやすみモード",
       "quietHoursDescription": "指定した時間帯は通知を受け取りません",
       "quietHoursStart": "開始時刻",

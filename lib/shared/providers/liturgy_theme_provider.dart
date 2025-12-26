@@ -212,102 +212,234 @@ final specialDayProvider = FutureProvider.family<SpecialDay?, DateTime>((
   return await LiturgicalCalendarService.getSpecialDayForDate(date);
 });
 
-/// 전례 기본 색상 Provider (ChatGPT 우선, 특별한 축일 고려)
+/// 전례색 문자열을 Color로 변환하는 헬퍼 함수
+Color _getLiturgicalColorFromString(String color) {
+  switch (color) {
+    case 'white':
+      return LiturgyColors.goldPrimary; // 금색으로 표시 (흰색은 보이지 않으므로)
+    case 'red':
+      return LiturgyColors.pentecostPrimary; // 채도 낮춘 빨간색
+    case 'green':
+      return LiturgyColors.ordinaryPrimary;
+    case 'purple':
+      return LiturgyColors.adventPrimary;
+    case 'rose':
+      return const Color(0xFFD4878F); // 장미색 (채도 낮춤)
+    case 'black':
+      return Colors.black87;
+    default:
+      return LiturgyColors.ordinaryPrimary;
+  }
+}
+
+/// 전례일 이름 요약 (헤더용)
+String _summarizeLiturgicalDayName(String name) {
+  // 너무 긴 이름은 요약
+  // 예: "성 스테파노 부제 순교자 축일" -> "성 스테파노 순교자"
+  // 예: "예수 성탄 대축일 팔일 축제 제2일" -> "성탄 팔일 축제"
+
+  String result = name;
+
+  // "축일", "대축일", "기념일" 등 제거
+  result = result.replaceAll(' 축일', '');
+  result = result.replaceAll(' 대축일', '');
+  result = result.replaceAll(' 기념일', '');
+  result = result.replaceAll('축일', '');
+  result = result.replaceAll('대축일', '');
+  result = result.replaceAll('기념일', '');
+
+  // "부제" 제거 (성 스테파노 부제 순교자 -> 성 스테파노 순교자)
+  result = result.replaceAll(' 부제', '');
+  result = result.replaceAll('부제 ', '');
+
+  // 일본어: 祝日, 大祝日 등 제거
+  result = result.replaceAll('祝日', '');
+  result = result.replaceAll('大祝日', '');
+  result = result.replaceAll('記念日', '');
+
+  // 영어: Feast, Solemnity 등 제거
+  result = result.replaceAll(' Feast', '');
+  result = result.replaceAll(' Solemnity', '');
+  result = result.replaceAll(' Memorial', '');
+  result = result.replaceAll('Feast of ', '');
+  result = result.replaceAll('Solemnity of ', '');
+  result = result.replaceAll('Memorial of ', '');
+
+  // 최대 15자로 제한
+  if (result.length > 15) {
+    result = '${result.substring(0, 14)}…';
+  }
+
+  return result.trim();
+}
+
+/// 전례일 이름 Provider (말씀 전례일 카드 우선)
+final liturgyDayNameProvider = Provider.family<String, String>((ref, locale) {
+  // 1. 말씀 화면의 전례일 데이터에서 이름 가져오기 (우선)
+  final liturgicalDayAsync = ref.watch(todayLiturgicalDayProvider);
+  if (liturgicalDayAsync.hasValue && liturgicalDayAsync.value != null) {
+    final liturgicalDay = liturgicalDayAsync.value!;
+    // 전례일 이름이 있으면 사용, 없으면 시즌 이름 사용
+    if (liturgicalDay.name.isNotEmpty) {
+      return _summarizeLiturgicalDayName(liturgicalDay.name);
+    }
+    // 이름이 비어있으면 시즌 이름 반환
+    return _getSeasonNameFromString(liturgicalDay.season, locale);
+  }
+
+  // 2. 전례일 데이터 로딩 중이거나 실패 시 기존 로직 사용
+  final testDate = ref.watch(testDateOverrideProvider);
+  final seasonAsync = ref.watch(currentLiturgySeasonProvider);
+  final season =
+      seasonAsync.value ?? LiturgySeasonUtil.getCurrentSeasonSync(testDate);
+  return LiturgySeasonUtil.getSeasonName(season, locale: locale);
+});
+
+/// 시즌 문자열을 로케일에 맞는 이름으로 변환
+String _getSeasonNameFromString(String season, String locale) {
+  switch (locale) {
+    case 'ko':
+      switch (season) {
+        case 'ordinary':
+          return '연중';
+        case 'advent':
+          return '대림';
+        case 'christmas':
+          return '성탄';
+        case 'lent':
+          return '사순';
+        case 'easter':
+          return '부활';
+        default:
+          return '연중';
+      }
+    case 'ja':
+      switch (season) {
+        case 'ordinary':
+          return '年間';
+        case 'advent':
+          return '待降節';
+        case 'christmas':
+          return '降誕節';
+        case 'lent':
+          return '四旬節';
+        case 'easter':
+          return '復活節';
+        default:
+          return '年間';
+      }
+    case 'en':
+    default:
+      switch (season) {
+        case 'ordinary':
+          return 'Ordinary Time';
+        case 'advent':
+          return 'Advent';
+        case 'christmas':
+          return 'Christmas';
+        case 'lent':
+          return 'Lent';
+        case 'easter':
+          return 'Easter';
+        default:
+          return 'Ordinary Time';
+      }
+  }
+}
+
+/// 전례 기본 색상 Provider (말씀 전례일 카드 우선)
 final liturgyPrimaryColorProvider = Provider<Color>((ref) {
   // 날짜 변경 감지를 위해 currentDateStringProvider를 watch
   ref.watch(currentDateStringProvider);
 
-  final testDate = ref.watch(testDateOverrideProvider);
-  final date = testDate ?? DateTime.now();
-
-  // ChatGPT로 전례력 정보 가져오기 시도
-  final liturgyInfoAsync = ref.watch(liturgyInfoFromChatGPTProvider(date));
-  if (liturgyInfoAsync.hasValue && liturgyInfoAsync.value != null) {
-    final liturgyInfo = liturgyInfoAsync.value!;
-    final colorType = liturgyInfo['colorType'] as String?;
-    final specialDay = liturgyInfo['specialDay'] as bool? ?? false;
-    final specialDayType = liturgyInfo['specialDayType'] as String?;
-
-    // 특별한 축일 색상 우선
-    if (specialDay) {
-      if (specialDayType == 'martyr' || specialDayType == 'passion') {
-        return LiturgyColors.pentecostPrimary; // 붉은색
-      }
-      if (specialDayType == 'saint') {
-        return LiturgyColors.saintPrimary; // 골드
-      }
-    }
-
-    // 색상 타입에 따라 색상 반환
-    if (colorType != null) {
-      switch (colorType.toLowerCase()) {
-        case 'green':
-          return LiturgyColors.ordinaryPrimary;
-        case 'purple':
-          return LiturgyColors.adventPrimary;
-        case 'gold':
-          return LiturgyColors.goldPrimary;
-        case 'red':
-          return LiturgyColors.pentecostPrimary;
-        case 'white':
-          return LiturgyColors.goldPrimary; // 흰색 시기에는 골드 포인트
-      }
-    }
+  // 1. 말씀 화면의 전례일 데이터에서 색상 가져오기 (우선)
+  final liturgicalDayAsync = ref.watch(todayLiturgicalDayProvider);
+  if (liturgicalDayAsync.hasValue && liturgicalDayAsync.value != null) {
+    final liturgicalDay = liturgicalDayAsync.value!;
+    return _getLiturgicalColorFromString(liturgicalDay.color);
   }
 
-  // ChatGPT 실패 시 기존 로직 사용
+  // 2. 전례일 데이터 로딩 중이거나 실패 시 기존 로직 사용
+  final testDate = ref.watch(testDateOverrideProvider);
   final seasonAsync = ref.watch(currentLiturgySeasonProvider);
   final season =
       seasonAsync.value ?? LiturgySeasonUtil.getCurrentSeasonSync(testDate);
 
-  // 성주간 특별 날짜를 날짜 기반으로 직접 계산 (데이터 로딩 실패 대비)
-  final year = date.year;
-  final easter = LiturgySeasonUtil.calculateEaster(year);
-  final goodFriday = easter.subtract(const Duration(days: 2)); // 부활절 2일 전
-  final passionSunday = easter.subtract(
-    const Duration(days: 7),
-  ); // 부활절 7일 전 (주일)
-
-  // 성금요일 체크 (날짜 기반)
-  if (date.year == goodFriday.year &&
-      date.month == goodFriday.month &&
-      date.day == goodFriday.day) {
-    return LiturgyColors.pentecostPrimary; // 붉은색
-  }
-
-  // 수난 주일 체크 (날짜 기반) - 부활절 7일 전 일요일
-  if (date.year == passionSunday.year &&
-      date.month == passionSunday.month &&
-      date.day == passionSunday.day) {
-    return LiturgyColors.pentecostPrimary; // 붉은색
-  }
-
-  // 특별한 축일 체크 (성금요일, 수난 주일, 순교자 축일은 붉은색 우선)
-  final specialDayAsync = ref.watch(specialDayProvider(date));
-  if (specialDayAsync.hasValue && specialDayAsync.value != null) {
-    final specialDay = specialDayAsync.value!;
-    final name = specialDay.name;
-
-    // 성주간 특별 날짜 - 붉은색 (수난 주일, 성금요일)
-    if (name.isNotEmpty &&
-        (name.contains('受難') ||
-            name.contains('聖金曜日') ||
-            name.contains('Passion') ||
-            name.contains('Good Friday'))) {
-      return LiturgyColors.pentecostPrimary; // 붉은색
-    }
-
-    // 순교자 축일 - 붉은색
-    if (name.isNotEmpty &&
-        (name.contains('殉教') ||
-            name.contains('殉教者') ||
-            name.contains('martyr') ||
-            name.contains('Martyr'))) {
-      return LiturgyColors.martyrPrimary; // 붉은색
-    }
-  }
-
   return LiturgyColors.getPrimaryColor(season);
+});
+
+/// 전례색 문자열에서 그라데이션 시작 색상 반환
+Color _getGradientStartFromColorString(String color) {
+  switch (color) {
+    case 'white':
+      return LiturgyColors.christmasGradientStart;
+    case 'red':
+      return LiturgyColors.pentecostGradientStart;
+    case 'green':
+      return LiturgyColors.ordinaryGradientStart;
+    case 'purple':
+      return LiturgyColors.adventGradientStart;
+    case 'rose':
+      return const Color(0xFFDEA0A7); // 장미색 밝은 톤 (채도 낮춤)
+    case 'black':
+      return const Color(0xFF424242);
+    default:
+      return LiturgyColors.ordinaryGradientStart;
+  }
+}
+
+/// 전례색 문자열에서 그라데이션 끝 색상 반환
+Color _getGradientEndFromColorString(String color) {
+  switch (color) {
+    case 'white':
+      return LiturgyColors.christmasGradientEnd;
+    case 'red':
+      return LiturgyColors.pentecostGradientEnd;
+    case 'green':
+      return LiturgyColors.ordinaryGradientEnd;
+    case 'purple':
+      return LiturgyColors.adventGradientEnd;
+    case 'rose':
+      return const Color(0xFFD4878F); // 장미색 진한 톤 (채도 낮춤)
+    case 'black':
+      return const Color(0xFF212121);
+    default:
+      return LiturgyColors.ordinaryGradientEnd;
+  }
+}
+
+/// 전례 그라데이션 시작 색상 Provider
+final liturgyGradientStartColorProvider = Provider<Color>((ref) {
+  // 1. 말씀 화면의 전례일 데이터에서 색상 가져오기 (우선)
+  final liturgicalDayAsync = ref.watch(todayLiturgicalDayProvider);
+  if (liturgicalDayAsync.hasValue && liturgicalDayAsync.value != null) {
+    final liturgicalDay = liturgicalDayAsync.value!;
+    return _getGradientStartFromColorString(liturgicalDay.color);
+  }
+
+  // 2. 전례일 데이터 로딩 중이거나 실패 시 기존 로직 사용
+  final testDate = ref.watch(testDateOverrideProvider);
+  final seasonAsync = ref.watch(currentLiturgySeasonProvider);
+  final season =
+      seasonAsync.value ?? LiturgySeasonUtil.getCurrentSeasonSync(testDate);
+  return LiturgyColors.getGradientStartColor(season);
+});
+
+/// 전례 그라데이션 끝 색상 Provider
+final liturgyGradientEndColorProvider = Provider<Color>((ref) {
+  // 1. 말씀 화면의 전례일 데이터에서 색상 가져오기 (우선)
+  final liturgicalDayAsync = ref.watch(todayLiturgicalDayProvider);
+  if (liturgicalDayAsync.hasValue && liturgicalDayAsync.value != null) {
+    final liturgicalDay = liturgicalDayAsync.value!;
+    return _getGradientEndFromColorString(liturgicalDay.color);
+  }
+
+  // 2. 전례일 데이터 로딩 중이거나 실패 시 기존 로직 사용
+  final testDate = ref.watch(testDateOverrideProvider);
+  final seasonAsync = ref.watch(currentLiturgySeasonProvider);
+  final season =
+      seasonAsync.value ?? LiturgySeasonUtil.getCurrentSeasonSync(testDate);
+  return LiturgyColors.getGradientEndColor(season);
 });
 
 /// 전례 배경 색상 Provider (ChatGPT 우선)

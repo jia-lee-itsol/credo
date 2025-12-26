@@ -51,6 +51,8 @@ class ProfileGodparentSection extends ConsumerWidget {
               child: InputDecorator(
                 decoration: InputDecoration(
                   labelText: l10n.profile.godparent.label,
+                  filled: true,
+                  fillColor: Colors.white,
                   suffixIcon: const Icon(Icons.chevron_right),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(4),

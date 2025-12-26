@@ -58,6 +58,8 @@ class ProfileBasicInfoSection extends ConsumerWidget {
               decoration: InputDecoration(
                 labelText: l10n.auth.nickname,
                 hintText: l10n.validation.nicknameRequired,
+                filled: true,
+                fillColor: Colors.white,
               ),
               validator: (value) => Validators.validateNickname(value, l10n),
               maxLength: 20,
@@ -66,7 +68,11 @@ class ProfileBasicInfoSection extends ConsumerWidget {
             // 이메일 (읽기 전용)
             TextFormField(
               initialValue: email ?? '',
-              decoration: InputDecoration(labelText: l10n.auth.email),
+              decoration: InputDecoration(
+                labelText: l10n.auth.email,
+                filled: true,
+                fillColor: Colors.grey.shade100,
+              ),
               enabled: false,
             ),
             const SizedBox(height: 8),
@@ -92,7 +98,11 @@ class ProfileBasicInfoSection extends ConsumerWidget {
                   : null,
               child: TextFormField(
                 initialValue: userId ?? '',
-                decoration: InputDecoration(labelText: l10n.profile.userId),
+                decoration: InputDecoration(
+                  labelText: l10n.profile.userId,
+                  filled: true,
+                  fillColor: Colors.grey.shade100,
+                ),
                 enabled: false,
               ),
             ),
@@ -115,6 +125,8 @@ class ProfileBasicInfoSection extends ConsumerWidget {
                     decoration: InputDecoration(
                       labelText: l10n.auth.baptismName,
                       hintText: l10n.profile.basicInfo.baptismNameHint,
+                      filled: true,
+                      fillColor: Colors.white,
                     ),
                     maxLength: 50,
                   )
@@ -122,7 +134,11 @@ class ProfileBasicInfoSection extends ConsumerWidget {
                   // 세례명 설정됨: 읽기 전용
                   TextFormField(
                     initialValue: baptismalName,
-                    decoration: InputDecoration(labelText: l10n.auth.baptismName),
+                    decoration: InputDecoration(
+                      labelText: l10n.auth.baptismName,
+                      filled: true,
+                      fillColor: Colors.grey.shade100,
+                    ),
                     enabled: false,
                   ),
                 const SizedBox(height: 8),
@@ -153,6 +169,8 @@ class ProfileBasicInfoSection extends ConsumerWidget {
                     initialValue: feastDayMonth,
                     decoration: InputDecoration(
                       labelText: l10n.profile.month,
+                      filled: true,
+                      fillColor: Colors.white,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
@@ -184,6 +202,8 @@ class ProfileBasicInfoSection extends ConsumerWidget {
                     initialValue: feastDayDay,
                     decoration: InputDecoration(
                       labelText: l10n.profile.day,
+                      filled: true,
+                      fillColor: Colors.white,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),

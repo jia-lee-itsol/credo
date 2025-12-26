@@ -7,12 +7,18 @@ class ParishDetailMassTimes extends StatelessWidget {
   final Map<String, dynamic> parish;
   final Color primaryColor;
   final AppLocalizations l10n;
+  final bool canEdit;
+  final VoidCallback? onEditMassTimes;
+  final VoidCallback? onEditForeignMass;
 
   const ParishDetailMassTimes({
     super.key,
     required this.parish,
     required this.primaryColor,
     required this.l10n,
+    this.canEdit = false,
+    this.onEditMassTimes,
+    this.onEditForeignMass,
   });
 
   @override
@@ -67,13 +73,24 @@ class ParishDetailMassTimes extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           massTime == null || massTime.isEmpty
-              ? Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text(
-                      l10n.parish.detailSection.noMassTimeInfo,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
+              ? GestureDetector(
+                  onLongPress: canEdit ? onEditMassTimes : null,
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              l10n.parish.detailSection.noMassTimeInfo,
+                              style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                          ),
+                          if (canEdit)
+                            Icon(Icons.edit, size: 16, color: Colors.grey.shade400),
+                        ],
                       ),
                     ),
                   ),
@@ -84,6 +101,9 @@ class ParishDetailMassTimes extends StatelessWidget {
                   massTime: massTime,
                   parish: parish,
                   l10n: l10n,
+                  canEdit: canEdit,
+                  onEditMassTimes: onEditMassTimes,
+                  onEditForeignMass: onEditForeignMass,
                 ),
         ],
       ),
@@ -98,6 +118,9 @@ class _MassTimeCards extends StatelessWidget {
   final String massTime;
   final Map<String, dynamic> parish;
   final AppLocalizations l10n;
+  final bool canEdit;
+  final VoidCallback? onEditMassTimes;
+  final VoidCallback? onEditForeignMass;
 
   const _MassTimeCards({
     required this.context,
@@ -105,6 +128,9 @@ class _MassTimeCards extends StatelessWidget {
     required this.massTime,
     required this.parish,
     required this.l10n,
+    this.canEdit = false,
+    this.onEditMassTimes,
+    this.onEditForeignMass,
   });
 
   @override
@@ -120,14 +146,26 @@ class _MassTimeCards extends StatelessWidget {
 
     if (!hasForeign) {
       // 외국어 미사가 없으면 단일 카드
-      return Card(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: _MassTimeByWeekday(
-            context: context,
-            theme: theme,
-            weekdayGroups: japaneseGroups,
-            l10n: l10n,
+      return GestureDetector(
+        onLongPress: canEdit ? onEditMassTimes : null,
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                _MassTimeByWeekday(
+                  context: context,
+                  theme: theme,
+                  weekdayGroups: japaneseGroups,
+                  l10n: l10n,
+                ),
+                if (canEdit)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Icon(Icons.edit, size: 16, color: Colors.grey.shade400),
+                  ),
+              ],
+            ),
           ),
         ),
       );
@@ -137,27 +175,51 @@ class _MassTimeCards extends StatelessWidget {
     return Column(
       children: [
         // 위: 일본어 미사
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: _MassTimeByWeekday(
-              context: context,
-              theme: theme,
-              weekdayGroups: japaneseGroups,
-              l10n: l10n,
+        GestureDetector(
+          onLongPress: canEdit ? onEditMassTimes : null,
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  _MassTimeByWeekday(
+                    context: context,
+                    theme: theme,
+                    weekdayGroups: japaneseGroups,
+                    l10n: l10n,
+                  ),
+                  if (canEdit)
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(Icons.edit, size: 16, color: Colors.grey.shade400),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
         const SizedBox(height: 12),
         // 아래: 외국어 미사
-        Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: _MassTimeByWeekday(
-              context: context,
-              theme: theme,
-              weekdayGroups: foreignGroups,
-              l10n: l10n,
+        GestureDetector(
+          onLongPress: canEdit ? onEditForeignMass : null,
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  _MassTimeByWeekday(
+                    context: context,
+                    theme: theme,
+                    weekdayGroups: foreignGroups,
+                    l10n: l10n,
+                  ),
+                  if (canEdit)
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Icon(Icons.edit, size: 16, color: Colors.grey.shade400),
+                    ),
+                ],
+              ),
             ),
           ),
         ),

@@ -32,11 +32,8 @@ class DailyMassCommentInput extends StatelessWidget {
         top: 12,
         bottom: MediaQuery.of(context).padding.bottom + 12,
       ),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        border: Border(
-          top: BorderSide(color: theme.colorScheme.outlineVariant),
-        ),
+      decoration: const BoxDecoration(
+        color: Colors.white,
       ),
       child: Row(
         children: [
@@ -45,10 +42,26 @@ class DailyMassCommentInput extends StatelessWidget {
               controller: commentController,
               decoration: InputDecoration(
                 hintText: l10n.mass.prayer.shareHint,
-                border: InputBorder.none,
+                hintStyle: TextStyle(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+                filled: true,
+                fillColor: Colors.white,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide: BorderSide(color: primaryColor.withValues(alpha: 0.3)),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide: BorderSide(color: primaryColor.withValues(alpha: 0.3)),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(24),
+                  borderSide: BorderSide(color: primaryColor),
+                ),
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: 16,
-                  vertical: 16,
+                  vertical: 12,
                 ),
               ),
               maxLines: null,
@@ -65,12 +78,12 @@ class DailyMassCommentInput extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: primaryColor.withValues(alpha: 0.1),
+                  color: primaryColor,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.send,
-                  color: primaryColor,
+                  color: Colors.white,
                   size: 24,
                 ),
               ),
@@ -95,8 +108,6 @@ class DailyMassLoginPrompt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Container(
       padding: EdgeInsets.only(
         left: 16,
@@ -104,36 +115,36 @@ class DailyMassLoginPrompt extends StatelessWidget {
         top: 12,
         bottom: MediaQuery.of(context).padding.bottom + 12,
       ),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        border: Border(
-          top: BorderSide(color: theme.colorScheme.outlineVariant),
-        ),
+      decoration: const BoxDecoration(
+        color: Colors.white,
       ),
       child: GestureDetector(
         onTap: () {
           LoginRequiredDialog.show(context, primaryColor: primaryColor);
         },
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: primaryColor.withValues(alpha: 0.05),
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: primaryColor.withValues(alpha: 0.2)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.login, color: primaryColor, size: 20),
-              const SizedBox(width: 8),
-              Text(
-                l10n.mass.prayer.loginToShare,
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: primaryColor,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
+        child: TextField(
+          enabled: false,
+          decoration: InputDecoration(
+            hintText: l10n.mass.prayer.loginToShare,
+            hintStyle: TextStyle(
+              color: primaryColor,
+              fontWeight: FontWeight.w500,
+            ),
+            prefixIcon: Icon(Icons.login, color: primaryColor, size: 20),
+            filled: true,
+            fillColor: Colors.white,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide(color: primaryColor.withValues(alpha: 0.3)),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide(color: primaryColor.withValues(alpha: 0.3)),
+            ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12,
+            ),
           ),
         ),
       ),

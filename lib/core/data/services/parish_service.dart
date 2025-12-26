@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../error/failures.dart';
@@ -82,11 +83,53 @@ class ParishService {
       final parishes = await getParishesByDiocese(dioceseId);
 
       // 이름으로 교회 찾기
+      Map<String, dynamic>? parish;
       try {
-        return parishes.firstWhere((parish) => parish['name'] == name);
+        parish = Map<String, dynamic>.from(
+          parishes.firstWhere((p) => p['name'] == name),
+        );
       } catch (e) {
         return null;
       }
+
+      // Firestore에서 수정된 데이터 가져와서 병합
+      try {
+        AppLogger.info('[ParishService] Firestore 조회 시작: parishId=$parishId');
+        final firestoreDoc = await FirebaseFirestore.instance
+            .collection('parishes')
+            .doc(parishId)
+            .get();
+
+        AppLogger.info('[ParishService] Firestore 문서 존재: ${firestoreDoc.exists}');
+
+        if (firestoreDoc.exists) {
+          final firestoreData = firestoreDoc.data();
+          AppLogger.info('[ParishService] Firestore 데이터: $firestoreData');
+          if (firestoreData != null) {
+            // 수정 가능한 필드들을 Firestore 데이터로 덮어쓰기
+            final editableFields = [
+              'imageUrl',
+              'address',
+              'phone',
+              'website',
+              'massTime',    // 미사 시간 (단일 텍스트)
+              'massTimes',   // 미사 시간 (구조화된 데이터)
+              'foreignMass', // 외국어 미사
+            ];
+            for (final field in editableFields) {
+              if (firestoreData[field] != null) {
+                parish[field] = firestoreData[field];
+                AppLogger.info('[ParishService] $field 적용: ${firestoreData[field]}');
+              }
+            }
+          }
+        }
+      } catch (e) {
+        // Firestore 조회 실패해도 로컬 데이터는 반환
+        AppLogger.error('[ParishService] Firestore 조회 실패: $e');
+      }
+
+      return parish;
     } catch (e) {
       return null;
     }
