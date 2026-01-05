@@ -25,21 +25,75 @@ class SignInScreen extends ConsumerStatefulWidget {
   ConsumerState<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignInScreenState extends ConsumerState<SignInScreen> {
+class _SignInScreenState extends ConsumerState<SignInScreen>
+    with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLoading = false;
   bool _rememberMe = false;
 
+  late AnimationController _animationController;
+  late Animation<double> _logoFadeAnimation;
+  late Animation<double> _logoScaleAnimation;
+  late Animation<double> _formFadeAnimation;
+  late Animation<Offset> _formSlideAnimation;
+  late Animation<double> _socialFadeAnimation;
+
   @override
   void initState() {
     super.initState();
+
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 900),
+      vsync: this,
+    );
+
+    _logoFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.3, curve: Curves.easeOut),
+      ),
+    );
+
+    _logoScaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.4, curve: Curves.easeOutBack),
+      ),
+    );
+
+    _formFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.2, 0.6, curve: Curves.easeOut),
+      ),
+    );
+
+    _formSlideAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.1),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.2, 0.6, curve: Curves.easeOutCubic),
+      ),
+    );
+
+    _socialFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.4, 0.8, curve: Curves.easeOut),
+      ),
+    );
+
+    _animationController.forward();
     _loadSavedEmail();
   }
 
   @override
   void dispose() {
+    _animationController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -103,115 +157,141 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // 로고 헤더
-                  AuthLogoHeader(
-                    primaryColor: primaryColor,
-                    backgroundColor: backgroundColor,
-                    subtitle: l10n.auth.subtitle,
-                  ),
-
-                  // 이메일 입력
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      labelText: l10n.auth.email,
-                      prefixIcon: const Icon(Icons.email_outlined),
+                  // 로고 헤더 (애니메이션 적용)
+                  FadeTransition(
+                    opacity: _logoFadeAnimation,
+                    child: ScaleTransition(
+                      scale: _logoScaleAnimation,
+                      child: AuthLogoHeader(
+                        primaryColor: primaryColor,
+                        backgroundColor: backgroundColor,
+                        subtitle: l10n.auth.subtitle,
+                      ),
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) => Validators.validateEmail(value, l10n),
-                    textInputAction: TextInputAction.next,
                   ),
-                  const SizedBox(height: 16),
 
-                  // 비밀번호 입력
-                  PasswordField(
-                    controller: _passwordController,
-                    labelText: l10n.auth.password,
-                    validator: (value) =>
-                        Validators.validatePassword(value, l10n),
-                    onFieldSubmitted: (_) => _signIn(),
+                  // 폼 영역 (애니메이션 적용)
+                  FadeTransition(
+                    opacity: _formFadeAnimation,
+                    child: SlideTransition(
+                      position: _formSlideAnimation,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // 이메일 입력
+                          TextFormField(
+                            controller: _emailController,
+                            decoration: InputDecoration(
+                              labelText: l10n.auth.email,
+                              prefixIcon: const Icon(Icons.email_outlined),
+                            ),
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (value) => Validators.validateEmail(value, l10n),
+                            textInputAction: TextInputAction.next,
+                          ),
+                          const SizedBox(height: 16),
+
+                          // 비밀번호 입력
+                          PasswordField(
+                            controller: _passwordController,
+                            labelText: l10n.auth.password,
+                            validator: (value) =>
+                                Validators.validatePassword(value, l10n),
+                            onFieldSubmitted: (_) => _signIn(),
+                          ),
+                          const SizedBox(height: 8),
+
+                          // 나의 정보 저장 체크박스
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: _rememberMe,
+                                onChanged: _isLoading
+                                    ? null
+                                    : (value) {
+                                        setState(() {
+                                          _rememberMe = value ?? false;
+                                        });
+                                      },
+                                activeColor: primaryColor,
+                              ),
+                              Text(l10n.auth.saveEmail),
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+
+                          // 비밀번호 찾기
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: _isLoading ? null : _resetPassword,
+                              child: Text(l10n.auth.forgotPassword),
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+
+                          // 로그인 버튼
+                          LoadingButton(
+                            onPressed: _signIn,
+                            label: l10n.auth.signIn,
+                            backgroundColor: primaryColor,
+                            isLoading: _isLoading,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 24),
 
-                  // 나의 정보 저장 체크박스
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: _rememberMe,
-                        onChanged: _isLoading
-                            ? null
-                            : (value) {
-                                setState(() {
-                                  _rememberMe = value ?? false;
-                                });
+                  // 소셜 로그인 영역 (애니메이션 적용)
+                  FadeTransition(
+                    opacity: _socialFadeAnimation,
+                    child: Column(
+                      children: [
+                        // 구분선
+                        DividerWithText(text: l10n.common.or),
+                        const SizedBox(height: 24),
+
+                        // 소셜 로그인 버튼
+                        SocialLoginButton(
+                          type: SocialLoginType.google,
+                          onPressed: _signInWithGoogle,
+                          isLoading: _isLoading,
+                        ),
+                        const SizedBox(height: 12),
+                        SocialLoginButton(
+                          type: SocialLoginType.apple,
+                          onPressed: _signInWithApple,
+                          isLoading: _isLoading,
+                        ),
+                        const SizedBox(height: 32),
+
+                        // 회원가입 링크
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              l10n.auth.noAccount,
+                              style: theme.textTheme.bodyMedium,
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                context.push(AppRoutes.signUp);
                               },
-                        activeColor: primaryColor,
-                      ),
-                      Text(l10n.auth.saveEmail),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
+                              child: Text(l10n.auth.signUp),
+                            ),
+                          ],
+                        ),
 
-                  // 비밀번호 찾기
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: _isLoading ? null : _resetPassword,
-                      child: Text(l10n.auth.forgotPassword),
+                        // 게스트로 계속하기
+                        TextButton(
+                          onPressed: () {
+                            context.go(AppRoutes.home);
+                          },
+                          child: Text(l10n.auth.continueAsGuest),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 24),
-
-                  // 로그인 버튼
-                  LoadingButton(
-                    onPressed: _signIn,
-                    label: l10n.auth.signIn,
-                    backgroundColor: primaryColor,
-                    isLoading: _isLoading,
-                  ),
-                  const SizedBox(height: 24),
-
-                  // 구분선
-                  DividerWithText(text: l10n.common.or),
-                  const SizedBox(height: 24),
-
-                  // 소셜 로그인 버튼
-                  SocialLoginButton(
-                    type: SocialLoginType.google,
-                    onPressed: _signInWithGoogle,
-                    isLoading: _isLoading,
-                  ),
-                  const SizedBox(height: 12),
-                  SocialLoginButton(
-                    type: SocialLoginType.apple,
-                    onPressed: _signInWithApple,
-                    isLoading: _isLoading,
-                  ),
-                  const SizedBox(height: 32),
-
-                  // 회원가입 링크
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        l10n.auth.noAccount,
-                        style: theme.textTheme.bodyMedium,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          context.push(AppRoutes.signUp);
-                        },
-                        child: Text(l10n.auth.signUp),
-                      ),
-                    ],
-                  ),
-
-                  // 게스트로 계속하기
-                  TextButton(
-                    onPressed: () {
-                      context.go(AppRoutes.home);
-                    },
-                    child: Text(l10n.auth.continueAsGuest),
                   ),
                 ],
               ),

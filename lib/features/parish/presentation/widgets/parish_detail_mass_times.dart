@@ -3,108 +3,160 @@ import '../../../../core/utils/app_localizations.dart';
 import '../utils/mass_time_parser.dart';
 
 /// 성당 미사 시간 섹션 위젯
-class ParishDetailMassTimes extends StatelessWidget {
+class ParishDetailMassTimes extends StatefulWidget {
   final Map<String, dynamic> parish;
   final Color primaryColor;
   final AppLocalizations l10n;
-  final bool canEdit;
-  final VoidCallback? onEditMassTimes;
-  final VoidCallback? onEditForeignMass;
 
   const ParishDetailMassTimes({
     super.key,
     required this.parish,
     required this.primaryColor,
     required this.l10n,
-    this.canEdit = false,
-    this.onEditMassTimes,
-    this.onEditForeignMass,
   });
+
+  @override
+  State<ParishDetailMassTimes> createState() => _ParishDetailMassTimesState();
+}
+
+class _ParishDetailMassTimesState extends State<ParishDetailMassTimes>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _titleFadeAnimation;
+  late Animation<double> _noticeFadeAnimation;
+  late Animation<double> _cardFadeAnimation;
+  late Animation<Offset> _cardSlideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 700),
+      vsync: this,
+    );
+
+    _titleFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.3, curve: Curves.easeOut),
+      ),
+    );
+
+    _noticeFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.15, 0.5, curve: Curves.easeOut),
+      ),
+    );
+
+    _cardFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.3, 0.8, curve: Curves.easeOut),
+      ),
+    );
+
+    _cardSlideAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.15),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.3, 0.8, curve: Curves.easeOutCubic),
+      ),
+    );
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final massTime = parish['massTime'] as String?;
+    final massTime = widget.parish['massTime'] as String?;
 
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            l10n.parish.detailSection.massTime,
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
+          FadeTransition(
+            opacity: _titleFadeAnimation,
+            child: Text(
+              widget.l10n.parish.detailSection.massTime,
+              style: theme.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           // 경고 문구 (항상 표시, 위에 표시)
           const SizedBox(height: 12),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest.withValues(
-                alpha: 0.5,
-              ),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: theme.colorScheme.outline.withValues(alpha: 0.3),
-              ),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.info_outline,
-                  size: 20,
-                  color: theme.colorScheme.primary,
+          FadeTransition(
+            opacity: _noticeFadeAnimation,
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surfaceContainerHighest.withValues(
+                  alpha: 0.5,
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    l10n.parish.detailSection.massTimeNotice,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
-                      height: 1.5,
-                    ),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: theme.colorScheme.outline.withValues(alpha: 0.3),
+                ),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.info_outline,
+                    size: 20,
+                    color: theme.colorScheme.primary,
                   ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 12),
-          massTime == null || massTime.isEmpty
-              ? GestureDetector(
-                  onLongPress: canEdit ? onEditMassTimes : null,
-                  child: Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              l10n.parish.detailSection.noMassTimeInfo,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: theme.colorScheme.onSurfaceVariant,
-                              ),
-                            ),
-                          ),
-                          if (canEdit)
-                            Icon(Icons.edit, size: 16, color: Colors.grey.shade400),
-                        ],
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      widget.l10n.parish.detailSection.massTimeNotice,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                        height: 1.5,
                       ),
                     ),
                   ),
-                )
-              : _MassTimeCards(
-                  context: context,
-                  theme: theme,
-                  massTime: massTime,
-                  parish: parish,
-                  l10n: l10n,
-                  canEdit: canEdit,
-                  onEditMassTimes: onEditMassTimes,
-                  onEditForeignMass: onEditForeignMass,
-                ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          FadeTransition(
+            opacity: _cardFadeAnimation,
+            child: SlideTransition(
+              position: _cardSlideAnimation,
+              child: massTime == null || massTime.isEmpty
+                  ? Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          widget.l10n.parish.detailSection.noMassTimeInfo,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ),
+                    )
+                  : _MassTimeCards(
+                      context: context,
+                      theme: theme,
+                      massTime: massTime,
+                      parish: widget.parish,
+                      l10n: widget.l10n,
+                    ),
+            ),
+          ),
         ],
       ),
     );
@@ -118,9 +170,6 @@ class _MassTimeCards extends StatelessWidget {
   final String massTime;
   final Map<String, dynamic> parish;
   final AppLocalizations l10n;
-  final bool canEdit;
-  final VoidCallback? onEditMassTimes;
-  final VoidCallback? onEditForeignMass;
 
   const _MassTimeCards({
     required this.context,
@@ -128,9 +177,6 @@ class _MassTimeCards extends StatelessWidget {
     required this.massTime,
     required this.parish,
     required this.l10n,
-    this.canEdit = false,
-    this.onEditMassTimes,
-    this.onEditForeignMass,
   });
 
   @override
@@ -146,26 +192,14 @@ class _MassTimeCards extends StatelessWidget {
 
     if (!hasForeign) {
       // 외국어 미사가 없으면 단일 카드
-      return GestureDetector(
-        onLongPress: canEdit ? onEditMassTimes : null,
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              children: [
-                _MassTimeByWeekday(
-                  context: context,
-                  theme: theme,
-                  weekdayGroups: japaneseGroups,
-                  l10n: l10n,
-                ),
-                if (canEdit)
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Icon(Icons.edit, size: 16, color: Colors.grey.shade400),
-                  ),
-              ],
-            ),
+      return Card(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: _MassTimeByWeekday(
+            context: context,
+            theme: theme,
+            weekdayGroups: japaneseGroups,
+            l10n: l10n,
           ),
         ),
       );
@@ -175,51 +209,27 @@ class _MassTimeCards extends StatelessWidget {
     return Column(
       children: [
         // 위: 일본어 미사
-        GestureDetector(
-          onLongPress: canEdit ? onEditMassTimes : null,
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  _MassTimeByWeekday(
-                    context: context,
-                    theme: theme,
-                    weekdayGroups: japaneseGroups,
-                    l10n: l10n,
-                  ),
-                  if (canEdit)
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Icon(Icons.edit, size: 16, color: Colors.grey.shade400),
-                    ),
-                ],
-              ),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: _MassTimeByWeekday(
+              context: context,
+              theme: theme,
+              weekdayGroups: japaneseGroups,
+              l10n: l10n,
             ),
           ),
         ),
         const SizedBox(height: 12),
         // 아래: 외국어 미사
-        GestureDetector(
-          onLongPress: canEdit ? onEditForeignMass : null,
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  _MassTimeByWeekday(
-                    context: context,
-                    theme: theme,
-                    weekdayGroups: foreignGroups,
-                    l10n: l10n,
-                  ),
-                  if (canEdit)
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Icon(Icons.edit, size: 16, color: Colors.grey.shade400),
-                    ),
-                ],
-              ),
+        Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: _MassTimeByWeekday(
+              context: context,
+              theme: theme,
+              weekdayGroups: foreignGroups,
+              l10n: l10n,
             ),
           ),
         ),

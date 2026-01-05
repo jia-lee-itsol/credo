@@ -88,31 +88,59 @@ class _HomeActionButtonState extends State<HomeActionButton>
             scale: _scaleAnimation.value,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: const Color(0xFFE5E5E5), width: 0.5),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.white,
+                    widget.primaryColor.withValues(alpha: 0.02),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: widget.primaryColor.withValues(alpha: 0.15),
+                  width: 1,
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.05),
-                    blurRadius: _elevationAnimation.value * 4,
-                    offset: Offset(0, _elevationAnimation.value),
+                    color: Colors.black.withValues(alpha: 0.04),
+                    blurRadius: 12,
+                    offset: const Offset(0, 4),
+                  ),
+                  BoxShadow(
+                    color: widget.primaryColor.withValues(alpha: 0.08),
+                    blurRadius: _elevationAnimation.value * 8,
+                    offset: Offset(0, _elevationAnimation.value * 2),
                   ),
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(18),
                 child: Row(
                   children: [
+                    // 아이콘 컨테이너
                     Container(
-                      width: 56,
-                      height: 56,
+                      width: 52,
+                      height: 52,
                       decoration: BoxDecoration(
-                        color: widget.backgroundColor,
-                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            widget.primaryColor.withValues(alpha: 0.15),
+                            widget.primaryColor.withValues(alpha: 0.08),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(14),
                       ),
-                      child: Icon(widget.icon, color: widget.primaryColor, size: 28),
+                      child: Icon(
+                        widget.icon,
+                        color: widget.primaryColor,
+                        size: 26,
+                      ),
                     ),
                     const SizedBox(width: 16),
+                    // 텍스트 영역
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,24 +148,35 @@ class _HomeActionButtonState extends State<HomeActionButton>
                           Text(
                             widget.title,
                             style: theme.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xFF262626),
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xFF1A1A1A),
+                              letterSpacing: -0.3,
                             ),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             widget.subtitle,
                             style: theme.textTheme.bodySmall?.copyWith(
-                              color: const Color(0xFF737373),
+                              color: const Color(0xFF6B6B6B),
+                              height: 1.3,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const Icon(
-                      Icons.chevron_right,
-                      color: Color(0xFF737373),
-                      size: 24,
+                    // 화살표
+                    Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: widget.primaryColor.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(
+                        Icons.arrow_forward_rounded,
+                        color: widget.primaryColor,
+                        size: 18,
+                      ),
                     ),
                   ],
                 ),

@@ -9,11 +9,44 @@ import '../../../../shared/providers/auth_provider.dart';
 import '../../../../shared/widgets/expandable_content_card.dart';
 
 /// 기도 가이드 화면
-class PrayerScreen extends ConsumerWidget {
+class PrayerScreen extends ConsumerStatefulWidget {
   const PrayerScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PrayerScreen> createState() => _PrayerScreenState();
+}
+
+class _PrayerScreenState extends ConsumerState<PrayerScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _noticeFadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+
+    _noticeFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.3, curve: Curves.easeOut),
+      ),
+    );
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10nAsync = ref.watch(appLocalizationsProvider);
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     final currentUser = ref.watch(currentUserProvider);
@@ -115,6 +148,8 @@ class PrayerScreen extends ConsumerWidget {
           primaryColor,
           currentUser,
           prayerGuides,
+          _controller,
+          _noticeFadeAnimation,
         );
       },
       loading: () =>
@@ -130,6 +165,8 @@ class PrayerScreen extends ConsumerWidget {
     Color primaryColor,
     dynamic currentUser,
     List<_PrayerGuide> prayerGuides,
+    AnimationController controller,
+    Animation<double> noticeFadeAnimation,
   ) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -159,39 +196,61 @@ class PrayerScreen extends ConsumerWidget {
       ),
       body: CustomScrollView(
         slivers: [
-          // 면책 조항
+          // 면책 조항 (애니메이션 적용)
           SliverToBoxAdapter(
-            child: Container(
-              margin: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade50,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey.shade300, width: 1),
-              ),
-              child: Text(
-                l10n.mass.bibleNotice,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey.shade700,
-                  height: 1.5,
+            child: FadeTransition(
+              opacity: noticeFadeAnimation,
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade50,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.grey.shade300, width: 1),
                 ),
-                textAlign: TextAlign.center,
+                child: Text(
+                  l10n.mass.bibleNotice,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey.shade700,
+                    height: 1.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),
-          // 기도 가이드 목록
+          // 기도 가이드 목록 (staggered 애니메이션)
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate((context, index) {
                 final guide = prayerGuides[index];
-                return ExpandableContentCard(
-                  title: guide.title,
-                  subtitle: guide.subtitle,
-                  icon: guide.icon,
-                  primaryColor: primaryColor,
-                  content: guide.content,
+                // 각 카드에 딜레이된 애니메이션 적용
+                final delay = 0.1 + (index * 0.05);
+                final endDelay = (delay + 0.3).clamp(0.0, 1.0);
+
+                return AnimatedBuilder(
+                  animation: controller,
+                  builder: (context, child) {
+                    final animValue = Curves.easeOutCubic.transform(
+                      ((controller.value - delay) / (endDelay - delay)).clamp(0.0, 1.0),
+                    );
+                    return Opacity(
+                      opacity: animValue,
+                      child: Transform.translate(
+                        offset: Offset(0, 20 * (1 - animValue)),
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: ExpandableContentCard(
+                    title: guide.title,
+                    subtitle: guide.subtitle,
+                    icon: guide.icon,
+                    primaryColor: primaryColor,
+                    content: guide.content,
+                  ),
                 );
               }, childCount: prayerGuides.length),
             ),

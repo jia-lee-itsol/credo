@@ -69,83 +69,156 @@ class _DailyReflectionCardState extends ConsumerState<DailyReflectionCard>
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: primaryColor, width: 1.5),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.white,
+              primaryColor.withValues(alpha: 0.03),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: primaryColor.withValues(alpha: 0.2),
+            width: 1,
+          ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.08),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
+              color: Colors.black.withValues(alpha: 0.04),
+              blurRadius: 12,
+              offset: const Offset(0, 4),
+            ),
+            BoxShadow(
+              color: primaryColor.withValues(alpha: 0.08),
+              blurRadius: 20,
+              offset: const Offset(0, 6),
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Stack(
             children: [
-              // 헤더
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: primaryColor.withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      '❞',
-                      style: TextStyle(
-                        color: primaryColor,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    _getTitle(locale.languageCode),
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: primaryColor,
-                    ),
-                  ),
-                  const Spacer(),
-                  // 새로고침 버튼 (회전 애니메이션)
-                  IconButton(
-                    icon: RotationTransition(
-                      turns: _rotationController,
-                      child: Icon(
-                        Icons.refresh,
-                        color: primaryColor.withValues(alpha: 0.6),
-                        size: 20,
-                      ),
-                    ),
-                    onPressed: _isRefreshing ? null : _handleRefresh,
-                    tooltip: _getRefreshTooltip(locale.languageCode),
-                    visualDensity: VisualDensity.compact,
-                  ),
-                ],
+              // 장식용 인용부호 (배경)
+              Positioned(
+                right: -10,
+                bottom: -20,
+                child: Icon(
+                  Icons.format_quote_rounded,
+                  size: 120,
+                  color: primaryColor.withValues(alpha: 0.04),
+                ),
               ),
-              const SizedBox(height: 16),
-              // 묵상 내용
-              reflectionAsync.when(
-                data: (reflection) {
-                  if (reflection == null || reflection.isEmpty) {
-                    return _buildPlaceholder(theme, locale.languageCode);
-                  }
-                  return Text(
-                    reflection,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      height: 1.6,
-                      fontStyle: FontStyle.italic,
+              // 메인 콘텐츠
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 헤더
+                    Row(
+                      children: [
+                        // 인용 아이콘 컨테이너
+                        Container(
+                          width: 44,
+                          height: 44,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: [
+                                primaryColor.withValues(alpha: 0.15),
+                                primaryColor.withValues(alpha: 0.08),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: primaryColor.withValues(alpha: 0.1),
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Icon(
+                            Icons.format_quote_rounded,
+                            color: primaryColor,
+                            size: 22,
+                          ),
+                        ),
+                        const SizedBox(width: 14),
+                        // 타이틀
+                        Expanded(
+                          child: Text(
+                            _getTitle(locale.languageCode),
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xFF1A1A1A),
+                              letterSpacing: -0.3,
+                            ),
+                          ),
+                        ),
+                        // 새로고침 버튼 (회전 애니메이션)
+                        Container(
+                          width: 36,
+                          height: 36,
+                          decoration: BoxDecoration(
+                            color: primaryColor.withValues(alpha: 0.08),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: IconButton(
+                            icon: RotationTransition(
+                              turns: _rotationController,
+                              child: Icon(
+                                Icons.refresh_rounded,
+                                color: primaryColor.withValues(alpha: 0.7),
+                                size: 18,
+                              ),
+                            ),
+                            onPressed: _isRefreshing ? null : _handleRefresh,
+                            tooltip: _getRefreshTooltip(locale.languageCode),
+                            padding: EdgeInsets.zero,
+                          ),
+                        ),
+                      ],
                     ),
-                  );
-                },
-                loading: () => _buildLoading(theme, locale.languageCode),
-                error: (error, stack) =>
-                    _buildPlaceholder(theme, locale.languageCode),
+                    const SizedBox(height: 18),
+                    // 구분선
+                    Container(
+                      height: 1,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            primaryColor.withValues(alpha: 0.2),
+                            primaryColor.withValues(alpha: 0.05),
+                            Colors.transparent,
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 18),
+                    // 묵상 내용
+                    reflectionAsync.when(
+                      data: (reflection) {
+                        if (reflection == null || reflection.isEmpty) {
+                          return _buildPlaceholder(theme, primaryColor, locale.languageCode);
+                        }
+                        return Text(
+                          reflection,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            height: 1.7,
+                            fontStyle: FontStyle.italic,
+                            color: const Color(0xFF2D2D2D),
+                            letterSpacing: 0.1,
+                          ),
+                        );
+                      },
+                      loading: () => _buildLoading(theme, primaryColor, locale.languageCode),
+                      error: (error, stack) =>
+                          _buildPlaceholder(theme, primaryColor, locale.languageCode),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -154,22 +227,38 @@ class _DailyReflectionCardState extends ConsumerState<DailyReflectionCard>
     );
   }
 
-  Widget _buildLoading(ThemeData theme, String languageCode) {
-    return Text(
-      _getLoadingText(languageCode),
-      style: theme.textTheme.bodyMedium?.copyWith(
-        color: theme.colorScheme.onSurfaceVariant,
-        fontStyle: FontStyle.italic,
-      ),
+  Widget _buildLoading(ThemeData theme, Color primaryColor, String languageCode) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 16,
+          height: 16,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            color: primaryColor.withValues(alpha: 0.5),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Text(
+            _getLoadingText(languageCode),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: const Color(0xFF6B6B6B),
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
-  Widget _buildPlaceholder(ThemeData theme, String languageCode) {
+  Widget _buildPlaceholder(ThemeData theme, Color primaryColor, String languageCode) {
     return Text(
       _getPlaceholderText(languageCode),
       style: theme.textTheme.bodyMedium?.copyWith(
-        color: theme.colorScheme.onSurfaceVariant,
+        color: const Color(0xFF6B6B6B),
         fontStyle: FontStyle.italic,
+        height: 1.6,
       ),
     );
   }

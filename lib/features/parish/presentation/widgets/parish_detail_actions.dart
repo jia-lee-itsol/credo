@@ -5,7 +5,7 @@ import '../../../../config/routes/app_routes.dart';
 import '../../../../core/utils/app_localizations.dart';
 
 /// 성당 액션 버튼 위젯 (지도, 커뮤니티)
-class ParishDetailActions extends StatelessWidget {
+class ParishDetailActions extends StatefulWidget {
   final Map<String, dynamic> parish;
   final String parishId;
   final Color primaryColor;
@@ -20,9 +20,50 @@ class ParishDetailActions extends StatelessWidget {
   });
 
   @override
+  State<ParishDetailActions> createState() => _ParishDetailActionsState();
+}
+
+class _ParishDetailActionsState extends State<ParishDetailActions>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _leftButtonAnimation;
+  late Animation<double> _rightButtonAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+
+    _leftButtonAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOutBack),
+      ),
+    );
+
+    _rightButtonAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.2, 0.8, curve: Curves.easeOutBack),
+      ),
+    );
+
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // 주소가 없으면 버튼 표시하지 않음
-    if (parish['address'] == null) {
+    if (widget.parish['address'] == null) {
       return const SizedBox.shrink();
     }
 
@@ -32,48 +73,58 @@ class ParishDetailActions extends StatelessWidget {
         children: [
           // 지도 버튼
           Expanded(
-            child: OutlinedButton.icon(
-              onPressed: () {
-                // 주소를 검색어로 사용하여 Google Maps에서 검색
-                final address =
-                    '${parish['prefecture'] as String? ?? ''} ${parish['address'] as String? ?? ''}';
-                _launchMapByAddress(address);
+            child: AnimatedBuilder(
+              animation: _leftButtonAnimation,
+              builder: (context, child) {
+                return Transform.scale(
+                  scale: _leftButtonAnimation.value,
+                  child: Opacity(
+                    opacity: _leftButtonAnimation.value,
+                    child: child,
+                  ),
+                );
               },
-              icon: const Icon(Icons.map),
-              label: Text(l10n.parish.openInMap),
+              child: _AnimatedActionButton(
+                isOutlined: true,
+                icon: Icons.map,
+                label: widget.l10n.parish.openInMap,
+                onPressed: () {
+                  final address =
+                      '${widget.parish['prefecture'] as String? ?? ''} ${widget.parish['address'] as String? ?? ''}';
+                  _launchMapByAddress(address);
+                },
+              ),
             ),
           ),
           const SizedBox(width: 12),
           // 커뮤니티 버튼
           Expanded(
-            child: ElevatedButton.icon(
-              onPressed: () {
-                // parishId를 명시적으로 사용하여 올바른 교회로 이동
-                // 클로저에서 최신 값을 사용하도록 보장
-                final targetParishId = parishId;
-
-                // 현재 경로가 myPage 내부인 경우 go 사용, 아니면 push 사용
-                final currentLocation = GoRouterState.of(
-                  context,
-                ).matchedLocation;
-
-                if (currentLocation.startsWith('/my-page')) {
-                  // myPage 내부에서 접근한 경우 go 사용 (StatefulShellRoute 브랜치로 이동)
-                  // 전체 경로를 명시적으로 지정하여 올바른 parishId 전달
-                  // GoRouter는 자동으로 URL 인코딩/디코딩을 처리함
-                  context.go('/community/$targetParishId');
-                } else {
-                  // parish 브랜치에서 접근한 경우 push 사용
-                  context.push(
-                    AppRoutes.communityParishPath(targetParishId),
-                  );
-                }
+            child: AnimatedBuilder(
+              animation: _rightButtonAnimation,
+              builder: (context, child) {
+                return Transform.scale(
+                  scale: _rightButtonAnimation.value,
+                  child: Opacity(
+                    opacity: _rightButtonAnimation.value,
+                    child: child,
+                  ),
+                );
               },
-              icon: const Icon(Icons.forum),
-              label: Text(l10n.parish.community),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor,
-                foregroundColor: Colors.white,
+              child: _AnimatedActionButton(
+                isOutlined: false,
+                icon: Icons.forum,
+                label: widget.l10n.parish.community,
+                primaryColor: widget.primaryColor,
+                onPressed: () {
+                  final targetParishId = widget.parishId;
+                  final currentLocation = GoRouterState.of(context).matchedLocation;
+
+                  if (currentLocation.startsWith('/my-page')) {
+                    context.go('/community/$targetParishId');
+                  } else {
+                    context.push(AppRoutes.communityParishPath(targetParishId));
+                  }
+                },
               ),
             ),
           ),
@@ -90,6 +141,89 @@ class ParishDetailActions extends StatelessWidget {
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
+  }
+}
+
+/// 탭 시 애니메이션이 있는 액션 버튼
+class _AnimatedActionButton extends StatefulWidget {
+  final bool isOutlined;
+  final IconData icon;
+  final String label;
+  final VoidCallback onPressed;
+  final Color? primaryColor;
+
+  const _AnimatedActionButton({
+    required this.isOutlined,
+    required this.icon,
+    required this.label,
+    required this.onPressed,
+    this.primaryColor,
+  });
+
+  @override
+  State<_AnimatedActionButton> createState() => _AnimatedActionButtonState();
+}
+
+class _AnimatedActionButtonState extends State<_AnimatedActionButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _tapController;
+  late Animation<double> _tapAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _tapController = AnimationController(
+      duration: const Duration(milliseconds: 150),
+      vsync: this,
+    );
+    _tapAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _tapController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _tapController.dispose();
+    super.dispose();
+  }
+
+  void _handleTapDown(TapDownDetails details) {
+    _tapController.forward();
+  }
+
+  void _handleTapUp(TapUpDetails details) {
+    _tapController.reverse();
+  }
+
+  void _handleTapCancel() {
+    _tapController.reverse();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTapDown: _handleTapDown,
+      onTapUp: _handleTapUp,
+      onTapCancel: _handleTapCancel,
+      child: ScaleTransition(
+        scale: _tapAnimation,
+        child: widget.isOutlined
+            ? OutlinedButton.icon(
+                onPressed: widget.onPressed,
+                icon: Icon(widget.icon),
+                label: Text(widget.label),
+              )
+            : ElevatedButton.icon(
+                onPressed: widget.onPressed,
+                icon: Icon(widget.icon),
+                label: Text(widget.label),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: widget.primaryColor,
+                  foregroundColor: Colors.white,
+                ),
+              ),
+      ),
+    );
   }
 }
 

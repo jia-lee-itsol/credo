@@ -225,13 +225,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildSectionTitle(BuildContext context, String title) {
+    final primaryColor = ref.watch(liturgyPrimaryColorProvider);
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 24, 16, 12),
-      child: Text(
-        title,
-        style: Theme.of(
-          context,
-        ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+      padding: const EdgeInsets.fromLTRB(16, 28, 16, 14),
+      child: Row(
+        children: [
+          Container(
+            width: 4,
+            height: 20,
+            decoration: BoxDecoration(
+              color: primaryColor,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Text(
+            title,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF1A1A1A),
+              letterSpacing: -0.3,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -347,211 +363,322 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final parishAsync = parishId != null
         ? ref.watch(parishByIdProvider(parishId))
         : null;
+    final isExpanded = _parishExpandedState[parishId] ?? false;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: primaryColor, width: 1.5),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: primaryColor.withValues(alpha: 0.15),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.08),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+          BoxShadow(
+            color: primaryColor.withValues(alpha: 0.06),
+            blurRadius: 20,
+            offset: const Offset(0, 6),
           ),
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 성당 이름 헤더 (아코디언 토글)
-          InkWell(
-            onTap: () {
-              setState(() {
-                _parishExpandedState[parishId] =
-                    !(_parishExpandedState[parishId] ?? false);
-              });
-            },
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(11),
-              topRight: Radius.circular(11),
-            ),
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(11),
-                  topRight: Radius.circular(11),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Icon(Icons.church, color: primaryColor, size: 20),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: parishAsync != null
-                        ? parishAsync.when(
-                            data: (parishData) => Text(
-                              parishData?['name'] as String? ?? '알 수 없는 성당',
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: primaryColor,
-                              ),
-                            ),
-                            loading: () => Text(
-                              '알 수 없는 성당',
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: primaryColor,
-                              ),
-                            ),
-                            error: (error, stack) => Text(
-                              '알 수 없는 성당',
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: primaryColor,
-                              ),
-                            ),
-                          )
-                        : Text(
-                            '알 수 없는 성당',
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              color: primaryColor,
-                            ),
-                          ),
-                  ),
-                  Icon(
-                    (_parishExpandedState[parishId] ?? false)
-                        ? Icons.expand_less
-                        : Icons.expand_more,
-                    color: primaryColor,
-                    size: 24,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // 알림 목록 (아코디언)
-          if (_parishExpandedState[parishId] ?? false)
-            ...posts.map((post) {
-              // 게시글을 알림 형태로 변환
-              final isMyPost =
-                  currentUserId != null && post.authorId == currentUserId;
-              final hasComments = post.commentCount > 0;
-
-              // 표시 형식 결정
-              String notificationBody;
-              String notificationType;
-
-              if (post.isNotice) {
-                // 공지글 등록
-                notificationBody = l10n.community.home.noticeAdded;
-                notificationType = 'notice';
-              } else if (isMyPost && hasComments) {
-                // 내 글에 댓글이 달린 경우
-                notificationBody = l10n.community.home.commentOnMyPost;
-                notificationType = 'comment';
-              } else {
-                // 새글 등록
-                notificationBody = l10n.community.home.newPostAdded;
-                notificationType = 'post';
-              }
-
-              return Dismissible(
-                key: Key(post.postId),
-                direction: DismissDirection.endToStart,
-                background: Container(
-                  margin: const EdgeInsets.only(bottom: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  alignment: Alignment.centerRight,
-                  padding: const EdgeInsets.only(right: 20),
-                  child: const Icon(Icons.delete, color: Colors.white),
-                ),
-                onDismissed: (direction) {
-                  // 삭제된 게시글 ID를 Set에 추가하여 리스트에서 제외
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 성당 이름 헤더 (아코디언 토글)
+            Material(
+              color: isExpanded
+                  ? primaryColor.withValues(alpha: 0.05)
+                  : Colors.transparent,
+              child: InkWell(
+                onTap: () {
                   setState(() {
-                    _dismissedPostIds.add(post.postId);
+                    _parishExpandedState[parishId] = !isExpanded;
                   });
                 },
+                splashColor: primaryColor.withValues(alpha: 0.08),
+                highlightColor: primaryColor.withValues(alpha: 0.04),
                 child: Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 4,
-                  ),
-                  child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                    leading: CircleAvatar(
-                      backgroundColor: _getNotificationColor(
-                        notificationType,
-                      ).withValues(alpha: 0.1),
-                      child: Icon(
-                        _getNotificationIcon(notificationType),
-                        color: _getNotificationColor(notificationType),
-                        size: 20,
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      // 교회 아이콘 컨테이너
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              primaryColor.withValues(alpha: 0.15),
+                              primaryColor.withValues(alpha: 0.08),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(
+                          Icons.church_outlined,
+                          color: primaryColor,
+                          size: 20,
+                        ),
                       ),
-                    ),
-                    title: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: _getNotificationColor(
-                              notificationType,
-                            ).withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            _getNotificationLabel(notificationType, l10n),
-                            style: theme.textTheme.labelSmall?.copyWith(
-                              color: _getNotificationColor(notificationType),
-                              fontWeight: FontWeight.w600,
-                            ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: parishAsync != null
+                            ? parishAsync.when(
+                                data: (parishData) => Text(
+                                  parishData?['name'] as String? ?? '알 수 없는 성당',
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF1A1A1A),
+                                    letterSpacing: -0.3,
+                                  ),
+                                ),
+                                loading: () => Text(
+                                  '알 수 없는 성당',
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF1A1A1A),
+                                    letterSpacing: -0.3,
+                                  ),
+                                ),
+                                error: (error, stack) => Text(
+                                  '알 수 없는 성당',
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF1A1A1A),
+                                    letterSpacing: -0.3,
+                                  ),
+                                ),
+                              )
+                            : Text(
+                                '알 수 없는 성당',
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFF1A1A1A),
+                                  letterSpacing: -0.3,
+                                ),
+                              ),
+                      ),
+                      // 알림 개수 뱃지
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: primaryColor.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          '${posts.length}',
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: primaryColor,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            notificationBody,
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(width: 8),
+                      // 확장/축소 아이콘
+                      Container(
+                        width: 28,
+                        height: 28,
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: AnimatedRotation(
+                          turns: isExpanded ? 0.5 : 0,
+                          duration: const Duration(milliseconds: 200),
+                          child: Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: theme.colorScheme.onSurfaceVariant,
+                            size: 18,
                           ),
                         ),
-                      ],
-                    ),
-                    trailing: Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: _getNotificationColor(notificationType),
-                        shape: BoxShape.circle,
                       ),
-                    ),
-                    onTap: () {
-                      if (post.parishId != null) {
-                        context.push(
-                          AppRoutes.postDetailPath(post.parishId!, post.postId),
-                        );
-                      }
-                    },
+                    ],
                   ),
                 ),
-              );
-            }),
-        ],
+              ),
+            ),
+            // 알림 목록 (아코디언)
+            AnimatedCrossFade(
+              firstChild: const SizedBox.shrink(),
+              secondChild: Column(
+                children: [
+                  // 구분선
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    height: 1,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          primaryColor.withValues(alpha: 0.15),
+                          primaryColor.withValues(alpha: 0.05),
+                          Colors.transparent,
+                        ],
+                      ),
+                    ),
+                  ),
+                  ...posts.map((post) {
+                    final isMyPost =
+                        currentUserId != null && post.authorId == currentUserId;
+                    final hasComments = post.commentCount > 0;
+
+                    String notificationBody;
+                    String notificationType;
+
+                    if (post.isNotice) {
+                      notificationBody = l10n.community.home.noticeAdded;
+                      notificationType = 'notice';
+                    } else if (isMyPost && hasComments) {
+                      notificationBody = l10n.community.home.commentOnMyPost;
+                      notificationType = 'comment';
+                    } else {
+                      notificationBody = l10n.community.home.newPostAdded;
+                      notificationType = 'post';
+                    }
+
+                    final notificationColor = _getNotificationColor(notificationType);
+
+                    return Dismissible(
+                      key: Key(post.postId),
+                      direction: DismissDirection.endToStart,
+                      background: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.red.withValues(alpha: 0.8),
+                              Colors.red,
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        alignment: Alignment.centerRight,
+                        padding: const EdgeInsets.only(right: 20),
+                        child: const Icon(Icons.delete_outline, color: Colors.white),
+                      ),
+                      onDismissed: (direction) {
+                        setState(() {
+                          _dismissedPostIds.add(post.postId);
+                        });
+                      },
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {
+                            if (post.parishId != null) {
+                              context.push(
+                                AppRoutes.postDetailPath(post.parishId!, post.postId),
+                              );
+                            }
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                            child: Row(
+                              children: [
+                                // 아이콘 컨테이너
+                                Container(
+                                  width: 42,
+                                  height: 42,
+                                  decoration: BoxDecoration(
+                                    color: notificationColor.withValues(alpha: 0.1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Icon(
+                                    _getNotificationIcon(notificationType),
+                                    color: notificationColor,
+                                    size: 20,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                // 내용
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      // 타입 태그
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 3,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              notificationColor.withValues(alpha: 0.12),
+                                              notificationColor.withValues(alpha: 0.06),
+                                            ],
+                                          ),
+                                          borderRadius: BorderRadius.circular(6),
+                                        ),
+                                        child: Text(
+                                          _getNotificationLabel(notificationType, l10n),
+                                          style: theme.textTheme.labelSmall?.copyWith(
+                                            color: notificationColor,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 6),
+                                      // 제목
+                                      Text(
+                                        notificationBody,
+                                        style: theme.textTheme.bodyMedium?.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                          color: const Color(0xFF2D2D2D),
+                                          height: 1.3,
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                // 화살표
+                                Container(
+                                  width: 24,
+                                  height: 24,
+                                  decoration: BoxDecoration(
+                                    color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 10,
+                                    color: theme.colorScheme.onSurfaceVariant,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                ],
+              ),
+              crossFadeState: isExpanded
+                  ? CrossFadeState.showSecond
+                  : CrossFadeState.showFirst,
+              duration: const Duration(milliseconds: 200),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -561,26 +688,50 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ThemeData theme,
     AppLocalizations l10n,
   ) {
-    return SizedBox(
-      height: 120,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.notifications_none,
-              size: 40,
-              color: theme.colorScheme.outlineVariant,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              l10n.community.home.noNotifications,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ],
+    final primaryColor = ref.watch(liturgyPrimaryColorProvider);
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
+          width: 1,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.02),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 56,
+            height: 56,
+            decoration: BoxDecoration(
+              color: primaryColor.withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: Icon(
+              Icons.notifications_none_rounded,
+              size: 28,
+              color: primaryColor.withValues(alpha: 0.5),
+            ),
+          ),
+          const SizedBox(height: 14),
+          Text(
+            l10n.community.home.noNotifications,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: const Color(0xFF6B6B6B),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }

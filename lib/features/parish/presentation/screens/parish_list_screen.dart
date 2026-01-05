@@ -27,7 +27,8 @@ class ParishListScreen extends ConsumerStatefulWidget {
   ConsumerState<ParishListScreen> createState() => _ParishListScreenState();
 }
 
-class _ParishListScreenState extends ConsumerState<ParishListScreen> {
+class _ParishListScreenState extends ConsumerState<ParishListScreen>
+    with SingleTickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   bool _sortByDistance = false;
 
@@ -38,6 +39,10 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
   bool _onlyWithMassTime = false;
   bool _onlyTodayMass = false;
   bool _onlyForeignLanguageMass = false;
+
+  // 애니메이션
+  late AnimationController _animationController;
+  late Animation<double> _headerFadeAnimation;
 
   // 일본어 제외 언어 목록
   static const List<String> _availableMassLanguages = [
@@ -51,6 +56,21 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
   @override
   void initState() {
     super.initState();
+
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+
+    _headerFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.4, curve: Curves.easeOut),
+      ),
+    );
+
+    _animationController.forward();
+
     // 화면이 로드될 때 위치 권한 확인
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _checkLocationPermission();
@@ -59,6 +79,7 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
 
   @override
   void dispose() {
+    _animationController.dispose();
     _searchController.dispose();
     super.dispose();
   }
@@ -228,8 +249,11 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 헤더 영역 (검색바와 필터)
-            _buildHeader(),
+            // 헤더 영역 (검색바와 필터) - 애니메이션 적용
+            FadeTransition(
+              opacity: _headerFadeAnimation,
+              child: _buildHeader(),
+            ),
 
             // 교회 목록
             Expanded(child: _buildParishList()),
@@ -499,12 +523,32 @@ class _ParishListScreenState extends ConsumerState<ParishListScreen> {
             final diocese = parish['diocese'] as String? ?? '';
             final name = parish['name'] as String? ?? '';
             final parishId = '$diocese-$name';
-            return ParishCard(
-              key: ValueKey('parishCard_$parishId'),
-              parish: parish,
-              onTap: () {
-                context.push(AppRoutes.parishDetailPath(parishId));
+
+            // staggered 애니메이션
+            final delay = 0.2 + (index * 0.03).clamp(0.0, 0.5);
+            final endDelay = (delay + 0.3).clamp(0.0, 1.0);
+
+            return AnimatedBuilder(
+              animation: _animationController,
+              builder: (context, child) {
+                final animValue = Curves.easeOutCubic.transform(
+                  ((_animationController.value - delay) / (endDelay - delay)).clamp(0.0, 1.0),
+                );
+                return Opacity(
+                  opacity: animValue,
+                  child: Transform.translate(
+                    offset: Offset(0, 15 * (1 - animValue)),
+                    child: child,
+                  ),
+                );
               },
+              child: ParishCard(
+                key: ValueKey('parishCard_$parishId'),
+                parish: parish,
+                onTap: () {
+                  context.push(AppRoutes.parishDetailPath(parishId));
+                },
+              ),
             );
           },
         );

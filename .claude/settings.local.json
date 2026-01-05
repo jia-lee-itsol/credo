@@ -25,7 +25,9 @@
       "Bash(grep:*)",
       "Bash(firebase functions:log:*)",
       "Bash(firebase deploy:*)",
-      "Bash(flutter pub add:*)"
+      "Bash(flutter pub add:*)",
+      "Bash(flutter build:*)",
+      "Bash(flutter pub:*)"
     ],
     "deny": [],
     "ask": []

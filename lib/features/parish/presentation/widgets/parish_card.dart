@@ -5,7 +5,6 @@ import '../../../../shared/providers/location_provider.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 import '../../../../core/utils/location_utils.dart';
 import '../constants/parish_colors.dart';
-import 'parish_tag.dart';
 
 /// 교회 카드 위젯
 class ParishCard extends ConsumerWidget {
@@ -32,112 +31,200 @@ class ParishCard extends ConsumerWidget {
     // 지원 언어 추출
     final languages = _getSupportedLanguages(massTime);
 
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(14),
-        child: Container(
-          padding: const EdgeInsets.all(15.99),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: ParishColors.neutral200, width: 0.69),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
           ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // 왼쪽: 교회 정보
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // 교회 이름
-                    Text(
-                      name,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: ParishColors.neutral800,
-                        letterSpacing: -0.31,
-                        height: 24 / 16,
+          BoxShadow(
+            color: primaryColor.withValues(alpha: 0.03),
+            blurRadius: 20,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Material(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(16),
+          splashColor: primaryColor.withValues(alpha: 0.08),
+          highlightColor: primaryColor.withValues(alpha: 0.04),
+          child: Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: ParishColors.neutral200.withValues(alpha: 0.8),
+                width: 1,
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // 왼쪽: 교회 아이콘
+                Container(
+                  width: 44,
+                  height: 44,
+                  decoration: BoxDecoration(
+                    color: primaryColor.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    Icons.church_outlined,
+                    color: primaryColor,
+                    size: 22,
+                  ),
+                ),
+                const SizedBox(width: 14),
+
+                // 중앙: 교회 정보
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // 교회 이름
+                      Text(
+                        name,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: ParishColors.neutral800,
+                          letterSpacing: -0.3,
+                          height: 1.3,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
 
-                    const SizedBox(height: 8),
+                      const SizedBox(height: 6),
 
-                    // 주소
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_on_outlined,
-                          size: 16,
-                          color: ParishColors.neutral600,
-                        ),
-                        const SizedBox(width: 6),
-                        Expanded(
-                          child: Text(
-                            address,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                              color: ParishColors.neutral600,
-                              letterSpacing: -0.15,
-                              height: 20 / 14,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 12),
-
-                    // 거리, 언어 태그 - 한 줄 가로 배치 (가로 스크롤 가능)
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
+                      // 주소
+                      Row(
                         children: [
-                          // 거리 태그 (거리가 있을 때만 표시)
-                          if (distance != null) ...[
-                            ParishTag(
-                              text: distance,
-                              backgroundColor: primaryColor.withValues(
-                                alpha: 0.1,
+                          Icon(
+                            Icons.location_on_outlined,
+                            size: 14,
+                            color: ParishColors.neutral600,
+                          ),
+                          const SizedBox(width: 4),
+                          Expanded(
+                            child: Text(
+                              address,
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                                color: ParishColors.neutral600,
+                                letterSpacing: -0.1,
+                                height: 1.4,
                               ),
-                              textColor: primaryColor,
-                            ),
-                            const SizedBox(width: 8),
-                          ],
-                          // 언어 태그들
-                          ...languages.map(
-                            (lang) => Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ParishOutlinedTag(
-                                text: lang,
-                                textColor: ParishColors.blue600,
-                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ),
 
-              // 오른쪽: 화살표
-              const SizedBox(width: 8),
-              const Icon(
-                Icons.chevron_right,
-                size: 20,
-                color: ParishColors.neutral600,
-              ),
-            ],
+                      if (distance != null || languages.isNotEmpty) ...[
+                        const SizedBox(height: 10),
+
+                        // 거리, 언어 태그
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              // 거리 태그
+                              if (distance != null) ...[
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: primaryColor.withValues(alpha: 0.1),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.directions_walk,
+                                        size: 12,
+                                        color: primaryColor,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        distance,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                          color: primaryColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                              ],
+                              // 언어 태그들
+                              ...languages.map(
+                                (lang) => Padding(
+                                  padding: const EdgeInsets.only(right: 6),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ParishColors.blue600.withValues(alpha: 0.4),
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Text(
+                                      lang,
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600,
+                                        color: ParishColors.blue600,
+                                        letterSpacing: 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+
+                // 오른쪽: 화살표
+                const SizedBox(width: 8),
+                Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    color: ParishColors.neutral100,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 12,
+                    color: ParishColors.neutral600,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

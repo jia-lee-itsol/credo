@@ -17,16 +17,65 @@ class SaintDetailScreen extends ConsumerStatefulWidget {
   ConsumerState<SaintDetailScreen> createState() => _SaintDetailScreenState();
 }
 
-class _SaintDetailScreenState extends ConsumerState<SaintDetailScreen> {
+class _SaintDetailScreenState extends ConsumerState<SaintDetailScreen>
+    with SingleTickerProviderStateMixin {
   SaintDetailInfo? _detailInfo;
   bool _isLoading = true;
   SaintFeastDayModel? _saint;
   String? _currentImageUrl;
 
+  late AnimationController _animationController;
+  late Animation<double> _imageScaleAnimation;
+  late Animation<double> _imageFadeAnimation;
+  late Animation<double> _contentFadeAnimation;
+  late Animation<Offset> _contentSlideAnimation;
+
   @override
   void initState() {
     super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+
+    _imageScaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.5, curve: Curves.easeOutBack),
+      ),
+    );
+
+    _imageFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.4, curve: Curves.easeOut),
+      ),
+    );
+
+    _contentFadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.3, 0.7, curve: Curves.easeOut),
+      ),
+    );
+
+    _contentSlideAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.1),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.3, 0.7, curve: Curves.easeOutCubic),
+      ),
+    );
+
     _loadSaintAndDetail();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadSaintAndDetail() async {
@@ -55,6 +104,8 @@ class _SaintDetailScreenState extends ConsumerState<SaintDetailScreen> {
         _detailInfo = detail;
         _isLoading = false;
       });
+      // 데이터 로드 완료 시 애니메이션 시작
+      _animationController.forward();
     }
   }
 
@@ -78,22 +129,26 @@ class _SaintDetailScreenState extends ConsumerState<SaintDetailScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // 이미지 영역
-            Container(
-              width: double.infinity,
-              height: 300,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    theme.colorScheme.primary.withValues(alpha: 0.1),
-                    theme.colorScheme.primary.withValues(alpha: 0.05),
-                  ],
-                ),
-              ),
-              child: Center(
-                child: imageUrlAsync.when(
+            // 이미지 영역 (애니메이션 적용)
+            FadeTransition(
+              opacity: _imageFadeAnimation,
+              child: ScaleTransition(
+                scale: _imageScaleAnimation,
+                child: Container(
+                  width: double.infinity,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        theme.colorScheme.primary.withValues(alpha: 0.1),
+                        theme.colorScheme.primary.withValues(alpha: 0.05),
+                      ],
+                    ),
+                  ),
+                  child: Center(
+                    child: imageUrlAsync.when(
                   data: (imageUrl) {
                     // 현재 이미지 URL 저장
                     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -196,14 +251,20 @@ class _SaintDetailScreenState extends ConsumerState<SaintDetailScreen> {
                       ),
                     ),
                   ),
+                    ),
+                  ),
                 ),
               ),
             ),
 
-            // 내용 영역
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
+            // 내용 영역 (애니메이션 적용)
+            FadeTransition(
+              opacity: _contentFadeAnimation,
+              child: SlideTransition(
+                position: _contentSlideAnimation,
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 축일 정보
@@ -298,7 +359,9 @@ class _SaintDetailScreenState extends ConsumerState<SaintDetailScreen> {
                         ),
                       ),
                     ),
-                ],
+                    ],
+                  ),
+                ),
               ),
             ),
           ],

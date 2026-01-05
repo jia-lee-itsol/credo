@@ -6,7 +6,7 @@ import '../../../../core/utils/share_utils.dart';
 import '../../../../shared/providers/liturgy_theme_provider.dart';
 
 /// 성당 상세 화면 헤더 위젯
-class ParishDetailHeader extends ConsumerWidget {
+class ParishDetailHeader extends ConsumerStatefulWidget {
   final String parishName;
   final String parishId;
   final String? address;
@@ -29,7 +29,61 @@ class ParishDetailHeader extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ParishDetailHeader> createState() => _ParishDetailHeaderState();
+}
+
+class _ParishDetailHeaderState extends ConsumerState<ParishDetailHeader>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _heartController;
+  late Animation<double> _heartScaleAnimation;
+  bool _previousFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _previousFavorite = widget.isFavorite;
+    _heartController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+    _heartScaleAnimation = TweenSequence<double>([
+      TweenSequenceItem(
+        tween: Tween<double>(begin: 1.0, end: 1.3)
+            .chain(CurveTween(curve: Curves.easeOut)),
+        weight: 50,
+      ),
+      TweenSequenceItem(
+        tween: Tween<double>(begin: 1.3, end: 1.0)
+            .chain(CurveTween(curve: Curves.elasticOut)),
+        weight: 50,
+      ),
+    ]).animate(_heartController);
+  }
+
+  @override
+  void didUpdateWidget(ParishDetailHeader oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // 즐겨찾기 상태가 변경되면 애니메이션 재생
+    if (widget.isFavorite != _previousFavorite) {
+      _previousFavorite = widget.isFavorite;
+      if (widget.isFavorite) {
+        _heartController.forward(from: 0);
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _heartController.dispose();
+    super.dispose();
+  }
+
+  void _handleFavoriteToggle() {
+    widget.onFavoriteToggle();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final primaryColor = ref.watch(liturgyPrimaryColorProvider);
 
     return SliverAppBar(
@@ -38,7 +92,7 @@ class ParishDetailHeader extends ConsumerWidget {
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         title: Text(
-          parishName,
+          widget.parishName,
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -55,7 +109,7 @@ class ParishDetailHeader extends ConsumerWidget {
         ),
         titlePadding: const EdgeInsets.symmetric(horizontal: 48, vertical: 16),
         background: GestureDetector(
-          onLongPress: canEditImage ? onEditImage : null,
+          onLongPress: widget.canEditImage ? widget.onEditImage : null,
           child: _buildBackground(primaryColor),
         ),
       ),
@@ -64,12 +118,25 @@ class ParishDetailHeader extends ConsumerWidget {
           icon: const Icon(Icons.share_outlined),
           onPressed: () => _shareParish(context, ref),
         ),
-        IconButton(
-          icon: Icon(
-            isFavorite ? Icons.favorite : Icons.favorite_border,
-            color: isFavorite ? Colors.red : null,
+        ScaleTransition(
+          scale: _heartScaleAnimation,
+          child: IconButton(
+            icon: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              transitionBuilder: (child, animation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: child,
+                );
+              },
+              child: Icon(
+                widget.isFavorite ? Icons.favorite : Icons.favorite_border,
+                key: ValueKey<bool>(widget.isFavorite),
+                color: widget.isFavorite ? Colors.red : null,
+              ),
+            ),
+            onPressed: _handleFavoriteToggle,
           ),
-          onPressed: onFavoriteToggle,
         ),
       ],
     );
@@ -77,12 +144,12 @@ class ParishDetailHeader extends ConsumerWidget {
 
   Widget _buildBackground(Color primaryColor) {
     // 이미지 URL이 있으면 이미지 표시
-    if (imageUrl != null && imageUrl!.isNotEmpty) {
+    if (widget.imageUrl != null && widget.imageUrl!.isNotEmpty) {
       return Stack(
         fit: StackFit.expand,
         children: [
           CachedNetworkImage(
-            imageUrl: imageUrl!,
+            imageUrl: widget.imageUrl!,
             fit: BoxFit.cover,
             placeholder: (context, url) => _buildPlaceholder(primaryColor),
             errorWidget: (context, url, error) => _buildPlaceholder(primaryColor),
@@ -135,9 +202,9 @@ class ParishDetailHeader extends ConsumerWidget {
       final l10n = ref.read(appLocalizationsSyncProvider);
       await ShareUtils.shareParish(
         context: context,
-        parishName: parishName,
-        parishId: parishId,
-        address: address,
+        parishName: widget.parishName,
+        parishId: widget.parishId,
+        address: widget.address,
         l10n: l10n,
       );
     } catch (e) {

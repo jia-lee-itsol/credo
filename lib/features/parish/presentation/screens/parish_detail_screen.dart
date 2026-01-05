@@ -21,8 +21,49 @@ class ParishDetailScreen extends ConsumerStatefulWidget {
   ConsumerState<ParishDetailScreen> createState() => _ParishDetailScreenState();
 }
 
-class _ParishDetailScreenState extends ConsumerState<ParishDetailScreen> {
+class _ParishDetailScreenState extends ConsumerState<ParishDetailScreen>
+    with SingleTickerProviderStateMixin {
   bool _isUploadingImage = false;
+  late AnimationController _animationController;
+  late Animation<double> _fadeAnimation;
+  late Animation<Offset> _slideAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
+      ),
+    );
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.1),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOutCubic),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _startAnimation() {
+    if (!_animationController.isAnimating &&
+        _animationController.status != AnimationStatus.completed) {
+      _animationController.forward();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +94,9 @@ class _ParishDetailScreenState extends ConsumerState<ParishDetailScreen> {
           );
         }
 
+        // 데이터 로드 완료 시 애니메이션 시작
+        _startAnimation();
+
         final parishName = parish['name'] as String? ?? '';
 
         return Scaffold(
@@ -76,33 +120,69 @@ class _ParishDetailScreenState extends ConsumerState<ParishDetailScreen> {
                     onEditImage: canEditImage ? () => _handleEditImage(context) : null,
                   ),
 
-                  // 기본 정보
+                  // 기본 정보 (애니메이션 적용)
                   SliverToBoxAdapter(
-                    child: ParishDetailBasicInfo(
-                      parish: parish,
-                      primaryColor: primaryColor,
-                      l10n: l10n,
+                    child: FadeTransition(
+                      opacity: _fadeAnimation,
+                      child: SlideTransition(
+                        position: _slideAnimation,
+                        child: ParishDetailBasicInfo(
+                          parish: parish,
+                          primaryColor: primaryColor,
+                          l10n: l10n,
+                        ),
+                      ),
                     ),
                   ),
 
-                  // 액션 버튼 (지도, 커뮤니티)
+                  // 액션 버튼 (지도, 커뮤니티) - 딜레이된 애니메이션
                   SliverToBoxAdapter(
-                    child: ParishDetailActions(
-                      parish: parish,
-                      parishId: widget.parishId,
-                      primaryColor: primaryColor,
-                      l10n: l10n,
+                    child: AnimatedBuilder(
+                      animation: _animationController,
+                      builder: (context, child) {
+                        final delayedValue = Curves.easeOutCubic.transform(
+                          (_animationController.value * 1.5 - 0.2).clamp(0.0, 1.0),
+                        );
+                        return Opacity(
+                          opacity: delayedValue,
+                          child: Transform.translate(
+                            offset: Offset(0, 20 * (1 - delayedValue)),
+                            child: child,
+                          ),
+                        );
+                      },
+                      child: ParishDetailActions(
+                        parish: parish,
+                        parishId: widget.parishId,
+                        primaryColor: primaryColor,
+                        l10n: l10n,
+                      ),
                     ),
                   ),
 
                   const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
-                  // 미사 시간
+                  // 미사 시간 - 더 딜레이된 애니메이션
                   SliverToBoxAdapter(
-                    child: ParishDetailMassTimes(
-                      parish: parish,
-                      primaryColor: primaryColor,
-                      l10n: l10n,
+                    child: AnimatedBuilder(
+                      animation: _animationController,
+                      builder: (context, child) {
+                        final delayedValue = Curves.easeOutCubic.transform(
+                          (_animationController.value * 1.5 - 0.4).clamp(0.0, 1.0),
+                        );
+                        return Opacity(
+                          opacity: delayedValue,
+                          child: Transform.translate(
+                            offset: Offset(0, 20 * (1 - delayedValue)),
+                            child: child,
+                          ),
+                        );
+                      },
+                      child: ParishDetailMassTimes(
+                        parish: parish,
+                        primaryColor: primaryColor,
+                        l10n: l10n,
+                      ),
                     ),
                   ),
 
@@ -256,219 +336,5 @@ class _ParishDetailScreenState extends ConsumerState<ParishDetailScreen> {
         );
       },
     );
-  }
-
-  /// 주소 수정 다이얼로그
-  Future<void> _showEditAddressDialog(BuildContext context, String? currentAddress) async {
-    final controller = TextEditingController(text: currentAddress ?? '');
-    final primaryColor = ref.read(liturgyPrimaryColorProvider);
-
-    final result = await showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('주소 수정'),
-        content: TextField(
-          controller: controller,
-          decoration: const InputDecoration(
-            labelText: '주소',
-            hintText: '주소를 입력하세요',
-            border: OutlineInputBorder(),
-          ),
-          maxLines: 2,
-          autofocus: true,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('취소'),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context, controller.text),
-            style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
-            child: const Text('저장', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
-    );
-
-    if (result != null && result.isNotEmpty && result != currentAddress) {
-      await _updateParishField('address', result);
-    }
-  }
-
-  /// 전화번호 수정 다이얼로그
-  Future<void> _showEditPhoneDialog(BuildContext context, String? currentPhone) async {
-    final controller = TextEditingController(text: currentPhone ?? '');
-    final primaryColor = ref.read(liturgyPrimaryColorProvider);
-
-    final result = await showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('전화번호 수정'),
-        content: TextField(
-          controller: controller,
-          decoration: const InputDecoration(
-            labelText: '전화번호',
-            hintText: '03-1234-5678',
-            helperText: '하이픈(-)을 포함하여 입력하세요',
-            border: OutlineInputBorder(),
-          ),
-          keyboardType: TextInputType.phone,
-          autofocus: true,
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('취소'),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context, controller.text),
-            style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
-            child: const Text('저장', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
-    );
-
-    if (result != null && result.isNotEmpty && result != currentPhone) {
-      await _updateParishField('phone', result);
-    }
-  }
-
-  /// 미사 시간 수정 다이얼로그
-  Future<void> _showEditMassTimesDialog(BuildContext context, String? currentMassTime) async {
-    final controller = TextEditingController(text: currentMassTime ?? '');
-    final primaryColor = ref.read(liturgyPrimaryColorProvider);
-
-    final result = await showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('미사 시간 수정'),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '형식 예시:\n日 10:00, 18:00\n土 18:00\n月-金 07:00',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: controller,
-                decoration: const InputDecoration(
-                  labelText: '미사 시간',
-                  hintText: '日 10:00, 18:00',
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 8,
-                autofocus: true,
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('취소'),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context, controller.text),
-            style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
-            child: const Text('저장', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
-    );
-
-    if (result != null && result != currentMassTime) {
-      await _updateParishField('massTime', result);
-    }
-  }
-
-  /// 외국어 미사 수정 다이얼로그
-  Future<void> _showEditForeignMassDialog(BuildContext context, String? currentMassTime) async {
-    // 외국어 미사 부분만 추출 (현재는 전체 텍스트에서 필터링)
-    final controller = TextEditingController(text: currentMassTime ?? '');
-    final primaryColor = ref.read(liturgyPrimaryColorProvider);
-
-    final result = await showDialog<String>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('외국어 미사 수정'),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '형식 예시:\n日 14:00 영어\n日 16:00 한국어\n土 19:00 스페인어',
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: controller,
-                decoration: const InputDecoration(
-                  labelText: '미사 시간 (외국어 포함)',
-                  hintText: '日 14:00 영어',
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 8,
-                autofocus: true,
-              ),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('취소'),
-          ),
-          ElevatedButton(
-            onPressed: () => Navigator.pop(context, controller.text),
-            style: ElevatedButton.styleFrom(backgroundColor: primaryColor),
-            child: const Text('저장', style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      ),
-    );
-
-    if (result != null && result != currentMassTime) {
-      await _updateParishField('massTime', result);
-    }
-  }
-
-  /// 성당 정보 필드 업데이트
-  Future<void> _updateParishField(String fieldName, dynamic value) async {
-    try {
-      await parishEdit.ParishEditService.updateParishField(
-        parishId: widget.parishId,
-        fieldName: fieldName,
-        value: value,
-      );
-
-      // Provider 무효화하여 새 데이터 반영
-      ref.invalidate(core.parishByIdProvider(widget.parishId));
-
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('정보가 업데이트되었습니다'),
-            backgroundColor: Colors.green,
-          ),
-        );
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('업데이트 실패: $e'),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-    }
   }
 }
